@@ -1,3 +1,4 @@
+package grid;
 /**
  * Grid class
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante

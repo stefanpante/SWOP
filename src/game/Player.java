@@ -1,9 +1,14 @@
+package game;
 /**
- * Game class
+ * Player class
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
-public class Game {
+public class Player {
+
+	public Player() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @param args
