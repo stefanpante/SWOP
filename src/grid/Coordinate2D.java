@@ -69,6 +69,7 @@ public class Coordinate2D {
 	 */
 	//TODO check if valid param, do we need lower and upper bound?
 	public void setY(int y1) throws IllegalArgumentException{
+		if(!isValidY(y1)) throw new IllegalArgumentException();
 		this.y = y1;
 	}
 	
