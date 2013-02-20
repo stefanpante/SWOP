@@ -38,23 +38,25 @@ public class Coordinate2D {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * returns the x-coordinate of this Coordinate2D
 	 */
 	public int getX(){
 		return x;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 *  returns the y-coordinate of this Coordinate2D
 	 */
 	public int getY(){
 		return y;
 	}
 	/**
+	 * Checks whether the given x is a valid value for this
+	 * Coordinate2D
 	 * 
-	 * @param x1
+	 * @param 	x1
+	 * 			The coordinate to be checked
+	 * @return 	True only if 
 	 */
 	//TODO Check if valid param, do we need lower and upper bound?
 	public void setX(int x1) throws IllegalArgumentException{
