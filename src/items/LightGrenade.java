@@ -1,5 +1,5 @@
 package items;
 
-public class LightGrenade {
-
+public class LightGrenade extends Item{
+	
 }
