@@ -1,5 +1,10 @@
 package items;
 
-public class LightGrenade {
+/**
+ * LightGrenade class
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ *
+ */
+public class LightGrenade extends Item {
 
 }
