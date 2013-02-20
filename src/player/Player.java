@@ -1,4 +1,4 @@
-package game;
+package player;
 /**
  * Player class
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
