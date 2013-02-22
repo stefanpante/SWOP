@@ -55,8 +55,7 @@ public class Coordinate2D {
 	 * Coordinate2D
 	 * 
 	 * @param 	x1
-	 * 			The coordinate to be checked
-	 * @return 	True only if 
+	 * 			
 	 */
 	//TODO Check if valid param, do we need lower and upper bound?
 	public void setX(int x1) throws IllegalArgumentException{
