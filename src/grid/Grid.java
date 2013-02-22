@@ -1,10 +1,15 @@
 package grid;
+
+import java.util.HashMap;
+
 /**
  * Grid class
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
 public class Grid {
+	
+	HashMap<Coordinate2D,Square> squares;
 
 	/**
 	 * 
