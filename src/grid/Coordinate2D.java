@@ -31,21 +31,19 @@ public class Coordinate2D {
 	 * 			| !isValidX(x) || !isValidY(y)
 	 */
 	public Coordinate2D(int x, int y) throws IllegalArgumentException {
-		
 		setX(x);
 		setY(y);
-		
 	}
 	
 	/**
-	 * returns the x-coordinate of this Coordinate2D
+	 * Returns the x-coordinate of this Coordinate2D
 	 */
 	public int getX(){
 		return x;
 	}
 	
 	/**
-	 *  returns the y-coordinate of this Coordinate2D
+	 *  Returns the y-coordinate of this Coordinate2D
 	 */
 	public int getY(){
 		return y;
@@ -57,27 +55,28 @@ public class Coordinate2D {
 	 * @param 	x1
 	 * 			
 	 */
-	//TODO Check if valid param, do we need lower and upper bound?
-	public void setX(int x1) throws IllegalArgumentException{
-		this.x = x1;
+	public void setX(int x) throws IllegalArgumentException{
+		if(!isValidX(x)) throw new IllegalArgumentException();
+		this.x = x;
 	}
 	
 	/**
+	 * Checks whether the given y is a valid value for this
+	 * Coordinate2D
 	 * 
-	 * @param y1
+	 * @param y
 	 */
-	//TODO check if valid param, do we need lower and upper bound?
-	public void setY(int y1) throws IllegalArgumentException{
-		if(!isValidY(y1)) throw new IllegalArgumentException();
-		this.y = y1;
+	public void setY(int y) throws IllegalArgumentException{
+		if(!isValidY(y)) throw new IllegalArgumentException();
+		this.y = y;
 	}
 	
-	public boolean isValidX(int x1){
-		return false;
+	public boolean isValidX(int x){
+		return true;
 	}
 	
-	public boolean isValidY(int y1){
-		return false;
+	public boolean isValidY(int y){
+		return true;	
 	}
 
 
