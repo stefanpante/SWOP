@@ -1,17 +1,28 @@
 package grid;
 
+import be.kuleuven.cs.som.annotate.*;
+
 /**
  * Coordinate2D represents a point in 2D space, 
  * has an x-coordinate and y-coordinate
  * 
  * @author Jonas Devlieghere, Dieter Castel, Vincent Reniers and Stefan Pante
- * @version 0.0.1RC-alpha
+ * @version 0.9
  *
+ * @Invar 	The x-coordinate is a valid x-coordinate.
+ * 			| isValidX(getX())
+ * @Invar 	The y-coordinate is a valid y-coordinate.
+ * 			| isValidY(getY())
  */
-
 public class Coordinate2D {
 
+	/**
+	 * The x-coordinate.
+	 */
 	private int x;
+	/**
+	 * The y-coordinate.
+	 */
 	private int y;
 	
 	/**
@@ -38,6 +49,7 @@ public class Coordinate2D {
 	/**
 	 * Returns the x-coordinate of this Coordinate2D
 	 */
+	@Basic @Raw
 	public int getX(){
 		return x;
 	}
@@ -45,15 +57,15 @@ public class Coordinate2D {
 	/**
 	 *  Returns the y-coordinate of this Coordinate2D
 	 */
+	@Basic @Raw
 	public int getY(){
 		return y;
 	}
 	/**
-	 * Checks whether the given x is a valid value for this
-	 * Coordinate2D
+	 * Sets the x-coordinate of this coordinate if the given x is valid.
 	 * 
-	 * @param 	x1
-	 * 			
+	 * @param x
+	 * 		
 	 */
 	public void setX(int x) throws IllegalArgumentException{
 		if(!isValidX(x)) throw new IllegalArgumentException();
@@ -61,8 +73,7 @@ public class Coordinate2D {
 	}
 	
 	/**
-	 * Checks whether the given y is a valid value for this
-	 * Coordinate2D
+	 * Sets the y-coordinate of this coordinate if the given y is valid.
 	 * 
 	 * @param y
 	 */
@@ -71,13 +82,68 @@ public class Coordinate2D {
 		this.y = y;
 	}
 	
-	public boolean isValidX(int x){
+	/**
+	 * Returns whether the given number is a valid x coordinate.
+	 * 
+	 * @param x
+	 * @return 	Always true since the coordinates have no constraints.
+	 * 			| result == true
+	 */
+	public static boolean isValidX(int x){
 		return true;
 	}
 	
-	public boolean isValidY(int y){
+	/**
+	 * Returns whether the given number is a valid y coordinate.
+	 * 
+	 * @param y
+	 * @return Always true since the coordinates have no constraints.
+	 * 			| result == true
+	 */
+	public static boolean isValidY(int y){
 		return true;	
 	}
 
-
+	/**
+	 * The string representation of this coordinate.
+	 */
+	@Override
+	public String toString() {
+		String result = "(" + getX()+","+ getY() +")";
+		return result;
+	}
+	
+	/**
+	* Check whether this retangle is equal to the given object.
+	*
+	* @return	True if <obj> is an effective Coordinate2D with the same
+	* 			x and y coordinate.
+	* 			| (obj != null) && (obj instance of Coordinate2D) &&
+	* 			| (((Coordinate2D) obj).getX() == getX())
+	* 			| (((Coordinate2D) obj).getY() == getY())
+	*/
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null){
+			return false;
+		}
+		if(!(obj instanceof Coordinate2D)){
+			return false;
+		}
+		if(this.getX() != ((Coordinate2D) obj).getX()){
+			return false;
+		}
+		if(this.getY() != ((Coordinate2D) obj).getY()){
+			return false;
+		}
+		return true;
+	}
+	
+	/*TODO: currently we state that the coordinates can have negative values 
+	 * 		if however we use negative numbers the hashCode won't be correct.
+	 */
+	@Override
+	public int hashCode() {
+		return (int) (Math.pow(2, this.getX()) * Math.pow(3, this.getY()));
+	}
 }

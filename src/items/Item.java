@@ -24,4 +24,9 @@ public class Item {
 	public boolean isActive() {
 		return this.active;
 	}
+	
+	@Override
+	public String toString() {
+		return "Item";
+	}
 }
