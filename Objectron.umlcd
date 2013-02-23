@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.yattasolutions.uml.diagrams.classifier:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.yattasolutions.uml.diagrams.classifier="http://ns.yatta-solutions.com/umllab/diagrams/classifier/1.1.0" xmi:id="_Yb5CYH2pEeK94JMZoA07xA">
+  <modelElement href="test.uml#_VgVQMH2pEeK94JMZoA07xA"/>
+  <edges xsi:type="com.yattasolutions.uml.diagrams.classifier:AssociationVisual" xmi:id="_ctGKIH2vEeK94JMZoA07xA" sourceAnchor="146.0,70.0" targetAnchor="0.0,59.0" target="_P_a9oH2vEeK94JMZoA07xA" source="_RtGAYH2vEeK94JMZoA07xA">
+    <modelElement href="test.uml#_csGEkH2vEeK94JMZoA07xA"/>
+    <visualProperties xmi:id="_ctGxMH2vEeK94JMZoA07xA"/>
+    <nameVisual xmi:id="_ctGxMX2vEeK94JMZoA07xA" text="">
+      <visualProperties xmi:id="_cxL_8H2vEeK94JMZoA07xA" position="-12.599999999999994,-16.5"/>
+    </nameVisual>
+    <sourceRole xmi:id="_ctGxMn2vEeK94JMZoA07xA" aggregationKind="NONE" name="square" navigable="true">
+      <modelElement href="test.uml#_csPOgH2vEeK94JMZoA07xA"/>
+      <visualProperties xmi:id="_cxKKwH2vEeK94JMZoA07xA" position="5.0,2.5"/>
+      <visibility xmi:id="_ctGxM32vEeK94JMZoA07xA" label="+"/>
+      <cardinality xmi:id="_ctGxNH2vEeK94JMZoA07xA" label="*" max="-1"/>
+    </sourceRole>
+    <targetRole xmi:id="_ctGxNX2vEeK94JMZoA07xA" aggregationKind="NONE" name="grid" navigable="true">
+      <modelElement href="test.uml#_csaNoX2vEeK94JMZoA07xA"/>
+      <visualProperties xmi:id="_cxMnAH2vEeK94JMZoA07xA" position="-37.0,41.5"/>
+      <visibility xmi:id="_ctGxNn2vEeK94JMZoA07xA" label="+"/>
+      <cardinality xmi:id="_ctGxN32vEeK94JMZoA07xA" label="*" max="-1"/>
+    </targetRole>
+  </edges>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_RtGAYH2vEeK94JMZoA07xA" name="Square" associationsOut="_ctGKIH2vEeK94JMZoA07xA">
+    <modelElement href="test.uml#_RtEyQH2vEeK94JMZoA07xA"/>
+    <visualProperties xmi:id="_RtGAYX2vEeK94JMZoA07xA" position="13.0,225.0" size="146.0,141.0"/>
+    <visibility xmi:id="_RtGAYn2vEeK94JMZoA07xA" label="+"/>
+    <attributes xmi:id="_ctNe4H2vEeK94JMZoA07xA" name="grid">
+      <modelElement href="test.uml#_csaNoX2vEeK94JMZoA07xA"/>
+      <visibility xmi:id="_ctNe4X2vEeK94JMZoA07xA" label="+"/>
+      <cardinality xmi:id="_ctNe4n2vEeK94JMZoA07xA" label="*" max="-1"/>
+      <type xmi:id="_ctNe432vEeK94JMZoA07xA" name="Grid">
+        <modelElement href="test.uml#_P_ZvgH2vEeK94JMZoA07xA"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_NsOzAH2vEeK94JMZoA07xA" name="Game">
+    <modelElement href="test.uml#_NsNk4H2vEeK94JMZoA07xA"/>
+    <visualProperties xmi:id="_NsOzAX2vEeK94JMZoA07xA" position="11.0,30.0" size="229.0,142.0"/>
+    <visibility xmi:id="_NsOzAn2vEeK94JMZoA07xA" label="+"/>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_P_a9oH2vEeK94JMZoA07xA" name="Grid" associationsIn="_ctGKIH2vEeK94JMZoA07xA">
+    <modelElement href="test.uml#_P_ZvgH2vEeK94JMZoA07xA"/>
+    <visualProperties xmi:id="_P_a9oX2vEeK94JMZoA07xA" position="223.0,236.0" size="193.0,119.0"/>
+    <visibility xmi:id="_P_a9on2vEeK94JMZoA07xA" label="+"/>
+    <attributes xmi:id="_ctKbkH2vEeK94JMZoA07xA" name="square">
+      <modelElement href="test.uml#_csPOgH2vEeK94JMZoA07xA"/>
+      <visibility xmi:id="_ctKbkX2vEeK94JMZoA07xA" label="+"/>
+      <cardinality xmi:id="_ctKbkn2vEeK94JMZoA07xA" label="*" max="-1"/>
+      <type xmi:id="_ctKbk32vEeK94JMZoA07xA" name="Square">
+        <modelElement href="test.uml#_RtEyQH2vEeK94JMZoA07xA"/>
+      </type>
+    </attributes>
+  </nodes>
+</com.yattasolutions.uml.diagrams.classifier:ClassDiagram>
