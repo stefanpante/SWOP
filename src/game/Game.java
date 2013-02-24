@@ -185,9 +185,11 @@ public class Game {
 	/**
 	 * Switches player. e.g.: if the current player is the first player,
 	 * the current player will be set to player 2
-	 * 
+	 * @pre		currentPlayer == player1 || currentPlayer == player2
+	 * @post	if(old.currentPlayer == player1) new.currentPlayer == player2
+	 * 			if(old.currentPlayer == player2) new.currentPlayer == player1
 	 */
-	//TODO hoe hier postconditie?
+	//TODO hoe Controleer deze postcondities en precondities
 	public void switchPlayer(){
 		if(currentPlayer == player1) currentPlayer = player2;
 		if(currentPlayer == player2) currentPlayer = player1;
