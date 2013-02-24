@@ -213,5 +213,10 @@ public class Game {
 		currentPlayer.useItem(itemIndex);
 		
 	}
+
+	public void endTurn() {
+		currentPlayer.endTurn();
+		
+	}
 }
 	

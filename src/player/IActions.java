@@ -29,7 +29,7 @@ public interface IActions {
 	 * 
 	 * @param item
 	 */
-	public void useItem(Item item);
+	public void useItem(int index);
 	
 	/**
 	 * Player ends its turn.

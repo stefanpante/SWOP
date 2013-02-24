@@ -106,7 +106,10 @@ public class Player implements IPlayer {
 	 */
 	public void move(Square newPosition) throws IllegalStateException{
 		if(isValidMove(newPosition)) throw new IllegalStateException("Not a valid move");
-		else currentPosition = newPosition;
+		else{
+			currentPosition = newPosition;
+			currentPosition.activateUsedItems();
+		}
 		
 	}
 
@@ -120,7 +123,7 @@ public class Player implements IPlayer {
 	 */
 	public void useItem(int index) {
 		Item item = items.getItem(index);
-		currentPosition.
+		currentPosition.addUsedItem(item);
 		
 	}
 	
@@ -148,6 +151,13 @@ public class Player implements IPlayer {
 	 */
 	public Square getPosition() {
 		return currentPosition;
+	}
+
+
+	@Override
+	public void endTurn() {
+		currentPosition.activateUsedItems();
+		
 	}
 
 }
