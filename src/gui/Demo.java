@@ -1,5 +1,6 @@
-package gui.simpleguidemo;
+package gui;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
@@ -18,14 +19,31 @@ public class Demo {
 			String status = "All's well.";
 			int row;
 			
+			int width = 400;
+			int height = 600;
+			int rows = 5;
+			int cols = 5;
+			
+			
 			public void run() {
 				final SimpleGUI gui = new SimpleGUI("Demo", 400, 600) {
+					
 					
 					@Override
 					public void paint(Graphics2D graphics) {
 						// TODO Auto-generated method stub
 						graphics.drawImage(playerRed, 0, row * 40, 40, 40, null);
 						graphics.drawString(status, 0, 200);
+						
+						int i;
+
+					    int rowHt = height / (rows);
+					    for (i = 0; i < rows; i++)
+					    	graphics.drawLine(0, i * rowHt, width, i * rowHt);
+
+					    int rowWid = width / (cols);
+					    for (i = 0; i < cols; i++)
+					    	graphics.drawLine(i * rowWid, 0, i * rowWid, height);
 					}
 
 					@Override

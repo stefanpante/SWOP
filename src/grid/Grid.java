@@ -14,8 +14,9 @@ public class Grid {
 	/**
 	 * generates a grid with vSize * hSize squares
 	 */
-	public Grid(int vSize, int hSize) {
-		// TODO Auto-generated constructor stub
+	public Grid(int vSize, int hSize) throws IllegalArgumentException {
+		setVerticalSize(vSize);
+		setHorizontalSize(hSize);
 	}
 	
 	/**
@@ -109,13 +110,9 @@ public class Grid {
 	public static boolean isValidHorizontalSize(int hSize) {
 		return hSize > 0;
 	}
+	
+	
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-	}
 
 }

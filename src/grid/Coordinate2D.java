@@ -154,19 +154,19 @@ public class Coordinate2D {
 		case NORTH:
 			return new Coordinate2D(x, y+1);
 		case NORTHEAST:
-			return new Coordinate2D(x+1, y+1);
+			return new Coordinate2D(x+1, y-1);
 		case EAST:
 			return new Coordinate2D(x+1, y);
 		case SOUTHEAST:
-			return new Coordinate2D(x+1, y-1);
+			return new Coordinate2D(x+1, y+1);
 		case SOUTH:
 			return new Coordinate2D(x, y-1);
 		case SOUTHWEST:
-			return new Coordinate2D(x-1, y-1);
+			return new Coordinate2D(x-1, y+1);
 		case WEST:
 			return new Coordinate2D(x-1, y);
 		case NORTHWEST:
-			return new Coordinate2D(x-1, y+1);
+			return new Coordinate2D(x-1, y-1);
 		}
 		return null;
 	}
