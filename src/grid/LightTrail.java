@@ -3,7 +3,7 @@
  */
 package grid;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author jonas
@@ -13,35 +13,27 @@ public class LightTrail {
 	
 	public static final int LENGTH = 2;
 	
-	ArrayList<Square> squares;
+	HashMap<Integer,Square> trail;
 	
-	/**
-	 * Extend the light trail by adding a new square to the trail.
-	 * 
-	 * @param 	square 
-	 * 			The square to add to the trail
-	 * @throws 	IllegalArgumentException
-	 * 			
-	 */
-	public void addToLightTrail(Square square) throws IllegalArgumentException {
-		if(!canAddToLightTrail(square))
-			throw new IllegalArgumentException();
-		squares.remove(LENGTH);
-		squares.add(0,square);
+	public LightTrail(){
+		this.trail = new HashMap<Integer,Square>();
 	}
 	
-	/**
-	 * Check whether the given square can be added to this light trail.
-	 * @param 	square
-	 * 			The square to be checked
-	 * @return	True
-	 * 			True if and only if the square is connected to the last square
-	 * 			in this light trail.
-	 */
-	public boolean canAddToLightTrail(Square square){
-		return true;
+	public void addToTrail(Square square, int actionId){
+		trail.put(actionId, square);
+	}
+	
+	public void checkTrail(int actionId){
+		for(Integer integer: trail.keySet()){
+			if(integer < actionId - LENGTH){
+				trail.remove(integer);
+			}
+		}
 	}
 	
 	
+	public boolean occupies(Square square){
+		return trail.values().contains(square);
+	}
 	
 }
