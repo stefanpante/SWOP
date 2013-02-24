@@ -92,6 +92,13 @@ public class Player implements IPlayer {
 	public boolean isValidMove(Square pos){
 		return false;
 	}
+	
+	/**
+	 * Moves the player to another square
+	 * @param newPosition	The new Position of the player
+	 * @throws IllegalStateException
+	 * 		   thrown if the player is unable to make this move 
+	 */
 	public void move(Square newPosition) throws IllegalStateException{
 		if(isValidMove(newPosition)) throw new IllegalStateException("Not a valid move");
 		else currentPosition = newPosition;
@@ -113,8 +120,11 @@ public class Player implements IPlayer {
 		
 	}
 
+	/**
+	 * returns the current position of the player
+	 */
 	public Square getPosition() {
-		return position;
+		return currentPosition;
 	}
 
 }
