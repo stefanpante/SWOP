@@ -146,4 +146,28 @@ public class Coordinate2D {
 	public int hashCode() {
 		return (int) (Math.pow(2, this.getX()) * Math.pow(3, this.getY()));
 	}
+	
+	public Coordinate2D getNeighbor(Direction direction){
+		int x = getX();
+		int y = getY();
+		switch (direction) {
+		case NORTH:
+			return new Coordinate2D(x, y+1);
+		case NORTHEAST:
+			return new Coordinate2D(x+1, y+1);
+		case EAST:
+			return new Coordinate2D(x+1, y);
+		case SOUTHEAST:
+			return new Coordinate2D(x+1, y-1);
+		case SOUTH:
+			return new Coordinate2D(x, y-1);
+		case SOUTHWEST:
+			return new Coordinate2D(x-1, y-1);
+		case WEST:
+			return new Coordinate2D(x-1, y);
+		case NORTHWEST:
+			return new Coordinate2D(x-1, y+1);
+		}
+		return null;
+	}
 }

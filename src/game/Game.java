@@ -95,7 +95,7 @@ public class Game {
 	 *			| !isValidPlayer1(player1)
 	 */
 	public void setPlayer1(Player player1) {
-		if (!isValidPlayer1(player1)) {
+		if (!isValidPlayer(player1)) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ player1
@@ -105,13 +105,13 @@ public class Game {
 	};
 
 	/**
-	 * Check whether the given player1 is a valid player1 for all the objects of Game.
-	 * @param 	player1
-	 *			The player1 to check.
+	 * Check whether the given player is a valid player for all the objects of Game.
+	 * @param 	player
+	 *			The player to check.
 	 * @return	True if and only if the given value is not null, has the correct type, ...
 	 */
-	public static boolean isValidPlayer1(Player player1) {
-		if (!(player1 instanceof Player)) {
+	public static boolean isValidPlayer(Player player) {
+		if (!(player instanceof Player)) {
 			return false;
 		}
 		//TODO: specific constraints for this field.
@@ -140,7 +140,7 @@ public class Game {
 	 *			| !isValidPlayer2(player2)
 	 */
 	public void setPlayer2(Player player2) {
-		if (!isValidPlayer2(player2)) {
+		if (!isValidPlayer(player2)) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ player2
@@ -148,22 +148,6 @@ public class Game {
 		}
 		this.player2 = player2;
 	};
-
-	/**
-	 * Check whether the given player2 is a valid player2 for all the objects of Game.
-	 * @param 	player2
-	 *			The player2 to check.
-	 * @return	True if and only if the given value is not null, has the correct type, ...
-	 */
-	public static boolean isValidPlayer2(Player player2) {
-		if (!(player2 instanceof Player)) {
-			return false;
-		}
-		//TODO: specific constraints for this field.
-		return true;
-	}
-	
-	
 
 	/**
 	 * Returns the value of the currentPlayer of this Game as an Player.
