@@ -22,12 +22,15 @@ public class Square {
 	 * Inventory containing all items on the square
 	 */
 	private Inventory items;
+	private ArrayList<Item> usedItems;
 	
 	/**
 	 * Zero argument constructor for a square.
 	 */
 	public Square (){
-		
+		this.usedItems = new ArrayList<Item>();
+		//TODO: inventory for squares, hasn't got a size constraint
+		this.items = new Inventory(10);
 	}
 	
 	/**
@@ -37,49 +40,19 @@ public class Square {
 	public Inventory getItems() {
 		return items;
 	}
-
-// Violation of GRASP principles
-//	/**
-//	 * Checks if the square has a certain item.
-//	 * 
-//	 * @param item
-//	 */
-//	public boolean hasItem(Item item) {
-//		return items.contains(item);
-//	}
-//	
-//	/**
-//	 * Check if the square has an active item.
-//	 */
-//	public boolean hasActiveItem() {
-//		Iterator<Item> iterator = items.iterator();
-//		
-//		while(iterator.hasNext()) {
-//			Item item = iterator.next();
-//			if(item.isActive()) {
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-//	}
 	
-//	/**
-//	 * If the given <item> is a valid item it is added to the current square.
-//	 * 
-//	 * @param 	item 	
-//	 * 			The item to add.
-//	 * @post 	If the given item is a valid item and this square also can have the item as one of its items
-//	 * 			then the square has the given item as one of it's items.
-//	 * 			| if(isValidItem(item) && canHaveAsItem(item)) 
-//	 * 			|	this.hasItem(item)
-//	 */
-//	public void addItem(Item item){
-//		if(!isValidItem(item) || !canHaveAsItem(item)){
-//			throw new IllegalArgumentException("The given item is not a valid item");
-//		}
-//		items.add(item);
-//	}
+	public void addUsedItem(Item item){
+		usedItems.add(item);
+		
+	}
+	
+	/**
+	 * used to activate the usedItems on the square
+	 */
+	public void activateUsedItems(){
+		for(Item i: usedItems)
+			i.activate();
+	}
 
 	/**
 	 * Returns whether the given item is a valid item for all squares.
