@@ -26,12 +26,20 @@ public class Inventory {
 	 * 
 	 */
 	public Inventory(int size){
-		this.items = new ArrayList<>
+		this.size = size;
+		this.items = new ArrayList<Item>(size);
 		
 	}
 	
 	public boolean hasItem(Item item){
-		items.
+		return items.contains(item);
+	}
+	
+	public void addItem(Item item) throws IllegalStateException{
+		if(items.size() + 1 > size){
+			throw new IllegalStateException("The inventory is full, cannot add another item");
+		}
+		else items.add(item);
 	}
 
 }

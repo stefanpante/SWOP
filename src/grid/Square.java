@@ -60,26 +60,26 @@ public class Square {
 //				return true;
 //			}
 //		}
-		
-		return false;
-	}
+//		
+//		return false;
+//	}
 	
-	/**
-	 * If the given <item> is a valid item it is added to the current square.
-	 * 
-	 * @param 	item 	
-	 * 			The item to add.
-	 * @post 	If the given item is a valid item and this square also can have the item as one of its items
-	 * 			then the square has the given item as one of it's items.
-	 * 			| if(isValidItem(item) && canHaveAsItem(item)) 
-	 * 			|	this.hasItem(item)
-	 */
-	public void addItem(Item item){
-		if(!isValidItem(item) || !canHaveAsItem(item)){
-			throw new IllegalArgumentException("The given item is not a valid item");
-		}
-		items.add(item);
-	}
+//	/**
+//	 * If the given <item> is a valid item it is added to the current square.
+//	 * 
+//	 * @param 	item 	
+//	 * 			The item to add.
+//	 * @post 	If the given item is a valid item and this square also can have the item as one of its items
+//	 * 			then the square has the given item as one of it's items.
+//	 * 			| if(isValidItem(item) && canHaveAsItem(item)) 
+//	 * 			|	this.hasItem(item)
+//	 */
+//	public void addItem(Item item){
+//		if(!isValidItem(item) || !canHaveAsItem(item)){
+//			throw new IllegalArgumentException("The given item is not a valid item");
+//		}
+//		items.add(item);
+//	}
 
 	/**
 	 * Returns whether the given item is a valid item for all squares.
@@ -88,6 +88,7 @@ public class Square {
 	 * 			The item to check.
 	 * @return
 	 */
+	//TODO: Loze check?
 	public static boolean isValidItem(Item item) {
 		if(!(item instanceof Item)){
 			return false;
