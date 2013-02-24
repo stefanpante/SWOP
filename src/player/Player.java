@@ -27,6 +27,11 @@ public class Player implements IPlayer {
 	private String name;
 	
 	/**
+	 * The inventory of the player
+	 */
+	private Inventory items;
+	
+	/**
 	 * creates a new player with a given name and start position
 	 * 
 	 * @param startPosition the startposition for the player
@@ -110,16 +115,34 @@ public class Player implements IPlayer {
 		
 	}
 
-	public void useItem(Item item) {
-		// TODO Auto-generated method stub
+	/**
+	 * Method to select the item which the player is going to use
+	 */
+	public void useItem(int index) {
+		Item item = items.getItem(index);
+		currentPosition.
 		
 	}
-
-	public void endTurn() {
-		// TODO Auto-generated method stub
-		
+	
+	public Inventory getInventory(){
+		return items;
+	}
+	/**
+	 * sets an inventory for the player
+	 * @param inventory the new inventory for the player
+	 * @throws IllegalArgumentException
+	 * 			thrown if the given inventory is not valid for the player
+	 */
+	public void setInventory(Inventory inventory) throws IllegalArgumentException{
+		if(!isValidInventory(inventory)) 
+			throw new IllegalArgumentException("This inventory is invalid for this player");
+		else this.items = inventory;
 	}
 
+	//TODO check inventory
+	public boolean isValidInventory(Inventory inventory){
+		return false;
+	}
 	/**
 	 * returns the current position of the player
 	 */

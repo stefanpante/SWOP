@@ -187,6 +187,13 @@ public class Game {
 		if(currentPlayer == player1) currentPlayer = player2;
 		if(currentPlayer == player2) currentPlayer = player1;
 	}
+	
+	/**
+	 * gets the inventory of the current player 
+	 */
+	public String getInventoryString(){
+		return currentPlayer.getInventory().toString();
+	}
 
 	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for all the objects of Game.
@@ -202,7 +209,8 @@ public class Game {
 		return true;
 	}
 	
-	public Game(){
+	public void useItem(int itemIndex) {
+		currentPlayer.useItem(itemIndex);
 		
 	}
 }

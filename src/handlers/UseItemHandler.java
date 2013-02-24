@@ -1,5 +1,10 @@
 package handlers;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import game.Game;
+
 /**
  * Handler/Controller for the use case in which 
  * an item is used
@@ -8,8 +13,29 @@ package handlers;
  */
 public class UseItemHandler {
 
-	public UseItemHandler() {
-		// TODO Auto-generated constructor stub
+	private Game game;
+	
+	/** 
+	 * Creates the handler for the usage of an item
+	 * @param game
+	 */
+	public UseItemHandler(Game game) {
+		this.game = game;
+	}
+	
+	/**
+	 * 
+	 */
+	//TODO: this is an temporary implementation of useItem, 
+	// is commandline but should be in GUI
+	public void useItem() throws IOException{
+		System.out.println(game.getInventoryString());
+		InputStreamReader cin = new InputStreamReader(System.in);
+		int itemIndex = cin.read();
+		game.useItem(itemIndex);
+		
+		
+		
 	}
 
 }

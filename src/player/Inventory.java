@@ -52,8 +52,9 @@ public class Inventory {
 	}
 	
 	/**
-	 * Initializes the size of the inventory and 
-	 * creates a new ArrayList with the size as initial capacity
+	 * Sets the size of the inventory  and inits a new arraylist
+	 * if a arraylist hasnt already been initialised
+	 * 
 	 * @param size	the size of this inventory
 	 * @throws IllegalArgumentException if the given size is not valid
 	 */
@@ -61,7 +62,10 @@ public class Inventory {
 		if(!isValidSize(size)) throw new IllegalArgumentException("The given size is not valid!");
 		else{
 			this.size = size;
-			this.items = new ArrayList<Item>(size);
+			if(this.items == null){
+				this.items = new ArrayList<Item>();
+			}
+			
 		}
 	}
 	
