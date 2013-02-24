@@ -33,7 +33,7 @@ public class Player implements IPlayer {
 	private Inventory items;
 	
 	/**
-	 * keeps track of the number of actions this user has done in its turn;
+	 * keeps track of the number of actions this user has done;
 	 */
 	private int actions;
 	
