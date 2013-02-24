@@ -1,6 +1,7 @@
 package player;
 
 import grid.Square;
+import items.Inventory;
 import items.Item;
 
 /**
