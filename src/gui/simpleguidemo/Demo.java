@@ -35,7 +35,7 @@ public class Demo {
 					
 				};
 				
-				playerRed = gui.loadImage("simpleguidemo/player_red.png", 40, 40);
+				playerRed = gui.loadImage("res/player_red.png", 40, 40);
 				final Button button = gui.createButton(40, 0, 80, 40, new Runnable() {
 					public void run() {
 						status = "Trouble ahead.";
