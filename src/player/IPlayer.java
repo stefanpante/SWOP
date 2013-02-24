@@ -2,6 +2,8 @@ package player;
 
 import grid.Square;
 
+
+
 /**
  * This interface shows what actions and methods you can call
  * on the player object such as moving, picking up items etc.
