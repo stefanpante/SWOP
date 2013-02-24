@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import player.Inventory;
+
 import notnullcheckweaver.NotNull;
 
 /**
@@ -17,9 +19,9 @@ import notnullcheckweaver.NotNull;
 public class Square {
 	
 	/**
-	 * List of all the items that are currently on the square.
+	 * Inventory containing all items on the square
 	 */
-	private List<Item> items = new ArrayList<Item>();
+	private Inventory items;
 	
 	/**
 	 * Zero argument constructor for a square.
@@ -32,31 +34,32 @@ public class Square {
 	 * Returns a list of all the items that are currently on the square.
 	 * These may be active or inactive.
 	 */
-	public List<Item> getItems() {
+	public Inventory getItems() {
 		return items;
 	}
-	
-	/**
-	 * Checks if the square has a certain item.
-	 * 
-	 * @param item
-	 */
-	public boolean hasItem(Item item) {
-		return items.contains(item);
-	}
-	
-	/**
-	 * Check if the square has an active item.
-	 */
-	public boolean hasActiveItem() {
-		Iterator<Item> iterator = items.iterator();
-		
-		while(iterator.hasNext()) {
-			Item item = iterator.next();
-			if(item.isActive()) {
-				return true;
-			}
-		}
+
+// Violation of GRASP principles
+//	/**
+//	 * Checks if the square has a certain item.
+//	 * 
+//	 * @param item
+//	 */
+//	public boolean hasItem(Item item) {
+//		return items.contains(item);
+//	}
+//	
+//	/**
+//	 * Check if the square has an active item.
+//	 */
+//	public boolean hasActiveItem() {
+//		Iterator<Item> iterator = items.iterator();
+//		
+//		while(iterator.hasNext()) {
+//			Item item = iterator.next();
+//			if(item.isActive()) {
+//				return true;
+//			}
+//		}
 		
 		return false;
 	}

@@ -12,9 +12,9 @@ public class Grid {
 	HashMap<Coordinate2D,Square> squares;
 
 	/**
-	 * 
+	 * generates a grid with vSize * hSize squares
 	 */
-	public Grid() {
+	public Grid(int vSize, int hSize) {
 		// TODO Auto-generated constructor stub
 	}
 
