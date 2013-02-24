@@ -184,8 +184,10 @@ public class Game {
 	
 	/**
 	 * Switches player. e.g.: if the current player is the first player,
-	 *  the currentplayer will be set to player 2
+	 * the current player will be set to player 2
+	 * 
 	 */
+	//TODO hoe hier postconditie?
 	public void switchPlayer(){
 		if(currentPlayer == player1) currentPlayer = player2;
 		if(currentPlayer == player2) currentPlayer = player1;
@@ -212,14 +214,14 @@ public class Game {
 		return true;
 	}
 	
+	//TODO:comment
 	public void useItem(int itemIndex) {
 		currentPlayer.useItem(itemIndex);
 		
 	}
-
+	//TODO: comment
 	public void endTurn() {
-		currentPlayer.endTurn();
-		
+		currentPlayer.endTurn();	
 	}
 }
 	
