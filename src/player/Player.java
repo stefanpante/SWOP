@@ -38,9 +38,21 @@ public class Player implements IPlayer {
 	private int actions;
 	
 	/**
+	 * The number of action when the last turn ended
+	 */
+	
+	private int previousactions;
+	
+	/**
 	 * true if the user has moved during his turn
 	 */
 	private boolean moved;
+	
+	/**
+	 * The number of items a player can carry
+	 */
+	
+	private static int INVENTORY_SIZE = 6;
 	
 	/**
 	 * creates a new player with a given name and start position
@@ -51,10 +63,12 @@ public class Player implements IPlayer {
 	 * @effect setName(name)
 	 */
 	public Player(Square startPosition, String name) {
+		
 		this.setStartPosition(startPosition);
 		this.setName(name);
-		this.items = new Inventory(6);
+		this.items = new Inventory(INVENTORY_SIZE);
 		this.actions = 0;
+		this.previousactions = 0;
 		this.moved = false;
 	}
 
@@ -92,7 +106,7 @@ public class Player implements IPlayer {
 	}
 	
 	/**
-	 * Sets the startposition for the player
+	 * Sets the start position for the player
 	 * 
 	 * @param pos the position to be used as the start position for the player
 	 * @throws 	IllegalArgumentException
@@ -124,12 +138,15 @@ public class Player implements IPlayer {
 			currentPosition = newPosition;
 			currentPosition.activateUsedItems();
 			moved = true;
+			//TODO check and add lighttrail.
 		}
 		
 	}
 
 	public void pickUp(Item item) {
 		// TODO Auto-generated method stub
+		// check own inventory limits
+		// TODO: check the lighttrails
 		
 	}
 
@@ -174,17 +191,25 @@ public class Player implements IPlayer {
 	 * @pre getActions < 3
 	 * @pre if(!moved) actions < 3-1 if the user hasn't moved, he must have more than one action left
 	 */
-	public void pickUp(){
-		//TODO
+	// TODO: Violates the GRASP principles?
+	public void pickUp(int index){
+		//TODO: add update for lighttrail
+		Item item = currentPosition.getItems().getItem(index);
+		items.addItem(item);
+		
+		
 	}
 	/**
 	 * 
 	 */
 	@Override
 	public void endTurn() {
+		//TODO: add update for lighttrail
 		
-		
-		//currentPosition.activateUsedItems();
+		// activates all items used on the current square
+		currentPosition.activateUsedItems();
+		// needed to check for 3 actions and the actions itself is needed for the lighttrail.
+		this.previousactions = actions;
 		
 	}
 

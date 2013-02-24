@@ -57,7 +57,7 @@ public class Game {
 		if (!isValidGrid(grid)) {
 			throw new IllegalArgumentException(
 					"The argument ("
-							+ grid
+							+ grid // kan dit zomaar?
 							+ ") is not a valid agrument of the field grid from the class Game");
 		}
 		this.grid = grid;
@@ -198,8 +198,12 @@ public class Game {
 	/**
 	 * gets the inventory of the current player 
 	 */
-	public String getInventoryString(){
+	public String getCurrentPlayerInventoryString(){
 		return currentPlayer.getInventory().toString();
+	}
+	// worden hier de GRASP principes geviolate??
+	public String getCurrentPositionInventoryString(){
+		return currentPlayer.getPosition().getItems().toString();
 	}
 
 	/**
@@ -224,6 +228,10 @@ public class Game {
 	//TODO: comment
 	public void endTurn() {
 		currentPlayer.endTurn();	
+	}
+
+	public void pickUp(int itemIndex) {
+		currentPlayer.pickUp(itemIndex);
 	}
 }
 	

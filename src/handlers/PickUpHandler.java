@@ -1,5 +1,10 @@
 package handlers;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import game.Game;
+
 /**
  * Handler/Controller for the pick up use case
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
@@ -7,8 +12,21 @@ package handlers;
  */
 public class PickUpHandler {
 
-	public PickUpHandler() {
-		// TODO Auto-generated constructor stub
+	private Game game;
+	public PickUpHandler(Game game) {
+		this.game = game;
+	}
+	
+	/**
+	 * commandline for now, has to be integrated into the gui.
+	 * @throws IOException
+	 */
+	public void pickUp() throws IOException{
+		System.out.println(game.getCurrentPositionInventoryString());
+		InputStreamReader cin = new InputStreamReader(System.in);
+		int itemIndex = cin.read();
+		game.pickUp(itemIndex);
+		cin.close();
 	}
 
 }
