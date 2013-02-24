@@ -3,6 +3,9 @@ package gui.simpleguidemo;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import simplegui.Button;
+import simplegui.SimpleGUI;
+
 
 public class Demo {
 
