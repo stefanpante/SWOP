@@ -18,11 +18,11 @@ public class Sidebar extends SimpleGUI{
 	public Sidebar(String title, int width, int height){
 		super(title,width,height);
 		buttons = new ArrayList<Button>();
-		simplegui.Button b1 = createButton(5, 0, 150, 30, null);
+		simplegui.Button b1 = createButton(5, 10, 150, 30, null);
 		b1.setText("button 1");
-		simplegui.Button b2 = createButton(5, 40, 150, 30, null);
+		simplegui.Button b2 = createButton(5, 50, 150, 30, null);
 		b2.setText("button 2");
-		simplegui.Button b3 = this.createButton(5, 80, 150, 30, null);
+		simplegui.Button b3 = this.createButton(5, 90, 150, 30, null);
 		b3.setText("button 3");
 	}
 
@@ -32,7 +32,7 @@ public class Sidebar extends SimpleGUI{
 	public static void main(String[] args) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run(){
-				SimpleGUI g = new Sidebar("test", 160 ,120);
+				SimpleGUI g = new Sidebar("test", 160 ,130);
 				g.repaint();
 			}
 		});
