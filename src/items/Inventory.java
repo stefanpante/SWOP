@@ -1,10 +1,9 @@
-package player;
+package items;
 
 import java.util.ArrayList;
 
 import be.kuleuven.cs.som.annotate.Raw;
 
-import items.Item;
 
 /**
  * Inventory class is used to contain items 
@@ -37,8 +36,15 @@ public class Inventory {
 	 */
 	@Raw
 	public Inventory(int size){
-		this.setSize(size);
-		
+		this.setSize(size);	
+	}
+	
+	/**
+	 * Creates a new instance of the Inventory class
+	 * @effect 	setSize(Integer.MAX_VALUE)
+	 */	
+	public Inventory(){
+		this(Integer.MAX_VALUE);
 	}
 	
 	/**

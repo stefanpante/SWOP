@@ -1,12 +1,12 @@
 package grid;
 
+import items.Inventory;
 import items.Item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import player.Inventory;
 
 import notnullcheckweaver.NotNull;
 
@@ -21,7 +21,7 @@ public class Square {
 	/**
 	 * Inventory containing all items on the square
 	 */
-	private Inventory items;
+	private Inventory inventory;
 	private ArrayList<Item> usedItems;
 	
 	/**
@@ -30,7 +30,7 @@ public class Square {
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
 		//TODO: inventory for squares, hasn't got a size constraint
-		this.items = new Inventory(10);
+		this.inventory = new Inventory(10);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ public class Square {
 	 * These may be active or inactive.
 	 */
 	public Inventory getItems() {
-		return items;
+		return inventory;
 	}
 	
 	public void addUsedItem(Item item){
