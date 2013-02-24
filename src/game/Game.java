@@ -16,14 +16,17 @@ public class Game {
 	 * The grid of this Game object.
 	 */
 	private Grid grid;
+	
 	/**
 	 * The player1 of this Game object.
 	 */
 	private Player player1;
+	
 	/**
 	 * The player2 of this Game object.
 	 */
 	private Player player2;
+	
 	/**
 	 * The currentPlayer of this Game object.
 	 */
