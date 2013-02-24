@@ -29,6 +29,8 @@ public class Square {
 	 */
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
+		//TODO: inventory for squares, hasn't got a size constraint
+		this.items = new Inventory(10);
 	}
 	
 	/**
@@ -44,6 +46,9 @@ public class Square {
 		
 	}
 	
+	/**
+	 * used to activate the usedItems on the square
+	 */
 	public void activateUsedItems(){
 		for(Item i: usedItems)
 			i.activate();

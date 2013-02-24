@@ -32,6 +32,16 @@ public class Player implements IPlayer {
 	private Inventory items;
 	
 	/**
+	 * keeps track of the number of actions this user has done in its turn;
+	 */
+	private int actions;
+	
+	/**
+	 * true if the user has moved during his turn
+	 */
+	private boolean moved;
+	
+	/**
 	 * creates a new player with a given name and start position
 	 * 
 	 * @param startPosition the startposition for the player
@@ -42,6 +52,9 @@ public class Player implements IPlayer {
 	public Player(Square startPosition, String name) {
 		this.setStartPosition(startPosition);
 		this.setName(name);
+		this.items = new Inventory(6);
+		this.actions = 0;
+		this.moved = false;
 	}
 
 	/**
@@ -109,6 +122,7 @@ public class Player implements IPlayer {
 		else{
 			currentPosition = newPosition;
 			currentPosition.activateUsedItems();
+			moved = true;
 		}
 		
 	}
@@ -154,9 +168,22 @@ public class Player implements IPlayer {
 	}
 
 
+	/**
+	 * the Player picks up an item from the playing field
+	 * @pre getActions < 3
+	 * @pre if(!moved) actions < 3-1 if the user hasn't moved, he must have more than one action left
+	 */
+	public void pickUp(){
+		//TODO
+	}
+	/**
+	 * 
+	 */
 	@Override
 	public void endTurn() {
-		currentPosition.activateUsedItems();
+		
+		
+		//currentPosition.activateUsedItems();
 		
 	}
 
