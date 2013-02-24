@@ -138,7 +138,9 @@ public class Inventory {
 		else{
 			int i = 0;
 			while(i < items.size());
-			description +=  i + ". " + items.get(i).toString() + "\n";
+			// the system.getProperty is used to get a system independent newline,
+			// is different on windows vs Unix systems.
+			description +=  i + ". " + items.get(i).toString() + System.getProperty("line.seperator");
 			i++;
 		}
 		
