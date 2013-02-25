@@ -45,10 +45,8 @@ public class TestGrid {
 	public void testCreateSquares(){
 		Grid grid = new Grid(10,10);
 		HashMap<Coordinate2D, Square> squares = grid.getSquares();
-		int hSize = grid.getHorizontalSize();
-		int vSize = grid.getVerticalSize();
 		assertTrue(squares != null);
-		assertTrue(squares.size() == hSize * vSize);
+		assertTrue(squares.size() == grid.getSize());
 	}
 	
 	@Test
@@ -63,18 +61,29 @@ public class TestGrid {
 			if (o instanceof Wall){
 				i++;
 				assertTrue(o.getSquares().size() >= 2);
+				// wall cannot contain startposition
+				assertFalse(o.contains(grid.getLowerLeft()));
+				assertFalse(o.contains(grid.getUpperRight()));
 			}
-		//TODO check specificaties	
-		assertTrue(i <= 0.2 * grid.getHorizontalSize() * grid.getVerticalSize());
+		//TODO check specificaties, check of muren correct geplaatst zijn ten opzichte van elkaar
+		assertTrue(i <= 0.2 * grid.getSize());
 		}
 		
 		}
 		
-		
-	}
-	
+	//TODO add extra tests for grenades
 	@Test
 	public void testPlaceGrenades(){
+		Grid grid = new Grid(10,10);
+		HashMap<Coordinate2D, Square> squares = grid.getSquares();
+		int counter = 0;
+		for(Square sq: squares.values()){
+			if (!sq.getItems().isEmpty()) counter++;
+		}
+		
+		int numberOfGrenades =(int) (Math.ceil(grid.getSize() * 0.05));
+		
+		assertTrue(numberOfGrenades == counter);
 	}
 
 }

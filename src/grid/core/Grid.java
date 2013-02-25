@@ -79,8 +79,22 @@ public class Grid {
 	}
 	//TODO
 	public void createWalls(){
-		//Random waarde tussen 0 en 0.20
-		// vermenigvuldigen met aantal squares
+		
+		// max 20 percent of squares is covered
+		int coverage = (int) ((vSize*hSize) * 0.20);
+		// random selection between 0 and 20 percent
+		coverage = (int) Math.floor(coverage * Math.random());
+		
+		// All possible directions.
+		Direction[] directions = 
+				new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
+		// is this a correct method? Clone vereist cast jammer genoeg...
+		
+		HashMap<Coordinate2D, Square> candidates = new HashMap<Coordinate2D, Square>(squares);//(HashMap<Coordinate2D, Square>) squares.clone();
+		// remove startpositions from possible candidates
+		candidates.remove(new Coordinate2D(0, vSize -1));
+		candidates.remove(new Coordinate2D(hSize -1, 0));
+		
 		// kies een random richting
 		// Random waarde tussen 0 en 0.50 ( minimum lengte van wall is 2
 		// lengte van de muur
@@ -230,6 +244,10 @@ public class Grid {
 	
 	public ArrayList<Obstacle> getObstacles(){
 		return obstacles;
+	}
+	
+	public int getSize(){
+		return hSize * vSize;
 	}
 	
 	

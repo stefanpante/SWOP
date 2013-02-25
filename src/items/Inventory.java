@@ -2,6 +2,7 @@ package items;
 
 import java.util.ArrayList;
 
+import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 
 
@@ -149,6 +150,11 @@ public class Inventory {
 	
 	public ArrayList<Item> getAllItems(){
 		return new ArrayList<Item>(items);
+	}
+	
+	@Basic
+	public boolean isEmpty(){
+		return items.isEmpty();
 	}
 
 }
