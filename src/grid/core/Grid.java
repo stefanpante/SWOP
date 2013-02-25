@@ -60,7 +60,7 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
-		this.squares = new HashMap<Coordinate2D,Square>(vSize * hSize);
+		this.squares = new HashMap<Coordinate2D,Square>(this.getSize());
 		this.obstacles = new ArrayList<Obstacle>();
 		this.initGrid();
 	}
