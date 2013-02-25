@@ -1,7 +1,7 @@
 /**
  * 
  */
-package gui;
+package gui.view;
 
 import java.awt.Color;
 import java.awt.Graphics;

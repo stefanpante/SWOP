@@ -1,19 +1,15 @@
 /**
  * 
  */
-package gui;
+package gui.view;
 
-import grid.core.Coordinate2D;
-import items.Item;
+import handlers.GuiHandler;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +24,7 @@ import javax.swing.border.TitledBorder;
  * @author jonas
  *
  */
-public class ApplicationWindow implements ActionListener, MouseListener {
+public class ApplicationWindow implements Observer {
 
 	
 	public static final int WINDOW_WIDTH = 800;
@@ -40,20 +36,12 @@ public class ApplicationWindow implements ActionListener, MouseListener {
 	public static final int ROW_HEIGHT = GRID_WIDTH/ROWS;
 	public static final int COL_WIDTH =  GRID_WIDTH/COLS;
 	
+	private GuiHandler controller;
 	private JFrame frame;	
 	private String[] inventoryItems;
 
-    public static void main(String[] args) {
-        try {
-        	UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
-        	ApplicationWindow window = new ApplicationWindow();
-            window.frame.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ApplicationWindow() {
+    public ApplicationWindow(GuiHandler controller) {
+    	setController(controller);
         initialize();
     }
 
@@ -68,7 +56,7 @@ public class ApplicationWindow implements ActionListener, MouseListener {
         GuiGrid gridPanel = new GuiGrid(GRID_WIDTH, GRID_WIDTH, 10, 10);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
-        gridPanel.addMouseListener(this);
+        gridPanel.addMouseListener(getController());
         frame.getContentPane().setBackground(Color.BLACK);
         frame.getContentPane().add(gridPanel);
         
@@ -120,79 +108,23 @@ public class ApplicationWindow implements ActionListener, MouseListener {
         listScroller.setBounds(10,20,270,120);
         inventoryPanel.add(listScroller);
     }
+    
+    private GuiHandler getController(){
+    	return this.controller;
+    }
+    
+    private void setController(GuiHandler controller){
+    	this.controller = controller;
+    }
+    
+    public void setVisisble(){
+    	this.frame.setVisible(true);
+    }
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void update(Observable arg0, Object arg1) {
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Point point = e.getPoint();
-		Coordinate2D coordinate = new Coordinate2D((int)point.getX(), (int)point.getY());
-		// TODO: Whole shebang
-		System.out.println(getGridCoordinate(coordinate));
-	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static Coordinate2D getGridCoordinate(Coordinate2D coordinate){
-		int newX = coordinate.getX() / COL_WIDTH;
-		int newY = coordinate.getY() / ROW_HEIGHT;
-		return new Coordinate2D(newX, newY);
-	}
-	
-	public static Coordinate2D getGuiCoordinate(Coordinate2D coordinate){
-		int newX = coordinate.getX() * COL_WIDTH;
-		int newY = coordinate.getY() * ROW_HEIGHT;
-		return new Coordinate2D(newX, newY);
-	}
-	
-	public void setInventory(ArrayList<Item> list){
-		String[] inventory = new String[list.size()];
-		for(int i = 0; i < list.size(); i++)
-			inventory[i] = list.get(i).toString();
-		this.inventoryItems = inventory;
-	}
 }
