@@ -25,6 +25,10 @@ public class Obstacle {
 		return this.squares;
 	}
 	
+	public boolean contains(Square square){
+		return this.squares.contains(square);
+	}
+	
 	
 	
 }

@@ -12,12 +12,6 @@ import javax.swing.UIManager;
  */
 public class GameHandler {
     public static void main(String[] args) {
-        try {
-        	UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        	ApplicationWindow window = new ApplicationWindow(new GuiHandler(null));
-            window.setVisisble();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    	new GuiHandler(null);
     }
 }

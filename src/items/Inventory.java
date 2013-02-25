@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.lang.*;
 import java.nio.channels.IllegalSelectorException;
 
+import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 
 
@@ -216,6 +217,15 @@ public class Inventory {
 			i++;
 		}
 		return description;
+	}
+	
+	public ArrayList<Item> getAllItems(){
+		return new ArrayList<Item>(items);
+	}
+	
+	@Basic
+	public boolean isEmpty(){
+		return items.isEmpty();
 	}
 
 }

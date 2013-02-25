@@ -4,6 +4,7 @@ import grid.obstacles.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -14,21 +15,36 @@ import be.kuleuven.cs.som.annotate.Raw;
  *
  */
 public class Grid {
-	
+
 	/**
 	 * the minimum vertical and horizontal size are 10 squares
 	 */
 	public static int MIN_VSIZE = 10;
 	public static int MIN_HSIZE = 10;
-	
+
+	/**
+	 * Percentage of square covered by grenades
+	 */
+	public static float PERCENTAGEGRENADES = 0.05f;
+
+	/**
+	 * Max percentage of squares covered by walls
+	 */
+	public static float PERCENTAGEWALLS = 0.2f;
+
+	/**
+	 * Percentage of max length of a wall
+	 */
+	public static float LENGTHPERCENTAGEWALL = 0.5f;
+
 	private HashMap<Coordinate2D,Square> squares;
 	private ArrayList<Obstacle> obstacles;
-	
+
 	/**
 	 * The vSize of this Grid object.
 	 */
 	private int vSize;
-	
+
 	/**
 	 * The hSize of this Grid object.
 	 */
@@ -44,7 +60,7 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
-		this.squares = new HashMap<Coordinate2D,Square>(vSize * hSize);
+		this.squares = new HashMap<Coordinate2D,Square>(this.getSize());
 		this.obstacles = new ArrayList<Obstacle>();
 		this.initGrid();
 	}
@@ -53,7 +69,7 @@ public class Grid {
 		createSquares();
 		createWalls();
 		placeGrenades();
-	
+
 		// max 20% is covered by walls + the length of the walls is max 0.5 * hSize or vSize
 		//2. 5 percent of squares have a lightgrenade in there inventory// Watch out,
 		// squares covered by walls can't contain lightgrenades
@@ -63,7 +79,7 @@ public class Grid {
 	 * Creates the grid with the squares
 	 */
 	public void createSquares() throws IllegalStateException{
-		
+
 		for(int i = 0; i< hSize; i++){
 			for(int j = 0; j < vSize; j++){
 				Coordinate2D key = new Coordinate2D(i,j);
@@ -72,25 +88,59 @@ public class Grid {
 			}
 		}
 	}
-	
+
 	@Basic 
 	public HashMap<Coordinate2D, Square> getSquares(){
 		return squares;
 	}
 	//TODO
 	public void createWalls(){
-		//Random waarde tussen 0 en 0.20
-		// vermenigvuldigen met aantal squares
+
+		// max 20 percent of squares is covered
+		int coverage = (int) ((vSize*hSize) * Grid.PERCENTAGEWALLS);
+		// random selection between 0 and 20 percent
+		coverage = (int) Math.floor(coverage * Math.random());
+
+		// All possible directions.
+		Direction[] directions = 
+				new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
+		// is this a correct method? Clone vereist cast jammer genoeg...
+
+		HashMap<Coordinate2D, Square> candidates = new HashMap<Coordinate2D, Square>(squares);//(HashMap<Coordinate2D, Square>) squares.clone();
+		// remove startpositions from possible candidates
+		candidates.remove(new Coordinate2D(0, vSize -1));
+		candidates.remove(new Coordinate2D(hSize -1, 0));
+
 		// kies een random richting
 		// Random waarde tussen 0 en 0.50 ( minimum lengte van wall is 2
 		// lengte van de muur
 		// aftrekken van nodige squares
 		// stoppen als het aantal resterende square < 2
 	}
-	
-	//TODO
+
+	//TODO: me thinkey this method is finished
 	private void placeGrenades(){
-		
+
+		int grenades = (int) (this.getSize() * Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
+
+		ArrayList<Square> candidateSquares = new ArrayList<Square>(squares.values());
+
+		// Remove startpositions
+		candidateSquares.remove(getLowerLeft());
+		candidateSquares.remove(getUpperRight());
+
+		//TODO: remove all obstacles
+		for(Obstacle o: obstacles)
+			candidateSquares.removeAll(o.getSquares());
+
+		// Add the grenades to the squares, random distribution
+		Random generator = new Random();
+		for(int i = 0; i < grenades; i++){
+			int l = candidateSquares.size();
+			Square s = candidateSquares.get(generator.nextInt(l));
+			candidateSquares.remove(s);
+		}
+
 	}
 	//TODO
 	/**
@@ -100,9 +150,9 @@ public class Grid {
 	@Raw @Basic
 	public Square getLowerLeft() {
 		return squares.get(new Coordinate2D(0, vSize -1));
-		
+
 	}
-	
+
 	/**
 	 * gets the upper right square of the grid
 	 * @return
@@ -110,7 +160,7 @@ public class Grid {
 	@Raw @Basic
 	public Square getUpperRight(){
 		return squares.get(new Coordinate2D(hSize -1, 0));
-		
+
 	}
 	/**
 	 * Finds the Coordinate2D associated with a square
@@ -129,7 +179,7 @@ public class Grid {
 				break;
 			}
 		}
-		
+
 		if(result == null) 
 			throw new IllegalStateException("Square is not part of the grid");
 		return result;
@@ -173,7 +223,7 @@ public class Grid {
 	public static boolean isValidVerticalSize(int vSize) {
 		return vSize > Grid.MIN_VSIZE;
 	}
-	
+
 	/**
 	 * Checks if the given position is a valid start position for the player.
 	 * The starting position of player cannot contain a light grenade.
@@ -227,13 +277,19 @@ public class Grid {
 	public static boolean isValidHorizontalSize(int hSize) {
 		return hSize > Grid.MIN_HSIZE;
 	}
-	
+
 	public ArrayList<Obstacle> getObstacles(){
 		return obstacles;
 	}
-	
-	
 
-
+	public int getSize(){
+		return hSize * vSize;
+	}
+	
+	@Override
+	//TODO should we also describe the obstacles?
+	public String toString(){
+		return "horizontal size: " + hSize + " Vertical size: " +  vSize;
+	}
 
 }

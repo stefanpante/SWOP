@@ -22,6 +22,10 @@ public class Square {
 	 * Inventory containing all items on the square
 	 */
 	private Inventory inventory;
+	
+	/**
+	 * All the items used on this square
+	 */
 	private ArrayList<Item> usedItems;
 	
 	/**
@@ -44,6 +48,10 @@ public class Square {
 	public void addUsedItem(Item item){
 		usedItems.add(item);
 		
+	}
+	
+	public void addItem(Item item){
+		inventory.addItem(item);
 	}
 	
 	/**
