@@ -1,7 +1,6 @@
 package items;
 
 import java.util.ArrayList;
-import java.lang.*;
 
 import be.kuleuven.cs.som.annotate.Raw;
 
@@ -146,8 +145,10 @@ public class Inventory {
 		}
 		
 		return description;
-		
-		
+	}
+	
+	public ArrayList<Item> getAllItems(){
+		return new ArrayList<Item>(items);
 	}
 
 }
