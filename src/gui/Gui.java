@@ -24,7 +24,6 @@ public class Gui {
 	
 	public static final int ROW_HEIGHT = HEIGHT / (ROWS);
 	public static final int COL_WIDTH = WIDTH / (COLS);
-
 	
 	public static void main(String[] args) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
