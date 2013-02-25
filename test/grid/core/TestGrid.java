@@ -3,6 +3,9 @@ package grid.core;
 import static org.junit.Assert.*;
 
 
+import grid.obstacles.Obstacle;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.After;
@@ -35,6 +38,10 @@ public class TestGrid {
 	}
 	
 	@Test
+	public void testGrid(){
+		// test if a grid can be created with sizes less than minimum size
+	}
+	@Test
 	public void testCreateSquares(){
 		Grid grid = new Grid(10,10);
 		HashMap<Coordinate2D, Square> squares = grid.getSquares();
@@ -45,7 +52,23 @@ public class TestGrid {
 	}
 	
 	@Test
+	//TODO check length of walls
 	public void testCreateWalls(){
+		Grid grid = new Grid(10,10);
+		ArrayList<Obstacle> obstacles= grid.getObstacles();
+		assertTrue(obstacles != null);
+		int i = 0;
+		
+		for(Obstacle o: obstacles){
+			if (o instanceof Wall){
+				i++;
+				assertTrue(o.getSquares().size() >= 2);
+			}
+		//TODO check specificaties	
+		assertTrue(i <= 0.2 * grid.getHorizontalSize() * grid.getVerticalSize());
+		}
+		
+		}
 		
 		
 	}

@@ -25,4 +25,6 @@ public class Obstacle {
 		return this.squares;
 	}
 	
+	
+	
 }

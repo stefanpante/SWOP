@@ -53,7 +53,7 @@ public class Square {
 		for(Item i: usedItems)
 			i.activate();
 	}
-
+	
 	/**
 	 * Returns whether the given item is a valid item for all squares.
 	 * 

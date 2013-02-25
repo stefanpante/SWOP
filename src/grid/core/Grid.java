@@ -228,6 +228,10 @@ public class Grid {
 		return hSize > Grid.MIN_HSIZE;
 	}
 	
+	public ArrayList<Obstacle> getObstacles(){
+		return obstacles;
+	}
+	
 	
 
 
