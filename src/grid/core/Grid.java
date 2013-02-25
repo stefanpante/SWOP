@@ -246,6 +246,10 @@ public class Grid {
 		return obstacles;
 	}
 	
+	public int getSize(){
+		return hSize * vSize;
+	}
+	
 	
 
 

@@ -3,6 +3,7 @@ package items;
 import java.util.ArrayList;
 import java.lang.*;
 
+import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 
 
@@ -148,6 +149,11 @@ public class Inventory {
 		return description;
 		
 		
+	}
+	
+	@Basic
+	public boolean isEmpty(){
+		return items.isEmpty();
 	}
 
 }
