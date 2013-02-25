@@ -30,15 +30,13 @@ public class UseItemHandler {
 	 */
 	//TODO: this is an temporary implementation of useItem, 
 	// is commandline but should be in GUI
-	public void useItem(Item item) throws IOException{
+	public void useItem(Item item) {
 		System.out.println(game.getCurrentPlayerInventory());
-		InputStreamReader cin = new InputStreamReader(System.in);
-		int itemIndex = cin.read();
-		game.useItem(itemIndex);
-		cin.close();
-		
-		
-		
+//		InputStreamReader cin = new InputStreamReader(System.in);
+//		int itemIndex = cin.read();
+//		game.useItem(itemIndex);
+//		cin.close();
+		game.useItem(item);
 	}
 
 }

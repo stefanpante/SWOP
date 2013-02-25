@@ -159,10 +159,11 @@ public class Player extends Observable implements IPlayer {
 		return items;
 	}
 	/**
-	 * sets an inventory for the player
-	 * @param inventory the new inventory for the player
-	 * @throws IllegalArgumentException
-	 * 			thrown if the given inventory is not valid for the player
+	 * Sets an inventory for the player
+	 * @param 	inventory 
+	 * 			The new inventory for the player.
+	 * @throws 	IllegalArgumentException
+	 * 			Thrown if the given inventory is not valid for the player.
 	 */
 	public void setInventory(Inventory inventory) throws IllegalArgumentException{
 		if(!isValidInventory(inventory)) 
