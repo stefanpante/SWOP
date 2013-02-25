@@ -1,8 +1,11 @@
 package game;
 
+import grid.Grid;
+
+import java.util.Observable;
+
 import notnullcheckweaver.NotNull;
 import player.Player;
-import grid.Grid;
 
 /**
  * Game class

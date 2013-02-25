@@ -1,5 +1,7 @@
 package player;
 
+import java.util.Observable;
+
 import grid.Square;
 import items.Inventory;
 import items.Item;
@@ -9,7 +11,7 @@ import items.Item;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
-public class Player implements IPlayer {
+public class Player extends Observable implements IPlayer {
 
 	
 	/**
@@ -156,7 +158,6 @@ public class Player implements IPlayer {
 	public void useItem(int index) {
 		Item item = items.getItem(index);
 		currentPosition.addUsedItem(item);
-		
 	}
 	
 	public Inventory getInventory(){
