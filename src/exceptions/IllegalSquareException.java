@@ -1,8 +1,8 @@
 package exceptions;
 
 /**
- * Exception that can be thrown when an illegal square is used
- * possibly as an argument.
+ * Exception that can be thrown when a square is used
+ * that violates conditions
  * 
  * @author vincentreniers
  */
