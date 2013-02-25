@@ -63,8 +63,11 @@ public class TestGrid {
 			if (o instanceof Wall){
 				i++;
 				assertTrue(o.getSquares().size() >= 2);
+				// wall cannot contain startposition
+				assertFalse(o.contains(grid.getLowerLeft()));
+				assertFalse(o.contains(grid.getUpperRight()));
 			}
-		//TODO check specificaties	
+		//TODO check specificaties, check of muren correct geplaatst zijn ten opzichte van elkaar
 		assertTrue(i <= 0.2 * grid.getHorizontalSize() * grid.getVerticalSize());
 		}
 		
