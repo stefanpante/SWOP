@@ -201,7 +201,7 @@ public class Game {
 	public String getCurrentPlayerInventoryString(){
 		return currentPlayer.getInventory().toString();
 	}
-	// worden hier de GRASP principes geviolate??
+	//TODO worden hier de GRASP principes geviolate??
 	public String getCurrentPositionInventoryString(){
 		return currentPlayer.getPosition().getItems().toString();
 	}
