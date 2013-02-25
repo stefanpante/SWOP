@@ -1,4 +1,4 @@
-package grid;
+package grid.core;
 
 /**
  * Orientation is used to indicate the orientation of an object.

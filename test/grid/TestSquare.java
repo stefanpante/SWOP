@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.ArrayList;
 
+import grid.core.Square;
 import items.Item;
 import items.LightGrenade;
 

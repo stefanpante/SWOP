@@ -1,4 +1,4 @@
-package grid;
+package grid.core;
 
 /**
  * This is used for scenarios where the player wants to move into a certain direction

@@ -4,7 +4,7 @@
 package handlers;
 
 import game.Game;
-import grid.Coordinate2D;
+import grid.core.Coordinate2D;
 import items.Item;
 import player.Player;
 

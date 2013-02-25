@@ -1,19 +1,23 @@
 /**
  * 
  */
-package grid;
+package grid.core;
+
+
+import grid.obstacles.Obstacle;
 
 import java.util.ArrayList;
 
+
 /**
+ * LightTrail is a trail that is left behind the player while he
+ * executes actions on the grid. The LightTrail is an obstacle.
+ * 
  * @author jonas
- *
  */
-public class LightTrail {
+public class LightTrail extends Obstacle{
 	
 	public static final int LENGTH = 2;
-	
-	ArrayList<Square> squares;
 		
 	/**
 	 * Extend the light trail by adding a new square to the trail.
@@ -26,6 +30,7 @@ public class LightTrail {
 	public void addToLightTrail(Square square) throws IllegalArgumentException {
 		if(!canAddToLightTrail(square))
 			throw new IllegalArgumentException();
+		
 		squares.remove(LENGTH);
 		squares.add(0,square);
 	}

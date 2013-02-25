@@ -1,7 +1,7 @@
 package player;
 
 import items.Item;
-import grid.Square;
+import grid.core.Square;
 
 /**
  * The actions that a player can use.

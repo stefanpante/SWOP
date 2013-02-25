@@ -1,6 +1,6 @@
 package game;
 
-import grid.Grid;
+import grid.core.Grid;
 
 import java.util.Observable;
 

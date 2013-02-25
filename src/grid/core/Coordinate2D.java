@@ -1,4 +1,4 @@
-package grid;
+package grid.core;
 
 import be.kuleuven.cs.som.annotate.*;
 

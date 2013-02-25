@@ -1,6 +1,6 @@
 package player;
 
-import grid.Square;
+import grid.core.Square;
 
 
 

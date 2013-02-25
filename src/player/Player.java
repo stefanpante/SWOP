@@ -2,7 +2,7 @@ package player;
 
 import java.util.Observable;
 
-import grid.Square;
+import grid.core.Square;
 import items.Inventory;
 import items.Item;
 
