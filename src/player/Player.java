@@ -13,7 +13,6 @@ import items.Item;
  */
 public class Player extends Observable implements IPlayer {
 
-	
 	/**
 	 * The start position of this player
 	 */
@@ -42,7 +41,6 @@ public class Player extends Observable implements IPlayer {
 	/**
 	 * The number of action when the last turn ended
 	 */
-	
 	private int previousactions;
 	
 	/**
@@ -65,24 +63,13 @@ public class Player extends Observable implements IPlayer {
 	 * @effect setName(name)
 	 */
 	public Player(Square startPosition, String name) {
-		
 		this.setStartPosition(startPosition);
 		this.setName(name);
+		
 		this.items = new Inventory(INVENTORY_SIZE);
 		this.actions = 0;
 		this.previousactions = 0;
 		this.moved = false;
-	}
-
-	/**
-	 * checks if the given position is a valid start position for the player
-	 * @param pos
-	 * @return  true if the position is a valid startposition
-	 * 			false otherwise
-	 */
-	//TODO: implement this, depends on the decision to implement neighbours in square
-	public boolean isValidStartPosition(Square pos){
-		return false;
 	}
 	
 	/**

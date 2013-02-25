@@ -1,5 +1,7 @@
 package handlers;
 
+import items.Item;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -28,8 +30,8 @@ public class UseItemHandler {
 	 */
 	//TODO: this is an temporary implementation of useItem, 
 	// is commandline but should be in GUI
-	public void useItem() throws IOException{
-		System.out.println(game.getCurrentPlayerInventoryString());
+	public void useItem(Item item) throws IOException{
+		System.out.println(game.getCurrentPlayerInventory());
 		InputStreamReader cin = new InputStreamReader(System.in);
 		int itemIndex = cin.read();
 		game.useItem(itemIndex);

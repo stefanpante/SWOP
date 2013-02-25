@@ -173,6 +173,20 @@ public class Grid {
 	public static boolean isValidVerticalSize(int vSize) {
 		return vSize > Grid.MIN_VSIZE;
 	}
+	
+	/**
+	 * Checks if the given position is a valid start position for the player.
+	 * The starting position of player cannot contain a light grenade.
+	 * For each player, at least one light grenade is placed in the area of 3x3 squares 
+	 * that covers the starting position of that player.
+	 * 
+	 * @param	pos
+	 * @return  true if the position is a valid startposition
+	 * 			false otherwise
+	 */
+	public boolean isValidStartPosition(Square pos){
+		return false;
+	}
 
 	/**
 	 * Returns the value of the hSize of this Grid as an int.
