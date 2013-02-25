@@ -2,6 +2,8 @@ package game;
 
 import grid.core.Grid;
 
+import items.Inventory;
+
 import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
@@ -36,6 +38,24 @@ public class Game {
 	private Player currentPlayer;
 	
 
+	/**
+	 * Zero argument constructor that makes a new game with standard grid and standard player names.
+	 */
+	public Game(){
+		this(new Grid(10,10));
+	}
+	
+	/**
+	 * One argument constructor that makes a new game with given grid and standard player names.
+	 * 
+	 * @param grid	The grid 
+	 */
+	public Game(Grid grid){
+		setGrid(grid);
+		setPlayer1(new Player(this.getGrid().getLowerLeftCorner()), "player1");
+		setPlayer2(new Player(this.getGrid().getLowerLeftCorner()), "player2");
+	}
+	
 	/**
 	 * Returns the value of the grid of this Game as an Grid.
 	 *
@@ -201,8 +221,8 @@ public class Game {
 	/**
 	 * gets the inventory of the current player 
 	 */
-	public String getCurrentPlayerInventoryString(){
-		return currentPlayer.getInventory().toString();
+	public Inventory getCurrentPlayerInventory(){
+		return currentPlayer.getInventory();
 	}
 	//TODO worden hier de GRASP principes geviolate??
 	public String getCurrentPositionInventoryString(){
