@@ -32,6 +32,11 @@ public class Grid {
 	 */
 	public static float PERCENTAGEWALLS = 0.2f;
 	
+	/**
+	 * Percentage of max length of a wall
+	 */
+	public static float LENGTHPERCENTAGEWALL = 0.5f;
+	
 	private HashMap<Coordinate2D,Square> squares;
 	private ArrayList<Obstacle> obstacles;
 	
