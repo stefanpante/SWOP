@@ -9,7 +9,15 @@ import java.util.HashMap;
  */
 public class Grid {
 	
+	/**
+	 * HashMap holding all the squares in this grid.
+	 */
 	HashMap<Coordinate2D,Square> squares;
+	
+	/**
+	 * The vSize of this Grid object.
+	 */
+	private int vSize;
 
 	/**
 	 * generates a grid with vSize * hSize squares
@@ -18,12 +26,6 @@ public class Grid {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
 	}
-	
-	/**
-	 * The vSize of this Grid object.
-	 */
-	//TODO: Move this line to the begin of the class.
-	private int vSize;
 
 	/**
 	 * Returns the value of the vSize of this Grid as an int.
@@ -45,7 +47,7 @@ public class Grid {
 	 *			If the given argument is not a valid vSize.
 	 *			| !isValidVerticalSize(vSize)
 	 */
-	public void setVerticalSize(int vSize) {
+	public void setVerticalSize(int vSize) throws IllegalArgumentException {
 		if (!isValidVerticalSize(vSize)) {
 			throw new IllegalArgumentException(
 					"The argument ("
@@ -111,8 +113,9 @@ public class Grid {
 		return hSize > 0;
 	}
 	
-	
-
-
-
+	@Override
+	public String toString() {
+		String result = "Grid (" + getHorizontalSize() + "x"+ getVerticalSize()+")"; 
+		return result;
+	}
 }

@@ -53,7 +53,7 @@ public class Game {
 	 *			If the given argument is not a valid grid.
 	 *			| !isValidGrid(grid)
 	 */
-	public void setGrid(Grid grid) {
+	public void setGrid(Grid grid) throws IllegalArgumentException{
 		if (!isValidGrid(grid)) {
 			throw new IllegalArgumentException(
 					"The argument ("
