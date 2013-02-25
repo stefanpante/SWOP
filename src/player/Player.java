@@ -73,6 +73,16 @@ public class Player extends Observable implements IPlayer {
 	}
 	
 	/**
+	 * Returns the name of the player.
+	 * 
+	 * @return	The name of this player. 
+	 * 
+	 */
+	public String getName(){
+		return name;
+	}
+	
+	/**
 	 * sets the name for the player
 	 * @param 	name	the name which is given to the player
 	 * @throws 	IllegalArgumentException
@@ -83,6 +93,8 @@ public class Player extends Observable implements IPlayer {
 		if(!isValidName(name)) throw new IllegalArgumentException("Not a valid name");
 		this.name = name;
 	}
+	
+	
 	
 	/**
 	 * returns true for now
@@ -101,13 +113,9 @@ public class Player extends Observable implements IPlayer {
 	 * @throws 	IllegalArgumentException
 	 * 			If the given position is not a valid startposition
 	 */
-	private void setStartPosition(Square pos) throws IllegalArgumentException{
-		if(!isValidStartPosition(pos))
-			throw new IllegalArgumentException("Square is not a valid startposition!");
-		else {
-			this.startPosition = pos;
-			this.currentPosition = startPosition;
-		}
+	private void setStartPosition(Square pos){
+		this.startPosition = pos;
+		this.currentPosition = startPosition;
 	}
 	
 	//TODO: when is a move valid?
@@ -142,8 +150,8 @@ public class Player extends Observable implements IPlayer {
 	/**
 	 * Method to select the item which the player is going to use
 	 */
-	public void useItem(int index) {
-		Item item = items.getItem(index);
+	public void useItem(Item itemToUse) {
+		Item item = items.takeItem(itemToUse);
 		currentPosition.addUsedItem(item);
 	}
 	
@@ -199,6 +207,11 @@ public class Player extends Observable implements IPlayer {
 		// needed to check for 3 actions and the actions itself is needed for the lighttrail.
 		this.previousactions = actions;
 		
+	}
+	
+	@Override
+	public String toString() {
+		return "Player " + this.getName();
 	}
 
 }

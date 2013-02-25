@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import items.Inventory;
+import items.Item;
 import items.LightGrenade;
 import game.Game;
 
@@ -43,10 +44,11 @@ public class TestUseItemHandler {
 		Game game = new Game();
 		game.setCurrentPlayer(game.getPlayer1());
 		Inventory inv = new Inventory(6);
+		Item lg = new LightGrenade();
 		inv.addItem(new LightGrenade());
 		game.getPlayer1().setInventory(inv);
 		UseItemHandler uh = new UseItemHandler(game);
-		uh.useItem();
+		uh.useItem(lg);
 	}
 
 }

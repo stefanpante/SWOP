@@ -2,6 +2,7 @@ package items;
 
 import java.util.ArrayList;
 import java.lang.*;
+import java.nio.channels.IllegalSelectorException;
 
 import be.kuleuven.cs.som.annotate.Raw;
 
@@ -22,7 +23,7 @@ public class Inventory {
 	/**
 	 * The size of the inventory, should not be smaller than zero
 	 */
-	private int size;
+	private int maximumSize;
 	
 	/**
 	 * A given size should imply the usage of an array,
@@ -37,7 +38,7 @@ public class Inventory {
 	 */
 	@Raw
 	public Inventory(int size){
-		this.setSize(size);	
+		this.setMaximumSize(size);	
 	}
 	
 	/**
@@ -50,25 +51,36 @@ public class Inventory {
 	
 	/**
 	 * Checks if the given size is valid for this inventory
-	 * @param size size parameter
+	 * @param maximumSize size parameter
 	 * @return 	true if the size is larger or equal to zero
 	 * 			false otherwise
 	 */
-	public boolean isValidSize(int size){
-		return size >= 0;
+	public boolean isValidMaximumSize(int maximumSize){
+		return maximumSize >= 0;
 	}
 	
 	/**
-	 * Sets the size of the inventory  and inits a new arraylist
-	 * if a arraylist hasnt already been initialised
+	 * The maximum size of this inventory of items.
 	 * 
-	 * @param size	the size of this inventory
-	 * @throws IllegalArgumentException if the given size is not valid
+	 * @return	An integer representing the maximum size of this inventory.
 	 */
-	public void setSize(int size) throws IllegalArgumentException{
-		if(!isValidSize(size)) throw new IllegalArgumentException("The given size is not valid!");
+	public int getMaximumSize(){
+		return this.maximumSize;
+	}
+	
+	/**
+	 * Sets the size of the inventory and inits a new arraylist
+	 * if a arraylist hasn't already been initialised.
+	 * 
+	 * @param 	maximumSize	
+	 * 			the size of this inventory
+	 * @throws 	IllegalArgumentException 
+	 * 			if the given size is not valid
+	 */
+	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{
+		if(!isValidMaximumSize(maximumSize)) throw new IllegalArgumentException("The given size is not valid!");
 		else{
-			this.size = size;
+			this.maximumSize = maximumSize;
 			if(this.items == null){
 				this.items = new ArrayList<Item>();
 			}
@@ -77,9 +89,19 @@ public class Inventory {
 	}
 	
 	/**
+	 * Returns the amount of already occupied spaces in the inventory.
+	 * 
+	 * @return	An integer representing the spaces already occupied in this inventory.
+	 */
+	public int getAmountOfUsedSpaces(){
+		return items.size();
+	}
+	
+	/**
 	 * checks if the given item is in the inventory
-	 * @param item the item to be checked
-	 * @return true if the item is contained in this inventory,
+	 * @param 	item 
+	 * 			the item to be checked
+	 * @return 	true if the item is contained in this inventory,
 	 * 				otherwise false
 	 */
 	public boolean hasItem(Item item){
@@ -94,33 +116,82 @@ public class Inventory {
 	 * 			of the inventory
 	 */
 	public void addItem(Item item) throws IllegalStateException{
-		if(items.size() + 1 > size){
+		if(this.getAmountOfUsedSpaces() + 1 > this.getMaximumSize()){
 			throw new IllegalStateException("The inventory is full, cannot add another item");
+		} else {
+			items.add(item);
 		}
-		else items.add(item);
 	}
 	
 	/**
-	 * Gets an item based on its index and removes it from the inventory
-	 * @param index the index of the item to return 
-	 * @return the item of which the index is given
-	 * @throws IndexOutOfBoundsException
-	 * 		   thrown if the given index is not valid for this inventory
+	 * Inspector that returns the item at the given index.
+	 * 
+	 * @param 	index 
+	 * 			The index of the item to return.
+	 * @return	The item of which the index is given.
+	 * @throws 	IllegalStateException
+	 * 		   	Thrown if the given index is not valid for this inventory.
+	 * 			| !canHaveAsItemIndex(index)
 	 */
 	public Item getItem(int index) throws IndexOutOfBoundsException{
-		if(index >= items.size()) throw new IndexOutOfBoundsException();
-		Item item = items.get(index);
-		items.remove(index);
-		
+		if(!canHaveAsItemIndex(index)){
+			throw new IllegalSelectorException();
+		}
+		return items.get(index);
+	}
+	
+	/**
+	 * Mutator that removes an item at the given index from the inventory and returns it.
+	 * 
+	 * @return 
+	 * @throws 	IllegalStateException
+	 * 			If the item at the given index cannot be removed.
+	 * @throws 	IndexOutOfBoundsException
+	 * 			If the given index is not a valid index.
+	 */
+	public Item takeItem(int index) throws IllegalStateException, IndexOutOfBoundsException{
+		Item item = getItem(index);
+		removeItem(item);
 		return item;
 		
 	}
 	
 	/**
+	 * Mutator that removes a given item from the inventory and returns it.
+	 * 
+	 * @param	item
+	 * 			The item that will be taken from the inventory.
+	 * @effect	removeItem(item)
+	 * @return 	The given Item that is now removed from the inventory.
+	 * @throws 	IllegalStateException
+	 * 			If the given item cannot be removed.
+	 */
+	public Item takeItem(Item item) throws IllegalStateException{
+		removeItem(item);
+		return item;
+		
+	}
+	
+	/**
+	 * Returns whether the given index is a possible index for this inventory.
+	 * 
+	 * @param 	index
+	 * 			The index to be checked.
+	 * @return	True if and only if the given index is larger than zero,
+	 * 			smaller than the maximum possible size and the amount of spaces used.
+	 * 			| index > 0 && 
+	 * 			| index <= this.getMaximumSize() && 
+	 * 			| index <= this.getAmountOfUsedSpaces()
+	 */
+	public boolean canHaveAsItemIndex(int index){
+		return index > 0 && index <= this.getMaximumSize() && index <= this.getAmountOfUsedSpaces();
+	}
+	
+	/**
 	 * Removes a given item from the inventory
-	 * @param item the item to be removed
-	 * @throws IllegalStateException
-	 * 		   thrown when the item cannot be removed, because it is not inside the inventory
+	 * @param 	item the item to be removed
+	 * @throws 	IllegalStateException
+	 * 		  	Thrown when the item cannot be removed, because it is not inside the inventory
 	 */
 	public void removeItem(Item item) throws IllegalStateException{
 		if(!this.hasItem(item)) 
@@ -135,7 +206,7 @@ public class Inventory {
 	@Override
 	public String toString(){
 		String description = "";
-		if(size == 0) return "This inventory is empty";
+		if(maximumSize == 0) return "This inventory is empty";
 		else{
 			int i = 0;
 			while(i < items.size());
@@ -144,10 +215,7 @@ public class Inventory {
 			description +=  i + ". " + items.get(i).toString() + System.getProperty("line.seperator");
 			i++;
 		}
-		
 		return description;
-		
-		
 	}
 
 }

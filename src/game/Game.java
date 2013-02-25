@@ -3,6 +3,7 @@ package game;
 import grid.core.Grid;
 
 import items.Inventory;
+import items.Item;
 
 import java.util.Observable;
 
@@ -48,12 +49,12 @@ public class Game {
 	/**
 	 * One argument constructor that makes a new game with given grid and standard player names.
 	 * 
-	 * @param grid	The grid 
+	 * @param grid	The grid  that will be used for the game.
 	 */
 	public Game(Grid grid){
 		setGrid(grid);
-		setPlayer1(new Player(this.getGrid().getLowerLeftCorner()), "player1");
-		setPlayer2(new Player(this.getGrid().getLowerLeftCorner()), "player2");
+		setPlayer1(new Player(this.getGrid().getLowerLeft(), "player1"));
+		setPlayer2(new Player(this.getGrid().getUpperRight(), "player2"));
 	}
 	
 	/**
@@ -80,7 +81,7 @@ public class Game {
 		if (!isValidGrid(grid)) {
 			throw new IllegalArgumentException(
 					"The argument ("
-							+ grid // kan dit zomaar?
+							+ grid
 							+ ") is not a valid agrument of the field grid from the class Game");
 		}
 		this.grid = grid;
@@ -90,12 +91,9 @@ public class Game {
 	 * Check whether the given grid is a valid grid for all the objects of Game.
 	 * @param 	grid
 	 *			The grid to check.
-	 * @return	True if and only if the given value is not null, has the correct type, ...
+	 * @return	True
 	 */
 	public static boolean isValidGrid(Grid grid) {
-		if (!(grid instanceof Grid)) {
-			return false;
-		}
 		//TODO: specific constraints for this field.
 		return true;
 	}
@@ -134,16 +132,12 @@ public class Game {
 	 * Check whether the given player is a valid player for all the objects of Game.
 	 * @param 	player
 	 *			The player to check.
-	 * @return	True if and only if the given value is not null, has the correct type, ...
+	 * @return	True
 	 */
 	public static boolean isValidPlayer(Player player) {
-		if (!(player instanceof Player)) {
-			return false;
-		}
 		//TODO: specific constraints for this field.
 		return true;
 	}
-	
 
 	/**
 	 * Returns the value of the player2 of this Game as an Player.
@@ -194,9 +188,12 @@ public class Game {
 	 * @throws 	IllegalArgumentException
 	 *			If the given argument is not a valid currentPlayer.
 	 *			| !isValidCurrentPlayer(currentPlayer)
+	 * @throws 	IllegalArgumentException
+	 *			If the given argument can't be currentPlayer of this game.
+	 *			| !canHaveAsCurrentPlayer(currentPlayer)
 	 */
 	public void setCurrentPlayer(Player currentPlayer) {
-		if (!isValidCurrentPlayer(currentPlayer)) {
+		if (!isValidCurrentPlayer(currentPlayer) || !canHaveAsCurrentPlayer(currentPlayer)) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ currentPlayer
@@ -214,40 +211,80 @@ public class Game {
 	 */
 	//TODO hoe Controleer deze postcondities en precondities
 	public void switchPlayer(){
-		if(currentPlayer == player1) currentPlayer = player2;
-		if(currentPlayer == player2) currentPlayer = player1;
+		if(currentPlayer == player1){
+			currentPlayer = player2;
+		}
+		if(currentPlayer == player2){
+			currentPlayer = player1;
+		}
 	}
 	
 	/**
-	 * gets the inventory of the current player 
+	 * Returns the inventory of the current player.
 	 */
 	public Inventory getCurrentPlayerInventory(){
 		return currentPlayer.getInventory();
 	}
-	//TODO worden hier de GRASP principes geviolate??
-	public String getCurrentPositionInventoryString(){
-		return currentPlayer.getPosition().getItems().toString();
+	
+	/**
+	 * Returns the inventory of the items on the square where the current player is.
+	 * 
+	 */
+	public Inventory getCurrentPositionInventory(){
+		return currentPlayer.getPosition().getItems();
 	}
 
 	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for all the objects of Game.
 	 * @param 	currentPlayer
 	 *			The currentPlayer to check.
-	 * @return	True if and only if the given value is not null, has the correct type, ...
+	 * @return	True
 	 */
 	public static boolean isValidCurrentPlayer(Player currentPlayer) {
-		if (!(currentPlayer instanceof Player)) {
-			return false;
-		}
 		//TODO: specific constraints for this field.
 		return true;
 	}
 	
-	//TODO:comment
-	public void useItem(int itemIndex) {
-		currentPlayer.useItem(itemIndex);
-		
+	/**
+	 * Checks whether the given current player is a legal currentPlayer for this game object.
+	 * 
+	 * @param 	currentPlayer
+	 * 			The currentPlayer to check.
+	 * @return	True if the given player is either the first or second player.
+	 * 			| (currentPlayer == this.getPlayer1() ||  currentPlayer == this.getPlayer2())
+	 */
+	public boolean canHaveAsCurrentPlayer(Player currentPlayer) {
+		return (currentPlayer == this.getPlayer1() ||  currentPlayer == this.getPlayer2());
 	}
+	
+
+	/**
+	 * 
+	 * @param itemIndex
+	 */
+	public void useItem(Item item) throws IllegalStateException {
+		if(!canUseAsItem(item)){
+			throw new IllegalStateException("The item "
+					+ item
+					+ " can't be used by " 
+					+ currentPlayer 
+					+ " right now.");
+		}
+		currentPlayer.useItem(item);
+	}
+	
+	/**
+	 * Returns if the current player can use the given item.
+	 * 
+	 * @param 	item
+	 * 			The item to check.
+	 * @return
+	 */
+	public boolean canUseAsItem(Item item) {
+		//TODO maybe let only player check this.
+		return false;
+	}
+
 	//TODO: comment
 	public void endTurn() {
 		currentPlayer.endTurn();	
