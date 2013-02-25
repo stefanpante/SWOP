@@ -1,7 +1,7 @@
 /**
  * 
  */
-package gui;
+package oldgui;
 
 import grid.core.Coordinate2D;
 
