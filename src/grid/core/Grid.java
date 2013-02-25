@@ -52,12 +52,12 @@ public class Grid {
 	}
 	
 	public Square getLowerLeft(){
-		return null;
+		return squares.get(new Coordinate2D(0, vSize -1));
 		
 	}
 	
 	public Square getUpperRight(){
-		return null;
+		return squares.get(new Coordinate2D(hSize -1, 0));
 		
 	}
 	/**
