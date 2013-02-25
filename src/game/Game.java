@@ -11,9 +11,20 @@ import notnullcheckweaver.NotNull;
 import player.Player;
 
 /**
- * Game class
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
- *
+ * Game class, this class controls the flow of the game
+ * 
+ * @author 	Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ * @version 0.5
+ * 
+ * @invar	The Grid is a valid grid for this game
+ * 			| isValidGrid(getGrid())
+ * @invar	player1 is a valid player for this game
+ * 			| isValidPlayer(getPlayer1())
+ * @invar	player2 is a valid player for this game
+ * 			| isValidPlayer(getPlayer1())
+ * @invar   currentPlayer is valid current player for the game
+ * 			| isValidCurrentPlayer(getCurrentPlayer())
+ * 
  */
 @NotNull
 public class Game {
@@ -41,9 +52,11 @@ public class Game {
 
 	/**
 	 * Zero argument constructor that makes a new game with standard grid and standard player names.
+	 * 
+	 * @effect	this.Game(new Grid(10,10))
 	 */
 	public Game(){
-		this(new Grid(10,10));
+		this(new Grid(Grid.MIN_VSIZE,Grid.MIN_HSIZE));
 	}
 	
 	/**
@@ -212,10 +225,10 @@ public class Game {
 	//TODO hoe Controleer deze postcondities en precondities
 	public void switchPlayer(){
 		if(currentPlayer == player1){
-			currentPlayer = player2;
+			setCurrentPlayer(player2);
 		}
 		if(currentPlayer == player2){
-			currentPlayer = player1;
+			setCurrentPlayer(player1);
 		}
 	}
 	
