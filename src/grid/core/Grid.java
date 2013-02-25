@@ -5,6 +5,9 @@ import grid.obstacles.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
+
 /**
  * Grid class
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
@@ -40,37 +43,57 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
+		this.squares = new HashMap<Coordinate2D,Square>(vSize * hSize);
+		this.obstacles = new ArrayList<Obstacle>();
 		this.initGrid();
 	}
-	//TODO: Write method
+	//TODO: Write method, creates all the squares,
 	private void initGrid(){
+		for(int i = 0; i< hSize; i++){
+			for(int j = 0; j < vSize; j++){
+				Coordinate2D key = new Coordinate2D(i,j);
+				Square value = new Square();
+				squares.put(key, value);
+			}
+		}
 		//1. Creates squares
 		// max 20% is covered by walls + the length of the walls is max 0.5 * hSize or vSize
 		//2. 5 percent of squares have a lightgrenade in there inventory// Watch out,
 		// squares covered by walls can't contain lightgrenades
 		// Startposition cant be covered by wall
 	}
-	
-	public Square getLowerLeft(){
+	/**
+	 * gets the lowerleft square of the grid
+	 * @return
+	 */
+	@Raw @Basic
+	public Square getLowerLeft() {
 		return squares.get(new Coordinate2D(0, vSize -1));
 		
 	}
 	
+	/**
+	 * gets the upper right square of the grid
+	 * @return
+	 */
+	@Raw @Basic
 	public Square getUpperRight(){
 		return squares.get(new Coordinate2D(hSize -1, 0));
 		
 	}
 	/**
-	 * Finds the Coordinate2D associate
-	 * @param sq
-	 * @return
+	 * Finds the Coordinate2D associated with a square
+	 * @param sq the square of which the coordinate needs to be looked up
+	 * @return the coordinate2D associated with the given square
 	 * @throws IllegalStateException
+	 * 			thrown if the square is not a part of the grid, the 
+	 * 			grid is in a inconsistent state
 	 */
 	public Coordinate2D getCoordinate2D(Square sq) throws IllegalStateException{
 		Coordinate2D result = null;
 		for(Coordinate2D c: squares.keySet()){
 			Square square = squares.get(c);
-			if(square == sq){
+			if(square.equals(sq)){
 				result = c;
 				break;
 			}
@@ -117,7 +140,7 @@ public class Grid {
 	 * @return	True if and only if the given value is larger than zero.
 	 */
 	public static boolean isValidVerticalSize(int vSize) {
-		return vSize > 0;
+		return vSize > Grid.MIN_VSIZE;
 	}
 
 	/**
@@ -157,7 +180,7 @@ public class Grid {
 	 * @return	True if and only if the given value is larger than 0.
 	 */
 	public static boolean isValidHorizontalSize(int hSize) {
-		return hSize > 0;
+		return hSize > Grid.MIN_HSIZE;
 	}
 	
 	
