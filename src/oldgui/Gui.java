@@ -54,7 +54,7 @@ public class Gui {
 						drawSquare(coordinate, Color.BLUE);
 						new Runnable() {
 							public void run() {
-								gui.repaint();
+								//gui.repaint();
 							}
 						};
 					}
