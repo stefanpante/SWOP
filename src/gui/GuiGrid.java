@@ -3,7 +3,8 @@
  */
 package gui;
 
-import grid.Coordinate2D;
+import grid.core.Coordinate2D;
+
 
 import java.awt.Canvas;
 import java.awt.Color;
