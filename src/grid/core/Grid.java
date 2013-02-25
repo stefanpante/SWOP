@@ -1,5 +1,8 @@
 package grid.core;
 
+import grid.obstacles.*;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -9,7 +12,14 @@ import java.util.HashMap;
  */
 public class Grid {
 	
-	HashMap<Coordinate2D,Square> squares;
+	/**
+	 * the minimum vertical and horizontal size are 10 squares
+	 */
+	public static int MIN_VSIZE = 10;
+	public static int MIN_HSIZE = 10;
+	
+	private HashMap<Coordinate2D,Square> squares;
+	private ArrayList<Obstacle> obstacles;
 	
 	/**
 	 * The vSize of this Grid object.
@@ -30,8 +40,46 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
+		this.initGrid();
 	}
-
+	//TODO: Write method
+	private void initGrid(){
+		//1. Creates squares
+		// max 20% is covered by walls + the length of the walls is max 0.5 * hSize or vSize
+		//2. 5 percent of squares have a lightgrenade in there inventory// Watch out,
+		// squares covered by walls can't contain lightgrenades
+		// Startposition cant be covered by wall
+	}
+	
+	public Square getLowerLeft(){
+		return null;
+		
+	}
+	
+	public Square getUpperRight(){
+		return null;
+		
+	}
+	/**
+	 * Finds the Coordinate2D associate
+	 * @param sq
+	 * @return
+	 * @throws IllegalStateException
+	 */
+	public Coordinate2D getCoordinate2D(Square sq) throws IllegalStateException{
+		Coordinate2D result = null;
+		for(Coordinate2D c: squares.keySet()){
+			Square square = squares.get(c);
+			if(square == sq){
+				result = c;
+				break;
+			}
+		}
+		
+		if(result == null) 
+			throw new IllegalStateException("Square is not part of the grid");
+		return result;
+	}
 	/**
 	 * Returns the value of the vSize of this Grid as an int.
 	 *
