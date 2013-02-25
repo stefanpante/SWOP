@@ -49,6 +49,20 @@ public class Grid {
 	}
 	//TODO: Write method, creates all the squares,
 	private void initGrid(){
+		createSquares();
+		createWalls();
+		placeGrenades();
+	
+		// max 20% is covered by walls + the length of the walls is max 0.5 * hSize or vSize
+		//2. 5 percent of squares have a lightgrenade in there inventory// Watch out,
+		// squares covered by walls can't contain lightgrenades
+		// Startposition cant be covered by wall
+	}
+	/**
+	 * Creates the grid with the squares
+	 */
+	private void createSquares(){
+		
 		for(int i = 0; i< hSize; i++){
 			for(int j = 0; j < vSize; j++){
 				Coordinate2D key = new Coordinate2D(i,j);
@@ -56,12 +70,23 @@ public class Grid {
 				squares.put(key, value);
 			}
 		}
-		//1. Creates squares
-		// max 20% is covered by walls + the length of the walls is max 0.5 * hSize or vSize
-		//2. 5 percent of squares have a lightgrenade in there inventory// Watch out,
-		// squares covered by walls can't contain lightgrenades
-		// Startposition cant be covered by wall
 	}
+	//TODO
+	private void createWalls(){
+		//Random waarde tussen 0 en 0.20
+		// vermenigvuldigen met aantal squares
+		// kies een random richting
+		// Random waarde tussen 0 en 0.50 ( minimum lengte van wall is 2
+		// lengte van de muur
+		// aftrekken van nodige squares
+		// stoppen als het aantal resterende square < 2
+	}
+	
+	//TODO
+	private void placeGrenades(){
+		
+	}
+	//TODO
 	/**
 	 * gets the lowerleft square of the grid
 	 * @return
