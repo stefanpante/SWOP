@@ -38,6 +38,7 @@ public class Grid {
 	 * generates a grid with vSize * hSize squares
 	 * 
 	 * @param	vSize	Vertical dimension of the grid.
+	 * 
 	 * @param	hSize	Horizontal dimension of the grid.
 	 */
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
@@ -48,7 +49,7 @@ public class Grid {
 		this.initGrid();
 	}
 	//TODO: Write method, creates all the squares,
-	private void initGrid(){
+	public void initGrid(){
 		createSquares();
 		createWalls();
 		placeGrenades();
@@ -61,7 +62,7 @@ public class Grid {
 	/**
 	 * Creates the grid with the squares
 	 */
-	private void createSquares(){
+	public void createSquares() throws IllegalStateException{
 		
 		for(int i = 0; i< hSize; i++){
 			for(int j = 0; j < vSize; j++){
@@ -71,8 +72,13 @@ public class Grid {
 			}
 		}
 	}
+	
+	@Basic 
+	public HashMap<Coordinate2D, Square> getSquares(){
+		return squares;
+	}
 	//TODO
-	private void createWalls(){
+	public void createWalls(){
 		//Random waarde tussen 0 en 0.20
 		// vermenigvuldigen met aantal squares
 		// kies een random richting
