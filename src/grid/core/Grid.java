@@ -4,6 +4,7 @@ import grid.obstacles.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -20,6 +21,16 @@ public class Grid {
 	 */
 	public static int MIN_VSIZE = 10;
 	public static int MIN_HSIZE = 10;
+	
+	/**
+	 * Percentage of square covered by grenades
+	 */
+	public static float PERCENTAGEGRENADES = 0.05f;
+	
+	/**
+	 * Max percentage of squares covered by walls
+	 */
+	public static float PERCENTAGEWALLS = 0.2f;
 	
 	private HashMap<Coordinate2D,Square> squares;
 	private ArrayList<Obstacle> obstacles;
@@ -81,7 +92,7 @@ public class Grid {
 	public void createWalls(){
 		
 		// max 20 percent of squares is covered
-		int coverage = (int) ((vSize*hSize) * 0.20);
+		int coverage = (int) ((vSize*hSize) * Grid.PERCENTAGEWALLS);
 		// random selection between 0 and 20 percent
 		coverage = (int) Math.floor(coverage * Math.random());
 		
@@ -102,8 +113,28 @@ public class Grid {
 		// stoppen als het aantal resterende square < 2
 	}
 	
-	//TODO
+	//TODO: me thinkey this method is finished
 	private void placeGrenades(){
+		
+		int grenades = (int) (this.getSize() * Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
+		
+		ArrayList<Square> candidateSquares = new ArrayList<Square>(squares.values());
+		
+		// Remove startpositions
+		candidateSquares.remove(getLowerLeft());
+		candidateSquares.remove(getUpperRight());
+		
+		//TODO: remove all obstacles
+		for(Obstacle o: obstacles)
+			candidateSquares.removeAll(o.getSquares());
+		
+		// Add the grenades to the squares, random distribution
+		Random generator = new Random();
+		for(int i = 0; i < grenades; i++){
+			int l = candidateSquares.size();
+			Square s = candidateSquares.get(generator.nextInt(l));
+			candidateSquares.remove(s);
+		}
 		
 	}
 	//TODO

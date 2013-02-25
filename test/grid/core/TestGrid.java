@@ -36,7 +36,7 @@ public class TestGrid {
 	public void testToString() {
 		fail("Not yet implemented");
 	}
-	
+
 	@Test
 	public void testGrid(){
 		// test if a grid can be created with sizes less than minimum size
@@ -48,7 +48,7 @@ public class TestGrid {
 		assertTrue(squares != null);
 		assertTrue(squares.size() == grid.getSize());
 	}
-	
+
 	@Test
 	//TODO check length of walls
 	public void testCreateWalls(){
@@ -56,7 +56,7 @@ public class TestGrid {
 		ArrayList<Obstacle> obstacles= grid.getObstacles();
 		assertTrue(obstacles != null);
 		int i = 0;
-		
+
 		for(Obstacle o: obstacles){
 			if (o instanceof Wall){
 				i++;
@@ -65,12 +65,12 @@ public class TestGrid {
 				assertFalse(o.contains(grid.getLowerLeft()));
 				assertFalse(o.contains(grid.getUpperRight()));
 			}
-		//TODO check specificaties, check of muren correct geplaatst zijn ten opzichte van elkaar
-		assertTrue(i <= 0.2 * grid.getSize());
+			//TODO check specificaties, check of muren correct geplaatst zijn ten opzichte van elkaar
+			assertTrue(i <= Grid.PERCENTAGEWALLS * grid.getSize());
 		}
-		
-		}
-		
+
+	}
+
 	//TODO add extra tests for grenades
 	@Test
 	public void testPlaceGrenades(){
@@ -80,9 +80,9 @@ public class TestGrid {
 		for(Square sq: squares.values()){
 			if (!sq.getItems().isEmpty()) counter++;
 		}
-		
-		int numberOfGrenades =(int) (Math.ceil(grid.getSize() * 0.05));
-		
+
+		int numberOfGrenades =(int) (Math.ceil(grid.getSize() * Grid.PERCENTAGEGRENADES));
+
 		assertTrue(numberOfGrenades == counter);
 	}
 
