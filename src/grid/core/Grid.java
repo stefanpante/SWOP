@@ -101,9 +101,8 @@ public class Grid {
 		// random selection between 0 and 20 percent
 		coverage = (int) Math.floor(coverage * Math.random());
 
-		// All possible directions.
-		Direction[] directions = 
-				new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
+		// All possible orientations for a wall.
+		Orientation[] orientations = new Orientation[]{Orientation.HORIZONTAL, Orientation.VERTICAL};
 		// is this a correct method? Clone vereist cast jammer genoeg...
 
 		HashMap<Coordinate2D, Square> candidates = new HashMap<Coordinate2D, Square>(squares);//(HashMap<Coordinate2D, Square>) squares.clone();
