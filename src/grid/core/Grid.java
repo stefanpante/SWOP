@@ -220,7 +220,7 @@ public class Grid {
 	 * @return	True if and only if the given value is larger than zero.
 	 */
 	public static boolean isValidVerticalSize(int vSize) {
-		return vSize > Grid.MIN_VSIZE;
+		return vSize >= Grid.MIN_VSIZE;
 	}
 
 	/**
@@ -274,7 +274,7 @@ public class Grid {
 	 * @return	True if and only if the given value is larger than 0.
 	 */
 	public static boolean isValidHorizontalSize(int hSize) {
-		return hSize > Grid.MIN_HSIZE;
+		return hSize >= Grid.MIN_HSIZE;
 	}
 
 	public ArrayList<Obstacle> getObstacles(){

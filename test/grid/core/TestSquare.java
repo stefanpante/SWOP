@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import grid.core.Square;
+import items.Inventory;
 import items.Item;
 import items.LightGrenade;
 
@@ -43,22 +44,22 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.addItem(lg1);
+		sq.addItemToInventory(lg1);
 		assertTrue(sq.hasItem(lg1));
 		assertTrue(sq.getItems().size() == 1);
 		
-		sq.addItem(lg2);
+		sq.addItemToInventory(lg2);
 		assertTrue(sq.hasItem(lg1));
 		assertTrue(sq.hasItem(lg2));
 		assertTrue(sq.getItems().size() == 2);
 		
-		sq.addItem(lg3);
+		sq.addItemToInventory(lg3);
 		assertTrue(sq.hasItem(lg1));
 		assertTrue(sq.hasItem(lg2));
 		assertTrue(sq.hasItem(lg3));
 		assertTrue(sq.getItems().size() == 3);
 
-		sq.addItem(it);
+		sq.addItemToInventory(it);
 		assertTrue(sq.hasItem(lg1));
 		assertTrue(sq.hasItem(lg2));
 		assertTrue(sq.hasItem(lg3));
@@ -74,17 +75,17 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.addItem(lg1);
-		sq.addItem(lg2);		
-		sq.addItem(lg3);
-		sq.addItem(it);
+		sq.addItemToInventory(lg1);
+		sq.addItemToInventory(lg2);		
+		sq.addItemToInventory(lg3);
+		sq.addItemToInventory(it);
 		
-		List<Item> list = sq.getItems();
-		assertTrue(list.size() == 4);
-		assertTrue(list.contains(lg1));
-		assertTrue(list.contains(lg2));
-		assertTrue(list.contains(lg3));
-		assertTrue(list.contains(it));
+		Inventory inv = sq.getInventory();
+		assertTrue(inv.getAmountOfUsedSpaces() == 4);
+		assertTrue(inv.hasItem(lg1));
+		assertTrue(inv.hasItem(lg2));
+		assertTrue(inv.hasItem(lg3));
+		assertTrue(inv.hasItem(it));
 
 	}
 
@@ -99,15 +100,15 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 		
-		sq1.addItem(lg1);
+		sq1.addItemToInventory(lg1);
 		assertTrue(sq1.hasItem(lg1));
 		
 		
-		sq2.addItem(lg2);
+		sq2.addItemToInventory(lg2);
 		assertTrue(sq2.hasItem(lg2));
 		
-		sq3.addItem(lg3);
-		sq3.addItem(it);
+		sq3.addItemToInventory(lg3);
+		sq3.addItemToInventory(it);
 		assertTrue(sq3.hasItem(lg3));
 		assertTrue(sq3.hasItem(it));
 	}
