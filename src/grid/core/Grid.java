@@ -114,6 +114,10 @@ public class Grid {
 			Orientation  orientation = Orientation.getRandomOrientation();
 			int maxlength = this.getMaxLengthWall(orientation);
 			int length = (int) (2 + Math.floor(((maxlength-2) * Math.random()))); // Upper limit of the length
+			ArrayList<Square> sequence = getRandomSquareSequence(candidates, orientation);
+			if(sequence.size() == length){
+				Wall wall = new Wall(sequence);
+			}
 		}
 
 	}

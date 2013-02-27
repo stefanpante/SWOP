@@ -1,5 +1,7 @@
 package grid.obstacles;
 
+import java.util.ArrayList;
+
 import grid.core.Square;
 
 /**
@@ -26,4 +28,7 @@ public class Wall extends Obstacle{
 		this.addSquare(otherSquare);
 	}
 	
+	public Wall(ArrayList<Square> squares){
+		this.squares = squares;
+	}
 }
