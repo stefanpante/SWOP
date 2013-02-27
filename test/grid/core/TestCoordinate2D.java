@@ -29,7 +29,8 @@ public class TestCoordinate2D {
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		Coordinate2D coord = new Coordinate2D(1,1);
+		assertEquals(coord.toString(), new String("(1,1)"));
 	}
 	
 	public TestCoordinate2D() {
