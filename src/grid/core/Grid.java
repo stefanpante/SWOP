@@ -38,7 +38,6 @@ public class Grid {
 	public static float LENGTHPERCENTAGEWALL = 0.5f;
 
 	private HashMap<Coordinate2D,Square> squares;
-	private ArrayList<Obstacle> obstacles;
 
 	/**
 	 * The vSize of this Grid object.
@@ -60,8 +59,6 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
-		this.squares = new HashMap<Coordinate2D,Square>(this.getSize());
-		this.obstacles = new ArrayList<Obstacle>();
 		this.initGrid();
 	}
 	//TODO: Write method, creates all the squares,
@@ -117,7 +114,6 @@ public class Grid {
 		// stoppen als het aantal resterende square < 2
 	}
 
-	//TODO: me thinkey this method is finished
 	private void placeGrenades(){
 
 		int grenades = (int) (this.getSize() * Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
@@ -127,10 +123,9 @@ public class Grid {
 		// Remove startpositions
 		candidateSquares.remove(getLowerLeft());
 		candidateSquares.remove(getUpperRight());
+		
+		//
 
-		//TODO: remove all obstacles
-		for(Obstacle o: obstacles)
-			candidateSquares.removeAll(o.getSquares());
 
 		// Add the grenades to the squares, random distribution
 		Random generator = new Random();
