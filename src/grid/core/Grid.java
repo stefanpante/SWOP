@@ -2,6 +2,8 @@ package grid.core;
 
 import grid.obstacles.*;
 
+import items.LightGrenade;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -129,10 +131,18 @@ public class Grid {
 
 		// Add the grenades to the squares, random distribution
 		Random generator = new Random();
-		for(int i = 0; i < grenades; i++){
+			 
+		int i = 0;
+		while(i < grenades){
 			int l = candidateSquares.size();
 			Square s = candidateSquares.get(generator.nextInt(l));
+			if(!s.isObstructed()){
+				s.addItemToInventory(new LightGrenade());
+				i++;
+			}
+			
 			candidateSquares.remove(s);
+			
 		}
 
 	}
@@ -270,10 +280,6 @@ public class Grid {
 	 */
 	public static boolean isValidHorizontalSize(int hSize) {
 		return hSize >= Grid.MIN_HSIZE;
-	}
-
-	public ArrayList<Obstacle> getObstacles(){
-		return obstacles;
 	}
 
 	public int getSize(){
