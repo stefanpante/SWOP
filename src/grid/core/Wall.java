@@ -1,6 +1,5 @@
 package grid.core;
 
-import exceptions.IllegalSquareException;
 import grid.obstacles.Obstacle;
 
 /**
@@ -22,7 +21,7 @@ public class Wall extends Obstacle{
 	 * 
 	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
 	 */
-	public Wall(Square square, Square otherSquare) throws IllegalSquareException {
+	public Wall(Square square, Square otherSquare) throws IllegalArgumentException {
 		this.addSquare(square);
 		this.addSquare(otherSquare);
 	}
@@ -34,11 +33,11 @@ public class Wall extends Obstacle{
 	 * 
 	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
 	 */
-	public void addSquare(Square square) throws IllegalSquareException {
+	public void addSquare(Square square) throws IllegalArgumentException {
 		if(isValidSquare(square))
 			squares.add(square);
 		else
-			throw new IllegalSquareException("The square is already contained in the wall.");
+			throw new IllegalArgumentException("The square is already contained in the wall.");
 	}
 	
 	/**
