@@ -1,5 +1,6 @@
 package grid.core;
 
+import grid.obstacles.Obstacle;
 import items.Inventory;
 import items.Item;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 import notnullcheckweaver.NotNull;
+import notnullcheckweaver.Nullable;
 
 /**
  * Square class
@@ -32,6 +34,12 @@ public class Square {
 	private ArrayList<Item> usedItems;
 	
 	/**
+	 * The obstacle of this Square object.
+	 */
+	@Nullable
+	private Obstacle obstacle;
+	
+	/**
 	 * Zero argument constructor for a square.
 	 */
 	public Square (){
@@ -40,12 +48,10 @@ public class Square {
 	}
 	
 	/**
-	 * Returns a list of all the items that are currently on the square.
-	 * These may be active or inactive.
+	 * Returns a list of all the items that are placed on a square 
 	 */
-	//TODO:replace with two seperate ones?? Makes no sense in the same inventory...
-	public Inventory getItems() {
-		return inventory;
+	public ArrayList<Item> getUsedItems() {
+		return usedItems;
 	}
 	
 	public void addUsedItem(Item item){
@@ -111,9 +117,66 @@ public class Square {
 		//TODO: add specific implementation
 		return true;
 	}
+
 	
+
+
+	/**
+	 * Returns the value of the obstacle of this Square as an Obstacle.
+	 *
+	 * @return 	An object of the Obstacle class.
+	 * 			| Obstacle
+	 */
+	public Obstacle getObstacle() {
+		return obstacle;
+	};
+
+	/**
+	 * Sets the value of the obstacle of Square if the given value is valid. 
+	 * 
+	 * @param 	obstacle
+	 *			The obstacle to set.
+	 * @post 	The given value is the current value of the obstacle of this Square.
+	 * @throws 	IllegalArgumentException
+	 *			If the given argument is not a valid obstacle.
+	 *			| !isValidObstacle(obstacle)
+	 */
+	@Nullable
+	public void setObstacle(Obstacle obstacle)
+			throws IllegalArgumentException {
+		if (!isValidObstacle(obstacle)) {
+			throw new IllegalArgumentException(
+					"The argument ("
+							+ obstacle
+							+ ") is not a valid agrument of the field obstacle from the class Square");
+		}
+		this.obstacle = obstacle;
+	};
+
+	/**
+	 * Check whether the given obstacle is a valid obstacle for all the objects of Square.
+	 * @param 	obstacle
+	 *			The obstacle to check.
+	 * @return	True if and only if the given value is not null, has the correct type, ...
+	 */
+	public static boolean isValidObstacle(Obstacle obstacle) {
+		if (!(obstacle instanceof Obstacle)) {
+			return false;
+		}
+		//TODO: specific constraints for this field.
+		return true;
+	}
 	@Override
 	public String toString() {
 		return "Square [ " + this.getInventory() +" ]";
+	}
+	
+	/**
+	 * Returns whether this square is obstructed by an obstacle or not.
+	 * 
+	 * @return
+	 */
+	public boolean isObstructed(){
+			return obstacle == null;
 	}
 }

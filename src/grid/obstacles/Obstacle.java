@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 /**
  * Super class where any obstacle grid inherits its general properties from.
- * Such as a wall or a light trail.
+ * Such as a wall or a light trail
  * A player cannot move through an obstacle.
  * 
  * @author vincentreniers
  */
-public class Obstacle {
+public abstract class Obstacle {
 	
 	/**
 	 * An obstacle may cover a set of squares.
