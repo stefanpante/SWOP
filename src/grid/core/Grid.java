@@ -103,26 +103,29 @@ public class Grid {
 		// remove start positions from possible candidates
 		candidates.remove(new Coordinate2D(0, vSize -1));
 		candidates.remove(new Coordinate2D(hSize -1, 0));
-		Orientation[] orientations = new Orientation[]{Orientation.HORIZONTAL, Orientation.VERTICAL};
 
-		int randomCoverage = 2+ (int) Math.floor((this.getMaxCoverage() -2) * Math.random());
+		int randomCoverage = 2 + (int) Math.floor((this.getMaxCoverage() -2) * Math.random());
 
 		int amountOfWalls =  1 + (int) Math.floor((randomCoverage/2) * Math.random());
 
 		int coverage = randomCoverage;
 
 		while(coverage >= 2){
-			Orientation  orientation =Orientation.getRandomOrientation();
+			Orientation  orientation = Orientation.getRandomOrientation();
 			int maxlength = this.getMaxLengthWall(orientation);
 			int length = (int) (2 + Math.floor(((maxlength-2) * Math.random()))); // Upper limit of the length
 		}
 
 	}
+	
 	/**
+	 * Selects a random square in the given HashMap with squares 
+	 * and builds the longest possible sequence of squares in the given orientation
 	 * 
-	 * @param squares
-	 * @param orientation
-	 * @return
+	 * @param 	squares the possible squares that can be used for this randomSequence
+	 * @param 	orientation the orientation in which the wall faces
+	 * @return 	a list of squares which are in sequence, but the first square is 
+	 * 			selected randomly and the orientation is given
 	 */
 	private ArrayList<Square> getRandomSquareSequence(HashMap<Coordinate2D, Square> squares,
 			Orientation orientation) throws IllegalArgumentException{
@@ -151,6 +154,13 @@ public class Grid {
 		
 	}
 	
+	/**
+	 * 
+	 * Builds the longest possible  horizontal sequence of squares with a given start position
+	 * @param start 	the given start position
+	 * @param squares	The possible squares
+	 * @return	the longest possible horizontal sequence of squares
+	 */
 	private ArrayList<Square> getHorizontalSequence(Coordinate2D start, HashMap<Coordinate2D, Square> squares){
 		
 		ArrayList<Square> sequence = new ArrayList<Square>();
@@ -176,6 +186,14 @@ public class Grid {
 		return sequence;
 	}
 	
+	/**
+	 * 
+	 * Builds the longest possible  vertical sequence of squares with a given start position
+	 * 
+	 * @param start 	the given start position
+	 * @param squares	The possible squares
+	 * @return	the longest possible vertical sequence of squares
+	 */
 	private ArrayList<Square> getVerticalSequence(Coordinate2D start, HashMap<Coordinate2D, Square> squares){
 		
 		ArrayList<Square> sequence = new ArrayList<Square>();
