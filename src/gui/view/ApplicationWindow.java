@@ -59,7 +59,7 @@ public class ApplicationWindow implements Observer {
 		frame.setTitle("Objectron");
 
         /* GRID */
-        GuiGrid gridPanel = new GuiGrid(GRID_WIDTH, GRID_WIDTH, 10, 10);
+        GridCanvas gridPanel = new GridCanvas(GRID_WIDTH, GRID_WIDTH, 10, 10);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
         gridPanel.addMouseListener(getController());

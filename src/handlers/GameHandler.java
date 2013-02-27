@@ -11,7 +11,5 @@ import javax.swing.UIManager;
  *
  */
 public class GameHandler {
-    public static void main(String[] args) {
-    	new GuiHandler(null);
-    }
+
 }

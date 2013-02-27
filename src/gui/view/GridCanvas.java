@@ -12,12 +12,12 @@ import javax.swing.JPanel;
  * @author jonas
  *
  */
-public class GuiGrid extends JPanel {
+public class GridCanvas extends JPanel {
 	
 	int width, height, rows, cols;
 	int rowHeight, colWidth;
 
-	GuiGrid(int width, int height, int rows, int cols){
+	GridCanvas(int width, int height, int rows, int cols){
 		this.width = width;
 		this.height = height;
 		this.rows = rows;
