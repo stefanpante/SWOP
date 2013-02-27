@@ -65,15 +65,12 @@ public class Grid {
 	}
 	//TODO: Write method, creates all the squares,
 	public void initGrid(){
+		
 		createSquares();
 		createWalls();
 		placeGrenades();
-
-		// max 20% is covered by walls + the length of the walls is max 0.5 * hSize or vSize
-		//2. 5 percent of squares have a lightgrenade in there inventory// Watch out,
-		// squares covered by walls can't contain lightgrenades
-		// Startposition cant be covered by wall
 	}
+	
 	/**
 	 * Creates the grid with the squares
 	 */
@@ -88,11 +85,19 @@ public class Grid {
 		}
 	}
 
+	/**
+	 * Returns the squares of this grid
+	 * @return
+	 */
 	@Basic 
 	public HashMap<Coordinate2D, Square> getSquares(){
 		return squares;
 	}
-	//TODO
+	/**
+	 * Creates the walls on the grid
+	 * 
+	 * 
+	 */
 	public void createWalls(){
 		HashMap<Coordinate2D, Square> candidates = new HashMap<Coordinate2D, Square>(squares);//(HashMap<Coordinate2D, Square>) squares.clone();
 		// remove startpositions from possible candidates
@@ -195,11 +200,23 @@ public class Grid {
 
 
 
-
+	/**
+	 * Returns the maximal number of squares covered by walls
+	 * @return 	the max number of squares covered by walls
+	 */
 	private int getMaxCoverage() {
 		return (int) ((vSize*hSize) * Grid.MAX_PERCENTAGEWALLS);
 	}
-
+	/**
+	 * 
+	 * returns the maximal permitted length of wall, which depends on the 
+	 * orientation of the wall
+	 * 
+	 * @param 	orientation the orientation of the wall
+	 * @return 	the maximal length which is permitted for a wall in this grid
+	 * @throws 	IllegalArgumentException
+	 * 		   
+	 */
 	private int getMaxLengthWall(Orientation orientation) throws IllegalArgumentException{
 		switch(orientation){
 		case HORIZONTAL: 	return (int) (this.hSize * Grid.MAX_LENGTHPERCENTAGEWALL);
@@ -209,6 +226,10 @@ public class Grid {
 	}
 
 
+	/**
+	 * Covers 5 percent of the field with grenades. 
+	 * Grenades cannot be placed on the starting position of a player or on a wall
+	 */
 	private void placeGrenades(){
 
 		int grenades = (int) (this.getSize() * Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
@@ -236,10 +257,10 @@ public class Grid {
 		}
 
 	}
-	//TODO
 	/**
-	 * gets the lowerleft square of the grid
-	 * @return
+	 * 
+	 * gets the lower left square of the grid
+	 * @return the lower left square of the grid
 	 */
 	@Raw @Basic
 	public Square getLowerLeft() {
@@ -248,8 +269,10 @@ public class Grid {
 	}
 
 	/**
+	 * 
 	 * gets the upper right square of the grid
-	 * @return
+	 * 
+	 * @return the upper right square of the grid
 	 */
 	@Raw @Basic
 	public Square getUpperRight(){
@@ -372,13 +395,33 @@ public class Grid {
 		return hSize >= Grid.MIN_HSIZE;
 	}
 
+	/**
+	 * Returns the number of squares in the grid
+	 * @return
+	 */
 	public int getSize(){
 		return hSize * vSize;
 	}
 
-	//TODO
+	/**
+	 * Returns the neighbours of the given square
+	 * @param square
+	 * @return
+	 */
 	public ArrayList<Square> getNeighbours(Square square){
-		return null;
+		ArrayList<Square> neighbours = new ArrayList<Square>();
+		
+		 Direction[] directions = Direction.values();
+		 Coordinate2D coor = getCoordinate2D(square);
+		 
+		 for(Direction dir: directions){
+			 Coordinate2D c = coor.getNeighbor(dir);
+			 if(squares.containsKey(c))
+				 neighbours.add(squares.get(c));
+		 }
+		 
+		
+		return neighbours;
 	}
 
 	@Override
