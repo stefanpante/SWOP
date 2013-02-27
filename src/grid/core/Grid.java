@@ -111,7 +111,6 @@ public class Grid {
 		int amountOfWalls =  1 + (int) Math.floor((randomCoverage/2) * Math.random());
 
 		int coverage = randomCoverage;
-		System.out.println("coverage:" + coverage);
 		while(coverage >= 2){
 			Orientation  orientation = Orientation.getRandomOrientation();
 			int maxlength = this.getMaxLengthWall(orientation);
@@ -300,7 +299,7 @@ public class Grid {
 		int grenades = getNumberOfGrenades();
 
 		ArrayList<Square> candidateSquares = new ArrayList<Square>(squares.values());
-
+		System.out.println("Number of grenades: " + grenades);
 		// Remove startpositions
 		candidateSquares.remove(getLowerLeft());
 		candidateSquares.remove(getUpperRight());
@@ -316,7 +315,6 @@ public class Grid {
 				i++;
 			}
 			candidateSquares.remove(s);
-			System.out.println(candidateSquares.size());
 
 		}
 

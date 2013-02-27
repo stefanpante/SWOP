@@ -34,11 +34,6 @@ public class TestGrid {
 	}
 
 	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGrid(){
 		// test if a grid can be created with sizes less than minimum size
 	}
@@ -58,8 +53,9 @@ public class TestGrid {
 		HashMap<Coordinate2D, Square> squares = grid.getSquares();
 		int counter = 0;
 		for(Square s: squares.values()){
-			if(!s.isObstructed()) counter++;
+			if(s.isObstructed()) counter++;
 		}
+		System.out.println("Number of walls: " + counter );
 		assertTrue(counter <= grid.getMaxCoverage());
 
 	}
@@ -67,15 +63,14 @@ public class TestGrid {
 	//TODO add extra tests for grenades, 
 	@Test
 	public void testPlaceGrenades(){
-		Grid grid = new Grid(10,10);
-		HashMap<Coordinate2D, Square> squares = grid.getSquares();
-		int counter = 0;
-		for(Square sq: squares.values()){
-			if (!sq.getInventory().isEmpty()) counter++;
-		}
-
-
-		assertTrue(counter == 5);
+			Grid grid = new Grid(10,10);
+			HashMap<Coordinate2D, Square> squares = grid.getSquares();
+			int counter = 0;
+			for(Square sq: squares.values()){
+				if (!sq.getInventory().isEmpty()) counter++;
+			}
+			
+			assertTrue(counter == 5);
 	}
 	
 	
