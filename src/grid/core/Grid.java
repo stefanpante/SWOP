@@ -32,12 +32,12 @@ public class Grid {
 	/**
 	 * Max percentage of squares covered by walls
 	 */
-	public static float PERCENTAGEWALLS = 0.2f;
+	public static float MAX_PERCENTAGEWALLS = 0.2f;
 
 	/**
 	 * Percentage of max length of a wall
 	 */
-	public static float LENGTHPERCENTAGEWALL = 0.5f;
+	public static float MAX_LENGTHPERCENTAGEWALL = 0.5f;
 
 	private HashMap<Coordinate2D,Square> squares;
 
@@ -96,7 +96,7 @@ public class Grid {
 	public void createWalls(){
 
 		// max 20 percent of squares is covered
-		int coverage = (int) ((vSize*hSize) * Grid.PERCENTAGEWALLS);
+		int coverage = (int) ((vSize*hSize) * Grid.MAX_PERCENTAGEWALLS);
 		// random selection between 0 and 20 percent
 		coverage = (int) Math.floor(coverage * Math.random());
 

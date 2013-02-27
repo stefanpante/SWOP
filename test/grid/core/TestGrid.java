@@ -66,7 +66,7 @@ public class TestGrid {
 				assertFalse(o.contains(grid.getUpperRight()));
 			}
 			//TODO check specificaties, check of muren correct geplaatst zijn ten opzichte van elkaar
-			assertTrue(i <= Grid.PERCENTAGEWALLS * grid.getSize());
+			assertTrue(i <= Grid.MAX_PERCENTAGEWALLS * grid.getSize());
 		}
 
 	}
