@@ -85,5 +85,55 @@ public class TestGrid {
 
 		assertTrue(numberOfGrenades == counter);
 	}
+	
+	@Test
+	public void testGetNeighbours(){
+		Grid grid = new Grid(10,10);
+		HashMap<Coordinate2D, Square> squares = grid.getSquares();
+		
+		// test corners
+		Coordinate2D corner1 = new Coordinate2D(0,0);
+		Square sq = squares.get(corner1);
+		ArrayList<Square> neighbours = grid.getNeighbours(sq);
+		assertTrue(neighbours.size() == 3);
+		
+		Coordinate2D n = new Coordinate2D(0,1);
+		assertTrue(neighbours.contains(squares.get(n)));
+		n = new Coordinate2D(1,0);
+		assertTrue(neighbours.contains(squares.get(n)));
+		n = new Coordinate2D(1,1);
+		assertTrue(neighbours.contains(squares.get(n)));
+		
+		Coordinate2D corner2 = new Coordinate2D(0,9);
+		sq = squares.get(corner2);
+		neighbours = grid.getNeighbours(sq);
+		assertTrue(neighbours.size() == 3);
+		
+		n = new Coordinate2D(1,9);
+		assertTrue(neighbours.contains(squares.get(n)));
+		n = new Coordinate2D(0,8);
+		assertTrue(neighbours.contains(squares.get(n)));
+		n = new Coordinate2D(1,8);
+		assertTrue(neighbours.contains(squares.get(n)));
+		
+		Coordinate2D corner3 = new Coordinate2D(9,0);
+		sq = squares.get(corner3);
+		neighbours = grid.getNeighbours(sq);
+		assertTrue(neighbours.size() == 3);
+		
+		Coordinate2D corner4 = new Coordinate2D(9,9);
+		sq = squares.get(corner4);
+		neighbours = grid.getNeighbours(sq);
+		assertTrue(neighbours.size() == 3);
+		// test Edges
+		Coordinate2D edge1;
+		Coordinate2D edge2;
+		Coordinate2D edge3;
+		Coordinate2D edge4;
+		
+		// Test 8 neighbours
+		
+		Coordinate2D center;
+	}
 
 }

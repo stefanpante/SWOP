@@ -285,6 +285,11 @@ public class Grid {
 		return hSize * vSize;
 	}
 	
+	//TODO
+	public ArrayList<Square> getNeighbours(Square square){
+		return null;
+	}
+	
 	@Override
 	//TODO should we also describe the obstacles?
 	public String toString(){
