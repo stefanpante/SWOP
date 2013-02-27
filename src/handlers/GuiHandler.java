@@ -72,6 +72,8 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		// TODO: Whole shebang
 		System.out.println(getGridCoordinate(coordinate));
 		inventory.addItem(new LightGrenade());
+        setChanged();
+        notifyObservers(null);
 	}
 
 	/* (non-Javadoc)
