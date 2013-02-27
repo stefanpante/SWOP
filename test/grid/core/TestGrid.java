@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 
 import grid.obstacles.Obstacle;
+import grid.obstacles.Wall;
 
 import java.util.ArrayList;
 import java.util.HashMap;

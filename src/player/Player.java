@@ -11,7 +11,7 @@ import items.Item;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
-public class Player extends Observable implements IPlayer {
+public class Player extends Observable {
 
 	/**
 	 * The start position of this player
@@ -191,15 +191,13 @@ public class Player extends Observable implements IPlayer {
 	// TODO: Violates the GRASP principles?
 	public void pickUp(int index){
 		//TODO: add update for lighttrail
-		Item item = currentPosition.getItems().getItem(index);
+		Item item = currentPosition.getInventory().getItem(index);
 		items.addItem(item);
 		
 		
 	}
-	/**
-	 * 
-	 */
-	@Override
+
+	
 	public void endTurn() {
 		//TODO: add update for lighttrail
 		
