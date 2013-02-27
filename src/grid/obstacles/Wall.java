@@ -1,6 +1,6 @@
-package grid.core;
+package grid.obstacles;
 
-import grid.obstacles.Obstacle;
+import grid.core.Square;
 
 /**
  * Wall class
