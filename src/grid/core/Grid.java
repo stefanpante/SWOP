@@ -126,13 +126,10 @@ public class Grid {
 		candidateSquares.remove(getLowerLeft());
 		candidateSquares.remove(getUpperRight());
 		
-		//
-
-
 		// Add the grenades to the squares, random distribution
-		Random generator = new Random();
-			 
+		Random generator = new Random();	 
 		int i = 0;
+		
 		while(i < grenades){
 			int l = candidateSquares.size();
 			Square s = candidateSquares.get(generator.nextInt(l));
