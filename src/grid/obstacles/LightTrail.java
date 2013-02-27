@@ -7,11 +7,11 @@ import grid.core.Square;
  * LightTrail is a trail that is left behind the player while he
  * executes actions on the grid. The LightTrail is an obstacle.
  * 
- * @author jonas
+ * @author jonas, vincent
  */
 public class LightTrail extends Obstacle{
 	
-	public static final int LENGTH = 2;
+	public static final int MAX_LENGTH = 3;
 		
 	/**
 	 * Extend the light trail by adding a new square to the trail.
@@ -26,7 +26,9 @@ public class LightTrail extends Obstacle{
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException();
 		
-		getSquares().remove(LENGTH);
+		if(getLength() >= MAX_LENGTH)
+			getSquares().remove(MAX_LENGTH-1);
+		
 		getSquares().add(0,square);
 	}
 	
@@ -50,6 +52,11 @@ public class LightTrail extends Obstacle{
 		return true;
 	}
 	
-	
+	/**
+	 * Get the current length of the LightTrail.
+	 */
+	public int getLength() {
+		return getSquares().size();
+	}
 	
 }

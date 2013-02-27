@@ -11,22 +11,6 @@ import org.junit.Test;
 
 public class TestCoordinate2D {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void testToString() {
 		Coordinate2D coord = new Coordinate2D(1,1);
@@ -34,7 +18,7 @@ public class TestCoordinate2D {
 	}
 	
 	public TestCoordinate2D() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	@Test

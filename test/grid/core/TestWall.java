@@ -1,6 +1,7 @@
 package grid.core;
 
 import static org.junit.Assert.*;
+import grid.obstacles.Wall;
 
 import org.junit.*;
 
@@ -29,6 +30,55 @@ public class TestWall {
 	
 	public TestWall() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	/**
+	 * Test for constructing with two duplicate squares.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testIllegalArgumentException() {
+		Square squareOne = new Square();
+		
+		Wall wall = new Wall(squareOne, squareOne);
+	}
+	
+	/**
+	 * Test for constructing and adding a duplicate square.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testIllegalArgumentExceptionDuplicate() {
+		Square squareOne = new Square();
+		Square squareTwo = new Square();
+		
+		Wall wall = new Wall(squareOne, squareOne);
+		wall.addSquare(squareOne);
+	}
+	
+	/**
+	 * Test if validSquare for duplicate is false.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testValidSquareDuplicate() {
+		Square squareOne = new Square();
+		Square squareTwo = new Square();
+		
+		Wall wall = new Wall(squareOne, squareOne);
+		
+		assertFalse(wall.isValidSquare(squareOne));
+	}
+	
+	/**
+	 * Test if validSquare is true for a new square.
+	 */
+	public  void testValidSquareNewSquare() {
+		Square squareOne = new Square();
+		Square squareTwo = new Square();
+		
+		Wall wall = new Wall(squareOne, squareOne);
+		
+		Square squareThree = new Square();
+		
+		assertTrue(wall.isValidSquare(squareThree));
 	}
 
 
