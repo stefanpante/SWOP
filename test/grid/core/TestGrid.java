@@ -51,57 +51,33 @@ public class TestGrid {
 	}
 
 	@Test
-	//TODO check length of walls
+	//TODO check length of walls, 
 	public void testCreateWalls(){
+		
 		Grid grid = new Grid(10,10);
-		ArrayList<Obstacle> obstacles= grid.getObstacles();
-		assertTrue(obstacles != null);
-		int i = 0;
-
-		for(Obstacle o: obstacles){
-			if (o instanceof Wall){
-				i++;
-				assertTrue(o.getSquares().size() >= 2);
-				// wall cannot contain startposition
-				assertFalse(o.contains(grid.getLowerLeft()));
-				assertFalse(o.contains(grid.getUpperRight()));
-			}
-			//TODO check specificaties, check of muren correct geplaatst zijn ten opzichte van elkaar
-			assertTrue(i <= Grid.MAX_PERCENTAGEWALLS * grid.getSize());
+		HashMap<Coordinate2D, Square> squares = grid.getSquares();
+		int counter = 0;
+		for(Square s: squares.values()){
+			if(!s.isObstructed()) counter++;
 		}
+		assertTrue(counter <= grid.getMaxCoverage());
 
 	}
 
-	//TODO add extra tests for grenades
+	//TODO add extra tests for grenades, 
 	@Test
 	public void testPlaceGrenades(){
 		Grid grid = new Grid(10,10);
 		HashMap<Coordinate2D, Square> squares = grid.getSquares();
 		int counter = 0;
 		for(Square sq: squares.values()){
-			if (!sq.getItems().isEmpty()) counter++;
+			if (!sq.getInventory().isEmpty()) counter++;
 		}
 
-		int numberOfGrenades =(int) (Math.ceil(grid.getSize() * Grid.PERCENTAGEGRENADES));
 
-		assertTrue(numberOfGrenades == counter);
+		assertTrue(counter == 5);
 	}
 	
-	@Test
-	public void testGetNeighbours(){
-		Grid grid = new Grid(10,10);
-		HashMap<Coordinate2D, Square> squares = grid.getSquares();
-		
-		// test corners, 3 squares
-		
-		
-		// test Edges, 5 neighbours
-		
-		
-		// Test 8 neighbours
-		
-		
-	}
 	
 	@Test
 	public void testEdges(){
@@ -232,7 +208,7 @@ public class TestGrid {
 		n = new Coordinate2D(9,1);
 		assertTrue(neighbours.contains(squares.get(n)));
 		
-		n = new Coordinate2D(9,0);
+		n = new Coordinate2D(8,0);
 		assertTrue(neighbours.contains(squares.get(n)));
 		
 		n = new Coordinate2D(8,1);

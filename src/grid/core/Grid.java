@@ -62,6 +62,7 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
+		this.squares = new HashMap<Coordinate2D, Square>();
 		this.initGrid();
 	}
 	//TODO: Write method, creates all the squares,
@@ -110,7 +111,7 @@ public class Grid {
 		int amountOfWalls =  1 + (int) Math.floor((randomCoverage/2) * Math.random());
 
 		int coverage = randomCoverage;
-
+		System.out.println("coverage:" + coverage);
 		while(coverage >= 2){
 			Orientation  orientation = Orientation.getRandomOrientation();
 			int maxlength = this.getMaxLengthWall(orientation);
@@ -265,7 +266,7 @@ public class Grid {
 	 * Returns the maximal number of squares covered by walls
 	 * @return 	the max number of squares covered by walls
 	 */
-	private int getMaxCoverage() {
+	public int getMaxCoverage() {
 		return (int) ((vSize*hSize) * Grid.MAX_PERCENTAGEWALLS);
 	}
 	/**
@@ -296,7 +297,7 @@ public class Grid {
 	 */
 	private void placeGrenades(){
 
-		int grenades = (int) (this.getSize() * Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
+		int grenades = getNumberOfGrenades();
 
 		ArrayList<Square> candidateSquares = new ArrayList<Square>(squares.values());
 
@@ -307,19 +308,22 @@ public class Grid {
 		// Add the grenades to the squares, random distribution
 		Random generator = new Random();	 
 		int i = 0;
-
-		while(i < grenades){
+		while(i < grenades && !candidateSquares.isEmpty()){
 			int l = candidateSquares.size();
 			Square s = candidateSquares.get(generator.nextInt(l));
 			if(!s.isObstructed()){
 				s.addItemToInventory(new LightGrenade());
 				i++;
 			}
-
 			candidateSquares.remove(s);
+			System.out.println(candidateSquares.size());
 
 		}
 
+	}
+	
+	public int getNumberOfGrenades(){
+		return (int) (Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
 	}
 	/**
 	 * 
