@@ -94,27 +94,120 @@ public class Grid {
 	}
 	//TODO
 	public void createWalls(){
-
-		// max 20 percent of squares is covered
-		int coverage = (int) ((vSize*hSize) * Grid.MAX_PERCENTAGEWALLS);
-		// random selection between 0 and 20 percent
-		coverage = (int) Math.floor(coverage * Math.random());
-
-		// All possible orientations for a wall.
-		Orientation[] orientations = new Orientation[]{Orientation.HORIZONTAL, Orientation.VERTICAL};
-		// is this a correct method? Clone vereist cast jammer genoeg...
-
 		HashMap<Coordinate2D, Square> candidates = new HashMap<Coordinate2D, Square>(squares);//(HashMap<Coordinate2D, Square>) squares.clone();
 		// remove startpositions from possible candidates
 		candidates.remove(new Coordinate2D(0, vSize -1));
 		candidates.remove(new Coordinate2D(hSize -1, 0));
+		Orientation[] orientations = new Orientation[]{Orientation.HORIZONTAL, Orientation.VERTICAL};
 
-		// kies een random richting
-		// Random waarde tussen 0 en 0.50 ( minimum lengte van wall is 2
-		// lengte van de muur
-		// aftrekken van nodige squares
-		// stoppen als het aantal resterende square < 2
+		int randomCoverage = 2+ (int) Math.floor((this.getMaxCoverage() -2) * Math.random());
+
+		int amountOfWalls =  1 + (int) Math.floor((randomCoverage/2) * Math.random());
+
+		int coverage = randomCoverage;
+
+		while(coverage >= 2){
+			Orientation  orientation =Orientation.getRandomOrientation();
+			int maxlength = this.getMaxLengthWall(orientation);
+			int length = (int) (2 + Math.floor(((maxlength-2) * Math.random()))); // Upper limit of the length
+		}
+
 	}
+	/**
+	 * 
+	 * @param squares
+	 * @param orientation
+	 * @return
+	 */
+	private ArrayList<Square> getRandomSquareSequence(HashMap<Coordinate2D, Square> squares,
+			Orientation orientation) throws IllegalArgumentException{
+		
+		ArrayList<Square> sequence;
+		Random ran = new Random();
+		
+		ArrayList<Coordinate2D> coors = new ArrayList<Coordinate2D>(squares.keySet());
+		Coordinate2D startCoor = coors.get(ran.nextInt(coors.size()));
+		
+		
+		switch(orientation){
+			case HORIZONTAL: sequence = getHorizontalSequence(startCoor, squares );
+							 break;
+			case VERTICAL:	 sequence = getVerticalSequence(startCoor, squares);
+							 break;
+			default:		 throw new IllegalArgumentException("This orientation is not supported:" + orientation);
+		}
+		
+		return sequence;
+		
+		
+		
+	}
+	
+	private ArrayList<Square> getHorizontalSequence(Coordinate2D start, HashMap<Coordinate2D, Square> squares){
+		
+		ArrayList<Square> sequence = new ArrayList<Square>();
+		sequence.add(squares.get(start));
+		int y = start.getY();
+		
+		for(int x = start.getX() + 1 ; x < hSize; x++){
+			Coordinate2D coor = new Coordinate2D(x, y);
+			if(squares.containsKey(coor)){
+				sequence.add(squares.get(coor));
+			}
+			else break;
+		}
+		
+		for(int x = start.getX() - 1; x >= 0; x--){
+			Coordinate2D coor = new Coordinate2D(x, y);
+			if(squares.containsKey(coor)){
+				sequence.add(squares.get(coor));
+			}
+			else break;
+		}
+		
+		return sequence;
+	}
+	
+	private ArrayList<Square> getVerticalSequence(Coordinate2D start, HashMap<Coordinate2D, Square> squares){
+		
+		ArrayList<Square> sequence = new ArrayList<Square>();
+		sequence.add(squares.get(start));
+		int x = start.getX();
+		
+		for(int y = start.getY() + 1 ; y < hSize; y++){
+			Coordinate2D coor = new Coordinate2D(x, y);
+			if(squares.containsKey(coor)){
+				sequence.add(squares.get(coor));
+			}
+			else break;
+		}
+		
+		for(int y = start.getY() - 1; y >= 0; y--){
+			Coordinate2D coor = new Coordinate2D(x, y);
+			if(squares.containsKey(coor)){
+				sequence.add(squares.get(coor));
+			}
+			else break;
+		}
+		
+		return sequence;
+	}
+
+
+
+
+	private int getMaxCoverage() {
+		return (int) ((vSize*hSize) * Grid.MAX_PERCENTAGEWALLS);
+	}
+
+	private int getMaxLengthWall(Orientation orientation) throws IllegalArgumentException{
+		switch(orientation){
+		case HORIZONTAL: 	return (int) (this.hSize * Grid.MAX_LENGTHPERCENTAGEWALL);
+		case VERTICAL:		return (int) (this.vSize * Grid.MAX_LENGTHPERCENTAGEWALL);
+		default:	throw new IllegalArgumentException("This orientation is not supported:" + orientation);
+		}
+	}
+
 
 	private void placeGrenades(){
 
@@ -125,11 +218,11 @@ public class Grid {
 		// Remove startpositions
 		candidateSquares.remove(getLowerLeft());
 		candidateSquares.remove(getUpperRight());
-		
+
 		// Add the grenades to the squares, random distribution
 		Random generator = new Random();	 
 		int i = 0;
-		
+
 		while(i < grenades){
 			int l = candidateSquares.size();
 			Square s = candidateSquares.get(generator.nextInt(l));
@@ -137,9 +230,9 @@ public class Grid {
 				s.addItemToInventory(new LightGrenade());
 				i++;
 			}
-			
+
 			candidateSquares.remove(s);
-			
+
 		}
 
 	}
@@ -282,12 +375,12 @@ public class Grid {
 	public int getSize(){
 		return hSize * vSize;
 	}
-	
+
 	//TODO
 	public ArrayList<Square> getNeighbours(Square square){
 		return null;
 	}
-	
+
 	@Override
 	//TODO should we also describe the obstacles?
 	public String toString(){
