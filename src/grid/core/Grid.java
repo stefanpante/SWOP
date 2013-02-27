@@ -5,6 +5,7 @@ import grid.obstacles.*;
 import items.LightGrenade;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -115,11 +116,46 @@ public class Grid {
 			int maxlength = this.getMaxLengthWall(orientation);
 			int length = (int) (2 + Math.floor(((maxlength-2) * Math.random()))); // Upper limit of the length
 			ArrayList<Square> sequence = getRandomSquareSequence(candidates, orientation);
-			if(sequence.size() == length){
+			if(sequence.size() < 2){
+				coverage--;
+				continue;
+			}
+			if(sequence.size() <= length){
 				Wall wall = new Wall(sequence);
+				addWallToSquares(wall);
+				removeCollection(candidates, sequence);
+				coverage -= sequence.size();
+			}
+			// Implement iterator in wall?
+			if(sequence.size() > length){
+				int size = sequence.size();
+				ArrayList<Square> blocks= new ArrayList<Square>(sequence.subList(0, length));
+				Wall wall = new Wall(blocks);
+				addWallToSquares(wall);
+				removeCollection(candidates, sequence);
+				coverage -= length;
 			}
 		}
 
+	}
+	
+	private void addWallToSquares(Wall wall){
+		for(Square s :wall.getSquares()){
+			s.setObstacle(wall);
+		}
+	}
+	
+	/**
+	 * Removes a given collection from the HashMap
+	 * @param hash
+	 * @param toRemove
+	 */
+	//TODO is this correct?
+	private void removeCollection(HashMap<Coordinate2D,Square> hash, Collection<Square> toRemove){
+		for (Square s: toRemove){
+			Coordinate2D coor = this.getCoordinate2D(s);
+			if(hash.containsKey(coor)) hash.remove(coor);
+		}
 	}
 	
 	/**
