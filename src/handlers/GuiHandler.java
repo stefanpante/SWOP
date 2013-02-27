@@ -5,31 +5,31 @@ package handlers;
 
 import game.Game;
 import grid.core.Coordinate2D;
-import gui.model.GuiModel;
+import grid.core.Grid;
 import gui.view.ApplicationWindow;
-import items.Item;
+import items.Inventory;
+import items.LightGrenade;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Observable;
 
 import javax.swing.UIManager;
-
-import player.Player;
 
 /**
  * @author jonas
  *
  */
-public class GuiHandler implements ActionListener, MouseListener {
+public class GuiHandler extends Observable implements ActionListener, MouseListener {
 	
-	private GuiModel model;
+	Inventory inventory;
 	
 	public GuiHandler(Game game){
-		this.model = new GuiModel();
 		run();
+		inventory = new Inventory();
 	}
 	
 	public void run(){
@@ -37,27 +37,21 @@ public class GuiHandler implements ActionListener, MouseListener {
         	UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         	ApplicationWindow window = new ApplicationWindow(this);
             window.setVisisble();
-            model.addObserver(window);
+            this.addObserver(window);
         } catch (Exception e) {
             e.printStackTrace();
         }
 	}
 	
-	public void setWall(Coordinate2D coordinate){
-		
+	public Inventory getInventory(){
+		return this.inventory;
 	}
 	
-	public void setItem(Coordinate2D coordinate, Item item){
-		
+	public Grid getGrid(){
+		return new Grid(10, 10);
 	}
 	
-	public void setPlayer(Coordinate2D coordinate, Player player){
-		
-	}
-		
-	private void drawGrid(){
-		
-	}
+	
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -77,7 +71,7 @@ public class GuiHandler implements ActionListener, MouseListener {
 		Coordinate2D coordinate = new Coordinate2D((int)point.getX(), (int)point.getY());
 		// TODO: Whole shebang
 		System.out.println(getGridCoordinate(coordinate));
-		model.updateInventory();
+		inventory.addItem(new LightGrenade());
 	}
 
 	/* (non-Javadoc)

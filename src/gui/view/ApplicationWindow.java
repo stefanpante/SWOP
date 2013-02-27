@@ -3,19 +3,18 @@
  */
 package gui.view;
 
-import gui.model.GuiModel;
 import handlers.GuiHandler;
 import items.Inventory;
 import items.Item;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -43,12 +42,12 @@ public class ApplicationWindow implements Observer {
 	
 	private GuiHandler controller;
 	private JFrame frame;	
-	private String[] inventoryItems;
+	private DefaultListModel<String> inventoryItems;
 	private JLabel currentPlayerLabel;
 
     public ApplicationWindow(GuiHandler controller) {
     	setController(controller);
-    	this.inventoryItems = new String[0];
+    	this.inventoryItems = new DefaultListModel<String>();
         initialize();
     }
 
@@ -129,26 +128,24 @@ public class ApplicationWindow implements Observer {
     }
 
 	@Override
-	public void update(Observable arg0, Object arg1) {
-		GuiModel model = (GuiModel) arg0;
-		updateInventory(model.getInventory());
+	public void update(Observable o, Object arg) {
+		GuiHandler handler = (GuiHandler) o;
+		updateInventory(handler.getInventory());
 	}
 
+	/**
+	 * @param inventory
+	 */
 	private void updateInventory(Inventory inventory) {
-		ArrayList<Item> itemList = inventory.getAllItems();
-		String[] nameList = new String[itemList.size()];
-		for(int i = 0; i < itemList.size(); i++)
-			nameList[i] = itemList.get(i).toString();
-		this.inventoryItems = nameList;
-		System.out.println(this.inventoryItems.length);
-	}
-	
-	private void repaintAll(){
-		for(Component c : frame.getComponents()){
-			c.validate();
-			c.repaint();
+		System.out.println("STF");
+		ArrayList<Item> items = inventory.getAllItems();
+		this.inventoryItems.clear();
+		for(int i = 0; i < items.size(); i++){
+			this.inventoryItems.add(i, items.get(i).toString());
 		}
+		
 	}
+
 	
 
 
