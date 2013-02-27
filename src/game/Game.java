@@ -244,7 +244,7 @@ public class Game {
 	 * 
 	 */
 	public Inventory getCurrentPositionInventory(){
-		return currentPlayer.getPosition().getItems();
+		return currentPlayer.getPosition().getInventory();
 	}
 
 	/**
