@@ -5,7 +5,7 @@ import grid.obstacles.LightTrail;
 
 import org.junit.*;
 
-public class testLightTrail {
+public class TestLightTrail {
 	
 	
 	/**
