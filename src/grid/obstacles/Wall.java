@@ -26,33 +26,4 @@ public class Wall extends Obstacle{
 		this.addSquare(otherSquare);
 	}
 	
-	/**
-	 * Adds a square to the wall.
-	 * 
-	 * @param square
-	 * 
-	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
-	 */
-	public void addSquare(Square square) throws IllegalArgumentException {
-		if(isValidSquare(square))
-			squares.add(square);
-		else
-			throw new IllegalArgumentException("The square is already contained in the wall.");
-	}
-	
-	/**
-	 * A given square is invalid if the square is already contained in the wall.
-	 * The wall may not contain duplicates.
-	 * 
-	 * @param square	The square that needs to be checked if it is valid.
-	 * @return	True	If the square is not yet contained.
-	 * 			False	If the square is already contained.
-	 */
-	public boolean isValidSquare(Square square) {
-		if(squares.contains(square))
-			return false;
-		else
-			return true;		
-	}
-	
 }
