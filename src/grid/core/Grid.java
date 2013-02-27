@@ -100,7 +100,7 @@ public class Grid {
 	 */
 	public void createWalls(){
 		HashMap<Coordinate2D, Square> candidates = new HashMap<Coordinate2D, Square>(squares);//(HashMap<Coordinate2D, Square>) squares.clone();
-		// remove startpositions from possible candidates
+		// remove start positions from possible candidates
 		candidates.remove(new Coordinate2D(0, vSize -1));
 		candidates.remove(new Coordinate2D(hSize -1, 0));
 		Orientation[] orientations = new Orientation[]{Orientation.HORIZONTAL, Orientation.VERTICAL};
@@ -135,11 +135,14 @@ public class Grid {
 		
 		
 		switch(orientation){
-			case HORIZONTAL: sequence = getHorizontalSequence(startCoor, squares );
-							 break;
-			case VERTICAL:	 sequence = getVerticalSequence(startCoor, squares);
-							 break;
-			default:		 throw new IllegalArgumentException("This orientation is not supported:" + orientation);
+			case HORIZONTAL: 
+				sequence = getHorizontalSequence(startCoor, squares );
+				break;
+			case VERTICAL:	 
+				sequence = getVerticalSequence(startCoor, squares);
+				break;
+			default:		 
+				throw new IllegalArgumentException("This orientation is not supported:" + orientation);
 		}
 		
 		return sequence;
@@ -219,9 +222,12 @@ public class Grid {
 	 */
 	private int getMaxLengthWall(Orientation orientation) throws IllegalArgumentException{
 		switch(orientation){
-		case HORIZONTAL: 	return (int) (this.hSize * Grid.MAX_LENGTHPERCENTAGEWALL);
-		case VERTICAL:		return (int) (this.vSize * Grid.MAX_LENGTHPERCENTAGEWALL);
-		default:	throw new IllegalArgumentException("This orientation is not supported:" + orientation);
+		case HORIZONTAL:
+			return (int) (this.hSize * Grid.MAX_LENGTHPERCENTAGEWALL);
+		case VERTICAL:
+			return (int) (this.vSize * Grid.MAX_LENGTHPERCENTAGEWALL);
+		default:	
+			throw new IllegalArgumentException("This orientation is not supported:" + orientation);
 		}
 	}
 
@@ -406,7 +412,7 @@ public class Grid {
 	/**
 	 * Returns the neighbours of the given square
 	 * @param square
-	 * @return
+	 * @return the neighbours of a square
 	 */
 	public ArrayList<Square> getNeighbours(Square square){
 		ArrayList<Square> neighbours = new ArrayList<Square>();
@@ -424,8 +430,10 @@ public class Grid {
 		return neighbours;
 	}
 
+	/**
+	 * A Basic string representation of a grid
+	 */
 	@Override
-	//TODO should we also describe the obstacles?
 	public String toString(){
 		return "horizontal size: " + hSize + " Vertical size: " +  vSize;
 	}

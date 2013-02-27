@@ -114,7 +114,9 @@ public class Coordinate2D {
 	}
 	
 	/**
-	* Check whether this retangle is equal to the given object.
+	* Check whether this Coordinate is equal to the given object.
+	* Compares the x and y coordinates if the given object is also
+	* a Coordinate2D
 	*
 	* @return	True if <obj> is an effective Coordinate2D with the same
 	* 			x and y coordinate.
@@ -147,6 +149,12 @@ public class Coordinate2D {
 		return (int) (Math.pow(2, this.getX()) * Math.pow(3, this.getY()));
 	}
 	
+	/**
+	 * Returns the closest neighbouring coordinate in the given direction
+	 * 
+	 * @param 	direction the direction in which the neighbour is wanted
+	 * @return 	the closest neighbour in the given direction
+	 */
 	public Coordinate2D getNeighbor(Direction direction){
 		int x = getX();
 		int y = getY();
@@ -167,7 +175,8 @@ public class Coordinate2D {
 			return new Coordinate2D(x-1, y);
 		case NORTHWEST:
 			return new Coordinate2D(x-1, y+1);
+		default:
+			throw new IllegalArgumentException("The given direction is not valid" + direction ); 
 		}
-		return null;
 	}
 }
