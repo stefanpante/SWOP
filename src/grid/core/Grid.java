@@ -2,6 +2,8 @@ package grid.core;
 
 import grid.obstacles.*;
 
+import items.LightGrenade;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -30,15 +32,14 @@ public class Grid {
 	/**
 	 * Max percentage of squares covered by walls
 	 */
-	public static float PERCENTAGEWALLS = 0.2f;
+	public static float MAX_PERCENTAGEWALLS = 0.2f;
 
 	/**
 	 * Percentage of max length of a wall
 	 */
-	public static float LENGTHPERCENTAGEWALL = 0.5f;
+	public static float MAX_LENGTHPERCENTAGEWALL = 0.5f;
 
 	private HashMap<Coordinate2D,Square> squares;
-	private ArrayList<Obstacle> obstacles;
 
 	/**
 	 * The vSize of this Grid object.
@@ -60,8 +61,6 @@ public class Grid {
 	public Grid(int vSize, int hSize) throws IllegalArgumentException {
 		setVerticalSize(vSize);
 		setHorizontalSize(hSize);
-		this.squares = new HashMap<Coordinate2D,Square>(this.getSize());
-		this.obstacles = new ArrayList<Obstacle>();
 		this.initGrid();
 	}
 	//TODO: Write method, creates all the squares,
@@ -97,7 +96,7 @@ public class Grid {
 	public void createWalls(){
 
 		// max 20 percent of squares is covered
-		int coverage = (int) ((vSize*hSize) * Grid.PERCENTAGEWALLS);
+		int coverage = (int) ((vSize*hSize) * Grid.MAX_PERCENTAGEWALLS);
 		// random selection between 0 and 20 percent
 		coverage = (int) Math.floor(coverage * Math.random());
 
@@ -117,7 +116,6 @@ public class Grid {
 		// stoppen als het aantal resterende square < 2
 	}
 
-	//TODO: me thinkey this method is finished
 	private void placeGrenades(){
 
 		int grenades = (int) (this.getSize() * Math.ceil(this.getSize() * Grid.PERCENTAGEGRENADES));
@@ -127,17 +125,24 @@ public class Grid {
 		// Remove startpositions
 		candidateSquares.remove(getLowerLeft());
 		candidateSquares.remove(getUpperRight());
+		
+		//
 
-		//TODO: remove all obstacles
-		for(Obstacle o: obstacles)
-			candidateSquares.removeAll(o.getSquares());
 
 		// Add the grenades to the squares, random distribution
 		Random generator = new Random();
-		for(int i = 0; i < grenades; i++){
+			 
+		int i = 0;
+		while(i < grenades){
 			int l = candidateSquares.size();
 			Square s = candidateSquares.get(generator.nextInt(l));
+			if(!s.isObstructed()){
+				s.addItemToInventory(new LightGrenade());
+				i++;
+			}
+			
 			candidateSquares.remove(s);
+			
 		}
 
 	}
@@ -275,10 +280,6 @@ public class Grid {
 	 */
 	public static boolean isValidHorizontalSize(int hSize) {
 		return hSize >= Grid.MIN_HSIZE;
-	}
-
-	public ArrayList<Obstacle> getObstacles(){
-		return obstacles;
 	}
 
 	public int getSize(){

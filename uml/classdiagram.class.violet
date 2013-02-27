@@ -20,21 +20,21 @@
         <void method="set">
          <object idref="Point2D$Double0">
           <void method="setLocation">
-           <double>12.0</double>
-           <double>12.0</double>
+           <double>903.0</double>
+           <double>221.0</double>
           </void>
          </object>
-         <double>12.0</double>
+         <double>221.0</double>
         </void>
        </void>
       </object>
-      <double>12.0</double>
+      <double>903.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
     <void property="name">
      <void property="text">
       <string>Coordinate2D
@@ -52,15 +52,15 @@
         <void method="set">
          <object idref="Point2D$Double1">
           <void method="setLocation">
-           <double>18.0</double>
-           <double>95.0</double>
+           <double>191.0</double>
+           <double>418.0</double>
           </void>
          </object>
-         <double>95.0</double>
+         <double>418.0</double>
         </void>
        </void>
       </object>
-      <double>18.0</double>
+      <double>191.0</double>
      </void>
     </void>
    </object>
@@ -84,21 +84,21 @@
         <void method="set">
          <object idref="Point2D$Double2">
           <void method="setLocation">
-           <double>140.0</double>
-           <double>19.0</double>
+           <double>408.0</double>
+           <double>180.0</double>
           </void>
          </object>
-         <double>19.0</double>
+         <double>180.0</double>
         </void>
        </void>
       </object>
-      <double>140.0</double>
+      <double>408.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
     <void property="name">
      <void property="text">
       <string>Grid
@@ -117,21 +117,21 @@
         <void method="set">
          <object idref="Point2D$Double3">
           <void method="setLocation">
-           <double>361.0</double>
-           <double>108.0</double>
+           <double>310.0</double>
+           <double>290.0</double>
           </void>
          </object>
-         <double>108.0</double>
+         <double>290.0</double>
         </void>
        </void>
       </object>
-      <double>361.0</double>
+      <double>310.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
+   <object class="com.horstmann.violet.ClassNode">
     <void property="name">
      <void property="text">
       <string>LightTrail
@@ -149,15 +149,15 @@
         <void method="set">
          <object idref="Point2D$Double4">
           <void method="setLocation">
-           <double>761.0</double>
-           <double>269.0</double>
+           <double>807.0</double>
+           <double>517.0</double>
           </void>
          </object>
-         <double>269.0</double>
+         <double>517.0</double>
         </void>
        </void>
       </object>
-      <double>761.0</double>
+      <double>807.0</double>
      </void>
     </void>
    </object>
@@ -182,21 +182,21 @@
         <void method="set">
          <object idref="Point2D$Double5">
           <void method="setLocation">
-           <double>152.0</double>
-           <double>183.0</double>
+           <double>15.0</double>
+           <double>192.0</double>
           </void>
          </object>
-         <double>183.0</double>
+         <double>192.0</double>
         </void>
        </void>
       </object>
-      <double>152.0</double>
+      <double>15.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
     <void property="name">
      <void property="text">
       <string>Square</string>
@@ -213,21 +213,21 @@
         <void method="set">
          <object idref="Point2D$Double6">
           <void method="setLocation">
-           <double>13.0</double>
-           <double>266.0</double>
+           <double>421.0</double>
+           <double>418.0</double>
           </void>
          </object>
-         <double>266.0</double>
+         <double>418.0</double>
         </void>
        </void>
       </object>
-      <double>13.0</double>
+      <double>421.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
+   <object class="com.horstmann.violet.ClassNode">
     <void property="name">
      <void property="text">
       <string>Wall
@@ -245,15 +245,15 @@
         <void method="set">
          <object idref="Point2D$Double7">
           <void method="setLocation">
-           <double>568.0</double>
-           <double>272.0</double>
+           <double>614.0</double>
+           <double>520.0</double>
           </void>
          </object>
-         <double>272.0</double>
+         <double>520.0</double>
         </void>
        </void>
       </object>
-      <double>568.0</double>
+      <double>614.0</double>
      </void>
     </void>
    </object>
@@ -277,21 +277,21 @@
         <void method="set">
          <object idref="Point2D$Double8">
           <void method="setLocation">
-           <double>761.0</double>
-           <double>118.0</double>
+           <double>309.0</double>
+           <double>515.0</double>
           </void>
          </object>
-         <double>118.0</double>
+         <double>515.0</double>
         </void>
        </void>
       </object>
-      <double>761.0</double>
+      <double>309.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
     <void property="name">
      <void property="text">
       <string>Item
@@ -309,21 +309,21 @@
         <void method="set">
          <object idref="Point2D$Double9">
           <void method="setLocation">
-           <double>424.0</double>
-           <double>304.0</double>
+           <double>635.0</double>
+           <double>179.0</double>
           </void>
          </object>
-         <double>304.0</double>
+         <double>179.0</double>
         </void>
        </void>
       </object>
-      <double>424.0</double>
+      <double>635.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode4">
     <void property="name">
      <void property="text">
       <string>Inventory
@@ -341,21 +341,21 @@
         <void method="set">
          <object idref="Point2D$Double10">
           <void method="setLocation">
-           <double>17.0</double>
-           <double>440.0</double>
+           <double>636.0</double>
+           <double>73.0</double>
           </void>
          </object>
-         <double>440.0</double>
+         <double>73.0</double>
         </void>
        </void>
       </object>
-      <double>17.0</double>
+      <double>636.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode5">
     <void property="name">
      <void property="text">
       <string>LightGrenade</string>
@@ -372,21 +372,21 @@
         <void method="set">
          <object idref="Point2D$Double11">
           <void method="setLocation">
-           <double>387.0</double>
-           <double>418.0</double>
+           <double>632.0</double>
+           <double>296.0</double>
           </void>
          </object>
-         <double>418.0</double>
+         <double>296.0</double>
         </void>
        </void>
       </object>
-      <double>387.0</double>
+      <double>632.0</double>
      </void>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode4">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode6">
     <void property="name">
      <void property="text">
       <string>Player
@@ -404,15 +404,15 @@
         <void method="set">
          <object idref="Point2D$Double12">
           <void method="setLocation">
-           <double>966.0</double>
-           <double>275.0</double>
+           <double>826.0</double>
+           <double>73.0</double>
           </void>
          </object>
-         <double>275.0</double>
+         <double>73.0</double>
         </void>
        </void>
       </object>
-      <double>966.0</double>
+      <double>826.0</double>
      </void>
     </void>
    </object>
@@ -426,53 +426,68 @@
      <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
     </void>
    </object>
+   <object idref="ClassNode5"/>
    <object idref="ClassNode3"/>
-   <object idref="ClassNode2"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
     </void>
     <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
    </object>
-   <object idref="InterfaceNode0"/>
+   <object idref="ClassNode3"/>
+   <object idref="ClassNode4"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+   </object>
+   <object idref="ClassNode4"/>
+   <object idref="ClassNode6"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+   </object>
+   <object idref="ClassNode0"/>
    <object idref="ClassNode1"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
     </void>
     <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
    </object>
-   <object idref="ClassNode0"/>
-   <object idref="InterfaceNode0"/>
+   <object idref="ClassNode2"/>
+   <object idref="ClassNode1"/>
   </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
     </void>
     <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
    </object>
-   <object idref="ClassNode4"/>
    <object idref="InterfaceNode0"/>
+   <object idref="ClassNode1"/>
   </void>
  </object>
 </java>
