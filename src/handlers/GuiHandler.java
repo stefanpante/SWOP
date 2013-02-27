@@ -26,9 +26,9 @@ import javax.swing.UIManager;
 public class GuiHandler extends Observable implements ActionListener, MouseListener {
 	
 	Inventory inventory;
+	Grid grid;
 	
-	public GuiHandler(Game game){
-		run();
+	public GuiHandler(){
 		inventory = new Inventory();
 	}
 	
@@ -46,12 +46,11 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	public Inventory getInventory(){
 		return this.inventory;
 	}
-	
+		
 	public Grid getGrid(){
 		return new Grid(10, 10);
 	}
-	
-	
+
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -59,7 +58,6 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/* (non-Javadoc)
@@ -75,6 +73,8 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
         setChanged();
         notifyObservers(null);
 	}
+	
+	
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
