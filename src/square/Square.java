@@ -155,7 +155,17 @@ public class Square {
 		return usedItems;
 	}
 	
-	public void addUsedItem(Item item){
+	/**
+	 * Adds/uses the given item on this square
+	 * 
+	 * @param 	item
+	 * 			The item to be added or used
+	 * @throws 	IllegalArgumentException
+	 * 			If the given item cannot be used on this square
+	 */
+	public void addUsedItem(Item item) throws IllegalArgumentException {
+		if(!canBeUsedHere(item))
+			throw new IllegalArgumentException();
 		usedItems.add(item);
 	}
 	

@@ -160,7 +160,7 @@ public class Player extends Observable {
 			throw new IllegalArgumentException();
 		}
 		Item item = items.take(itemToUse);
-		currentPosition.addUsedItem(item);
+		getPosition().addUsedItem(item);
 	}
 	
 	public Inventory getInventory(){

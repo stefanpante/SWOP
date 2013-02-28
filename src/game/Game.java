@@ -201,8 +201,7 @@ public class Game {
 	 * @return	True
 	 */
 	public static boolean isValidCurrentPlayer(Player currentPlayer) {
-		//TODO: specific constraints for this field.
-		return true;
+		return !(currentPlayer == null);
 	}
 	
 	/**
@@ -223,13 +222,6 @@ public class Game {
 	 * @param itemIndex
 	 */
 	public void useItem(Item item) throws IllegalStateException {
-//		if(!canUseAsItem(item)){
-//			throw new IllegalStateException("The item "
-//					+ item
-//					+ " can't be used by " 
-//					+ currentPlayer 
-//					+ " right now.");
-//		}
 		currentPlayer.useItem(item);
 	}
 	
