@@ -63,14 +63,28 @@ public class Square {
 	/**
 	 * The neighbor must be valid.
 	 * 
-	 * @pre	The square must be a valid neighbor in the given direction.	
-	 * 		isValidNeighbor(direction, square)
+	 * @pre		The square must be a valid neighbor in the given direction.	
+	 * 			isValidNeighbor(direction, square)
+	 * 
+	 * @post	If the square is valid the square is set as neighbor in the given direction.
+	 * 
+	 * @post	If the square is valid and does not have the current square as a neighbor it also set
+	 * 			in the given square in the opposing direction.
+	 * 
+	 * @throws	IllegalArgumentException
+	 * 			If the square given is not a valid one according to the direction an exception is thrown.
 	 * 
 	 * @param direction
 	 * @param square
 	 */
-	public void setNeigbor(Direction direction, Square square){
-		neighbors.put(direction,square);
+	public void setNeigbor(Direction direction, Square square) throws IllegalArgumentException{
+		if(isValidNeighbor(direction, square))
+			neighbors.put(direction,square);
+		else
+			throw new IllegalArgumentException();
+		
+		if(!square.hasNeigbor(direction.opposite()))
+			square.setNeigbor(direction.opposite(), this);
 	}
 
 	/**
@@ -110,7 +124,13 @@ public class Square {
 	 * @return
 	 */
 	public boolean isValidNeighbor(Direction direction, Square square) {
-		return true;
+		if(square.hasNeighbor(direction.opposite(), this))
+			return true;
+		
+		if(!square.hasNeigbor(direction.opposite()))
+			return true;
+		
+		return false;
 	}
 	
 	/**
@@ -232,6 +252,7 @@ public class Square {
 		//TODO: specific constraints for this field.
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "Square [ " + this.getInventory() +" ]";
