@@ -178,7 +178,7 @@ public class TestInventory {
 			fail("Setting maximum size to a greater size should be allowed");
 		}
 		for(int i = 0; i < 24; i ++){
-			item = new LightGrenade();
+			Item item = new LightGrenade();
 			inventory.addItem(item);
 		}
 		try{
