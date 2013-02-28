@@ -5,7 +5,7 @@ package items;
  * 
  * @author vincentreniers
  */
-public class Item {
+public class Item implements InventoryElement {
 
 	/**
 	 * This flag indicates if the item is active or inactive.
@@ -32,5 +32,9 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item";
+	}
+
+	public void accept(InventoryElementVisitor visitor) {
+		visitor.visit(this);
 	}
 }
