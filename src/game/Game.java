@@ -8,7 +8,6 @@ import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
-import square.Grid;
 
 /**
  * Game class, this class controls the flow of the game
@@ -30,11 +29,6 @@ import square.Grid;
 public class Game {
 	
 	/**
-	 * The grid of this Game object.
-	 */
-	private Grid grid;
-	
-	/**
 	 * The player1 of this Game object.
 	 */
 	private Player player1;
@@ -50,65 +44,13 @@ public class Game {
 	private Player currentPlayer;
 	
 
+	
 	/**
-	 * Zero argument constructor that makes a new game with standard grid and standard player names.
-	 * 
-	 * @effect	this.Game(new Grid(10,10))
+	 * Zero argument constructor that makes a new game.
 	 */
 	public Game(){
-		this(new Grid(Grid.MIN_VSIZE,Grid.MIN_HSIZE));
-	}
-	
-	/**
-	 * One argument constructor that makes a new game with given grid and standard player names.
-	 * 
-	 * @param grid	The grid  that will be used for the game.
-	 */
-	public Game(Grid grid){
-		setGrid(grid);
 		setPlayer1(new Player(null, "player1"));
 		setPlayer2(new Player(null, "player2"));
-	}
-	
-	/**
-	 * Returns the value of the grid of this Game as an Grid.
-	 *
-	 * @return 	An object of the Grid class.
-	 * 			| Grid
-	 */
-	public Grid getGrid() {
-		return grid;
-	};
-
-	/**
-	 * Sets the value of the grid of Game if the given value is valid. 
-	 * 
-	 * @param 	grid
-	 *			The grid to set.
-	 * @post 	The given value is the current value of the grid of this Game.
-	 * @throws 	IllegalArgumentException
-	 *			If the given argument is not a valid grid.
-	 *			| !isValidGrid(grid)
-	 */
-	public void setGrid(Grid grid) throws IllegalArgumentException{
-		if (!isValidGrid(grid)) {
-			throw new IllegalArgumentException(
-					"The argument ("
-							+ grid
-							+ ") is not a valid agrument of the field grid from the class Game");
-		}
-		this.grid = grid;
-	};
-
-	/**
-	 * Check whether the given grid is a valid grid for all the objects of Game.
-	 * @param 	grid
-	 *			The grid to check.
-	 * @return	True
-	 */
-	public static boolean isValidGrid(Grid grid) {
-		//TODO: specific constraints for this field.
-		return true;
 	}
 
 	/**
