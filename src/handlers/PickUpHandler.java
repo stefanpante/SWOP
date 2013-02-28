@@ -1,5 +1,8 @@
 package handlers;
 
+import items.Inventory;
+import items.Item;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -21,11 +24,15 @@ public class PickUpHandler {
 	 * commandline for now, has to be integrated into the gui.
 	 * @throws IOException
 	 */
-	public void pickUp() throws IOException{
-		InputStreamReader cin = new InputStreamReader(System.in);
-		int itemIndex = cin.read();
-		game.pickUp(itemIndex);
-		cin.close();
+	public void pickUp(Item item){
+		game.getCurrentPlayer().getPosition().getInventory().take(item);
+		game.getCurrentPlayer().pickUp(item);
+		game.getCurrentPlayer().incrementActions();
+	}
+	
+	public void showItems(){
+		Inventory inventory = game.getCurrentPlayer().getPosition().getInventory();
+		GuiHandler.updateListModel(inventory);
 	}
 	
 	

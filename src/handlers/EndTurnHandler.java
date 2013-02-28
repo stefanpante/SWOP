@@ -16,8 +16,11 @@ public class EndTurnHandler {
 	}
 	
 
+	public void 
 	public void endTurn(){
+		game.getCurrentPlayer().incrementActions();
 		game.endTurn();
+		
 	}
 	//TODO checkAllConditions for end turn, turns inactive items active
 

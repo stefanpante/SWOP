@@ -1,5 +1,6 @@
 package handlers;
 
+import square.Square;
 import game.Game;
 
 /**
@@ -15,5 +16,10 @@ public class MoveHandler {
 		this.game = game;
 	}
 	
+	public void move(Direction direction){
+		Square newPosition = game.getCurrentPlayer().getPosition().getNeighor(direction);
+		game.getCurrentPlayer().move(newPosition);
+		game.getCurrentPlayer().incrementActions();
+	}
 
 }

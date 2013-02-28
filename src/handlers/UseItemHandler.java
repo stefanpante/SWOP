@@ -1,5 +1,6 @@
 package handlers;
 
+import items.Inventory;
 import items.Item;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import game.Game;
 public class UseItemHandler {
 
 	private Game game;
+	private GuiHandler guiHandler;
 	
 	/** 
 	 * Creates the handler for the usage of an item
@@ -29,15 +31,13 @@ public class UseItemHandler {
 	/**
 	 * 
 	 */
-	//TODO: this is an temporary implementation of useItem, 
-	// is commandline but should be in GUI
 	public void useItem(Item item) {
-		System.out.println(game.getCurrentPlayerInventory());
-//		InputStreamReader cin = new InputStreamReader(System.in);
-//		int itemIndex = cin.read();
-//		game.useItem(itemIndex);
-//		cin.close();
-		game.useItem(item);
+		game.getCurrentPlayer().useItem(item);
+	}
+	
+	public void showItems(){
+		Inventory inventory = game.getCurrentPlayer().getInventory();
+		GuiHandler.updateListModel(inventory);
 	}
 
 }
