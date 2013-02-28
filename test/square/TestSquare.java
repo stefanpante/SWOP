@@ -129,15 +129,37 @@ public class TestSquare {
 	 */
 	@Test
 	public void testAddingNeighbor() {
+		Square square = new Square();
+		Square otherSquare = new Square();
 		
+		square.setNeigbor(Direction.NORTH, otherSquare);
+		
+		assertTrue(otherSquare.hasNeigbor(Direction.SOUTH));
+		assertTrue(square.hasNeigbor(Direction.NORTH));
 	}
 	
 	/**
 	 * Neighbor already set in other square.
 	 */
 	@Test
-	public void testAddingNeigborBiDirectional() {
+	public void testAddingNeigbors() {
+		Square square = new Square();
+		Square otherSquare = new Square();
 		
+		square.setNeigbor(Direction.NORTH, otherSquare);
+		
+		Square thirdSquare = new Square();
+		
+		square.setNeigbor(Direction.EAST, thirdSquare);
+		
+		assertTrue(otherSquare.hasNeigbor(Direction.SOUTH));
+		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH, square));
+		
+		assertTrue(thirdSquare.hasNeigbor(Direction.WEST));
+		assertTrue(thirdSquare.hasNeighbor(Direction.WEST, square));
+		
+		assertFalse(thirdSquare.hasNeighbor(Direction.WEST, new Square()));
+		assertFalse(thirdSquare.hasNeighbor(Direction.NORTHEAST, square));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
