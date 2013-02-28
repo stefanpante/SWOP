@@ -118,5 +118,44 @@ public class TestSquare {
 	public void testHasActiveItem() {
 		fail("Not yet implemented");
 	}
+	
+	
+	/************************************
+	 *  Neighbor tests
+	 ************************************/
+	
+	/**
+	 * Neighbor not yet set in both squares.
+	 */
+	@Test
+	public void testAddingNeighbor() {
+		
+	}
+	
+	/**
+	 * Neighbor already set in other square.
+	 */
+	@Test
+	public void testAddingNeigborBiDirectional() {
+		
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAddingDuplicateNeigbor() {
+		Square square = new Square();
+		Square otherSquare = new Square();
+		
+		square.setNeigbor(Direction.NORTH, new Square());
+		square.setNeigbor(Direction.NORTH, otherSquare);
+	}
+	
+	@Test
+	public void testIsValidNeighbor() {
+		Square square = new Square();
+		
+		assertTrue(square.isValidNeighbor(Direction.NORTH, new Square()));
+	}
+	
+	
 
 }
