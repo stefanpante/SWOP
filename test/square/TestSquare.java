@@ -16,6 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import square.Square;
+import square.obstacles.Obstacle;
+import square.obstacles.Wall;
 
 
 public class TestSquare {
@@ -172,12 +174,43 @@ public class TestSquare {
 	}
 	
 	@Test
-	public void testIsValidNeighbor() {
+	public void testIsConnectedTo() {
+		Square square = new Square();
+		Square otherSquare = new Square();
+		
+		assertFalse(square.isConnectedTo(otherSquare));
+		
+		square.setNeigbor(Direction.NORTH, otherSquare);
+		assertTrue(square.isConnectedTo(otherSquare));
+	}
+	
+	@Test
+	public void testCanHaveAsNeighbor() {
 		Square square = new Square();
 		
 		assertTrue(square.canHaveAsNeighbor(Direction.NORTH, new Square()));
 	}
 	
+	@Test
+	public void testSetObstacle() {
+		Square square = new Square();
+		Square otherSquare = new Square();
+		
+		square.setNeigbor(Direction.EAST, otherSquare);
+		
+		Obstacle wall = new Wall(square, otherSquare);
+		
+		square.setObstacle(wall);
+		
+		assertEquals(square.getObstacle(), wall);
+		assertTrue(square.isObstructed());
+	}
 	
+	@Test
+	public void testIsObstructed() {
+		Square square = new Square();
+		
+		assertFalse(square.isObstructed());
+	}
 
 }

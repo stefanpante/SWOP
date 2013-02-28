@@ -178,8 +178,6 @@ public class Square {
 		return inventory;
 	}
 	
-	
-	
 	/**
 	 * This method is used to activate the usedItems on the square.
 	 */
@@ -187,6 +185,7 @@ public class Square {
 		for(Item i: usedItems)
 			i.activate();
 	}
+	
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
 	 *
@@ -208,30 +207,12 @@ public class Square {
 	 *			| !isValidObstacle(obstacle)
 	 */
 	@Nullable
-	public void setObstacle(Obstacle obstacle)
-			throws IllegalArgumentException {
-		if (!isValidObstacle(obstacle)) {
-			throw new IllegalArgumentException(
-					"The argument ("
-							+ obstacle
-							+ ") is not a valid agrument of the field obstacle from the class Square");
-		}
+	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
+		if (getObstacle() != null)
+			throw new IllegalArgumentException("Obstacle already exists on this square.");
+		
 		this.obstacle = obstacle;
 	};
-
-	/**
-	 * Check whether the given obstacle is a valid obstacle for all the objects of Square.
-	 * @param 	obstacle
-	 *			The obstacle to check.
-	 * @return	True if and only if the given value is not null, has the correct type, ...
-	 */
-	public static boolean isValidObstacle(Obstacle obstacle) {
-		if (!(obstacle instanceof Obstacle)) {
-			return false;
-		}
-		//TODO: specific constraints for this field.
-		return true;
-	}
 	
 	@Override
 	public String toString() {
@@ -241,10 +222,11 @@ public class Square {
 	/**
 	 * Returns whether this square is obstructed by an obstacle or not.
 	 * 
-	 * @return
+	 * @return	True	if there is an obstacle which is not null.
+	 * 			False	If there is no obstacle.
 	 */
 	public boolean isObstructed(){
-			return obstacle == null;
+			return obstacle != null;
 	}
 
 	/**
@@ -256,7 +238,7 @@ public class Square {
 	 * @return	True if and only if the given square is connected to
 	 * 			this square.
 	 */
-	public boolean connectedTo(Square square) {
+	public boolean isConnectedTo(Square square) {
 		for(Square neighborSquare : getNeighbors().values())
 			if(square == neighborSquare)
 				return true;
