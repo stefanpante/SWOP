@@ -14,6 +14,7 @@ import square.Square;
  */
 public class Wall extends Obstacle{
 	
+	public static int MIN_SIZE = 2;
 	/**
 	 * Initialises the wall. Two squares must at least be given for a wall to be possible.
 	 * 

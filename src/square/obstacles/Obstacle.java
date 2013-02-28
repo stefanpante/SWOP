@@ -17,8 +17,11 @@ public abstract class Obstacle {
 	/**
 	 * An obstacle may cover a set of squares.
 	 */
-	private ArrayList<Square> squares = new ArrayList<Square>();
+	private ArrayList<Square> squares;
 	
+	public Obstacle(){
+		squares = new ArrayList<Square>();
+	}
 	/**
 	 * Returns a list of squares which the obstacle covers.
 	 */
