@@ -54,8 +54,8 @@ public class Game {
 	 * 			The top right square
 	 */
 	public Game(Square bottomLeft, Square topRight){
-		setPlayer1(new Player(bottomLeft, "player1"));
-		setPlayer2(new Player(topRight, "player2"));
+		setPlayer1(new Player(bottomLeft, "Player 1"));
+		setPlayer2(new Player(topRight, "Player 2"));
 	}
 
 	/**

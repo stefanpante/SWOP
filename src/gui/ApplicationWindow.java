@@ -18,6 +18,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -52,6 +53,14 @@ public class ApplicationWindow implements Observer {
     }
 
     private void initialize() {
+    	
+    	String player1 = JOptionPane.showInputDialog(null, "First player's name", 
+    			"Player 1", 1);
+    	String player2 = JOptionPane.showInputDialog(null, "Second player's name", 
+    			"Player 2", 1);
+    	
+    	controller.setNames(player1,player2);
+    	
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

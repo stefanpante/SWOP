@@ -9,14 +9,11 @@ import game.Game;
  */
 public class MoveHandler {
 
-	private static final MoveHandler instance = new MoveHandler();
+
 	private Game game;
-	public MoveHandler() {
-		this.game = Game.getInstance();
+	public MoveHandler(Game game) {
+		this.game = game;
 	}
 	
-	public MoveHandler getInstance(){
-		return instance;
-	}
 
 }

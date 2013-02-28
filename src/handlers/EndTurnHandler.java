@@ -10,15 +10,12 @@ import game.Game;
 public class EndTurnHandler {
 
 	private Game game;
-	private static final EndTurnHandler instance = new EndTurnHandler();
 	
-	private EndTurnHandler() {
-		this.game = Game.getInstance();
+	public EndTurnHandler(Game game) {
+		this.game = game;
 	}
 	
-	public EndTurnHandler getInstance(){
-		return instance;
-	}
+
 	public void endTurn(){
 		game.endTurn();
 	}
