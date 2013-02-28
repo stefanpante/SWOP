@@ -268,4 +268,12 @@ public class Square {
 	private HashMap<Direction, Square> getNeighbors() {
 		return new HashMap<Direction, Square>(this.neighbors);
 	}
+
+	/**
+	 * @param item
+	 * @return
+	 */
+	public boolean canBeUsedHere(Item item) {
+		return true;
+	}
 }
