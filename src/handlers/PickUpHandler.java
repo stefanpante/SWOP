@@ -13,8 +13,9 @@ import game.Game;
 public class PickUpHandler {
 
 	private Game game;
-	public PickUpHandler(Game game) {
-		this.game = game;
+	private static final PickUpHandler instance = new PickUpHandler();
+	public PickUpHandler() {
+		this.game = Game.getInstance();
 	}
 	
 	/**
@@ -27,5 +28,10 @@ public class PickUpHandler {
 		game.pickUp(itemIndex);
 		cin.close();
 	}
+	
+	public PickUpHandler getInstance(){
+		return instance;
+	}
+	
 
 }
