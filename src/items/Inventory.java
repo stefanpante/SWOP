@@ -149,8 +149,9 @@ public class Inventory {
 	
 	/**
 	 * Adds an item to the inventory if the size limit allows it
-	 * @param item	the item to be added to the inventory
-	 * @throws IllegalStateException
+	 * @param 	item	
+	 * 			the item to be added to the inventory
+	 * @throws 	IllegalStateException
 	 * 			thrown when adding the item would exceed the size
 	 * 			of the inventory
 	 */
@@ -176,6 +177,20 @@ public class Inventory {
 		return index > 0 && index <= this.getMaximumSize() && index <= this.getSize();
 	}
 	
+
+	/**
+	 * Returns whether the given item is a valid item for all Inventory objects.
+	 * 
+	 * @param	item
+	 * 			The item to check.
+	 * @return	Returns true if and only if the item is not null.
+	 */
+	public static boolean isValidItem(Item item){
+		if(item == null)
+			return false;
+		return true;
+	}
+		
 	/**
 	 * Checks if a certain item can be added.
 	 * 
@@ -186,7 +201,6 @@ public class Inventory {
 	public boolean canHaveAsItem(Item item) {
 		if(isFull())
 			return false;
-		
 		if(items.contains(item))
 			return false;
 		
