@@ -8,6 +8,7 @@ import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
+import square.Square;
 
 /**
  * Game class, this class controls the flow of the game
@@ -15,8 +16,6 @@ import player.Player;
  * @author 	Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  * @version 0.5
  * 
- * @invar	The Grid is a valid grid for this game
- * 			| isValidGrid(getGrid())
  * @invar	player1 is a valid player for this game
  * 			| isValidPlayer(getPlayer1())
  * @invar	player2 is a valid player for this game
@@ -46,11 +45,17 @@ public class Game {
 
 	
 	/**
-	 * Zero argument constructor that makes a new game.
+	 * Two argument constructor that makes a new game based
+	 * on the bottom left and top right square.
+	 * 
+	 * @param 	bottomLeft
+	 * 			The bottom left square
+	 * @param 	topRight
+	 * 			The top right square
 	 */
-	public Game(){
-		setPlayer1(new Player(null, "player1"));
-		setPlayer2(new Player(null, "player2"));
+	public Game(Square bottomLeft, Square topRight){
+		setPlayer1(new Player(bottomLeft, "player1"));
+		setPlayer2(new Player(topRight, "player2"));
 	}
 
 	/**
@@ -165,7 +170,7 @@ public class Game {
 	 * 			if(old.currentPlayer == player2) new.currentPlayer == player1
 	 */
 	//TODO hoe Controleer deze postcondities en precondities
-	public void switchPlayer(){
+	public void switchPlayer() {
 		if(currentPlayer == player1){
 			setCurrentPlayer(player2);
 		}
@@ -190,14 +195,13 @@ public class Game {
 	}
 
 	/**
-	 * Check whether the given currentPlayer is a valid currentPlayer for all the objects of Game.
+	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
 	 * @param 	currentPlayer
 	 *			The currentPlayer to check.
 	 * @return	True
 	 */
 	public static boolean isValidCurrentPlayer(Player currentPlayer) {
-		//TODO: specific constraints for this field.
-		return true;
+		return !(currentPlayer == null);
 	}
 	
 	/**
@@ -218,27 +222,9 @@ public class Game {
 	 * @param itemIndex
 	 */
 	public void useItem(Item item) throws IllegalStateException {
-		if(!canUseAsItem(item)){
-			throw new IllegalStateException("The item "
-					+ item
-					+ " can't be used by " 
-					+ currentPlayer 
-					+ " right now.");
-		}
 		currentPlayer.useItem(item);
 	}
 	
-	/**
-	 * Returns if the current player can use the given item.
-	 * 
-	 * @param 	item
-	 * 			The item to check.
-	 * @return
-	 */
-	public boolean canUseAsItem(Item item) {
-		//TODO maybe let only player check this.
-		return false;
-	}
 
 	//TODO: comment
 	public void endTurn() {

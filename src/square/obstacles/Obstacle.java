@@ -2,7 +2,6 @@ package square.obstacles;
 
 
 import java.util.ArrayList;
-import java.util.Observer;
 
 import square.Square;
 

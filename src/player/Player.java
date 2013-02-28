@@ -52,8 +52,12 @@ public class Player extends Observable {
 	/**
 	 * The number of items a player can carry
 	 */
-	
 	private static int INVENTORY_SIZE = 6;
+	
+	/**
+	 * The amount of action a player has during one move
+	 */
+	private static int ACTIONS = 3;
 	
 	/**
 	 * creates a new player with a given name and start position
@@ -151,9 +155,12 @@ public class Player extends Observable {
 	/**
 	 * Method to select the item which the player is going to use
 	 */
-	public void useItem(Item itemToUse) {
-		Item item = items.takeItem(itemToUse);
-		currentPosition.addUsedItem(item);
+	public void useItem(Item itemToUse) throws IllegalArgumentException {
+		if(!canUseItem(itemToUse)){
+			throw new IllegalArgumentException();
+		}
+		Item item = items.take(itemToUse);
+		getPosition().addUsedItem(item);
 	}
 	
 	public Inventory getInventory(){
@@ -194,10 +201,15 @@ public class Player extends Observable {
 		//TODO: add update for lighttrail
 		Item item = currentPosition.getInventory().getItem(index);
 		items.addItem(item);
-		
-		
+	}
+	
+	public int getRemainingActions(){
+		return ACTIONS - this.actions;
 	}
 
+	public boolean hasRemainingActions(){
+		return getRemainingActions() > 0;
+	}
 	
 	public void endTurn() {
 		//TODO: add update for lighttrail
@@ -207,6 +219,14 @@ public class Player extends Observable {
 		// needed to check for 3 actions and the actions itself is needed for the lighttrail.
 		this.previousactions = actions;
 		
+	}
+	
+	private boolean canUseItem(Item item){
+		if(!hasRemainingActions())
+			return false;
+		if(!getPosition().canBeUsedHere(item))
+			return false;
+		return true;
 	}
 	
 	@Override
