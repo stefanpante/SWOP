@@ -7,8 +7,8 @@ import items.Item;
 
 import javax.swing.DefaultListModel;
 
-@SuppressWarnings("hiding")
-public class InventoryListModel<String> extends DefaultListModel<String>{
+
+public class InventoryListModel extends DefaultListModel<String>{
 	
 	Inventory inventory;
 
@@ -26,7 +26,7 @@ public class InventoryListModel<String> extends DefaultListModel<String>{
 		ArrayList<Item> items = inventory.getAllItems();
 		for(int i = 0; i < items.size(); i++){
 			Item item = items.get(i);
-			java.lang.String desc = item.toString();
+			String desc = item.toString();
 			this.add(i, desc );
 		}
 	}
