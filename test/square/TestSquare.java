@@ -47,25 +47,25 @@ public class TestSquare {
 
 		sq.getInventory().addItem(lg1);
 		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 1);
+		assertTrue(sq.getInventory().getSize() == 1);
 		
 		sq.getInventory().addItem(lg2);
 		assertTrue(sq.getInventory().hasItem(lg1));
 		assertTrue(sq.getInventory().hasItem(lg2));
-		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 2);
+		assertTrue(sq.getInventory().getSize() == 2);
 		
 		sq.getInventory().addItem(lg3);
 		assertTrue(sq.getInventory().hasItem(lg1));
 		assertTrue(sq.getInventory().hasItem(lg2));
 		assertTrue(sq.getInventory().hasItem(lg3));
-		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 3);
+		assertTrue(sq.getInventory().getSize() == 3);
 
 		sq.getInventory().addItem(it);
 		assertTrue(sq.getInventory().hasItem(lg1));
 		assertTrue(sq.getInventory().hasItem(lg2));
 		assertTrue(sq.getInventory().hasItem(lg3));
 		assertTrue(sq.getInventory().hasItem(it));
-		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 4);
+		assertTrue(sq.getInventory().getSize() == 4);
 	}
 		
 	@Test
@@ -82,7 +82,7 @@ public class TestSquare {
 		sq.getInventory().addItem(it);
 		
 		Inventory inv = sq.getInventory();
-		assertTrue(inv.getAmountOfUsedSpaces() == 4);
+		assertTrue(inv.getSize() == 4);
 		assertTrue(inv.hasItem(lg1));
 		assertTrue(inv.hasItem(lg2));
 		assertTrue(inv.hasItem(lg3));
