@@ -5,7 +5,7 @@ package items;
  * 
  * @author vincentreniers
  */
-public class Item implements InventoryElement {
+public class Item {
 
 	/**
 	 * This flag indicates if the item is active or inactive.
@@ -33,7 +33,7 @@ public class Item implements InventoryElement {
 	public String toString() {
 		return "Item";
 	}
-
+	
 	public void accept(InventoryElementVisitor visitor) {
 		visitor.visit(this);
 	}

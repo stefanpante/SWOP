@@ -59,7 +59,7 @@ public class Inventory{
 	 * @return 	true if the size is larger or equal to zero
 	 * 			false otherwise
 	 */
-	public boolean isValidMaximumSize(int maximumSize){
+	public static boolean isValidMaximumSize(int maximumSize){
 		return maximumSize >= 0;
 	}
 
@@ -106,10 +106,6 @@ public class Inventory{
 			throw new IllegalArgumentException("The given size is not valid!");
 		else{
 			this.maximumSize = maximumSize;
-			if(this.items == null){
-
-			}
-
 		}
 	}
 
@@ -251,10 +247,9 @@ public class Inventory{
 	}
 
 	public void accept(InventoryElementVisitor visitor) {
-		for(InventoryElement element: this.getAllItems()){
-			element.accept(visitor);
+		for(Item it: this.getAllItems()){
+			it.accept(visitor);
 		}
-		visitor.visit(this);
 	}
 
 }
