@@ -1,5 +1,6 @@
 package handlers;
 
+import square.Direction;
 import square.Square;
 import game.Game;
 
@@ -8,7 +9,7 @@ import game.Game;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class MoveHandler {
+public class MoveHandler extends Handler {
 
 
 	private Game game;

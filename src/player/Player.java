@@ -162,8 +162,8 @@ public class Player extends Observable {
 		if(!canUseItem(itemToUse)){
 			throw new IllegalArgumentException();
 		}
-		Item item = items.take(itemToUse);
-		getPosition().addUsedItem(item);
+		items.take(itemToUse);
+		getPosition().addUsedItem(itemToUse);
 	}
 	
 	public Inventory getInventory(){

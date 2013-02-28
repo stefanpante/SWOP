@@ -27,7 +27,7 @@ import javax.swing.UIManager;
 public class GuiHandler extends Observable implements ActionListener, MouseListener {
 	
 	Inventory inventory;
-	public static InventoryListModel<String> listModel = new InventoryListModel();
+	public static InventoryListModel listModel = new InventoryListModel();
 	private Game game;
 	
 	public GuiHandler(Game game){

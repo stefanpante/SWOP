@@ -14,10 +14,10 @@ import game.Game;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class UseItemHandler {
+public class UseItemHandler extends Handler {
 
 	private Game game;
-	private GuiHandler guiHandler;
+
 	
 	/** 
 	 * Creates the handler for the usage of an item

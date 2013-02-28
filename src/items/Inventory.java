@@ -14,24 +14,24 @@ import be.kuleuven.cs.som.annotate.Raw;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 public class Inventory {
-	
+
 	/**
 	 * Static field which declares an empty inventory,
 	 * added for performance, to prevent unnecessary instancing
 	 */
 	public static Inventory EMPTY = new Inventory(0);
-	
+
 	/**
 	 * The size of the inventory, should not be smaller than zero
 	 */
 	private int maximumSize;
-	
+
 	/**
 	 * A given size should imply the usage of an array,
 	 * But we use an ArrayList for the convenience of the contains and add method
 	 */
 	private  ArrayList<Item> items;
-	
+
 	/**
 	 * Creates a new instance of the Inventory class
 	 * 
@@ -41,10 +41,10 @@ public class Inventory {
 	@Raw
 	public Inventory(int size) throws IllegalArgumentException {
 		this.setMaximumSize(size);
-		
+
 		this.items = new ArrayList<Item>();
 	}
-	
+
 	/**
 	 * Creates a new instance of the Inventory class
 	 * @effect 	setSize(Integer.MAX_VALUE)
@@ -52,7 +52,7 @@ public class Inventory {
 	public Inventory(){
 		this(Integer.MAX_VALUE);
 	}
-	
+
 	/**
 	 * Checks if the given size is valid for this inventory
 	 * @param maximumSize size parameter
@@ -62,7 +62,7 @@ public class Inventory {
 	public boolean isValidMaximumSize(int maximumSize){
 		return maximumSize >= 0;
 	}
-	
+
 	/**
 	 * Checks if the inventory is full.
 	 * 
@@ -72,7 +72,7 @@ public class Inventory {
 	public boolean isFull() {
 		return this.getSize() >= this.getMaximumSize();
 	}
-	
+
 	/**
 	 * Checks if the inventory is empty.
 	 * 
@@ -82,7 +82,7 @@ public class Inventory {
 	public boolean isEmpty(){
 		return items.isEmpty();
 	}
-	
+
 	/**
 	 * The maximum size of this inventory of items.
 	 * 
@@ -91,7 +91,7 @@ public class Inventory {
 	public int getMaximumSize(){
 		return this.maximumSize;
 	}
-	
+
 	/**
 	 * Sets the size of the inventory and inits a new arraylist
 	 * if a arraylist hasn't already been initialised.
@@ -107,12 +107,12 @@ public class Inventory {
 		else{
 			this.maximumSize = maximumSize;
 			if(this.items == null){
-				
+
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * Returns the size of already occupied spaces in the inventory.
 	 * 
@@ -121,14 +121,14 @@ public class Inventory {
 	public int getSize(){
 		return items.size();
 	}
-	
+
 	/**
 	 * Returns all the items.
 	 */
 	public ArrayList<Item> getAllItems(){
 		return new ArrayList<Item>(items);
 	}
-	
+
 	/**
 	 * Inspector that returns the item at the given index.
 	 * 
@@ -145,7 +145,7 @@ public class Inventory {
 		}
 		return items.get(index);
 	}
-	
+
 	/**
 	 * checks if the given item is in the inventory
 	 * @param 	item 
@@ -156,7 +156,7 @@ public class Inventory {
 	public boolean hasItem(Item item){
 		return items.contains(item);
 	}
-	
+
 	/**
 	 * Adds an item to the inventory if the size limit allows it
 	 * @param 	item	
@@ -171,7 +171,7 @@ public class Inventory {
 		else
 			items.add(item);
 	}
-		
+
 	/**
 	 * Returns whether the given index is a possible index for this inventory.
 	 * 
@@ -186,7 +186,7 @@ public class Inventory {
 	public boolean canHaveAsItemIndex(int index){
 		return index > 0 && index <= this.getMaximumSize() && index <= this.getSize();
 	}
-	
+
 
 	/**
 	 * Returns whether the given item is a valid item for all Inventory objects.
@@ -200,7 +200,7 @@ public class Inventory {
 			return false;
 		return true;
 	}
-		
+
 	/**
 	 * Checks if a certain item can be added.
 	 * 
@@ -213,10 +213,10 @@ public class Inventory {
 			return false;
 		if(items.contains(item))
 			return false;
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Removes a given item from the inventory
 	 * 
@@ -224,15 +224,13 @@ public class Inventory {
 	 * @throws 	IllegalStateException
 	 * 		  	Thrown when the item cannot be removed, because it is not inside the inventory
 	 */
-	public Item take(Item item) throws IllegalStateException{
+	public void take(Item item) throws IllegalStateException{
 		if(!this.hasItem(item)) 
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
 			items.remove(item);
-		
-		return item;
 	}
-	
+
 	/**
 	 * Returns a string representation of this Inventory object,
 	 * can be used so that a player can chose the item he wants
@@ -246,7 +244,7 @@ public class Inventory {
 			while(i < items.size());
 			// the system.getProperty is used to get a system independent newline,
 			// is different on windows vs Unix systems.
-			description +=  i + ". " + items.get(i).toString() + System.getProperty("line.seperator");
+			description +=  i + ". " + items.get(i).toString() + System.getProperty("line.separator");
 			i++;
 		}
 		return description;

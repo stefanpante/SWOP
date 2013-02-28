@@ -1,5 +1,10 @@
 package items;
 
+/**
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ */
 public class PlayerInventory extends Inventory {
 	public static int PLAYER_INVENTORY_SIZE = 6;
 

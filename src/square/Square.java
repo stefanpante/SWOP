@@ -2,6 +2,7 @@ package square;
 
 import items.Inventory;
 import items.Item;
+import items.SquareInventory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,6 @@ public class Square {
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
 		this.inventory = new Inventory();
-		
 		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
@@ -74,19 +74,19 @@ public class Square {
 	 * @pre		The square must be a valid neighbor in the given direction.	
 	 * 			isValidNeighbor(direction, square)
 	 * 
-	 * @post	If the square is valid the square is set as neighbor in the given direction.
+	 * @post	If the square is valid, the square is set as neighbor in the given direction.
 	 * 
-	 * @post	If the square is valid and does not have the current square as a neighbor it also set
+	 * @post	If the square is valid and does not have the current square as a neighbor, it is also set
 	 * 			in the given square in the opposing direction.
 	 * 
 	 * @throws	IllegalArgumentException
-	 * 			If the square given is not a valid one according to the direction an exception is thrown.
+	 * 			If the given square  is not a valid one according to the direction an exception is thrown.
 	 * 
 	 * @param direction
 	 * @param square
 	 */
 	public void setNeigbor(Direction direction, Square square) throws IllegalArgumentException{
-		if(isValidNeighbor(direction, square))
+		if(canHaveAsNeighbor(direction, square))
 			neighbors.put(direction,square);
 		else
 			throw new IllegalArgumentException();
@@ -96,7 +96,7 @@ public class Square {
 	}
 
 	/**
-	 * Checks if there is a neighbour in the given direction.
+	 * Checks if there is a neighbor in the given direction.
 	 * 
 	 * @param direction
 	 * @return
@@ -106,7 +106,7 @@ public class Square {
 	}
 	
 	/**
-	 * Checks if the square given is a neighbor in the given direction.
+	 * Checks if the given square is a neighbor in the given direction.
 	 * 
 	 * @param direction
 	 * @param square
@@ -125,9 +125,11 @@ public class Square {
 	}
 	
 	/**
-	 * The current square may not already have a square as neighbor in the given direction.
+	 * Returns whether the given square in the given direction is a valid 
+	 * neighbor for this square
 	 * 
-	 * The square that is beeing set as a neighbor must apply to the 
+	 * 
+	 * The square that is being set as a neighbor must apply to the 
 	 * following conditions:
 	 * 	- The square has the current square as a neighbor in the opposing direction.
 	 * 	- The square has no square as a neighbor in the opposing direction.
@@ -136,7 +138,7 @@ public class Square {
 	 * @param square
 	 * @return
 	 */
-	public boolean isValidNeighbor(Direction direction, Square square) {
+	public boolean canHaveAsNeighbor(Direction direction, Square square) {
 		if(hasNeigbor(direction))
 			return false;
 		
@@ -156,7 +158,7 @@ public class Square {
 	}
 	
 	/**
-	 * Adds/uses the given item on this square
+	 * Adds and uses the given item on this square.
 	 * 
 	 * @param 	item
 	 * 			The item to be added or used
@@ -170,24 +172,6 @@ public class Square {
 	}
 	
 	/**
-	 * Adds the given item to the inventory of this square.
-	 * 
-	 * @param 	item
-	 * 			The item that will be added to the inventory.
-	 */
-	public void addItemToInventory(Item item){
-		if(!isValidInventoryItem(item) || !canHaveAsInventoryItem(item)){
-			throw new IllegalArgumentException("The item"
-												+item
-												+"can not be added to the inventory of this "
-												+this);
-		}
-		inventory.addItem(item);
-	}
-	
-	
-	
-	/**
 	 * Returns the inventory of this square.
 	 */
 	public Inventory getInventory() {
@@ -197,41 +181,12 @@ public class Square {
 	
 	
 	/**
-	 * used to activate the usedItems on the square
+	 * This method is used to activate the usedItems on the square.
 	 */
 	public void activateUsedItems(){
 		for(Item i: usedItems)
 			i.activate();
 	}
-	
-	/**
-	 * Returns whether the given item is a valid item for all squares.
-	 * 
-	 * @param 	item
-	 * 			The item to check.
-	 * @return	True if and only if the item is not an active item.
-	 * 			| !item.isActive()
-	 */
-	//TODO: I think it is safe to assume that we never want an active item to be placed in the inventory.
-	public static boolean isValidInventoryItem(Item item) {
-		return !item.isActive();
-	}
-
-	/**
-	 * Returns whether the given can be added to the current square.
-	 * 
-	 * @param 	item
-	 * 			The item to check.
-	 * @return  True if there are 
-	 */
-	public boolean canHaveAsInventoryItem(Item item) {
-		//TODO: add specific implementation
-		return true;
-	}
-
-	
-
-
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
 	 *

@@ -38,6 +38,6 @@ public class ApplicationHandler extends Handler {
     	this.endTurnHandler = new EndTurnHandler(game);
     	this.moveHandler = new MoveHandler(game);
     	this.pickUpHandler = new PickUpHandler(game);
-    	this.useItemHandler = new useItemHandler(game);
+    	this.useItemHandler = new UseItemHandler(game);
     }
 }

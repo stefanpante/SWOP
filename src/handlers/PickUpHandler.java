@@ -13,9 +13,10 @@ import game.Game;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class PickUpHandler {
+public class PickUpHandler extends Handler {
 
 	private Game game;
+	
 	public PickUpHandler(Game game) {
 		this.game = game;
 	}

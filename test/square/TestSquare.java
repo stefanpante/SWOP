@@ -175,7 +175,7 @@ public class TestSquare {
 	public void testIsValidNeighbor() {
 		Square square = new Square();
 		
-		assertTrue(square.isValidNeighbor(Direction.NORTH, new Square()));
+		assertTrue(square.canHaveAsNeighbor(Direction.NORTH, new Square()));
 	}
 	
 	

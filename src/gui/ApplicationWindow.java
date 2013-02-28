@@ -139,7 +139,7 @@ public class ApplicationWindow implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		GuiHandler handler = (GuiHandler) o;
-		updateInventory(handler.getInventory());
+		listModel.updateInventory(handler.getInventory());
 	}
 
 	
