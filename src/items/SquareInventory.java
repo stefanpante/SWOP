@@ -9,7 +9,7 @@ package items;
 public class SquareInventory extends Inventory {
 
 	/**
-	 * 
+	 *  
 	 * @param size
 	 */
 	public SquareInventory(int size) {

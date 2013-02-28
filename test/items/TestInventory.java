@@ -156,6 +156,13 @@ public class TestInventory {
 		item.activate();
 		assertFalse(Inventory.isValidItem(item));
 	}
+	
+	@Test
+	public void testIsValidMaxSize(){
+		assertFalse(Inventory.isValidMaximumSize(-1));
+		assertTrue(Inventory.isValidMaximumSize(0));
+		assertTrue(Inventory.isValidMaximumSize(10));
+	}
 		
 	
 
