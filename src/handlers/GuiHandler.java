@@ -105,4 +105,13 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 		
 	}
+
+	/**
+	 * @param player1
+	 * @param player2
+	 */
+	public void setNames(String player1, String player2) {
+		game.getPlayer1().setName(player1);
+		game.getPlayer2().setName(player2);
+	}
 }
