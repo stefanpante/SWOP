@@ -13,7 +13,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public class Inventory {
+public class Inventory{
 
 	/**
 	 * Static field which declares an empty inventory,
@@ -198,7 +198,7 @@ public class Inventory {
 	public static boolean isValidItem(Item item){
 		if(item == null)
 			return false;
-		return true;
+		return !item.isActive();
 	}
 
 	/**
@@ -248,6 +248,13 @@ public class Inventory {
 			i++;
 		}
 		return description;
+	}
+
+	public void accept(InventoryElementVisitor visitor) {
+		for(InventoryElement element: this.getAllItems()){
+			element.accept(visitor);
+		}
+		visitor.visit(this);
 	}
 
 }

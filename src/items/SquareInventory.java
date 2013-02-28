@@ -46,7 +46,7 @@ public class SquareInventory extends Inventory {
 	 * 			| !item.isActive()
 	 */
 	public static boolean isValidItem(Item item) {
-		if(!Inventory.isValidItem(item) || item.isActive() )
+		if(!Inventory.isValidItem(item))
 			return false;
 		return true;
 	}
