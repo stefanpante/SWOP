@@ -1,4 +1,4 @@
-package grid.core;
+package square;
 
 import static org.junit.Assert.*;
 
