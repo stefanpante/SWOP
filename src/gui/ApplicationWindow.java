@@ -142,19 +142,7 @@ public class ApplicationWindow implements Observer {
 		updateInventory(handler.getInventory());
 	}
 
-	/**
-	 * @param inventory
-	 */
-	private void updateInventory(Inventory inventory) {
-		System.out.println("STF");
-		ArrayList<Item> items = inventory.getAllItems();
-		this.inventoryItems.clear();
-		for(int i = 0; i < items.size(); i++){
-			this.inventoryItems.add(i, items.get(i).toString());
-		}
-		
-	}
-
+	
 	
 
 

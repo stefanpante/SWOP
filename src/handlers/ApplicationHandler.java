@@ -31,9 +31,10 @@ public class ApplicationHandler extends Handler {
     
     private void initialize(){
     	// construction of grid nodig voor game
+ 
     	this.game = new Game();
     	
-    	this.guiHandler = new GuiHandler();
+    	this.guiHandler = new GuiHandler(game);
     	this.endTurnHandler = new EndTurnHandler(game);
     	this.moveHandler = new MoveHandler(game);
     	this.pickUpHandler = new PickUpHandler(game);
