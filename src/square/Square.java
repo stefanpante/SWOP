@@ -53,10 +53,18 @@ public class Square {
 		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
-	// TODO: Own exception?
+	/**
+	 * Returns the neighbor in the given direction if there is one.
+	 * 
+	 * @param	direction
+	 * @returns	Returns the neighbor if there is one for the given direction.
+	 * @throws	IllegalArgumentException
+	 * 			Throws exception if there is no neighbor in the given direction.
+	 */
 	public Square getNeighor(Direction direction) throws IllegalArgumentException {
 		if(!hasNeigbor(direction))
 			throw new IllegalArgumentException();
+		
 		return neighbors.get(direction);
 	}
 	
@@ -107,6 +115,9 @@ public class Square {
 	public boolean hasNeighbor(Direction direction, Square square) {
 		Square neighbor = neighbors.get(direction);
 		
+		if(neighbor == null)
+			return false;
+		
 		if(neighbor.equals(square))
 			return true;
 		else
@@ -114,6 +125,8 @@ public class Square {
 	}
 	
 	/**
+	 * The current square may not already have a square as neighbor in the given direction.
+	 * 
 	 * The square that is beeing set as a neighbor must apply to the 
 	 * following conditions:
 	 * 	- The square has the current square as a neighbor in the opposing direction.
@@ -124,13 +137,15 @@ public class Square {
 	 * @return
 	 */
 	public boolean isValidNeighbor(Direction direction, Square square) {
+		if(hasNeigbor(direction))
+			return false;
+		
 		if(square.hasNeighbor(direction.opposite(), this))
 			return true;
-		
-		if(!square.hasNeigbor(direction.opposite()))
+		else if(!square.hasNeigbor(direction.opposite()))
 			return true;
-		
-		return false;
+		else
+			return false;
 	}
 	
 	/**

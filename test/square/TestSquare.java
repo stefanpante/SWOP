@@ -45,27 +45,27 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.addItemToInventory(lg1);
-		assertTrue(sq.hasItem(lg1));
-		assertTrue(sq.getItems().size() == 1);
+		sq.getInventory().addItem(lg1);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 1);
 		
-		sq.addItemToInventory(lg2);
-		assertTrue(sq.hasItem(lg1));
-		assertTrue(sq.hasItem(lg2));
-		assertTrue(sq.getItems().size() == 2);
+		sq.getInventory().addItem(lg2);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 2);
 		
-		sq.addItemToInventory(lg3);
-		assertTrue(sq.hasItem(lg1));
-		assertTrue(sq.hasItem(lg2));
-		assertTrue(sq.hasItem(lg3));
-		assertTrue(sq.getItems().size() == 3);
+		sq.getInventory().addItem(lg3);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().hasItem(lg3));
+		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 3);
 
-		sq.addItemToInventory(it);
-		assertTrue(sq.hasItem(lg1));
-		assertTrue(sq.hasItem(lg2));
-		assertTrue(sq.hasItem(lg3));
-		assertTrue(sq.hasItem(it));
-		assertTrue(sq.getItems().size() == 4);
+		sq.getInventory().addItem(it);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().hasItem(lg3));
+		assertTrue(sq.getInventory().hasItem(it));
+		assertTrue(sq.getInventory().getAmountOfUsedSpaces() == 4);
 	}
 		
 	@Test
@@ -76,10 +76,10 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.addItemToInventory(lg1);
-		sq.addItemToInventory(lg2);		
-		sq.addItemToInventory(lg3);
-		sq.addItemToInventory(it);
+		sq.getInventory().addItem(lg1);
+		sq.getInventory().addItem(lg2);		
+		sq.getInventory().addItem(lg3);
+		sq.getInventory().addItem(it);
 		
 		Inventory inv = sq.getInventory();
 		assertTrue(inv.getAmountOfUsedSpaces() == 4);
@@ -101,22 +101,61 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 		
-		sq1.addItemToInventory(lg1);
-		assertTrue(sq1.hasItem(lg1));
+		sq1.getInventory().addItem(lg1);
+		assertTrue(sq1.getInventory().hasItem((lg1)));
 		
 		
-		sq2.addItemToInventory(lg2);
-		assertTrue(sq2.hasItem(lg2));
+		sq2.getInventory().addItem(lg2);
+		assertTrue(sq2.getInventory().hasItem(lg2));
 		
-		sq3.addItemToInventory(lg3);
-		sq3.addItemToInventory(it);
-		assertTrue(sq3.hasItem(lg3));
-		assertTrue(sq3.hasItem(it));
+		sq3.getInventory().addItem(lg3);
+		sq3.getInventory().addItem(it);
+		assertTrue(sq3.getInventory().hasItem(lg3));
+		assertTrue(sq3.getInventory().hasItem(it));
 	}
 
 	@Test
 	public void testHasActiveItem() {
 		fail("Not yet implemented");
 	}
+	
+	
+	/************************************
+	 *  Neighbor tests
+	 ************************************/
+	
+	/**
+	 * Neighbor not yet set in both squares.
+	 */
+	@Test
+	public void testAddingNeighbor() {
+		
+	}
+	
+	/**
+	 * Neighbor already set in other square.
+	 */
+	@Test
+	public void testAddingNeigborBiDirectional() {
+		
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAddingDuplicateNeigbor() {
+		Square square = new Square();
+		Square otherSquare = new Square();
+		
+		square.setNeigbor(Direction.NORTH, new Square());
+		square.setNeigbor(Direction.NORTH, otherSquare);
+	}
+	
+	@Test
+	public void testIsValidNeighbor() {
+		Square square = new Square();
+		
+		assertTrue(square.isValidNeighbor(Direction.NORTH, new Square()));
+	}
+	
+	
 
 }
