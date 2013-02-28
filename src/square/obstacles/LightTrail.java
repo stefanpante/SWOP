@@ -1,4 +1,4 @@
-package grid.obstacles;
+package square.obstacles;
 
 
 import java.util.Observable;
@@ -36,36 +36,40 @@ public class LightTrail extends Obstacle implements Observer{
 	}
 	
 	/**
-	 * Check whether the given square can be added to this light trail.
-	 * The added square may not already be contained in the existing light trail.
-	 * No duplicates may be added.
+	 * Checks if the square is valid. The square must not be a duplicate
+	 * and it must be connected to the last square in the LightTrail.
 	 * 
-	 * @param 	square
-	 * 			The square to be checked
-	 * @return	True	if and only if the square is connected to the last square
-	 * 					in this light trail.
-	 * 			False	If the square is a duplicate or it is not connected to any other
-	 * 					square.
+	 * @param	Square	The square.
+	 * @return	True	If the square is no duplicate and connected to the last
+	 * 					square in the lightTrail. If there is at least one square.
+	 * 			False	If it is a duplicate or not connected to the last square
+	 * 					in the trail. If there is at least one square.
 	 */
 	@Override
-	public boolean isValidSquare(Square square){
+	public boolean isValidSquare(Square square) {
 		if(!super.isValidSquare(square))
 			return false;
-		boolean connected = false;
-		for(Square trailSquare : getSquares()){
-			if(trailSquare.connectedTo(square)){
-				connected = true;
-			}
-		}
-		return connected;
+		
+		if(getLength() == 0)
+			return true;
+		
+		if(getLastSquare().connectedTo(square))
+			return true;
+		else
+			return false;
 	}
-
 	
 	/**
-	 * Get the current length of the LightTrail.
+	 * Returns the last square that was added in the LightTrail.
+	 * 
+	 * @return	Square	If the trail is not empty the last one is returned.
+	 * 			Null	If the trail is empty.
 	 */
-	public int getLength() {
-		return getSquares().size();
+	public Square getLastSquare() {
+		if(getLength() >= 1)
+			return getSquares().get(0);
+		else
+			return null;
 	}
 
 	/* (non-Javadoc)
