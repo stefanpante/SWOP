@@ -31,15 +31,13 @@ public class UseItemHandler {
 	/**
 	 * 
 	 */
-	//TODO: this is an temporary implementation of useItem, 
-	// is commandline but should be in GUI
 	public void useItem(Item item) {
 		game.getCurrentPlayer().useItem(item);
 	}
 	
 	public void showItems(){
 		Inventory inventory = game.getCurrentPlayer().getInventory();
-		GuiHandler.updateListModel(inventory.getAllItems());
+		GuiHandler.updateListModel(inventory);
 	}
 
 }
