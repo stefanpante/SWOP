@@ -79,7 +79,7 @@ public class Game {
 	 *			| !isValidPlayer1(player1)
 	 */
 	public void setPlayer1(Player player1) {
-		if (!isValidPlayer(player1)) {
+		if (!isValidPlayer(player1) || player1 == player2) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ player1
@@ -95,8 +95,7 @@ public class Game {
 	 * @return	True
 	 */
 	public static boolean isValidPlayer(Player player) {
-		//TODO: specific constraints for this field.
-		return true;
+		return player != null;
 	}
 
 	/**
@@ -108,7 +107,7 @@ public class Game {
 	public Player getPlayer2() {
 		return player2;
 	};
-
+ 
 	/**
 	 * Sets the value of the player2 of Game if the given value is valid. 
 	 * 
@@ -120,7 +119,7 @@ public class Game {
 	 *			| !isValidPlayer2(player2)
 	 */
 	public void setPlayer2(Player player2) {
-		if (!isValidPlayer(player2)) {
+		if (!isValidPlayer(player2) || player2 == player1) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ player2
@@ -152,7 +151,7 @@ public class Game {
 	 *			If the given argument can't be currentPlayer of this game.
 	 *			| !canHaveAsCurrentPlayer(currentPlayer)
 	 */
-	public void setCurrentPlayer(Player currentPlayer) {
+	public void setCurrentPlayer(Player currentPlayer) { 
 		if (!isValidCurrentPlayer(currentPlayer) || !canHaveAsCurrentPlayer(currentPlayer)) {
 			throw new IllegalArgumentException(
 					"The argument ("

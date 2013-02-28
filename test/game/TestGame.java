@@ -75,5 +75,69 @@ public class TestGame {
 		}
 		catch(Exception e){}
 		
+		try{
+			game.setCurrentPlayer(null);
+			fail("Null can't be the current player!");
+		} 
+		catch(Exception e){}
+		
+	}
+	@Test
+	public void testCanHaveAsPlayer(){
+		Game game = new Game(lowerLeft, upperRight);
+		Player player1 = game.getPlayer1();
+		Player player2 = game.getPlayer2();
+		
+		assertTrue(game.canHaveAsCurrentPlayer(player1));
+		assertTrue(game.canHaveAsCurrentPlayer(player2));
+	}
+	
+	@Test
+	public void testIsValidCurrentPlayer(){
+		Game game = new Game(lowerLeft, upperRight);
+		Player player1 = game.getPlayer1();
+		Player player2 = game.getPlayer2();
+		Player player3 = new Player(null, null);
+		assertTrue(Game.isValidCurrentPlayer(player1));
+		assertTrue(Game.isValidCurrentPlayer(player2));
+		assertTrue(Game.isValidCurrentPlayer(player3));
+		assertFalse(Game.isValidCurrentPlayer(null));
+	}
+	
+	@Test
+	public void testSetPlayer(){
+		Game game = new Game(lowerLeft, upperRight);
+		Player playa = null;
+		Player player1 = game.getPlayer1();
+		Player player2 = game.getPlayer2();
+		 
+		try{
+			game.setPlayer1(playa);
+			fail("A player cant be null");
+			
+		}
+		catch(Exception e){}
+		 
+		try{
+			game.setPlayer1(player2);
+			fail("The two player objects should not be the same");
+		}
+		catch(Exception e){ }
+		try{
+			game.setPlayer2(player1);
+			fail("The two player objects should not be the same");
+		}
+		catch(Exception e){}
+		try{
+			playa = new Player(null,null);
+			game.setPlayer1(playa);
+			game.setPlayer1(player1);
+			game.setPlayer2(playa);
+		}
+		
+		catch(Exception e){
+			fail("A new player object should be able to become the new player 1 or 2");
+		}
+		
 	}
 }
