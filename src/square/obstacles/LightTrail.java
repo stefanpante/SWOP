@@ -53,7 +53,7 @@ public class LightTrail extends Obstacle implements Observer{
 		if(getLength() == 0)
 			return true;
 		
-		if(getLastSquare().connectedTo(square))
+		if(getLastSquare().isConnectedTo(square))
 			return true;
 		else
 			return false;

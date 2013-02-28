@@ -51,7 +51,7 @@ public abstract class Obstacle {
 		if(isValidSquare(square))
 			getSquares().add(square);
 		else
-			throw new IllegalArgumentException("The square is already contained in the wall.");
+			throw new IllegalArgumentException("The square is invalid.");
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public abstract class Obstacle {
 			return true;
 		
 		for(Square trailSquare : getSquares())
-			if(trailSquare.connectedTo(square))
+			if(trailSquare.isConnectedTo(square))
 				return true;
 		
 		return false;

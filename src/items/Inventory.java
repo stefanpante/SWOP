@@ -37,8 +37,8 @@ public class Inventory{
 	 * 
 	 * @param	size	the size of the new inventory
 	 * @effect setSize(size)
-	 */  
-	@Raw 
+	 */
+	@Raw
 	public Inventory(int size) throws IllegalArgumentException {
 		this.setMaximumSize(size);
  
@@ -99,18 +99,15 @@ public class Inventory{
 	 * @param 	maximumSize	
 	 * 			the size of this inventory
 	 * @throws 	IllegalArgumentException 
-	 * 			If the given size is not valid that is lower than 0
-	 * 			or smaller or equal to the current size of the inventory.
+	 * 			if the given size is not valid
 	 */
-	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{
-		
+	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{		
 		if(!isValidMaximumSize(maximumSize) || maximumSize < 0) 
 			throw new IllegalArgumentException("The given size is not valid!");
-		else{
-				this.maximumSize = maximumSize; 
-		}
+		else
+			this.maximumSize = maximumSize; 
 	}
-  
+
 	/**
 	 * Returns the size of already occupied spaces in the inventory.
 	 * 
@@ -133,13 +130,13 @@ public class Inventory{
 	 * @param 	index 
 	 * 			The index of the item to return.
 	 * @return	The item of which the index is given.
-	 * @throws 	IllegalStateException
+	 * @throws 	IndexOutOfBoundsException
 	 * 		   	Thrown if the given index is not valid for this inventory.
 	 * 			| !canHaveAsItemIndex(index)
 	 */
 	public Item getItem(int index) throws IndexOutOfBoundsException{
 		if(!canHaveAsItemIndex(index)){
-			throw new IllegalSelectorException();
+			throw new IndexOutOfBoundsException();
 		}
 		return items.get(index);
 	}
