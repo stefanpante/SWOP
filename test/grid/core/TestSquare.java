@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.ArrayList;
 
-import grid.core.Square;
 import items.Inventory;
 import items.Item;
 import items.LightGrenade;
@@ -15,6 +14,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import square.Square;
 
 
 public class TestSquare {

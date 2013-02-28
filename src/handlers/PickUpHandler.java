@@ -22,7 +22,6 @@ public class PickUpHandler {
 	 * @throws IOException
 	 */
 	public void pickUp() throws IOException{
-		System.out.println(game.getCurrentPositionInventoryString());
 		InputStreamReader cin = new InputStreamReader(System.in);
 		int itemIndex = cin.read();
 		game.pickUp(itemIndex);

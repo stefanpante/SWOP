@@ -1,7 +1,7 @@
 package grid.obstacles;
 
 
-import grid.core.Square;
+import square.Square;
 
 /**
  * LightTrail is a trail that is left behind the player while he

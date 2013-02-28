@@ -1,8 +1,9 @@
 package grid.obstacles;
 
-import grid.core.Square;
 
 import java.util.ArrayList;
+
+import square.Square;
 
 /**
  * Super class where any obstacle grid inherits its general properties from.

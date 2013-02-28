@@ -4,8 +4,6 @@
 package handlers;
 
 import game.Game;
-import grid.core.Coordinate2D;
-import grid.core.Grid;
 import gui.view.ApplicationWindow;
 import items.Inventory;
 import items.LightGrenade;
@@ -20,13 +18,12 @@ import java.util.Observable;
 import javax.swing.UIManager;
 
 /**
- * @author jonas
+ * @author Jonas Devlieghere
  *
  */
 public class GuiHandler extends Observable implements ActionListener, MouseListener {
 	
 	Inventory inventory;
-	Grid grid;
 	
 	public GuiHandler(){
 		inventory = new Inventory();
@@ -47,9 +44,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		return this.inventory;
 	}
 		
-	public Grid getGrid(){
-		return new Grid(10, 10);
-	}
+
 
 
 	/* (non-Javadoc)
@@ -66,12 +61,10 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Point point = e.getPoint();
-		Coordinate2D coordinate = new Coordinate2D((int)point.getX(), (int)point.getY());
 		// TODO: Whole shebang
-		System.out.println(getGridCoordinate(coordinate));
 		inventory.addItem(new LightGrenade());
         setChanged();
-        notifyObservers(null);
+        notifyObservers();
 	}
 	
 	
@@ -111,20 +104,4 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 		
 	}
-
-	public static Coordinate2D getGridCoordinate(Coordinate2D coordinate){
-		int newX = coordinate.getX() / ApplicationWindow.COL_WIDTH;
-		int newY = coordinate.getY() / ApplicationWindow.ROW_HEIGHT;
-		return new Coordinate2D(newX, newY);
-	}
-	
-	public static Coordinate2D getGuiCoordinate(Coordinate2D coordinate){
-		int newX = coordinate.getX() * ApplicationWindow.COL_WIDTH;
-		int newY = coordinate.getY() * ApplicationWindow.ROW_HEIGHT;
-		return new Coordinate2D(newX, newY);
-	}
-	
-
-	
-	
 }

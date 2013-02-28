@@ -1,4 +1,4 @@
-package grid.core;
+package square;
 
 /**
  * This is used for scenarios where the player wants to move into a certain direction

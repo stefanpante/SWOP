@@ -1,6 +1,5 @@
 package game;
 
-import grid.core.Grid;
 
 import items.Inventory;
 import items.Item;
@@ -9,6 +8,7 @@ import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
+import square.Grid;
 
 /**
  * Game class, this class controls the flow of the game
@@ -66,8 +66,8 @@ public class Game {
 	 */
 	public Game(Grid grid){
 		setGrid(grid);
-		setPlayer1(new Player(this.getGrid().getLowerLeft(), "player1"));
-		setPlayer2(new Player(this.getGrid().getUpperRight(), "player2"));
+		setPlayer1(new Player(null, "player1"));
+		setPlayer2(new Player(null, "player2"));
 	}
 	
 	/**

@@ -1,13 +1,11 @@
-package grid.core;
+package square;
 
 import grid.obstacles.Obstacle;
 import items.Inventory;
 import items.Item;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import java.util.HashMap;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -22,6 +20,11 @@ import notnullcheckweaver.Nullable;
  */
 @NotNull
 public class Square {
+	
+	/*
+	 * Neighbors of this square
+	 */
+	private HashMap<Direction, Square> neighbors;
 	
 	/**
 	 * Inventory containing all items on the square
@@ -45,6 +48,21 @@ public class Square {
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
 		this.inventory = new Inventory();
+	}
+	
+	// TODO: Own exception?
+	public Square getNeighor(Direction direction) throws IllegalArgumentException {
+		if(!hasNeigbor(direction))
+			throw new IllegalArgumentException();
+		return neighbors.get(direction);
+	}
+	
+	public void setNeigbor(Direction direction, Square square){
+		neighbors.put(direction,square);
+	}
+
+	public boolean hasNeigbor(Direction direction){
+		return neighbors.containsKey(direction);
 	}
 	
 	/**

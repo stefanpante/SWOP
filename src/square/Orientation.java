@@ -1,4 +1,4 @@
-package grid.core;
+package square;
 
 import java.util.Random;
 

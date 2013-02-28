@@ -2,7 +2,8 @@ package grid.obstacles;
 
 import java.util.ArrayList;
 
-import grid.core.Square;
+import square.Square;
+
 
 /**
  * Wall class

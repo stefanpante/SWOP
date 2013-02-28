@@ -5,6 +5,8 @@ import grid.obstacles.Wall;
 
 import org.junit.*;
 
+import square.Square;
+
 public class TestWall {
 
 	@BeforeClass
