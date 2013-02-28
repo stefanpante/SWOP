@@ -135,7 +135,7 @@ public class Inventory{
 	 * @param 	index 
 	 * 			The index of the item to return.
 	 * @return	The item of which the index is given.
-	 * @throws 	IndexOutOfBoudnsException
+	 * @throws 	IndexOutOfBoundsException
 	 * 		   	Thrown if the given index is not valid for this inventory.
 	 * 			| !canHaveAsItemIndex(index)
 	 */
