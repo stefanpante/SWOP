@@ -173,7 +173,7 @@ public class Game {
 		if(currentPlayer == player1){
 			setCurrentPlayer(player2);
 		}
-		if(currentPlayer == player2){
+		else if(currentPlayer == player2){
 			setCurrentPlayer(player1);
 		}
 	}
