@@ -1,7 +1,5 @@
 package square.obstacles;
 
-import java.util.ArrayList;
-
 import square.Square;
 
 
@@ -27,9 +25,5 @@ public class Wall extends Obstacle{
 	public Wall(Square square, Square otherSquare) throws IllegalArgumentException {
 		this.addSquare(square);
 		this.addSquare(otherSquare);
-	}
-	
-	public Wall(ArrayList<Square> squares){
-		this.squares = squares;
 	}
 }
