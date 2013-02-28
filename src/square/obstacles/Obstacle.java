@@ -67,6 +67,9 @@ public abstract class Obstacle {
 		if(getSquares().contains(square))
 			return false;
 		
+		if(getLength() == 0)
+			return true;
+		
 		for(Square trailSquare : getSquares())
 			if(trailSquare.connectedTo(square))
 				return true;
