@@ -43,7 +43,7 @@ public class TestInventory {
 		
 		inventory.addItem(item);
 	}
-	
+	 
 	@Test(expected=IllegalStateException.class)
 	public void testAddingOverCapacity() {
 		Inventory inventory = new Inventory(1);
@@ -86,7 +86,36 @@ public class TestInventory {
 		Inventory inventory = new Inventory();
 		Item item = new LightGrenade();
 		
+		inventory.addItem(item);
+		assertTrue(inventory.getAllItems().contains(item));
+		
+		inventory.take(item);
+		assertFalse(inventory.getAllItems().contains(item));
+		
+		try{
+			inventory.take(item);
+			fail("You shouldn't be able to take an item that isn't in the inventory");
+		} catch(Exception e){}
+		
 		
 	}
+	
+	@Test
+	public void testCanHaveAsItemIndex(){
+		Inventory inventory = new Inventory();
+		Item item = null;
+		for(int i = 0; i < 10; i ++){
+			item = new LightGrenade();
+			inventory.addItem(item);
+		}
+		
+		assertTrue(inventory.canHaveAsItemIndex(0));
+		assertTrue(inventory.canHaveAsItemIndex(inventory.getAllItems().size() - 1));
+		assertTrue(inventory.canHaveAsItemIndex(inventory.getAllItems().size()));
+		assertFalse(inventory.canHaveAsItemIndex(-2));
+	}
+		
+	
+
 
 }

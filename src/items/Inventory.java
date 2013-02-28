@@ -41,7 +41,7 @@ public class Inventory {
 	@Raw
 	public Inventory(int size) throws IllegalArgumentException {
 		this.setMaximumSize(size);
-
+ 
 		this.items = new ArrayList<Item>();
 	}
 
@@ -177,14 +177,14 @@ public class Inventory {
 	 * 
 	 * @param 	index
 	 * 			The index to be checked.
-	 * @return	True if and only if the given index is larger than zero,
+	 * @return	True if and only if the given index is larger than or equal to zero,
 	 * 			smaller than the maximum possible size and the amount of spaces used.
 	 * 			| index > 0 && 
 	 * 			| index <= this.getMaximumSize() && 
-	 * 			| index <= this.getAmountOfUsedSpaces()
+	 * 			| index <= this.getsize() - 1
 	 */
 	public boolean canHaveAsItemIndex(int index){
-		return index > 0 && index <= this.getMaximumSize() && index <= this.getSize();
+		return index >= 0  && index <= this.getSize() - 1;
 	}
 
 
