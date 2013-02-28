@@ -27,6 +27,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	
 	public GuiHandler(){
 		inventory = new Inventory();
+		run();
 	}
 	
 	public void run(){
