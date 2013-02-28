@@ -3,6 +3,8 @@
  */
 package handlers;
 
+import game.Game;
+
 /**
  * @author jonas
  *
@@ -10,7 +12,13 @@ package handlers;
 public class ApplicationHandler extends Handler {
 	
 	private GuiHandler guiHandler;
-	private GameHandler gameHander;
+	private EndTurnHandler endTurnHandler;
+	private MoveHandler moveHandler;
+	private PickUpHandler pickUpHandler;
+	private UseItemHandler useItemHandler;
+	private Game game;
+	
+
 	
     public static void main(String[] args) {
     	ApplicationHandler applicationHandler = new ApplicationHandler();
@@ -22,7 +30,13 @@ public class ApplicationHandler extends Handler {
     }
     
     private void initialize(){
-    	this.gameHander = new GameHandler();
+    	// construction of grid nodig voor game
+    	this.game = new Game();
+    	
     	this.guiHandler = new GuiHandler();
+    	this.endTurnHandler = new EndTurnHandler(game);
+    	this.moveHandler = new MoveHandler(game);
+    	this.pickUpHandler = new PickUpHandler(game);
+    	this.useItemHandler = new useItemHandler(game);
     }
 }

@@ -21,7 +21,7 @@ public class UseItemHandler {
 	 * Creates the handler for the usage of an item
 	 * @param game
 	 */
-	private UseItemHandler(Game game) {
+	public UseItemHandler(Game game) {
 		this.game = game;
 	}
 	

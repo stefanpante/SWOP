@@ -11,7 +11,7 @@ public class EndTurnHandler {
 
 	private Game game;
 	
-	private EndTurnHandler(Game game) {
+	public EndTurnHandler(Game game) {
 		this.game = game;
 	}
 	
