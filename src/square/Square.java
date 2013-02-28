@@ -1,11 +1,12 @@
 package square;
 
-import grid.obstacles.Obstacle;
 import items.Inventory;
 import items.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import square.obstacles.Obstacle;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
