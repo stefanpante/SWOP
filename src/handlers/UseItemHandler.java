@@ -16,19 +16,15 @@ import game.Game;
 public class UseItemHandler {
 
 	private Game game;
-	private static final UseItemHandler instance = new UseItemHandler();
 	
 	/** 
 	 * Creates the handler for the usage of an item
 	 * @param game
 	 */
-	private UseItemHandler() {
-		this.game = Game.getInstance();
+	private UseItemHandler(Game game) {
+		this.game = game;
 	}
 	
-	public UseItemHandler getInstance(){
-		return instance;
-	}
 	
 	/**
 	 * 
