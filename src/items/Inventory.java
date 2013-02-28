@@ -99,10 +99,11 @@ public class Inventory{
 	 * @param 	maximumSize	
 	 * 			the size of this inventory
 	 * @throws 	IllegalArgumentException 
-	 * 			if the given size is not valid
+	 * 			If the given size is not valid that is lower than 0
+	 * 			or smaller or equal to the current size of the inventory.
 	 */
 	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{
-		if(!isValidMaximumSize(maximumSize)) 
+		if(!isValidMaximumSize(maximumSize) && maximumSize > this.getSize()) 
 			throw new IllegalArgumentException("The given size is not valid!");
 		else{
 			this.maximumSize = maximumSize;
@@ -131,13 +132,13 @@ public class Inventory{
 	 * @param 	index 
 	 * 			The index of the item to return.
 	 * @return	The item of which the index is given.
-	 * @throws 	IndexOutOfBoundsException
+	 * @throws 	IllegalStateException
 	 * 		   	Thrown if the given index is not valid for this inventory.
 	 * 			| !canHaveAsItemIndex(index)
 	 */
 	public Item getItem(int index) throws IndexOutOfBoundsException{
 		if(!canHaveAsItemIndex(index)){
-			throw new IndexOutOfBoundsException();
+			throw new IllegalSelectorException();
 		}
 		return items.get(index);
 	}

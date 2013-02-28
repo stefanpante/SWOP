@@ -59,6 +59,6 @@ public class SquareInventory extends Inventory {
 		if(!super.canHaveAsItem(item)){
 			return false;
 		}
-		if
+		return true;
 	}
 }
