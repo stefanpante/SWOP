@@ -6,8 +6,9 @@ package items;
  *
  */
 public class LightGrenade extends Item {
+	
 	@Override
 	public String toString() {
-		return "LightGrenade [" + super.toString() +"]";
+		return "LightGrenade";
 	}
 }

@@ -169,7 +169,6 @@ public class Game {
 	 * @post	if(old.currentPlayer == player1) new.currentPlayer == player2
 	 * 			if(old.currentPlayer == player2) new.currentPlayer == player1
 	 */
-	//TODO hoe Controleer deze postcondities en precondities
 	public void switchPlayer() {
 		if(currentPlayer == player1){
 			setCurrentPlayer(player2);
@@ -179,21 +178,6 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Returns the inventory of the current player.
-	 */
-	public Inventory getCurrentPlayerInventory(){
-		return currentPlayer.getInventory();
-	}
-	
-	/**
-	 * Returns the inventory of the items on the square where the current player is.
-	 * 
-	 */
-	public Inventory getCurrentPositionInventory(){
-		return currentPlayer.getPosition().getInventory();
-	}
-
 	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
 	 * @param 	currentPlayer
@@ -214,25 +198,6 @@ public class Game {
 	 */
 	public boolean canHaveAsCurrentPlayer(Player currentPlayer) {
 		return (currentPlayer == this.getPlayer1() ||  currentPlayer == this.getPlayer2());
-	}
-	
-
-	/**
-	 * 
-	 * @param itemIndex
-	 */
-	public void useItem(Item item) throws IllegalStateException {
-		currentPlayer.useItem(item);
-	}
-	
-
-	//TODO: comment
-	public void endTurn() {
-		currentPlayer.endTurn();	
-	}
-
-	public void pickUp(int itemIndex) {
-		currentPlayer.pickUp(itemIndex);
 	}
 }
 	
