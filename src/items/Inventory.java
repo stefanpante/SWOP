@@ -101,12 +101,11 @@ public class Inventory{
 	 * @throws 	IllegalArgumentException 
 	 * 			if the given size is not valid
 	 */
-	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{
-		if(!isValidMaximumSize(maximumSize)) 
+	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{		
+		if(!isValidMaximumSize(maximumSize) || maximumSize < 0) 
 			throw new IllegalArgumentException("The given size is not valid!");
-		else{
-			this.maximumSize = maximumSize;
-		}
+		else
+			this.maximumSize = maximumSize; 
 	}
 
 	/**
