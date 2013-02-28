@@ -158,10 +158,35 @@ public class TestInventory {
 	}
 	
 	@Test
-	public void testIsValidMaxSize(){
+	public void testIsValidMaximumSize(){
 		assertFalse(Inventory.isValidMaximumSize(-1));
 		assertTrue(Inventory.isValidMaximumSize(0));
 		assertTrue(Inventory.isValidMaximumSize(10));
+	}
+	
+	@Test
+	public void testSetMaximumSize(){
+		Inventory inventory = new Inventory(20);
+		try{
+			inventory.setMaximumSize(-1);
+			fail("Size should not be negative");
+		} catch(Exception e){}
+		
+		try{
+			inventory.setMaximumSize(25);
+		}catch(Exception e){
+			fail("Setting maximum size to a greater size should be allowed");
+		}
+		for(int i = 0; i < 24; i ++){
+			item = new LightGrenade();
+			inventory.addItem(item);
+		}
+		try{
+			inventory.setMaximumSize(20);
+			fail("Should not succeed when there are more elements in the inventory than the desired maximum size");
+		} 
+		catch(Exception e){}
+		
 	}
 		
 	

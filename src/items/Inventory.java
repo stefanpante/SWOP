@@ -37,8 +37,8 @@ public class Inventory{
 	 * 
 	 * @param	size	the size of the new inventory
 	 * @effect setSize(size)
-	 */
-	@Raw
+	 */  
+	@Raw 
 	public Inventory(int size) throws IllegalArgumentException {
 		this.setMaximumSize(size);
  
@@ -106,7 +106,7 @@ public class Inventory{
 		if(!isValidMaximumSize(maximumSize) && maximumSize > this.getSize()) 
 			throw new IllegalArgumentException("The given size is not valid!");
 		else{
-			this.maximumSize = maximumSize;
+			this.maximumSize = maximumSize; 
 		}
 	}
 
