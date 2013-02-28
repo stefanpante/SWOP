@@ -111,8 +111,50 @@ public class TestInventory {
 		
 		assertTrue(inventory.canHaveAsItemIndex(0));
 		assertTrue(inventory.canHaveAsItemIndex(inventory.getAllItems().size() - 1));
-		assertTrue(inventory.canHaveAsItemIndex(inventory.getAllItems().size()));
+		assertFalse(inventory.canHaveAsItemIndex(inventory.getAllItems().size()));
 		assertFalse(inventory.canHaveAsItemIndex(-2));
+	}
+	
+	@Test
+	public void testGetItem(){
+		Inventory inventory = new Inventory();
+		Item item = null;
+		for(int i = 0; i < 10; i ++){
+			item = new LightGrenade();
+			inventory.addItem(item);
+		}
+		
+		try{
+			inventory.getItem(-1);
+			fail("Index shouldn't take negative values");
+		}
+		catch(Exception e){}
+		
+		try{
+			inventory.getItem(10);
+			fail("shouldnt be able to get item");
+		}
+		catch(Exception e){}
+
+		try{
+			inventory.getItem(9);
+			inventory.getItem(0);
+			inventory.getItem(4);
+		}
+		catch(Exception e){ 
+			fail("Given indices should be in range");
+		}
+	}
+	
+	@Test 
+	public void testIsValidItem(){
+		Item item = null;
+		item = new LightGrenade();
+		
+		assertFalse(Inventory.isValidItem(null));
+		assertTrue(Inventory.isValidItem(item));
+		item.activate();
+		assertFalse(Inventory.isValidItem(item));
 	}
 		
 	

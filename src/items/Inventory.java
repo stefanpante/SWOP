@@ -131,13 +131,13 @@ public class Inventory{
 	 * @param 	index 
 	 * 			The index of the item to return.
 	 * @return	The item of which the index is given.
-	 * @throws 	IllegalStateException
+	 * @throws 	IndexOutOfBoundsException
 	 * 		   	Thrown if the given index is not valid for this inventory.
 	 * 			| !canHaveAsItemIndex(index)
 	 */
 	public Item getItem(int index) throws IndexOutOfBoundsException{
 		if(!canHaveAsItemIndex(index)){
-			throw new IllegalSelectorException();
+			throw new IndexOutOfBoundsException();
 		}
 		return items.get(index);
 	}
