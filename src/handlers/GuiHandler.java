@@ -6,6 +6,7 @@ package handlers;
 import game.Game;
 import gui.ApplicationWindow;
 import items.Inventory;
+import items.Item;
 import items.LightGrenade;
 
 import java.awt.Point;
@@ -13,8 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Observable;
 
+import javax.swing.DefaultListModel;
 import javax.swing.UIManager;
 
 /**
@@ -24,9 +27,12 @@ import javax.swing.UIManager;
 public class GuiHandler extends Observable implements ActionListener, MouseListener {
 	
 	Inventory inventory;
+	public static DefaultListModel<String> listModel;
+	private Game game;
 	
-	public GuiHandler(){
+	public GuiHandler(Game game){
 		inventory = new Inventory();
+		this.game = game;
 		run();
 	}
 	
@@ -114,4 +120,16 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		game.getPlayer1().setName(player1);
 		game.getPlayer2().setName(player2);
 	}
+	
+	/**
+	 * @param inventory
+	 */
+	public static void updateListModel(ArrayList<Item> arrayList) {
+		listModel.clear();
+		for(int i = 0; i < arrayList.size(); i++){
+			listModel.add(i, arrayList.get(i).toString());
+		}
+		
+	}
+
 }

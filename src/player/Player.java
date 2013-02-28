@@ -140,6 +140,7 @@ public class Player extends Observable {
 			currentPosition = newPosition;
 			currentPosition.activateUsedItems();
 			moved = true;
+			actions++;
 			//TODO check and add lighttrail.
 		}
 		
@@ -160,6 +161,7 @@ public class Player extends Observable {
 			throw new IllegalArgumentException();
 		}
 		Item item = items.take(itemToUse);
+		actions++;
 		getPosition().addUsedItem(item);
 	}
 	
@@ -191,17 +193,7 @@ public class Player extends Observable {
 	}
 
 
-	/**
-	 * the Player picks up an item from the playing field
-	 * @pre getActions < 3
-	 * @pre if(!moved) actions < 3-1 if the user hasn't moved, he must have more than one action left
-	 */
-	// TODO: Violates the GRASP principles?
-	public void pickUp(int index){
-		//TODO: add update for lighttrail
-		Item item = currentPosition.getInventory().getItem(index);
-		items.addItem(item);
-	}
+	
 	
 	public int getRemainingActions(){
 		return ACTIONS - this.actions;
