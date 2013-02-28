@@ -140,16 +140,18 @@ public class Player extends Observable {
 			currentPosition = newPosition;
 			currentPosition.activateUsedItems();
 			moved = true;
-			actions++;
 			//TODO check and add lighttrail.
 		}
 		
+	}
+	
+	public void incrementActions(){
+		this.actions++;
 	}
 
 	public void pickUp(Item item) {
 		// TODO Auto-generated method stub
 		// check own inventory limits
-		// TODO: check the lighttrails
 		
 	}
 
@@ -161,7 +163,6 @@ public class Player extends Observable {
 			throw new IllegalArgumentException();
 		}
 		Item item = items.take(itemToUse);
-		actions++;
 		getPosition().addUsedItem(item);
 	}
 	

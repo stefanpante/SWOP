@@ -27,5 +27,9 @@ public class InventoryListModel<K> extends DefaultListModel<K>{
 			this.add(i, items.get(i).toString());
 		}
 	}
+	
+	public Item getItemAtIndex(int index){
+		return inventory.getItem(index);
+	}
 
 }
