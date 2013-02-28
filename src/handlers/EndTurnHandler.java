@@ -23,7 +23,6 @@ public class EndTurnHandler {
 	public void endTurn(){
 		game.getCurrentPlayer().incrementActions();
 		game.switchPlayer();
-		game.endTurn();
 		
 	}
 	//TODO checkAllConditions for end turn, turns inactive items active
