@@ -1,11 +1,12 @@
 package square;
 
-import grid.obstacles.Obstacle;
 import items.Inventory;
 import items.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import square.obstacles.Obstacle;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -48,6 +49,8 @@ public class Square {
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
 		this.inventory = new Inventory();
+		
+		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
 	// TODO: Own exception?
@@ -57,12 +60,57 @@ public class Square {
 		return neighbors.get(direction);
 	}
 	
+	/**
+	 * The neighbor must be valid.
+	 * 
+	 * @pre	The square must be a valid neighbor in the given direction.	
+	 * 		isValidNeighbor(direction, square)
+	 * 
+	 * @param direction
+	 * @param square
+	 */
 	public void setNeigbor(Direction direction, Square square){
 		neighbors.put(direction,square);
 	}
 
+	/**
+	 * Checks if there is a neighbour in the given direction.
+	 * 
+	 * @param direction
+	 * @return
+	 */
 	public boolean hasNeigbor(Direction direction){
 		return neighbors.containsKey(direction);
+	}
+	
+	/**
+	 * Checks if the square given is a neighbor in the given direction.
+	 * 
+	 * @param direction
+	 * @param square
+	 * @return
+	 */
+	public boolean hasNeighbor(Direction direction, Square square) {
+		Square neighbor = neighbors.get(direction);
+		
+		if(neighbor.equals(square))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * The square that is beeing set as a neighbor must apply to the 
+	 * following conditions:
+	 * 	- The square has the current square as a neighbor in the opposing direction.
+	 * 	- The square has no square as a neighbor in the opposing direction.
+	 * 
+	 * @param direction
+	 * @param square
+	 * @return
+	 */
+	public boolean isValidNeighbor(Direction direction, Square square) {
+		return true;
 	}
 	
 	/**

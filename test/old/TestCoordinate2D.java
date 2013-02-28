@@ -1,4 +1,4 @@
-package grid.core;
+package old;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import square.Direction;
 
+//TODO look if this test can be overhauled to use the new neighbor implementation.
+@Deprecated
 public class TestCoordinate2D {
 
 	@Test

@@ -1,11 +1,11 @@
-package grid.core;
+package square.obstacle;
 
 import static org.junit.Assert.*;
-import grid.obstacles.Wall;
 
 import org.junit.*;
 
 import square.Square;
+import square.obstacles.Wall;
 
 public class TestWall {
 

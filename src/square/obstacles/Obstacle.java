@@ -1,4 +1,4 @@
-package grid.obstacles;
+package square.obstacles;
 
 
 import java.util.ArrayList;
@@ -18,12 +18,12 @@ public abstract class Obstacle {
 	/**
 	 * An obstacle may cover a set of squares.
 	 */
-	protected ArrayList<Square> squares = new ArrayList<Square>();
+	private ArrayList<Square> squares = new ArrayList<Square>();
 	
 	/**
 	 * Returns a list of squares which the obstacle covers.
 	 */
-	protected ArrayList<Square> getSquares() {
+	public ArrayList<Square> getSquares() {
 		return this.squares;
 	}
 	
@@ -53,18 +53,35 @@ public abstract class Obstacle {
 	}
 	
 	/**
-	 * A given square is invalid if the square is already contained in the wall.
-	 * The wall may not contain duplicates.
+	 * Check whether the given square can be added to this obstacle.
+	 * The added square may not already be contained in the existing obstacle.
+	 * No duplicates may be added.
 	 * 
-	 * @param square	The square that needs to be checked if it is valid.
-	 * @return	True	If the square is not yet contained.
-	 * 			False	If the square is already contained.
+	 * @param 	square
+	 * 			The square to be checked
+	 * @return	True	if and only if the square is connected to one of the squares.
+	 * 			False	If the square is a duplicate or it is not connected to any other
+	 * 					square.
 	 */
-	public boolean isValidSquare(Square square) {
-		if(squares.contains(square))
+	public boolean isValidSquare(Square square){
+		if(getSquares().contains(square))
 			return false;
-		else
-			return true;		
+		
+		if(getLength() == 0)
+			return true;
+		
+		for(Square trailSquare : getSquares())
+			if(trailSquare.connectedTo(square))
+				return true;
+		
+		return false;
+	}
+	
+	/**
+	 * Get the current length of the obstacle.
+	 */
+	public int getLength() {
+		return getSquares().size();
 	}
 	
 	
