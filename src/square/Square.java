@@ -49,6 +49,8 @@ public class Square {
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
 		this.inventory = new Inventory();
+		
+		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
 	// TODO: Own exception?
@@ -58,12 +60,77 @@ public class Square {
 		return neighbors.get(direction);
 	}
 	
-	public void setNeigbor(Direction direction, Square square){
-		neighbors.put(direction,square);
+	/**
+	 * The neighbor must be valid.
+	 * 
+	 * @pre		The square must be a valid neighbor in the given direction.	
+	 * 			isValidNeighbor(direction, square)
+	 * 
+	 * @post	If the square is valid the square is set as neighbor in the given direction.
+	 * 
+	 * @post	If the square is valid and does not have the current square as a neighbor it also set
+	 * 			in the given square in the opposing direction.
+	 * 
+	 * @throws	IllegalArgumentException
+	 * 			If the square given is not a valid one according to the direction an exception is thrown.
+	 * 
+	 * @param direction
+	 * @param square
+	 */
+	public void setNeigbor(Direction direction, Square square) throws IllegalArgumentException{
+		if(isValidNeighbor(direction, square))
+			neighbors.put(direction,square);
+		else
+			throw new IllegalArgumentException();
+		
+		if(!square.hasNeigbor(direction.opposite()))
+			square.setNeigbor(direction.opposite(), this);
 	}
 
+	/**
+	 * Checks if there is a neighbour in the given direction.
+	 * 
+	 * @param direction
+	 * @return
+	 */
 	public boolean hasNeigbor(Direction direction){
 		return neighbors.containsKey(direction);
+	}
+	
+	/**
+	 * Checks if the square given is a neighbor in the given direction.
+	 * 
+	 * @param direction
+	 * @param square
+	 * @return
+	 */
+	public boolean hasNeighbor(Direction direction, Square square) {
+		Square neighbor = neighbors.get(direction);
+		
+		if(neighbor.equals(square))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * The square that is beeing set as a neighbor must apply to the 
+	 * following conditions:
+	 * 	- The square has the current square as a neighbor in the opposing direction.
+	 * 	- The square has no square as a neighbor in the opposing direction.
+	 * 
+	 * @param direction
+	 * @param square
+	 * @return
+	 */
+	public boolean isValidNeighbor(Direction direction, Square square) {
+		if(square.hasNeighbor(direction.opposite(), this))
+			return true;
+		
+		if(!square.hasNeigbor(direction.opposite()))
+			return true;
+		
+		return false;
 	}
 	
 	/**
@@ -73,7 +140,17 @@ public class Square {
 		return usedItems;
 	}
 	
-	public void addUsedItem(Item item){
+	/**
+	 * Adds/uses the given item on this square
+	 * 
+	 * @param 	item
+	 * 			The item to be added or used
+	 * @throws 	IllegalArgumentException
+	 * 			If the given item cannot be used on this square
+	 */
+	public void addUsedItem(Item item) throws IllegalArgumentException {
+		if(!canBeUsedHere(item))
+			throw new IllegalArgumentException();
 		usedItems.add(item);
 	}
 	
@@ -185,6 +262,7 @@ public class Square {
 		//TODO: specific constraints for this field.
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "Square [ " + this.getInventory() +" ]";
@@ -220,5 +298,13 @@ public class Square {
 	 */
 	private HashMap<Direction, Square> getNeighbors() {
 		return new HashMap<Direction, Square>(this.neighbors);
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 */
+	public boolean canBeUsedHere(Item item) {
+		return true;
 	}
 }

@@ -2,7 +2,6 @@ package square.obstacles;
 
 
 import java.util.ArrayList;
-import java.util.Observer;
 
 import square.Square;
 
@@ -66,6 +65,9 @@ public abstract class Obstacle {
 	public boolean isValidSquare(Square square){
 		if(getSquares().contains(square))
 			return false;
+		
+		if(getLength() == 0)
+			return true;
 		
 		for(Square trailSquare : getSquares())
 			if(trailSquare.connectedTo(square))

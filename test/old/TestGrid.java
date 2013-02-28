@@ -1,4 +1,4 @@
-package grid.core;
+package old;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,8 @@ import square.Square;
 import square.obstacles.Obstacle;
 import square.obstacles.Wall;
 
+//TODO look if this test can be overhauled to use the new neighbor implementation.
+@Deprecated
 public class TestGrid {
 
 	@BeforeClass

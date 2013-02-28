@@ -140,39 +140,7 @@ public class Inventory {
 		}
 		return items.get(index);
 	}
-	
-	/**
-	 * Mutator that removes an item at the given index from the inventory and returns it.
-	 * 
-	 * @return 
-	 * @throws 	IllegalStateException
-	 * 			If the item at the given index cannot be removed.
-	 * @throws 	IndexOutOfBoundsException
-	 * 			If the given index is not a valid index.
-	 */
-	public Item takeItem(int index) throws IllegalStateException, IndexOutOfBoundsException{
-		Item item = getItem(index);
-		removeItem(item);
-		return item;
 		
-	}
-	
-	/**
-	 * Mutator that removes a given item from the inventory and returns it.
-	 * 
-	 * @param	item
-	 * 			The item that will be taken from the inventory.
-	 * @effect	removeItem(item)
-	 * @return 	The given Item that is now removed from the inventory.
-	 * @throws 	IllegalStateException
-	 * 			If the given item cannot be removed.
-	 */
-	public Item takeItem(Item item) throws IllegalStateException{
-		removeItem(item);
-		return item;
-		
-	}
-	
 	/**
 	 * Returns whether the given index is a possible index for this inventory.
 	 * 
@@ -194,10 +162,11 @@ public class Inventory {
 	 * @throws 	IllegalStateException
 	 * 		  	Thrown when the item cannot be removed, because it is not inside the inventory
 	 */
-	public void removeItem(Item item) throws IllegalStateException{
+	public Item take(Item item) throws IllegalStateException{
 		if(!this.hasItem(item)) 
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else items.remove(item);
+		return item;
 	}
 	
 	/**

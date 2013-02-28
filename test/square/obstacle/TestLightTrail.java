@@ -1,4 +1,4 @@
-package grid.core;
+package square.obstacle;
 
 import static org.junit.Assert.*;
 import square.*;
@@ -16,8 +16,12 @@ public class TestLightTrail {
 	public void testLightTrailLength() {
 		LightTrail lightTrail = new LightTrail();
 
-		for (int i=1; i <= LightTrail.MAX_LENGTH; i++) {
+		for (int i=1; i <= LightTrail.MAX_LENGTH-1; i++) {
+			Square square = new Square();
 			lightTrail.addSquare(new Square());
+			
+			Square otherSquare = new Square();
+			otherSquare.setNeigbor(Direction.NORTH, square);
 		}
 
 		assertEquals(lightTrail.getLength(), LightTrail.MAX_LENGTH);
@@ -60,6 +64,17 @@ public class TestLightTrail {
 
 		lightTrail.addSquare(squareOne);
 		assertFalse(lightTrail.isValidSquare(squareOne));
+	}
+	
+	/**
+	 * Test if not connected squares are invalid.
+	 */
+	@Test
+	public void testIsValidNotConnected() {
+		LightTrail lightTrail = new LightTrail();
+		
+		lightTrail.addSquare(new Square());
+		assertFalse(lightTrail.isValidSquare(new Square()));
 	}
 
 	/**
