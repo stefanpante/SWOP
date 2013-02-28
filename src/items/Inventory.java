@@ -74,6 +74,16 @@ public class Inventory {
 	}
 	
 	/**
+	 * Checks if the inventory is empty.
+	 * 
+	 * @return
+	 */
+	@Basic
+	public boolean isEmpty(){
+		return items.isEmpty();
+	}
+	
+	/**
 	 * The maximum size of this inventory of items.
 	 * 
 	 * @return	An integer representing the maximum size of this inventory.
@@ -155,7 +165,7 @@ public class Inventory {
 	 * 			of the inventory
 	 */
 	public void addItem(Item item) throws IllegalStateException{
-		if(isFull())
+		if(!canHaveAsItem(item))
 			throw new IllegalStateException("The inventory is full, cannot add another item");
 		else
 			items.add(item);
@@ -226,11 +236,6 @@ public class Inventory {
 			i++;
 		}
 		return description;
-	}
-	
-	@Basic
-	public boolean isEmpty(){
-		return items.isEmpty();
 	}
 
 }
