@@ -102,7 +102,7 @@ public class TestSquare {
 		Item it = new Item();
 		
 		sq1.getInventory().addItem(lg1);
-		assertTrue(sq1.getInventory().hasItem((lg1));
+		assertTrue(sq1.getInventory().hasItem((lg1)));
 		
 		
 		sq2.getInventory().addItem(lg2);
