@@ -197,4 +197,27 @@ public class Square {
 	public boolean isObstructed(){
 			return obstacle == null;
 	}
+
+	/**
+	 * Check if the current square is connected to the given square
+	 * 
+	 * @param 	square
+	 * 			The square to check wether it's connected to this
+	 * 			square.
+	 * @return	True if and only if the given square is connected to
+	 * 			this square.
+	 */
+	public boolean connectedTo(Square square) {
+		for(Square neighborSquare : getNeighbors().values())
+			if(square == neighborSquare)
+				return true;
+		return false;
+	}
+
+	/**
+	 * @return
+	 */
+	private HashMap<Direction, Square> getNeighbors() {
+		return new HashMap<Direction, Square>(this.neighbors);
+	}
 }

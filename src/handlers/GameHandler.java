@@ -1,7 +1,7 @@
 package handlers;
 
 import game.Game;
-import gui.view.ApplicationWindow;
+import gui.ApplicationWindow;
 
 import javax.swing.UIManager;
 

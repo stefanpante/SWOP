@@ -2,6 +2,7 @@ package grid.obstacles;
 
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import square.Square;
 
@@ -22,7 +23,7 @@ public abstract class Obstacle {
 	/**
 	 * Returns a list of squares which the obstacle covers.
 	 */
-	public ArrayList<Square> getSquares() {
+	protected ArrayList<Square> getSquares() {
 		return this.squares;
 	}
 	

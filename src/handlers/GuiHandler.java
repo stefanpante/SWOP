@@ -4,7 +4,7 @@
 package handlers;
 
 import game.Game;
-import gui.view.ApplicationWindow;
+import gui.ApplicationWindow;
 import items.Inventory;
 import items.LightGrenade;
 

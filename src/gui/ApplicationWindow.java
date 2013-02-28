@@ -1,7 +1,7 @@
 /**
  * 
  */
-package gui.view;
+package gui;
 
 import handlers.GuiHandler;
 import items.Inventory;

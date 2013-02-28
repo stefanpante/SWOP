@@ -1,6 +1,9 @@
 package grid.obstacles;
 
 
+import java.util.Observable;
+import java.util.Observer;
+
 import square.Square;
 
 /**
@@ -9,7 +12,7 @@ import square.Square;
  * 
  * @author jonas, vincent
  */
-public class LightTrail extends Obstacle{
+public class LightTrail extends Obstacle implements Observer{
 	
 	public static final int MAX_LENGTH = 3;
 		
@@ -48,15 +51,30 @@ public class LightTrail extends Obstacle{
 	public boolean isValidSquare(Square square){
 		if(!super.isValidSquare(square))
 			return false;
-		
-		return true;
+		boolean connected = false;
+		for(Square trailSquare : getSquares()){
+			if(trailSquare.connectedTo(square)){
+				connected = true;
+			}
+		}
+		return connected;
 	}
+
 	
 	/**
 	 * Get the current length of the LightTrail.
 	 */
 	public int getLength() {
 		return getSquares().size();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
