@@ -3,6 +3,13 @@
  <object class="com.horstmann.violet.ClassDiagramGraph">
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
+    <void property="attributes">
+     <void property="text">
+      <string>-  ArrayList&lt;Squares&gt; neighbors
+-  Obstacle obstacle
+-  usedItem item</string>
+     </void>
+    </void>
     <void property="methods">
      <void property="text">
       <string>GetNeighbors(): ArrayList&lt;Square&gt;
@@ -50,7 +57,7 @@ isObstructed(): boolean
      <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
     <void property="endLabel">
-     <string>3..8</string>
+     <string>                 3..8</string>
     </void>
     <void property="startLabel">
      <string>1</string>

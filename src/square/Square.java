@@ -49,6 +49,8 @@ public class Square {
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
 		this.inventory = new Inventory();
+		
+		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
 	// TODO: Own exception?
