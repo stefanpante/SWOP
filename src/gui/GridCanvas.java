@@ -71,7 +71,7 @@ public class GridCanvas extends JPanel implements ImageObserver, Observer {
 		if(coordinate == null)
 			return;
 		System.out.println("Draw "+ image +" at "+ coordinate);
-		Image img = Toolkit.getDefaultToolkit().getImage("./src/res/"+image+".png");
+		Image img = Toolkit.getDefaultToolkit().getImage("./class/res/"+image+".png");
     	graphics.drawImage(img,coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1,Color.BLACK,this);
 	}
 
@@ -81,7 +81,7 @@ public class GridCanvas extends JPanel implements ImageObserver, Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		System.out.println("repaint");
-		repaint();
+		this.repaint();
 	}
 	
 
