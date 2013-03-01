@@ -164,6 +164,16 @@ public class TestSquare {
 		assertFalse(thirdSquare.hasNeighbor(Direction.NORTHEAST, square));
 	}
 	
+	/**
+	 * Test adding square itself as neighbor must throw exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testAddingNeighborOwnSquare() {
+		Square square = new Square();
+		
+		square.setNeigbor(Direction.SOUTH, square);
+	}
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testAddingDuplicateNeigbor() {
 		Square square = new Square();
@@ -189,6 +199,13 @@ public class TestSquare {
 		Square square = new Square();
 		
 		assertTrue(square.canHaveAsNeighbor(Direction.NORTH, new Square()));
+	}
+	
+	@Test
+	public void testCanHaveAsNeighborOwnSquare() {
+		Square square = new Square();
+		
+		assertFalse(square.canHaveAsNeighbor(Direction.NORTH, square));
 	}
 	
 	@Test

@@ -15,20 +15,31 @@ public class TestLightTrail {
 	@Test
 	public void testLightTrailLength() {
 		LightTrail lightTrail = new LightTrail();
+		
+		Square squareOne = new Square();
+		Square squareTwo = new Square();
+		Square squareThree = new Square();
+		
+		squareOne.setNeigbor(Direction.NORTH, squareTwo);
+		squareTwo.setNeigbor(Direction.NORTH, squareThree);
 
-		for (int i=1; i <= LightTrail.MAX_LENGTH-1; i++) {
-			Square square = new Square();
-			lightTrail.addSquare(new Square());
-			
-			Square otherSquare = new Square();
-			otherSquare.setNeigbor(Direction.NORTH, square);
-		}
+		assertEquals(lightTrail.getLength(), 0);
 
+		lightTrail.addSquare(squareOne);
+		assertEquals(lightTrail.getLength(), 1);
+		
+		lightTrail.addSquare(squareTwo);
+		assertEquals(lightTrail.getLength(), 2);
+		
+		lightTrail.addSquare(squareThree);
 		assertEquals(lightTrail.getLength(), LightTrail.MAX_LENGTH);
-
-		lightTrail.addSquare(new Square());
-
+		
+		Square squareFour = new Square();
+		squareThree.setNeigbor(Direction.NORTH, squareFour);
+		lightTrail.addSquare(squareFour);
 		assertEquals(lightTrail.getLength(), LightTrail.MAX_LENGTH);
+		assertFalse(lightTrail.contains(squareOne));
+		assertTrue(lightTrail.contains(squareFour));
 	}
 
 	/**
@@ -76,6 +87,28 @@ public class TestLightTrail {
 		lightTrail.addSquare(new Square());
 		assertFalse(lightTrail.isValidSquare(new Square()));
 	}
+	
+	/**
+	 * Test if not connected squares are invalid in a longer LightTrail.
+	 */
+	@Test
+	public void testIsValidNotConnectedMultiple() {
+		LightTrail lightTrail = new LightTrail();
+		
+		Square squareOne = new Square();
+		Square squareTwo = new Square();
+		
+		squareOne.setNeigbor(Direction.SOUTH, squareTwo);
+		
+		assertTrue(lightTrail.isValidSquare(squareOne));
+		
+		lightTrail.addSquare(squareOne);
+		
+		assertTrue(lightTrail.isValidSquare(squareTwo));
+		lightTrail.addSquare(squareTwo);
+		
+		assertFalse(lightTrail.isValidSquare(new Square()));
+	}
 
 	/**
 	 * Test adding new square must be valid.
@@ -101,6 +134,25 @@ public class TestLightTrail {
 
 		assertEquals(lightTrail.getSquares().size(), 1);
 		assertEquals(lightTrail.getSquares().size(), lightTrail.getLength());
+	}
+	
+	@Test
+	public void testGetLastSquare() {
+		LightTrail lightTrail = new LightTrail();
+		
+		assertEquals(lightTrail.getLastSquare(), null);
+		
+		Square oneSquare = new Square();
+		Square secondSquare = new Square();
+
+		oneSquare.setNeigbor(Direction.NORTH, secondSquare);
+		lightTrail.addSquare(oneSquare);
+		
+		assertEquals(lightTrail.getLastSquare(), oneSquare);
+		
+		assertTrue(lightTrail.isValidSquare(secondSquare));
+		lightTrail.addSquare(secondSquare);
+		assertEquals(lightTrail.getLastSquare(), secondSquare);
 	}
 
 
