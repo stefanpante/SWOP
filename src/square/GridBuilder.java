@@ -255,6 +255,8 @@ public class GridBuilder {
 				coverage -= length;
 			}
 		}
+		
+		this.wallRepresentation();
 	}
 
 
@@ -419,7 +421,7 @@ public class GridBuilder {
 				}
 			}
 		}
-		GridCanvas.GRID_MODEL = coors;
+		GridCanvas.GRID_MODEL.setWalls(coors);
 	}
 	/**
 	 *
