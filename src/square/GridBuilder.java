@@ -301,7 +301,7 @@ public class GridBuilder {
 	/**
 	 * 
 	 * @param sequence
-	 * @return
+	 * @return 
 	 */
 	private ArrayList<Square> getNeighborWalls(ArrayList<Square> sequence){
 		ArrayList<Square> result = new ArrayList<Square>();
@@ -310,7 +310,7 @@ public class GridBuilder {
 		}
 		result.addAll(sequence);
 		return result;
-	}
+	} 
 	/**
 	 *
 	 * returns the maximal permitted length of wall, which depends on the

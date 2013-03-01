@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 
@@ -20,7 +22,7 @@ import utils.Coordinate2D;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class GridCanvas extends JPanel implements ImageObserver {
+public class GridCanvas extends JPanel implements ImageObserver, Observer {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
@@ -41,10 +43,6 @@ public class GridCanvas extends JPanel implements ImageObserver {
 		this.cols = cols;
 		this.rowHeight = height/rows;
 		this.colWidth = width/cols;
-		
-		ApplicationWindow.GRID_MODEL.addToLightGrenades(new Coordinate2D(0, 0), new Square());
-		ApplicationWindow.GRID_MODEL.setPlayer1(new Coordinate2D(0, 0));
-		ApplicationWindow.GRID_MODEL.setPlayer2(new Coordinate2D(100, 100));
 	}
 	
 	/**
@@ -70,9 +68,20 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	}
 	
 	private void DrawImage(Graphics graphics, Coordinate2D coordinate, String image){
+		if(coordinate == null)
+			return;
 		System.out.println("Draw "+ image +" at "+ coordinate);
 		Image img = Toolkit.getDefaultToolkit().getImage("./src/res/"+image+".png");
     	graphics.drawImage(img,coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1,Color.BLACK,this);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("repaint");
+		repaint();
 	}
 	
 

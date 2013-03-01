@@ -8,6 +8,7 @@ import items.LightGrenade;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import square.Square;
 import utils.Coordinate2D;
@@ -35,10 +36,6 @@ public class GridModel extends Observable {
 		this.currentPlayerInventory = new ArrayList<Item>();
 		this.currentSquareInventory = new ArrayList<Item>();
 		currentPlayerInventory.add(new LightGrenade());
-	}
-	
-	public void addObserver(Observer o){
-		addObserver(o);
 	}
 	
 	public void addToLightTrailBlue(Coordinate2D coordinate){
