@@ -177,12 +177,9 @@ public class TestInventory {
 		for(int i = 0; i < 24; i ++){
 			Item item = new LightGrenade();
 			inventory.addItem(item);
-		}
-		try{
-			inventory.setMaximumSize(20);
-			fail("Should not succeed when there are more elements in the inventory than the desired maximum size");
 		} 
-		catch(Exception e){}
+		
+	
 		
 	}
 		

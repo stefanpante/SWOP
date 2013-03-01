@@ -17,7 +17,7 @@ public abstract class Obstacle {
 	/**
 	 * An obstacle may cover a set of squares.
 	 */
-	private ArrayList<Square> squares;
+	private ArrayList<Square> squares; 
 	
 	public Obstacle(){
 		squares = new ArrayList<Square>();
@@ -45,7 +45,7 @@ public abstract class Obstacle {
 	 * 
 	 * @param square
 	 * 
-	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
+	 * @throws IllegalArgumentException If a duplicate square is given an exception is thrown.
 	 */
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(isValidSquare(square)){

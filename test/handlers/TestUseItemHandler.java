@@ -40,14 +40,16 @@ public class TestUseItemHandler {
 
 	@Test
 	public void testCheckToProceed(){
-		Game game = new Game(10,10);
-		UseItemHandler handler = new UseItemHandler(game);
-		assertTrue(handler.checkToProceed());
+		ApplicationHandler h = new ApplicationHandler();
+		h.initialize();
+		UseItemHandler handler = h.getUseItemHandler();
+		assertTrue(handler.checkToProceed()); 
 		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++){
-			game.getCurrentPlayer().incrementActions();
+			Item item = new LightGrenade();
+			handler.useItem(item);
 		}
 		assertFalse(handler.checkToProceed());
-	}
+	} 
 
 	@Test
 	public void testUseItem(){
