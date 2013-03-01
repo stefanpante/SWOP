@@ -27,6 +27,19 @@ public class UseItemHandler extends Handler {
 		this.game = game;
 	}
 	
+	/**
+	 * Checks the precondition for the use item case
+	 * returns true if the preconditions are satisfied
+	 * @return 	true if the precondition is satisfied
+	 * 			otherwise false.
+	 */
+	public boolean checkToProceed(){
+		if(game.getCurrentPlayer().getRemainingActions() > 1){
+			return true;
+		}
+		
+		return false;
+	}
 	
 	/**
 	 * 
@@ -35,6 +48,7 @@ public class UseItemHandler extends Handler {
 		game.getCurrentPlayer().useItem(item);
 	}
 	
+	//TODO: if the player doesn't have any items in his inventory?
 	public void showItems(){
 		Inventory inventory = game.getCurrentPlayer().getInventory();
 		GuiHandler.updateListModel(inventory);
