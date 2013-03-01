@@ -108,8 +108,8 @@ public enum Direction {
 		@Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
-			neighborDirections.add(Direction.SOUTHEAST);
-			neighborDirections.add(Direction.SOUTHWEST);
+			neighborDirections.add(Direction.WEST);
+			neighborDirections.add(Direction.SOUTH);
 			return neighborDirections;
 		}
 		

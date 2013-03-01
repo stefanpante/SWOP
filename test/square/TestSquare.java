@@ -16,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import square.Square;
+import square.obstacles.LightTrail;
 import square.obstacles.Obstacle;
 import square.obstacles.Wall;
 
@@ -115,12 +116,6 @@ public class TestSquare {
 		assertTrue(sq3.getInventory().hasItem(lg3));
 		assertTrue(sq3.getInventory().hasItem(it));
 	}
-
-	@Test
-	public void testHasActiveItem() {
-		fail("Not yet implemented");
-	}
-	
 	
 	/************************************
 	 *  Neighbor tests
@@ -217,8 +212,6 @@ public class TestSquare {
 		
 		Obstacle wall = new Wall(square, otherSquare);
 		
-		square.setObstacle(wall);
-		
 		assertEquals(square.getObstacle(), wall);
 		assertTrue(square.isObstructed());
 	}
@@ -229,5 +222,127 @@ public class TestSquare {
 		
 		assertFalse(square.isObstructed());
 	}
+	
+	
+	@Test
+	public void testCanMoveTo1(){
+		GridBuilder gb = new GridBuilder(10, 10);
+		gb.constructSquares();
+		Square bl = gb.getBottomLeft();
+		Square tr = gb.getTopRight();
+		
+		//TEST CORNERS.
+		//	Bottem Left
+		//		Possible
+		assertTrue(bl.canMoveTo(Direction.NORTH));
+		assertTrue(bl.canMoveTo(Direction.NORTHEAST));
+		assertTrue(bl.canMoveTo(Direction.EAST));
+		//		Impossible
+		assertFalse(bl.canMoveTo(Direction.SOUTHEAST));
+		assertFalse(bl.canMoveTo(Direction.SOUTH));
+		assertFalse(bl.canMoveTo(Direction.SOUTHWEST));
+		assertFalse(bl.canMoveTo(Direction.WEST));
+		assertFalse(bl.canMoveTo(Direction.NORTHWEST));
+		//	Top Right
+		//		Impossible
+		assertFalse(tr.canMoveTo(Direction.NORTH));
+		assertFalse(tr.canMoveTo(Direction.NORTHEAST));
+		assertFalse(tr.canMoveTo(Direction.EAST));
+		assertFalse(tr.canMoveTo(Direction.SOUTHEAST));
+		//		Possible
+		assertTrue(tr.canMoveTo(Direction.SOUTH));
+		assertTrue(tr.canMoveTo(Direction.SOUTHWEST));
+		assertTrue(tr.canMoveTo(Direction.WEST));
+		//		Impossible
+		assertFalse(tr.canMoveTo(Direction.NORTHWEST));		
+	}
+	
+	@Test
+	public void testCanMoveTo2(){
+		GridBuilder gb = new GridBuilder(10, 10);
+		gb.constructSquares();
+		Square bl = gb.getBottomLeft();
+		Square tr = gb.getTopRight();
+		
+		Wall blWall = new Wall(bl.getNeighor(Direction.EAST), bl.getNeighor(Direction.NORTHEAST));
+		Wall trWall = new Wall(tr.getNeighor(Direction.SOUTHWEST), tr.getNeighor(Direction.SOUTH));
+
+		
+		//TEST CORNERS.
+		//	Bottem Left
+		//		Possible
+		assertTrue(bl.canMoveTo(Direction.NORTH));
+		//		Impossible
+		assertFalse(bl.canMoveTo(Direction.NORTHEAST));
+		assertFalse(bl.canMoveTo(Direction.EAST));
+		assertFalse(bl.canMoveTo(Direction.SOUTHEAST));
+		assertFalse(bl.canMoveTo(Direction.SOUTH));
+		assertFalse(bl.canMoveTo(Direction.SOUTHWEST));
+		assertFalse(bl.canMoveTo(Direction.WEST));
+		assertFalse(bl.canMoveTo(Direction.NORTHWEST));
+		//	Top Right
+		//		Impossible
+		assertFalse(tr.canMoveTo(Direction.NORTH));
+		assertFalse(tr.canMoveTo(Direction.NORTHEAST));
+		assertFalse(tr.canMoveTo(Direction.EAST));
+		assertFalse(tr.canMoveTo(Direction.SOUTHEAST));
+		assertFalse(tr.canMoveTo(Direction.SOUTH));
+		assertFalse(tr.canMoveTo(Direction.SOUTHWEST));
+		//		Possible
+		assertTrue(tr.canMoveTo(Direction.WEST));
+		//		Impossible
+		assertFalse(tr.canMoveTo(Direction.NORTHWEST));	
+		
+	}
+	
+	@Test
+	public void testCanMoveTo3(){
+		GridBuilder gb = new GridBuilder(10, 10);
+		gb.constructSquares();
+		Square bl = gb.getBottomLeft();
+		Square tr = gb.getTopRight();
+		
+		LightTrail blLightTrail = new LightTrail();
+		try {
+			blLightTrail.addSquare(bl.getNeighor(Direction.NORTH));
+			blLightTrail.addSquare(bl.getNeighor(Direction.EAST));
+		} catch (Exception e) {
+			System.out.println("YES");
+		}
+		
+		assertTrue(blLightTrail.contains(bl.getNeighor(Direction.NORTH)));
+
+		assertTrue(blLightTrail.contains(bl.getNeighor(Direction.EAST)));
+		
+		LightTrail trLightTrail = new LightTrail();
+		trLightTrail.addSquare(tr.getNeighor(Direction.SOUTH));
+		trLightTrail.addSquare(tr.getNeighor(Direction.WEST));
+
+		//TEST CORNERS.
+		//	Bottem Left
+		//		Impossible
+		System.out.println(bl.getNeighor(Direction.NORTH).isObstructed());
+		System.out.println(bl.getNeighor(Direction.EAST).isObstructed());
+
+		assertFalse(bl.canMoveTo(Direction.NORTH));
+		assertFalse(bl.canMoveTo(Direction.NORTHEAST));
+		assertFalse(bl.canMoveTo(Direction.EAST));
+		assertFalse(bl.canMoveTo(Direction.SOUTHEAST));
+		assertFalse(bl.canMoveTo(Direction.SOUTH));
+		assertFalse(bl.canMoveTo(Direction.SOUTHWEST));
+		assertFalse(bl.canMoveTo(Direction.WEST));
+		assertFalse(bl.canMoveTo(Direction.NORTHWEST));
+		//	Top Right
+		assertFalse(tr.canMoveTo(Direction.NORTH));
+		assertFalse(tr.canMoveTo(Direction.NORTHEAST));
+		assertFalse(tr.canMoveTo(Direction.EAST));
+		assertFalse(tr.canMoveTo(Direction.SOUTHEAST));
+		assertFalse(tr.canMoveTo(Direction.SOUTH));
+		assertFalse(tr.canMoveTo(Direction.SOUTHWEST));
+		assertFalse(tr.canMoveTo(Direction.WEST));
+		assertFalse(tr.canMoveTo(Direction.NORTHWEST));		
+		
+	}
+	
 
 }

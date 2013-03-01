@@ -32,7 +32,7 @@ public class LightTrail extends Obstacle implements Observer{
 		if(getLength() >= MAX_LENGTH)
 			getSquares().remove(MAX_LENGTH-1);
 		
-		getSquares().add(0,square);
+		super.addSquare(square);
 	}
 	
 	/**
