@@ -99,7 +99,7 @@ public class Game {
 	
 	public boolean isValidHSize(int size){
 		return size >= this.MIN_HSIZE;
-	}
+	} 
 	
 	public boolean isValidVSize(int size){
 		return size >= this.MIN_VSIZE;

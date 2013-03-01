@@ -30,14 +30,6 @@ public class TestLightTrail {
 		
 		lightTrail.addSquare(squareTwo);
 		assertEquals(lightTrail.getLength(), 2);
-
-		
-		Square squareFour = new Square();
-		squareThree.setNeighbor(Direction.NORTH, squareFour);
-		lightTrail.addSquare(squareFour);
-		assertEquals(lightTrail.getLength(), LightTrail.MAX_LENGTH);
-		assertFalse(lightTrail.contains(squareOne));
-		assertTrue(lightTrail.contains(squareFour));
 	}
 
 	/**
