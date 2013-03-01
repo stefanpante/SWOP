@@ -148,7 +148,6 @@ public class Player extends Observable {
 			currentPosition = newPosition;
 			currentPosition.activateUsedItems();
 			moved = true;
-			//TODO check and add lighttrail.
 		}
 		
 	}
@@ -202,6 +201,9 @@ public class Player extends Observable {
 	}
 
 
+	public boolean hasMoved(){
+		return moved;
+	}
 	
 	
 	public int getRemainingActions(){
@@ -213,12 +215,9 @@ public class Player extends Observable {
 	}
 	
 	public void endTurn() {
-		//TODO: add update for lighttrail
-		
-		// activates all items used on the current square
-		currentPosition.activateUsedItems();
-		// needed to check for 3 actions and the actions itself is needed for the lighttrail.
-		this.previousactions = actions;
+		this.previousactions += ACTIONS;
+		actions = previousactions;
+		moved = false;
 		
 	}
 	
