@@ -56,13 +56,10 @@ public class Game {
 
 	
 	/**
-	 * Two argument constructor that makes a new game based
-	 * on the bottom left and top right square.
+	 *Constructs a new board-based game.
 	 * 
-	 * @param 	bottomLeft
-	 * 			The bottom left square
-	 * @param 	topRight
-	 * 			The top right square
+	 * @param hSize		the horizontal size of the board
+	 * @param vSize		the vertical size of the board
 	 */
 	public Game(int hSize, int vSize){
 		initialize(hSize, vSize);

@@ -215,14 +215,17 @@ public class GuiHandler implements ActionListener  {
 	}
 	
 	/**
-	 * @param input
+	 * 
+	 * causes a use action.
+	 * @param item  the item on which the action is performed
 	 */
 	public void use(Item item) {
 		getApplicationHandler().getUseItemHandler().useItem(item);
 	}
 
 	/**
-	 * @param input
+	 * causes a pickup action.
+	 * @param item  the item on which the action is performed
 	 */
 	public void pickup(Item item) {
 		getApplicationHandler().getPickupHandler().pickUp(item);
