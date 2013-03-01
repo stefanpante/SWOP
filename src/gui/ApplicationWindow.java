@@ -184,7 +184,8 @@ public class ApplicationWindow {
                     "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
                     a, 
                     null);
-                getController().pickup(input);
+                if(input != null)
+                	getController().pickup(input);
             }
         });      
         inventoryPanel.add(pickup);
@@ -201,11 +202,12 @@ public class ApplicationWindow {
                     "Use item", JOptionPane.QUESTION_MESSAGE, null,
                     a, 
                     null);
-                getController().use(input);
+                if(input != null)
+                	getController().use(input);
             }
         });      
         inventoryPanel.add(use);       
-        
+ 
         GRID_MODEL.addObserver(gridPanel);
 
 
