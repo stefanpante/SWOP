@@ -3,6 +3,7 @@
  */
 package gui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import square.Square;
@@ -14,20 +15,16 @@ import utils.Coordinate2D;
  */
 public class GridModel {
 
-	private HashMap<Coordinate2D, Square> walls;
+	private ArrayList<Coordinate2D> walls;
 	private HashMap<Coordinate2D, Square> lightTrails;
 	private HashMap<Coordinate2D, Square> lightGrenades;
 	private Coordinate2D player1;
 	private Coordinate2D player2;
 	
 	public GridModel(){
-		this.walls = new HashMap<Coordinate2D, Square>();
+		this.walls = new ArrayList<Coordinate2D>();
 		this.lightTrails = new HashMap<Coordinate2D, Square>();
 		this.lightGrenades = new HashMap<Coordinate2D, Square>();
-	}
-	
-	public void addToWalls(Coordinate2D coordinate, Square square){
-		walls.put(coordinate, square);
 	}
 	
 	public void addToLightTrails(Coordinate2D coordinate, Square square){
@@ -46,8 +43,12 @@ public class GridModel {
 		this.player2 = coordinate;
 	}
 	
-	public HashMap<Coordinate2D, Square> getWalls(){
-		return new HashMap<Coordinate2D, Square>(this.walls);
+	public void setWalls(ArrayList<Coordinate2D> walls){
+		this.walls = walls;
+	}
+	
+	public ArrayList<Coordinate2D> getWalls(){
+		return new ArrayList<Coordinate2D>(walls);
 	}
 
 	public HashMap<Coordinate2D, Square> getLightTrails(){

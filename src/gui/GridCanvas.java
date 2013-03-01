@@ -24,7 +24,7 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
-	private static GridModel GRID_MODEL = new GridModel();;
+	public static GridModel GRID_MODEL = new GridModel();
 
 	/**
 	 * 
