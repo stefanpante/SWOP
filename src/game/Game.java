@@ -8,6 +8,7 @@ import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
+import square.GridBuilder;
 import square.Square;
 
 /**
@@ -53,9 +54,16 @@ public class Game {
 	 * @param 	topRight
 	 * 			The top right square
 	 */
-	public Game(Square bottomLeft, Square topRight){
-		setPlayer1(new Player(bottomLeft, "Player 1"));
-		setPlayer2(new Player(topRight, "Player 2"));
+	public Game(int hSize, int vSize){
+		initialize(hSize, vSize);
+	}
+	
+	private void initialize(int hSize, int vSize){
+		GridBuilder builder = new GridBuilder(hSize, vSize);
+		builder.constructSquares();
+		builder.constructWalls();
+		setPlayer1(new Player(builder.getBottomLeft(), "Player 1"));
+		setPlayer2(new Player(builder.getTopRight(), "Player 2"));
 	}
 	
 	
