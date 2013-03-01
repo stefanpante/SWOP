@@ -284,7 +284,30 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	 * @param item  the item on which the action is performed
 	 */
 	public void use(Item item) {
-		getApplicationHandler().getUseItemHandler().useItem(item);
+		try{
+			Player currentPlayer = game.getCurrentPlayer();
+			getApplicationHandler().getUseItemHandler().useItem(item);
+			if(currentPlayer == game.getPlayer1()){
+				ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
+				for(Coordinate2D coor: player1LTCoordinates.keySet()){
+					  if(!currentPlayer.getLightTrail().contains(player1LTCoordinates.get(coor))){
+						  player1LTCoordinates.remove(coor);
+					  }
+				}
+				ApplicationWindow.GRID_MODEL.setLightTrailBlue(getPlayer1LightTrailCoordinates());
+			} else {
+				ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
+				for(Coordinate2D coor: player2LTCoordinates.keySet()){
+					  if(!currentPlayer.getLightTrail().contains(player2LTCoordinates.get(coor))){
+						  player2LTCoordinates.remove(coor);
+					  }
+				}
+				ApplicationWindow.GRID_MODEL.setLightTrailRed(getPlayer1LightTrailCoordinates());
+
+			}
+		}  catch(Exception e1) {
+			System.err.println("Cannot use that " + item);
+		}
 	}
 
 	/**
@@ -292,7 +315,30 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	 * @param item  the item on which the action is performed
 	 */
 	public void pickup(Item item) {
-		getApplicationHandler().getPickupHandler().pickUp(item);
+		try{
+			Player currentPlayer = game.getCurrentPlayer();
+			getApplicationHandler().getPickupHandler().pickUp(item);
+			if(currentPlayer == game.getPlayer1()){
+				ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
+				for(Coordinate2D coor: player1LTCoordinates.keySet()){
+					  if(!currentPlayer.getLightTrail().contains(player1LTCoordinates.get(coor))){
+						  player1LTCoordinates.remove(coor);
+					  }
+				}
+				ApplicationWindow.GRID_MODEL.setLightTrailBlue(getPlayer1LightTrailCoordinates());
+			} else {
+				ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
+				for(Coordinate2D coor: player2LTCoordinates.keySet()){
+					  if(!currentPlayer.getLightTrail().contains(player2LTCoordinates.get(coor))){
+						  player2LTCoordinates.remove(coor);
+					  }
+				}
+				ApplicationWindow.GRID_MODEL.setLightTrailRed(getPlayer1LightTrailCoordinates());
+
+			}
+		}  catch(Exception e1) {
+			System.err.println("Cannot pick up that " + item);
+		}
 		
 	}
 
