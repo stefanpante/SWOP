@@ -164,12 +164,12 @@ public class Player extends Observable {
 	/**
 	 * Method to select the item which the player is going to use
 	 * 
-	 * @param	Item
+	 * @param	itemToUse
 	 * 			The item to use.
 	 * @throws	IllegalStateException
 	 * 			thrown when adding the item would exceed the size of the inventory.
 	 * @throws	IllegalArgumentException
-	 * 			If the item cannot be used on the current squre.
+	 * 			If the item cannot be used on the current square.
 	 */
 	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(itemToUse);
@@ -178,7 +178,7 @@ public class Player extends Observable {
 	
 	/**
 	 * Returns the player's inventory.
-	 * @return
+	 * @return the inventory of this player
 	 */
 	public PlayerInventory getInventory(){
 		return inventory;
