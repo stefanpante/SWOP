@@ -13,6 +13,7 @@ import game.Game;
 import java.util.Random;
 
 import square.obstacles.Wall;
+import utils.Coordinate2D;
 
 /**
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
@@ -408,6 +409,16 @@ public class GridBuilder {
 		return sequence;
 	}
 
+	private void wallRepresentation(){
+		ArrayList<Coordinate2D> coors = new ArrayList<Coordinate2D>();
+		for(int i = 0; i <grid.length; i++ ){
+			for(int j = 0; j < grid[i].length; j++){
+				if(grid[i][j].isObstructed()){
+					coors.add(new Coordinate2D(i, grid[i].length -j));
+				}
+			}
+		}
+	}
 	/**
 	 *
 	 * Builds the longest possible horizontal sequence of squares with a given start position
