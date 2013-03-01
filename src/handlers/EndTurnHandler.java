@@ -38,7 +38,6 @@ public class EndTurnHandler {
 	public void endTurn(){
 		game.getCurrentPlayer().endTurn();
 		game.switchPlayer();
-		
 	}
 
 }

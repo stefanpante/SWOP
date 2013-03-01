@@ -55,5 +55,8 @@ public class PickUpHandler extends Handler {
 		}
 	}
 	
+	public Inventory showItems(){
+		return game.getCurrentPlayer().getPosition().getInventory();
+	}
 
 }
