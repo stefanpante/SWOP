@@ -245,10 +245,4 @@ public class Inventory{
 		return description;
 	}
 
-	public void accept(InventoryElementVisitor visitor) {
-		for(Item it: this.getAllItems()){
-			it.accept(visitor);
-		}
-	}
-
 }
