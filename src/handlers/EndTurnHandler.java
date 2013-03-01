@@ -32,7 +32,7 @@ public class EndTurnHandler {
 	}
 	
 	public boolean hasMoved(){
-		return true;
+		return game.getCurrentPlayer().hasMoved();
 	}
 	
 	public void endTurn(){
