@@ -226,7 +226,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	}
 	
 	/**
-	 * @return
+	 * @return returns a listmodel
 	 */
 	public DefaultListModel getListModel() {
 		return this.inventoryItems;
@@ -279,14 +279,17 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	}
 
 	/**
-	 * @param input
+	 * 
+	 * causes a use action.
+	 * @param item  the item on which the action is performed
 	 */
 	public void use(Item item) {
 		getApplicationHandler().getUseItemHandler().useItem(item);
 	}
 
 	/**
-	 * @param input
+	 * causes a pickup action.
+	 * @param item  the item on which the action is performed
 	 */
 	public void pickup(Item item) {
 		getApplicationHandler().getPickupHandler().pickUp(item);
