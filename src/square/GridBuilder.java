@@ -20,19 +20,9 @@ public class GridBuilder {
 	public static int MIN_HSIZE = 10;
 
 	/**
-	 * Percentage of square covered by grenades.
-	 */
-	public static float PERCENTAGEGRENADES = 0.05f;
-
-	/**
 	 * Max percentage of squares covered by walls.
 	 */
 	public static float MAX_PERCENTAGEWALLS = 0.2f;
-
-	/**
-	 * Percentage of max length of a wall.
-	 */
-	public static float MAX_LENGTHPERCENTAGEWALL = 0.5f;
 	
 	/**
 	 * Horizontal size of this grid.
@@ -67,11 +57,44 @@ public class GridBuilder {
 	 * @param 	vSize
 	 * 			The vertical size for this grid builder
 	 */
-	public GridBuilder(int hSize, int vSize){
+	public GridBuilder(int hSize, int vSize) throws IllegalArgumentException {
+		if(!isValidSize(hSize,vSize))
+			throw new IllegalArgumentException();
 		this.hSize = hSize;
 		this.vSize = vSize;
 	}
 	
+	/**
+	 * @param 	hSize
+	 * 			The horizontal size
+	 * @param 	vSize
+	 * 			The vertical size
+	 * @return	True if and only if when the given values
+	 * 			are larger or equal to the minimal values.
+	 */
+	private boolean isValidSize(int hSize, int vSize) {
+		return hSize >= MIN_HSIZE && vSize >= MIN_VSIZE;
+	}
+	
+	/**
+	 * Set the grid for this grid builder
+	 * 
+	 * @param 	grid
+	 * 			The grid to be set
+	 */
+	private void setGrid(Square[][] grid){
+		this.grid = grid;
+	}
+	
+	/**
+	 * Returns the grid constructed in the grid builder.
+	 * 
+	 * @return	The grid
+	 */
+	private Square[][] getGrid(){
+		return this.grid;
+	}
+
 	/**
 	 * Creator method for squares
 	 * 
@@ -84,7 +107,7 @@ public class GridBuilder {
 	/**
 	 * Construct the grid for this grid builder.
 	 */
-	public void construct(){
+	public void constructSquares(){
 		Square[][] grid = new Square[hSize][vSize];
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
@@ -98,22 +121,13 @@ public class GridBuilder {
 		
 	}
 	
-	
-	private void setGrid(Square[][] grid){
-		this.grid = grid;
-	}
-	
-	private Square[][] getGrid(){
-		return this.grid;
-	}
-	
 	/**
 	 * Connect the squares in the grid of this grid builder.
 	 * 
 	 * @param 	grid
 	 * 			The grid containing the squares to be connected.
 	 */
-	public void connect(){
+	private void connect(){
 		Square[][] grid = getGrid();
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
@@ -144,7 +158,7 @@ public class GridBuilder {
 	 * @return	The square in the given direction from the square at
 	 * 			the given location.
 	 */
-	public Square neighborInGrid(int i, int j, Direction direction) throws IndexOutOfBoundsException {
+	private Square neighborInGrid(int i, int j, Direction direction) throws IndexOutOfBoundsException {
 		int x = i; 
 		int y = j;
 		switch (direction) {
@@ -217,7 +231,7 @@ public class GridBuilder {
 	 * @param 	maxLength
 	 * 			The maximal length of the wall
 	 */
-	public Wall buildWall(Square square, int maxLength) throws IllegalStateException {
+	private Wall buildWall(Square square, int maxLength) throws IllegalStateException {
 		Random random = new Random();
 		boolean vertical = random.nextBoolean();
 		Direction direction;
@@ -249,7 +263,7 @@ public class GridBuilder {
 	 * @param 	otherSquare
 	 * 			The other square to connect the square to
 	 */
-	public void connect(Square square, Direction direction, Square otherSquare){
+	private void connect(Square square, Direction direction, Square otherSquare){
 		try{
 			square.setNeigbor(direction, otherSquare);
 		} catch (Exception e){
