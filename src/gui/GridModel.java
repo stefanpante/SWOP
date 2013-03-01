@@ -39,41 +39,49 @@ public class GridModel extends Observable {
 	
 	public void addToLightTrailBlue(Coordinate2D coordinate){
 		lightTrailBlue.add(coordinate);
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void addToLightTrailRed(Coordinate2D coordinate){
 		lightTrailRed.add(coordinate);
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void addToLightGrenades(Coordinate2D coordinate, Square square){
 		lightGrenades.add(coordinate);
+		setChanged();
 		notifyObservers();
 	}
 		
 	public void setPlayer1(Coordinate2D coordinate){
 		this.player1 = coordinate;
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void setPlayer2(Coordinate2D coordinate){
 		this.player2 = coordinate;
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void setWalls(ArrayList<Coordinate2D> walls){
 		this.walls = walls;
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void setLightTrailBlue(ArrayList<Coordinate2D> lightTrail){
 		this.lightTrailBlue = lightTrail;
+		setChanged();
 		notifyObservers();
 	}
 	
 	public void setLightTrailRed(ArrayList<Coordinate2D> lightTrail){
 		this.lightTrailRed = lightTrail;
+		setChanged();
 		notifyObservers();
 	}
 	
