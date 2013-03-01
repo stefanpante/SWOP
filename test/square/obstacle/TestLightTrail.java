@@ -30,7 +30,6 @@ public class TestLightTrail {
 		
 		lightTrail.addSquare(squareTwo);
 		assertEquals(lightTrail.getLength(), 2);
-
 	}
 
 	/**
