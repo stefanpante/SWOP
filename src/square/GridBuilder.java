@@ -249,9 +249,7 @@ public class GridBuilder {
 			lastSquare = lastSquare.getNeighor(direction);
 			wall.addSquare(lastSquare);
 		}
-		
-		if()
-		
+				
 		if(wall.contains(getBottomLeft()) || wall.contains(getTopRight()))
 			throw new IllegalStateException("A wall cannot contain the bottom left or top right square");
 		
