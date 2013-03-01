@@ -276,4 +276,19 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 
 	}
 
+	/**
+	 * @param input
+	 */
+	public void use(Item item) {
+		getApplicationHandler().getUseItemHandler().useItem(item);
+	}
+
+	/**
+	 * @param input
+	 */
+	public void pickup(Item item) {
+		getApplicationHandler().getPickupHandler().pickUp(item);
+		
+	}
+
 }

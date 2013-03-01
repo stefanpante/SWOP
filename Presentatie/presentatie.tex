@@ -95,7 +95,23 @@ Test-cases voor elke package.
 \end{frame}
 
 \subsection{Grid constructie}
+\begin{frame}{Inventories}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
 \begin{frame}{Constructie van het Grid}
+\begin{itemize}
+	\item Klasse die een random grid genereert.
+	\item Dit grid voldoet aan de verschillende constraints.
+\end{itemize}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{../uml/gridBuilder.png}
+\end{center}
+\end{figure}
 
 \end{frame}
 
@@ -140,7 +156,7 @@ Sequentie diagrammen van de use cases:
 
 \begin{frame}[plain]
 \begin{center}
-\includegraphics[width= 0.90\linewidth]{../uml/pickup_SD.png}
+\includegraphics[width= 1\linewidth]{../uml/move_SD.png}
 \end{center}
 \end{frame}
 
@@ -154,7 +170,7 @@ Sequentie diagrammen van de use cases:
 
 \begin{frame}[plain]
 \begin{center}
-\includegraphics[width= 0.90\linewidth]{../uml/pickup_SD.png}
+\includegraphics[width= 0.90\linewidth]{../uml/endTurn_SD.png}
 \end{center}
 \end{frame}
 
@@ -173,20 +189,36 @@ Sequentie diagrammen van de use cases:
 \end{frame}
 
 \section{Test cases}
+\subsection{JUnit}
 \begin{frame}{Test cases}
 \begin{multicols}{2}
 \tableofcontents[currentsection]
 \end{multicols}
 \end{frame}
 
-\subsection{JUnit}
 \begin{frame}{JUnit test per klasse}
-
+\begin{itemize}
+	\item Test-Driven Development
+	\begin{itemize}
+		\item	Test klassen per klasse.
+		\item	Methodes op voorhand uitwerking in Tests.
+		\item	Gaandeweg extra tests bij nieuwe functionaliteit.
+	\end{itemize}
+\end{itemize}
 \end{frame}
 
 \subsection{Eclemma}
-\begin{frame}
+\begin{frame}{Test cases}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
 
+\begin{frame}[plain]{Eclemma}
+Voldoende tests en coverage in onderste lagen van het model.
+\begin{center}
+\includegraphics[width= 1\linewidth]{images/coverage.png}
+\end{center}
 \end{frame}
 
 
@@ -223,6 +255,13 @@ Overerving vindt plaats via:
 \begin{frame}[plain]{Modulair design}
 \begin{center}
 \includegraphics[width= 0.5\linewidth]{../uml/MVC.png}
+\end{center}
+\end{frame}
+
+\begin{frame}{Besluit}
+\vspace{0.8in}
+\begin{center}
+Bedankt voor uw aandacht.
 \end{center}
 \end{frame}
 
