@@ -128,24 +128,27 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	public ArrayList<Coordinate2D> getWallsRepresentation(){
 
 		ArrayList<Coordinate2D> wallCoor = new ArrayList<Coordinate2D>();
-		int y = game.getVSize() - 1 ;
+		int y = game.getVSize();
 		int x = 0;
 		Square s = game.getPlayer1().getStartPosition();
 		Square n = s;
 		while(s.hasNeighbor(Direction.NORTH)){
 			while(n.hasNeighbor(Direction.EAST)){
+				if(n.isObstructed())
+					wallCoor.add(new Coordinate2D(x,y));
 
 				try{
 					n = n.getNeighbor(Direction.EAST);
+					
 					y--;
-					wallCoor.add(new Coordinate2D(x,y));
+					
 				} catch(Exception e){
 					break;
 				}
 			}
 			try{
 				s = s.getNeighbor(Direction.NORTH);
-				y = game.getVSize() - 1;
+				y = game.getVSize();
 				n = s;
 				x++;
 			}
