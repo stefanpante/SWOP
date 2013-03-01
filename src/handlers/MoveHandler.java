@@ -17,13 +17,24 @@ public class MoveHandler extends Handler {
 		this.game = game;
 	}
 	
-	public void check(){
+	// Checks the precondition of the use case Move
+	public boolean checkToProceed(){
+		if(game.getCurrentPlayer().getRemainingActions() > 0){
+			return true;
+		}
 		
+		return false;
 	}
+	
 	public void move(Direction direction){
-		Square newPosition = game.getCurrentPlayer().getPosition().getNeighor(direction);
-		game.getCurrentPlayer().move(newPosition);
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Square newPosition = currentPosition.getNeighor(direction);
+		if(currentPosition.canMoveTo(newPosition)){
+			game.getCurrentPlayer().move(newPosition);
+		}
 		game.getCurrentPlayer().incrementActions();
 	}
+	
+	public void endAction(){
 
 }
