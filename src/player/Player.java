@@ -6,6 +6,7 @@ import square.Square;
 
 import items.Inventory;
 import items.Item;
+import items.PlayerInventory;
 
 /**
  * Player class
@@ -32,7 +33,7 @@ public class Player extends Observable {
 	/**
 	 * The inventory of the player
 	 */
-	private Inventory items;
+	private PlayerInventory inventory;
 	
 	/**
 	 * keeps track of the number of actions this user has done;
@@ -48,11 +49,6 @@ public class Player extends Observable {
 	 * true if the user has moved during his turn
 	 */
 	private boolean moved;
-	
-	/**
-	 * The number of items a player can carry
-	 */
-	private static int INVENTORY_SIZE = 6;
 	
 	/**
 	 * The amount of action a player has during one move
@@ -71,7 +67,7 @@ public class Player extends Observable {
 		this.setStartPosition(startPosition);
 		this.setName(name);
 		
-		this.items = new Inventory(INVENTORY_SIZE);
+		this.inventory = new PlayerInventory();
 		this.actions = 0;
 		this.previousactions = 0;
 		this.moved = false;
@@ -170,13 +166,14 @@ public class Player extends Observable {
 		if(!canUseItem(itemToUse)){
 			throw new IllegalArgumentException();
 		}
-		items.take(itemToUse);
+		inventory.take(itemToUse);
 		getPosition().addUsedItem(itemToUse);
 	}
 	
-	public Inventory getInventory(){
-		return items;
+	public PlayerInventory getInventory(){
+		return inventory;
 	}
+	
 	/**
 	 * Sets an inventory for the player
 	 * @param 	inventory 
@@ -184,25 +181,24 @@ public class Player extends Observable {
 	 * @throws 	IllegalArgumentException
 	 * 			Thrown if the given inventory is not valid for the player.
 	 */
-	public void setInventory(Inventory inventory) throws IllegalArgumentException{
+	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
 		if(!isValidInventory(inventory)) 
 			throw new IllegalArgumentException("This inventory is invalid for this player");
-		else this.items = inventory;
+		else 
+			this.inventory = inventory;
 	}
 
 	//TODO check inventory
 	public boolean isValidInventory(Inventory inventory){
 		return false;
 	}
+	
 	/**
 	 * returns the current position of the player
 	 */
 	public Square getPosition() {
 		return currentPosition;
 	}
-
-
-	
 	
 	public int getRemainingActions(){
 		return ACTIONS - this.actions;
@@ -222,11 +218,23 @@ public class Player extends Observable {
 		
 	}
 	
+	/**
+	 * Checks if the player can use an item according to the following conditions:
+	 * 	- The item must be in the player's inventory.
+	 *	- It must be possible to use the item on the current square.
+	 *	- There must at least be one remaining action.
+	 * 
+	 * @param item
+	 * @return	
+	 */
 	private boolean canUseItem(Item item){
 		if(!hasRemainingActions())
 			return false;
 		if(!getPosition().canBeUsedHere(item))
 			return false;
+		if(!inventory.hasItem(item))
+			return false;
+		
 		return true;
 	}
 	
