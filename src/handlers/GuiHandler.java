@@ -32,7 +32,7 @@ import utils.Coordinate2D;
  * @author Jonas Devlieghere
  *
  */
-public class GuiHandler extends Observable implements ActionListener, MouseListener  {
+public class GuiHandler implements ActionListener  {
 
 	public ApplicationHandler applicationHandler;
 	private Game game;
@@ -160,17 +160,6 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		game.getPlayer2().setName(player2);
 	}
 
-	/**
-	 * @param inventory
-	 */
-	public void updateListModel(Inventory inventory) {
-		DefaultListModel<Item> listModel = getListModel(); 
-		listModel.clear();
-		getListModel().clear();
-		for(Item item : inventory.getAllItems()){
-			listModel.addElement(item);
-		}
-	}
 
 	/**
 	 * @param hSize
@@ -225,59 +214,6 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		return player2CO;
 	}
 	
-	/**
-	 * @return
-	 */
-	public DefaultListModel getListModel() {
-		return this.inventoryItems;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		JList list = (JList) e.getSource();
-		int index = list.locationToIndex(e.getPoint());
-		System.out.println(index);
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
 	 * @param input
 	 */
