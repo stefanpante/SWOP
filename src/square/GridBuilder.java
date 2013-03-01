@@ -62,10 +62,6 @@ public class GridBuilder {
 	 */
 	private Square topRight;
 	
-	/**
-	 * Random generator
-	 */
-	private static final Random RANDOM = new Random();
 
 	
 	private ArrayList<Square> freeFields = new ArrayList<Square>();
@@ -228,8 +224,6 @@ public class GridBuilder {
 		int randomCoverage = 2 + (int) Math.floor((this.getMaxCoverage() - 2)
 				* Math.random());
 
-		int amountOfWalls = 1 + (int) Math.floor((randomCoverage / 2)
-				* Math.random());
 
 		int coverage = randomCoverage;
 		while (coverage >= 2) {
@@ -460,34 +454,6 @@ public class GridBuilder {
 		return "";
 	}
 	
-	/**
-	 * Build a wall with a given maximum length starting at the given square
-	 * 
-	 * @param 	square
-	 * 			The square where the wall starts
-	 * @param 	maxLength
-	 * 			The maximal length of the wall
-	 */
-	private Wall buildWall(Square square, int maxLength) throws IllegalStateException {
-		Direction direction = getRandomDirection();
-		
-		if(!square.hasNeighbor(direction))
-			throw new IllegalStateException("A wall needs at least two neighboring squares");
-		
-		Square lastSquare = square.getNeighbor(direction);
-		Wall wall = new Wall(square, lastSquare);
-		
-		while(lastSquare.hasNeighbor(direction) && wall.getLength() <= maxLength){
-			lastSquare = lastSquare.getNeighbor(direction);
-			wall.addSquare(lastSquare);
-		}
-				
-		if(wall.contains(getBottomLeft()) || wall.contains(getTopRight()))
-			throw new IllegalStateException("A wall cannot contain the bottom left or top right square");
-		
-		
-		return wall;
-	}
 	
 	
 	/**
@@ -530,16 +496,5 @@ public class GridBuilder {
 		return this.vSize * this.hSize;
 	}
 	
-	private Square getRandomSquare(){
-		int x = RANDOM.nextInt(hSize);
-		int y = RANDOM.nextInt(vSize);
-		return getGrid()[x][y];
-	}
-	
-	private Direction getRandomDirection(){
-		if(RANDOM.nextBoolean())
-			return Direction.NORTH;
-		return Direction.EAST;
-	}
 
 }

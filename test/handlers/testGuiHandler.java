@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import square.Square;
 import utils.Coordinate2D;
 import game.Game;
 
@@ -19,6 +20,20 @@ public class testGuiHandler {
 			System.out.println(c.toString());
 		}
 		
+	}
+	
+	@Test
+	public void removeDuplicates(){
+		ArrayList<Square> s = new ArrayList<Square>();
+		Square s2 = new Square();
+		
+		s.add(s2);
+		
+		ArrayList<Square> r= new ArrayList<Square>();
+		r.add(s2);
+		r.add(s2);
+		
+		s.removeAll(r);
 	}
 
 }
