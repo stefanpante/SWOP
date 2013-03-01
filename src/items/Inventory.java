@@ -76,7 +76,8 @@ public class Inventory{
 	/**
 	 * Checks if the inventory is empty.
 	 * 
-	 * @return
+	 * @return 	True if the inventory is empty,
+	 * 			otherwise False.
 	 */
 	@Basic
 	public boolean isEmpty(){

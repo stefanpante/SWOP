@@ -64,7 +64,7 @@ public class Square {
 	 * Returns the neighbor in the given direction if there is one.
 	 * 
 	 * @param	direction
-	 * @returns	Returns the neighbor if there is one for the given direction.
+	 * @return	Returns the neighbor if there is one for the given direction.
 	 * @throws	IllegalArgumentException
 	 * 			Throws exception if there is no neighbor in the given direction.
 	 */
@@ -105,8 +105,9 @@ public class Square {
 	/**
 	 * Checks if there is a neighbor in the given direction.
 	 * 
-	 * @param direction
-	 * @return
+	 * @param 	direction the direction of the neighbour
+	 * @return 	True if this square has a neighbor in the given direction
+	 * 			otherwise False.
 	 */
 	public boolean hasNeighbor(Direction direction){
 		return neighbors.containsKey(direction);
@@ -115,9 +116,10 @@ public class Square {
 	/**
 	 * Checks if the given square is a neighbor in the given direction.
 	 * 
-	 * @param direction
-	 * @param square
-	 * @return
+	 * @param 	direction the direction in which the square should be a neighbor
+	 * @param 	square the square that should be the neighbor in the given direction
+	 * @return 	true if the square is the neighbor in the given direction
+	 * 			otherwise false
 	 */
 	public boolean hasNeighbor(Direction direction, Square square) {
 		Square neighbor = neighbors.get(direction);
@@ -142,9 +144,9 @@ public class Square {
 	 * 	- The square has the current square as a neighbor in the opposing direction.
 	 * 	- The square has no square as a neighbor in the opposing direction.
 	 * 
-	 * @param direction
-	 * @param square
-	 * @return
+	 * @param direction checks whether the square could be a neighbor in the given direction
+	 * @param square  	the square to be checked
+	 * @return			True if the square could be a neighbor in the given direction
 	 */
 	public boolean canHaveAsNeighbor(Direction direction, Square square) {
 		if(square == null)
@@ -188,8 +190,8 @@ public class Square {
 	/**
 	 * Adds and uses the given item on this square.
 	 * 
-	 * @param 	item
-	 * 			The item to be added or used
+	 * @param 	lg
+	 * 			The lightgrenade to be added or used
 	 * @throws 	IllegalArgumentException
 	 * 			If the given item cannot be used on this square
 	 */
@@ -200,7 +202,7 @@ public class Square {
 	
 	/**
 	 * Returns true if there is an active LightGrenade on this square.
-	 * @return
+	 * @return true if there is an active lightGrenade on this square.
 	 */
 	public boolean hasActiveLightGrenade(){
 		if(usedLightGrenade == null)
@@ -291,14 +293,16 @@ public class Square {
 	}
 	
 	/**
-	 * @return
+	 * @return A HashMap with neighbours with there direction as the key
+	 * 			and the Square as value.
 	 */
 	private HashMap<Direction, Square> getNeighbors() {
 		return new HashMap<Direction, Square>(this.neighbors);
 	}
 	
 	/**
-	 * @return
+	 * Returns the neighbours of this square as a list.
+	 * @return Returns the neighbours of this square as a list.
 	 */
 	public ArrayList<Square> getNeighborsAsList() {
 		return new ArrayList<Square>(neighbors.values());
@@ -322,7 +326,7 @@ public class Square {
 	 * 
 	 * @param 	direction
 	 * 			The direction of the neighbor that will be checked.
-	 * @return	
+	 * @return	true if it is possible to move in the given direction
 	 */
 	public boolean canMoveTo(Direction direction){
 		Square direcionSquare;

@@ -157,7 +157,7 @@ public enum Direction {
 	
 	/**
 	 * Returns the opposite direction of the direction on which it is called.
-	 * @return
+	 * @return returns the direction opposite of this direction.
 	 */
 	abstract public Direction opposite();
 	

@@ -290,7 +290,8 @@ public class GridBuilder {
 
 	/**
 	 * 
-	 * @return
+	 * Returns the number of grenades on the grid.
+	 * @return the number of grenades on the grid.
 	 */
 	public int getNumberOfGrenades(){
 		return (int) (Math.ceil(this.getGridSize() * PERCENTAGEGRENADES));
@@ -299,9 +300,12 @@ public class GridBuilder {
 
 
 	/**
+	 * Returns an arrayList which contains all the neighbors of the given wall.
+	 * Contains also the wall. ( may contain duplicates)
 	 * 
-	 * @param sequence
-	 * @return 
+	 * @param 	sequence 	the building blocks of the wall (squares)
+	 * @return 	all the neighboring squares of a wall and all the 
+	 * 			squares included in the wall
 	 */
 	private ArrayList<Square> getNeighborWalls(ArrayList<Square> sequence){
 		ArrayList<Square> result = new ArrayList<Square>();
