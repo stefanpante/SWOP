@@ -5,8 +5,14 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.ImageObserver;
 
 import javax.swing.JPanel;
+
+import square.Square;
+import utils.Coordinate2D;
 
 /**
  * 
@@ -14,7 +20,7 @@ import javax.swing.JPanel;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class GridCanvas extends JPanel {
+public class GridCanvas extends JPanel implements ImageObserver {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
@@ -36,6 +42,9 @@ public class GridCanvas extends JPanel {
 		this.cols = cols;
 		this.rowHeight = height/rows;
 		this.colWidth = width/cols;
+		
+		this.gridModel= new GridModel();
+		gridModel.addToWalls(new Coordinate2D(0, 0), new Square());
 	}
 	
 	/**
@@ -47,7 +56,19 @@ public class GridCanvas extends JPanel {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
-	    
+	    for(Coordinate2D coordinate : getGridModel().getWalls().keySet()){
+	    	DrawImage(graphics, coordinate, "wall");
+	    }
+	}
+	
+	private void DrawImage(Graphics graphics, Coordinate2D coordinate, String image){
+		Image img = Toolkit.getDefaultToolkit().getImage("res/"+image+".png");
+    	graphics.drawImage(img,coordinate.getX(),coordinate.getY(),colWidth,rowHeight,Color.BLACK,this);
+
+	}
+	
+	public GridModel getGridModel(){
+		return this.gridModel;
 	}
 	
 }

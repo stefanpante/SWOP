@@ -83,7 +83,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		}else if(is(e,"NW")){
 			direction = Direction.NORTHWEST;
 		}
-		
+
 		if(getApplicationHandler().getMoveHandler().checkToProceed()){
 			getApplicationHandler().getMoveHandler().move(direction);
 			boolean won = getApplicationHandler().getMoveHandler().endAction();
@@ -128,32 +128,38 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	public ArrayList<Coordinate2D> getWallsRepresentation(){
 
 		ArrayList<Coordinate2D> wallCoor = new ArrayList<Coordinate2D>();
-		int y = game.getVSize() - 1 ;
+		int y = game.getVSize() -1;
 		int x = 0;
 		Square s = game.getPlayer1().getStartPosition();
 		Square n = s;
-		while(s.hasNeighbor(Direction.NORTH)){
-			while(n.hasNeighbor(Direction.EAST)){
-
+		while(true){
+			while(true){
+				if(n.isObstructed())
+					wallCoor.add(new Coordinate2D(x,y));
 				try{
 					n = n.getNeighbor(Direction.EAST);
-					y--;
+					x++;
+
 				} catch(Exception e){
 					break;
 				}
+				
 			}
+			
 			try{
 				s = s.getNeighbor(Direction.NORTH);
-				y = game.getVSize() - 1;
+				
 				n = s;
-				x++;
+				y--;
 			}
 			catch(Exception e){
 				break;
 			}
-			
+			x = 0;
+
 		}
 
+		return wallCoor;
 	}
 	/**
 	 * @return
@@ -207,12 +213,5 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 
 	}
-<<<<<<< HEAD
-
-
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/stefanpante/SWOP.git
 
 }
