@@ -166,23 +166,41 @@ public class ApplicationWindow {
         playerActionPanel.add(bNW);
 
         
-        /* Inventory Items */
+        /* Square Inventory Items */
+        JPanel squareInventoryPanel = new JPanel();
+        squareInventoryPanel.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Square Inventory",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        squareInventoryPanel.setBounds(5, 175, SIDEBAR_WIDTH-10, 100);
+        squareInventoryPanel.setLayout(null);
+        sideBarPanel.add(squareInventoryPanel);
+        
+        JList squareList = new JList(controller.getListModel());
+        squareList.addMouseListener(controller);
+        squareList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        squareList.setLayoutOrientation(JList.VERTICAL);
+        squareList.setVisibleRowCount(-1);
+        JScrollPane squareListScroller = new JScrollPane(squareList);
+        squareListScroller.setBounds(10,20,270,70);
+        squareInventoryPanel.add(squareListScroller);
+        
+        /* Player Inventory Items */
         JPanel inventoryPanel = new JPanel();
         inventoryPanel.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Inventory",
+				.getBorder("TitledBorder.border"), "Player's Inventory",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        inventoryPanel.setBounds(5, 175, SIDEBAR_WIDTH-10, 150);
+        inventoryPanel.setBounds(5, 275, SIDEBAR_WIDTH-10, 200);
         inventoryPanel.setLayout(null);
         sideBarPanel.add(inventoryPanel);
         
-        JList list = new JList(controller.getListModel());
-        list.addMouseListener(controller);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setVisibleRowCount(-1);
-        JScrollPane listScroller = new JScrollPane(list);
-        listScroller.setBounds(10,20,270,120);
-        inventoryPanel.add(listScroller);
+        JList playerList = new JList(controller.getListModel());
+        playerList.addMouseListener(controller);
+        playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        playerList.setLayoutOrientation(JList.VERTICAL);
+        playerList.setVisibleRowCount(-1);
+        JScrollPane playerListScroller = new JScrollPane(playerList);
+        playerListScroller.setBounds(10,20,270,170);
+        inventoryPanel.add(playerListScroller);
     }
     
     /**

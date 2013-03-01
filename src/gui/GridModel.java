@@ -14,10 +14,10 @@ import utils.Coordinate2D;
  */
 public class GridModel {
 
-	HashMap<Coordinate2D, Square> walls;
-	HashMap<Coordinate2D, Square> lightTrails;
-	HashMap<Coordinate2D, Square> lightGrenades;
-	HashMap<Coordinate2D, Square> players;
+	private HashMap<Coordinate2D, Square> walls;
+	private HashMap<Coordinate2D, Square> lightTrails;
+	private HashMap<Coordinate2D, Square> lightGrenades;
+	private HashMap<Coordinate2D, Square> players;
 	
 	public GridModel(){
 		

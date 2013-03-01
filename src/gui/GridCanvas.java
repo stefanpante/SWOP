@@ -18,8 +18,7 @@ public class GridCanvas extends JPanel {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
-	
-//	private
+	private GridModel gridModel;
 
 	/**
 	 * 
