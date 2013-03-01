@@ -31,7 +31,7 @@ public class Square {
 	/**
 	 * Inventory containing all items on the square
 	 */
-	private Inventory inventory;
+	private SquareInventory inventory;
 	
 	/**
 	 * All the items used on this square
@@ -49,7 +49,7 @@ public class Square {
 	 */
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
-		this.inventory = new Inventory();
+		this.inventory = new SquareInventory();
 		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
@@ -250,7 +250,7 @@ public class Square {
 				return true;
 		return false;
 	}
-
+	
 	/**
 	 * @return
 	 */
@@ -266,5 +266,36 @@ public class Square {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param direction
+	 * @return
+	 */
+	public boolean canMoveTo(Direction direction){
+		Square direcionSquare;
+		try {
+			direcionSquare = getNeighor(direction);
+		} catch (Exception e) {
+			return false;
+		}
+		if(direcionSquare.isObstructed())
+			return false;
+		if(direction.isDiagonal()){
+			ArrayList<Direction> dirs = direction.neighborDirections();
+			Square s1 = null;
+			Square s2 = null;
+			try{
+				s1 = getNeighor(dirs.get(0)); 
+				s2 = getNeighor(dirs.get(0));
+			} catch (Exception exp){
+				//This should never happen.
+				assert(false);
+			}
+			if(s1.getObstacle().equals(s2.getObstacle())){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }
