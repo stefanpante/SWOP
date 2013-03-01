@@ -5,23 +5,18 @@ package gui;
 
 import game.Game;
 import handlers.GuiHandler;
+import items.Item;
 
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Observable;
-import java.util.Observer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
@@ -43,6 +38,9 @@ public class ApplicationWindow {
 	private GuiHandler controller;
 	private JFrame frame;	
 	private JLabel currentPlayerLabel;
+	
+	public static GridModel GRID_MODEL = new GridModel();
+
 
 	/**
 	 * Creates a new applicationWindow with a given GuiHandler.
@@ -167,40 +165,48 @@ public class ApplicationWindow {
 
         
         /* Square Inventory Items */
-        JPanel squareInventoryPanel = new JPanel();
-        squareInventoryPanel.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Square Inventory",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        squareInventoryPanel.setBounds(5, 175, SIDEBAR_WIDTH-10, 100);
-        squareInventoryPanel.setLayout(null);
-        sideBarPanel.add(squareInventoryPanel);
-        
-        JList squareList = new JList(controller.getListModel());
-        squareList.addMouseListener(controller);
-        squareList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        squareList.setLayoutOrientation(JList.VERTICAL);
-        squareList.setVisibleRowCount(-1);
-        JScrollPane squareListScroller = new JScrollPane(squareList);
-        squareListScroller.setBounds(10,20,270,70);
-        squareInventoryPanel.add(squareListScroller);
-        
-        /* Player Inventory Items */
         JPanel inventoryPanel = new JPanel();
         inventoryPanel.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Player's Inventory",
+				.getBorder("TitledBorder.border"), "Inventories",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        inventoryPanel.setBounds(5, 275, SIDEBAR_WIDTH-10, 200);
-        inventoryPanel.setLayout(null);
+        inventoryPanel.setBounds(5, 175, SIDEBAR_WIDTH-10, 70);
         sideBarPanel.add(inventoryPanel);
         
-        JList playerList = new JList(controller.getListModel());
-        playerList.addMouseListener(controller);
-        playerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        playerList.setLayoutOrientation(JList.VERTICAL);
-        playerList.setVisibleRowCount(-1);
-        JScrollPane playerListScroller = new JScrollPane(playerList);
-        playerListScroller.setBounds(10,20,270,170);
-        inventoryPanel.add(playerListScroller);
+        JButton pickup  = new JButton("Pick up item");
+        pickup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				ArrayList<Item> items = GRID_MODEL.getCurrentSquareInventory();
+				Item[] a = new Item[items.size()];
+				GRID_MODEL.getCurrentSquareInventory().toArray(a);
+
+                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
+                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
+                    a, 
+                    null);
+                getController().pickup(input);
+            }
+        });      
+        inventoryPanel.add(pickup);
+        
+        JButton use = new JButton("Use item");
+        use.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				ArrayList<Item> items = GRID_MODEL.getCurrentPlayerInventory();
+				Item[] a = new Item[items.size()];
+				GRID_MODEL.getCurrentPlayerInventory().toArray(a);
+
+                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
+                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
+                    a, 
+                    null);
+                getController().use(input);
+            }
+        });      
+        inventoryPanel.add(use);       
+        
+
     }
     
     /**
