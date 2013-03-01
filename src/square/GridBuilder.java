@@ -50,6 +50,12 @@ public class GridBuilder {
 	private Square topRight;
 	
 	/**
+	 * Random generator
+	 */
+	private static final Random RANDOM = new Random();
+
+	
+	/**
 	 * Create a new GridBuilder with the given dimension.
 	 * 
 	 * @param 	hSize
@@ -198,9 +204,8 @@ public class GridBuilder {
 	 * Construct walls randomly within the limitations of this grid builder.
 	 */
 	public void constructWalls(){
-		Random random = new Random();
 		int wallLimit = (int) (getGridSize() * MAX_PERCENTAGEWALLS);
-		int wallSize = random.nextInt(wallLimit-1)+1;
+		int wallSize = RANDOM.nextInt(wallLimit-1)+1;
 		while(wallSize >= 2){
 			try {
 				Wall wall = buildWall(getRandomSquare(), wallSize);
@@ -232,23 +237,23 @@ public class GridBuilder {
 	 * 			The maximal length of the wall
 	 */
 	private Wall buildWall(Square square, int maxLength) throws IllegalStateException {
-		Random random = new Random();
-		boolean vertical = random.nextBoolean();
-		Direction direction;
-		if(vertical){
-			direction = Direction.NORTH;
-		}else{
-			direction = Direction.EAST;
-		}
+		Direction direction = getRandomDirection();
+		
 		if(!square.hasNeigbor(direction))
-			throw new IllegalStateException();
+			throw new IllegalStateException("A wall needs at least two neighboring squares");
+		
 		Square lastSquare = square.getNeighor(direction);
 		Wall wall = new Wall(square, lastSquare);
-		lastSquare = lastSquare.getNeighor(direction);
+		
 		while(lastSquare.hasNeigbor(direction) && wall.getLength() <= maxLength){
-			wall.addSquare(lastSquare);
 			lastSquare = lastSquare.getNeighor(direction);
+			wall.addSquare(lastSquare);
 		}
+				
+		if(wall.contains(getBottomLeft()) || wall.contains(getTopRight()))
+			throw new IllegalStateException("A wall cannot contain the bottom left or top right square");
+		
+		
 		return wall;
 	}
 	
@@ -294,10 +299,15 @@ public class GridBuilder {
 	}
 	
 	private Square getRandomSquare(){
-		Random  random = new Random();
-		int x = random.nextInt(hSize);
-		int y = random.nextInt(vSize);
+		int x = RANDOM.nextInt(hSize);
+		int y = RANDOM.nextInt(vSize);
 		return getGrid()[x][y];
+	}
+	
+	private Direction getRandomDirection(){
+		if(RANDOM.nextBoolean())
+			return Direction.NORTH;
+		return Direction.EAST;
 	}
 
 }

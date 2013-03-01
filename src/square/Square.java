@@ -278,9 +278,12 @@ public class Square {
 	}
 	
 	/**
+	 * Checks whether from the current square it is possible to move to a
+	 * neighboring square in the given direction. 
 	 * 
-	 * @param direction
-	 * @return
+	 * @param 	direction
+	 * 			The direction of the neighbor that will be checked.
+	 * @return	
 	 */
 	public boolean canMoveTo(Direction direction){
 		Square direcionSquare;
@@ -292,21 +295,24 @@ public class Square {
 		if(direcionSquare.isObstructed())
 			return false;
 		if(direction.isDiagonal()){
-			ArrayList<Direction> dirs = direction.neighborDirections();
 			Square s1 = null;
 			Square s2 = null;
+			ArrayList<Direction> dirs = direction.neighborDirections();
 			try{
 				s1 = getNeighor(dirs.get(0)); 
-				s2 = getNeighor(dirs.get(0));
+				s2 = getNeighor(dirs.get(1));
 			} catch (Exception exp){
 				//This should never happen.
 				assert(false);
 			}
-			if(s1.getObstacle().equals(s2.getObstacle())){
-				return false;
+			if(s1 != null && s2 != null){
+				if(s1.isObstructed() && s2.isObstructed()){
+					if(s1.getObstacle().equals(s2.getObstacle())){
+						return false;
+					}
+				}
 			}
 		}
 		return true;
 	}
-	
 }
