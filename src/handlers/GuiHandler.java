@@ -20,6 +20,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.UIManager;
 
+import square.Direction;
+
 /**
  * @author Jonas Devlieghere
  *
@@ -52,6 +54,10 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	public void setGame(Game game){
 		this.game = game;
 	}
+	
+	public ApplicationHandler getApplicationHandler(){
+		return this.applicationHandler;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
@@ -59,22 +65,24 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(is(e,"N")){
+			getApplicationHandler().getMoveHandler().move(Direction.NORTH);
+		}else if(is(e,"NE")){
+			getApplicationHandler().getMoveHandler().move(Direction.NORTHEAST);
+		}else if(is(e,"E")){
+			getApplicationHandler().getMoveHandler().move(Direction.EAST);
+		}else if(is(e,"SE")){
+			getApplicationHandler().getMoveHandler().move(Direction.SOUTHEAST);
+		}else if(is(e,"S")){
+			getApplicationHandler().getMoveHandler().move(Direction.SOUTH);
+		}else if(is(e,"SW")){
+			getApplicationHandler().getMoveHandler().move(Direction.SOUTHWEST);
+		}else if(is(e,"W")){
+			getApplicationHandler().getMoveHandler().move(Direction.WEST);			
+		}else if(is(e,"NW")){
+			getApplicationHandler().getMoveHandler().move(Direction.NORTHWEST);
+		}else{
 			inventory.addItem(new LightGrenade());
 			updateListModel(inventory);
-		}else if(is(e,"NE")){
-			
-		}else if(is(e,"E")){
-			
-		}else if(is(e,"SE")){
-			
-		}else if(is(e,"S")){
-			
-		}else if(is(e,"SW")){
-			
-		}else if(is(e,"NW")){
-			
-		}else{
-			
 		}
 	}
 	

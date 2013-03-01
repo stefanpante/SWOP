@@ -50,11 +50,5 @@ public class PickUpHandler extends Handler {
 		
 	}
 	
-	public void showItems(){
-		Inventory inventory = game.getCurrentPlayer().getPosition().getInventory();
-		GuiHandler.updateListModel(inventory);
-	}
-	
-	
 
 }

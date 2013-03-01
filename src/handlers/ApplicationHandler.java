@@ -37,6 +37,14 @@ public class ApplicationHandler extends Handler {
     	this.pickUpHandler = new PickUpHandler(game);
     	this.useItemHandler = new UseItemHandler(game);
     }
+    
+    public MoveHandler getMoveHandler(){
+    	return this.moveHandler;
+    }
+    
+    public PickUpHandler getPickupHandler(){
+    	return this.pickUpHandler;
+    }
 
 	/**
 	 * Create a game based on the given dimensions of the grid
