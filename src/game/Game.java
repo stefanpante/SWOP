@@ -76,6 +76,7 @@ public class Game {
 		builder.constructWalls();
 		setPlayer1(new Player(builder.getBottomLeft(), "Player 1"));
 		setPlayer2(new Player(builder.getTopRight(), "Player 2"));
+		setCurrentPlayer(player1);
 	}
 	
 	public void setHSize(int size) throws IllegalArgumentException{

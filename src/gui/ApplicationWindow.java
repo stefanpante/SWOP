@@ -150,7 +150,7 @@ public class ApplicationWindow {
         
         JButton bSW = new JButton("SW");
         bSW.addActionListener(getController());
-        bNE.setActionCommand("SW");
+        bSW.setActionCommand("SW");
         playerActionPanel.add(bSW);
         
         JButton bW  = new JButton("W");
