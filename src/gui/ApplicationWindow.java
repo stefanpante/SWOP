@@ -26,7 +26,9 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 /**
- * @author jonas
+ * The application window of the game. Is used for the graphical user interface
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class ApplicationWindow {
@@ -40,21 +42,35 @@ public class ApplicationWindow {
 	
 	private GuiHandler controller;
 	private JFrame frame;	
-	private DefaultListModel<String> inventoryItems;
 	private JLabel currentPlayerLabel;
 
+	/**
+	 * Creates a new applicationWindow with a given GuiHandler.
+	 * The GuiHandler is used for the interaction between the model ant the view
+	 * 
+	 * @param controller	The GuiHandler that will handel all triggers.
+	 */
     public ApplicationWindow(GuiHandler controller) {
     	setController(controller);
-    	this.inventoryItems = new DefaultListModel<String>();
         initialize();
     }
     
+    /**
+     * Sets the dimensions used to draw the grid
+     * @param hSize the number of horizontal cells in the grid.
+     * @param vSize	the number of vertical cells in the grid.
+     */
     private void setSize(int hSize, int vSize){
     	this.hSize = hSize;
     	this.vSize = vSize;
     	controller.setDim(this.hSize, this.vSize);
     }
 
+    /**
+     * Initializes a new application window, with a grid and a sidebar.
+     * Adds listeners and buttons with which the flow of the game can
+     * be controlled.
+     */
     private void initialize() {
     	int hSize = 0, vSize = 0;
     	while(hSize < Game.MIN_HSIZE || vSize < Game.MIN_VSIZE){
@@ -159,32 +175,42 @@ public class ApplicationWindow {
         inventoryPanel.setLayout(null);
         sideBarPanel.add(inventoryPanel);
         
-        JList list = new JList(inventoryItems);
+        JList list = new JList(controller.getListModel());
+        list.addMouseListener(controller);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);
-        list.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-            	System.out.println("click");
-            }
-        });
         JScrollPane listScroller = new JScrollPane(list);
         listScroller.setBounds(10,20,270,120);
         inventoryPanel.add(listScroller);
     }
     
+    /**
+     * 
+     * @return	the GuiHandler which is used in this application window
+     */
     private GuiHandler getController(){
     	return this.controller;
     }
     
+    /**
+     * Sets the controller which this application should use
+     * @param controller	the GuiHandler instance which should be used 
+     * 						to interact with the model
+     */
     private void setController(GuiHandler controller){
     	this.controller = controller;
     }
     
-    public void setVisisble(){
+    /**
+     * Turns the Jframe on
+     */
+    public void setVisible(){
     	this.frame.setVisible(true);
     }
 
+
+    
 	
 	
 

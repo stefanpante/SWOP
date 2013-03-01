@@ -48,10 +48,5 @@ public class UseItemHandler extends Handler {
 		game.getCurrentPlayer().useItem(item);
 	}
 	
-	//TODO: if the player doesn't have any items in his inventory?
-	public void showItems(){
-		Inventory inventory = game.getCurrentPlayer().getInventory();
-		GuiHandler.updateListModel(inventory);
-	}
 
 }
