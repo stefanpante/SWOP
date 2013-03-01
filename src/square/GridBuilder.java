@@ -305,7 +305,7 @@ public class GridBuilder {
 	private ArrayList<Square> getNeighborWalls(ArrayList<Square> sequence){
 		ArrayList<Square> result = new ArrayList<Square>();
 		for(Square s: sequence){
-			if(!result.contains(s)) result.addAll(s.getNeighborsAsList());
+			result.addAll(s.getNeighborsAsList());
 		}
 		result.addAll(sequence);
 		return result;
