@@ -126,7 +126,8 @@ public class Square {
 	
 	/**
 	 * Returns whether the given square in the given direction is a valid 
-	 * neighbor for this square
+	 * neighbor for this square. The square may not be the square itself.
+	 * The given square may also not be null.
 	 * 
 	 * 
 	 * The square that is being set as a neighbor must apply to the 
@@ -139,6 +140,12 @@ public class Square {
 	 * @return
 	 */
 	public boolean canHaveAsNeighbor(Direction direction, Square square) {
+		if(square == null)
+			return false;
+		
+		if(this.equals(square))
+			return false;
+		
 		if(hasNeigbor(direction))
 			return false;
 		
@@ -261,8 +268,8 @@ public class Square {
 	/**
 	* Checks if the item can be used in the square.
 	*
-	* @param item
-	* @return False If the item is already used once in the square.
+	* @param 	item
+	* @return 	False If the item is already used once in the square.
 	*/
 	public boolean canBeUsedHere(Item item) {
 		if(!usedItems.contains(item))

@@ -6,6 +6,7 @@ import square.Square;
 
 import items.Inventory;
 import items.Item;
+import items.PlayerInventory;
 
 /**
  * Player class
@@ -32,7 +33,7 @@ public class Player extends Observable {
 	/**
 	 * The inventory of the player
 	 */
-	private Inventory items;
+	private PlayerInventory inventory;
 	
 	/**
 	 * keeps track of the number of actions this user has done;
@@ -50,14 +51,9 @@ public class Player extends Observable {
 	private boolean moved;
 	
 	/**
-	 * The number of items a player can carry
-	 */
-	private static int INVENTORY_SIZE = 6;
-	
-	/**
 	 * The amount of action a player has during one move
 	 */
-	private static int ACTIONS = 3;
+	public static int MAX_ALLOWED_ACTIONS = 3;
 	
 	/**
 	 * creates a new player with a given name and start position
@@ -71,7 +67,7 @@ public class Player extends Observable {
 		this.setStartPosition(startPosition);
 		this.setName(name);
 		
-		this.items = new Inventory(INVENTORY_SIZE);
+		this.inventory = new PlayerInventory();
 		this.actions = 0;
 		this.previousactions = 0;
 		this.moved = false;
@@ -98,8 +94,6 @@ public class Player extends Observable {
 		if(!isValidName(name)) throw new IllegalArgumentException("Not a valid name");
 		this.name = name;
 	}
-	
-	
 	
 	/**
 	 * returns true for now
@@ -131,10 +125,9 @@ public class Player extends Observable {
 		return startPosition;
 	}
 	
-	//TODO: when is a move valid?
-	public boolean isValidMove(Square pos){
-		return false;
-	}
+	/**
+	 * 
+	 */
 	
 	/**
 	 * Moves the player to another square
@@ -143,40 +136,49 @@ public class Player extends Observable {
 	 * 		   thrown if the player is unable to make this move 
 	 */
 	public void move(Square newPosition) throws IllegalStateException{
-		if(isValidMove(newPosition)) throw new IllegalStateException("Not a valid move");
-		else{
-			currentPosition = newPosition;
-			currentPosition.activateUsedItems();
-			moved = true;
-			//TODO check and add lighttrail.
-		}
-		
+		currentPosition = newPosition;
+		currentPosition.activateUsedItems();
+		moved = true;
 	}
 	
 	public void incrementActions(){
 		this.actions++;
 	}
 
-	public void pickUp(Item item) {
-		// TODO Auto-generated method stub
-		// check own inventory limits
-		
+	/**
+	 * Adds the item to the player's inventory.
+	 * 
+	 * @param	item
+	 * @throws	IllegalArgumentException
+	 * 			Thrown when adding the item would exceed the size of the inventory
+	 */
+	public void pickUp(Item item) throws IllegalArgumentException {
+		inventory.addItem(item);
 	}
 
 	/**
 	 * Method to select the item which the player is going to use
+	 * 
+	 * @param	Item
+	 * 			The item to use.
+	 * @throws	IllegalStateException
+	 * 			thrown when adding the item would exceed the size of the inventory.
+	 * @throws	IllegalArgumentException
+	 * 			If the item cannot be used on the current squre.
 	 */
-	public void useItem(Item itemToUse) throws IllegalArgumentException {
-		if(!canUseItem(itemToUse)){
-			throw new IllegalArgumentException();
-		}
-		items.take(itemToUse);
+	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
+		inventory.take(itemToUse);
 		getPosition().addUsedItem(itemToUse);
 	}
 	
-	public Inventory getInventory(){
-		return items;
+	/**
+	 * Returns the player's inventory.
+	 * @return
+	 */
+	public PlayerInventory getInventory(){
+		return inventory;
 	}
+	
 	/**
 	 * Sets an inventory for the player
 	 * @param 	inventory 
@@ -184,50 +186,44 @@ public class Player extends Observable {
 	 * @throws 	IllegalArgumentException
 	 * 			Thrown if the given inventory is not valid for the player.
 	 */
-	public void setInventory(Inventory inventory) throws IllegalArgumentException{
+	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
 		if(!isValidInventory(inventory)) 
 			throw new IllegalArgumentException("This inventory is invalid for this player");
-		else this.items = inventory;
+		else 
+			this.inventory = inventory;
 	}
 
 	//TODO check inventory
 	public boolean isValidInventory(Inventory inventory){
 		return false;
 	}
+	
 	/**
 	 * returns the current position of the player
 	 */
 	public Square getPosition() {
 		return currentPosition;
 	}
-
-
 	
+	public boolean hasMoved(){
+		return moved;
+	}
 	
 	public int getRemainingActions(){
-		return ACTIONS - this.actions;
+		return MAX_ALLOWED_ACTIONS - this.actions;
 	}
 
 	public boolean hasRemainingActions(){
 		return getRemainingActions() > 0;
 	}
 	
+	/**
+	 * End's the player his turn.
+	 */
 	public void endTurn() {
-		//TODO: add update for lighttrail
-		
-		// activates all items used on the current square
-		currentPosition.activateUsedItems();
-		// needed to check for 3 actions and the actions itself is needed for the lighttrail.
-		this.previousactions = actions;
-		
-	}
-	
-	private boolean canUseItem(Item item){
-		if(!hasRemainingActions())
-			return false;
-		if(!getPosition().canBeUsedHere(item))
-			return false;
-		return true;
+		this.previousactions += MAX_ALLOWED_ACTIONS;
+		actions = previousactions;
+		moved = false;
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package handlers;
 
+import player.Player;
 import square.Direction;
 import square.Square;
 import game.Game;
@@ -17,7 +18,12 @@ public class MoveHandler extends Handler {
 		this.game = game;
 	}
 	
-	// Checks the precondition of the use case Move
+	/**
+	 * Checks the precondition for the move use case
+	 * returns true if the preconditions are satisfied
+	 * @return 	true if the precondition is satisfied
+	 * 			otherwise false.
+	 */
 	public boolean checkToProceed(){
 		if(game.getCurrentPlayer().getRemainingActions() > 0){
 			return true;
@@ -26,20 +32,36 @@ public class MoveHandler extends Handler {
 		return false;
 	}
 	
+	/**
+	 * Moves in the given direction if it's possible, if it isn't
+	 * possible, the player doesn't move but does lose an action
+	 * @param 	direction	the direction in which the player wants to move
+	 * 
+	 */
 	public void move(Direction direction){
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-		Square newPosition = currentPosition.getNeighor(direction);
-		if(currentPosition.canMoveTo(newPosition)){
+
+		if(currentPosition.canMoveTo(direction)){
+			Square newPosition = currentPosition.getNeighor(direction);
 			game.getCurrentPlayer().move(newPosition);
+			game.getCurrentPlayer().incrementActions();
 		}
-		game.getCurrentPlayer().incrementActions();
+		
 	}
 	
-	public void endAction(){
+	/**
+	 * Checks if the end of the move causes the current player to win.
+	 * @return 	true if the move causes the player to win. 
+	 */
+	public boolean endAction(){
 		Player otherPlayer = game.getOtherPlayer();
 		Player currentPlayer = game.getCurrentPlayer();
 		
-		if(otherPlayer.ge)
+		if(otherPlayer.getStartPosition() == currentPlayer.getPosition()){
+			return true;
+		}
+		
+		return false;
 	}
 
 }

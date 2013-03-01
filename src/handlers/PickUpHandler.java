@@ -22,13 +22,32 @@ public class PickUpHandler extends Handler {
 	}
 	
 	/**
-	 * commandline for now, has to be integrated into the gui.
-	 * @throws IOException
+	 * Checks the precondition for the pick up use case
+	 * returns true if the preconditions are satisfied
+	 * @return 	true if the precondition is satisfied
+	 * 			otherwise false.
+	 */
+	public boolean checkToProceed(){
+		if(game.getCurrentPlayer().getRemainingActions() > 1){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	 * The player pickups the item he wants if his inventory allows it,
+	 * otherwise he will not receive the item and will lose an action.
+	 * @param item
 	 */
 	public void pickUp(Item item){
 		game.getCurrentPlayer().getPosition().getInventory().take(item);
-		game.getCurrentPlayer().pickUp(item);
-		game.getCurrentPlayer().incrementActions();
+		if(!game.getCurrentPlayer().getInventory().isFull()){
+			game.getCurrentPlayer().pickUp(item);
+			game.getCurrentPlayer().incrementActions();
+		}
+		
 	}
 	
 	public void showItems(){

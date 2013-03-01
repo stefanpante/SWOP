@@ -57,6 +57,9 @@ public class Game {
 		setPlayer1(new Player(bottomLeft, "Player 1"));
 		setPlayer2(new Player(topRight, "Player 2"));
 	}
+	
+	
+	
 
 	/**
 	 * Returns the value of the player1 of this Game as an Player.

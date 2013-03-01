@@ -83,7 +83,7 @@ public class TestInventory {
 		assertTrue(inventory.hasItem(item));
 	}
 	
-	@Test
+	@Test(expected=IllegalStateException.class)
 	public void testTakeItem() {
 		Inventory inventory = new Inventory();
 		Item item = new LightGrenade();
@@ -94,12 +94,7 @@ public class TestInventory {
 		inventory.take(item);
 		assertFalse(inventory.getAllItems().contains(item));
 		
-		try{
-			inventory.take(item);
-			fail("You shouldn't be able to take an item that isn't in the inventory");
-		} catch(Exception e){}
-		
-		
+		inventory.take(item);
 	}
 	
 	@Test
