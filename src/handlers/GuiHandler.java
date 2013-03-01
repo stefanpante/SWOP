@@ -5,10 +5,8 @@ package handlers;
 
 import game.Game;
 import gui.ApplicationWindow;
-import gui.InventoryListModel;
 import items.Inventory;
 import items.Item;
-import items.LightGrenade;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +31,6 @@ import utils.Coordinate2D;
 public class GuiHandler extends Observable implements ActionListener, MouseListener  {
 
 	public ApplicationHandler applicationHandler;
-	public static InventoryListModel listModel = new InventoryListModel();
 	private Game game;
 	Inventory inventory = new Inventory();
 

@@ -42,12 +42,17 @@ public class PickUpHandler extends Handler {
 	 * @param item
 	 */
 	public void pickUp(Item item){
-		game.getCurrentPlayer().getPosition().getInventory().take(item);
-		if(!game.getCurrentPlayer().getInventory().isFull()){
-			game.getCurrentPlayer().pickUp(item);
-			game.getCurrentPlayer().incrementActions();
+		try{
+			game.getCurrentPlayer().getPosition().getInventory().take(item);
+			if(!game.getCurrentPlayer().getInventory().isFull()){
+				game.getCurrentPlayer().pickUp(item);
+				game.getCurrentPlayer().incrementActions();
+			}
+		} catch(IllegalStateException e) {
+			System.err.println("The item cannot be removed because it is not in the square inventory.");
+		} catch(IllegalArgumentException e) {
+			System.err.println("Picking item resulted in overfull player inventory.");
 		}
-		
 	}
 	
 

@@ -1,6 +1,7 @@
 package handlers;
 
 import items.Inventory;
+
 import items.Item;
 
 import java.io.IOException;
@@ -42,10 +43,18 @@ public class UseItemHandler extends Handler {
 	}
 	
 	/**
-	 * 
+	 * Uses the given item for the player. Exceptions are handled when
+	 * the player uses an item that isn't in his inventory. (IllegalArgument)
+	 * Or when the player cannot use the item on the square.
 	 */
 	public void useItem(Item item) {
-		game.getCurrentPlayer().useItem(item);
+		try{
+			game.getCurrentPlayer().useItem(item);
+		} catch(IllegalStateException e) {
+			System.err.println("Item is not in player his inventory:" + item);
+		} catch(IllegalArgumentException e) {
+			System.err.println("Item cannot be used on the square.");
+		}
 	}
 	
 
