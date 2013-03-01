@@ -40,12 +40,10 @@ public class ApplicationWindow {
 	
 	private GuiHandler controller;
 	private JFrame frame;	
-	private DefaultListModel<String> inventoryItems;
 	private JLabel currentPlayerLabel;
 
     public ApplicationWindow(GuiHandler controller) {
     	setController(controller);
-    	this.inventoryItems = new DefaultListModel<String>();
         initialize();
     }
     
@@ -159,15 +157,11 @@ public class ApplicationWindow {
         inventoryPanel.setLayout(null);
         sideBarPanel.add(inventoryPanel);
         
-        JList list = new JList(inventoryItems);
+        JList list = new JList(controller.getListModel());
+        list.addMouseListener(controller);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setLayoutOrientation(JList.VERTICAL);
         list.setVisibleRowCount(-1);
-        list.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-            	System.out.println("click");
-            }
-        });
         JScrollPane listScroller = new JScrollPane(list);
         listScroller.setBounds(10,20,270,120);
         inventoryPanel.add(listScroller);
@@ -185,6 +179,8 @@ public class ApplicationWindow {
     	this.frame.setVisible(true);
     }
 
+
+    
 	
 	
 
