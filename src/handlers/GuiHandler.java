@@ -43,7 +43,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
         try {
         	UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         	ApplicationWindow window = new ApplicationWindow(this);
-            window.setVisisble();
+            window.setVisible();
         } catch (Exception e) {
             e.printStackTrace();
         }
