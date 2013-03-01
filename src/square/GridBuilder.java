@@ -3,6 +3,8 @@
  */
 package square;
 
+import items.LightGrenade;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,8 +15,7 @@ import java.util.Random;
 import square.obstacles.Wall;
 
 /**
- * @author jonas
- *
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */	
 public class GridBuilder {
 	
@@ -26,6 +27,10 @@ public class GridBuilder {
 	public static float MAX_PERCENTAGEWALLS = 0.2f;
 	
 	
+	/**
+	* Percentage of square covered by grenades
+	*/
+	public static float PERCENTAGEGRENADES = 0.05f;
 
 	/**
 	* Percentage of max length of a wall
@@ -62,6 +67,8 @@ public class GridBuilder {
 	 */
 	private static final Random RANDOM = new Random();
 
+	
+	private ArrayList<Square> freeFields = new ArrayList<Square>();
 	
 	/**
 	 * Create a new GridBuilder with the given dimension.
@@ -132,7 +139,10 @@ public class GridBuilder {
 		connect();
 		this.bottomLeft = grid[0][0];
 		this.topRight = grid[hSize-1][vSize-1];
-		
+		//Initialize freeFields
+		for (int i = 0; i < grid.length; i++) {
+			freeFields.addAll(Arrays.asList(grid[i]));
+		}
 	}
 	
 	/**
@@ -212,13 +222,8 @@ public class GridBuilder {
 	 * Construct walls randomly within the limitations of this grid builder.
 	 */
 	public void constructWalls() {
-		ArrayList<Square> candidates = new ArrayList<Square>();
-		for (int i = 0; i < grid.length; i++) {
-			candidates.addAll(Arrays.asList(grid[i]));
-		}
-
-		candidates.remove(this.bottomLeft);
-		candidates.remove(this.topRight);
+		freeFields.remove(this.bottomLeft);
+		freeFields.remove(this.topRight);
 
 		int randomCoverage = 2 + (int) Math.floor((this.getMaxCoverage() - 2)
 				* Math.random());
@@ -233,7 +238,7 @@ public class GridBuilder {
 			int length = (int) (2 + Math
 					.floor(((maxlength - 2) * Math.random()))); // Upper limit
 																// of the length
-			ArrayList<Square> sequence = getRandomSquareSequence(candidates,
+			ArrayList<Square> sequence = getRandomSquareSequence(freeFields,
 					orientation);
 			if (sequence.size() < 2) {
 				coverage--;
@@ -241,7 +246,7 @@ public class GridBuilder {
 			}
 			if (sequence.size() <= length) {
 				Wall wall = new Wall(sequence);
-				candidates.removeAll(getNeighborWalls(sequence));
+				freeFields.removeAll(getNeighborWalls(sequence));
 				coverage -= sequence.size();
 			}
 			// Implement iterator in wall?
@@ -250,13 +255,55 @@ public class GridBuilder {
 				ArrayList<Square> blocks = new ArrayList<Square>(
 						sequence.subList(0, length));
 				Wall wall = new Wall(blocks);
-				candidates.removeAll(getNeighborWalls(blocks));
+				freeFields.removeAll(getNeighborWalls(blocks));
 				coverage -= length;
 			}
+		}
+	}
+	
+	
+	/**
+	 * Covers 5 percent of the field with grenades. Grenades cannot be placed on
+	 * the starting position of a player or on a wall
+	 */
+	private void placeGrenades() {
+
+		int grenades = getNumberOfGrenades();
+		// Remove startpositions
+		freeFields.remove(getBottomLeft());
+		freeFields.remove(getTopRight());
+
+		// Add the grenades to the squares, random distribution
+		Random generator = new Random();
+		int i = 0;
+		while (i < grenades && !freeFields.isEmpty()) {
+			int l = freeFields.size();
+			Square s = freeFields.get(generator.nextInt(l));
+			if (!s.isObstructed()) {
+				s.getInventory().addItem(new LightGrenade());
+				i++;
+			}
+			freeFields.remove(s);
+
 		}
 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfGrenades(){
+		return (int) (Math.ceil(this.getGridSize() * PERCENTAGEGRENADES));
+	}
+		
+	
+	
+	/**
+	 * 
+	 * @param sequence
+	 * @return
+	 */
 	private ArrayList<Square> getNeighborWalls(ArrayList<Square> sequence){
 		ArrayList<Square> result = new ArrayList<Square>();
 		for(Square s: sequence){
