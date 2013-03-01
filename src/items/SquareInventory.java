@@ -1,5 +1,7 @@
 package items;
 
+import notnullcheckweaver.Nullable;
+
 /**
  * This class descibes the inventory of a square. contains items.
  * 
@@ -7,9 +9,13 @@ package items;
  *
  */
 public class SquareInventory extends Inventory {
-
+	
+	@Nullable
+	private LightGrenade lightGrenade;
+	
 	/**
-	 *  
+	 * Creates a square inventory with the given size. 
+	 * 
 	 * @param size
 	 */
 	public SquareInventory(int size) {
@@ -17,10 +23,22 @@ public class SquareInventory extends Inventory {
 	}
 
 	/**
-	 * 
+	 * Creates a square inventory with unlimited size.
 	 */
 	public SquareInventory() {
 		super();
+	}
+	
+	/**
+	 * Adds a LightGrenade to the inventory if possible.
+	 * @param lg
+	 */
+	public void addItem(LightGrenade lg) throws IllegalStateException{
+		addItem((Item)lg);
+		if(lightGrenade != null){
+			throw new IllegalStateException("You can only add one LightGrenade to the inventory");
+		}
+		lightGrenade = lg;
 	}
 	
 	/**
@@ -34,6 +52,16 @@ public class SquareInventory extends Inventory {
 											+ " is not a valid item for this "
 											+ this);
 		super.addItem(item);
+	}
+	
+	/**
+	 * Removes the only light grenade form the inventory.
+	 * @param lg
+	 * @throws IllegalStateException
+	 */
+	public void take(LightGrenade lg) throws IllegalStateException {
+		take((Item)lg);
+		lightGrenade = null;
 	}
 	
 	/**
@@ -60,5 +88,9 @@ public class SquareInventory extends Inventory {
 			return false;
 		}
 		return true;
+	}
+	
+	public boolean hasLightGrenade(){
+		return lightGrenade!=null;
 	}
 }

@@ -123,6 +123,14 @@ public class Player extends Observable {
 		this.currentPosition = startPosition;
 	}
 	
+	/**
+	 * returns the startposition of this player
+	 * @return Square startposition
+	 */
+	public Square getStartPosition(){
+		return startPosition;
+	}
+	
 	//TODO: when is a move valid?
 	public boolean isValidMove(Square pos){
 		return false;

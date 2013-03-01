@@ -178,6 +178,18 @@ public class Game {
 	}
 	
 	/**
+	 * Gets the player instance which isn't the current player.
+	 * e.g.: If the currentPlayer is player 1, player 2 is returned
+	 * @pre		currentPlayer == player1 || currentPlayer == player2
+	 * @return 	if(currentPlayer == player1) return player2
+	 * 			if(currentPlayer == player2) return player1
+	 */
+	public Player getOtherPlayer(){
+		if(currentPlayer == player1) return player2;
+		else return player1;
+	}
+	
+	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
 	 * @param 	currentPlayer
 	 *			The currentPlayer to check.
