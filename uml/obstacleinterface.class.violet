@@ -6,7 +6,7 @@
     <void property="name">
      <void property="text">
       <string>Obstacle
-«Interface»</string>
+«Class»</string>
      </void>
     </void>
    </object>
@@ -97,38 +97,6 @@
     </void>
    </object>
   </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
-    <void property="name">
-     <void property="text">
-      <string>Player
-</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double3">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double3">
-       <void class="java.awt.geom.Point2D$Double" method="getField">
-        <string>y</string>
-        <void method="set">
-         <object idref="Point2D$Double3">
-          <void method="setLocation">
-           <double>498.0</double>
-           <double>245.0</double>
-          </void>
-         </object>
-         <double>245.0</double>
-        </void>
-       </void>
-      </object>
-      <double>498.0</double>
-     </void>
-    </void>
-   </object>
-  </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
@@ -136,24 +104,6 @@
     </void>
     <void property="endArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
-    </void>
-   </object>
-   <object idref="InterfaceNode0"/>
-   <object idref="ClassNode1"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
-    </void>
-    <void property="endArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
-    </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
     </void>
    </object>
    <object idref="ClassNode0"/>
@@ -167,11 +117,8 @@
     <void property="endArrowHead">
      <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
     </void>
-    <void property="lineStyle">
-     <object class="com.horstmann.violet.LineStyle" field="DOTTED"/>
-    </void>
    </object>
-   <object idref="ClassNode2"/>
+   <object idref="ClassNode1"/>
    <object idref="InterfaceNode0"/>
   </void>
  </object>

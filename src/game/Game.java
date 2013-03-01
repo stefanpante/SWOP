@@ -29,6 +29,12 @@ import square.Square;
 public class Game {
 	
 	/**
+	 * the minimum vertical and horizontal size are 10 squares.
+	 */
+	public static final int MIN_VSIZE = 10;
+	public static final int MIN_HSIZE = 10;
+	
+	/**
 	 * The player1 of this Game object.
 	 */
 	private Player player1;

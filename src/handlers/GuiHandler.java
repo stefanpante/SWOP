@@ -24,17 +24,20 @@ import javax.swing.UIManager;
  * @author Jonas Devlieghere
  *
  */
-public class GuiHandler extends Observable implements ActionListener, MouseListener {
+public class GuiHandler extends Observable implements ActionListener {
 	
-	Inventory inventory;
+	public ApplicationHandler applicationHandler;
 	public static InventoryListModel listModel = new InventoryListModel();
 	private Game game;
+    Inventory inventory = new Inventory();
+
 	
-	public GuiHandler(Game game){
-		inventory = new Inventory();
-		this.game = game;
+	public GuiHandler(ApplicationHandler applicationHandler){
+		this.applicationHandler = applicationHandler;
 		run();
 	}
+	
+	
 	
 	public void run(){
         try {
@@ -46,12 +49,10 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
             e.printStackTrace();
         }
 	}
-	
-	public Inventory getInventory(){
-		return this.inventory;
-	}
-		
 
+	public void setGame(Game game){
+		this.game = game;
+	}
 
 
 	/* (non-Javadoc)
@@ -59,57 +60,16 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		Point point = e.getPoint();
-		// TODO: Whole shebang
-		inventory.addItem(new LightGrenade());
-        setChanged();
-        notifyObservers();
+		if(is(e,"N")){
+			System.out.println("Move NORTH");
+		}else{
+			inventory.addItem(new LightGrenade());
+			updateListModel(inventory);
+		}
 	}
 	
-	
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
-	 */
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	private boolean is(ActionEvent e,String string){
+		return e.getActionCommand().equals(string);
 	}
 
 	/**
@@ -126,6 +86,16 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	 */
 	public static void updateListModel(Inventory inventory) {
 		listModel.setInventory(inventory);
+		System.out.println(listModel.getSize());
+	}
+
+
+	/**
+	 * @param hSize
+	 * @param vSize
+	 */
+	public void setDim(int hSize, int vSize) {
+		applicationHandler.createGame(hSize,vSize);
 	}
 
 

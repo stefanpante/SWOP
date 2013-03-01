@@ -1,21 +1,147 @@
-\documentclass[xcolor=dvipsnames]{beamer} 
+\documentclass[t]{beamer}
+\usecolortheme[RGB={0,114,197}]{structure} 
+\usetheme{Ilmenau} 
+\usepackage{multicol}
 
-\usecolortheme[named=Blue]{structure} 
-\usetheme[height=7mm]{Rochester}
-\setbeamertemplate{blocks}[rounded][shadow=true] 
-\useoutertheme{infolines} 
-\setbeamertemplate{navigation symbols}{}
+\title{Software-Ontwerp}
+\subtitle{Iteratie 1}
+\author{Reniers V. - Devlieghere J. - Castel D. - Pante S.}
+\institute{KU Leuven}
 
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\author{Vincent Reniers, Dieter Castel, Stefan Pante, Jonas Devlieghere}
-\title{Iteration 1: Presentation}
 \begin{document}
 
-\begin{frame}
-\maketitle
+\frame{\titlepage} 
+\begin{frame}{Inhoud}
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
 \end{frame}
+
+
+
+\section{Inleiding} 
+\begin{frame}{Inleiding} 
+Thema's die aan bod komen:
+\begin{itemize}
+	\item High-Level bespreking van het ontwerp.
+	\item Onderdelen in detail bekeken.
+	\item GRASP en design patterns.
+	\item Uitbreidbaarheid van het ontwerp.
+	\item Test cases.
+\end{itemize}
+\end{frame}
+
+\section{Het ontwerp}
+\begin{frame}{Het ontwerp}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\subsection{Basisstructuur}
+\begin{frame}{Basistructuur}
+Packages:
+\begin{itemize}
+	\item Game
+	\item Square
+	\item Handlers
+	\item Items
+	\item Player
+	\item GUI
+\end{itemize}
+Test-cases voor elke package.
+\end{frame}
+
+
+\subsection{UML}
+\begin{frame}{UML Ontwerp}
+
+'% UML afbeelding hier.
+
+\end{frame}
+
+
+\subsection{Interactie}
+\begin{frame}{Onderlinge interactie}
+
+% Afbeelding met actoren en interacties.
+
+\end{frame}
+
+
+\section{Componenten}
+\begin{frame}{Componenten}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\subsection{Obstacles}
+\begin{frame}{Square en Obstacle}
+
+\end{frame}
+
+\subsection{Handlers}
+\begin{frame}{Handlers}
+
+\end{frame}
+
+\subsection{Inventories}
+\begin{frame}{Items in Inventory}
+
+\end{frame}
+
+\subsection{Grid constructie}
+\begin{frame}{Constructie van het Grid}
+
+\end{frame}
+
+\section{GRASP en Patterns}
+\begin{frame}{GRASP en Patterns}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\subsection{GRASP}
+\begin{frame}{GRASP Principes}
+
+\end{frame}
+
+\subsection{Patterns}
+\begin{frame}{Patterns}
+
+\end{frame}
+
+\section{Test cases}
+\begin{frame}{Test cases}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\subsection{JUnit}
+\begin{frame}{JUnit test per klasse}
+
+\end{frame}
+
+\subsection{Eclemma}
+\begin{frame}
+
+\end{frame}
+
+
+\section{Uitbreidbaarheid}
+\begin{frame}{Uitbreidbaarheid}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\subsection{Polymorfisme}
+\begin{frame}{Polymorfisme}
+
+\end{frame}
+
 
 \end{document}

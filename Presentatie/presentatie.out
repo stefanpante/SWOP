@@ -1,0 +1,18 @@
+\BOOKMARK [2][]{Outline0.1}{Inleiding}{}% 1
+\BOOKMARK [2][]{Outline0.2}{Het ontwerp}{}% 2
+\BOOKMARK [3][]{Outline0.2.1.5}{Basisstructuur}{Outline0.2}% 3
+\BOOKMARK [3][]{Outline0.2.2.6}{UML}{Outline0.2}% 4
+\BOOKMARK [3][]{Outline0.2.3.7}{Interactie}{Outline0.2}% 5
+\BOOKMARK [2][]{Outline0.3}{Componenten}{}% 6
+\BOOKMARK [3][]{Outline0.3.1.9}{Obstacles}{Outline0.3}% 7
+\BOOKMARK [3][]{Outline0.3.2.10}{Handlers}{Outline0.3}% 8
+\BOOKMARK [3][]{Outline0.3.3.11}{Inventories}{Outline0.3}% 9
+\BOOKMARK [3][]{Outline0.3.4.12}{Grid constructie}{Outline0.3}% 10
+\BOOKMARK [2][]{Outline0.4}{GRASP en Patterns}{}% 11
+\BOOKMARK [3][]{Outline0.4.1.14}{GRASP}{Outline0.4}% 12
+\BOOKMARK [3][]{Outline0.4.2.15}{Patterns}{Outline0.4}% 13
+\BOOKMARK [2][]{Outline0.5}{Test cases}{}% 14
+\BOOKMARK [3][]{Outline0.5.1.17}{JUnit}{Outline0.5}% 15
+\BOOKMARK [3][]{Outline0.5.2.18}{Eclemma}{Outline0.5}% 16
+\BOOKMARK [2][]{Outline0.6}{Uitbreidbaarheid}{}% 17
+\BOOKMARK [3][]{Outline0.6.1.20}{Polymorfisme}{Outline0.6}% 18

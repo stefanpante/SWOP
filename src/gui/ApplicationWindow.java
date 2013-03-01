@@ -3,18 +3,18 @@
  */
 package gui;
 
+import game.Game;
 import handlers.GuiHandler;
-import items.Inventory;
-import items.Item;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -29,17 +29,14 @@ import javax.swing.border.TitledBorder;
  * @author jonas
  *
  */
-public class ApplicationWindow implements Observer {
-
+public class ApplicationWindow {
 	
-	public static final int WINDOW_WIDTH = 800;
-	public static final int WINDOW_HEIGHT = 523;
-	public static final int GRID_WIDTH = 500;
-	public static final int SIDEBAR_WIDTH = WINDOW_WIDTH - GRID_WIDTH;
-	public static final int ROWS = 10;
-	public static final int COLS = 10;
-	public static final int ROW_HEIGHT = GRID_WIDTH/ROWS;
-	public static final int COL_WIDTH =  GRID_WIDTH/COLS;
+	public static final int WINDOW_WIDTH 	= 800;
+	public static final int WINDOW_HEIGHT 	= 523;
+	public static final int GRID_WIDTH 		= 500;
+	public static final int SIDEBAR_WIDTH 	= WINDOW_WIDTH - GRID_WIDTH;
+
+	private int hSize, vSize;
 	
 	private GuiHandler controller;
 	private JFrame frame;	
@@ -51,15 +48,26 @@ public class ApplicationWindow implements Observer {
     	this.inventoryItems = new DefaultListModel<String>();
         initialize();
     }
+    
+    private void setSize(int hSize, int vSize){
+    	this.hSize = hSize;
+    	this.vSize = vSize;
+    	controller.setDim(this.hSize, this.vSize);
+    }
 
     private void initialize() {
-    	
-    	String player1 = JOptionPane.showInputDialog(null, "First player's name", 
-    			"Player 1", 1);
-    	String player2 = JOptionPane.showInputDialog(null, "Second player's name", 
-    			"Player 2", 1);
-    	
-    	controller.setNames(player1,player2);
+    	int hSize = 0, vSize = 0;
+    	while(hSize < Game.MIN_HSIZE || vSize < Game.MIN_VSIZE){
+	    	hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the horizontal grid size (>="+Game.MIN_HSIZE+")", 
+	    			"Game Dimensions", 1));
+	    	vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the vertical grid size (>="+Game.MIN_VSIZE+")", 
+	    			"Game Dimensions", 1));
+	    	if(hSize < Game.MIN_HSIZE || vSize < Game.MIN_VSIZE){
+	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again.");
+	    	}
+    	}
+    	setSize(hSize, vSize);
+
     	
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -68,10 +76,9 @@ public class ApplicationWindow implements Observer {
 		frame.setTitle("Objectron");
 
         /* GRID */
-        GridCanvas gridPanel = new GridCanvas(GRID_WIDTH, GRID_WIDTH, 10, 10);
+        GridCanvas gridPanel = new GridCanvas(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
-        gridPanel.addMouseListener(getController());
         frame.getContentPane().setBackground(Color.BLACK);
         frame.getContentPane().add(gridPanel);
         
@@ -98,15 +105,57 @@ public class ApplicationWindow implements Observer {
         playerActionPanel.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Player Actions",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        playerActionPanel.setBounds(5, 55, SIDEBAR_WIDTH-10, 100);
+        playerActionPanel.setBounds(5, 55, SIDEBAR_WIDTH-10, 120);
+        sideBarPanel.setLayout(null);
         sideBarPanel.add(playerActionPanel);
+        
+        JButton bN  = new JButton("N");
+        bN.addActionListener(getController());
+        bN.setActionCommand("N");
+        playerActionPanel.add(bN);
+        
+        JButton bNE = new JButton("NE");
+        bNE.addActionListener(getController());
+        bNE.setActionCommand("NE");
+        playerActionPanel.add(bNE);
+        
+        JButton bE  = new JButton("E");
+        bE.addActionListener(getController());
+        bE.setActionCommand("E");
+        playerActionPanel.add(bE);
+        
+        JButton bSE = new JButton("SE");
+        bSE.addActionListener(getController());
+        bSE.setActionCommand("SE");
+        playerActionPanel.add(bSE);
+        
+        JButton bS  = new JButton("S");
+        bS.addActionListener(getController());
+        bS.setActionCommand("S");
+        playerActionPanel.add(bS);
+        
+        JButton bSW = new JButton("SW");
+        bSW.addActionListener(getController());
+        bNE.setActionCommand("SW");
+        playerActionPanel.add(bSW);
+        
+        JButton bW  = new JButton("W");
+        bW.addActionListener(getController());
+        bW.setActionCommand("W");
+        playerActionPanel.add(bW);
+        
+        JButton bNW = new JButton("NW");
+        bNW.addActionListener(getController());
+        bNW.setActionCommand("NW");
+        playerActionPanel.add(bNW);
+
         
         /* Inventory Items */
         JPanel inventoryPanel = new JPanel();
         inventoryPanel.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Inventory",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        inventoryPanel.setBounds(5, 155, SIDEBAR_WIDTH-10, 150);
+        inventoryPanel.setBounds(5, 175, SIDEBAR_WIDTH-10, 150);
         inventoryPanel.setLayout(null);
         sideBarPanel.add(inventoryPanel);
         
@@ -135,12 +184,6 @@ public class ApplicationWindow implements Observer {
     public void setVisisble(){
     	this.frame.setVisible(true);
     }
-
-	@Override
-	public void update(Observable o, Object arg) {
-		GuiHandler handler = (GuiHandler) o;
-		listModel.updateInventory(handler.getInventory());
-	}
 
 	
 	

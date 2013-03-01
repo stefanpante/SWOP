@@ -6,6 +6,8 @@ package square;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import game.Game;
+
 import java.util.Random;
 
 import square.obstacles.Wall;
@@ -16,11 +18,7 @@ import square.obstacles.Wall;
  */	
 public class GridBuilder {
 	
-	/**
-	 * the minimum vertical and horizontal size are 10 squares.
-	 */
-	public static int MIN_VSIZE = 10;
-	public static int MIN_HSIZE = 10;
+
 
 	/**
 	 * Max percentage of squares covered by walls.
@@ -89,7 +87,7 @@ public class GridBuilder {
 	 * 			are larger or equal to the minimal values.
 	 */
 	private boolean isValidSize(int hSize, int vSize) {
-		return hSize >= MIN_HSIZE && vSize >= MIN_VSIZE;
+		return hSize >= Game.MIN_HSIZE && vSize >= Game.MIN_VSIZE;
 	}
 	
 	/**
