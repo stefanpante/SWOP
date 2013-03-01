@@ -57,5 +57,10 @@ public class UseItemHandler extends Handler {
 		}
 	}
 	
+	
+	public Inventory showItems(){
+		return game.getCurrentPlayer().getInventory();
+	}
+
 
 }

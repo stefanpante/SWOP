@@ -207,12 +207,5 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 
 	}
-<<<<<<< HEAD
-
-
-=======
-	
-	
->>>>>>> branch 'master' of https://github.com/stefanpante/SWOP.git
 
 }

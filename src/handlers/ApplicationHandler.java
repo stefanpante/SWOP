@@ -18,8 +18,6 @@ public class ApplicationHandler extends Handler {
 	private UseItemHandler useItemHandler;
 	private Game game;
 	
-
-	
     public static void main(String[] args) {
     	ApplicationHandler applicationHandler = new ApplicationHandler();
     	applicationHandler.initialize();
