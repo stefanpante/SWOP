@@ -26,15 +26,16 @@ import javax.swing.UIManager;
  */
 public class GuiHandler extends Observable implements ActionListener, MouseListener {
 	
-	Inventory inventory;
+	public ApplicationHandler applicationHandler;
 	public static InventoryListModel listModel = new InventoryListModel();
 	private Game game;
 	
-	public GuiHandler(Game game){
-		inventory = new Inventory();
-		this.game = game;
+	public GuiHandler(ApplicationHandler applicationHandler){
+		this.applicationHandler = applicationHandler;
 		run();
 	}
+	
+	
 	
 	public void run(){
         try {
@@ -46,12 +47,10 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
             e.printStackTrace();
         }
 	}
-	
-	public Inventory getInventory(){
-		return this.inventory;
-	}
-		
 
+	public void setGame(Game game){
+		this.game = game;
+	}
 
 
 	/* (non-Javadoc)
@@ -69,7 +68,6 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	public void mouseClicked(MouseEvent e) {
 		Point point = e.getPoint();
 		// TODO: Whole shebang
-		inventory.addItem(new LightGrenade());
         setChanged();
         notifyObservers();
 	}
@@ -126,6 +124,16 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	 */
 	public static void updateListModel(Inventory inventory) {
 		listModel.setInventory(inventory);
+	}
+
+
+
+	/**
+	 * @param hSize
+	 * @param vSize
+	 */
+	public void setDim(int hSize, int vSize) {
+		applicationHandler.createGame(hSize,vSize);
 	}
 
 

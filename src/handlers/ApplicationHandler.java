@@ -22,22 +22,31 @@ public class ApplicationHandler extends Handler {
 	
     public static void main(String[] args) {
     	ApplicationHandler applicationHandler = new ApplicationHandler();
-    	applicationHandler.start();
+    	applicationHandler.initialize();
     }
     
-    public void start(){
-    	initialize();
+    public void initialize(){
+    	this.guiHandler = new GuiHandler(this);
+		start();
     }
     
-    private void initialize(){
-    	// construction of grid nodig voor game
- 
-    	this.game = new Game();
-    	
-    	this.guiHandler = new GuiHandler(game);
+    private void start(){    
+    	this.guiHandler.setGame(game);
     	this.endTurnHandler = new EndTurnHandler(game);
     	this.moveHandler = new MoveHandler(game);
     	this.pickUpHandler = new PickUpHandler(game);
     	this.useItemHandler = new UseItemHandler(game);
     }
+
+	/**
+	 * Create a game based on the given dimensions of the grid
+	 * 
+	 * @param 	hSize
+	 * 			Horizontal size of the game's grid
+	 * @param 	vSize
+	 * 			Vertical size of the game's grid
+	 */
+	public void createGame(int hSize, int vSize) {
+		this.game = new Game(hSize, vSize);
+	}
 }

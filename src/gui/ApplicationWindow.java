@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener;
 
 /**
  * @author jonas
@@ -36,10 +37,9 @@ public class ApplicationWindow implements Observer {
 	public static final int WINDOW_HEIGHT = 523;
 	public static final int GRID_WIDTH = 500;
 	public static final int SIDEBAR_WIDTH = WINDOW_WIDTH - GRID_WIDTH;
-	public static final int ROWS = 10;
-	public static final int COLS = 10;
-	public static final int ROW_HEIGHT = GRID_WIDTH/ROWS;
-	public static final int COL_WIDTH =  GRID_WIDTH/COLS;
+
+	private int row_height, row_width;
+	private int hSize, vSize;
 	
 	private GuiHandler controller;
 	private JFrame frame;	
@@ -51,15 +51,30 @@ public class ApplicationWindow implements Observer {
     	this.inventoryItems = new DefaultListModel<String>();
         initialize();
     }
+    
+    private void setSize(int hSize, int vSize){
+    	this.hSize = hSize;
+    	this.vSize = vSize;
+    	this.row_height = GRID_WIDTH / vSize;
+    	this.row_width  = GRID_WIDTH / hSize;
+    	controller.setDim(this.hSize, this.vSize);
+    }
 
     private void initialize() {
     	
-    	String player1 = JOptionPane.showInputDialog(null, "First player's name", 
-    			"Player 1", 1);
-    	String player2 = JOptionPane.showInputDialog(null, "Second player's name", 
-    			"Player 2", 1);
+    	int hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Horizontal Grid Size", 
+    			"10", 1));
+    	int vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Vertical Grid Size", 
+    			"10", 1));
     	
-    	controller.setNames(player1,player2);
+    	setSize(hSize, vSize);
+    	
+//    	String player1 = JOptionPane.showInputDialog(null, "First player's name", 
+//    			"Player 1", 1);
+//    	String player2 = JOptionPane.showInputDialog(null, "Second player's name", 
+//    			"Player 2", 1);
+//    	
+//    	controller.setNames(player1,player2);
     	
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -68,7 +83,7 @@ public class ApplicationWindow implements Observer {
 		frame.setTitle("Objectron");
 
         /* GRID */
-        GridCanvas gridPanel = new GridCanvas(GRID_WIDTH, GRID_WIDTH, 10, 10);
+        GridCanvas gridPanel = new GridCanvas(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
         gridPanel.addMouseListener(getController());
@@ -139,7 +154,6 @@ public class ApplicationWindow implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		GuiHandler handler = (GuiHandler) o;
-		listModel.updateInventory(handler.getInventory());
 	}
 
 	
