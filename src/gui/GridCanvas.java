@@ -16,8 +16,10 @@ import javax.swing.JPanel;
  */
 public class GridCanvas extends JPanel {
 	
-	int width, height, rows, cols;
-	int rowHeight, colWidth;
+	private int width, height, rows, cols;
+	private int rowHeight, colWidth;
+	
+//	private
 
 	/**
 	 * 
@@ -46,5 +48,7 @@ public class GridCanvas extends JPanel {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
+	    
 	}
+	
 }

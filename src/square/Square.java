@@ -2,6 +2,7 @@ package square;
 
 import items.Inventory;
 import items.Item;
+import items.LightGrenade;
 import items.SquareInventory;
 
 import java.util.ArrayList;
@@ -43,6 +44,12 @@ public class Square {
 	 */
 	@Nullable
 	private Obstacle obstacle;
+	
+	/**
+	 * 
+	 */
+	private LightGrenade usedLightGrenade;
+
 	
 	/**
 	 * Zero argument constructor for a square.
@@ -158,7 +165,7 @@ public class Square {
 	}
 	
 	/**
-	 * Returns a list of all the items that are placed on a square 
+	 * Returns a list of all the items that are placed on a square.
 	 */
 	public ArrayList<Item> getUsedItems() {
 		return usedItems;
@@ -179,6 +186,29 @@ public class Square {
 	}
 	
 	/**
+	 * Adds and uses the given item on this square.
+	 * 
+	 * @param 	item
+	 * 			The item to be added or used
+	 * @throws 	IllegalArgumentException
+	 * 			If the given item cannot be used on this square
+	 */
+	public void addUsedItem(LightGrenade lg) throws IllegalArgumentException {
+		addUsedItem((Item) lg);
+		usedLightGrenade = lg;
+	}
+	
+	/**
+	 * Returns true if there is an active LightGrenade on this square.
+	 * @return
+	 */
+	public boolean hasActiveLightGrenade(){
+		if(usedLightGrenade == null)
+			return false;
+		return usedLightGrenade.isActive();
+	}
+	
+	/**
 	 * Returns the inventory of this square.
 	 */
 	public Inventory getInventory() {
@@ -192,6 +222,8 @@ public class Square {
 		for(Item i: usedItems)
 			i.activate();
 	}
+	
+	
 	
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.

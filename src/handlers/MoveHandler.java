@@ -14,6 +14,12 @@ public class MoveHandler extends Handler {
 
 
 	private Game game;
+	
+	/**
+	 * Basic constructor that initiates the moveHandler with the given game. 
+	 * 
+	 * @param game
+	 */
 	public MoveHandler(Game game) {
 		this.game = game;
 	}
@@ -21,6 +27,7 @@ public class MoveHandler extends Handler {
 	/**
 	 * Checks the precondition for the move use case
 	 * returns true if the preconditions are satisfied
+	 * 
 	 * @return 	true if the precondition is satisfied
 	 * 			otherwise false.
 	 */
@@ -28,14 +35,15 @@ public class MoveHandler extends Handler {
 		if(game.getCurrentPlayer().getRemainingActions() > 0){
 			return true;
 		}
-		
 		return false;
 	}
 	
 	/**
 	 * Moves in the given direction if it's possible, if it isn't
 	 * possible, the player doesn't move but does lose an action
-	 * @param 	direction	the direction in which the player wants to move
+	 * 
+	 * @param 	direction	
+	 * 			The direction in which the player wants to move.
 	 * 
 	 */
 	public void move(Direction direction){
@@ -46,7 +54,10 @@ public class MoveHandler extends Handler {
 			game.getCurrentPlayer().move(newPosition);
 			game.getCurrentPlayer().incrementActions();
 		}
-		
+		if(game.getCurrentPlayer().getPosition().hasActiveLightGrenade()){
+			game.getCurrentPlayer().endTurn();
+			game.switchPlayer();
+		}
 	}
 	
 	/**

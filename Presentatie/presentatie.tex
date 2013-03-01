@@ -1,6 +1,7 @@
 \documentclass[t]{beamer}
 \usecolortheme[RGB={0,114,197}]{structure} 
 \usetheme{Ilmenau} 
+\usepackage{tikz}
 \usepackage{multicol}
 
 \title{Software-Ontwerp}
@@ -32,13 +33,13 @@ Thema's die aan bod komen:
 \end{frame}
 
 \section{Het ontwerp}
-\begin{frame}{Het ontwerp}
+\subsection{Basisstructuur}
+\begin{frame}{Componenten}
 \begin{multicols}{2}
 \tableofcontents[currentsection]
 \end{multicols}
 \end{frame}
 
-\subsection{Basisstructuur}
 \begin{frame}{Basistructuur}
 Packages:
 \begin{itemize}
@@ -54,41 +55,43 @@ Test-cases voor elke package.
 
 
 \subsection{UML}
-\begin{frame}{UML Ontwerp}
-
-'% UML afbeelding hier.
-
-\end{frame}
-
-
-\subsection{Interactie}
-\begin{frame}{Onderlinge interactie}
-
-% Afbeelding met actoren en interacties.
-
-\end{frame}
-
-
-\section{Componenten}
 \begin{frame}{Componenten}
 \begin{multicols}{2}
 \tableofcontents[currentsection]
 \end{multicols}
 \end{frame}
 
-\subsection{Obstacles}
-\begin{frame}{Square en Obstacle}
-
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width= 0.9\linewidth]{../uml/SimpleOverview.png}
+\end{center}
 \end{frame}
 
-\subsection{Handlers}
-\begin{frame}{Handlers}
+\section{Componenten}
+\subsection{Obstacles}
+\begin{frame}{Componenten}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
 
+\begin{frame}[plain]{Square en obstacle}
+\begin{center}
+\includegraphics[width= 0.9\linewidth]{../uml/classdiagramObstaclesSquare.png}
+\end{center}
 \end{frame}
 
 \subsection{Inventories}
-\begin{frame}{Items in Inventory}
+\begin{frame}{Inventories}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
 
+\begin{frame}[plain]{Items in Inventory}
+\begin{center}
+\includegraphics[width= 0.9\linewidth]{../uml/classdiagramInventory.png}
+\end{center}
 \end{frame}
 
 \subsection{Grid constructie}
@@ -96,21 +99,77 @@ Test-cases voor elke package.
 
 \end{frame}
 
-\section{GRASP en Patterns}
-\begin{frame}{GRASP en Patterns}
+\section{Interactie}
+\begin{frame}{Interactie}
 \begin{multicols}{2}
 \tableofcontents[currentsection]
 \end{multicols}
 \end{frame}
 
-\subsection{GRASP}
-\begin{frame}{GRASP Principes}
-
+\begin{frame}{Onderlinge interactie}
+Sequentie diagrammen van de use cases:
+\begin{itemize}
+	\item itemPickUp
+	\item moveTo
+	\item endTurn
+	\item useItem
+\end{itemize}
 \end{frame}
 
-\subsection{Patterns}
-\begin{frame}{Patterns}
+% Item pick up
+\subsection{Pick up}
+\begin{frame}{Interactie}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
 
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width= 0.90\linewidth]{../uml/pickup_SD.png}
+\end{center}
+\end{frame}
+
+% Move to
+\subsection{Move to}
+\begin{frame}{Interactie}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width= 0.90\linewidth]{../uml/pickup_SD.png}
+\end{center}
+\end{frame}
+
+% End turn
+\subsection{End Turn}
+\begin{frame}{Interactie}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width= 0.90\linewidth]{../uml/pickup_SD.png}
+\end{center}
+\end{frame}
+
+% Use Item
+\subsection{Use item}
+\begin{frame}{Interactie}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
+\begin{frame}[plain]{Use Item}
+\begin{center}
+\includegraphics[width= 1\linewidth]{../uml/useItem_SD.png}
+\end{center}
 \end{frame}
 
 \section{Test cases}
