@@ -10,7 +10,7 @@ public class Item {
 	/**
 	 * This flag indicates if the item is active or inactive.
 	 */
-	private boolean active = false;
+	private ItemState currentState = ItemState.INACTIVE;
 	
 	/**
 	 * Returns whether the item is active or inactive.
@@ -19,16 +19,33 @@ public class Item {
 	 * 			False when the item is inactive.
 	 */
 	public boolean isActive() {
-		return this.active;
+		return this.currentState == ItemState.ACTIVE;
+	}
+	
+	public ItemState getState(){
+		return this.currentState;
 	}
 	
 	/**
-	 * activates the item.
+	 * Activates the item.
 	 */
 	public void activate(){
-		this.active = true;
+		if(this.currentState != ItemState.INACTIVE)
+			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
+		this.currentState = ItemState.ACTIVE;
 	}
 	
+	public void use() throws IllegalStateException {
+		if(this.currentState != ItemState.ACTIVE)
+			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the used state.");
+		this.currentState = ItemState.USED;
+	}
+	
+	public void deactivate(){
+		if(this.currentState != ItemState.ACTIVE)
+			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
+		this.currentState = ItemState.INACTIVE;
+	}
 	@Override
 	public String toString() {
 		return "Item";

@@ -9,7 +9,9 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
- * @author jonas
+ * 
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class GridCanvas extends JPanel {
@@ -19,6 +21,15 @@ public class GridCanvas extends JPanel {
 	
 //	private
 
+	/**
+	 * 
+	 * Creates a new GridCanvas with the specified width and height in pixels.
+	 * the grid consists of squares of size height/rows x width/cols
+	 * @param width		The width of the canvas
+	 * @param height	The height of the canvas
+	 * @param rows		number of rows in the grid
+	 * @param cols		number of columns in the gris
+	 */
 	GridCanvas(int width, int height, int rows, int cols){
 		this.width = width;
 		this.height = height;
@@ -28,6 +39,9 @@ public class GridCanvas extends JPanel {
 		this.colWidth = width/cols;
 	}
 	
+	/**
+	 * Paints the grid
+	 */
 	public void paintComponent(Graphics graphics){
 		graphics.setColor(Color.WHITE);
 	    for (int i = 1; i <= rows-1; i++)

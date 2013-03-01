@@ -46,7 +46,10 @@ public class MoveHandler extends Handler {
 			game.getCurrentPlayer().move(newPosition);
 			game.getCurrentPlayer().incrementActions();
 		}
-		
+		if(game.getCurrentPlayer().getPosition().hasActiveLightGrenade()){
+			game.getCurrentPlayer().endTurn();
+			game.switchPlayer();
+		}
 	}
 	
 	/**
