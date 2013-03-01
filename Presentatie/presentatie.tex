@@ -95,7 +95,23 @@ Test-cases voor elke package.
 \end{frame}
 
 \subsection{Grid constructie}
+\begin{frame}{Inventories}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
 \begin{frame}{Constructie van het Grid}
+\begin{itemize}
+	\item Klasse die een random grid genereert.
+	\item Dit grid voldoet aan de verschillende constraints.
+\end{itemize}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{../uml/gridBuilder.png}
+\end{center}
+\end{figure}
 
 \end{frame}
 
@@ -183,6 +199,11 @@ Sequentie diagrammen van de use cases:
 \begin{frame}{JUnit test per klasse}
 \begin{itemize}
 	\item Test-Driven Development
+	\begin{itemize}
+		\item	Test klassen per klasse.
+		\item	Methodes op voorhand uitwerking in Tests.
+		\item	Gaandeweg extra tests bij nieuwe functionaliteit.
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
