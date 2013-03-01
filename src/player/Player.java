@@ -53,7 +53,7 @@ public class Player extends Observable {
 	/**
 	 * The amount of action a player has during one move
 	 */
-	private static int ACTIONS = 3;
+	public static int MAX_ALLOWED_ACTIONS = 3;
 	
 	/**
 	 * creates a new player with a given name and start position
@@ -95,8 +95,6 @@ public class Player extends Observable {
 		this.name = name;
 	}
 	
-	
-	
 	/**
 	 * returns true for now
 	 * @param name 	the name which has to be checked
@@ -128,14 +126,8 @@ public class Player extends Observable {
 	}
 	
 	/**
-	 * Move is not valid when the destinated square is obstructed.
 	 * 
-	 * @param pos
-	 * @return
 	 */
-	public boolean isValidMove(Square pos) {
-		return false;
-	}
 	
 	/**
 	 * Moves the player to another square
@@ -144,36 +136,45 @@ public class Player extends Observable {
 	 * 		   thrown if the player is unable to make this move 
 	 */
 	public void move(Square newPosition) throws IllegalStateException{
-		if(isValidMove(newPosition)) throw new IllegalStateException("Not a valid move");
-		else{
-			currentPosition = newPosition;
-			currentPosition.activateUsedItems();
-			moved = true;
-		}
-		
+		currentPosition = newPosition;
+		currentPosition.activateUsedItems();
+		moved = true;
 	}
 	
 	public void incrementActions(){
 		this.actions++;
 	}
 
-	public void pickUp(Item item) {
-		// TODO Auto-generated method stub
-		// check own inventory limits
-		
+	/**
+	 * Adds the item to the player's inventory.
+	 * 
+	 * @param	item
+	 * @throws	IllegalArgumentException
+	 * 			Thrown when adding the item would exceed the size of the inventory
+	 */
+	public void pickUp(Item item) throws IllegalArgumentException {
+		inventory.addItem(item);
 	}
 
 	/**
 	 * Method to select the item which the player is going to use
+	 * 
+	 * @param	Item
+	 * 			The item to use.
+	 * @throws	IllegalStateException
+	 * 			thrown when adding the item would exceed the size of the inventory.
+	 * @throws	IllegalArgumentException
+	 * 			If the item cannot be used on the current squre.
 	 */
-	public void useItem(Item itemToUse) throws IllegalArgumentException {
-		if(!canUseItem(itemToUse)){
-			throw new IllegalArgumentException();
-		}
+	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(itemToUse);
 		getPosition().addUsedItem(itemToUse);
 	}
 	
+	/**
+	 * Returns the player's inventory.
+	 * @return
+	 */
 	public PlayerInventory getInventory(){
 		return inventory;
 	}
@@ -209,37 +210,20 @@ public class Player extends Observable {
 	}
 	
 	public int getRemainingActions(){
-		return ACTIONS - this.actions;
+		return MAX_ALLOWED_ACTIONS - this.actions;
 	}
 
 	public boolean hasRemainingActions(){
 		return getRemainingActions() > 0;
 	}
 	
+	/**
+	 * End's the player his turn.
+	 */
 	public void endTurn() {
-		this.previousactions += ACTIONS;
+		this.previousactions += MAX_ALLOWED_ACTIONS;
 		actions = previousactions;
 		moved = false;
-	}
-	
-	/**
-	 * Checks if the player can use an item according to the following conditions:
-	 * 	- The item must be in the player's inventory.
-	 *	- It must be possible to use the item on the current square.
-	 *	- There must at least be one remaining action.
-	 * 
-	 * @param item
-	 * @return	
-	 */
-	private boolean canUseItem(Item item){
-		if(!hasRemainingActions())
-			return false;
-		if(!getPosition().canBeUsedHere(item))
-			return false;
-		if(!inventory.hasItem(item))
-			return false;
-		
-		return true;
 	}
 	
 	@Override
