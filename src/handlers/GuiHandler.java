@@ -5,6 +5,7 @@ package handlers;
 
 import game.Game;
 import gui.ApplicationWindow;
+import gui.GridCanvas;
 import items.Inventory;
 import items.Item;
 
@@ -14,11 +15,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Observable;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.UIManager;
+
+import player.Player;
 
 import square.Direction;
 import square.Square;
@@ -33,6 +37,12 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	public ApplicationHandler applicationHandler;
 	private Game game;
 	Inventory inventory = new Inventory();
+	
+	private Coordinate2D player1CO;
+	private HashMap<Coordinate2D,Square> player1LTCoordinates;
+	private Coordinate2D player2CO;
+	private HashMap<Coordinate2D,Square> player2LTCoordinates;
+
 
 	private DefaultListModel<Item> inventoryItems;
 
@@ -54,16 +64,19 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 
 	public void setGame(Game game){
 		this.game = game;
+		player1CO = new Coordinate2D(game.getVSize() -1, 0);
+		player2CO = new Coordinate2D(0, game.getHSize() -1);
+		player1LTCoordinates = new HashMap<Coordinate2D,Square>();
+		player2LTCoordinates = new HashMap<Coordinate2D,Square>();
 	}
 
 	public ApplicationHandler getApplicationHandler(){
 		return this.applicationHandler;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	/**
+	 * 
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		Direction direction = null;
 		if(is(e,"N")){
@@ -85,13 +98,53 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		}
 
 		if(getApplicationHandler().getMoveHandler().checkToProceed()){
-			getApplicationHandler().getMoveHandler().move(direction);
+			
+			try{
+				Square prevPosition = game.getCurrentPlayer().getPosition();
+				Player currentPlayer = game.getCurrentPlayer();
+				getApplicationHandler().getMoveHandler().move(direction);
+				if(currentPlayer == game.getPlayer1()){
+					player1LTCoordinates.put(player1CO, prevPosition);
+					player1CO = player1CO.getNeighbor(direction);
+					GridCanvas.GRID_MODEL.setPlayer1(player1CO);
+					for(Coordinate2D coor: player1LTCoordinates.keySet()){
+						  if(!currentPlayer.getLightTrail().contains(player1LTCoordinates.get(coor))){
+							  player1LTCoordinates.remove(coor);
+						  }
+					}
+					GridCanvas.GRID_MODEL.setLightTrailBlue(getPlayer1LightTrailCoordinates());
+				} else {
+					player2LTCoordinates.put(player2CO, prevPosition);
+					player2CO = player2CO.getNeighbor(direction);
+					GridCanvas.GRID_MODEL.setPlayer1(player1CO);
+					for(Coordinate2D coor: player2LTCoordinates.keySet()){
+						  if(!currentPlayer.getLightTrail().contains(player2LTCoordinates.get(coor))){
+							  player2LTCoordinates.remove(coor);
+						  }
+					}
+					GridCanvas.GRID_MODEL.setLightTrailRed(getPlayer1LightTrailCoordinates()));
+
+				}
+			}  catch(IllegalStateException e1) {
+				System.err.println("Player cannot move the square.");
+			} catch(IllegalArgumentException e2) {
+				System.err.println("Tried to move to a neighbor that is no square.");
+			}
+			
 			boolean won = getApplicationHandler().getMoveHandler().endAction();
 		}else{
 			// TOOD: Notifying?
 		}
 	}
 
+	public ArrayList<Coordinate2D> getPlayer1LightTrailCoordinates(){
+		return new ArrayList<Coordinate2D>(player1LTCoordinates.keySet());
+	}
+	
+	public ArrayList<Coordinate2D> getPlayer2LightTrailCoordinates(){
+		return new ArrayList<Coordinate2D>(player2LTCoordinates.keySet());
+	}
+	
 	private boolean is(ActionEvent e,String string){
 		return e.getActionCommand().equals(string);
 	}
@@ -161,6 +214,15 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 
 		return wallCoor;
 	}
+	
+	public Coordinate2D getPlayer1Coordinate(){
+		return player1CO;
+	}
+	
+	public Coordinate2D getPlayer2Coordinate(){
+		return player2CO;
+	}
+	
 	/**
 	 * @return
 	 */
