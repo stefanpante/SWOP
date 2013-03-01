@@ -64,25 +64,30 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Direction direction = null;
 		if(is(e,"N")){
-			getApplicationHandler().getMoveHandler().move(Direction.NORTH);
+			direction = Direction.NORTH;
 		}else if(is(e,"NE")){
-			getApplicationHandler().getMoveHandler().move(Direction.NORTHEAST);
+			direction = Direction.NORTHEAST;
 		}else if(is(e,"E")){
-			getApplicationHandler().getMoveHandler().move(Direction.EAST);
+			direction = Direction.EAST;
 		}else if(is(e,"SE")){
-			getApplicationHandler().getMoveHandler().move(Direction.SOUTHEAST);
+			direction = Direction.SOUTHEAST;
 		}else if(is(e,"S")){
-			getApplicationHandler().getMoveHandler().move(Direction.SOUTH);
+			direction = Direction.SOUTH;
 		}else if(is(e,"SW")){
-			getApplicationHandler().getMoveHandler().move(Direction.SOUTHWEST);
+			direction = Direction.SOUTHWEST;
 		}else if(is(e,"W")){
-			getApplicationHandler().getMoveHandler().move(Direction.WEST);			
+			direction = Direction.WEST;			
 		}else if(is(e,"NW")){
-			getApplicationHandler().getMoveHandler().move(Direction.NORTHWEST);
+			direction = Direction.NORTHWEST;
+		}
+		
+		if(getApplicationHandler().getMoveHandler().checkToProceed()){
+			getApplicationHandler().getMoveHandler().move(direction);
+			boolean won = getApplicationHandler().getMoveHandler().endAction();
 		}else{
-			inventory.addItem(new LightGrenade());
-			updateListModel(inventory);
+			// TOOD: Notifying?
 		}
 	}
 	
@@ -172,6 +177,6 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		
 	}
 	
-
+	
 
 }
