@@ -35,7 +35,6 @@ public class GridModel extends Observable {
 		this.lightGrenades = new ArrayList<Coordinate2D>();
 		this.currentPlayerInventory = new ArrayList<Item>();
 		this.currentSquareInventory = new ArrayList<Item>();
-		currentPlayerInventory.add(new LightGrenade());
 	}
 	
 	public void addToLightTrailBlue(Coordinate2D coordinate){
