@@ -37,12 +37,18 @@ public class TestGridBuilder {
 	public void testExceptions(){
 		GridBuilder gridBuilder = new GridBuilder(0, 0);
 		try {
-			gridBuilder.squareFromGrid(new Square[0][0], 3, 3, Direction.EAST);
+			gridBuilder.neighborInGrid(3, 3, Direction.EAST);
 			assertTrue(false);
-		} catch (IllegalAccessException e) {
+		} catch (IndexOutOfBoundsException e) {
 			assertTrue(true);
 		}
 	}
 	
+	@Test
+	public void wallTest(){
+		GridBuilder builder = new GridBuilder(10, 10);
+		builder.construct();
+		builder.constructWalls();
+	}
 
 }

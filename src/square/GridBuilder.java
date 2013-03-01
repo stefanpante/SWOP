@@ -3,6 +3,10 @@
  */
 package square;
 
+import java.util.Random;
+
+import square.obstacles.Wall;
+
 /**
  * @author jonas
  *
@@ -175,7 +179,66 @@ public class GridBuilder {
 		}
 		throw new IndexOutOfBoundsException();
 	}
-
+	
+	/**
+	 * Construct walls randomly within the limitations of this grid builder.
+	 */
+	public void constructWalls(){
+		Random random = new Random();
+		int wallLimit = (int) (getGridSize() * MAX_PERCENTAGEWALLS);
+		int wallSize = random.nextInt(wallLimit-1)+1;
+		while(wallSize >= 2){
+			try {
+				Wall wall = buildWall(getRandomSquare(), wallSize);
+				wallSize -= wall.getLength();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	
+	// TODO: Testing method
+	public String getCoordinate(Square square){
+		for(int i = 0; i < hSize; i++){
+			for(int j = 0; j < vSize; j++){
+				if(grid[i][j] == square){
+					return "("+i+","+j+")";
+				}
+			}
+		}
+		return "";
+	}
+	
+	/**
+	 * Build a wall with a given maximum length starting at the given square
+	 * 
+	 * @param 	square
+	 * 			The square where the wall starts
+	 * @param 	maxLength
+	 * 			The maximal length of the wall
+	 */
+	public Wall buildWall(Square square, int maxLength) throws IllegalStateException {
+		Random random = new Random();
+		boolean vertical = random.nextBoolean();
+		Direction direction;
+		if(vertical){
+			direction = Direction.NORTH;
+		}else{
+			direction = Direction.EAST;
+		}
+		if(!square.hasNeigbor(direction))
+			throw new IllegalStateException();
+		Square lastSquare = square.getNeighor(direction);
+		Wall wall = new Wall(square, lastSquare);
+		lastSquare = lastSquare.getNeighor(direction);
+		while(lastSquare.hasNeigbor(direction) && wall.getLength() <= maxLength){
+			wall.addSquare(lastSquare);
+			lastSquare = lastSquare.getNeighor(direction);
+		}
+		return wall;
+	}
+	
+	
 	/**
 	 * Connect the given square with the other square in the given direction
 	 * 
@@ -210,6 +273,17 @@ public class GridBuilder {
 	 */
 	public Square getTopRight(){
 		return this.topRight;
+	}
+	
+	public int getGridSize(){
+		return this.vSize * this.hSize;
+	}
+	
+	private Square getRandomSquare(){
+		Random  random = new Random();
+		int x = random.nextInt(hSize);
+		int y = random.nextInt(vSize);
+		return getGrid()[x][y];
 	}
 
 }

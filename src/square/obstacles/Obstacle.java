@@ -48,10 +48,12 @@ public abstract class Obstacle {
 	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
 	 */
 	public void addSquare(Square square) throws IllegalArgumentException {
-		if(isValidSquare(square))
+		if(isValidSquare(square)){
 			getSquares().add(square);
-		else
+			square.setObstacle(this);
+		}else{
 			throw new IllegalArgumentException("The square is invalid.");
+		}
 	}
 	
 	/**
