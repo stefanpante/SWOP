@@ -24,6 +24,12 @@ public class LightTrail extends Obstacle implements Observer{
 	 */
 	private int counter;
 
+	
+	public LightTrail(){
+		trail = new HashMap<Integer,Square>();
+		counter = 0;
+	}
+	
 	/**
 	 * Returns the value of the counter of this LightTrail as an int.
 	 * 
@@ -73,10 +79,14 @@ public class LightTrail extends Obstacle implements Observer{
 	}
 
 	private void addToTrail(int id, Square square) {
-		trail.put(id, square);
+		if(isValidSquare(square)){
+			trail.put(id, square);
+			addSquare(square);
+		}
 	}
 
 	private void removeFromTrail(int id) {
+		removeSquare(trail.get(id));
 		trail.remove(id);
 	}
 
@@ -153,10 +163,12 @@ public class LightTrail extends Obstacle implements Observer{
 	 * Method that gets called when the observable object changes.
 	 */
 	public void update(Observable o, Object arg) {
-		Square square = (Square) arg;
-		increaseCounter();
-		addToTrail(getCounter(), square);
-		clearTrail();		
+		if(arg !=null){
+			Square square = (Square) arg;
+			increaseCounter();
+			addToTrail(getCounter(), square);
+			clearTrail();	
+		}
 	}
 	
 }

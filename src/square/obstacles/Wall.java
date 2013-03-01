@@ -20,8 +20,8 @@ public class Wall extends Obstacle{
 	/**
 	 * Initialises the wall. Two squares must at least be given for a wall to be possible.
 	 * 
-	 * @param	Square First square.
-	 * @param	Square Second square.
+	 * @param	square First square.
+	 * @param	otherSquare Second square.
 	 * 
 	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
 	 */
