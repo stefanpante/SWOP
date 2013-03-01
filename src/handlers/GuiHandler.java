@@ -138,6 +138,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 				try{
 					n = n.getNeighbor(Direction.EAST);
 					y--;
+					wallCoor.add(new Coordinate2D(x,y));
 				} catch(Exception e){
 					break;
 				}
@@ -154,6 +155,7 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 			
 		}
 
+		return wallCoor;
 	}
 	/**
 	 * @return

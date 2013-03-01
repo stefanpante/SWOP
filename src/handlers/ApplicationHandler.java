@@ -35,7 +35,10 @@ public class ApplicationHandler extends Handler {
     	this.pickUpHandler = new PickUpHandler(game);
     	this.useItemHandler = new UseItemHandler(game);
     }
-    
+    public GuiHandler getGuiHandler(){
+    	return guiHandler;
+    	
+    }
     public MoveHandler getMoveHandler(){
     	return this.moveHandler;
     }

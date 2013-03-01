@@ -36,7 +36,7 @@ public class EndTurnHandler {
 	}
 	
 	public void endTurn(){
-		game.getCurrentPlayer().incrementActions();
+		game.getCurrentPlayer().endTurn();
 		game.switchPlayer();
 	}
 
