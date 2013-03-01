@@ -49,6 +49,12 @@ public class TestUseItemHandler {
 
 	@Test
 	public void testUseItem(){
+		Game game = new Game(new Square(),new Square());
+		UseItemHandler handler = new UseItemHandler(game);
+		
+		Item item = new LightGrenade();
+		handler.useItem(item);
+		assertTrue(game.getCurrentPlayer().getPosition().getUsedItems().contains(item));
 		
 	}
 	
