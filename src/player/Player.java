@@ -127,8 +127,13 @@ public class Player extends Observable {
 		return startPosition;
 	}
 	
-	//TODO: when is a move valid?
-	public boolean isValidMove(Square pos){
+	/**
+	 * Move is not valid when the destinated square is obstructed.
+	 * 
+	 * @param pos
+	 * @return
+	 */
+	public boolean isValidMove(Square pos) {
 		return false;
 	}
 	
