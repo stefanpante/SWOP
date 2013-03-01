@@ -202,7 +202,7 @@ public class Player extends Observable {
 	}
 	
 	public int getRemainingActions(){
-		return MAX_ALLOWED_ACTIONS - this.actions;
+		return this.actions - this.previousactions;
 	}
 
 	public boolean hasRemainingActions(){
