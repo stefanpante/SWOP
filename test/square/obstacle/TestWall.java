@@ -49,7 +49,7 @@ public class TestWall {
 		Square squareOne = new Square();
 		Square squareTwo = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
 		Wall wall = new Wall(squareOne, squareTwo);
 	}
 	
@@ -61,7 +61,7 @@ public class TestWall {
 		Square squareOne = new Square();
 		Square squareTwo = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
 		Wall wall = new Wall(squareOne, squareTwo);
 		
 		assertTrue(wall.contains(squareOne));
@@ -77,13 +77,13 @@ public class TestWall {
 		Square squareOne = new Square();
 		Square squareTwo = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
 		Wall wall = new Wall(squareOne, squareTwo);
 		
 		assertEquals(wall.getLength(), 2);
 		
 		Square squareThree = new Square();
-		squareTwo.setNeigbor(Direction.NORTH, squareThree);
+		squareTwo.setNeighbor(Direction.NORTH, squareThree);
 		wall.addSquare(squareThree);
 		
 		assertEquals(wall.getLength(), 3);
@@ -98,8 +98,8 @@ public class TestWall {
 		Square squareTwo = new Square();
 		Square squareThree = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
-		squareTwo.setNeigbor(Direction.NORTH, squareThree);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
+		squareTwo.setNeighbor(Direction.NORTH, squareThree);
 		
 		Wall wall = new Wall(squareOne, squareTwo);
 		
@@ -121,7 +121,7 @@ public class TestWall {
 		Square squareTwo = new Square();
 		Square squareThree = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
 		
 		Wall wall = new Wall(squareOne, squareTwo);
 		wall.addSquare(squareThree);
@@ -136,8 +136,8 @@ public class TestWall {
 		Square squareTwo = new Square();
 		Square squareThree = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
-		squareTwo.setNeigbor(Direction.NORTH, squareThree);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
+		squareTwo.setNeighbor(Direction.NORTH, squareThree);
 		
 		Wall wall = new Wall(squareOne, squareTwo);
 		

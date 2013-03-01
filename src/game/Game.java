@@ -49,6 +49,10 @@ public class Game {
 	 */
 	private Player currentPlayer;
 	
+	/**
+	 * the horizontal size and vertical size of the grid
+	 */
+	private int hSize, vSize;
 
 	
 	/**
@@ -66,13 +70,39 @@ public class Game {
 	
 	private void initialize(int hSize, int vSize){
 		GridBuilder builder = new GridBuilder(hSize, vSize);
+		setHSize(hSize);
+		setVSize(vSize);
 		builder.constructSquares();
 		builder.constructWalls();
 		setPlayer1(new Player(builder.getBottomLeft(), "Player 1"));
 		setPlayer2(new Player(builder.getTopRight(), "Player 2"));
 	}
 	
+	public void setHSize(int size) throws IllegalArgumentException{
+		if(!isValidHSize(size)) throw new IllegalArgumentException();
+		this.hSize = size;
+	}
 	
+	public void setVSize(int size) throws IllegalArgumentException{
+		if(!isValidVSize(size)) throw new IllegalArgumentException();
+		this.vSize = size;
+	}
+	
+	public int getHSize(){
+		return hSize;
+	}
+	
+	public int getVSize(){
+		return vSize;
+	}
+	
+	public boolean isValidHSize(int size){
+		return size >= this.MIN_HSIZE;
+	}
+	
+	public boolean isValidVSize(int size){
+		return size >= this.MIN_VSIZE;
+	}
 	
 
 	/**

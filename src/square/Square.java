@@ -61,8 +61,8 @@ public class Square {
 	 * @throws	IllegalArgumentException
 	 * 			Throws exception if there is no neighbor in the given direction.
 	 */
-	public Square getNeighor(Direction direction) throws IllegalArgumentException {
-		if(!hasNeigbor(direction))
+	public Square getNeighbor(Direction direction) throws IllegalArgumentException {
+		if(!hasNeighbor(direction))
 			throw new IllegalArgumentException();
 		
 		return neighbors.get(direction);
@@ -85,14 +85,14 @@ public class Square {
 	 * @param direction
 	 * @param square
 	 */
-	public void setNeigbor(Direction direction, Square square) throws IllegalArgumentException{
+	public void setNeighbor(Direction direction, Square square) throws IllegalArgumentException{
 		if(canHaveAsNeighbor(direction, square))
 			neighbors.put(direction,square);
 		else
 			throw new IllegalArgumentException();
 		
-		if(!square.hasNeigbor(direction.opposite()))
-			square.setNeigbor(direction.opposite(), this);
+		if(!square.hasNeighbor(direction.opposite()))
+			square.setNeighbor(direction.opposite(), this);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class Square {
 	 * @param direction
 	 * @return
 	 */
-	public boolean hasNeigbor(Direction direction){
+	public boolean hasNeighbor(Direction direction){
 		return neighbors.containsKey(direction);
 	}
 	
@@ -146,12 +146,12 @@ public class Square {
 		if(this.equals(square))
 			return false;
 		
-		if(hasNeigbor(direction))
+		if(hasNeighbor(direction))
 			return false;
 		
 		if(square.hasNeighbor(direction.opposite(), this))
 			return true;
-		else if(!square.hasNeigbor(direction.opposite()))
+		else if(!square.hasNeighbor(direction.opposite()))
 			return true;
 		else
 			return false;
@@ -225,7 +225,7 @@ public class Square {
 	public String toString() {
 		String s = "Square [ ";
 		for(Direction direction : Direction.values()){
-			if(hasNeigbor(direction))
+			if(hasNeighbor(direction))
 				s += direction + " ";
 		}
 		s += " ]";
@@ -295,7 +295,7 @@ public class Square {
 	public boolean canMoveTo(Direction direction){
 		Square direcionSquare;
 		try {
-			direcionSquare = getNeighor(direction);
+			direcionSquare = getNeighbor(direction);
 		} catch (Exception e) {
 			return false;
 		}
@@ -306,8 +306,8 @@ public class Square {
 			Square s2 = null;
 			ArrayList<Direction> dirs = direction.neighborDirections();
 			try{
-				s1 = getNeighor(dirs.get(0)); 
-				s2 = getNeighor(dirs.get(1));
+				s1 = getNeighbor(dirs.get(0)); 
+				s2 = getNeighbor(dirs.get(1));
 			} catch (Exception exp){
 				//This should never happen.
 				assert(false);

@@ -20,8 +20,8 @@ public class TestLightTrail {
 		Square squareTwo = new Square();
 		Square squareThree = new Square();
 		
-		squareOne.setNeigbor(Direction.NORTH, squareTwo);
-		squareTwo.setNeigbor(Direction.NORTH, squareThree);
+		squareOne.setNeighbor(Direction.NORTH, squareTwo);
+		squareTwo.setNeighbor(Direction.NORTH, squareThree);
 
 		assertEquals(lightTrail.getLength(), 0);
 
@@ -35,7 +35,7 @@ public class TestLightTrail {
 		assertEquals(lightTrail.getLength(), LightTrail.MAX_LENGTH);
 		
 		Square squareFour = new Square();
-		squareThree.setNeigbor(Direction.NORTH, squareFour);
+		squareThree.setNeighbor(Direction.NORTH, squareFour);
 		lightTrail.addSquare(squareFour);
 		assertEquals(lightTrail.getLength(), LightTrail.MAX_LENGTH);
 		assertFalse(lightTrail.contains(squareOne));
@@ -98,7 +98,7 @@ public class TestLightTrail {
 		Square squareOne = new Square();
 		Square squareTwo = new Square();
 		
-		squareOne.setNeigbor(Direction.SOUTH, squareTwo);
+		squareOne.setNeighbor(Direction.SOUTH, squareTwo);
 		
 		assertTrue(lightTrail.isValidSquare(squareOne));
 		
@@ -145,7 +145,7 @@ public class TestLightTrail {
 		Square oneSquare = new Square();
 		Square secondSquare = new Square();
 
-		oneSquare.setNeigbor(Direction.NORTH, secondSquare);
+		oneSquare.setNeighbor(Direction.NORTH, secondSquare);
 		lightTrail.addSquare(oneSquare);
 		
 		assertEquals(lightTrail.getLastSquare(), oneSquare);

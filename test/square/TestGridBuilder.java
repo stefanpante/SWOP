@@ -19,8 +19,8 @@ public class TestGridBuilder {
 		builder.construct();
 		Square bottomLeft = builder.getBottomLeft();
 		Square topRight = builder.getTopRight();
-		assertEquals(bottomLeft.getNeighor(Direction.NORTHEAST), topRight);
-		assertEquals(topRight.getNeighor(Direction.SOUTHWEST), bottomLeft);
+		assertEquals(bottomLeft.getNeighbor(Direction.NORTHEAST), topRight);
+		assertEquals(topRight.getNeighbor(Direction.SOUTHWEST), bottomLeft);
 	}
 	
 	@Test
@@ -29,8 +29,8 @@ public class TestGridBuilder {
 		builder.construct();
 		Square bottomLeft = builder.getBottomLeft();
 		Square topRight = builder.getTopRight();
-		assertEquals(bottomLeft.getNeighor(Direction.NORTHEAST).getNeighor(Direction.NORTHEAST), topRight);
-		assertEquals(topRight.getNeighor(Direction.SOUTHWEST).getNeighor(Direction.SOUTHWEST), bottomLeft);
+		assertEquals(bottomLeft.getNeighbor(Direction.NORTHEAST).getNeighbor(Direction.NORTHEAST), topRight);
+		assertEquals(topRight.getNeighbor(Direction.SOUTHWEST).getNeighbor(Direction.SOUTHWEST), bottomLeft);
 	}
 	
 	@Test

@@ -386,22 +386,22 @@ public class GridBuilder {
 		ArrayList<Square> sequence = new ArrayList<Square>();
 		sequence.add(start);
 		
-		Square x = start.getNeighor(Direction.EAST) ;
+		Square x = start.getNeighbor(Direction.EAST) ;
 		while(squares.contains(x)){
 			sequence.add(x);
 			try{
-				x = x.getNeighor(Direction.EAST);
+				x = x.getNeighbor(Direction.EAST);
 			} catch(Exception ex){
 				//Happens at the border of the grid.
 				break;
 			}
 		}
 		
-		Square y = start.getNeighor(Direction.WEST) ;
+		Square y = start.getNeighbor(Direction.WEST) ;
 		while(squares.contains(y)){
 			sequence.add(y);
 			try{
-				y = y.getNeighor(Direction.WEST);
+				y = y.getNeighbor(Direction.WEST);
 			} catch(Exception ex){
 				//Happens at the border of the grid.
 				break;
@@ -422,22 +422,22 @@ public class GridBuilder {
 		ArrayList<Square> sequence = new ArrayList<Square>();
 		sequence.add(start);
 		
-		Square x = start.getNeighor(Direction.NORTH) ;
+		Square x = start.getNeighbor(Direction.NORTH) ;
 		while(squares.contains(x)){
 			sequence.add(x);
 			try{
-				x = x.getNeighor(Direction.NORTH);
+				x = x.getNeighbor(Direction.NORTH);
 			} catch(Exception ex){
 				//Happens at the border of the grid.
 				break;
 			}
 		}
 		
-		Square y = start.getNeighor(Direction.SOUTH) ;
+		Square y = start.getNeighbor(Direction.SOUTH) ;
 		while(squares.contains(y)){
 			sequence.add(y);
 			try{
-				y = y.getNeighor(Direction.SOUTH);
+				y = y.getNeighbor(Direction.SOUTH);
 			} catch(Exception ex){
 				//Happens at the border of the grid.
 				break;
@@ -471,14 +471,14 @@ public class GridBuilder {
 	private Wall buildWall(Square square, int maxLength) throws IllegalStateException {
 		Direction direction = getRandomDirection();
 		
-		if(!square.hasNeigbor(direction))
+		if(!square.hasNeighbor(direction))
 			throw new IllegalStateException("A wall needs at least two neighboring squares");
 		
-		Square lastSquare = square.getNeighor(direction);
+		Square lastSquare = square.getNeighbor(direction);
 		Wall wall = new Wall(square, lastSquare);
 		
-		while(lastSquare.hasNeigbor(direction) && wall.getLength() <= maxLength){
-			lastSquare = lastSquare.getNeighor(direction);
+		while(lastSquare.hasNeighbor(direction) && wall.getLength() <= maxLength){
+			lastSquare = lastSquare.getNeighbor(direction);
 			wall.addSquare(lastSquare);
 		}
 				
@@ -502,7 +502,7 @@ public class GridBuilder {
 	 */
 	private void connect(Square square, Direction direction, Square otherSquare){
 		try{
-			square.setNeigbor(direction, otherSquare);
+			square.setNeighbor(direction, otherSquare);
 		} catch (Exception e){
 			
 		}

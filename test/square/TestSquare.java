@@ -129,10 +129,10 @@ public class TestSquare {
 		Square square = new Square();
 		Square otherSquare = new Square();
 		
-		square.setNeigbor(Direction.NORTH, otherSquare);
+		square.setNeighbor(Direction.NORTH, otherSquare);
 		
-		assertTrue(otherSquare.hasNeigbor(Direction.SOUTH));
-		assertTrue(square.hasNeigbor(Direction.NORTH));
+		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH));
+		assertTrue(square.hasNeighbor(Direction.NORTH));
 	}
 	
 	/**
@@ -143,16 +143,16 @@ public class TestSquare {
 		Square square = new Square();
 		Square otherSquare = new Square();
 		
-		square.setNeigbor(Direction.NORTH, otherSquare);
+		square.setNeighbor(Direction.NORTH, otherSquare);
 		
 		Square thirdSquare = new Square();
 		
-		square.setNeigbor(Direction.EAST, thirdSquare);
+		square.setNeighbor(Direction.EAST, thirdSquare);
 		
-		assertTrue(otherSquare.hasNeigbor(Direction.SOUTH));
+		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH));
 		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH, square));
 		
-		assertTrue(thirdSquare.hasNeigbor(Direction.WEST));
+		assertTrue(thirdSquare.hasNeighbor(Direction.WEST));
 		assertTrue(thirdSquare.hasNeighbor(Direction.WEST, square));
 		
 		assertFalse(thirdSquare.hasNeighbor(Direction.WEST, new Square()));
@@ -166,7 +166,7 @@ public class TestSquare {
 	public void testAddingNeighborOwnSquare() {
 		Square square = new Square();
 		
-		square.setNeigbor(Direction.SOUTH, square);
+		square.setNeighbor(Direction.SOUTH, square);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -174,8 +174,8 @@ public class TestSquare {
 		Square square = new Square();
 		Square otherSquare = new Square();
 		
-		square.setNeigbor(Direction.NORTH, new Square());
-		square.setNeigbor(Direction.NORTH, otherSquare);
+		square.setNeighbor(Direction.NORTH, new Square());
+		square.setNeighbor(Direction.NORTH, otherSquare);
 	}
 	
 	@Test
@@ -185,7 +185,7 @@ public class TestSquare {
 		
 		assertFalse(square.isConnectedTo(otherSquare));
 		
-		square.setNeigbor(Direction.NORTH, otherSquare);
+		square.setNeighbor(Direction.NORTH, otherSquare);
 		assertTrue(square.isConnectedTo(otherSquare));
 	}
 	
@@ -208,7 +208,7 @@ public class TestSquare {
 		Square square = new Square();
 		Square otherSquare = new Square();
 		
-		square.setNeigbor(Direction.EAST, otherSquare);
+		square.setNeighbor(Direction.EAST, otherSquare);
 		
 		Obstacle wall = new Wall(square, otherSquare);
 		
@@ -264,8 +264,8 @@ public class TestSquare {
 		Square bl = gb.getBottomLeft();
 		Square tr = gb.getTopRight();
 		
-		Wall blWall = new Wall(bl.getNeighor(Direction.EAST), bl.getNeighor(Direction.NORTHEAST));
-		Wall trWall = new Wall(tr.getNeighor(Direction.SOUTHWEST), tr.getNeighor(Direction.SOUTH));
+		Wall blWall = new Wall(bl.getNeighbor(Direction.EAST), bl.getNeighbor(Direction.NORTHEAST));
+		Wall trWall = new Wall(tr.getNeighbor(Direction.SOUTHWEST), tr.getNeighbor(Direction.SOUTH));
 
 		
 		//TEST CORNERS.
@@ -304,25 +304,25 @@ public class TestSquare {
 		
 		LightTrail blLightTrail = new LightTrail();
 		try {
-			blLightTrail.addSquare(bl.getNeighor(Direction.NORTH));
-			blLightTrail.addSquare(bl.getNeighor(Direction.EAST));
+			blLightTrail.addSquare(bl.getNeighbor(Direction.NORTH));
+			blLightTrail.addSquare(bl.getNeighbor(Direction.EAST));
 		} catch (Exception e) {
 			System.out.println("YES");
 		}
 		
-		assertTrue(blLightTrail.contains(bl.getNeighor(Direction.NORTH)));
+		assertTrue(blLightTrail.contains(bl.getNeighbor(Direction.NORTH)));
 
-		assertTrue(blLightTrail.contains(bl.getNeighor(Direction.EAST)));
+		assertTrue(blLightTrail.contains(bl.getNeighbor(Direction.EAST)));
 		
 		LightTrail trLightTrail = new LightTrail();
-		trLightTrail.addSquare(tr.getNeighor(Direction.SOUTH));
-		trLightTrail.addSquare(tr.getNeighor(Direction.WEST));
+		trLightTrail.addSquare(tr.getNeighbor(Direction.SOUTH));
+		trLightTrail.addSquare(tr.getNeighbor(Direction.WEST));
 
 		//TEST CORNERS.
 		//	Bottem Left
 		//		Impossible
-		System.out.println(bl.getNeighor(Direction.NORTH).isObstructed());
-		System.out.println(bl.getNeighor(Direction.EAST).isObstructed());
+		System.out.println(bl.getNeighbor(Direction.NORTH).isObstructed());
+		System.out.println(bl.getNeighbor(Direction.EAST).isObstructed());
 
 		assertFalse(bl.canMoveTo(Direction.NORTH));
 		assertFalse(bl.canMoveTo(Direction.NORTHEAST));

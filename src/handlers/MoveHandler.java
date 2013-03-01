@@ -42,7 +42,7 @@ public class MoveHandler extends Handler {
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 
 		if(currentPosition.canMoveTo(direction)){
-			Square newPosition = currentPosition.getNeighor(direction);
+			Square newPosition = currentPosition.getNeighbor(direction);
 			game.getCurrentPlayer().move(newPosition);
 			game.getCurrentPlayer().incrementActions();
 		}
