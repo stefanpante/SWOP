@@ -36,10 +36,9 @@ public class UseItemHandler extends Handler {
 	 */
 	public boolean checkToProceed(){
 		if(game.getCurrentPlayer().getRemainingActions() > 1){
-			return true;
+			return true; 
 		}
-		
-		return false;
+		else return false;
 	}
 	
 	/**

@@ -37,30 +37,6 @@ public class TestUseItemHandler {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	@Test
-	public void testCheckToProceed(){
-		ApplicationHandler h = new ApplicationHandler();
-		h.initialize();
-		UseItemHandler handler = h.getUseItemHandler();
-		assertTrue(handler.checkToProceed()); 
-		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++){
-			Item item = new LightGrenade();
-			handler.useItem(item);
-		}
-		assertFalse(handler.checkToProceed());
-	} 
-
-	@Test
-	public void testUseItem(){
-		Game game = new Game(10,10);
-		UseItemHandler handler = new UseItemHandler(game);
-		
-		Item item = new LightGrenade();
-		handler.useItem(item);
-		assertTrue(game.getCurrentPlayer().getPosition().getUsedItems().contains(item));
-		
-	}
 	
 
 }

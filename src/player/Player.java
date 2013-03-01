@@ -207,8 +207,8 @@ public class Player extends Observable {
 	}
 	
 	public int getRemainingActions(){
-		return this.actions - this.previousactions;
-	}
+		return (this.previousactions + this.MAX_ALLOWED_ACTIONS) - this.actions;
+	} 
 
 	public boolean hasRemainingActions(){
 		return getRemainingActions() > 0;
