@@ -187,15 +187,7 @@ public class Player extends Observable {
 	 * 			Thrown if the given inventory is not valid for the player.
 	 */
 	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
-		if(!isValidInventory(inventory)) 
-			throw new IllegalArgumentException("This inventory is invalid for this player");
-		else 
-			this.inventory = inventory;
-	}
-
-	//TODO check inventory
-	public boolean isValidInventory(Inventory inventory){
-		return false;
+		this.inventory = inventory;
 	}
 	
 	/**
