@@ -57,19 +57,20 @@ public class GridModel {
 		return new ArrayList<Coordinate2D>(walls);
 	}
 
-	public HashMap<Coordinate2D, Square> getLightTrails(){
-		return new HashMap<Coordinate2D, Square>(this.lightTrails);
+	public ArrayList<Coordinate2D> getLightTrailBlue(){
+		return new ArrayList<Coordinate2D> (this.lightTrailBlue);
 	}
 	
-	public HashMap<Coordinate2D, Square> getLightGrenades(){
-		return new HashMap<Coordinate2D, Square>(this.lightGrenades);
+	public ArrayList<Coordinate2D> getLightTrailRed(){
+		return new ArrayList<Coordinate2D> (this.lightTrailRed);
 	}
 	
-
+	public ArrayList<Coordinate2D> getLightGrenades(){
+		return new ArrayList<Coordinate2D> (this.lightGrenades);
+	}
 	
 	public void clear(){
 		this.walls.clear();
-		this.lightTrails.clear();
 		this.lightGrenades.clear();
 	}
 

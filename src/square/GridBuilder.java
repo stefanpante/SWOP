@@ -417,7 +417,7 @@ public class GridBuilder {
 		for(int i = 0; i <grid.length; i++ ){
 			for(int j = 0; j < grid[i].length; j++){
 				if(grid[i][j].isObstructed()){
-					coors.add(new Coordinate2D(i, grid[i].length -j));
+					coors.add(new Coordinate2D(i, grid[i].length - 1 - j)); 
 				}
 			}
 		}

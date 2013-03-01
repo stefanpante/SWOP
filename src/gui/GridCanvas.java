@@ -59,9 +59,11 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
 	    for(Coordinate2D coordinate : GRID_MODEL.getWalls())
 	    	DrawImage(graphics, coordinate, "wall");
-		for(Coordinate2D coordinate : GRID_MODEL.getLightTrails().keySet())
-		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");	
-		for(Coordinate2D coordinate : GRID_MODEL.getLightGrenades().keySet())
+		for(Coordinate2D coordinate : GRID_MODEL.getLightTrailRed())
+		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");
+		for(Coordinate2D coordinate : GRID_MODEL.getLightTrailRed())
+		    DrawImage(graphics, coordinate, "cell_lighttrail_red");	
+		for(Coordinate2D coordinate : GRID_MODEL.getLightGrenades())
 		    DrawImage(graphics, coordinate, "lightgrenade");
 		
 		 DrawImage(graphics, GRID_MODEL.getPlayer1(), "player_blue");
