@@ -66,6 +66,8 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 		this.game = game;
 		player1CO = new Coordinate2D(0, game.getVSize() -1);
 		player2CO = new Coordinate2D(game.getHSize() -1, 0);
+		ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
+		ApplicationWindow.GRID_MODEL.setPlayer1(player2CO);
 		player1LTCoordinates = new HashMap<Coordinate2D,Square>();
 		player2LTCoordinates = new HashMap<Coordinate2D,Square>();
 	}
