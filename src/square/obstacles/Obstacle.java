@@ -57,6 +57,24 @@ public abstract class Obstacle {
 	}
 	
 	/**
+	 * Removes a square of the obstacle.
+	 * 
+	 * @param 	square
+	 * 
+	 * @throws 	IllegalArgumentException 
+	 * 			If the square is not 
+	 */
+	public void removeSquare(Square square) throws IllegalArgumentException {
+		if(!getSquares().contains(square)){
+			throw new IllegalArgumentException("A square that is not added can not part of the obstacle cannot be removed.");
+		}else{
+			square.setObstacle(null);
+			getSquares().remove(square);
+		}
+	}
+	
+	
+	/**
 	 * Check whether the given square can be added to this obstacle.
 	 * The added square may not already be contained in the existing obstacle.
 	 * No duplicates may be added.
@@ -68,6 +86,9 @@ public abstract class Obstacle {
 	 * 					square.
 	 */
 	public boolean isValidSquare(Square square){
+		if(square == null){
+			return false;
+		}
 		if(getSquares().contains(square))
 			return false;
 		
