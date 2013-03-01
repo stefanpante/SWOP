@@ -64,8 +64,8 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 
 	public void setGame(Game game){
 		this.game = game;
-		player1CO = new Coordinate2D(game.getVSize() -1, 0);
-		player2CO = new Coordinate2D(0, game.getHSize() -1);
+		player1CO = new Coordinate2D(0, game.getVSize() -1);
+		player2CO = new Coordinate2D(game.getHSize() -1, 0);
 		player1LTCoordinates = new HashMap<Coordinate2D,Square>();
 		player2LTCoordinates = new HashMap<Coordinate2D,Square>();
 	}
@@ -106,23 +106,23 @@ public class GuiHandler extends Observable implements ActionListener, MouseListe
 				if(currentPlayer == game.getPlayer1()){
 					player1LTCoordinates.put(player1CO, prevPosition);
 					player1CO = player1CO.getNeighbor(direction);
-					GridCanvas.GRID_MODEL.setPlayer1(player1CO);
+					ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
 					for(Coordinate2D coor: player1LTCoordinates.keySet()){
 						  if(!currentPlayer.getLightTrail().contains(player1LTCoordinates.get(coor))){
 							  player1LTCoordinates.remove(coor);
 						  }
 					}
-					GridCanvas.GRID_MODEL.setLightTrailBlue(getPlayer1LightTrailCoordinates());
+					ApplicationWindow.GRID_MODEL.setLightTrailBlue(getPlayer1LightTrailCoordinates());
 				} else {
 					player2LTCoordinates.put(player2CO, prevPosition);
 					player2CO = player2CO.getNeighbor(direction);
-					GridCanvas.GRID_MODEL.setPlayer1(player1CO);
+					ApplicationWindow.GRID_MODEL.setPlayer1(player1CO);
 					for(Coordinate2D coor: player2LTCoordinates.keySet()){
 						  if(!currentPlayer.getLightTrail().contains(player2LTCoordinates.get(coor))){
 							  player2LTCoordinates.remove(coor);
 						  }
 					}
-					GridCanvas.GRID_MODEL.setLightTrailRed(getPlayer1LightTrailCoordinates()));
+					ApplicationWindow.GRID_MODEL.setLightTrailRed(getPlayer1LightTrailCoordinates());
 
 				}
 			}  catch(IllegalStateException e1) {
