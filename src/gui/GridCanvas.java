@@ -24,7 +24,7 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
-	private static GridModel GRID_MODEL = new GridModel();;
+	public static GridModel GRID_MODEL = new GridModel();
 
 	/**
 	 * 
@@ -57,7 +57,7 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
-	    for(Coordinate2D coordinate : GRID_MODEL.getWalls().keySet())
+	    for(Coordinate2D coordinate : GRID_MODEL.getWalls())
 	    	DrawImage(graphics, coordinate, "wall");
 		for(Coordinate2D coordinate : GRID_MODEL.getLightTrails().keySet())
 		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");	
