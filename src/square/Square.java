@@ -259,10 +259,14 @@ public class Square {
 	}
 
 	/**
-	 * @param item
-	 * @return
-	 */
+	* Checks if the item can be used in the square.
+	*
+	* @param item
+	* @return False If the item is already used once in the square.
+	*/
 	public boolean canBeUsedHere(Item item) {
+		if(!usedItems.contains(item))
+			return false;
 		return true;
 	}
 	
