@@ -36,5 +36,10 @@ public class MoveHandler extends Handler {
 	}
 	
 	public void endAction(){
+		Player otherPlayer = game.getOtherPlayer();
+		Player currentPlayer = game.getCurrentPlayer();
+		
+		if(otherPlayer.ge)
+	}
 
 }
