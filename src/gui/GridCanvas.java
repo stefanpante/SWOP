@@ -71,7 +71,7 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	private void DrawImage(Graphics graphics, Coordinate2D coordinate, String image){
 		System.out.println("Draw "+ image +" at "+ coordinate);
 		Image img = Toolkit.getDefaultToolkit().getImage("./src/res/"+image+".png");
-    	graphics.drawImage(img,coordinate.getX(),coordinate.getY(),colWidth+1,rowHeight+1,Color.BLACK,this);
+    	graphics.drawImage(img,coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1,Color.BLACK,this);
 	}
 	
 
