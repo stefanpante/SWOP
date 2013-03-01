@@ -216,7 +216,13 @@ public class Square {
 	
 	@Override
 	public String toString() {
-		return "Square [ " + this.getInventory() +" ]";
+		String s = "Square [ ";
+		for(Direction direction : Direction.values()){
+			if(hasNeigbor(direction))
+				s += direction + " ";
+		}
+		s += " ]";
+		return s;
 	}
 	
 	/**
@@ -259,4 +265,6 @@ public class Square {
 	public boolean canBeUsedHere(Item item) {
 		return true;
 	}
+	
+	
 }

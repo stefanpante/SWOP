@@ -20,6 +20,7 @@ public class SquareDirection {
 	
 
 	public void constructGrid(){
-		
+		Square bottomLeft = new
+		this.bottomLeft = squareBuilder.getSquare();
 	}
 }
