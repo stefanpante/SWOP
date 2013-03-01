@@ -16,8 +16,23 @@ public class EndTurnHandler {
 	}
 	
 
-	public void  check(){
+	/**
+	 * 
+	 * Checks the precondition for the pick up use case
+	 * returns true if the preconditions are satisfied
+	 * @return 	true if the precondition is satisfied
+	 * 			otherwise false.
+	 */
+	public boolean checkToProceed(){
+		if(game.getCurrentPlayer().getRemainingActions() > 0){
+			return true;
+		}
 		
+		return false;
+	}
+	
+	public boolean hasMoved(){
+		game.getCurrentPlayer().
 	}
 	
 	public void endTurn(){
@@ -25,6 +40,5 @@ public class EndTurnHandler {
 		game.switchPlayer();
 		
 	}
-	//TODO checkAllConditions for end turn, turns inactive items active
 
 }
