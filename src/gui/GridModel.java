@@ -7,6 +7,7 @@ import items.Item;
 import items.LightGrenade;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import square.Square;
 import utils.Coordinate2D;
@@ -15,7 +16,7 @@ import utils.Coordinate2D;
  * @author Jonas Devlieghere
  *
  */
-public class GridModel {
+public class GridModel extends Observable {
 
 	private ArrayList<Coordinate2D> walls;
 	private ArrayList<Coordinate2D> lightTrailBlue;
@@ -36,28 +37,48 @@ public class GridModel {
 		currentPlayerInventory.add(new LightGrenade());
 	}
 	
+	public void addObserver(Observer o){
+		addObserver(o);
+	}
+	
 	public void addToLightTrailBlue(Coordinate2D coordinate){
 		lightTrailBlue.add(coordinate);
+		notifyObservers();
 	}
 	
 	public void addToLightTrailRed(Coordinate2D coordinate){
 		lightTrailRed.add(coordinate);
+		notifyObservers();
 	}
 	
 	public void addToLightGrenades(Coordinate2D coordinate, Square square){
 		lightGrenades.add(coordinate);
+		notifyObservers();
 	}
 		
 	public void setPlayer1(Coordinate2D coordinate){
 		this.player1 = coordinate;
+		notifyObservers();
 	}
 	
 	public void setPlayer2(Coordinate2D coordinate){
 		this.player2 = coordinate;
+		notifyObservers();
 	}
 	
 	public void setWalls(ArrayList<Coordinate2D> walls){
 		this.walls = walls;
+		notifyObservers();
+	}
+	
+	public void setLightTrailBlue(ArrayList<Coordinate2D> lightTrail){
+		this.lightTrailBlue = lightTrail;
+		notifyObservers();
+	}
+	
+	public void setLightTrailRed(ArrayList<Coordinate2D> lightTrail){
+		this.lightTrailRed = lightTrail;
+		notifyObservers();
 	}
 	
 	public ArrayList<Coordinate2D> getWalls(){
