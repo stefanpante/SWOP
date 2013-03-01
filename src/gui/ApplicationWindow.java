@@ -3,14 +3,12 @@
  */
 package gui;
 
+import game.Game;
 import handlers.GuiHandler;
-import items.Inventory;
-import items.Item;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,7 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
-import javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener;
 
 /**
  * @author jonas
@@ -32,6 +29,7 @@ import javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener;
  */
 public class ApplicationWindow implements Observer {
 
+	
 	
 	public static final int WINDOW_WIDTH = 800;
 	public static final int WINDOW_HEIGHT = 523;
@@ -62,19 +60,17 @@ public class ApplicationWindow implements Observer {
 
     private void initialize() {
     	
-    	int hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Horizontal Grid Size", 
-    			"10", 1));
-    	int vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Vertical Grid Size", 
-    			"10", 1));
-    	
+    	while(this.hSize < Game.MIN_HSIZE || this.vSize < Game.MIN_VSIZE){
+	    	int hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the horizontal grid size (>="+Game.MIN_HSIZE+")", 
+	    			"Game Dimensions", 1));
+	    	int vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the vertical grid size (>="+Game.MIN_VSIZE+")", 
+	    			"Game Dimensions", 1));
+	    	if(this.hSize < Game.MIN_HSIZE || this.vSize < Game.MIN_VSIZE){
+	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again.");
+	    	}
+    	}
     	setSize(hSize, vSize);
-    	
-//    	String player1 = JOptionPane.showInputDialog(null, "First player's name", 
-//    			"Player 1", 1);
-//    	String player2 = JOptionPane.showInputDialog(null, "Second player's name", 
-//    			"Player 2", 1);
-//    	
-//    	controller.setNames(player1,player2);
+
     	
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);

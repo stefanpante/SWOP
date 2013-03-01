@@ -13,11 +13,7 @@ import square.obstacles.Wall;
  */
 public class GridBuilder {
 	
-	/**
-	 * the minimum vertical and horizontal size are 10 squares.
-	 */
-	public static int MIN_VSIZE = 10;
-	public static int MIN_HSIZE = 10;
+
 
 	/**
 	 * Max percentage of squares covered by walls.
