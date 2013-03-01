@@ -1,4 +1,4 @@
-package handlers;
+	package handlers;
 
 import player.Player;
 import square.Direction;
@@ -52,8 +52,8 @@ public class MoveHandler extends Handler {
 		try{
 			if(currentPosition.canMoveTo(direction)){
 				Square newPosition = currentPosition.getNeighbor(direction);
-				game.getCurrentPlayer().move(newPosition);
 				game.getCurrentPlayer().incrementActions();
+				game.getCurrentPlayer().move(newPosition);
 			}
 		} catch(IllegalStateException e) {
 			System.err.println("Player cannot move the square.");

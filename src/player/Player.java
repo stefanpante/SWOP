@@ -3,6 +3,7 @@ package player;
 import java.util.Observable;
 
 import square.Square;
+import square.obstacles.LightTrail;
 
 import items.Inventory;
 import items.Item;
@@ -55,6 +56,8 @@ public class Player extends Observable {
 	 */
 	public static int MAX_ALLOWED_ACTIONS = 3;
 	
+	private LightTrail lightTrail;
+	
 	/**
 	 * creates a new player with a given name and start position
 	 * 
@@ -71,6 +74,7 @@ public class Player extends Observable {
 		this.actions = 0;
 		this.previousactions = 0;
 		this.moved = false;
+		this.lightTrail = new LightTrail();
 	}
 	
 	/**
@@ -143,6 +147,7 @@ public class Player extends Observable {
 	
 	public void incrementActions(){
 		this.actions++;
+		this.getLightTrail().update(this, currentPosition);
 	}
 
 	/**
@@ -216,6 +221,10 @@ public class Player extends Observable {
 		this.previousactions += MAX_ALLOWED_ACTIONS;
 		actions = previousactions;
 		moved = false;
+	}
+	
+	public LightTrail getLightTrail(){
+		return lightTrail;
 	}
 	
 	@Override
