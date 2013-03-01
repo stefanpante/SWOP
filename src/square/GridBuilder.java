@@ -18,54 +18,54 @@ import square.obstacles.Wall;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */	
 public class GridBuilder {
-	
+
 
 
 	/**
 	 * Max percentage of squares covered by walls.
 	 */
 	public static float MAX_PERCENTAGEWALLS = 0.2f;
-	
-	
+
+
 	/**
-	* Percentage of square covered by grenades
-	*/
+	 * Percentage of square covered by grenades
+	 */
 	public static float PERCENTAGEGRENADES = 0.05f;
 
 	/**
-	* Percentage of max length of a wall
-	*/
+	 * Percentage of max length of a wall
+	 */
 	public static float MAX_LENGTHPERCENTAGEWALL = 0.5f;
-	
+
 	/**
 	 * Horizontal size of this grid.
 	 */
 	private int hSize;
-	
+
 	/**
 	 * Vertical size of this grid.
 	 */
 	private int vSize;
-	
+
 	/**
 	 * Two-dimensional array containing the squares in this grid.
 	 */
 	private Square[][] grid;
-	
+
 	/**
 	 * The square at the bottom left of this grid.
 	 */
 	private Square bottomLeft; 
-	
+
 	/**
 	 * The square at the top right of this grid.
 	 */
 	private Square topRight;
-	
 
-	
+
+
 	private ArrayList<Square> freeFields = new ArrayList<Square>();
-	
+
 	/**
 	 * Create a new GridBuilder with the given dimension.
 	 * 
@@ -80,7 +80,7 @@ public class GridBuilder {
 		this.hSize = hSize;
 		this.vSize = vSize;
 	}
-	
+
 	/**
 	 * @param 	hSize
 	 * 			The horizontal size
@@ -92,7 +92,7 @@ public class GridBuilder {
 	private boolean isValidSize(int hSize, int vSize) {
 		return hSize >= Game.MIN_HSIZE && vSize >= Game.MIN_VSIZE;
 	}
-	
+
 	/**
 	 * Set the grid for this grid builder
 	 * 
@@ -102,7 +102,7 @@ public class GridBuilder {
 	private void setGrid(Square[][] grid){
 		this.grid = grid;
 	}
-	
+
 	/**
 	 * Returns the grid constructed in the grid builder.
 	 * 
@@ -120,7 +120,7 @@ public class GridBuilder {
 	private Square createSquare(){
 		return new Square();
 	}
-	
+
 	/**
 	 * Construct the grid for this grid builder.
 	 */
@@ -140,7 +140,7 @@ public class GridBuilder {
 			freeFields.addAll(Arrays.asList(grid[i]));
 		}
 	}
-	
+
 	/**
 	 * Connect the squares in the grid of this grid builder.
 	 * 
@@ -213,7 +213,7 @@ public class GridBuilder {
 		}
 		throw new IndexOutOfBoundsException();
 	}
-	
+
 	/**
 	 * Construct walls randomly within the limitations of this grid builder.
 	 */
@@ -231,7 +231,7 @@ public class GridBuilder {
 			int maxlength = this.getMaxLengthWall(orientation);
 			int length = (int) (2 + Math
 					.floor(((maxlength - 2) * Math.random()))); // Upper limit
-																// of the length
+			// of the length
 			ArrayList<Square> sequence = getRandomSquareSequence(freeFields,
 					orientation);
 			if (sequence.size() < 2) {
@@ -254,8 +254,8 @@ public class GridBuilder {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * Covers 5 percent of the field with grenades. Grenades cannot be placed on
 	 * the starting position of a player or on a wall
@@ -282,7 +282,7 @@ public class GridBuilder {
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -290,9 +290,9 @@ public class GridBuilder {
 	public int getNumberOfGrenades(){
 		return (int) (Math.ceil(this.getGridSize() * PERCENTAGEGRENADES));
 	}
-		
-	
-	
+
+
+
 	/**
 	 * 
 	 * @param sequence
@@ -307,67 +307,67 @@ public class GridBuilder {
 		return result;
 	}
 	/**
-	*
-	* returns the maximal permitted length of wall, which depends on the
-	* orientation of the wall
-	*
-	* @param orientation the orientation of the wall
-	* @return the maximal length which is permitted for a wall in this grid
-	* @throws IllegalArgumentException
-	*
-	*/
+	 *
+	 * returns the maximal permitted length of wall, which depends on the
+	 * orientation of the wall
+	 *
+	 * @param orientation the orientation of the wall
+	 * @return the maximal length which is permitted for a wall in this grid
+	 * @throws IllegalArgumentException
+	 *
+	 */
 	private int getMaxLengthWall(Orientation orientation) throws IllegalArgumentException{
 		switch(orientation){
-			case HORIZONTAL:
+		case HORIZONTAL:
 			return (int) (this.hSize * MAX_LENGTHPERCENTAGEWALL);
-			case VERTICAL:
+		case VERTICAL:
 			return (int) (this.vSize * MAX_LENGTHPERCENTAGEWALL);
-			default:	
+		default:	
 			throw new IllegalArgumentException("This orientation is not supported:" + orientation);
 		}
 	}
-	
-	
+
+
 	/**
-	* Returns the maximal number of squares covered by walls
-	* @return the max number of squares covered by walls
-	*/
+	 * Returns the maximal number of squares covered by walls
+	 * @return the max number of squares covered by walls
+	 */
 	public int getMaxCoverage() {
 		return (int) ((vSize*hSize) * MAX_PERCENTAGEWALLS);
 	}
-	
+
 	/**
-	* Selects a random square in the given HashMap with squares
-	* and builds the longest possible sequence of squares in the given orientation
-	*
-	* @param squares the possible squares that can be used for this randomSequence
-	* @param orientation the orientation in which the wall faces
-	* @return a list of squares which are in sequence, but the first square is
-	* selected randomly and the orientation is given
-	*/
+	 * Selects a random square in the given HashMap with squares
+	 * and builds the longest possible sequence of squares in the given orientation
+	 *
+	 * @param squares the possible squares that can be used for this randomSequence
+	 * @param orientation the orientation in which the wall faces
+	 * @return a list of squares which are in sequence, but the first square is
+	 * selected randomly and the orientation is given
+	 */
 	private ArrayList<Square> getRandomSquareSequence(ArrayList<Square> squares, 
 			Orientation orientation) throws IllegalArgumentException{
-		
+
 		ArrayList<Square> sequence;
 		Random ran = new Random();
-		
+
 		Square rand = squares.get(ran.nextInt(squares.size()));
-		
-		
+
+
 		switch(orientation){
-			case HORIZONTAL:
+		case HORIZONTAL:
 			sequence = getHorizontalSequence(rand, squares );
 			break;
-			case VERTICAL:	
+		case VERTICAL:	
 			sequence = getVerticalSequence(rand, squares);
 			break;
-			default:	
+		default:	
 			throw new IllegalArgumentException("This orientation is not supported:" + orientation);
 		}
-		
+
 		return sequence;
 	}
-	
+
 	/**
 	 *
 	 * Builds the longest possible horizontal sequence of squares with a given start position
@@ -379,28 +379,32 @@ public class GridBuilder {
 
 		ArrayList<Square> sequence = new ArrayList<Square>();
 		sequence.add(start);
-		
-		Square x = start.getNeighbor(Direction.EAST) ;
-		while(squares.contains(x)){
-			sequence.add(x);
-			try{
-				x = x.getNeighbor(Direction.EAST);
-			} catch(Exception ex){
-				//Happens at the border of the grid.
-				break;
+
+		try{
+			Square x = start.getNeighbor(Direction.EAST) ;
+			while(squares.contains(x)){
+				sequence.add(x);
+				try{
+					x = x.getNeighbor(Direction.EAST);
+				} catch(Exception ex){
+					//Happens at the border of the grid.
+					break;
+				}
 			}
-		}
-		
-		Square y = start.getNeighbor(Direction.WEST) ;
-		while(squares.contains(y)){
-			sequence.add(y);
-			try{
-				y = y.getNeighbor(Direction.WEST);
-			} catch(Exception ex){
-				//Happens at the border of the grid.
-				break;
+		} catch(Exception e){}
+
+		try{
+			Square y = start.getNeighbor(Direction.WEST) ;
+			while(squares.contains(y)){
+				sequence.add(y);
+				try{
+					y = y.getNeighbor(Direction.WEST);
+				} catch(Exception ex){
+					//Happens at the border of the grid.
+					break;
+				}
 			}
-		}
+		} catch(Exception e){}
 		return sequence;
 	}
 
@@ -415,33 +419,38 @@ public class GridBuilder {
 
 		ArrayList<Square> sequence = new ArrayList<Square>();
 		sequence.add(start);
-		
-		Square x = start.getNeighbor(Direction.NORTH) ;
-		while(squares.contains(x)){
-			sequence.add(x);
-			try{
-				x = x.getNeighbor(Direction.NORTH);
-			} catch(Exception ex){
-				//Happens at the border of the grid.
-				break;
+		try{
+			Square x = start.getNeighbor(Direction.NORTH) ;
+			while(squares.contains(x)){
+				sequence.add(x);
+				try{
+					x = x.getNeighbor(Direction.NORTH);
+				} catch(Exception ex){
+					//Happens at the border of the grid.
+					break;
+				}
 			}
 		}
-		
-		Square y = start.getNeighbor(Direction.SOUTH) ;
-		while(squares.contains(y)){
-			sequence.add(y);
-			try{
-				y = y.getNeighbor(Direction.SOUTH);
-			} catch(Exception ex){
-				//Happens at the border of the grid.
-				break;
-			}
+		catch(Exception e){//no neighbors in that direction
 		}
+
+		try{
+			Square y = start.getNeighbor(Direction.SOUTH) ;
+			while(squares.contains(y)){
+				sequence.add(y);
+				try{
+					y = y.getNeighbor(Direction.SOUTH);
+				} catch(Exception ex){
+					//Happens at the border of the grid.
+					break;
+				}
+			}
+		}catch(Exception e){}
 		return sequence;
 	}
 
 
-	
+
 	// TODO: Testing method
 	public String getCoordinate(Square square){
 		for(int i = 0; i < hSize; i++){
@@ -453,9 +462,9 @@ public class GridBuilder {
 		}
 		return "";
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Connect the given square with the other square in the given direction
 	 * 
@@ -470,10 +479,10 @@ public class GridBuilder {
 		try{
 			square.setNeighbor(direction, otherSquare);
 		} catch (Exception e){
-			
+
 		}
 	}
-	
+
 	/**
 	 * Return the bottom left square of the constructed grid
 	 * 
@@ -491,10 +500,10 @@ public class GridBuilder {
 	public Square getTopRight(){
 		return this.topRight;
 	}
-	
+
 	public int getGridSize(){
 		return this.vSize * this.hSize;
 	}
-	
+
 
 }

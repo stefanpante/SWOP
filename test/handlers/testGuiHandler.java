@@ -15,6 +15,7 @@ public class testGuiHandler {
 		ApplicationHandler h = new ApplicationHandler();
 		h.initialize();
 		GuiHandler g = h.getGuiHandler();
+		g.setGame(new Game(10,10));
 		ArrayList<Coordinate2D> coor = g.getWallsRepresentation();
 		for(Coordinate2D c: coor){
 			System.out.println(c.toString());
