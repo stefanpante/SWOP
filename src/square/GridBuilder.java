@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import game.Game;
+import gui.ApplicationWindow;
 import gui.GridCanvas;
 
 import java.util.Random;
@@ -421,7 +422,7 @@ public class GridBuilder {
 				}
 			}
 		}
-		GridCanvas.GRID_MODEL.setWalls(coors);
+		ApplicationWindow.GRID_MODEL.setWalls(coors);
 	}
 	/**
 	 *

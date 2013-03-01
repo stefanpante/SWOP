@@ -3,8 +3,10 @@
  */
 package gui;
 
+import items.Item;
+import items.LightGrenade;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import square.Square;
 import utils.Coordinate2D;
@@ -19,6 +21,8 @@ public class GridModel {
 	private ArrayList<Coordinate2D> lightTrailBlue;
 	private ArrayList<Coordinate2D> lightTrailRed;
 	private ArrayList<Coordinate2D> lightGrenades;
+	private ArrayList<Item> currentSquareInventory;
+	private ArrayList<Item> currentPlayerInventory;
 	private Coordinate2D player1;
 	private Coordinate2D player2;
 	
@@ -27,6 +31,9 @@ public class GridModel {
 		this.lightTrailBlue = new ArrayList<Coordinate2D>();
 		this.lightTrailRed = new ArrayList<Coordinate2D>();		
 		this.lightGrenades = new ArrayList<Coordinate2D>();
+		this.currentPlayerInventory = new ArrayList<Item>();
+		this.currentSquareInventory = new ArrayList<Item>();
+		currentPlayerInventory.add(new LightGrenade());
 	}
 	
 	public void addToLightTrailBlue(Coordinate2D coordinate){
@@ -80,6 +87,16 @@ public class GridModel {
 	
 	public Coordinate2D getPlayer2() {
 		return this.player2;
-	}	
+	}
+	
+	public ArrayList<Item> getCurrentPlayerInventory(){
+		return this.currentPlayerInventory;
+	}
+	
+	public ArrayList<Item> getCurrentSquareInventory(){
+		return this.currentSquareInventory;
+	}
+
+
 
 }
