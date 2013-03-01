@@ -3,6 +3,8 @@
  */
 package square;
 
+import game.Game;
+
 import java.util.Random;
 
 import square.obstacles.Wall;
@@ -75,7 +77,7 @@ public class GridBuilder {
 	 * 			are larger or equal to the minimal values.
 	 */
 	private boolean isValidSize(int hSize, int vSize) {
-		return hSize >= MIN_HSIZE && vSize >= MIN_VSIZE;
+		return hSize >= Game.MIN_HSIZE && vSize >= Game.MIN_VSIZE;
 	}
 	
 	/**
