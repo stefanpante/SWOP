@@ -37,7 +37,7 @@ public class TestGame {
 
 	@Test 
 	public void switchPlayer(){
-		Game game = new Game(lowerLeft, upperRight);
+		Game game = new Game(10, 10);
 		Player player1 = game.getPlayer1();
 		Player player2 = game.getPlayer2();
 		
@@ -58,7 +58,7 @@ public class TestGame {
 	}
 	
 	public void testSetCurrentPlayer(){
-		Game game = new Game(lowerLeft, upperRight);
+		Game game = new Game(10, 10);
 		Player player1 = game.getPlayer1();
 		Player player2 = game.getPlayer2();
 		
@@ -84,7 +84,7 @@ public class TestGame {
 	}
 	@Test
 	public void testCanHaveAsPlayer(){
-		Game game = new Game(lowerLeft, upperRight);
+		Game game = new Game(10, 10);
 		Player player1 = game.getPlayer1();
 		Player player2 = game.getPlayer2();
 		
@@ -94,7 +94,7 @@ public class TestGame {
 	
 	@Test
 	public void testIsValidCurrentPlayer(){
-		Game game = new Game(lowerLeft, upperRight);
+		Game game = new Game(10, 10);
 		Player player1 = game.getPlayer1();
 		Player player2 = game.getPlayer2();
 		Player player3 = new Player(null, null);
@@ -106,7 +106,7 @@ public class TestGame {
 	
 	@Test
 	public void testSetPlayer(){
-		Game game = new Game(lowerLeft, upperRight);
+		Game game = new Game(10, 10);
 		Player playa = null;
 		Player player1 = game.getPlayer1();
 		Player player2 = game.getPlayer2();

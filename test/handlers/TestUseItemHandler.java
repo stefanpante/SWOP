@@ -16,6 +16,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import player.Player;
+
 import square.Square;
 
 public class TestUseItemHandler {
@@ -38,10 +40,10 @@ public class TestUseItemHandler {
 
 	@Test
 	public void testCheckToProceed(){
-		Game game = new Game(new Square(),new Square());
+		Game game = new Game(10,10);
 		UseItemHandler handler = new UseItemHandler(game);
 		assertTrue(handler.checkToProceed());
-		for(int i = 0; i < player.MAX_ALLOWED_ACTIONS){
+		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++){
 			game.getCurrentPlayer().incrementActions();
 		}
 		assertFalse(handler.checkToProceed());
@@ -49,7 +51,7 @@ public class TestUseItemHandler {
 
 	@Test
 	public void testUseItem(){
-		Game game = new Game(new Square(),new Square());
+		Game game = new Game(10,10);
 		UseItemHandler handler = new UseItemHandler(game);
 		
 		Item item = new LightGrenade();
@@ -57,9 +59,6 @@ public class TestUseItemHandler {
 		assertTrue(game.getCurrentPlayer().getPosition().getUsedItems().contains(item));
 		
 	}
-	
-	@Test
-	public void 
 	
 
 }
