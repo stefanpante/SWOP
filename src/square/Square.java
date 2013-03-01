@@ -264,6 +264,13 @@ public class Square {
 	private HashMap<Direction, Square> getNeighbors() {
 		return new HashMap<Direction, Square>(this.neighbors);
 	}
+	
+	/**
+	 * @return
+	 */
+	public ArrayList<Square> getNeighborsAsList() {
+		return new ArrayList<Square>(neighbors.values());
+	}
 
 	/**
 	* Checks if the item can be used in the square.
