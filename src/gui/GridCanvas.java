@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.ImageObserver;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 
@@ -20,7 +22,7 @@ import utils.Coordinate2D;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class GridCanvas extends JPanel implements ImageObserver {
+public class GridCanvas extends JPanel implements ImageObserver, Observer {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
@@ -73,6 +75,14 @@ public class GridCanvas extends JPanel implements ImageObserver {
 		System.out.println("Draw "+ image +" at "+ coordinate);
 		Image img = Toolkit.getDefaultToolkit().getImage("./src/res/"+image+".png");
     	graphics.drawImage(img,coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1,Color.BLACK,this);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
 	}
 	
 

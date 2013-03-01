@@ -206,6 +206,8 @@ public class ApplicationWindow {
         });      
         inventoryPanel.add(use);       
         
+        GRID_MODEL.addObserver(gridPanel);
+
 
     }
     

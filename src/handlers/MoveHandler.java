@@ -46,21 +46,19 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction){
+	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException{
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 
-		try{
-			if(currentPosition.canMoveTo(direction)){
-				Square newPosition = currentPosition.getNeighbor(direction);
-				game.getCurrentPlayer().incrementActions();
-				game.getCurrentPlayer().move(newPosition);
-			}
-		} catch(IllegalStateException e) {
-			System.err.println("Player cannot move the square.");
-		} catch(IllegalArgumentException e) {
-			System.err.println("Tried to move to a neighbor that is no square.");
-
+		if(currentPosition.canMoveTo(direction)){
+			Square newPosition = currentPosition.getNeighbor(direction);
+			game.getCurrentPlayer().incrementActions();
+			game.getCurrentPlayer().move(newPosition);
 		}
+//		} catch(IllegalStateException e) {
+//			System.err.println("Player cannot move the square.");
+//		} catch(IllegalArgumentException e) {
+//			System.err.println("Tried to move to a neighbor that is no square.");
+//		}
 		
 		if(game.getCurrentPlayer().getPosition().hasActiveLightGrenade()){
 			game.getCurrentPlayer().endTurn();
