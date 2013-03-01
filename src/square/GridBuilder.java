@@ -118,14 +118,13 @@ public class GridBuilder {
 					try {
 						Square otherSquare = neighborInGrid(i,j, direction);
 						connect(square, direction, otherSquare);
-					} catch (IllegalAccessException e) {
-						// Do nothing
+					} catch (IndexOutOfBoundsException e) {
+						// Nothing to do here, we expect this to happen.
 					}
 				}
 			}
 		}
 	}
-	
 
 
 	/**
@@ -141,7 +140,7 @@ public class GridBuilder {
 	 * @return	The square in the given direction from the square at
 	 * 			the given location.
 	 */
-	public Square neighborInGrid(int i, int j, Direction direction) throws IllegalAccessException {
+	public Square neighborInGrid(int i, int j, Direction direction) throws IndexOutOfBoundsException {
 		int x = i; 
 		int y = j;
 		switch (direction) {
@@ -174,9 +173,19 @@ public class GridBuilder {
 			Square[][] grid = getGrid();
 			return grid[x][y];
 		}
-		throw new IllegalAccessException();
+		throw new IndexOutOfBoundsException();
 	}
 
+	/**
+	 * Connect the given square with the other square in the given direction
+	 * 
+	 * @param 	square
+	 * 			The square to connect
+	 * @param 	direction
+	 * 			The direction in which to connect the squares
+	 * @param 	otherSquare
+	 * 			The other square to connect the square to
+	 */
 	public void connect(Square square, Direction direction, Square otherSquare){
 		try{
 			square.setNeigbor(direction, otherSquare);
@@ -185,12 +194,20 @@ public class GridBuilder {
 		}
 	}
 	
-
-	
+	/**
+	 * Return the bottom left square of the constructed grid
+	 * 
+	 * @return	The bottom left square of the constructed grid
+	 */
 	public Square getBottomLeft(){
 		return this.bottomLeft;
 	}
-	
+
+	/**
+	 * Return the top right square of the constructed grid
+	 * 
+	 * @return	The top right square of the constructed grid
+	 */
 	public Square getTopRight(){
 		return this.topRight;
 	}
