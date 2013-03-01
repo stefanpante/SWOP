@@ -17,13 +17,13 @@ public class GridModel {
 	private HashMap<Coordinate2D, Square> walls;
 	private HashMap<Coordinate2D, Square> lightTrails;
 	private HashMap<Coordinate2D, Square> lightGrenades;
-	private HashMap<Coordinate2D, Square> players;
+	private Coordinate2D player1;
+	private Coordinate2D player2;
 	
 	public GridModel(){
 		this.walls = new HashMap<Coordinate2D, Square>();
 		this.lightTrails = new HashMap<Coordinate2D, Square>();
 		this.lightGrenades = new HashMap<Coordinate2D, Square>();
-		this.players = new HashMap<Coordinate2D, Square>();
 	}
 	
 	public void addToWalls(Coordinate2D coordinate, Square square){
@@ -38,8 +38,12 @@ public class GridModel {
 		lightGrenades.put(coordinate, square);
 	}
 		
-	public void addToPlayers(Coordinate2D coordinate, Square square){
-		players.put(coordinate, square);
+	public void setPlayer1(Coordinate2D coordinate){
+		this.player1 = coordinate;
+	}
+	
+	public void setPlayer2(Coordinate2D coordinate){
+		this.player2 = coordinate;
 	}
 	
 	public HashMap<Coordinate2D, Square> getWalls(){
@@ -54,9 +58,7 @@ public class GridModel {
 		return new HashMap<Coordinate2D, Square>(this.lightGrenades);
 	}
 	
-	public HashMap<Coordinate2D, Square> getPlayers(){
-		return new HashMap<Coordinate2D, Square>(this.players);
-	}
+
 	
 	public void clear(){
 		this.walls.clear();
@@ -64,6 +66,14 @@ public class GridModel {
 		this.lightGrenades.clear();
 		this.players.clear();
 	}
+
+
+	public Coordinate2D getPlayer1() {
+		return this.player1;
+	}
 	
+	public Coordinate2D getPlayer2() {
+		return this.player2;
+	}	
 
 }

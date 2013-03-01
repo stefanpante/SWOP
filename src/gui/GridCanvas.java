@@ -24,7 +24,7 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
-	private GridModel gridModel;
+	private static GridModel GRID_MODEL = new GridModel();;
 
 	/**
 	 * 
@@ -43,8 +43,9 @@ public class GridCanvas extends JPanel implements ImageObserver {
 		this.rowHeight = height/rows;
 		this.colWidth = width/cols;
 		
-		this.gridModel= new GridModel();
-		gridModel.addToWalls(new Coordinate2D(0, 0), new Square());
+		GRID_MODEL.addToLightGrenades(new Coordinate2D(0, 0), new Square());
+		GRID_MODEL.setPlayer1(new Coordinate2D(0, 0));
+		GRID_MODEL.setPlayer2(new Coordinate2D(100, 100));
 	}
 	
 	/**
@@ -56,19 +57,22 @@ public class GridCanvas extends JPanel implements ImageObserver {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
-	    for(Coordinate2D coordinate : getGridModel().getWalls().keySet()){
+	    for(Coordinate2D coordinate : GRID_MODEL.getWalls().keySet())
 	    	DrawImage(graphics, coordinate, "wall");
-	    }
+		for(Coordinate2D coordinate : GRID_MODEL.getLightTrails().keySet())
+		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");	
+		for(Coordinate2D coordinate : GRID_MODEL.getLightGrenades().keySet())
+		    DrawImage(graphics, coordinate, "lightgrenade");
+		
+		 DrawImage(graphics, GRID_MODEL.getPlayer1(), "player_blue");
+		 DrawImage(graphics, GRID_MODEL.getPlayer2(), "player_red");
 	}
 	
 	private void DrawImage(Graphics graphics, Coordinate2D coordinate, String image){
-		Image img = Toolkit.getDefaultToolkit().getImage("res/"+image+".png");
-    	graphics.drawImage(img,coordinate.getX(),coordinate.getY(),colWidth,rowHeight,Color.BLACK,this);
+		System.out.println("Draw "+ image +" at "+ coordinate);
+		Image img = Toolkit.getDefaultToolkit().getImage("./src/res/"+image+".png");
+    	graphics.drawImage(img,coordinate.getX(),coordinate.getY(),colWidth+1,rowHeight+1,Color.BLACK,this);
+	}
+	
 
-	}
-	
-	public GridModel getGridModel(){
-		return this.gridModel;
-	}
-	
 }
