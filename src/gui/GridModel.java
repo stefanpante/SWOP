@@ -20,7 +20,10 @@ public class GridModel {
 	private HashMap<Coordinate2D, Square> players;
 	
 	public GridModel(){
-		
+		this.walls = new HashMap<Coordinate2D, Square>();
+		this.lightTrails = new HashMap<Coordinate2D, Square>();
+		this.lightGrenades = new HashMap<Coordinate2D, Square>();
+		this.players = new HashMap<Coordinate2D, Square>();
 	}
 	
 	public void addToWalls(Coordinate2D coordinate, Square square){

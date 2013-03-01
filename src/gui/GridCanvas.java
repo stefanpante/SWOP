@@ -11,6 +11,7 @@ import java.awt.image.ImageObserver;
 
 import javax.swing.JPanel;
 
+import square.Square;
 import utils.Coordinate2D;
 
 /**
@@ -43,7 +44,7 @@ public class GridCanvas extends JPanel implements ImageObserver {
 		this.colWidth = width/cols;
 		
 		this.gridModel= new GridModel();
-		gridModel.addToWalls(new Coordinate2D(0, 0), null);
+		gridModel.addToWalls(new Coordinate2D(0, 0), new Square());
 	}
 	
 	/**
