@@ -1,4 +1,4 @@
-package square;
+package Board;
 
 import static org.junit.Assert.*;
 

@@ -164,7 +164,7 @@ public class BoardBuilder {
 		}
 	}
 	
-	private ArrayList<Coordinate2D> constructCandidates(){
+	public ArrayList<Coordinate2D> constructCandidates(){
 		ArrayList<Coordinate2D> candidates = new ArrayList<Coordinate2D>();
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
