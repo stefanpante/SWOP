@@ -189,32 +189,7 @@ public class GridBuilder {
 	private Square neighborInGrid(int i, int j, Direction direction) throws IndexOutOfBoundsException {
 		int x = i; 
 		int y = j;
-		switch (direction) {
-		case NORTH:
-			y++;
-			break;
-		case NORTHEAST:
-			x++; y++; 
-			break;
-		case EAST:
-			x++;
-			break;
-		case SOUTHEAST:
-			x++; y--;
-			break;
-		case SOUTH:
-			y--;
-			break;
-		case SOUTHWEST:
-			x--;y--;
-			break;
-		case WEST:
-			x--;
-			break;
-		case NORTHWEST:
-			x--; y++;
-			break;
-		}
+		direction.getNeighborCoordinate(new Coordinate2D(i,j));
 		if(x >= 0 && y >= 0 && x < hSize && y < vSize){
 			Square[][] grid = getGrid();
 			return grid[x][y];
@@ -319,7 +294,7 @@ public class GridBuilder {
 	private ArrayList<Square> getNeighborWalls(ArrayList<Square> sequence){
 		ArrayList<Square> result = new ArrayList<Square>();
 		for(Square s: sequence){
-			result.addAll(s.getNeighborsAsList());
+			result.addAll();
 		}
 		result.addAll(sequence);
 		return result;
@@ -370,7 +345,7 @@ public class GridBuilder {
 		Random ran = new Random();
 
 		Square rand = squares.get(ran.nextInt(squares.size()));
-
+		
 
 		switch(orientation){
 		case HORIZONTAL:
