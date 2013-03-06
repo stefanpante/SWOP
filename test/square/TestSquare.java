@@ -15,9 +15,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import board.Direction;
+import board.GridBuilder;
+import board.Square;
+
 import player.LightTrail;
 
-import square.Square;
 import square.obstacles.Obstacle;
 import square.obstacles.Wall;
 

@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
+import board.Orientation;
+
 public class TestOrientation {
 
 	public static  double SAMPLESIZE = 2000;

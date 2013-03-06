@@ -3,7 +3,8 @@ package square.obstacles;
 
 import java.util.ArrayList;
 
-import square.Square;
+import board.Square;
+
 
 /**
  * Super class where any obstacle grid inherits its general properties from.

@@ -6,10 +6,11 @@ import items.Item;
 
 import java.util.Observable;
 
+import board.GridBuilder;
+import board.Square;
+
 import notnullcheckweaver.NotNull;
 import player.Player;
-import square.GridBuilder;
-import square.Square;
 
 /**
  * Game class, this class controls the flow of the game

@@ -1,6 +1,8 @@
-package square;
+package board;
 
 import java.util.ArrayList;
+
+import utils.Coordinate2D;
 
 /**
  * This is used for scenarios where the player wants to move into a certain direction
@@ -27,6 +29,11 @@ public enum Direction {
 		public boolean isDiagonal() {
 			return false;
 		}
+		
+		@Override
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return  new Coordinate2D(c.getX(), c.getY() - 1);
+		}
 	},	NORTHEAST{
 		@Override
 		public Direction opposite() {
@@ -39,6 +46,10 @@ public enum Direction {
 			neighborDirections.add(Direction.NORTH);
 			neighborDirections.add(Direction.EAST);
 			return neighborDirections;
+		}
+		
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX() -1, c.getY() - 1);
 		}
 
 		@Override
@@ -63,6 +74,10 @@ public enum Direction {
 		public boolean isDiagonal() {
 			return false;
 		}
+		
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX() -1, c.getY());
+		}
 	},	SOUTHEAST {
 		@Override
 		public Direction opposite() {
@@ -80,6 +95,9 @@ public enum Direction {
 		@Override
 		public boolean isDiagonal() {
 			return true;
+		}
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX()  -1, c.getY() + 1);
 		}
 	},	SOUTH {
 		@Override
@@ -99,6 +117,10 @@ public enum Direction {
 		public boolean isDiagonal() {
 			return false;
 		}
+		
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX(), c.getY() + 1);
+		}
 	},	SOUTHWEST {
 		@Override
 		public Direction opposite() {
@@ -116,6 +138,10 @@ public enum Direction {
 		@Override
 		public boolean isDiagonal() {
 			return true;
+		}
+		
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX() + 1, c.getY() + 1);
 		}
 	},	WEST {
 		@Override
@@ -135,6 +161,10 @@ public enum Direction {
 		public boolean isDiagonal() {
 			return false;
 		}
+		
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX() + 1, c.getY());
+		}
 	},	NORTHWEST {
 		@Override
 		public Direction opposite() {
@@ -153,6 +183,10 @@ public enum Direction {
 		public boolean isDiagonal() {
 			return true;
 		}
+		
+		public Coordinate2D getNeighborCoordinate(Coordinate2D c){
+			return new Coordinate2D(c.getX()  + 1, c.getY() - 1);
+		}
 	};
 	
 	/**
@@ -162,6 +196,8 @@ public enum Direction {
 	abstract public Direction opposite();
 	
 	abstract public ArrayList<Direction> neighborDirections();
+	
+	abstract public Coordinate2D getNeighborCoordinate(Coordinate2D c);
 	
 	abstract public boolean isDiagonal();
 }

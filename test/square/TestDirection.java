@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import square.Direction;
+import board.Direction;
+
 
 public class TestDirection {
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package square;
+package board;
 
 import items.LightGrenade;
 

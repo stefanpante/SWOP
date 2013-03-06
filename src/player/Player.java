@@ -2,7 +2,8 @@ package player;
 
 import java.util.Observable;
 
-import square.Square;
+import board.Square;
+
 
 import items.Inventory;
 import items.Item;

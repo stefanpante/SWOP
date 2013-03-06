@@ -1,4 +1,4 @@
-package square;
+package board;
 
 import items.Inventory;
 import items.Item;

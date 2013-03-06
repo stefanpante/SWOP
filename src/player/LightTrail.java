@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import square.Square;
+import board.Square;
+
 import square.obstacles.Obstacle;
 
 /**

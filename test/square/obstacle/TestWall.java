@@ -4,8 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import square.Direction;
-import square.Square;
+import board.Direction;
+import board.Square;
+
 import square.obstacles.Wall;
 
 public class TestWall {

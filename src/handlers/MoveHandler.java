@@ -1,8 +1,8 @@
 	package handlers;
 
+import board.Direction;
+import board.Square;
 import player.Player;
-import square.Direction;
-import square.Square;
 import game.Game;
 
 /**

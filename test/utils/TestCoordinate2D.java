@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import square.Direction;
+import board.Direction;
+
 import utils.Coordinate2D;
 
 //TODO look if this test can be overhauled to use the new neighbor implementation.

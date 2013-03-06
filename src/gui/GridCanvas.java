@@ -13,7 +13,8 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import square.Square;
+import board.Square;
+
 import utils.Coordinate2D;
 
 /**

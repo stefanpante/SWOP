@@ -2,7 +2,8 @@ package square.obstacles;
 
 import java.util.ArrayList;
 
-import square.Square;
+import board.Square;
+
 
 
 /**
