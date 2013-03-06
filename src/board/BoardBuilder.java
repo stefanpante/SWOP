@@ -88,7 +88,7 @@ public class BoardBuilder {
 		int randomCoverage = 2 + (int) Math.floor((this.getMaxCoverage() - 2) * Math.random());
 		ArrayList<Coordinate2D> candidates = this.constructCandidates();
 		
-		while(randomCoverage >= 2){
+		while(randomCoverage >= Wall.MIN_SIZE){
 			Wall wall = constructWall(candidates);
 			if(wall != null){
 				walls.add(wall);
@@ -110,7 +110,7 @@ public class BoardBuilder {
 		int length = (int) (2 + Math
 				.floor(((maxLength - 2) * Math.random())));
 		
-		if(sequence.size() < 2){
+		if(sequence.size() < Wall.MIN_SIZE){
 			return result;
 		}
 		if(sequence.size() >= length){
