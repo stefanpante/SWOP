@@ -92,7 +92,7 @@ public class BoardBuilder {
 			Wall wall = constructWall(candidates);
 			if(wall != null){
 				walls.add(wall);
-				randomCoverage -= wall.getLength();
+				randomCoverage -= wall.length();
 			}
 			else{
 				randomCoverage--;
@@ -115,14 +115,13 @@ public class BoardBuilder {
 		}
 		if(sequence.size() >= length){
 			ArrayList<Coordinate2D> list = new ArrayList<Coordinate2D>(sequence.subList(0, length));
-			replaceWithBricks(list);
-			// wat voor wall opbouwen?
+			result = replaceWithBricks(list);
 			candidates.removeAll(getAllNeighbors(list));
 			
 		}
 		
 		if(sequence.size() < length){
-			replaceWithBricks(sequence);
+			result =  replaceWithBricks(sequence);
 			candidates.removeAll(getAllNeighbors(sequence));
 		}
 		
@@ -158,10 +157,15 @@ public class BoardBuilder {
 			throw new IllegalArgumentException("This orientation is not supported:" + orientation);
 		}
 	}
-	private void replaceWithBricks(ArrayList<Coordinate2D> bricks){
+	private Wall replaceWithBricks(ArrayList<Coordinate2D> bricks){
+		ArrayList<Brick> wall = new ArrayList<Brick>();
 		for(Coordinate2D c: bricks){
-			board.put(c, new Brick());
+			Brick brick = new Brick();
+			board.put(c,  brick);
+			wall.add(brick);
 		}
+		
+		return new Wall(wall);
 	}
 	
 	public ArrayList<Coordinate2D> constructCandidates(){
