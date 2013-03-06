@@ -1,4 +1,4 @@
-package square.obstacles;
+package board.obstacles;
 
 import java.util.ArrayList;
 

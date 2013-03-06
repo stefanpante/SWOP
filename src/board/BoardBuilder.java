@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import square.obstacles.Brick;
-import square.obstacles.Wall;
+import board.obstacles.Brick;
+import board.obstacles.Wall;
+
 import utils.Coordinate2D;
 
 

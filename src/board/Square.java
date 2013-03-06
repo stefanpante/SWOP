@@ -8,7 +8,8 @@ import items.SquareInventory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import square.obstacles.Obstacle;
+import board.obstacles.Obstacle;
+
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;

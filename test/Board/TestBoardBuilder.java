@@ -11,11 +11,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import square.obstacles.Wall;
 import utils.Coordinate2D;
 
 import board.BoardBuilder;
 import board.Square;
+import board.obstacles.Wall;
 
 public class TestBoardBuilder {
 

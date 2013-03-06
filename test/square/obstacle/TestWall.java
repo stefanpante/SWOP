@@ -6,8 +6,8 @@ import org.junit.*;
 
 import board.Direction;
 import board.Square;
+import board.obstacles.Wall;
 
-import square.obstacles.Wall;
 
 public class TestWall {
 	

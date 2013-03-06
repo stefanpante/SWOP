@@ -16,7 +16,8 @@ import gui.GridCanvas;
 
 import java.util.Random;
 
-import square.obstacles.Wall;
+import board.obstacles.Wall;
+
 import utils.Coordinate2D;
 
 /**

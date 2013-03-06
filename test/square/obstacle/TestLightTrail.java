@@ -1,11 +1,11 @@
 package square.obstacle;
 
 import static org.junit.Assert.*;
-import square.obstacles.*;
 
 import org.junit.*;
 
 import board.*;
+import board.obstacles.*;
 
 import player.LightTrail;
 

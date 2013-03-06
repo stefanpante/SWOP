@@ -6,8 +6,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import board.Square;
+import board.obstacles.Obstacle;
 
-import square.obstacles.Obstacle;
 
 /**
  * LightTrail is a trail that is left behind the player while he

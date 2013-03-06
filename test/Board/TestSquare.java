@@ -18,11 +18,11 @@ import org.junit.Test;
 import board.Direction;
 import board.GridBuilder;
 import board.Square;
+import board.obstacles.Obstacle;
+import board.obstacles.Wall;
 
 import player.LightTrail;
 
-import square.obstacles.Obstacle;
-import square.obstacles.Wall;
 
 
 public class TestSquare {
