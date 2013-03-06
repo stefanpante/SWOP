@@ -16,5 +16,13 @@ public class Board {
 		this.walls = builder.getWalls();
 		
 	}
+	
+	public ArrayList<Wall> getWalls(){
+		return walls;
+	}
+	
+	public HashMap<Coordinate2D, Square> getSquares(){
+		return squares;
+	}
 
 }
