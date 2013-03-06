@@ -8,6 +8,8 @@ import items.LightGrenade;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+
 import game.Game;
 import gui.ApplicationWindow;
 import gui.GridCanvas;
@@ -55,6 +57,7 @@ public class GridBuilder {
 	 */
 	private Square[][] grid;
 
+	private HashMap<Coordinate2D, Square> board;
 	/**
 	 * The square at the bottom left of this grid.
 	 */
@@ -131,7 +134,9 @@ public class GridBuilder {
 		Square[][] grid = new Square[hSize][vSize];
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
-				grid[i][j] = createSquare();
+				Square s = createSquare();
+				grid[i][j] = s;
+				board.put(new Coordinate2D(i,j), s);
 			}
 		}
 		this.grid = grid;
@@ -260,6 +265,10 @@ public class GridBuilder {
 		this.wallRepresentation();
 	}
 
+	
+	private void createWall(ArrayList<Square> blocks){
+		
+	}
 
 	/**
 	 * Covers 5 percent of the field with grenades. Grenades cannot be placed on

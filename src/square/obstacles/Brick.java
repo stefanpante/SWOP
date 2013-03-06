@@ -1,11 +1,16 @@
 package square.obstacles;
 
+import board.Square;
+
 public class Brick extends Square {
-
-	public Brick() {
-		// TODO Auto-generated constructor stub
-	}
-
 	
+	public Brick(){
+		super();
+	}
+	
+	@Override
+	public boolean isObstructed(){
+		return true;
+	}
 
 }
