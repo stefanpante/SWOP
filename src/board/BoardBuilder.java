@@ -10,6 +10,13 @@ import square.obstacles.Brick;
 import square.obstacles.Wall;
 import utils.Coordinate2D;
 
+
+/**
+ * 
+ * Class used for the construction of a complex board object
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ */	
 public class BoardBuilder {
 
 	/**
@@ -44,11 +51,15 @@ public class BoardBuilder {
 
 	private HashMap<Coordinate2D, Square> board;
 	private ArrayList<Wall> walls;
-
-
-
-	private ArrayList<Square> freeFields = new ArrayList<Square>();
 	
+	/**
+	 * Create a new BoardBuilder with the given dimension.
+	 * 
+	 * @param 	hSize
+	 * 			The horizontal size for this board builder
+	 * @param 	vSize
+	 * 			The vertical size for this board builder
+	 */
 	public BoardBuilder(int hSize, int vSize) {
 		this.hSize = hSize;
 		this.vSize = vSize;
@@ -62,25 +73,6 @@ public class BoardBuilder {
 		placeGrenades();
 	}
 	
-	private void placeGrenades() {
-		ArrayList<Coordinate2D> candidates = this.constructCandidates();
-		int grenades = getNumberOfGrenades();
-		candidates.remove(new Coordinate2D(hSize-1, 0));
-		candidates.remove(new Coordinate2D(0, vSize -1));
-		Random generator = new Random();
-		//TODO: place first 2 grenades in the 3 x 3 board around the startposition
-		int i = 2;
-		while (i < grenades && !candidates.isEmpty()) {
-			int l = candidates.size();
-			Coordinate2D c = candidates.get(generator.nextInt(l));
-			// no need for testing for obstructed, candidates ensures this
-			board.get(c).getInventory().addItem(new LightGrenade());
-			candidates.remove(c);
-
-		}
-		
-	}
-
 	public void constructSquares(){
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
@@ -90,7 +82,7 @@ public class BoardBuilder {
 		
 	}
 	
-	public void buildWalls(){
+	private void buildWalls(){
 		
 		
 		int randomCoverage = 2 + (int) Math.floor((this.getMaxCoverage() - 2) * Math.random());
@@ -250,6 +242,33 @@ public class BoardBuilder {
 		return seq;
 	}
 	
+	private void placeGrenades() {
+		ArrayList<Coordinate2D> candidates = this.constructCandidates();
+		int grenades = getNumberOfGrenades();
+		candidates.remove(new Coordinate2D(hSize-1, 0));
+		candidates.remove(new Coordinate2D(0, vSize -1));
+		Random generator = new Random();
+		//TODO: place first 2 grenades in the 3 x 3 board around the startposition
+		int i = 2;
+		while (i < grenades && !candidates.isEmpty()) {
+			int l = candidates.size();
+			Coordinate2D c = candidates.get(generator.nextInt(l));
+			// no need for testing for obstructed, candidates ensures this
+			board.get(c).getInventory().addItem(new LightGrenade());
+			candidates.remove(c);
+	
+		}
+		
+	}
+
+	public ArrayList<Wall> getWalls(){
+		return walls;
+	}
+
+	public HashMap<Coordinate2D, Square> getSquares(){
+		return board;
+	}
+
 	public int getNumberOfGrenades(){
 		return (int) (Math.ceil(this.getGridSize() * PERCENTAGEGRENADES));
 	}
