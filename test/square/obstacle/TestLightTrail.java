@@ -6,6 +6,8 @@ import square.obstacles.*;
 
 import org.junit.*;
 
+import player.LightTrail;
+
 public class TestLightTrail {
 
 

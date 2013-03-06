@@ -239,7 +239,7 @@ public class GridBuilder {
 					orientation);
 			if (sequence.size() < 2) {
 				coverage--;
-				continue;
+				continue; 
 			}
 			if (sequence.size() <= length) {
 				Wall wall = new Wall(sequence);

@@ -24,4 +24,4 @@ public enum Orientation {
 		Orientation[] or = Orientation.values();
 		return or[ran.nextInt(or.length)];
 	}
-}
+} 

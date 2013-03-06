@@ -225,36 +225,6 @@ public class Square {
 			i.activate();
 	}
 	
-	
-	
-	/**
-	 * Returns the value of the obstacle of this Square as an Obstacle.
-	 *
-	 * @return 	An object of the Obstacle class.
-	 * 			| Obstacle
-	 */
-	public Obstacle getObstacle() {
-		return obstacle;
-	};
-
-	/**
-	 * Sets the value of the obstacle of Square if the given value is valid. 
-	 * 
-	 * @param 	obstacle
-	 *			The obstacle to set.
-	 * @post 	The given value is the current value of the obstacle of this Square.
-	 * @throws 	IllegalArgumentException
-	 *			If the given argument is not a valid obstacle.
-	 *			| !isValidObstacle(obstacle)
-	 */
-	@Nullable
-	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
-		if (getObstacle() != null)
-			throw new IllegalArgumentException("Obstacle already exists on this square.");
-		
-		this.obstacle = obstacle;
-	};
-	
 	@Override
 	public String toString() {
 		String s = "Square [ ";

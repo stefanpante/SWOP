@@ -1,4 +1,4 @@
-package square.obstacles;
+package player;
 
 
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import square.Square;
+import square.obstacles.Obstacle;
 
 /**
  * LightTrail is a trail that is left behind the player while he

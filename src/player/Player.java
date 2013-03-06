@@ -3,7 +3,6 @@ package player;
 import java.util.Observable;
 
 import square.Square;
-import square.obstacles.LightTrail;
 
 import items.Inventory;
 import items.Item;
@@ -20,6 +19,7 @@ public class Player extends Observable {
 	 * The start position of this player
 	 */
 	private Square startPosition;
+	
 	
 	/**
 	 * the current position of the player
@@ -69,7 +69,6 @@ public class Player extends Observable {
 	public Player(Square startPosition, String name) {
 		this.setStartPosition(startPosition);
 		this.setName(name);
-		
 		this.inventory = new PlayerInventory();
 		this.actions = 0;
 		this.previousactions = 0;

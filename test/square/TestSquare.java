@@ -15,8 +15,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import player.LightTrail;
+
 import square.Square;
-import square.obstacles.LightTrail;
 import square.obstacles.Obstacle;
 import square.obstacles.Wall;
 
