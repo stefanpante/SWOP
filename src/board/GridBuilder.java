@@ -24,9 +24,6 @@ import utils.Coordinate2D;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */	
 public class GridBuilder {
-
-
-
 	/**
 	 * Max percentage of squares covered by walls.
 	 */
