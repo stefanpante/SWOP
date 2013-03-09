@@ -22,10 +22,10 @@ public class StartNewGameHandler extends Handler {
 	
     public static void main(String[] args) {
     	StartNewGameHandler applicationHandler = new StartNewGameHandler();
-    	applicationHandler.initialize();
+    	applicationHandler.startNewGame();
     }
     
-    public void initialize(){
+    public void startNewGame(){
     	this.guiHandler = new GuiHandler(this);
 		start();
     }
@@ -64,4 +64,6 @@ public class StartNewGameHandler extends Handler {
 	public void createGame(int hSize, int vSize) {
 		this.game = new Game(hSize, vSize);
 	}
+	
+	
 }
