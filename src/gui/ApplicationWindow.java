@@ -8,6 +8,9 @@ import handlers.GuiHandler;
 import items.Item;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +22,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+
+//TODO: http://cs.nyu.edu/~yap/classes/visual/03s/lect/l7/ -> misschien handige tutorial
 
 /**
  * The application window of the game. Is used for the graphical user interface
@@ -46,7 +52,7 @@ public class ApplicationWindow {
 	 * Creates a new applicationWindow with a given GuiHandler.
 	 * The GuiHandler is used for the interaction between the model ant the view
 	 * 
-	 * @param controller	The GuiHandler that will handel all triggers.
+	 * @param controller	The GuiHandler that will handle all triggers.
 	 */
     public ApplicationWindow(GuiHandler controller) {
     	setController(controller);
@@ -86,7 +92,8 @@ public class ApplicationWindow {
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+        // TODO: 
+        frame.getContentPane().setLayout(null);
 		frame.setTitle("Objectron");
 
         /* GRID */
@@ -99,6 +106,7 @@ public class ApplicationWindow {
         /* SIDEBAR */
         JPanel sideBarPanel = new JPanel();
         sideBarPanel.setBounds(GRID_WIDTH, 0, SIDEBAR_WIDTH, WINDOW_HEIGHT);
+        
         sideBarPanel.setLayout(null);
         frame.getContentPane().add(sideBarPanel);
        
