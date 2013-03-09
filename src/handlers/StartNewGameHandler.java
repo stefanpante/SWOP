@@ -1,5 +1,5 @@
 
-
+//TODO: refactor to startNewGameHandler?
 /**
  * 
  */
@@ -11,7 +11,7 @@ import game.Game;
  * @author jonas
  *
  */
-public class ApplicationHandler extends Handler {
+public class StartNewGameHandler extends Handler {
 	
 	private GuiHandler guiHandler;
 	private EndTurnHandler endTurnHandler;
@@ -21,11 +21,11 @@ public class ApplicationHandler extends Handler {
 	private Game game;
 	
     public static void main(String[] args) {
-    	ApplicationHandler applicationHandler = new ApplicationHandler();
-    	applicationHandler.initialize();
+    	StartNewGameHandler applicationHandler = new StartNewGameHandler();
+    	applicationHandler.startNewGame();
     }
     
-    public void initialize(){
+    public void startNewGame(){
     	this.guiHandler = new GuiHandler(this);
 		start();
     }
@@ -52,6 +52,10 @@ public class ApplicationHandler extends Handler {
     public UseItemHandler getUseItemHandler(){
     	return this.useItemHandler;
     }
+    
+    public EndTurnHandler getEndTurnHandler(){
+    	return this.endTurnHandler;
+    }
 
 	/**
 	 * Create a game based on the given dimensions of the grid
@@ -64,4 +68,6 @@ public class ApplicationHandler extends Handler {
 	public void createGame(int hSize, int vSize) {
 		this.game = new Game(hSize, vSize);
 	}
+	
+	
 }
