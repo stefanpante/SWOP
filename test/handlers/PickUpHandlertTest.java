@@ -2,6 +2,7 @@ package handlers;
 
 import static org.junit.Assert.*;
 import items.LightGrenade;
+import items.PlayerInventory;
 import game.Game;
 
 import org.junit.Test;
@@ -32,21 +33,38 @@ public class PickUpHandlertTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void pickUpTest(){
-		
 		Game game = new Game(10,10);
 		PickUpHandler ph = new PickUpHandler(game);
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-		currentPosition.getPickUpInventory();
-		assertFalse(currentPosition.getInventory().isEmpty());
-		ph.pickUp(new LightGrenade());
+		LightGrenade lg = new Lightgrenade();
+		currentPosition.getPickUpInventory().addItem(lg);
+		assertFalse(currentPosition.getPickUpInventory().isEmpty());
+		ph.pickUp(lg);
 	}
 	
 	/**
 	 * Test the pick up when there is an item on the square,
 	 * but the inventory of the player is full.
 	 */
-	@Test
+	@Test(expected = IllegalStateException.class)
 	public void pickUpFullInventoryTest(){
+		Game game = new Game(10,10);
+		PickUpHandler ph = new PickUpHandler(game);
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		LightGrenade lg = new LightGrenade();
+		currentPosition.getPickUpInventory().addItem(lg);
+		assertFalse(currentPosition.getPickUpInventory().isEmpty());
+		
+		PlayerInventory inventory = game.getCurrentPlayer().getInventory();
+		LightGrenade item = new LightGrenade();
+		while(inventory.canHaveAsItem(item)){
+			inventory.addItem(item);
+			item = new LightGrenade();
+		}
+		LightGrenade lg2 = new LightGrenade();
+		ph.pickUp(lg2);
+		
+		
 		
 	}
 	@Test
