@@ -11,5 +11,10 @@ public class PlayerInventory extends Inventory {
 	public PlayerInventory() {
 		super(PLAYER_INVENTORY_SIZE);
 	}
+	
+	@Override
+	public String toString() {
+		return "Player " + super.toString();
+	}
 
 }

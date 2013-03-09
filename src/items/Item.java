@@ -38,7 +38,7 @@ public class Item {
 	public void use() throws IllegalStateException {
 		if(this.currentState != ItemState.ACTIVE)
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the used state.");
-		this.currentState = ItemState.USED;
+		this.currentState = ItemState.WORN;
 	}
 	
 	public void deactivate(){

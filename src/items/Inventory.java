@@ -13,13 +13,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public class Inventory{
-
-	/**
-	 * Static field which declares an empty inventory,
-	 * added for performance, to prevent unnecessary instancing
-	 */
-	public static Inventory EMPTY = new Inventory(0);
+public abstract class Inventory{
 
 	/**
 	 * The size of the inventory, should not be smaller than zero
@@ -41,7 +35,6 @@ public class Inventory{
 	@Raw
 	public Inventory(int size) throws IllegalArgumentException {
 		this.setMaximumSize(size);
- 
 		this.items = new ArrayList<Item>();
 	}
 
@@ -194,7 +187,7 @@ public class Inventory{
 	public static boolean isValidItem(Item item){
 		if(item == null)
 			return false;
-		return !item.isActive();
+		return true;
 	}
 
 	/**
@@ -209,7 +202,6 @@ public class Inventory{
 			return false;
 		if(items.contains(item))
 			return false;
-
 		return true;
 	}
 
@@ -234,14 +226,17 @@ public class Inventory{
 	@Override
 	public String toString(){
 		String description = "";
-		if(maximumSize == 0) return "This inventory is empty";
-		else{
+		if(maximumSize == 0){
+			return "Inventory (empty)";
+		} else {
+			description += "Inventory ("+ getSize() +") containing: "; 
 			int i = 0;
-			while(i < items.size());
-			// the system.getProperty is used to get a system independent newline,
-			// is different on windows vs Unix systems.
-			description +=  i + ". " + items.get(i).toString() + System.getProperty("line.separator");
-			i++;
+			while(i < items.size()){
+				// the system.getProperty is used to get a system independent newline,
+				// is different on windows vs Unix systems.
+				description +=  i + ". " + items.get(i).toString() + System.getProperty("line.separator");
+				i++;
+			}
 		}
 		return description;
 	}
