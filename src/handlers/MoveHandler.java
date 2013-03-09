@@ -51,7 +51,7 @@ public class MoveHandler extends Handler {
 
 		if(currentPosition.canMoveTo(direction)){
 			Square newPosition = currentPosition.getNeighbor(direction);
-			currentPosition.activateUsedItems();
+			currentPosition.getUsedInventory().activateAllItems();
 			game.getCurrentPlayer().incrementActions();
 			game.getCurrentPlayer().move(newPosition);
 		}
@@ -61,7 +61,7 @@ public class MoveHandler extends Handler {
 //			System.err.println("Tried to move to a neighbor that is no square.");
 //		}
 		
-		if(game.getCurrentPlayer().getPosition().hasActiveLightGrenade()){
+		if(game.getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
 			game.getCurrentPlayer().endTurn();
 			game.switchPlayer();
 		}

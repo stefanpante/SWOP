@@ -36,7 +36,6 @@ public class GuiHandler implements ActionListener  {
 
 	public StartNewGameHandler applicationHandler;
 	private Game game;
-	Inventory inventory = new Inventory();
 	
 	private Coordinate2D player1CO;
 	private HashMap<Coordinate2D,Square> player1LTCoordinates;

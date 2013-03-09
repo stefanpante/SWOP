@@ -172,7 +172,7 @@ public class Square {
 	 * Return the inventory of used items on this Square
 	 * @return	the inventory of used items on this Square
 	 */
-	public Inventory getUsedInventory() {
+	public SquareInventory getUsedInventory() {
 		return usedInventory;
 	}
 	
@@ -180,7 +180,7 @@ public class Square {
 	 * Returns the inventory of which items can be picked up
 	 * @return the inventory of  items which can be picked up on this Square
 	 */
-	public Inventory getPickUpInventory(){
+	public SquareInventory getPickUpInventory(){
 		return pickUpInventory;
 	}
 	
