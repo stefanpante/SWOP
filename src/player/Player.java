@@ -173,7 +173,7 @@ public class Player extends Observable {
 	 */
 	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(itemToUse);
-		getPosition().addUsedItem(itemToUse);
+		getPosition().getUsedInventory().addItem(itemToUse);
 	}
 	
 	/**

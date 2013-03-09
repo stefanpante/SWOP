@@ -83,7 +83,7 @@ public class MoveHandlerTest {
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 
-		currentPosition.addUsedItem(lg);
+		currentPosition.getUsedInventory().addItem(lg);
 		assertFalse(lg.isActive());
 
 		Random random = new Random();
@@ -98,7 +98,7 @@ public class MoveHandlerTest {
 		}
 
 		assertTrue(lg.isActive());
-		assertTrue(currentPosition.hasActiveLightGrenade());
+		assertTrue(currentPosition.getUsedInventory().hasActiveLightGrenade());
 	}
 
 	/**

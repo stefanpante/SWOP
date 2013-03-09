@@ -22,7 +22,7 @@ public class PickUpHandlertTest {
 	public void EmptyPickUpTest(){
 		Game game = new Game(10,10);
 		PickUpHandler ph = new PickUpHandler(game);
-		assertTrue(game.getCurrentPlayer().getPosition().getInventory().isEmpty());
+		assertTrue(game.getCurrentPlayer().getPosition().getPickUpInventory().isEmpty());
 		ph.pickUp(new LightGrenade());
 		
 	}
@@ -36,7 +36,7 @@ public class PickUpHandlertTest {
 		Game game = new Game(10,10);
 		PickUpHandler ph = new PickUpHandler(game);
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-		LightGrenade lg = new Lightgrenade();
+		LightGrenade lg = new LightGrenade();
 		currentPosition.getPickUpInventory().addItem(lg);
 		assertFalse(currentPosition.getPickUpInventory().isEmpty());
 		ph.pickUp(lg);
