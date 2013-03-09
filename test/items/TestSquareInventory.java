@@ -27,6 +27,44 @@ public class TestSquareInventory {
 	public void tearDown() throws Exception {
 	}
 
+	
+	@Test 
+	public void testConstructor(){
+		SquareInventory sqinv1 = new SquareInventory(false);
+		assertFalse(sqinv1.isOnlyInactiveItems());
+		
+		SquareInventory sqinv2 = new SquareInventory(true);
+		assertTrue(sqinv2.isOnlyInactiveItems());
+	}
+	
+	@Test 
+	public void testConstructor2Args(){
+		SquareInventory sqinv1 = new SquareInventory(17, false);
+		assertEquals(17, sqinv1.getMaximumSize());
+		assertFalse(sqinv1.isOnlyInactiveItems());
+		
+		SquareInventory sqinv2 = new SquareInventory(1615, true);
+		assertEquals(1615, sqinv2.getMaximumSize());
+		assertTrue(sqinv2.isOnlyInactiveItems());
+	}
+	
+	@Test
+	public void testCanHaveAsItemFull(){
+		SquareInventory sqinv1 = new SquareInventory(1, false);
+		Item it1 = new Item();
+		Item it2 = new Item();
+		sqinv1.addItem(it1);
+		assertFalse(sqinv1.canHaveAsItem(it2));
+	}
+	
+	@Test
+	public void testCanHaveAsItemTwice(){
+		SquareInventory sqinv1 = new SquareInventory(1, false);
+		Item it1 = new Item();
+		sqinv1.addItem(it1);
+		assertFalse(sqinv1.canHaveAsItem(it1));
+	}
+	
 	@Test
 	public void testAddItemLightGrenade() {
 		SquareInventory sqinv = new SquareInventory(false);
@@ -42,6 +80,12 @@ public class TestSquareInventory {
 			assert(true);
 		}
 
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void testAddItemNull() {
+		SquareInventory sqinv = new SquareInventory(false);
+		sqinv.addItem(null);
 	}
 
 	@Test
@@ -107,8 +151,6 @@ public class TestSquareInventory {
 		assertFalse(sqinv.hasLightGrenade());
 	}
 	
-	
-	
 	@Test
 	public void testActivate(){
 		SquareInventory sqinvFalse = new SquareInventory(false);
@@ -126,6 +168,15 @@ public class TestSquareInventory {
 		LightGrenade lg = new LightGrenade();
 		
 		sqinvFalse.addItem(lg);
+		sqinvFalse.activate(lg);
+		assertFalse(lg.isActive());
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void testActivate3(){
+		SquareInventory sqinvFalse = new SquareInventory(false);
+		LightGrenade lg = new LightGrenade();
+		
 		sqinvFalse.activate(lg);
 		assertFalse(lg.isActive());
 	}
@@ -192,7 +243,7 @@ public class TestSquareInventory {
 		LightGrenade lg = new LightGrenade();
 		
 		sqinvFalse.addItem(lg);
-		sqinvFalse.activate(lg);
+		sqinvFalse.activateAllItems();
 		assertFalse(lg.isActive());
 	}
 	

@@ -49,7 +49,7 @@ public class SquareInventory extends Inventory {
 	 * @return
 	 */
 	@Basic
-	private final boolean isOnlyInactiveItems() {
+	public final boolean isOnlyInactiveItems() {
 		return onlyInactiveItems;
 	}
 	
