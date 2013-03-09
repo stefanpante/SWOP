@@ -52,6 +52,10 @@ public class StartNewGameHandler extends Handler {
     public UseItemHandler getUseItemHandler(){
     	return this.useItemHandler;
     }
+    
+    public EndTurnHandler getEndTurnHandler(){
+    	return this.endTurnHandler;
+    }
 
 	/**
 	 * Create a game based on the given dimensions of the grid
