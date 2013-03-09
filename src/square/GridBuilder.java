@@ -279,7 +279,7 @@ public class GridBuilder {
 			int l = freeFields.size();
 			Square s = freeFields.get(generator.nextInt(l));
 			if (!s.isObstructed()) {
-				s.getInventory().addItem(new LightGrenade());
+				s.getPickUpInventory().addItem(new LightGrenade());
 				i++;
 			}
 			freeFields.remove(s);

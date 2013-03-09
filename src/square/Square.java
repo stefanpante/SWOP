@@ -56,7 +56,6 @@ public class Square {
 	 * Zero argument constructor for a square.
 	 */
 	public Square (){
-		this.usedItems = new ArrayList<Item>();
 		this.pickUpInventory = new SquareInventory(false);
 		this.usedInventory = new SquareInventory(true);
 		this.neighbors = new HashMap<Direction, Square>();
