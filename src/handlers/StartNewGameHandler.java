@@ -1,5 +1,5 @@
 
-
+//TODO: refactor to startNewGameHandler?
 /**
  * 
  */
@@ -11,7 +11,7 @@ import game.Game;
  * @author jonas
  *
  */
-public class ApplicationHandler extends Handler {
+public class StartNewGameHandler extends Handler {
 	
 	private GuiHandler guiHandler;
 	private EndTurnHandler endTurnHandler;
@@ -21,7 +21,7 @@ public class ApplicationHandler extends Handler {
 	private Game game;
 	
     public static void main(String[] args) {
-    	ApplicationHandler applicationHandler = new ApplicationHandler();
+    	StartNewGameHandler applicationHandler = new StartNewGameHandler();
     	applicationHandler.initialize();
     }
     

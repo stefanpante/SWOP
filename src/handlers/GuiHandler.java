@@ -34,7 +34,7 @@ import utils.Coordinate2D;
  */
 public class GuiHandler implements ActionListener  {
 
-	public ApplicationHandler applicationHandler;
+	public StartNewGameHandler applicationHandler;
 	private Game game;
 	Inventory inventory = new Inventory();
 	
@@ -46,7 +46,7 @@ public class GuiHandler implements ActionListener  {
 
 	private DefaultListModel<Item> inventoryItems;
 
-	public GuiHandler(ApplicationHandler applicationHandler){
+	public GuiHandler(StartNewGameHandler applicationHandler){
 		inventoryItems = new DefaultListModel<Item>();
 		this.applicationHandler = applicationHandler;
 		run();
@@ -72,7 +72,7 @@ public class GuiHandler implements ActionListener  {
 		player2LTCoordinates = new HashMap<Coordinate2D,Square>();
 	}
 
-	public ApplicationHandler getApplicationHandler(){
+	public StartNewGameHandler getApplicationHandler(){
 		return this.applicationHandler;
 	}
 
