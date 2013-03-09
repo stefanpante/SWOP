@@ -29,19 +29,19 @@ public class Item {
 	/**
 	 * Activates the item.
 	 */
-	public void activate(){
+	public void activate() throws IllegalStateException {
 		if(this.currentState != ItemState.INACTIVE)
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
 		this.currentState = ItemState.ACTIVE;
 	}
 	
-	public void use() throws IllegalStateException {
+	public void wearOut() throws IllegalStateException {
 		if(this.currentState != ItemState.ACTIVE)
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the used state.");
 		this.currentState = ItemState.WORN;
 	}
 	
-	public void deactivate(){
+	public void deactivate() throws IllegalStateException{
 		if(this.currentState != ItemState.ACTIVE)
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
 		this.currentState = ItemState.INACTIVE;

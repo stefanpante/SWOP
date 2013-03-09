@@ -10,19 +10,23 @@ public class TestInventory {
 
 	@Test
 	public void testEmptyInventory() {
-		Inventory inventory = new Inventory();
+		SquareInventory si = new SquareInventory(false);
+		PlayerInventory pi = new PlayerInventory();
 		
 		Item item = new LightGrenade();
 		
-		assertTrue(inventory.isEmpty());
+		assertTrue(si.isEmpty());
+		assertTrue(pi.isEmpty());
 		
-		inventory.addItem(item);
-		assertFalse(inventory.isEmpty());
+		si.addItem(item);
+		pi.addItem(item);
+		assertFalse(si.isEmpty());
+		assertFalse(pi.isEmpty());
 	}
 	
 	@Test
 	public void testSize() {
-		Inventory inventory = new Inventory();
+		Inventory inventory = new PlayerInventory();
 		Item item = new LightGrenade();
 		
 		assertEquals(inventory.getSize(), 0);
@@ -33,7 +37,7 @@ public class TestInventory {
 	
 	@Test
 	public void testMaximumSize() {
-		Inventory inventory = new Inventory(10);
+		Inventory inventory = new SquareInventory(10, false);
 		
 		assertEquals(inventory.getMaximumSize(), 10);
 	}
@@ -41,14 +45,14 @@ public class TestInventory {
 	@Test
 	public void testAddingItem() {
 		Item item = new LightGrenade();
-		Inventory inventory = new Inventory();
+		Inventory inventory = new PlayerInventory();
 		
 		inventory.addItem(item);
 	}
 	 
 	@Test(expected=IllegalStateException.class)
 	public void testAddingOverCapacity() {
-		Inventory inventory = new Inventory(1);
+		Inventory inventory = new SquareInventory(1, false);
 		
 		inventory.addItem(new LightGrenade());
 		inventory.addItem(new LightGrenade());
@@ -56,7 +60,7 @@ public class TestInventory {
 	
 	@Test(expected=IllegalStateException.class)
 	public void testAddingDuplicate() {
-		Inventory inventory = new Inventory();
+		Inventory inventory = new PlayerInventory();
 		Item item = new LightGrenade();
 		
 		inventory.addItem(item);
@@ -65,17 +69,22 @@ public class TestInventory {
 	
 	@Test
 	public void testCanHaveAsItem() {
-		Inventory inventory = new Inventory();
+		SquareInventory si = new SquareInventory(false);
+		PlayerInventory pi = new PlayerInventory();
 		Item item = new LightGrenade();
 		
-		assertTrue(inventory.canHaveAsItem(item));
-		inventory.addItem(item);
-		assertFalse(inventory.canHaveAsItem(item));
+		assertTrue(si.canHaveAsItem(item));
+		si.addItem(item);
+		assertFalse(si.canHaveAsItem(item));
+		
+		assertTrue(pi.canHaveAsItem(item));
+		pi.addItem(item);
+		assertFalse(pi.canHaveAsItem(item));
 	}
 	
 	@Test
 	public void testHasItem() {
-		Inventory inventory = new Inventory();
+		Inventory inventory = new PlayerInventory();
 		Item item = new LightGrenade();
 		
 		assertFalse(inventory.hasItem(item));
@@ -85,7 +94,7 @@ public class TestInventory {
 	
 	@Test(expected=IllegalStateException.class)
 	public void testTakeItem() {
-		Inventory inventory = new Inventory();
+		Inventory inventory = new PlayerInventory();
 		Item item = new LightGrenade();
 		
 		inventory.addItem(item);
@@ -99,10 +108,10 @@ public class TestInventory {
 	
 	@Test
 	public void testCanHaveAsItemIndex(){
-		Inventory inventory = new Inventory();
+		Inventory inventory = new SquareInventory(false);
 		Item item = null;
 		for(int i = 0; i < 10; i ++){
-			item = new LightGrenade();
+			item = new Item();
 			inventory.addItem(item);
 		}
 		
@@ -114,10 +123,10 @@ public class TestInventory {
 	
 	@Test
 	public void testGetItem(){
-		Inventory inventory = new Inventory();
+		Inventory inventory = new SquareInventory(false);
 		Item item = null;
 		for(int i = 0; i < 10; i ++){
-			item = new LightGrenade();
+			item = new Item();
 			inventory.addItem(item);
 		}
 		
@@ -145,13 +154,12 @@ public class TestInventory {
 	
 	@Test 
 	public void testIsValidItem(){
-		Item item = null;
-		item = new LightGrenade();
+		Item item = new LightGrenade();
+		Item item2 = new Item();
 		
 		assertFalse(Inventory.isValidItem(null));
 		assertTrue(Inventory.isValidItem(item));
-		item.activate();
-		assertFalse(Inventory.isValidItem(item));
+		assertTrue(Inventory.isValidItem(item2));
 	}
 	
 	@Test
@@ -163,7 +171,7 @@ public class TestInventory {
 	
 	@Test
 	public void testSetMaximumSize(){
-		Inventory inventory = new Inventory(20);
+		Inventory inventory = new SquareInventory(20,false);
 		try{
 			inventory.setMaximumSize(-1);
 			fail("Size should not be negative");
@@ -175,15 +183,9 @@ public class TestInventory {
 			fail("Setting maximum size to a greater size should be allowed");
 		}
 		for(int i = 0; i < 24; i ++){
-			Item item = new LightGrenade();
+			Item item = new Item();
 			inventory.addItem(item);
 		} 
 		
-	
-		
 	}
-		
-	
-
-
 }

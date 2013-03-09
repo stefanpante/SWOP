@@ -1,5 +1,9 @@
 package items;
 
+import java.util.Iterator;
+
+import be.kuleuven.cs.som.annotate.Basic;
+
 import notnullcheckweaver.Nullable;
 
 /**
@@ -13,7 +17,7 @@ import notnullcheckweaver.Nullable;
 public class SquareInventory extends Inventory {
 	
 	private final boolean onlyInactiveItems;
-	
+
 	/**
 	 * Creates a square inventory with the given size. 
 	 * 
@@ -41,6 +45,15 @@ public class SquareInventory extends Inventory {
 	}
 	
 	/**
+	 * Returns whether this inventory is an 'only inactive item' inventory
+	 * @return
+	 */
+	@Basic
+	private final boolean isOnlyInactiveItems() {
+		return onlyInactiveItems;
+	}
+	
+	/**
 	 * Adds a given item to this UsedItemInventory if possible. 
 	 * 
 	 * @param 	item
@@ -62,21 +75,6 @@ public class SquareInventory extends Inventory {
 	}	
 	
 	/**
-	 * Returns whether the given item can be added to the inventory 
-	 * of any square ( checks whether the item is active).
-	 * 
-	 * @param 	item
-	 * 			The item to check.
-	 * @return	True if and only if the item is not an active item.
-	 * 			| !item.isActive()
-	 */
-	public static boolean isValidItem(Item item) {
-		if(!Inventory.isValidItem(item))
-			return false;
-		return true;
-	}
-	
-	/**
 	 * Returns whether the given item can be used as an item of this UsedItemInventory.
 	 * 
 	 * @param 	item
@@ -91,10 +89,10 @@ public class SquareInventory extends Inventory {
 		if(!super.canHaveAsItem(item)){
 			return false;
 		}
-		if(onlyInactiveItems){
+		if(isOnlyInactiveItems()){
 			return item.getState() == ItemState.INACTIVE;
 		}
-		if(hasLightGrenade()){
+		if(item instanceof LightGrenade && hasLightGrenade()){
 			return false;
 		}
 		return true;
@@ -134,7 +132,7 @@ public class SquareInventory extends Inventory {
 	 * 			| getLightGrenade().isActive()
 	 */
 	public boolean hasActiveLightGrenade(){
-		if(onlyInactiveItems){
+		if(isOnlyInactiveItems()){
 			return false;
 		} else {
 			LightGrenade lg = getLightGrenade();
@@ -144,11 +142,40 @@ public class SquareInventory extends Inventory {
 		}
 	}
 	
+	public void activate(Item item)throws IllegalStateException{
+		if(isOnlyInactiveItems()){
+			throw new IllegalStateException("Cant activate the item "+ item + " in " + this);
+		} else	if(!this.hasItem(item)){
+			throw new IllegalStateException("The "+ item + " is not in " + this);
+		} else {
+			item.activate();
+		}
+	}
+	
+	
+	/**
+	 * This method will activate all items in inactive state in this inventory.
+	 * 
+	 * @throws 	IllegalStateException
+	 * 			If this inventory cannot have active items.
+	 * 			| isOnlyInactiveItems()
+	 */
+	public void activateAllItems() throws IllegalStateException{
+		if(isOnlyInactiveItems()){
+			throw new IllegalStateException("Cant activate items in " + this);
+		} else {
+			for (Item it : getAllItems()) {
+				if(it.getState() == ItemState.INACTIVE){
+					it.activate();
+				}
+			}
+		}
+	}
 	
 	@Override
 	public String toString() {
 		String result = "Square ";
-		if(onlyInactiveItems){
+		if(isOnlyInactiveItems()){
 			result += "(inactive Only) ";
 		}
 		return result + super.toString();

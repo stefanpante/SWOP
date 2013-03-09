@@ -1,8 +1,6 @@
 package items;
 
 import java.util.ArrayList;
-import java.lang.*;
-import java.nio.channels.IllegalSelectorException;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -200,7 +198,7 @@ public abstract class Inventory{
 	public boolean canHaveAsItem(Item item) {
 		if(isFull())
 			return false;
-		if(items.contains(item))
+		if(hasItem(item))
 			return false;
 		return true;
 	}
