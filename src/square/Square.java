@@ -30,14 +30,15 @@ public class Square {
 	private HashMap<Direction, Square> neighbors;
 	
 	/**
-	 * Inventory containing all items on the square
+	 * Inventory containing all items on the square, not the ones that are used.
 	 */
-	private SquareInventory inventory;
+	private SquareInventory pickUpInventory;
 	
 	/**
-	 * All the items used on this square
+	 *  Contains all items which were used on this square.
 	 */
-	private ArrayList<Item> usedItems;
+	private SquareInventory usedInventory;
+	
 	
 	/**
 	 * The obstacle of this Square object.
@@ -56,7 +57,8 @@ public class Square {
 	 */
 	public Square (){
 		this.usedItems = new ArrayList<Item>();
-		this.inventory = new SquareInventory();
+		this.pickUpInventory = new SquareInventory(false);
+		this.usedInventory = new SquareInventory(true);
 		this.neighbors = new HashMap<Direction, Square>();
 	}
 	
@@ -167,65 +169,20 @@ public class Square {
 	}
 	
 	/**
-	 * Returns a list of all the items that are placed on a square.
+	 * Return the inventory of used items on this Square
+	 * @return	the inventory of used items on this Square
 	 */
-	public ArrayList<Item> getUsedItems() {
-		return usedItems;
+	public Inventory getUsedInventory() {
+		return usedInventory;
 	}
 	
 	/**
-	 * Adds and uses the given item on this square.
-	 * 
-	 * @param 	item
-	 * 			The item to be added or used
-	 * @throws 	IllegalArgumentException
-	 * 			If the given item cannot be used on this square
+	 * Returns the inventory of which items can be picked up
+	 * @return the inventory of  items which can be picked up on this Square
 	 */
-	public void addUsedItem(Item item) throws IllegalArgumentException {
-		if(!canBeUsedHere(item))
-			throw new IllegalArgumentException();
-		usedItems.add(item);
+	public Inventory getPickUpInventory(){
+		return pickUpInventory;
 	}
-	
-	/**
-	 * Adds and uses the given item on this square.
-	 * 
-	 * @param 	lg
-	 * 			The lightgrenade to be added or used
-	 * @throws 	IllegalArgumentException
-	 * 			If the given item cannot be used on this square
-	 */
-	public void addUsedItem(LightGrenade lg) throws IllegalArgumentException {
-		addUsedItem((Item) lg);
-		usedLightGrenade = lg;
-	}
-	
-	/**
-	 * Returns true if there is an active LightGrenade on this square.
-	 * @return true if there is an active lightGrenade on this square.
-	 */
-	public boolean hasActiveLightGrenade(){
-		if(usedLightGrenade == null)
-			return false;
-		return usedLightGrenade.isActive();
-	}
-	
-	/**
-	 * Returns the inventory of this square.
-	 */
-	public Inventory getInventory() {
-		return inventory;
-	}
-	
-	/**
-	 * This method is used to activate the usedItems on the square.
-	 */
-	public void activateUsedItems(){
-		for(Item i: usedItems)
-			i.activate();
-	}
-	
-	
 	
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
@@ -308,18 +265,6 @@ public class Square {
 		return new ArrayList<Square>(neighbors.values());
 	}
 
-	/**
-	* Checks if the item can be used in the square.
-	*
-	* @param 	item
-	* @return 	False If the item is already used once in the square.
-	*/
-	public boolean canBeUsedHere(Item item) {
-		if(!usedItems.contains(item))
-			return false;
-		return true;
-	}
-	
 	/**
 	 * Checks whether from the current square it is possible to move to a
 	 * neighboring square in the given direction. 

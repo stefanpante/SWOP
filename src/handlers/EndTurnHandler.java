@@ -16,6 +16,8 @@ public class EndTurnHandler {
 	}
 	
 
+	// TODO: warning to check if all turns are used 
+	
 	/**
 	 * 
 	 * Checks the precondition for the pick up use case

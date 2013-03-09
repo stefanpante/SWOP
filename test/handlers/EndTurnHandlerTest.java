@@ -1,17 +1,32 @@
 package handlers;
 
+import org.junit.Test;
+
 public class EndTurnHandlerTest {
 
 	public EndTurnHandlerTest() {
 		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	
+	
+	@Test
+	public void checkToProceedTest(){
+		
+	}
+	
+	@Test
+	public void EndTurnTest(){
+		
+	}
+	
+	@Test
+	public void EndActionTest(){
+		
+	}
+	
+	@Test 
+	public void hasMoveTest(){
+		
 	}
 
 }

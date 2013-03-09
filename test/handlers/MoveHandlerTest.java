@@ -42,6 +42,12 @@ public class MoveHandlerTest {
 	}
 
 	/**
+	 * 
+	 */
+	public void testCheckToProceedAfterMove(){
+		
+	}
+	/**
 	 * Players are in start position, 
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
 	 * Move to the east, northeast, south east, north and north west should cause an IllegalStateException for player 2
