@@ -6,11 +6,10 @@ import items.Item;
 
 import java.util.Observable;
 
-import board.GridBuilder;
-import board.Square;
-
 import notnullcheckweaver.NotNull;
 import player.Player;
+import square.GridBuilder;
+import square.Square;
 
 /**
  * Game class, this class controls the flow of the game
@@ -28,7 +27,13 @@ import player.Player;
  */
 @NotNull
 public class Game {
-		
+	
+	/**
+	 * the minimum vertical and horizontal size are 10 squares.
+	 */
+	public static final int MIN_VSIZE = 10;
+	public static final int MIN_HSIZE = 10;
+	
 	/**
 	 * The player1 of this Game object.
 	 */
@@ -49,10 +54,6 @@ public class Game {
 	 */
 	private int hSize, vSize;
 
-	/**
-	 * The board on which the game is player
-	 */
-	private Board board;
 	
 	/**
 	 *Constructs a new board-based game.

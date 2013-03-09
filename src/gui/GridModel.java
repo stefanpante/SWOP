@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import board.Square;
-
+import square.Square;
 import utils.Coordinate2D;
 
 /**

@@ -22,11 +22,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.UIManager;
 
-import board.Direction;
-import board.Square;
-
 import player.Player;
 
+import square.Direction;
+import square.Square;
 import utils.Coordinate2D;
 
 /**

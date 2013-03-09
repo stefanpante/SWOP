@@ -1,8 +1,8 @@
 package utils;
 
 import be.kuleuven.cs.som.annotate.*;
-import board.Direction;
 
+import square.Direction;
 
 /**
  * Coordinate2D represents a point in 2D space, 
