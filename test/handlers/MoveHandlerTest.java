@@ -2,6 +2,7 @@ package handlers;
 
 import static org.junit.Assert.*;
 
+
 import java.util.Random;
 
 import items.LightGrenade;
@@ -14,18 +15,15 @@ import square.obstacles.Wall;
 
 import game.Game;
 
+/**
+ * Scenario test for the Use Case "Move".
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ */
 public class MoveHandlerTest {
 
 	public MoveHandlerTest() {
 		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -43,11 +41,28 @@ public class MoveHandlerTest {
 	}
 
 	/**
-	 * 
+	 *  tests the check to proceed after real moves.
 	 */
+	@Test
 	public void testCheckToProceedAfterMove(){
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		int moves = 0;
 		
+		assertTrue(mh.checkToProceed());
+		while(moves < 3){
+			try{
+				mh.move(directions[random.nextInt(directions.length)]);
+				moves++;
+			}
+			catch(Exception e){}
+		}
+		
+		assertFalse(mh.checkToProceed());
 	}
+	
 	/**
 	 * Players are in start position, 
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
@@ -75,7 +90,6 @@ public class MoveHandlerTest {
 	/**
 	 * When a player moves onto a light grenade, his turn should end
 	 */
-
 	@Test
 	public void testMoveActiveLightGrenade(){
 		Game game = new Game(10,10);
@@ -103,6 +117,14 @@ public class MoveHandlerTest {
 	}
 
 	/**
+	 * Tests what happens when a player moves onto active lightGrenade
+	 */
+	@Test
+	public void testMoveOntoActiveLightGrenade(){
+		fail("Not yet implemented");
+	}
+	
+	/**
 	 * Tests a move to a square were a wall is positioned
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -124,6 +146,31 @@ public class MoveHandlerTest {
 		mh.move(Direction.EAST);
 		
 	}
+	
+	/**
+	 * Tests a move to a square were the lightTrial of another player is positioned
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testMoveToLightTrail(){
+		
+	}
+	
+	/**
+	 * Tests a move to a square were another player is situated
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testMovetoOtherPlayer() {
+		
+	}
+	
+	/**
+	 * Tests a move to a square with a power failure
+	 */
+	@Test
+	public void testMoveToPowerFailure(){
+		fail("Not yet implemented");
+	}
+	
 	/**
 	 * Tests if the endAction method is valid
 	 */
