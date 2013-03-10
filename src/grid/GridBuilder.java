@@ -1,19 +1,10 @@
-/**
- * 
- */
 package grid;
 
 import items.LightGrenade;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import game.Game;
 import gui.ApplicationWindow;
-import gui.GridPanel;
-
 import java.util.Random;
-
 import square.Direction;
 import square.Orientation;
 import square.Square;
@@ -21,6 +12,9 @@ import square.obstacles.Wall;
 import utils.Coordinate2D;
 
 /**
+ * Builds the grid. Used to separate the complex building process of the grid
+ * of the relatively simple representation
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */	
 public class GridBuilder {
