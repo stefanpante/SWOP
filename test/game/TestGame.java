@@ -38,8 +38,8 @@ public class TestGame {
 	@Test 
 	public void switchPlayer(){
 		Game game = new Game(10, 10);
-		Player player1 = game.getPlayer1();
-		Player player2 = game.getPlayer2();
+		Player player1 = game.getCurrentPlayer();
+		Player player2 = game.getNextPlayer();
 		
 		game.setCurrentPlayer(player1);
 		assertTrue(game.getCurrentPlayer() == player1);
@@ -47,20 +47,20 @@ public class TestGame {
 		game.setCurrentPlayer(player2);
 		assertTrue(game.getCurrentPlayer() == player2);
 		
-		game.switchPlayer();
+		game.switchToNextPlayer();
 		
 		assertTrue(game.getCurrentPlayer() == player1);
 		assertFalse(game.getCurrentPlayer() == player2);
 		
-		game.switchPlayer();
+		game.switchToNextPlayer();
 		assertTrue(game.getCurrentPlayer() == player2);
 		assertFalse(game.getCurrentPlayer() == player1);
 	}
 	
 	public void testSetCurrentPlayer(){
 		Game game = new Game(10, 10);
-		Player player1 = game.getPlayer1();
-		Player player2 = game.getPlayer2();
+		Player player1 = game.getCurrentPlayer();
+		Player player2 = game.getNextPlayer();
 		
 		game.setCurrentPlayer(player1);
 		assertTrue(game.getCurrentPlayer() == player1);
@@ -85,8 +85,8 @@ public class TestGame {
 	@Test
 	public void testCanHaveAsPlayer(){
 		Game game = new Game(10, 10);
-		Player player1 = game.getPlayer1();
-		Player player2 = game.getPlayer2();
+		Player player1 = game.getCurrentPlayer();
+		Player player2 = game.getNextPlayer();
 		
 		assertTrue(game.canHaveAsCurrentPlayer(player1));
 		assertTrue(game.canHaveAsCurrentPlayer(player2));
@@ -95,8 +95,8 @@ public class TestGame {
 	@Test
 	public void testIsValidCurrentPlayer(){
 		Game game = new Game(10, 10);
-		Player player1 = game.getPlayer1();
-		Player player2 = game.getPlayer2();
+		Player player1 = game.getCurrentPlayer();
+		Player player2 = game.getNextPlayer();
 		Player player3 = new Player(null, null);
 		assertTrue(Game.isValidCurrentPlayer(player1));
 		assertTrue(Game.isValidCurrentPlayer(player2));
@@ -108,31 +108,31 @@ public class TestGame {
 	public void testSetPlayer(){
 		Game game = new Game(10, 10);
 		Player playa = null;
-		Player player1 = game.getPlayer1();
-		Player player2 = game.getPlayer2();
+		Player player1 = game.getCurrentPlayer();
+		Player player2 = game.getNextPlayer();
 		 
 		try{
-			game.setPlayer1(playa);
+			game.addPlayer(playa);
 			fail("A player cant be null");
 			
 		}
 		catch(Exception e){}
 		 
 		try{
-			game.setPlayer1(player2);
+			game.addPlayer(player2);
 			fail("The two player objects should not be the same");
 		}
 		catch(Exception e){ }
 		try{
-			game.setPlayer2(player1);
+			game.addPlayer(player1);
 			fail("The two player objects should not be the same");
 		}
 		catch(Exception e){}
 		try{
 			playa = new Player(null,null);
-			game.setPlayer1(playa);
-			game.setPlayer1(player1);
-			game.setPlayer2(playa);
+			game.addPlayer(playa);
+			game.addPlayer(player1);
+			game.addPlayer(playa);
 		}
 		
 		catch(Exception e){
