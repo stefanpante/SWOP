@@ -4,6 +4,7 @@ package game;
 import items.Inventory;
 import items.Item;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
@@ -37,12 +38,7 @@ public class Game {
 	/**
 	 * The player1 of this Game object.
 	 */
-	private Player player1;
-	
-	/**
-	 * The player2 of this Game object.
-	 */
-	private Player player2;
+	private ArrayList<Player> players;
 	
 	/**
 	 * The currentPlayer of this Game object.
@@ -54,7 +50,6 @@ public class Game {
 	 */
 	private int hSize, vSize;
 
-	
 	/**
 	 *Constructs a new board-based game.
 	 * 
@@ -62,18 +57,17 @@ public class Game {
 	 * @param vSize		the vertical size of the board
 	 */
 	public Game(int hSize, int vSize){
-		initialize(hSize, vSize);
-	}
-	
-	private void initialize(int hSize, int vSize){
+		players = new ArrayList<Player>();
 		GridBuilder builder = new GridBuilder(hSize, vSize);
 		setHSize(hSize);
 		setVSize(vSize);
 		builder.constructSquares();
 		builder.constructWalls();
-		setPlayer1(new Player(builder.getBottomLeft(), "Player 1"));
-		setPlayer2(new Player(builder.getTopRight(), "Player 2"));
-		setCurrentPlayer(player1);
+		
+		addPlayer(new Player(builder.getBottomLeft(), "Player 1"));
+		addPlayer(new Player(builder.getTopRight(), "Player 2"));
+		
+		setCurrentPlayer(players.get(0));	
 	}
 	
 	public void setHSize(int size) throws IllegalArgumentException{
@@ -109,29 +103,21 @@ public class Game {
 	 * @return 	An object of the Player class.
 	 * 			| Player
 	 */
-	public Player getPlayer1() {
-		return player1;
+	public Player getPlayer(int i) throws IllegalArgumentException {
+		if(i >= players.size())
+			throw new IllegalArgumentException();
+		return players.get(i);
 	};
-
+	
 	/**
-	 * Sets the value of the player1 of Game if the given value is valid. 
+	 * Add the player to this game
 	 * 
-	 * @param 	player1
-	 *			The player1 to set.
-	 * @post 	The given value is the current value of the player1 of this Game.
-	 * @throws 	IllegalArgumentException
-	 *			If the given argument is not a valid player1.
-	 *			| !isValidPlayer1(player1)
+	 * @param 	player
+	 * 			The player to be set
 	 */
-	public void setPlayer1(Player player1) {
-		if (!isValidPlayer(player1) || player1 == player2) {
-			throw new IllegalArgumentException(
-					"The argument ("
-							+ player1
-							+ ") is not a valid agrument of the field player1 from the class Game");
-		}
-		this.player1 = player1;
-	};
+	public void addPlayer(Player player){
+		players.add(player);
+	}
 
 	/**
 	 * Check whether the given player is a valid player for all the objects of Game.
@@ -142,36 +128,6 @@ public class Game {
 	public static boolean isValidPlayer(Player player) {
 		return player != null;
 	}
-
-	/**
-	 * Returns the value of the player2 of this Game as an Player.
-	 *
-	 * @return 	An object of the Player class.
-	 * 			| Player
-	 */
-	public Player getPlayer2() {
-		return player2;
-	};
- 
-	/**
-	 * Sets the value of the player2 of Game if the given value is valid. 
-	 * 
-	 * @param 	player2
-	 *			The player2 to set.
-	 * @post 	The given value is the current value of the player2 of this Game.
-	 * @throws 	IllegalArgumentException
-	 *			If the given argument is not a valid player2.
-	 *			| !isValidPlayer2(player2)
-	 */
-	public void setPlayer2(Player player2) {
-		if (!isValidPlayer(player2) || player2 == player1) {
-			throw new IllegalArgumentException(
-					"The argument ("
-							+ player2
-							+ ") is not a valid agrument of the field player2 from the class Game");
-		}
-		this.player2 = player2;
-	};
 
 	/**
 	 * Returns the value of the currentPlayer of this Game as an Player.
@@ -197,7 +153,7 @@ public class Game {
 	 *			| !canHaveAsCurrentPlayer(currentPlayer)
 	 */
 	public void setCurrentPlayer(Player currentPlayer) { 
-		if (!isValidCurrentPlayer(currentPlayer) || !canHaveAsCurrentPlayer(currentPlayer)) {
+		if (currentPlayer == null || !isValidCurrentPlayer(currentPlayer) || !canHaveAsCurrentPlayer(currentPlayer)) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ currentPlayer
@@ -213,13 +169,8 @@ public class Game {
 	 * @post	if(old.currentPlayer == player1) new.currentPlayer == player2
 	 * 			if(old.currentPlayer == player2) new.currentPlayer == player1
 	 */
-	public void switchPlayer() {
-		if(currentPlayer == player1){
-			setCurrentPlayer(player2);
-		}
-		else if(currentPlayer == player2){
-			setCurrentPlayer(player1);
-		}
+	public void switchToNextPlayer() {
+		this.currentPlayer = getNextPlayer();
 	}
 	
 	/**
@@ -229,9 +180,9 @@ public class Game {
 	 * @return 	if(currentPlayer == player1) return player2
 	 * 			if(currentPlayer == player2) return player1
 	 */
-	public Player getOtherPlayer(){
-		if(currentPlayer == player1) return player2;
-		else return player1;
+	public Player getNextPlayer(){
+		int nextPlayer = (players.indexOf(getCurrentPlayer()) + 1) % players.size();
+		return players.get(nextPlayer);
 	}
 	
 	/**
@@ -253,7 +204,7 @@ public class Game {
 	 * 			| (currentPlayer == this.getPlayer1() ||  currentPlayer == this.getPlayer2())
 	 */
 	public boolean canHaveAsCurrentPlayer(Player currentPlayer) {
-		return (currentPlayer == this.getPlayer1() ||  currentPlayer == this.getPlayer2());
+		return players.contains(currentPlayer);
 	}
 }
 	
