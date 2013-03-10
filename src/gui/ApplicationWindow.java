@@ -44,7 +44,7 @@ public class ApplicationWindow implements ActionListener {
 	private JFrame frame;	
 	private JLabel currentPlayerLabel;
 	
-	public static GridModel GRID_MODEL = new GridModel();
+	public static GameModel MODEL = new GameModel();
 
 
 	/**
@@ -87,16 +87,15 @@ public class ApplicationWindow implements ActionListener {
     	}
     	setSize(hSize, vSize);
 
-    	
+    	/* Windows */
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // TODO: 
         frame.getContentPane().setLayout(null);
 		frame.setTitle("Objectron");
 
         /* GRID */
-        GridCanvas gridPanel = new GridCanvas(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
+        GridPanel gridPanel = new GridPanel(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
         frame.getContentPane().setBackground(Color.BLACK);
@@ -183,9 +182,9 @@ public class ApplicationWindow implements ActionListener {
         pickup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				ArrayList<Item> items = GRID_MODEL.getCurrentSquareInventory();
+				ArrayList<Item> items = MODEL.getCurrentSquareInventory();
 				Item[] a = new Item[items.size()];
-				GRID_MODEL.getCurrentSquareInventory().toArray(a);
+				MODEL.getCurrentSquareInventory().toArray(a);
 
                 Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
                     "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
@@ -201,9 +200,9 @@ public class ApplicationWindow implements ActionListener {
         use.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				ArrayList<Item> items = GRID_MODEL.getCurrentPlayerInventory();
+				ArrayList<Item> items = MODEL.getCurrentPlayerInventory();
 				Item[] a = new Item[items.size()];
-				GRID_MODEL.getCurrentPlayerInventory().toArray(a);
+				MODEL.getCurrentPlayerInventory().toArray(a);
 
                 Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
                     "Use item", JOptionPane.QUESTION_MESSAGE, null,
@@ -215,7 +214,7 @@ public class ApplicationWindow implements ActionListener {
         });      
         inventoryPanel.add(use);       
  
-        GRID_MODEL.addObserver(gridPanel);
+        MODEL.addObserver(gridPanel);
 
 
     }

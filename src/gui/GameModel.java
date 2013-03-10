@@ -17,7 +17,7 @@ import utils.Coordinate2D;
  * @author Jonas Devlieghere
  *
  */
-public class GridModel extends Observable {
+public class GameModel extends Observable {
 
 	private ArrayList<Coordinate2D> walls;
 	private ArrayList<Coordinate2D> lightTrailBlue;
@@ -25,10 +25,11 @@ public class GridModel extends Observable {
 	private ArrayList<Coordinate2D> lightGrenades;
 	private ArrayList<Item> currentSquareInventory;
 	private ArrayList<Item> currentPlayerInventory;
+	
 	private Coordinate2D player1;
 	private Coordinate2D player2;
 	
-	public GridModel(){
+	public GameModel(){
 		this.walls = new ArrayList<Coordinate2D>();
 		this.lightTrailBlue = new ArrayList<Coordinate2D>();
 		this.lightTrailRed = new ArrayList<Coordinate2D>();		

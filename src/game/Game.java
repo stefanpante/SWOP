@@ -1,6 +1,7 @@
 package game;
 
 
+import grid.GridBuilder;
 import items.Inventory;
 import items.Item;
 
@@ -9,7 +10,6 @@ import java.util.Observable;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
-import square.GridBuilder;
 import square.Square;
 
 /**
@@ -36,7 +36,7 @@ public class Game {
 	public static final int MIN_HSIZE = 10;
 	
 	/**
-	 * The player1 of this Game object.
+	 * The players of this Game object.
 	 */
 	private ArrayList<Player> players;
 	
