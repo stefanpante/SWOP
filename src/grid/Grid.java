@@ -16,21 +16,50 @@ import utils.Coordinate2D;
  *
  */
 public class Grid {
+	
+	/**
+	 * the minimum vertical and horizontal size are 10 squares.
+	 */
+	public static final int MIN_VSIZE = 10;
+	public static final int MIN_HSIZE = 10;
+	
+	private Square bottomLeft;
+	private Square topRight;
 
 	HashMap<Coordinate2D, Square> grid;
+	
+	/**
+	 * the horizontal size and vertical size of the grid
+	 */
 	private int hSize, vSize;
 	
 	public Grid(int hSize, int vSize){
+		GridBuilder builder = new GridBuilder(hSize, vSize);
 		setHSize(hSize);
 		setVSize(vSize);
+		builder.constructSquares();
+		builder.constructWalls();
+		
+		this.bottomLeft = builder.getBottomLeft();
+		this.topRight = builder.getTopRight();
 	}
 	
-	public void setHSize(int size){
+	public void setHSize(int size) throws IllegalArgumentException{
+		if(!isValidHSize(size)) throw new IllegalArgumentException();
 		this.hSize = size;
 	}
 	
-	public void setVSize(int size){
+	public void setVSize(int size) throws IllegalArgumentException{
+		if(!isValidVSize(size)) throw new IllegalArgumentException();
 		this.vSize = size;
+	}
+	
+	public boolean isValidHSize(int size){
+		return size >= this.MIN_HSIZE;
+	} 
+	
+	public boolean isValidVSize(int size){
+		return size >= this.MIN_VSIZE;
 	}
 	
 	public int getHSize(){
@@ -106,6 +135,14 @@ public class Grid {
 				return coordinate;
 		}
 		return null;
+	}
+	
+	public Square getBottomLeft() {
+		return this.bottomLeft;
+	}
+	
+	public Square getTopRight() {
+		return this.topRight;
 	}
 	
 	public boolean contains(Square square){

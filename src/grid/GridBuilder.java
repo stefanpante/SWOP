@@ -65,8 +65,8 @@ public class GridBuilder {
 	 * The square at the top right of this grid.
 	 */
 	private Square topRight;
-
-
+	
+	private ArrayList<Square> squares = new ArrayList<Square>();
 
 	private ArrayList<Square> freeFields = new ArrayList<Square>();
 
@@ -94,7 +94,7 @@ public class GridBuilder {
 	 * 			are larger or equal to the minimal values.
 	 */
 	private boolean isValidSize(int hSize, int vSize) {
-		return hSize >= Game.MIN_HSIZE && vSize >= Game.MIN_VSIZE;
+		return hSize >= Grid.MIN_HSIZE && vSize >= Grid.MIN_VSIZE;
 	}
 
 	/**
@@ -132,7 +132,9 @@ public class GridBuilder {
 		Square[][] grid = new Square[hSize][vSize];
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
-				grid[i][j] = createSquare();
+				Square square = createSquare();
+				grid[i][j] = square;
+				squares.add(square);
 			}
 		}
 		this.grid = grid;
@@ -344,6 +346,13 @@ public class GridBuilder {
 	 */
 	public int getMaxCoverage() {
 		return (int) ((vSize*hSize) * MAX_PERCENTAGEWALLS);
+	}
+	
+	/**
+	 * Returns all the squares which were constructed.
+	 */
+	public ArrayList<Square> getAllSquares() {
+		return this.squares;
 	}
 
 	/**

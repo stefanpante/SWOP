@@ -1,6 +1,7 @@
 package game;
 
 
+import grid.Grid;
 import grid.GridBuilder;
 import items.Inventory;
 import items.Item;
@@ -32,10 +33,9 @@ import square.Square;
 public class Game {
 	
 	/**
-	 * the minimum vertical and horizontal size are 10 squares.
+	 * The Grid.
 	 */
-	public static final int MIN_VSIZE = 10;
-	public static final int MIN_HSIZE = 10;
+	private Grid grid;
 	
 	/**
 	 * The players of this Game object.
@@ -46,11 +46,6 @@ public class Game {
 	 * The currentPlayer of this Game object.
 	 */
 	private Player currentPlayer;
-	
-	/**
-	 * the horizontal size and vertical size of the grid
-	 */
-	private int hSize, vSize;
 
 	/**
 	 *Constructs a new board-based game.
@@ -60,42 +55,12 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		players = new ArrayList<Player>();
-		GridBuilder builder = new GridBuilder(hSize, vSize);
-		setHSize(hSize);
-		setVSize(vSize);
-		builder.constructSquares();
-		builder.constructWalls();
+		grid = new Grid(hSize, vSize);
 		
-		addPlayer(new Player(builder.getBottomLeft(), "Player 1"));
-		addPlayer(new Player(builder.getTopRight(), "Player 2"));
+		addPlayer(new Player(grid.getBottomLeft(), "Player 1"));
+		addPlayer(new Player(grid.getTopRight(), "Player 2"));
 		
 		setCurrentPlayer(players.get(0));	
-	}
-	
-	public void setHSize(int size) throws IllegalArgumentException{
-		if(!isValidHSize(size)) throw new IllegalArgumentException();
-		this.hSize = size;
-	}
-	
-	public void setVSize(int size) throws IllegalArgumentException{
-		if(!isValidVSize(size)) throw new IllegalArgumentException();
-		this.vSize = size;
-	}
-	
-	public int getHSize(){
-		return hSize;
-	}
-	
-	public int getVSize(){
-		return vSize;
-	}
-	
-	public boolean isValidHSize(int size){
-		return size >= this.MIN_HSIZE;
-	} 
-	
-	public boolean isValidVSize(int size){
-		return size >= this.MIN_VSIZE;
 	}
 	
 	/**
