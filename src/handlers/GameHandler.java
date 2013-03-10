@@ -71,18 +71,6 @@ public class GameHandler extends Handler {
     public EndTurnHandler getEndTurnHandler(){
     	return this.endTurnHandler;
     }
-
-	/**
-	 * Create a game based on the given dimensions of the grid
-	 * 
-	 * @param 	hSize
-	 * 			Horizontal size of the game's grid
-	 * @param 	vSize
-	 * 			Vertical size of the game's grid
-	 */
-	public void createGame(int hSize, int vSize) {
-		this.game = new Game(hSize, vSize);
-	}
 	
 	/**
 	 * Gets a coordinate-based representation of the walls in this game

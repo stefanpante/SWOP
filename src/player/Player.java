@@ -75,6 +75,7 @@ public class Player extends Observable {
 		this.previousactions = 0;
 		this.moved = false;
 		this.lightTrail = new LightTrail();
+		this.addObserver(lightTrail);
 	}
 	
 	/**
@@ -149,7 +150,8 @@ public class Player extends Observable {
 	
 	public void incrementActions(){
 		this.actions++;
-		this.getLightTrail().update(this, currentPosition);
+		this.setChanged();
+		this.notifyObservers(currentPosition);
 	}
 
 	/**

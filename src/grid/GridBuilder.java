@@ -1,7 +1,7 @@
 /**
  * 
  */
-package square;
+package grid;
 
 import items.LightGrenade;
 
@@ -10,10 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import game.Game;
 import gui.ApplicationWindow;
-import gui.GridCanvas;
+import gui.GridPanel;
 
 import java.util.Random;
 
+import square.Direction;
+import square.Orientation;
+import square.Square;
 import square.obstacles.Wall;
 import utils.Coordinate2D;
 
@@ -21,8 +24,6 @@ import utils.Coordinate2D;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */	
 public class GridBuilder {
-
-
 
 	/**
 	 * Max percentage of squares covered by walls.
@@ -426,7 +427,7 @@ public class GridBuilder {
 				}
 			}
 		}
-		ApplicationWindow.GRID_MODEL.setWalls(coors);
+		ApplicationWindow.MODEL.setWalls(coors);
 	}
 	/**
 	 *
@@ -469,9 +470,6 @@ public class GridBuilder {
 		return sequence;
 	}
 
-
-
-	// TODO: Testing method
 	public String getCoordinate(Square square){
 		for(int i = 0; i < hSize; i++){
 			for(int j = 0; j < vSize; j++){
@@ -482,8 +480,6 @@ public class GridBuilder {
 		}
 		return "";
 	}
-
-
 
 	/**
 	 * Connect the given square with the other square in the given direction
