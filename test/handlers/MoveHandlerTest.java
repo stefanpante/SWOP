@@ -9,6 +9,8 @@ import items.LightGrenade;
 
 import org.junit.Test;
 
+import player.Player;
+
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
@@ -19,6 +21,7 @@ import game.Game;
  * Scenario test for the Use Case "Move".
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
+ *TODO: refactor to use static numberofactions in turn
  */
 public class MoveHandlerTest {
 
@@ -30,9 +33,10 @@ public class MoveHandlerTest {
 		Game game = new Game(10,10);
 		MoveHandler mh = new MoveHandler(game);
 		assertTrue(mh.checkToProceed());
-		game.getCurrentPlayer().incrementActions();
-		game.getCurrentPlayer().incrementActions();
-		game.getCurrentPlayer().incrementActions();
+		
+		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
+			game.getCurrentPlayer().incrementActions();
+		
 		assertFalse(mh.checkToProceed());
 	}
 
@@ -159,7 +163,7 @@ public class MoveHandlerTest {
 	 * Tests a move to a square were another player is situated
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testMovetoOtherPlayer() {
+	public void testMoveToOtherPlayer() {
 		
 	}
 	

@@ -49,27 +49,27 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.getInventory().addItem(lg1);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().getSize() == 1);
+		sq.getPickUpInventory().addItem(lg1);
+		assertTrue(sq.getPickUpInventory().hasItem(lg1));
+		assertTrue(sq.getPickUpInventory().getSize() == 1);
 		
-		sq.getInventory().addItem(lg2);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(lg2));
-		assertTrue(sq.getInventory().getSize() == 2);
+		sq.getPickUpInventory().addItem(lg2);
+		assertTrue(sq.getPickUpInventory().hasItem(lg1));
+		assertTrue(sq.getPickUpInventory().hasItem(lg2));
+		assertTrue(sq.getPickUpInventory().getSize() == 2);
 		
-		sq.getInventory().addItem(lg3);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(lg2));
-		assertTrue(sq.getInventory().hasItem(lg3));
-		assertTrue(sq.getInventory().getSize() == 3);
+		sq.getPickUpInventory().addItem(lg3);
+		assertTrue(sq.getPickUpInventory().hasItem(lg1));
+		assertTrue(sq.getPickUpInventory().hasItem(lg2));
+		assertTrue(sq.getPickUpInventory().hasItem(lg3));
+		assertTrue(sq.getPickUpInventory().getSize() == 3);
 
-		sq.getInventory().addItem(it);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(lg2));
-		assertTrue(sq.getInventory().hasItem(lg3));
-		assertTrue(sq.getInventory().hasItem(it));
-		assertTrue(sq.getInventory().getSize() == 4);
+		sq.getPickUpInventory().addItem(it);
+		assertTrue(sq.getPickUpInventory().hasItem(lg1));
+		assertTrue(sq.getPickUpInventory().hasItem(lg2));
+		assertTrue(sq.getPickUpInventory().hasItem(lg3));
+		assertTrue(sq.getPickUpInventory().hasItem(it));
+		assertTrue(sq.getPickUpInventory().getSize() == 4);
 	}
 		
 	@Test
@@ -80,12 +80,12 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.getInventory().addItem(lg1);
-		sq.getInventory().addItem(lg2);		
-		sq.getInventory().addItem(lg3);
-		sq.getInventory().addItem(it);
+		sq.getPickUpInventory().addItem(lg1);
+		sq.getPickUpInventory().addItem(lg2);		
+		sq.getPickUpInventory().addItem(lg3);
+		sq.getPickUpInventory().addItem(it);
 		
-		Inventory inv = sq.getInventory();
+		Inventory inv = sq.getPickUpInventory();
 		assertTrue(inv.getSize() == 4);
 		assertTrue(inv.hasItem(lg1));
 		assertTrue(inv.hasItem(lg2));
@@ -105,17 +105,17 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 		
-		sq1.getInventory().addItem(lg1);
-		assertTrue(sq1.getInventory().hasItem((lg1)));
+		sq1.getPickUpInventory().addItem(lg1);
+		assertTrue(sq1.getPickUpInventory().hasItem((lg1)));
 		
 		
-		sq2.getInventory().addItem(lg2);
-		assertTrue(sq2.getInventory().hasItem(lg2));
+		sq2.getPickUpInventory().addItem(lg2);
+		assertTrue(sq2.getPickUpInventory().hasItem(lg2));
 		
-		sq3.getInventory().addItem(lg3);
-		sq3.getInventory().addItem(it);
-		assertTrue(sq3.getInventory().hasItem(lg3));
-		assertTrue(sq3.getInventory().hasItem(it));
+		sq3.getPickUpInventory().addItem(lg3);
+		sq3.getPickUpInventory().addItem(it);
+		assertTrue(sq3.getPickUpInventory().hasItem(lg3));
+		assertTrue(sq3.getPickUpInventory().hasItem(it));
 	}
 	
 	/************************************
@@ -233,7 +233,7 @@ public class TestSquare {
 		Square tr = gb.getTopRight();
 		
 		//TEST CORNERS.
-		//	Bottem Left
+		//	Bottom Left
 		//		Possible
 		assertTrue(bl.canMoveTo(Direction.NORTH));
 		assertTrue(bl.canMoveTo(Direction.NORTHEAST));
