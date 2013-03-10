@@ -48,7 +48,7 @@ public class MoveHandler extends Handler {
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException{
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-
+		//TODO: move to square where other player is should be invalid
 		if(currentPosition.canMoveTo(direction)){
 			Square newPosition = currentPosition.getNeighbor(direction);
 			currentPosition.getUsedInventory().activateAllItems();
@@ -63,7 +63,7 @@ public class MoveHandler extends Handler {
 		
 		if(game.getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
 			game.getCurrentPlayer().endTurn();
-			game.switchPlayer();
+			game.switchToNextPlayer();
 		}
 	}
 	
@@ -72,10 +72,10 @@ public class MoveHandler extends Handler {
 	 * @return 	true if the move causes the player to win. 
 	 */
 	public boolean endAction(){
-		Player otherPlayer = game.getOtherPlayer();
+		Player nextPlayer = game.getNextPlayer();
 		Player currentPlayer = game.getCurrentPlayer();
 		
-		if(otherPlayer.getStartPosition() == currentPlayer.getPosition()){
+		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
 			return true;
 		}
 		

@@ -141,6 +141,8 @@ public class Player extends Observable {
 	 */
 	//TODO: Needs to throw an IllegalStateException when the newPosition is invalid.
 	public void move(Square newPosition) throws IllegalStateException{
+		if(!currentPosition.canMoveTo(newPosition))
+			throw new IllegalStateException("Cannot move to the given square");
 		currentPosition = newPosition;
 		moved = true;
 	}
