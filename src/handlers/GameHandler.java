@@ -106,24 +106,14 @@ public class GameHandler extends Handler {
 		}
 		return wallCoor;
 	}
-	
-	
 
 	/**
-	 * @param input
+	 * @param hSize
+	 * @param vSize
 	 */
-	public void pickup(Item input) {
-		
+	public void createGame(int hSize, int vSize) {
+		this.game = new Game(hSize, vSize);
 	}
-
-	/**
-	 * @param input
-	 */
-	public void use(Item input) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
 	
 }
