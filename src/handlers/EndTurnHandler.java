@@ -1,5 +1,9 @@
 package handlers;
 
+import java.util.Iterator;
+
+import square.Square;
+
 import game.Game;
 
 /**
@@ -38,6 +42,13 @@ public class EndTurnHandler {
 	public void endTurn(){
 		game.getCurrentPlayer().endTurn();
 		game.switchToNextPlayer();
+		
+		Iterator<Square> iterator = game.getAllSquares().iterator();
+		
+		while(iterator.hasNext()) {
+			Square square = iterator.next();
+			square.getState().nextTurn(square);
+		}
 	}
 
 }

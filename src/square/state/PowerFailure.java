@@ -34,7 +34,7 @@ public class PowerFailure extends State{
 	 */
 	@Override
 	public int resultOnStart(Square square) {
-		return -2;
+		return -1;
 	}
 	
 	@Override

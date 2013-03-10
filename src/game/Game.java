@@ -5,7 +5,9 @@ import items.Inventory;
 import items.Item;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Observable;
+import java.util.Stack;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
@@ -94,6 +96,37 @@ public class Game {
 	
 	public boolean isValidVSize(int size){
 		return size >= this.MIN_VSIZE;
+	}
+	
+	/**
+	 * Returns all the squares by recursively visiting all
+	 * and adding them to a list.
+	 * 
+	 * @return
+	 */
+	public ArrayList<Square> getAllSquares() {
+		Square startPos = currentPlayer.getStartPosition();
+		ArrayList<Square> squares = new ArrayList<Square>();
+		
+		Stack<Square> stack = new Stack<Square>();
+		stack.add(startPos);
+		
+		while(!stack.isEmpty()) {
+			Square square = stack.pop();
+			Iterator<Square> iterator = square.getNeighborsAsList().iterator();
+			
+			while(iterator.hasNext()) {
+				Square otherSquare = iterator.next();
+				
+				if(!squares.contains(otherSquare)) {
+					squares.add(otherSquare);
+					stack.push(otherSquare);
+				}
+			}
+		}
+		
+		System.out.println(squares.size());
+		return squares;
 	}
 	
 
