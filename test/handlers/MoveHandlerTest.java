@@ -22,10 +22,6 @@ import game.Game;
  */
 public class MoveHandlerTest {
 
-	public MoveHandlerTest() {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * IncrementActions causes IllegalArgumentException due to the setObstacle in Square
 	 */
@@ -78,7 +74,7 @@ public class MoveHandlerTest {
 		mh.move(Direction.SOUTH);
 		mh.move(Direction.SOUTHEAST);
 
-		game.switchPlayer();
+		game.switchToNextPlayer();
 
 		mh.move(Direction.EAST);
 		mh.move(Direction.NORTHEAST);
@@ -180,7 +176,7 @@ public class MoveHandlerTest {
 		MoveHandler mh = new MoveHandler(game);
 		
 		assertFalse(mh.endAction());
-		game.getCurrentPlayer().move(game.getOtherPlayer().getStartPosition());
+		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
 		assertTrue(mh.endAction());
 	}
 
