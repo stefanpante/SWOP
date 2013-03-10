@@ -48,7 +48,7 @@ public class MoveHandler extends Handler {
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException{
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-
+		//TODO: move to square where other player is should be invalid
 		if(currentPosition.canMoveTo(direction)){
 			Square newPosition = currentPosition.getNeighbor(direction);
 			currentPosition.getUsedInventory().activateAllItems();

@@ -106,7 +106,7 @@ public class Square {
 	/**
 	 * Checks if there is a neighbor in the given direction.
 	 * 
-	 * @param 	direction the direction of the neighbour
+	 * @param 	direction 	the direction of the neighbour
 	 * @return 	True if this square has a neighbor in the given direction
 	 * 			otherwise False.
 	 */
@@ -117,8 +117,8 @@ public class Square {
 	/**
 	 * Checks if the given square is a neighbor in the given direction.
 	 * 
-	 * @param 	direction the direction in which the square should be a neighbor
-	 * @param 	square the square that should be the neighbor in the given direction
+	 * @param 	direction 	the direction in which the square should be a neighbor
+	 * @param 	square 		the square that should be the neighbor in the given direction
 	 * @return 	true if the square is the neighbor in the given direction
 	 * 			otherwise false
 	 */
@@ -236,7 +236,7 @@ public class Square {
 	 * Check if the current square is connected to the given square
 	 * 
 	 * @param 	square
-	 * 			The square to check wether it's connected to this
+	 * 			The square to check whether it's connected to this
 	 * 			square.
 	 * @return	True if and only if the given square is connected to
 	 * 			this square.
@@ -273,13 +273,13 @@ public class Square {
 	 * @return	true if it is possible to move in the given direction
 	 */
 	public boolean canMoveTo(Direction direction){
-		Square direcionSquare;
+		Square directionSquare;
 		try {
-			direcionSquare = getNeighbor(direction);
+			directionSquare = getNeighbor(direction);
 		} catch (Exception e) {
 			return false;
 		}
-		if(direcionSquare.isObstructed())
+		if(directionSquare.isObstructed())
 			return false;
 		if(direction.isDiagonal()){
 			Square s1 = null;
@@ -300,6 +300,18 @@ public class Square {
 				}
 			}
 		}
+		return true;
+	}
+	
+	/**
+	 * Checks whether it is possible to move to the given square from this square
+	 * @param	square	The Square object to be checked
+	 * @return 	True	if it is possible to move from the current square to the given square
+	 * 			False	otherwise
+	 */
+	public boolean canMoveTo(Square square){
+		if(!neighbors.containsValue(square)) return false;
+		if(square.isObstructed()) return false;
 		return true;
 	}
 }

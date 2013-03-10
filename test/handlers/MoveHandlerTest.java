@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import square.Direction;
 import square.Square;
+import square.obstacles.Wall;
 
 import game.Game;
 
@@ -101,6 +102,28 @@ public class MoveHandlerTest {
 		assertTrue(currentPosition.getUsedInventory().hasActiveLightGrenade());
 	}
 
+	/**
+	 * Tests a move to a square were a wall is positioned
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testMoveToWall(){
+		Game game = new Game(20,20);
+		MoveHandler mh = new MoveHandler(game);
+		
+		Square position  = game.getCurrentPlayer().getPosition();
+		Square eastNeighbor = position.getNeighbor(Direction.EAST);
+		Square neighborOfEastNeighbor = eastNeighbor.getNeighbor(Direction.EAST);
+		
+		Wall wall = new Wall(eastNeighbor, neighborOfEastNeighbor);
+		eastNeighbor.setObstacle(wall);
+		neighborOfEastNeighbor.setObstacle(wall);
+		
+		assertTrue(eastNeighbor.isObstructed());
+		assertTrue(neighborOfEastNeighbor.isObstructed());
+		
+		mh.move(Direction.EAST);
+		
+	}
 	/**
 	 * Tests if the endAction method is valid
 	 */
