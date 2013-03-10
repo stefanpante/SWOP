@@ -26,20 +26,18 @@ public class EndTurnHandler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(game.getCurrentPlayer().getRemainingActions() > 0){
+		if(game.getCurrentPlayer().getRemainingActions() > 0)
 			return true;
-		}
-		
 		return false;
 	}
-	
+
 	public boolean hasMoved(){
 		return game.getCurrentPlayer().hasMoved();
 	}
 	
 	public void endTurn(){
 		game.getCurrentPlayer().endTurn();
-		game.switchPlayer();
+		game.switchToNextPlayer();
 	}
 
 }

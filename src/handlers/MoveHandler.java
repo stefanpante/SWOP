@@ -63,7 +63,7 @@ public class MoveHandler extends Handler {
 		
 		if(game.getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
 			game.getCurrentPlayer().endTurn();
-			game.switchPlayer();
+			game.switchToNextPlayer();
 		}
 	}
 	
@@ -72,10 +72,10 @@ public class MoveHandler extends Handler {
 	 * @return 	true if the move causes the player to win. 
 	 */
 	public boolean endAction(){
-		Player otherPlayer = game.getOtherPlayer();
+		Player nextPlayer = game.getNextPlayer();
 		Player currentPlayer = game.getCurrentPlayer();
 		
-		if(otherPlayer.getStartPosition() == currentPlayer.getPosition()){
+		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
 			return true;
 		}
 		

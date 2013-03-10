@@ -4,13 +4,10 @@
 package gui;
 
 import game.Game;
-import handlers.GuiHandler;
+import handlers.GameHandler;
 import items.Item;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import square.Direction;
+
 
 //TODO: http://cs.nyu.edu/~yap/classes/visual/03s/lect/l7/ -> misschien handige tutorial
 
@@ -32,7 +31,7 @@ import javax.swing.border.TitledBorder;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class ApplicationWindow {
+public class ApplicationWindow implements ActionListener {
 	
 	public static final int WINDOW_WIDTH 	= 800;
 	public static final int WINDOW_HEIGHT 	= 523;
@@ -41,7 +40,7 @@ public class ApplicationWindow {
 
 	private int hSize, vSize;
 	
-	private GuiHandler controller;
+	private GameHandler gameHandler;
 	private JFrame frame;	
 	private JLabel currentPlayerLabel;
 	
@@ -54,9 +53,9 @@ public class ApplicationWindow {
 	 * 
 	 * @param controller	The GuiHandler that will handle all triggers.
 	 */
-    public ApplicationWindow(GuiHandler controller) {
-    	setController(controller);
-        initialize();
+    public ApplicationWindow(GameHandler gameHandler) {
+        this.gameHandler = gameHandler;
+    	initialize();
     }
     
     /**
@@ -67,7 +66,7 @@ public class ApplicationWindow {
     private void setSize(int hSize, int vSize){
     	this.hSize = hSize;
     	this.vSize = vSize;
-    	controller.setDim(this.hSize, this.vSize);
+    	gameHandler.createGame(hSize, vSize);
     }
 
     /**
@@ -132,42 +131,42 @@ public class ApplicationWindow {
         sideBarPanel.add(playerActionPanel);
         
         JButton bN  = new JButton("N");
-        bN.addActionListener(getController());
+        bN.addActionListener(this);
         bN.setActionCommand("N");
         playerActionPanel.add(bN);
         
         JButton bNE = new JButton("NE");
-        bNE.addActionListener(getController());
+        bNE.addActionListener(this);
         bNE.setActionCommand("NE");
         playerActionPanel.add(bNE);
         
         JButton bE  = new JButton("E");
-        bE.addActionListener(getController());
+        bE.addActionListener(this);
         bE.setActionCommand("E");
         playerActionPanel.add(bE);
         
         JButton bSE = new JButton("SE");
-        bSE.addActionListener(getController());
+        bSE.addActionListener(this);
         bSE.setActionCommand("SE");
         playerActionPanel.add(bSE);
         
         JButton bS  = new JButton("S");
-        bS.addActionListener(getController());
+        bS.addActionListener(this);
         bS.setActionCommand("S");
         playerActionPanel.add(bS);
         
         JButton bSW = new JButton("SW");
-        bSW.addActionListener(getController());
+        bSW.addActionListener(this);
         bSW.setActionCommand("SW");
         playerActionPanel.add(bSW);
         
         JButton bW  = new JButton("W");
-        bW.addActionListener(getController());
+        bW.addActionListener(this);
         bW.setActionCommand("W");
         playerActionPanel.add(bW);
         
         JButton bNW = new JButton("NW");
-        bNW.addActionListener(getController());
+        bNW.addActionListener(this);
         bNW.setActionCommand("NW");
         playerActionPanel.add(bNW);
 
@@ -193,7 +192,7 @@ public class ApplicationWindow {
                     a, 
                     null);
                 if(input != null)
-                	getController().pickup(input);
+                	gameHandler.getPickupHandler().pickUp(input);
             }
         });      
         inventoryPanel.add(pickup);
@@ -211,7 +210,7 @@ public class ApplicationWindow {
                     a, 
                     null);
                 if(input != null)
-                	getController().use(input);
+                	gameHandler.getUseItemHandler().useItem(input);
             }
         });      
         inventoryPanel.add(use);       
@@ -222,33 +221,42 @@ public class ApplicationWindow {
     }
     
     /**
-     * 
-     * @return	the GuiHandler which is used in this application window
-     */
-    private GuiHandler getController(){
-    	return this.controller;
-    }
-    
-    /**
-     * Sets the controller which this application should use
-     * @param controller	the GuiHandler instance which should be used 
-     * 						to interact with the model
-     */
-    private void setController(GuiHandler controller){
-    	this.controller = controller;
-    }
-    
-    /**
      * Turns the Jframe on
      */
     public void setVisible(){
     	this.frame.setVisible(true);
     }
-
-
     
-	
-	
+
+
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Direction direction = null;
+		if(is(e,"N")){
+			direction = Direction.NORTH;
+		}else if(is(e,"NE")){
+			direction = Direction.NORTHEAST;
+		}else if(is(e,"E")){
+			direction = Direction.EAST;
+		}else if(is(e,"SE")){
+			direction = Direction.SOUTHEAST;
+		}else if(is(e,"S")){
+			direction = Direction.SOUTH;
+		}else if(is(e,"SW")){
+			direction = Direction.SOUTHWEST;
+		}else if(is(e,"W")){
+			direction = Direction.WEST;			
+		}else if(is(e,"NW")){
+			direction = Direction.NORTHWEST;
+		}
+	}
+
+	private boolean is(ActionEvent e,String string){
+		return e.getActionCommand().equals(string);
+	}
 
 
 }
