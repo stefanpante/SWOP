@@ -31,10 +31,12 @@ public class Wall extends Obstacle{
 	}
 	
 	/**
-	 * 
-	 * @param sequence
+	 * Constructs a wall from an arrayList
+	 * @param 	sequence the Sequence of which a wall should be created
 	 */
-	public Wall(ArrayList<Square> sequence) {
+	public Wall(ArrayList<Square> sequence) throws IllegalArgumentException {
+		if(sequence.size() < 2) 
+			throw new IllegalArgumentException("A wall should have at least two squares");
 		for(Square sq: sequence){
 			super.addSquare(sq);
 		}
