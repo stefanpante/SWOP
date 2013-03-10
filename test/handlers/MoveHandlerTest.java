@@ -148,7 +148,11 @@ public class MoveHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testMoveToLightTrail(){
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
 		
+		// replace the grid representation with a grid without walls
+		// TODO: wait until grid is implemented
 	}
 	
 	/**
