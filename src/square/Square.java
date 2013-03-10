@@ -1,6 +1,7 @@
 package square;
 
 import items.Inventory;
+
 import items.Item;
 import items.LightGrenade;
 import items.SquareInventory;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import square.obstacles.Obstacle;
+import square.state.RegularState;
+import square.state.State;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -39,6 +42,10 @@ public class Square {
 	 */
 	private SquareInventory usedInventory;
 	
+	/**
+	 * State of the current square. May be a power failure.
+	 */
+	private State state;
 	
 	/**
 	 * The obstacle of this Square object.
@@ -47,18 +54,13 @@ public class Square {
 	private Obstacle obstacle;
 	
 	/**
-	 * 
-	 */
-	private LightGrenade usedLightGrenade;
-
-	
-	/**
 	 * Zero argument constructor for a square.
 	 */
 	public Square (){
 		this.pickUpInventory = new SquareInventory(false);
 		this.usedInventory = new SquareInventory(true);
 		this.neighbors = new HashMap<Direction, Square>();
+		this.state = new RegularState();
 	}
 	
 	/**
@@ -74,6 +76,22 @@ public class Square {
 			throw new IllegalArgumentException();
 		
 		return neighbors.get(direction);
+	}
+	
+	/**
+	 * Returns the state of the square.
+	 */
+	public State getState() {
+		return this.state;
+	}
+	
+	/**
+	 * State state
+	 * 
+	 * @param regularState
+	 */
+	public void setState(State state) {
+		this.state = state;
 	}
 	
 	/**
