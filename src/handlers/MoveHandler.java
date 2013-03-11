@@ -46,6 +46,7 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
+	//TODO: endturnhandler oproepen?
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException{
 		
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
@@ -59,16 +60,24 @@ public class MoveHandler extends Handler {
 			if(p.getPosition().equals(newPosition))
 				throw new IllegalStateException("Cannot move to square were other player is positioned.");
 		}
-		
 		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getUsedInventory().activateAllItems();
-		getGame().getCurrentPlayer().incrementActions();
 		
-		//TODO: update for power failure
+		int turnsLost = newPosition.getState().resultOnMove(newPosition);
+		
+		
+		// TODO: powerfailure, from powerFailed to powerfailed, from not powerfailed to powerfailed.
 		if(getGame().getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
+			//-4
+			//getGame().getCurrentPlayer().endTurn();
+			getGame().switchToNextPlayer();
+		}
+		else if(turnsLost == -3){
 			getGame().getCurrentPlayer().endTurn();
 			getGame().switchToNextPlayer();
 		}
+		
+		getGame().getCurrentPlayer().incrementActions();
 	}
 
 	/**
