@@ -1,7 +1,5 @@
 package square;
 
-import items.Inventory;
-
 import items.Item;
 import items.LightGrenade;
 import items.SquareInventory;
@@ -21,21 +19,13 @@ import notnullcheckweaver.Nullable;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-/*TODO: Discuss: one inventory for items that can be picked up.
- * Another inventory for "used" items that are placed there.
- */
 @NotNull
 public class Square {
-	
-	/**
-	 * Inventory containing all items on the square, not the ones that are used.
-	 */
-	private SquareInventory pickUpInventory;
-	
+		
 	/**
 	 *  Contains all items which were used on this square.
 	 */
-	private SquareInventory usedInventory;
+	private SquareInventory inventory;
 	
 	/**
 	 * State of the current square. May be a power failure.
@@ -52,8 +42,7 @@ public class Square {
 	 * Zero argument constructor for a square.
 	 */
 	public Square (){
-		this.pickUpInventory = new SquareInventory(false);
-		this.usedInventory = new SquareInventory(true);
+		this.inventory = new SquareInventory();
 		this.state = new RegularState();
 	}
 	
@@ -78,16 +67,8 @@ public class Square {
 	 * Return the inventory of used items on this Square
 	 * @return	the inventory of used items on this Square
 	 */
-	public SquareInventory getUsedInventory() {
-		return usedInventory;
-	}
-	
-	/**
-	 * Returns the inventory of which items can be picked up
-	 * @return the inventory of  items which can be picked up on this Square
-	 */
-	public SquareInventory getPickUpInventory(){
-		return pickUpInventory;
+	public SquareInventory getInventory() {
+		return inventory;
 	}
 	
 	/**
@@ -122,7 +103,7 @@ public class Square {
 	public String toString() {
 		String s = "Square [ ";
 		s += "Obstacle: " + obstacle;
-		s += "Inv: " + this.getPickUpInventory();
+		s += "Inv: " + this.getInventory();
 		s += " ]";
 		return s;
 	}

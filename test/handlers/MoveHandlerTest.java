@@ -125,6 +125,15 @@ public class MoveHandlerTest {
 	}
 	
 	/**
+	 * Tests what happens when a player moves onto an active lightgrenade 
+	 * when the square is experiencing powerfailure.
+	 */
+	@Test
+	public void testMoveOntoActiveLightGrenadePowerFailure(){
+		fail("Not yet implemented");
+	}
+	
+	/**
 	 * Tests a move to a square were a wall is positioned
 	 */
 	@Test(expected = IllegalStateException.class)
@@ -133,8 +142,8 @@ public class MoveHandlerTest {
 		MoveHandler mh = new MoveHandler(game);
 		
 		Square position  = game.getCurrentPlayer().getPosition();
-		Square eastNeighbor = position.getNeighbor(Direction.EAST);
-		Square neighborOfEastNeighbor = eastNeighbor.getNeighbor(Direction.EAST);
+		Square eastNeighbor = game.getGrid().getNeighbor(position, Direction.EAST);
+		Square neighborOfEastNeighbor = game.getGrid().getNeighbor(eastNeighbor, Direction.EAST);
 		
 		Wall wall = new Wall(eastNeighbor, neighborOfEastNeighbor);
 		eastNeighbor.setObstacle(wall);

@@ -46,13 +46,8 @@ public class EndTurnHandler extends Handler{
 	public void endTurn(){
 		getGame().getCurrentPlayer().endTurn();
 		getGame().switchToNextPlayer();
-		
-		Iterator<Square> iterator = getGame().getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			square.getState().nextTurn(square);
-		}
+		getGame().updateStates();
+		getGame().powerFailureSquares();
 	}
 
 }

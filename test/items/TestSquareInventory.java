@@ -2,12 +2,13 @@ package items;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.experimental.categories.Categories.ExcludeCategory;
 
 public class TestSquareInventory {
 
@@ -27,30 +28,18 @@ public class TestSquareInventory {
 	public void tearDown() throws Exception {
 	}
 
-	
 	@Test 
 	public void testConstructor(){
-		SquareInventory sqinv1 = new SquareInventory(false);
-		assertFalse(sqinv1.isOnlyInactiveItems());
-		
-		SquareInventory sqinv2 = new SquareInventory(true);
-		assertTrue(sqinv2.isOnlyInactiveItems());
-	}
-	
-	@Test 
-	public void testConstructor2Args(){
-		SquareInventory sqinv1 = new SquareInventory(17, false);
+		SquareInventory sqinv1 = new SquareInventory(17);
 		assertEquals(17, sqinv1.getMaximumSize());
-		assertFalse(sqinv1.isOnlyInactiveItems());
 		
-		SquareInventory sqinv2 = new SquareInventory(1615, true);
+		SquareInventory sqinv2 = new SquareInventory(1615);
 		assertEquals(1615, sqinv2.getMaximumSize());
-		assertTrue(sqinv2.isOnlyInactiveItems());
 	}
 	
 	@Test
 	public void testCanHaveAsItemFull(){
-		SquareInventory sqinv1 = new SquareInventory(1, false);
+		SquareInventory sqinv1 = new SquareInventory(1);
 		Item it1 = new Item();
 		Item it2 = new Item();
 		sqinv1.addItem(it1);
@@ -59,7 +48,7 @@ public class TestSquareInventory {
 	
 	@Test
 	public void testCanHaveAsItemTwice(){
-		SquareInventory sqinv1 = new SquareInventory(1, false);
+		SquareInventory sqinv1 = new SquareInventory(1);
 		Item it1 = new Item();
 		sqinv1.addItem(it1);
 		assertFalse(sqinv1.canHaveAsItem(it1));
@@ -67,7 +56,7 @@ public class TestSquareInventory {
 	
 	@Test
 	public void testAddItemLightGrenade() {
-		SquareInventory sqinv = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		LightGrenade lg = new LightGrenade();
 		sqinv.addItem(lg);
 		assertTrue(sqinv.hasLightGrenade());
@@ -84,13 +73,13 @@ public class TestSquareInventory {
 	
 	@Test(expected = IllegalStateException.class)
 	public void testAddItemNull() {
-		SquareInventory sqinv = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		sqinv.addItem(null);
 	}
 
 	@Test
 	public void testTakeLightGrenade() {
-		SquareInventory sqinv = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		LightGrenade lg = new LightGrenade();
 		sqinv.addItem(lg);
 		assertTrue(sqinv.hasLightGrenade());
@@ -105,26 +94,10 @@ public class TestSquareInventory {
 			assert(true);
 		}
 	}
-
-	@Test(expected=IllegalStateException.class)
-	public void testAddActiveItem(){
-		SquareInventory sqinv = new SquareInventory(true);
-		LightGrenade lg = new LightGrenade();
-		lg.activate();
-		sqinv.addItem(lg);
-	}
-	
-	@Test(expected=IllegalStateException.class)
-	public void testAddActiveItem2(){
-		SquareInventory sqinv = new SquareInventory(true);
-		Item it = new Item();
-		it.activate();
-		sqinv.addItem(it);
-	}
 	
 	@Test
 	public void testAddActiveItem3(){
-		SquareInventory sqinv = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		Item it = new Item();
 		LightGrenade lg = new LightGrenade();
 		it.activate();
@@ -136,7 +109,7 @@ public class TestSquareInventory {
 	
 	@Test
 	public void testHasLightGrenade(){
-		SquareInventory sqinv = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		Item it = new Item();
 		LightGrenade lg = new LightGrenade();
 		
@@ -153,58 +126,34 @@ public class TestSquareInventory {
 	
 	@Test
 	public void testActivate(){
-		SquareInventory sqinvFalse = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		LightGrenade lg = new LightGrenade();
 		
-		sqinvFalse.addItem(lg);
-		sqinvFalse.activate(lg);
+		sqinv.addItem(lg);
+		sqinv.activate(lg);
 		assertTrue(lg.isActive());
-	}
-	
-	
-	@Test(expected=IllegalStateException.class)
-	public void testActivate2(){
-		SquareInventory sqinvFalse = new SquareInventory(true);
-		LightGrenade lg = new LightGrenade();
-		
-		sqinvFalse.addItem(lg);
-		sqinvFalse.activate(lg);
-		assertFalse(lg.isActive());
-	}
-	
-	@Test(expected=IllegalStateException.class)
-	public void testActivate3(){
-		SquareInventory sqinvFalse = new SquareInventory(false);
-		LightGrenade lg = new LightGrenade();
-		
-		sqinvFalse.activate(lg);
-		assertFalse(lg.isActive());
 	}
 	
 	@Test
 	public void testHasActiveLightGrenade(){
-		SquareInventory sqinvFalse = new SquareInventory(false);
-		SquareInventory sqinvTrue = new SquareInventory(true);
+		SquareInventory sqinv = new SquareInventory();
 		LightGrenade lg = new LightGrenade();
 
-		sqinvTrue.addItem(new LightGrenade());
-		assertFalse(sqinvTrue.hasActiveLightGrenade());
-
 		lg.activate();
-		sqinvFalse.addItem(lg);
-		assertTrue(sqinvFalse.hasActiveLightGrenade());
-		sqinvFalse.take(lg);
-		assertFalse(sqinvFalse.hasActiveLightGrenade());
+		sqinv.addItem(lg);
+		assertTrue(sqinv.hasActiveLightGrenade());
+		sqinv.take(lg);
+		assertFalse(sqinv.hasActiveLightGrenade());
 		lg.deactivate();
-		sqinvFalse.addItem(lg);
-		assertFalse(sqinvFalse.hasActiveLightGrenade());
-		sqinvFalse.activate(lg);
-		assertTrue(sqinvFalse.hasActiveLightGrenade());		
+		sqinv.addItem(lg);
+		assertFalse(sqinv.hasActiveLightGrenade());
+		sqinv.activate(lg);
+		assertTrue(sqinv.hasActiveLightGrenade());		
 	}
 	
 	@Test
 	public void testActivateAllItems(){
-		SquareInventory sqinvFalse = new SquareInventory(false);
+		SquareInventory sqinv = new SquareInventory();
 		LightGrenade inactive_lg = new LightGrenade();
 
 		Item active_i1 = new Item();
@@ -219,14 +168,14 @@ public class TestSquareInventory {
 		wornItem.activate();
 		wornItem.wearOut();
 		
-		sqinvFalse.addItem(inactive_lg);
-		sqinvFalse.addItem(active_i1);
-		sqinvFalse.addItem(active_i2);
-		sqinvFalse.addItem(inactive_i1);
-		sqinvFalse.addItem(inactive_i2);
-		sqinvFalse.addItem(wornItem);
+		sqinv.addItem(inactive_lg);
+		sqinv.addItem(active_i1);
+		sqinv.addItem(active_i2);
+		sqinv.addItem(inactive_i1);
+		sqinv.addItem(inactive_i2);
+		sqinv.addItem(wornItem);
 		
-		sqinvFalse.activateAllItems();
+		sqinv.activateAllItems();
 		
 		assertTrue(inactive_lg.isActive());
 		assertTrue(active_i1.isActive());
@@ -235,17 +184,66 @@ public class TestSquareInventory {
 		assertTrue(inactive_i2.isActive());
 		assertFalse(wornItem.isActive());
 	}
-
 	
-	@Test(expected=IllegalStateException.class)
-	public void testActivateAllItems2(){
-		SquareInventory sqinvFalse = new SquareInventory(true);
-		LightGrenade lg = new LightGrenade();
+	
+	@Test
+	public void testGetItems(){
+		SquareInventory sqinv = new SquareInventory();
 		
-		sqinvFalse.addItem(lg);
-		sqinvFalse.activateAllItems();
-		assertFalse(lg.isActive());
+		//Create and add inactive items
+		Item it_inactive1 = new Item();
+		sqinv.addItem(it_inactive1);
+		Item it_inactive2 = new Item();
+		sqinv.addItem(it_inactive2);
+		LightGrenade it_inactive3 = new LightGrenade();
+		sqinv.addItem(it_inactive3);
+
+		
+		//Create and add active items
+		Item it_active1 = new Item();
+		it_active1.activate();
+		sqinv.addItem(it_active1);
+		Item it_active2 = new Item();
+		it_active2.activate();
+		sqinv.addItem(it_active2);
+		Item it_active3 = new Item();
+		it_active3.activate();
+		sqinv.addItem(it_active3);
+
+		//Create and add worn out items
+		Item it_worn1 = new Item();
+		it_worn1.activate();
+		it_worn1.wearOut();
+		sqinv.addItem(it_worn1);
+		Item it_worn2 = new Item();
+		it_worn2.activate();
+		it_worn2.wearOut();
+		sqinv.addItem(it_worn2);
+		Item it_worn3 = new Item();
+		it_worn3.activate();
+		it_worn3.wearOut();
+		sqinv.addItem(it_worn3);
+		
+		
+		ArrayList<Item> actives = sqinv.getItems(ItemState.ACTIVE);
+		ArrayList<Item> inactives = sqinv.getItems(ItemState.INACTIVE);
+		ArrayList<Item> wornouts = sqinv.getItems(ItemState.WORN);
+
+		assertEquals(3, actives.size());
+		
+		assertTrue(actives.contains(it_active1));
+		assertTrue(actives.contains(it_active2));
+		assertTrue(actives.contains(it_active3));
+		
+		assertEquals(3, inactives.size());
+		assertTrue(inactives.contains(it_inactive1));
+		assertTrue(inactives.contains(it_inactive2));
+		assertTrue(inactives.contains(it_inactive3));
+		
+		assertEquals(3, wornouts.size());
+		assertTrue(wornouts.contains(it_worn1));
+		assertTrue(wornouts.contains(it_worn2));
+		assertTrue(wornouts.contains(it_worn3));
 	}
-	
 	
 }

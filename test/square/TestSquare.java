@@ -137,60 +137,7 @@ public class TestSquare {
 		assertTrue(square.hasNeighbor(Direction.NORTH));
 	}
 	
-	/**
-	 * Neighbor already set in other square.
-	 */
-	@Test
-	public void testAddingNeigbors() {
-		Square square = new Square();
-		Square otherSquare = new Square();
-		
-		square.setNeighbor(Direction.NORTH, otherSquare);
-		
-		Square thirdSquare = new Square();
-		
-		square.setNeighbor(Direction.EAST, thirdSquare);
-		
-		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH));
-		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH, square));
-		
-		assertTrue(thirdSquare.hasNeighbor(Direction.WEST));
-		assertTrue(thirdSquare.hasNeighbor(Direction.WEST, square));
-		
-		assertFalse(thirdSquare.hasNeighbor(Direction.WEST, new Square()));
-		assertFalse(thirdSquare.hasNeighbor(Direction.NORTHEAST, square));
-	}
-	
-	/**
-	 * Test adding square itself as neighbor must throw exception.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void testAddingNeighborOwnSquare() {
-		Square square = new Square();
-		
-		square.setNeighbor(Direction.SOUTH, square);
-	}
-	
-	@Test(expected=IllegalArgumentException.class)
-	public void testAddingDuplicateNeigbor() {
-		Square square = new Square();
-		Square otherSquare = new Square();
-		
-		square.setNeighbor(Direction.NORTH, new Square());
-		square.setNeighbor(Direction.NORTH, otherSquare);
-	}
-	
-	@Test
-	public void testIsConnectedTo() {
-		Square square = new Square();
-		Square otherSquare = new Square();
-		
-		assertFalse(square.isConnectedTo(otherSquare));
-		
-		square.setNeighbor(Direction.NORTH, otherSquare);
-		assertTrue(square.isConnectedTo(otherSquare));
-	}
-	
+
 	@Test
 	public void testCanHaveAsNeighbor() {
 		Square square = new Square();
