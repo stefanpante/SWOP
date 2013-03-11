@@ -1,4 +1,6 @@
-	package handlers;
+package handlers;
+
+import java.util.NoSuchElementException;
 
 import player.Player;
 import square.Direction;
@@ -11,7 +13,7 @@ import game.Game;
  *
  */
 public class MoveHandler extends Handler {
-	
+
 	/**
 	 * Basic constructor that initiates the moveHandler with the given game. 
 	 * 
@@ -20,7 +22,7 @@ public class MoveHandler extends Handler {
 	public MoveHandler(Game game) {
 		super(game);
 	}
-	
+
 	/**
 	 * Checks the precondition for the move use case
 	 * returns true if the preconditions are satisfied
@@ -34,7 +36,7 @@ public class MoveHandler extends Handler {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Moves in the given direction if it's possible, if it isn't
 	 * possible, the player doesn't move but does lose an action
@@ -43,27 +45,36 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException{
+	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException{
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
-		//TODO: move to square where other player is should be invalid
-		if(currentPosition.canMoveTo(direction)){
-			Square newPosition = currentPosition.getNeighbor(direction);
-			currentPosition.getUsedInventory().activateAllItems();
-			getGame().getCurrentPlayer().incrementActions();
-			getGame().getCurrentPlayer().move(newPosition);
-		}
-//		} catch(IllegalStateException e) {
-//			System.err.println("Player cannot move the square.");
-//		} catch(IllegalArgumentException e) {
-//			System.err.println("Tried to move to a neighbor that is no square.");
-//		}
 		
+		//Throws NoSuchElementException 
+		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction);
+	
+		// cannot move to square were other player is positioned
+		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
+		for(Player p: otherPlayers){
+			if(p.getPosition().equals(newPosition))
+				throw New IllegalStateException("Cannot move to square were other player is positioned.")
+		}
+		//TODO: move to square where other player is should be invalid
+
+		Square newPosition = currentPosition.getNeighbor(direction);
+		currentPosition.getUsedInventory().activateAllItems();
+		getGame().getCurrentPlayer().incrementActions();
+		getGame().getCurrentPlayer().move(newPosition);
+		//		} catch(IllegalStateException e) {
+		//			System.err.println("Player cannot move the square.");
+		//		} catch(IllegalArgumentException e) {
+		//			System.err.println("Tried to move to a neighbor that is no square.");
+		//		}
+
 		if(getGame().getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
 			getGame().getCurrentPlayer().endTurn();
 			getGame().switchToNextPlayer();
 		}
 	}
-	
+
 	/**
 	 * Checks if the end of the move causes the current player to win.
 	 * @return 	true if the move causes the player to win. 
@@ -71,11 +82,11 @@ public class MoveHandler extends Handler {
 	public boolean endAction(){
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
-		
+
 		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
 			return true;
 		}
-		
+
 		return false;
 	}
 

@@ -196,6 +196,18 @@ public class Game {
 		return players.get(nextPlayer);
 	}
 	
+	
+	
+	/**
+	 * Returns all players, except the current player
+	 * @return	Returns all players, except the current player
+	 */
+	public ArrayList<Player> getOtherPlayers(){
+		ArrayList<Player> otherPlayers = new ArrayList<Player>(players);
+		otherPlayers.remove(currentPlayer);
+		
+		return otherPlayers;
+	}
 	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
 	 * @param 	currentPlayer
