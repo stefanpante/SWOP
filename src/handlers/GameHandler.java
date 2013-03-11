@@ -16,7 +16,7 @@ import gui.ApplicationWindow;
 import player.Player;
 import square.Direction;
 import square.Square;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * @author jonas

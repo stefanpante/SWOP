@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import square.Square;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * @author Jonas Devlieghere
@@ -18,22 +18,22 @@ import utils.Coordinate2D;
  */
 public class GameModel extends Observable {
 
-	private ArrayList<Coordinate2D> walls;
+	private ArrayList<Coordinate> walls;
 	
 	private Grid grid;
 	
-	private ArrayList<Coordinate2D> lightTrailBlue;
-	private ArrayList<Coordinate2D> lightTrailRed;
+	private ArrayList<Coordinate> lightTrailBlue;
+	private ArrayList<Coordinate> lightTrailRed;
 	private ArrayList<Item> currentSquareInventory;
 	private ArrayList<Item> currentPlayerInventory;
 	
-	private Coordinate2D player1;
-	private Coordinate2D player2;
+	private Coordinate player1;
+	private Coordinate player2;
 	
 	public GameModel(){
-		this.walls = new ArrayList<Coordinate2D>();
-		this.lightTrailBlue = new ArrayList<Coordinate2D>();
-		this.lightTrailRed = new ArrayList<Coordinate2D>();		
+		this.walls = new ArrayList<Coordinate>();
+		this.lightTrailBlue = new ArrayList<Coordinate>();
+		this.lightTrailRed = new ArrayList<Coordinate>();		
 		this.currentPlayerInventory = new ArrayList<Item>();
 		this.currentSquareInventory = new ArrayList<Item>();
 	}
@@ -46,9 +46,9 @@ public class GameModel extends Observable {
 		return this.grid;
 	}
 	
-	public ArrayList<Coordinate2D> getAllGrenades(){
-		ArrayList<Coordinate2D> grenades = new ArrayList<Coordinate2D>();
-		for(Coordinate2D coordinate : getGrid().getAllCoordinates()){
+	public ArrayList<Coordinate> getAllGrenades(){
+		ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
+		for(Coordinate coordinate : getGrid().getAllCoordinates()){
 			if(getGrid().getSquare(coordinate).getInventory().hasLightGrenade()){
 				grenades.add(coordinate);
 			}
@@ -56,70 +56,70 @@ public class GameModel extends Observable {
 		return grenades;
 	}
  	
-	public void addToLightTrailBlue(Coordinate2D coordinate){
+	public void addToLightTrailBlue(Coordinate coordinate){
 		lightTrailBlue.add(coordinate);
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void addToLightTrailRed(Coordinate2D coordinate){
+	public void addToLightTrailRed(Coordinate coordinate){
 		lightTrailRed.add(coordinate);
 		setChanged();
 		notifyObservers();
 	}
 	
 		
-	public void setPlayer1(Coordinate2D coordinate){
+	public void setPlayer1(Coordinate coordinate){
 		this.player1 = coordinate;
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void setPlayer2(Coordinate2D coordinate){
+	public void setPlayer2(Coordinate coordinate){
 		this.player2 = coordinate;
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void setWalls(ArrayList<Coordinate2D> walls){
+	public void setWalls(ArrayList<Coordinate> walls){
 		this.walls = walls;
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void setLightTrailBlue(ArrayList<Coordinate2D> lightTrail){
+	public void setLightTrailBlue(ArrayList<Coordinate> lightTrail){
 		this.lightTrailBlue = lightTrail;
 		setChanged();
 		notifyObservers();
 	}
 	
-	public void setLightTrailRed(ArrayList<Coordinate2D> lightTrail){
+	public void setLightTrailRed(ArrayList<Coordinate> lightTrail){
 		this.lightTrailRed = lightTrail;
 		setChanged();
 		notifyObservers();
 	}
 	
-	public ArrayList<Coordinate2D> getWalls(){
-		return new ArrayList<Coordinate2D>(walls);
+	public ArrayList<Coordinate> getWalls(){
+		return new ArrayList<Coordinate>(walls);
 	}
 
-	public ArrayList<Coordinate2D> getLightTrailBlue(){
-		return new ArrayList<Coordinate2D> (this.lightTrailBlue);
+	public ArrayList<Coordinate> getLightTrailBlue(){
+		return new ArrayList<Coordinate> (this.lightTrailBlue);
 	}
 	
-	public ArrayList<Coordinate2D> getLightTrailRed(){
-		return new ArrayList<Coordinate2D> (this.lightTrailRed);
+	public ArrayList<Coordinate> getLightTrailRed(){
+		return new ArrayList<Coordinate> (this.lightTrailRed);
 	}
 	
 	public void clear(){
 		this.walls.clear();
 	}
 
-	public Coordinate2D getPlayer1() {
+	public Coordinate getPlayer1() {
 		return this.player1;
 	}
 	
-	public Coordinate2D getPlayer2() {
+	public Coordinate getPlayer2() {
 		return this.player2;
 	}
 	

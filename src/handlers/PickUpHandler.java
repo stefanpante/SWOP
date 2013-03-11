@@ -41,7 +41,7 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		try{
-			getGame().getCurrentPlayer().getPosition().getPickUpInventory().take(item);
+			getGame().getCurrentPlayer().getPosition().getInventory().take(item);
 			if(!getGame().getCurrentPlayer().getInventory().isFull()){
 				getGame().getCurrentPlayer().pickUp(item);
 				getGame().getCurrentPlayer().incrementActions();
@@ -54,7 +54,7 @@ public class PickUpHandler extends Handler {
 	}
 	
 	public Inventory showItems(){
-		return getGame().getCurrentPlayer().getPosition().getPickUpInventory();
+		return getGame().getCurrentPlayer().getPosition().getInventory();
 	}
 
 }

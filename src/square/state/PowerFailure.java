@@ -33,6 +33,7 @@ public class PowerFailure extends State{
 	/**
 	 * The player loses 1 action when starting on a square with powerfailure.
 	 */
+
 	@Override
 	public StateResult resultOnStart() {
 		return new StateResult(-1,false);
