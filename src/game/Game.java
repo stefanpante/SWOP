@@ -105,7 +105,17 @@ public class Game {
 		if(i >= players.size())
 			throw new IllegalArgumentException();
 		return players.get(i);
-	};
+	}
+	
+	/**
+	 * Returns the grid of this game
+	 * 
+	 * @return	The grid of this game
+	 * 			| Grid
+	 */
+	public Grid getGrid(){
+		return this.grid;
+	}
 	
 	/**
 	 * Add the player to this game

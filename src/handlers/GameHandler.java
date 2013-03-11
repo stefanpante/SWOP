@@ -79,7 +79,7 @@ public class GameHandler extends Handler {
 	 */
 	public ArrayList<Coordinate2D> getWallsRepresentation(){
 		ArrayList<Coordinate2D> wallCoor = new ArrayList<Coordinate2D>();
-		int y = game.getVSize() -1;
+		int y = game.getGrid().getVSize() -1;
 		int x = 0;
 		Square s = game.getPlayer(1).getStartPosition();
 		Square n = s;
