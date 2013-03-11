@@ -21,7 +21,6 @@ import game.Game;
  * Scenario test for the Use Case "Move".
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
- *TODO: refactor to use static numberofactions in turn
  */
 public class MoveHandlerTest {
 
@@ -108,6 +107,7 @@ public class MoveHandlerTest {
 			Direction direction = directions[random.nextInt(directions.length)];
 			try{
 				mh.move(direction);
+				System.out.println(game.getCurrentPlayer().hasMoved());
 			}
 			catch(Exception e){}
 		}
