@@ -64,7 +64,7 @@ public class MoveHandler extends Handler {
 		currentPosition.getUsedInventory().activateAllItems();
 		getGame().getCurrentPlayer().incrementActions();
 		
-
+		//TODO: update for power failure
 		if(getGame().getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
 			getGame().getCurrentPlayer().endTurn();
 			getGame().switchToNextPlayer();
