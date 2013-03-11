@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 import square.Direction;
 import square.Square;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * @author jonas
@@ -44,7 +44,7 @@ public class Grid {
 	 */
 	public static float LENGTH_PERCENTAGE_WALL = 0.5f;
 	
-	HashMap<Coordinate2D, Square> grid;
+	HashMap<Coordinate, Square> grid;
 	
 	/**
 	 * the horizontal size and vertical size of the grid
@@ -52,7 +52,7 @@ public class Grid {
 	private int hSize, vSize;
 	
 	public Grid(int hSize, int vSize){
-		grid = new HashMap<Coordinate2D, Square>();
+		grid = new HashMap<Coordinate, Square>();
 		setHSize(hSize);
 		setVSize(vSize);
 	}
@@ -83,7 +83,7 @@ public class Grid {
 		return vSize;
 	}
 	
-	public void setSquare(Coordinate2D coordinate, Square square){
+	public void setSquare(Coordinate coordinate, Square square){
 		grid.put(coordinate,square);
 	}
 
@@ -99,27 +99,27 @@ public class Grid {
 	public Square getNeighbor(Square square, Direction direction) throws NoSuchElementException {
 		int x = getCoordinate(square).getX(); 
 		int y = getCoordinate(square).getY(); 
-		Coordinate2D coordinate = new Coordinate2D(x, y);
+		Coordinate coordinate = new Coordinate(x, y);
 		if(contains(coordinate.getNeighbor(direction)))
 			return getSquare(coordinate);
 		throw new NoSuchElementException();
 	}
 		
 	
-	public Square getSquare(Coordinate2D coordinate){
+	public Square getSquare(Coordinate coordinate){
 		return grid.get(coordinate);
 	}
 	
-	public ArrayList<Square> getSquares(ArrayList<Coordinate2D> coordinates){
+	public ArrayList<Square> getSquares(ArrayList<Coordinate> coordinates){
 		ArrayList<Square> squares = new ArrayList<Square>();
-		for(Coordinate2D coordinate : coordinates){
+		for(Coordinate coordinate : coordinates){
 			squares.add(getSquare(coordinate));
 		}
 		return squares;
 	}
 	
-	public Coordinate2D getCoordinate(Square square) throws IndexOutOfBoundsException{
-		for(Coordinate2D coordinate : grid.keySet()){
+	public Coordinate getCoordinate(Square square) throws IndexOutOfBoundsException{
+		for(Coordinate coordinate : grid.keySet()){
 			if(getSquare(coordinate).equals(square))
 				return coordinate;
 		}
@@ -130,7 +130,7 @@ public class Grid {
 		return grid.containsValue(square);
 	}
 	
-	public boolean contains(Coordinate2D coordinate){
+	public boolean contains(Coordinate coordinate){
 		return grid.containsKey(coordinate);
 	}
 	
@@ -138,8 +138,8 @@ public class Grid {
 		return new ArrayList<Square>(grid.values());
 	}
 	
-	public ArrayList<Coordinate2D> getAllCoordinates(){
-		return new ArrayList<Coordinate2D>(grid.keySet());
+	public ArrayList<Coordinate> getAllCoordinates(){
+		return new ArrayList<Coordinate>(grid.keySet());
 	}
 	
 	//TODO: canMoveTo Square, Square 

@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import square.Square;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * @author jonas
@@ -22,10 +22,10 @@ public class TestGrid {
 
 	@Test
 	public void test() {
-		Coordinate2D c00 = new Coordinate2D(0,0);
-		Coordinate2D c10 = new Coordinate2D(1,0);
-		Coordinate2D c01 = new Coordinate2D(0,1);
-		Coordinate2D c11 = new Coordinate2D(1,1);
+		Coordinate c00 = new Coordinate(0,0);
+		Coordinate c10 = new Coordinate(1,0);
+		Coordinate c01 = new Coordinate(0,1);
+		Coordinate c11 = new Coordinate(1,1);
 
 		
 		

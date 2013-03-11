@@ -14,7 +14,7 @@ import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
 import sun.reflect.generics.tree.BottomSignature;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * @author jonas
@@ -24,10 +24,10 @@ public class GridBuilder2 {
 	
 	private Grid grid;
 	private Random random;
-	private ArrayList<Coordinate2D> walls;
+	private ArrayList<Coordinate> walls;
 	
 	public GridBuilder2(int hSize, int vSize) {
-		this.walls = new ArrayList<Coordinate2D>();
+		this.walls = new ArrayList<Coordinate>();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 	}
@@ -82,10 +82,10 @@ public class GridBuilder2 {
 	 * Fills the grid with squares
 	 */
 	public void constructSquares() {
-		Coordinate2D coordinate;
+		Coordinate coordinate;
 		for(int x = 0; x < getGrid().getHSize(); x++){
 			for(int y = 0; y < getGrid().getVSize(); y++){
-				coordinate = new Coordinate2D(x, y);
+				coordinate = new Coordinate(x, y);
 				getGrid().setSquare(coordinate, getSquare());
 			}
 		}
@@ -116,18 +116,18 @@ public class GridBuilder2 {
 	 * Adds walls to the grid
 	 */
 	public void constructWalls() {
-		ArrayList<Coordinate2D> candidates = getGrid().getAllCoordinates();
+		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		int totalWallLength = Math.round(Grid.PERCENTAGE_WALLS * candidates.size());
 		
 		/* Exclude starting positions from candidates */
-		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize()-1);
-		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize()-1, 0);
+		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
+		Coordinate topRight = new Coordinate(getGrid().getHSize()-1, 0);
 		candidates.remove(bottomLeft);
 		candidates.remove(topRight);
 
 		int remainingWallLength = totalWallLength;
 		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
-			ArrayList<Coordinate2D> wallSequence = getWall(candidates, remainingWallLength);
+			ArrayList<Coordinate> wallSequence = getWall(candidates, remainingWallLength);
 			if(wallSequence.size() >= 2){
 				new Wall(getGrid().getSquares(wallSequence));
 				removePerimeter(wallSequence, candidates);
@@ -137,7 +137,7 @@ public class GridBuilder2 {
 		}
 	}
 	
-	public ArrayList<Coordinate2D> getWalls(){
+	public ArrayList<Coordinate> getWalls(){
 		return this.walls;
 	}
 	
@@ -145,10 +145,10 @@ public class GridBuilder2 {
 	 * @param wall
 	 * @param candidates
 	 */
-	private void removePerimeter(ArrayList<Coordinate2D> coordinates, ArrayList<Coordinate2D> candidates) {
-		for(Coordinate2D coordinate : coordinates){
+	private void removePerimeter(ArrayList<Coordinate> coordinates, ArrayList<Coordinate> candidates) {
+		for(Coordinate coordinate : coordinates){
 			for(Direction direction : Direction.values()){
-				Coordinate2D neighbor = coordinate.getNeighbor(direction);
+				Coordinate neighbor = coordinate.getNeighbor(direction);
 				candidates.remove(neighbor);
 			}
 			candidates.remove(coordinate);
@@ -156,8 +156,8 @@ public class GridBuilder2 {
 	}
 
 
-	private ArrayList<Coordinate2D> getWall(ArrayList<Coordinate2D> candidates, int maxWallLength){
-		ArrayList<Coordinate2D> wall = new ArrayList<Coordinate2D>();
+	private ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
+		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
 		Direction direction = Direction.getRandom();
 		int maxPercentageLength;
 		/* Determine length */
@@ -168,8 +168,8 @@ public class GridBuilder2 {
 		}
 		int length = Math.min(maxWallLength, maxPercentageLength);
 		/* Choose start candidate and start constructing wall */
-		Coordinate2D start = candidates.get(getRandom().nextInt(candidates.size()));
-		Coordinate2D next = start.getNeighbor(direction);
+		Coordinate start = candidates.get(getRandom().nextInt(candidates.size()));
+		Coordinate next = start.getNeighbor(direction);
 		/* As long as the length is within range and there is a square, continue */
 		while(wall.size() < length && candidates.contains(next)){
 			wall.add(next);
@@ -179,37 +179,37 @@ public class GridBuilder2 {
 	}
 	
 	public void constructLightGrenades() {
-		ArrayList<Coordinate2D> candidates = getGrid().getAllCoordinates();
+		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		candidates.removeAll(walls);
 		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
 		/* Place grenade within range of start squares */
-		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize()-1);
-		Coordinate2D tR = getRandomNeighbor(bottomLeft, candidates);
+		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
+		Coordinate tR = getRandomNeighbor(bottomLeft, candidates);
 		setGrenade(tR);
 		candidates.remove(tR);
 		candidates.remove(bottomLeft);
 		
-		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize()-1, 0);
-		Coordinate2D bL = getRandomNeighbor(topRight, candidates);
+		Coordinate topRight = new Coordinate(getGrid().getHSize()-1, 0);
+		Coordinate bL = getRandomNeighbor(topRight, candidates);
 		setGrenade(bL);
 		candidates.remove(bL);
 		candidates.remove(topRight);
 		/*  Dispense grenades */
 		for(int i = 0; i < maxGrenades; i++){
-			Coordinate2D coordinate = candidates.get(getRandom().nextInt(candidates.size()));
+			Coordinate coordinate = candidates.get(getRandom().nextInt(candidates.size()));
 			setGrenade(coordinate);
 			candidates.remove(coordinate);
 		}
 	}
 	
-	private void setGrenade(Coordinate2D coordinate){
+	private void setGrenade(Coordinate coordinate){
 		Square square = getGrid().getSquare(coordinate);
 		square.getInventory().addItem(new LightGrenade());
 	}
 	
-	private Coordinate2D getRandomNeighbor(Coordinate2D coordinate, ArrayList<Coordinate2D> candidates){
-		ArrayList<Coordinate2D> realCandidates = new ArrayList<Coordinate2D>();
-		for(Coordinate2D neighbor : coordinate.getAllNeighbors()){
+	private Coordinate getRandomNeighbor(Coordinate coordinate, ArrayList<Coordinate> candidates){
+		ArrayList<Coordinate> realCandidates = new ArrayList<Coordinate>();
+		for(Coordinate neighbor : coordinate.getAllNeighbors()){
 			if(candidates.contains(neighbor)){
 				realCandidates.add(neighbor);
 			}

@@ -11,7 +11,7 @@ import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
 import square.state.PowerFailure;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * Game class, this class controls the flow of the game
@@ -61,8 +61,8 @@ public class Game {
 		GridBuilder2 gridBuilder = new GridBuilder2(hSize, vSize);
 		this.grid = gridBuilder.buildGrid();
 		
-		Square bottomLeft = grid.getSquare(new Coordinate2D(0, vSize));
-		Square topRight = grid.getSquare(new Coordinate2D(hSize, 0));
+		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize));
+		Square topRight = grid.getSquare(new Coordinate(hSize, 0));
 		
 		addPlayer(new Player(bottomLeft, "Player 1"));
 		addPlayer(new Player(topRight, "Player 2"));

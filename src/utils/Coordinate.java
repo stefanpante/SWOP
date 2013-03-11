@@ -18,7 +18,7 @@ import square.Direction;
  * @Invar 	The y-coordinate is a valid y-coordinate.
  * 			| isValidY(getY())
  */
-public class Coordinate2D {
+public class Coordinate {
 
 	/**
 	 * The x-coordinate.
@@ -45,7 +45,7 @@ public class Coordinate2D {
 	 * 			| x or y- coordinates of this Coordinate2d
 	 * 			| !isValidX(x) || !isValidY(y)
 	 */
-	public Coordinate2D(int x, int y) throws IllegalArgumentException {
+	public Coordinate(int x, int y) throws IllegalArgumentException {
 		setX(x);
 		setY(y);
 	}
@@ -133,13 +133,13 @@ public class Coordinate2D {
 		if(obj == null){
 			return false;
 		}
-		if(!(obj instanceof Coordinate2D)){
+		if(!(obj instanceof Coordinate)){
 			return false;
 		}
-		if(this.getX() != ((Coordinate2D) obj).getX()){
+		if(this.getX() != ((Coordinate) obj).getX()){
 			return false;
 		}
-		if(this.getY() != ((Coordinate2D) obj).getY()){
+		if(this.getY() != ((Coordinate) obj).getY()){
 			return false;
 		}
 		return true;
@@ -159,41 +159,41 @@ public class Coordinate2D {
 	 * @param 	direction the direction in which the neighbour is wanted
 	 * @return 	the closest neighbour in the given direction
 	 */
-	public Coordinate2D getNeighbor(Direction direction){
+	public Coordinate getNeighbor(Direction direction){
 		int x = getX();
 		int y = getY();
 		switch (direction) {
 		case NORTH:
-			return new Coordinate2D(x, y+1);
+			return new Coordinate(x, y+1);
 		case NORTHEAST:
-			return new Coordinate2D(x+1, y+1);
+			return new Coordinate(x+1, y+1);
 		case EAST:
-			return new Coordinate2D(x+1, y);
+			return new Coordinate(x+1, y);
 		case SOUTHEAST:
-			return new Coordinate2D(x+1, y-1);
+			return new Coordinate(x+1, y-1);
 		case SOUTH:
-			return new Coordinate2D(x, y-1);
+			return new Coordinate(x, y-1);
 		case SOUTHWEST:
-			return new Coordinate2D(x-1, y-1);
+			return new Coordinate(x-1, y-1);
 		case WEST:
-			return new Coordinate2D(x-1, y);
+			return new Coordinate(x-1, y);
 		case NORTHWEST:
-			return new Coordinate2D(x-1, y+1);
+			return new Coordinate(x-1, y+1);
 		default:
 			throw new IllegalArgumentException("The given direction is not valid" + direction ); 
 		}
 	}
 	
-	public ArrayList<Coordinate2D> getAllNeighbors(){
-		ArrayList<Coordinate2D> coordinates = new ArrayList<Coordinate2D>();
-		coordinates.add(new Coordinate2D(x+1, y));
-		coordinates.add(new Coordinate2D(x+1, y+1));
-		coordinates.add(new Coordinate2D(x+1, y-1));
-		coordinates.add(new Coordinate2D(x-1, y));
-		coordinates.add(new Coordinate2D(x-1, y+1));
-		coordinates.add(new Coordinate2D(x-1, y-1));
-		coordinates.add(new Coordinate2D(x	, y-1));
-		coordinates.add(new Coordinate2D(x	, y+1));
+	public ArrayList<Coordinate> getAllNeighbors(){
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		coordinates.add(new Coordinate(x+1, y));
+		coordinates.add(new Coordinate(x+1, y+1));
+		coordinates.add(new Coordinate(x+1, y-1));
+		coordinates.add(new Coordinate(x-1, y));
+		coordinates.add(new Coordinate(x-1, y+1));
+		coordinates.add(new Coordinate(x-1, y-1));
+		coordinates.add(new Coordinate(x	, y-1));
+		coordinates.add(new Coordinate(x	, y+1));
 		return coordinates;
 	}
 }

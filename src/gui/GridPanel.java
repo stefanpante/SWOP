@@ -14,7 +14,7 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import square.Square;
-import utils.Coordinate2D;
+import utils.Coordinate;
 
 /**
  * 
@@ -54,13 +54,13 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
-	    for(Coordinate2D coordinate : ApplicationWindow.MODEL.getWalls())
+	    for(Coordinate coordinate : ApplicationWindow.MODEL.getWalls())
 	    	DrawImage(graphics, coordinate, "wall");
-		for(Coordinate2D coordinate : ApplicationWindow.MODEL.getLightTrailRed())
+		for(Coordinate coordinate : ApplicationWindow.MODEL.getLightTrailRed())
 		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");
-		for(Coordinate2D coordinate : ApplicationWindow.MODEL.getLightTrailRed())
+		for(Coordinate coordinate : ApplicationWindow.MODEL.getLightTrailRed())
 		    DrawImage(graphics, coordinate, "cell_lighttrail_red");	
-		for(Coordinate2D coordinate : ApplicationWindow.MODEL.getAllGrenades())
+		for(Coordinate coordinate : ApplicationWindow.MODEL.getAllGrenades())
 		    DrawImage(graphics, coordinate, "lightgrenade");
 			
 		
@@ -68,7 +68,7 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 		 DrawImage(graphics, ApplicationWindow.MODEL.getPlayer2(), "player_red");
 	}
 	
-	private void DrawImage(Graphics graphics, Coordinate2D coordinate, String image){
+	private void DrawImage(Graphics graphics, Coordinate coordinate, String image){
 		if(coordinate == null)
 			return;
 		// System.out.println("Draw "+ image +" at "+ coordinate);
