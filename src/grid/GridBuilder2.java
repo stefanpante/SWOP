@@ -3,12 +3,17 @@
  */
 package grid;
 
+import gui.ApplicationWindow;
+
+import items.LightGrenade;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
+import sun.reflect.generics.tree.BottomSignature;
 import utils.Coordinate2D;
 
 /**
@@ -19,8 +24,10 @@ public class GridBuilder2 {
 	
 	private Grid grid;
 	private Random random;
+	private ArrayList<Coordinate2D> walls;
 	
 	public GridBuilder2(int hSize, int vSize) {
+		this.walls = new ArrayList<Coordinate2D>();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 	}
@@ -36,6 +43,9 @@ public class GridBuilder2 {
 	public Grid buildGrid(){
 		constructSquares();
 		constructWalls();
+		constructLightGrenades();
+		ApplicationWindow.MODEL.setGrid(getGrid());
+		ApplicationWindow.MODEL.setWalls(getWalls());
 		return getGrid();
 	}
 
@@ -110,11 +120,11 @@ public class GridBuilder2 {
 		int totalWallLength = Math.round(Grid.PERCENTAGE_WALLS * candidates.size());
 		
 		/* Exclude starting positions from candidates */
-		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize());
-		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize(), 0);
+		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize()-1);
+		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize()-1, 0);
 		candidates.remove(bottomLeft);
 		candidates.remove(topRight);
-		
+
 		int remainingWallLength = totalWallLength;
 		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
 			ArrayList<Coordinate2D> wallSequence = getWall(candidates, remainingWallLength);
@@ -122,11 +132,14 @@ public class GridBuilder2 {
 				new Wall(getGrid().getSquares(wallSequence));
 				removePerimeter(wallSequence, candidates);
 				remainingWallLength = remainingWallLength - wallSequence.size();
+				this.walls.addAll(wallSequence);
 			}
 		}
 	}
 	
-
+	public ArrayList<Coordinate2D> getWalls(){
+		return this.walls;
+	}
 	
 	/**
 	 * @param wall
@@ -158,19 +171,50 @@ public class GridBuilder2 {
 		Coordinate2D start = candidates.get(getRandom().nextInt(candidates.size()));
 		Coordinate2D next = start.getNeighbor(direction);
 		/* As long as the length is within range and there is a square, continue */
-		while(wall.size() < length && getGrid().contains(next)){
+		while(wall.size() < length && candidates.contains(next)){
 			wall.add(next);
 			next = next.getNeighbor(direction);
 		}
 		return wall;
 	}
 	
-	public void constructObjects(){
-		// TODO Auto-generated method stub
+	public void constructLightGrenades() {
+		ArrayList<Coordinate2D> candidates = getGrid().getAllCoordinates();
+		candidates.removeAll(walls);
+		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
+		/* Place grenade within range of start squares */
+		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize()-1);
+		Coordinate2D tR = getRandomNeighbor(bottomLeft, candidates);
+		setGrenade(tR);
+		candidates.remove(tR);
+		candidates.remove(bottomLeft);
+		
+		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize()-1, 0);
+		Coordinate2D bL = getRandomNeighbor(topRight, candidates);
+		setGrenade(bL);
+		candidates.remove(bL);
+		candidates.remove(topRight);
+		/*  Dispense grenades */
+		for(int i = 0; i < maxGrenades; i++){
+			Coordinate2D coordinate = candidates.get(getRandom().nextInt(candidates.size()));
+			setGrenade(coordinate);
+			candidates.remove(coordinate);
+		}
 	}
 	
-	public void constructLightGrenades() {
-		// TODO Auto-generated method stub
+	private void setGrenade(Coordinate2D coordinate){
+		Square square = getGrid().getSquare(coordinate);
+		square.getInventory().addItem(new LightGrenade());
+	}
+	
+	private Coordinate2D getRandomNeighbor(Coordinate2D coordinate, ArrayList<Coordinate2D> candidates){
+		ArrayList<Coordinate2D> realCandidates = new ArrayList<Coordinate2D>();
+		for(Coordinate2D neighbor : coordinate.getAllNeighbors()){
+			if(candidates.contains(neighbor)){
+				realCandidates.add(neighbor);
+			}
+		}
+		return realCandidates.get(getRandom().nextInt(realCandidates.size()));
 	}
 	
 	

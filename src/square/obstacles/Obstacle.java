@@ -86,20 +86,11 @@ public abstract class Obstacle {
 	 * 					square.
 	 */
 	public boolean isValidSquare(Square square){
-		if(square == null){
-			return false;
-		}
+		if(square == null)
+			return false; 
 		if(getSquares().contains(square))
 			return false;
-		
-		if(getLength() == 0)
-			return true;
-		//TODO: do we need to know it is connected?
-//		for(Square trailSquare : getSquares())
-//			if(trailSquare.isConnectedTo(square))
-//				return true;
-		
-		return false;
+		return true;
 	}
 	
 	/**

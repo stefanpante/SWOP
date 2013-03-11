@@ -104,7 +104,7 @@ public class Grid {
 			return getSquare(coordinate);
 		throw new NoSuchElementException();
 	}
-	
+		
 	
 	public Square getSquare(Coordinate2D coordinate){
 		return grid.get(coordinate);

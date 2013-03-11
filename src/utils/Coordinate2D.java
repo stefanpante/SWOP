@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+
 import be.kuleuven.cs.som.annotate.*;
 
 import square.Direction;
@@ -180,6 +182,18 @@ public class Coordinate2D {
 		default:
 			throw new IllegalArgumentException("The given direction is not valid" + direction ); 
 		}
-		
+	}
+	
+	public ArrayList<Coordinate2D> getAllNeighbors(){
+		ArrayList<Coordinate2D> coordinates = new ArrayList<Coordinate2D>();
+		coordinates.add(new Coordinate2D(x+1, y));
+		coordinates.add(new Coordinate2D(x+1, y+1));
+		coordinates.add(new Coordinate2D(x+1, y-1));
+		coordinates.add(new Coordinate2D(x-1, y));
+		coordinates.add(new Coordinate2D(x-1, y+1));
+		coordinates.add(new Coordinate2D(x-1, y-1));
+		coordinates.add(new Coordinate2D(x	, y-1));
+		coordinates.add(new Coordinate2D(x	, y+1));
+		return coordinates;
 	}
 }
