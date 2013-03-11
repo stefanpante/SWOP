@@ -11,12 +11,10 @@ import game.Game;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class EndTurnHandler {
-
-	private Game game;
+public class EndTurnHandler extends Handler{
 	
 	public EndTurnHandler(Game game) {
-		this.game = game;
+		super(game);
 	}
 	
 
@@ -30,20 +28,20 @@ public class EndTurnHandler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(game.getCurrentPlayer().getRemainingActions() > 0)
+		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
 			return true;
 		return false;
 	}
 
 	public boolean hasMoved(){
-		return game.getCurrentPlayer().hasMoved();
+		return getGame().getCurrentPlayer().hasMoved();
 	}
 	
 	public void endTurn(){
-		game.getCurrentPlayer().endTurn();
-		game.switchToNextPlayer();
+		getGame().getCurrentPlayer().endTurn();
+		getGame().switchToNextPlayer();
 		
-		Iterator<Square> iterator = game.getAllSquares().iterator();
+		Iterator<Square> iterator = getGame().getAllSquares().iterator();
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
