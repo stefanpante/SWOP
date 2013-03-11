@@ -1,5 +1,6 @@
 package items;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import be.kuleuven.cs.som.annotate.Basic;
@@ -15,8 +16,6 @@ import notnullcheckweaver.Nullable;
  * TODO: Implement the visitor pattern when there are more items then only a LightGrenade.
  */
 public class SquareInventory extends Inventory {
-	
-	private final boolean onlyInactiveItems;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -27,9 +26,8 @@ public class SquareInventory extends Inventory {
 	 * 			Boolean that states whether this inventory can only have inactive Items.
 	 * @effect	super(size)
 	 */
-	public SquareInventory(int size, final boolean onlyInactiveItems) {
+	public SquareInventory(int size) {
 		super(size);
-		this.onlyInactiveItems = onlyInactiveItems; 
 	}
 
 	/**
@@ -39,18 +37,8 @@ public class SquareInventory extends Inventory {
 	 * 			Boolean that states whether this inventory can only have inactive Items.
 	 * @effect	super(size)
 	 */
-	public SquareInventory(final boolean onlyInactiveItems) {
+	public SquareInventory() {
 		super();
-		this.onlyInactiveItems = onlyInactiveItems; 
-	}
-	
-	/**
-	 * Returns whether this inventory is an 'only inactive item' inventory
-	 * @return
-	 */
-	@Basic
-	public final boolean isOnlyInactiveItems() {
-		return onlyInactiveItems;
 	}
 	
 	/**
@@ -88,9 +76,6 @@ public class SquareInventory extends Inventory {
 	public boolean canHaveAsItem(Item item){
 		if(!super.canHaveAsItem(item)){
 			return false;
-		}
-		if(isOnlyInactiveItems()){
-			return item.getState() == ItemState.INACTIVE;
 		}
 		if(item instanceof LightGrenade && hasLightGrenade()){
 			return false;
@@ -132,20 +117,20 @@ public class SquareInventory extends Inventory {
 	 * 			| getLightGrenade().isActive()
 	 */
 	public boolean hasActiveLightGrenade(){
-		if(isOnlyInactiveItems()){
+		LightGrenade lg = getLightGrenade();
+		if(lg == null)
 			return false;
-		} else {
-			LightGrenade lg = getLightGrenade();
-			if(lg == null)
-				return false;
-			return getLightGrenade().isActive();
-		}
+		return getLightGrenade().isActive();
 	}
 	
+	/**
+	 * Active the given item. 
+	 * 
+	 * @param item
+	 * @throws IllegalStateException
+	 */
 	public void activate(Item item)throws IllegalStateException{
-		if(isOnlyInactiveItems()){
-			throw new IllegalStateException("Cant activate the item "+ item + " in " + this);
-		} else	if(!this.hasItem(item)){
+		if(!this.hasItem(item)){
 			throw new IllegalStateException("The "+ item + " is not in " + this);
 		} else {
 			item.activate();
@@ -161,23 +146,33 @@ public class SquareInventory extends Inventory {
 	 * 			| isOnlyInactiveItems()
 	 */
 	public void activateAllItems() throws IllegalStateException{
-		if(isOnlyInactiveItems()){
-			throw new IllegalStateException("Cant activate items in " + this);
-		} else {
-			for (Item it : getAllItems()) {
-				if(it.getState() == ItemState.INACTIVE){
-					it.activate();
-				}
+		for (Item it : getAllItems()) {
+			if(it.getState() == ItemState.INACTIVE){
+				it.activate();
 			}
 		}
+	}
+	
+	/**
+	 * Returns all the items in this inventory that have a certain state. 
+	 * 
+	 * @param 	state
+	 * 			The state which all returned items must have.
+	 * @return	All items of this inventory that have a certain state.
+	 */
+	public ArrayList<Item> getItems(ItemState state){
+		ArrayList<Item> result = new ArrayList<Item>();
+		for (Item it : getAllItems()) {
+			if(it.getState() == state){
+				result.add(it);
+			}
+		}
+		return result;
 	}
 	
 	@Override
 	public String toString() {
 		String result = "Square ";
-		if(isOnlyInactiveItems()){
-			result += "(inactive Only) ";
-		}
 		return result + super.toString();
 	}
 }

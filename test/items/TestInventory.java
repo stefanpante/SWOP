@@ -10,7 +10,7 @@ public class TestInventory {
 
 	@Test
 	public void testEmptyInventory() {
-		SquareInventory si = new SquareInventory(false);
+		SquareInventory si = new SquareInventory();
 		PlayerInventory pi = new PlayerInventory();
 		
 		Item item = new LightGrenade();
@@ -37,7 +37,7 @@ public class TestInventory {
 	
 	@Test
 	public void testMaximumSize() {
-		Inventory inventory = new SquareInventory(10, false);
+		Inventory inventory = new SquareInventory(10);
 		
 		assertEquals(inventory.getMaximumSize(), 10);
 	}
@@ -52,10 +52,10 @@ public class TestInventory {
 	 
 	@Test(expected=IllegalStateException.class)
 	public void testAddingOverCapacity() {
-		Inventory inventory = new SquareInventory(1, false);
+		Inventory inventory = new SquareInventory(1);
 		
-		inventory.addItem(new LightGrenade());
-		inventory.addItem(new LightGrenade());
+		inventory.addItem(new Item());
+		inventory.addItem(new Item());
 	}
 	
 	@Test(expected=IllegalStateException.class)
@@ -69,7 +69,7 @@ public class TestInventory {
 	
 	@Test
 	public void testCanHaveAsItem() {
-		SquareInventory si = new SquareInventory(false);
+		SquareInventory si = new SquareInventory();
 		PlayerInventory pi = new PlayerInventory();
 		Item item = new LightGrenade();
 		
@@ -108,7 +108,7 @@ public class TestInventory {
 	
 	@Test
 	public void testCanHaveAsItemIndex(){
-		Inventory inventory = new SquareInventory(false);
+		Inventory inventory = new SquareInventory();
 		Item item = null;
 		for(int i = 0; i < 10; i ++){
 			item = new Item();
@@ -123,7 +123,7 @@ public class TestInventory {
 	
 	@Test
 	public void testGetItem(){
-		Inventory inventory = new SquareInventory(false);
+		Inventory inventory = new SquareInventory();
 		Item item = null;
 		for(int i = 0; i < 10; i ++){
 			item = new Item();
@@ -171,7 +171,7 @@ public class TestInventory {
 	
 	@Test
 	public void testSetMaximumSize(){
-		Inventory inventory = new SquareInventory(20,false);
+		Inventory inventory = new SquareInventory(20);
 		try{
 			inventory.setMaximumSize(-1);
 			fail("Size should not be negative");
