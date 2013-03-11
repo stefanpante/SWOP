@@ -2,6 +2,7 @@ package game;
 
 import grid.Grid;
 import grid.GridBuilder;
+import grid.GridBuilder2;
 import items.Inventory;
 import items.Item;
 
@@ -55,7 +56,9 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		players = new ArrayList<Player>();
-		grid = new Grid(hSize, vSize);
+		GridBuilder2 gridBuilder = new GridBuilder2(hSize, vSize);
+		this.grid = gridBuilder.buildGrid();
+		
 		Square bottomLeft = grid.getSquare(new Coordinate2D(0, vSize));
 		Square topRight = grid.getSquare(new Coordinate2D(hSize, 0));
 		

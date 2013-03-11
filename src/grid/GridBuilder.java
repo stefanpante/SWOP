@@ -6,7 +6,6 @@ import java.util.Arrays;
 import gui.ApplicationWindow;
 import java.util.Random;
 import square.Direction;
-import square.Orientation;
 import square.Square;
 import square.obstacles.Wall;
 import utils.Coordinate2D;

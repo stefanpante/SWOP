@@ -3,6 +3,8 @@
  */
 package grid;
 
+import gui.ApplicationWindow;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,8 +21,10 @@ public class GridBuilder2 {
 	
 	private Grid grid;
 	private Random random;
+	private ArrayList<Coordinate2D> walls;
 	
 	public GridBuilder2(int hSize, int vSize) {
+		this.walls = new ArrayList<Coordinate2D>();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 	}
@@ -36,6 +40,8 @@ public class GridBuilder2 {
 	public Grid buildGrid(){
 		constructSquares();
 		constructWalls();
+		ApplicationWindow.MODEL.setWalls(getWalls());
+		System.out.println("Walls pushed to model");
 		return getGrid();
 	}
 
@@ -114,7 +120,7 @@ public class GridBuilder2 {
 		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize(), 0);
 		candidates.remove(bottomLeft);
 		candidates.remove(topRight);
-		
+
 		int remainingWallLength = totalWallLength;
 		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
 			ArrayList<Coordinate2D> wallSequence = getWall(candidates, remainingWallLength);
@@ -122,11 +128,14 @@ public class GridBuilder2 {
 				new Wall(getGrid().getSquares(wallSequence));
 				removePerimeter(wallSequence, candidates);
 				remainingWallLength = remainingWallLength - wallSequence.size();
+				this.walls.addAll(wallSequence);
 			}
 		}
 	}
 	
-
+	public ArrayList<Coordinate2D> getWalls(){
+		return this.walls;
+	}
 	
 	/**
 	 * @param wall
@@ -158,7 +167,7 @@ public class GridBuilder2 {
 		Coordinate2D start = candidates.get(getRandom().nextInt(candidates.size()));
 		Coordinate2D next = start.getNeighbor(direction);
 		/* As long as the length is within range and there is a square, continue */
-		while(wall.size() < length && getGrid().contains(next)){
+		while(wall.size() < length && candidates.contains(next)){
 			wall.add(next);
 			next = next.getNeighbor(direction);
 		}
@@ -170,7 +179,14 @@ public class GridBuilder2 {
 	}
 	
 	public void constructLightGrenades() {
-		// TODO Auto-generated method stub
+		ArrayList<Coordinate2D> candidates = getGrid().getAllCoordinates();
+		candidates.removeAll(walls);
+		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
+		for(int i = 0; i < maxGrenades; i++){
+			Coordinate2D coordinate = candidates.get(getRandom().nextInt(candidates.size()));
+			Square square = getGrid().getSquare(coordinate);
+			candidates.remove(coordinate);
+		}
 	}
 	
 	
