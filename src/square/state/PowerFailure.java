@@ -22,19 +22,19 @@ public class PowerFailure extends State{
 	 * The player loses 3 to 4 actions upon moving on a square with powerfailure.
 	 */
 	@Override
-	public int resultOnMove(Square square) {
+	public StateResult resultOnMove(Square square) {
 		if (square.getUsedInventory().hasActiveLightGrenade())
-			return -4;
+			return new StateResult(-4, true);
 		else
-			return -3;
+			return new StateResult(0, true);
 	}
 
 	/**
-	 * The player loses 2 actions when stating on a square with powerfailure.
+	 * The player loses 1 action when starting on a square with powerfailure.
 	 */
 	@Override
-	public int resultOnStart(Square square) {
-		return -1;
+	public StateResult resultOnStart(Square square) {
+		return new StateResult(-1,false);
 	}
 	
 	@Override
