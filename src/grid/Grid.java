@@ -82,46 +82,30 @@ public class Grid {
 	private void connect(Coordinate2D coordinate, Square square) {
 		for(Direction direction: Direction.values()){
 			try{
-				square.setNeighbor(direction, neighbor(square, direction));
+				square.setNeighbor(direction, getNeighbor(square, direction));
 			}catch(NoSuchElementException e){
 				// If there's no neighbor, nothing needs to be connected
 			}
 		}
 	}
 	
-	private Square neighbor(Square square, Direction direction) throws NoSuchElementException {
+	/**
+	 * Returns the neighbor of the given square.
+	 * 
+	 * @param square
+	 * @param direction
+	 * @return
+	 * @throws NoSuchElementException
+	 */
+	public Square getNeighbor(Square square, Direction direction) throws NoSuchElementException {
 		int x = getCoordinate(square).getX(); 
 		int y = getCoordinate(square).getY(); 
-		switch (direction) {
-		case NORTH:
-			y++;
-			break;
-		case NORTHEAST:
-			x++; y++; 
-			break;
-		case EAST:
-			x++;
-			break;
-		case SOUTHEAST:
-			x++; y--;
-			break;
-		case SOUTH:
-			y--;
-			break;
-		case SOUTHWEST:
-			x--;y--;
-			break;
-		case WEST:
-			x--;
-			break;
-		case NORTHWEST:
-			x--; y++;
-			break;
-		}
+		
 		Coordinate2D coordinate = new Coordinate2D(x, y);
-		if(contains(coordinate)){
+		
+		if(contains(coordinate.getNeighbor(direction)))
 			return getSquare(coordinate);
-		}
+		
 		throw new NoSuchElementException();
 	}
 

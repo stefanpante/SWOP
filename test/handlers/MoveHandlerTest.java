@@ -9,6 +9,8 @@ import items.LightGrenade;
 
 import org.junit.Test;
 
+import player.Player;
+
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
@@ -30,9 +32,10 @@ public class MoveHandlerTest {
 		Game game = new Game(10,10);
 		MoveHandler mh = new MoveHandler(game);
 		assertTrue(mh.checkToProceed());
-		game.getCurrentPlayer().incrementActions();
-		game.getCurrentPlayer().incrementActions();
-		game.getCurrentPlayer().incrementActions();
+		
+		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
+			game.getCurrentPlayer().incrementActions();
+		
 		assertFalse(mh.checkToProceed());
 	}
 
@@ -104,6 +107,7 @@ public class MoveHandlerTest {
 			Direction direction = directions[random.nextInt(directions.length)];
 			try{
 				mh.move(direction);
+				System.out.println(game.getCurrentPlayer().hasMoved());
 			}
 			catch(Exception e){}
 		}
@@ -159,7 +163,7 @@ public class MoveHandlerTest {
 	 * Tests a move to a square were another player is situated
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testMovetoOtherPlayer() {
+	public void testMoveToOtherPlayer() {
 		
 	}
 	
