@@ -75,12 +75,24 @@ public class UseItemHandlerTest {
 	}
 	/**
 	 * Test the placement of a grenade when there is already an active
-	 * lightgrenade on the square
+	 * light grenade on the square
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceGrenade2(){
 		Game game = new Game(10,10);
 		UseItemHandler uh = new UseItemHandler(game);
+		
+		LightGrenade lg2 = new LightGrenade();
+		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
+		lg2.activate();
+		
+		LightGrenade lg = new LightGrenade();
+		game.getCurrentPlayer().getInventory().addItem(lg);
+	
+		// Item should be in the inventory of the player
+		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
+		// This should throw an exception
+		uh.useItem(lg);
 	}
 	
 	/**
@@ -91,6 +103,19 @@ public class UseItemHandlerTest {
 	public void testPlaceGrenade3(){
 		Game game = new Game(10,10);
 		UseItemHandler uh = new UseItemHandler(game);
+		
+		LightGrenade lg2 = new LightGrenade();
+		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
+		lg2.wearOut();
+		
+		LightGrenade lg = new LightGrenade();
+		game.getCurrentPlayer().getInventory().addItem(lg);
+	
+		// Item should be in the inventory of the player
+		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
+		// This should throw an exception
+		uh.useItem(lg);
+		
 	}
 
 }
