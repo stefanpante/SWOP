@@ -60,8 +60,9 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");
 		for(Coordinate2D coordinate : ApplicationWindow.MODEL.getLightTrailRed())
 		    DrawImage(graphics, coordinate, "cell_lighttrail_red");	
-		for(Coordinate2D coordinate : ApplicationWindow.MODEL.getLightGrenades())
+		for(Coordinate2D coordinate : ApplicationWindow.MODEL.getAllGrenades())
 		    DrawImage(graphics, coordinate, "lightgrenade");
+			
 		
 		 DrawImage(graphics, ApplicationWindow.MODEL.getPlayer1(), "player_blue");
 		 DrawImage(graphics, ApplicationWindow.MODEL.getPlayer2(), "player_red");

@@ -1,16 +1,11 @@
 package game;
 
 import grid.Grid;
-import grid.GridBuilder;
 import grid.GridBuilder2;
-import items.Inventory;
-import items.Item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Observable;
 import java.util.Random;
-import java.util.Stack;
 
 import notnullcheckweaver.NotNull;
 import player.Player;

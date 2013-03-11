@@ -44,6 +44,7 @@ public class GridBuilder2 {
 		constructSquares();
 		constructWalls();
 		constructLightGrenades();
+		ApplicationWindow.MODEL.setGrid(getGrid());
 		ApplicationWindow.MODEL.setWalls(getWalls());
 		return getGrid();
 	}
@@ -119,8 +120,8 @@ public class GridBuilder2 {
 		int totalWallLength = Math.round(Grid.PERCENTAGE_WALLS * candidates.size());
 		
 		/* Exclude starting positions from candidates */
-		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize());
-		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize(), 0);
+		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize()-1);
+		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize()-1, 0);
 		candidates.remove(bottomLeft);
 		candidates.remove(topRight);
 
@@ -182,14 +183,17 @@ public class GridBuilder2 {
 		candidates.removeAll(walls);
 		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
 		/* Place grenade within range of start squares */
-		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize());
+		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize()-1);
 		Coordinate2D tR = getRandomNeighbor(bottomLeft, candidates);
 		setGrenade(tR);
 		candidates.remove(tR);
-		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize(), 0);
+		candidates.remove(bottomLeft);
+		
+		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize()-1, 0);
 		Coordinate2D bL = getRandomNeighbor(topRight, candidates);
 		setGrenade(bL);
 		candidates.remove(bL);
+		candidates.remove(topRight);
 		/*  Dispense grenades */
 		for(int i = 0; i < maxGrenades; i++){
 			Coordinate2D coordinate = candidates.get(getRandom().nextInt(candidates.size()));
