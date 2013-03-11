@@ -1,6 +1,7 @@
 package square;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This is used for scenarios where the player wants to move into a certain direction
@@ -164,4 +165,14 @@ public enum Direction {
 	abstract public ArrayList<Direction> neighborDirections();
 	
 	abstract public boolean isDiagonal();
+
+	/**
+	 * @return
+	 */
+	public static Direction getRandom() {
+		Random random = new Random();
+		if(random.nextBoolean())
+			return Direction.NORTH;
+		return Direction.EAST;
+	}
 }

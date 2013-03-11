@@ -2,13 +2,10 @@ package game;
 
 
 import grid.Grid;
-import grid.GridBuilder;
-import items.Inventory;
-import items.Item;
+import grid.GridBuilder2;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Observable;
 import java.util.Stack;
 
 import notnullcheckweaver.NotNull;
@@ -56,7 +53,9 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		players = new ArrayList<Player>();
-		grid = new Grid(hSize, vSize);
+		GridBuilder2 gridBuilder = new GridBuilder2(hSize, vSize);
+		this.grid = gridBuilder.buildGrid();
+		System.out.println(grid);
 		Square bottomLeft = grid.getSquare(new Coordinate2D(0, vSize));
 		Square topRight = grid.getSquare(new Coordinate2D(hSize, 0));
 		

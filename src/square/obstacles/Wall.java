@@ -38,6 +38,7 @@ public class Wall extends Obstacle{
 		if(sequence.size() < 2) 
 			throw new IllegalArgumentException("A wall should have at least two squares");
 		for(Square sq: sequence){
+			assert sq != null;
 			super.addSquare(sq);
 		}
 	}

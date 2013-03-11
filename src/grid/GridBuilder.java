@@ -388,7 +388,7 @@ public class GridBuilder {
 	 * @param squares The possible squares
 	 * @return the longest possible horizontal sequence of squares
 	 */
-	private ArrayList<Square> getHorizontalSequence(Square start, ArrayList<Square> squares){
+	private ArrayList<Square> (Square start, ArrayList<Square> squares){
 
 		ArrayList<Square> sequence = new ArrayList<Square>();
 		sequence.add(start);

@@ -22,7 +22,28 @@ public class Grid {
 	 */
 	public static final int MIN_VSIZE = 10;
 	public static final int MIN_HSIZE = 10;
+	
+	/**
+	 * Minimal length of a wall
+	 */
+	public static final int SMALLEST_WALL_LENGTH = 2;
+	
+	/**
+	 * Max percentage of squares covered by walls.
+	 */
+	public static float PERCENTAGE_WALLS = 0.2f;
 
+
+	/**
+	 * Percentage of square covered by grenades
+	 */
+	public static float PERCENTAGE_GRENADES = 0.05f;
+
+	/**
+	 * Percentage of max length of a wall
+	 */
+	public static float LENGTH_PERCENTAGE_WALL = 0.5f;
+	
 	HashMap<Coordinate2D, Square> grid;
 	
 	/**
@@ -31,11 +52,9 @@ public class Grid {
 	private int hSize, vSize;
 	
 	public Grid(int hSize, int vSize){
-		GridBuilder2 builder = new GridBuilder2(hSize, vSize);
+		grid = new HashMap<Coordinate2D, Square>();
 		setHSize(hSize);
 		setVSize(vSize);
-		builder.constructSquares();
-		builder.constructWalls();
 	}
 	
 	public void setHSize(int size) throws IllegalArgumentException{
@@ -65,7 +84,6 @@ public class Grid {
 	}
 	
 	public void setSquare(Coordinate2D coordinate, Square square){
-		connect(coordinate, square);
 		grid.put(coordinate,square);
 	}
 	
@@ -94,12 +112,9 @@ public class Grid {
 	public Square getNeighbor(Square square, Direction direction) throws NoSuchElementException {
 		int x = getCoordinate(square).getX(); 
 		int y = getCoordinate(square).getY(); 
-		
 		Coordinate2D coordinate = new Coordinate2D(x, y);
-		
 		if(contains(coordinate.getNeighbor(direction)))
 			return getSquare(coordinate);
-		
 		throw new NoSuchElementException();
 	}
 
@@ -107,12 +122,20 @@ public class Grid {
 		return grid.get(coordinate);
 	}
 	
-	public Coordinate2D getCoordinate(Square square){
+	public ArrayList<Square> getSquares(ArrayList<Coordinate2D> coordinates){
+		ArrayList<Square> squares = new ArrayList<Square>();
+		for(Coordinate2D coordinate : coordinates){
+			squares.add(getSquare(coordinate));
+		}
+		return squares;
+	}
+	
+	public Coordinate2D getCoordinate(Square square) throws IndexOutOfBoundsException{
 		for(Coordinate2D coordinate : grid.keySet()){
 			if(getSquare(coordinate).equals(square))
 				return coordinate;
 		}
-		return null;
+		throw new IndexOutOfBoundsException("No coordinate found for square " + square);
 	}
 	
 	public boolean contains(Square square){
