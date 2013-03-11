@@ -17,13 +17,25 @@ import sun.reflect.generics.tree.BottomSignature;
 import utils.Coordinate;
 
 /**
- * @author jonas
+ * 
+ * Used to seperate the complex creation and the relatively simple representation
+ * of the grid.
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class GridBuilder {
 	
+	/**
+	 * The grid which will be build
+	 */
 	private Grid grid;
+	/**
+	 * a random generator used in various creation methods
+	 */
 	private Random random;
+	/**
+	 * A list which contains the coordinates of the walls.
+	 */
 	private ArrayList<Coordinate> walls;
 	
 	public GridBuilder(int hSize, int vSize) {
@@ -41,6 +53,10 @@ public class GridBuilder {
 		return grid;
 	}
 	
+	/**
+	 * Constructs the grid as a whole, creates the Squares, walls and places the lighGrenades.
+	 * @return the grid that has been built
+	 */
 	public Grid buildGrid(){
 		constructSquares();
 		constructWalls();
@@ -59,11 +75,16 @@ public class GridBuilder {
 	}
 
 
+	/**
+	 * Creates a new square.
+	 * @return a new square object
+	 */
 	private Square getSquare(){
 		return new Square();
 	}	
 
 	/**
+	 * returns the randomgenerator
 	 * @return the random
 	 */
 	public Random getRandom() {
@@ -138,13 +159,18 @@ public class GridBuilder {
 		}
 	}
 	
+	/**
+	 * Returns a list of coordinates for the walls.
+	 * @return a list of coordinates for the walls.
+	 */
 	public ArrayList<Coordinate> getWalls(){
 		return this.walls;
 	}
 	
 	/**
-	 * @param wall
-	 * @param candidates
+	 * Removes all squares around a wall of a list of candidates
+	 * @param wall	the wall of which the perimeter will be removed.
+	 * @param candidates the list of squares of which the perimeter of the wall will be removed.
 	 */
 	private void removePerimeter(ArrayList<Coordinate> coordinates, ArrayList<Coordinate> candidates) {
 		for(Coordinate coordinate : coordinates){
@@ -157,6 +183,12 @@ public class GridBuilder {
 	}
 
 
+	/**
+	 * Returns a list of coordinates representing a wall.
+	 * @param candidates
+	 * @param maxWallLength
+	 * @return
+	 */
 	private ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
 		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
 		Direction direction = Direction.getRandom();
