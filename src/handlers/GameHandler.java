@@ -24,6 +24,10 @@ import utils.Coordinate2D;
  */
 public class GameHandler extends Handler {
 	
+	/**
+	 *  Initializes the game handler
+	 * 
+	 */
 	public GameHandler() {
 		super(null);
 	}
@@ -35,13 +39,15 @@ public class GameHandler extends Handler {
 	private UseItemHandler useItemHandler;
 	
 	/* Application Window */
-	private ApplicationWindow applicationWindow;
 	
     public static void main(String[] args) {
     	GameHandler gameHandler = new GameHandler();
     	gameHandler.startNewGame();
     }
     
+    /**
+     * Used to start a new game.
+     */
     public void startNewGame(){
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -57,58 +63,38 @@ public class GameHandler extends Handler {
     	this.useItemHandler = new UseItemHandler(getGame());
     }
     
+    /**
+     * Returns the moveHandler.
+     * @return 	the moveHandler.
+     */
     public MoveHandler getMoveHandler(){
     	return this.moveHandler;
     }
     
+    /**
+     * Returns the pickUpHandler.
+     * @return 	the pickUpHandler.
+     */
     public PickUpHandler getPickupHandler(){
     	return this.pickUpHandler;
     }
     
+    /**
+     * Returns the useItemHandler.
+     * @return	the useItemHandler
+     */
     public UseItemHandler getUseItemHandler(){
     	return this.useItemHandler;
     }
     
+    /**
+     * Returns the endTurnHandler.
+     * @return 	the endTurnHandler.
+     */
     public EndTurnHandler getEndTurnHandler(){
     	return this.endTurnHandler;
     }
-	
-	/**
-	 * Gets a coordinate-based representation of the walls in this game
-	 * 
-	 * @return	An ArrayList of coordinates indicating walls
-	 */
-	public ArrayList<Coordinate2D> getWallsRepresentation(){
-		ArrayList<Coordinate2D> wallCoor = new ArrayList<Coordinate2D>();
-		int y = getGame().getGrid().getVSize() -1;
-		int x = 0;
-		Square s = getGame().getPlayer(1).getStartPosition();
-		Square n = s;
-		
-		while(true){
-			while(true){
-				if(n.isObstructed())
-					wallCoor.add(new Coordinate2D(x,y));
-				try{
-					n = n.getNeighbor(Direction.EAST);
-					x++;
-				} catch(Exception e){
-					break;
-				}
-			}
-			try{
-				s = s.getNeighbor(Direction.NORTH);
-				n = s;
-				y--;
-			}
-			catch(Exception e){
-				break;
-			}
-			x = 0;
-		}
-		return wallCoor;
-	}
-
+    
 	/**
 	 * @param hSize
 	 * @param vSize

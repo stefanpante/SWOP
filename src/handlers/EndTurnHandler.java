@@ -17,9 +17,6 @@ public class EndTurnHandler extends Handler{
 		super(game);
 	}
 	
-
-	// TODO: warning to check if all turns are used 
-	
 	/**
 	 * 
 	 * Checks the precondition for the pick up use case
@@ -33,10 +30,19 @@ public class EndTurnHandler extends Handler{
 		return false;
 	}
 
+	/**
+	 * Check to see if the player hasMoved before ending the turn.
+	 * Can be used to warn the player that he needs to move.
+	 * @return
+	 */
 	public boolean hasMoved(){
 		return getGame().getCurrentPlayer().hasMoved();
 	}
 	
+	/**
+	 * Ends the turn of the current player and 
+	 * sets up the game for the turn of the next player
+	 */
 	public void endTurn(){
 		getGame().getCurrentPlayer().endTurn();
 		getGame().switchToNextPlayer();
