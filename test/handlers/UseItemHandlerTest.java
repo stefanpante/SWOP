@@ -29,5 +29,31 @@ public class UseItemHandlerTest {
 			game.getCurrentPlayer().incrementActions();
 		assertFalse(uh.checkToProceed());
 	}
+	
+	/**
+	 * Test the placement of a grenade on a square when there is
+	 * no other grenade placed on the square or used on the square
+	 */
+	@Test
+	public void testPlaceGrenade(){
+		
+	}
+	/**
+	 * Test the placement of a grenade when there is already an active
+	 * lightgrenade on the square
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testPlaceGrenade2(){
+		
+	}
+	
+	/**
+	 * Test the placement of a grenade when there is an already used
+	 * grenade on the Square.
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testPlaceGrenade3(){
+		
+	}
 
 }
