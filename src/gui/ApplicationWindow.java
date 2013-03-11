@@ -3,7 +3,7 @@
  */
 package gui;
 
-import game.Game;
+import grid.Grid;
 import handlers.GameHandler;
 import items.Item;
 
@@ -76,12 +76,12 @@ public class ApplicationWindow implements ActionListener {
      */
     private void initialize() {
     	int hSize = 0, vSize = 0;
-    	while(hSize < Game.MIN_HSIZE || vSize < Game.MIN_VSIZE){
-	    	hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the horizontal grid size (>="+Game.MIN_HSIZE+")", 
+    	while(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
+	    	hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the horizontal grid size (>="+Grid.MIN_HSIZE+")", 
 	    			"Game Dimensions", 1));
-	    	vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the vertical grid size (>="+Game.MIN_VSIZE+")", 
+	    	vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the vertical grid size (>="+Grid.MIN_VSIZE+")", 
 	    			"Game Dimensions", 1));
-	    	if(hSize < Game.MIN_HSIZE || vSize < Game.MIN_VSIZE){
+	    	if(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
 	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again.");
 	    	}
     	}

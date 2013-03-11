@@ -22,9 +22,6 @@ public class Grid {
 	 */
 	public static final int MIN_VSIZE = 10;
 	public static final int MIN_HSIZE = 10;
-	
-	private Square bottomLeft;
-	private Square topRight;
 
 	HashMap<Coordinate2D, Square> grid;
 	
@@ -34,14 +31,11 @@ public class Grid {
 	private int hSize, vSize;
 	
 	public Grid(int hSize, int vSize){
-		GridBuilder builder = new GridBuilder(hSize, vSize);
+		GridBuilder2 builder = new GridBuilder2(hSize, vSize);
 		setHSize(hSize);
 		setVSize(vSize);
 		builder.constructSquares();
 		builder.constructWalls();
-		
-		this.bottomLeft = builder.getBottomLeft();
-		this.topRight = builder.getTopRight();
 	}
 	
 	public void setHSize(int size) throws IllegalArgumentException{
@@ -119,14 +113,6 @@ public class Grid {
 				return coordinate;
 		}
 		return null;
-	}
-	
-	public Square getBottomLeft() {
-		return this.bottomLeft;
-	}
-	
-	public Square getTopRight() {
-		return this.topRight;
 	}
 	
 	public boolean contains(Square square){

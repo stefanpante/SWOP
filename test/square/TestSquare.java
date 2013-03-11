@@ -16,10 +16,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import square.Square;
-import square.obstacles.LightTrail;
+
+import player.LightTrail;
 import square.obstacles.Obstacle;
 import square.obstacles.Wall;
+
 
 
 public class TestSquare {
@@ -233,7 +234,7 @@ public class TestSquare {
 		Square tr = gb.getTopRight();
 		
 		//TEST CORNERS.
-		//	Bottom Left
+		//	Bottem Left
 		//		Possible
 		assertTrue(bl.canMoveTo(Direction.NORTH));
 		assertTrue(bl.canMoveTo(Direction.NORTHEAST));

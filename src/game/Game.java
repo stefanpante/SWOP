@@ -14,6 +14,7 @@ import java.util.Stack;
 import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
+import utils.Coordinate2D;
 
 /**
  * Game class, this class controls the flow of the game
@@ -56,20 +57,13 @@ public class Game {
 	public Game(int hSize, int vSize){
 		players = new ArrayList<Player>();
 		grid = new Grid(hSize, vSize);
+		Square bottomLeft = grid.getSquare(new Coordinate2D(0, vSize));
+		Square topRight = grid.getSquare(new Coordinate2D(hSize, 0));
 		
-		addPlayer(new Player(grid.getBottomLeft(), "Player 1"));
-		addPlayer(new Player(grid.getTopRight(), "Player 2"));
+		addPlayer(new Player(bottomLeft, "Player 1"));
+		addPlayer(new Player(topRight, "Player 2"));
 		
 		setCurrentPlayer(players.get(0));	
-	}
-	
-	/**
-	 * Returns the grid reference.
-	 * 
-	 * @return
-	 */
-	public Grid getGrid() {
-		return this.grid;
 	}
 	
 	/**
@@ -114,7 +108,17 @@ public class Game {
 		if(i >= players.size())
 			throw new IllegalArgumentException();
 		return players.get(i);
-	};
+	}
+	
+	/**
+	 * Returns the grid of this game
+	 * 
+	 * @return	The grid of this game
+	 * 			| Grid
+	 */
+	public Grid getGrid(){
+		return this.grid;
+	}
 	
 	/**
 	 * Add the player to this game
