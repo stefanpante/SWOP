@@ -20,13 +20,13 @@ import utils.Coordinate;
  * @author jonas
  *
  */
-public class GridBuilder2 {
+public class GridBuilder {
 	
 	private Grid grid;
 	private Random random;
 	private ArrayList<Coordinate> walls;
 	
-	public GridBuilder2(int hSize, int vSize) {
+	public GridBuilder(int hSize, int vSize) {
 		this.walls = new ArrayList<Coordinate>();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
