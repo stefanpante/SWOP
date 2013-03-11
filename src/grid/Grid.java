@@ -82,7 +82,7 @@ public class Grid {
 	private void connect(Coordinate2D coordinate, Square square) {
 		for(Direction direction: Direction.values()){
 			try{
-				square.setNeighbor(direction, neighbor(square, direction));
+				square.setNeighbor(direction, getNeighbor(square, direction));
 			}catch(NoSuchElementException e){
 				// If there's no neighbor, nothing needs to be connected
 			}
@@ -97,7 +97,7 @@ public class Grid {
 	 * @return
 	 * @throws NoSuchElementException
 	 */
-	public Square neighbor(Square square, Direction direction) throws NoSuchElementException {
+	public Square getNeighbor(Square square, Direction direction) throws NoSuchElementException {
 		int x = getCoordinate(square).getX(); 
 		int y = getCoordinate(square).getY(); 
 		
