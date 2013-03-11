@@ -94,10 +94,10 @@ public abstract class Obstacle {
 		
 		if(getLength() == 0)
 			return true;
-		
-		for(Square trailSquare : getSquares())
-			if(trailSquare.isConnectedTo(square))
-				return true;
+		//TODO: do we need to know it is connected?
+//		for(Square trailSquare : getSquares())
+//			if(trailSquare.isConnectedTo(square))
+//				return true;
 		
 		return false;
 	}

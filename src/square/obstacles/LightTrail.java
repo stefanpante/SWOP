@@ -136,14 +136,9 @@ public class LightTrail extends Obstacle implements Observer{
 	public boolean isValidSquare(Square square) {
 		if(!super.isValidSquare(square))
 			return false;
-		
 		if(getLength() == 0)
 			return true;
-		
-		if(getLastSquare().isConnectedTo(square))
-			return true;
-		else
-			return false;
+		return false;
 	}
 	
 	/**
