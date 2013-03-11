@@ -11,16 +11,18 @@ public abstract class State {
 	
 	public abstract void nextTurn(Square square);
 	
-	public StateResult resultOnMove(Square square) {
+	public StateResult resultOnMove() {
 		return new StateResult(0, false);
 	}
 	
-	public StateResult resultOnStart(Square square) {
+	public StateResult resultOnStart() {
 		return new StateResult(0, false);
 	}
 	
 	public boolean affectsNeighbors() {
 		return false;
 	}
+
+	public abstract StateResult resultOnMoveLG();
 	
 }

@@ -236,8 +236,7 @@ public class Player extends Observable {
 	/**
 	 * End's the player his turn.
 	 */
-	public void endTurn(int nextRemainingActions){
-		this.remainingActions = nextRemainingActions;
+	public void endTurn(){
 		moved = false;
 	}
 	

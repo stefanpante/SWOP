@@ -63,13 +63,21 @@ public class MoveHandler extends Handler {
 		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getInventory().activateAllItems();
 		
-		StateResult stateResult = newPosition.getState().resultOnMove(newPosition);
-		if(stateResult.hasToEndTurn()){
-			if(stateResult.getLostActions() == -4){
-				
-			}
-			getGame().getCurrentPlayer().endTurn();
+		StateResult stateResult = newPosition.getState().resultOnMove();
+		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions();
+		if(newPosition.getInventory().hasActiveLightGrenade()){
+			stateResult = newPosition.getState().resultOnMoveLG();
 		}
+		if(stateResult.hasToEndTurn()){
+			getGame().getCurrentPlayer().endTurn();
+			int remaining = currentRemainingActions + 3 - stateResult.getLostActions();
+			getGame().getCurrentPlayer().setRemainingActions(remaining);
+			getGame().switchToNextPlayer();
+		}
+		else{
+			getGame().getCurrentPlayer().setRemainingActions(currentRemainingActions -1);
+		}
+		
 		
 	}
 

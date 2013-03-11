@@ -9,7 +9,15 @@ public class RegularState extends State{
 	 */
 	@Override
 	public void nextTurn(Square square) {
-		
+	}
+	
+	
+	public StateResult resultOnMove(){
+		return new StateResult(0, false);
+	}
+	
+	public StateResult resultOnMoveLG(){
+		return new StateResult(-3, false);
 	}
 
 }
