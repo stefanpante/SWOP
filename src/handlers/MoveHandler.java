@@ -1,5 +1,6 @@
 package handlers;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import player.Player;
@@ -46,6 +47,7 @@ public class MoveHandler extends Handler {
 	 * 
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException{
+		
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		
 		//Throws NoSuchElementException 
@@ -57,17 +59,11 @@ public class MoveHandler extends Handler {
 			if(p.getPosition().equals(newPosition))
 				throw new IllegalStateException("Cannot move to square were other player is positioned.");
 		}
-		//TODO: move to square where other player is should be invalid
-
-		Square newPosition = currentPosition.getNeighbor(direction);
+		
+		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getUsedInventory().activateAllItems();
 		getGame().getCurrentPlayer().incrementActions();
-		getGame().getCurrentPlayer().move(newPosition);
-		//		} catch(IllegalStateException e) {
-		//			System.err.println("Player cannot move the square.");
-		//		} catch(IllegalArgumentException e) {
-		//			System.err.println("Tried to move to a neighbor that is no square.");
-		//		}
+		
 
 		if(getGame().getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
 			getGame().getCurrentPlayer().endTurn();
