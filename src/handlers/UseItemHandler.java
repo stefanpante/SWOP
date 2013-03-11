@@ -16,16 +16,13 @@ import game.Game;
  *
  */
 public class UseItemHandler extends Handler {
-
-	private Game game;
-
 	
 	/** 
 	 * Creates the handler for the usage of an item
 	 * @param game
 	 */
 	public UseItemHandler(Game game) {
-		this.game = game;
+		super(game);
 	}
 	
 	/**
@@ -35,7 +32,7 @@ public class UseItemHandler extends Handler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(game.getCurrentPlayer().getRemainingActions() > 1){
+		if(getGame().getCurrentPlayer().getRemainingActions() > 1){
 			return true; 
 		}
 		else return false;
@@ -48,7 +45,7 @@ public class UseItemHandler extends Handler {
 	 */
 	public void useItem(Item item) {
 		try{
-			game.getCurrentPlayer().useItem(item);
+			getGame().getCurrentPlayer().useItem(item);
 		} catch(IllegalStateException e) {
 			System.err.println("Item is not in player his inventory:" + item);
 		} catch(IllegalArgumentException e) {
@@ -58,7 +55,7 @@ public class UseItemHandler extends Handler {
 	
 	
 	public Inventory showItems(){
-		return game.getCurrentPlayer().getInventory();
+		return getGame().getCurrentPlayer().getInventory();
 	}
 
 

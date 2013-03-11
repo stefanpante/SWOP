@@ -11,9 +11,6 @@ import game.Game;
  *
  */
 public class MoveHandler extends Handler {
-
-
-	private Game game;
 	
 	/**
 	 * Basic constructor that initiates the moveHandler with the given game. 
@@ -21,7 +18,7 @@ public class MoveHandler extends Handler {
 	 * @param game
 	 */
 	public MoveHandler(Game game) {
-		this.game = game;
+		super(game);
 	}
 	
 	/**
@@ -32,7 +29,7 @@ public class MoveHandler extends Handler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(game.getCurrentPlayer().getRemainingActions() > 0){
+		if(getGame().getCurrentPlayer().getRemainingActions() > 0){
 			return true;
 		}
 		return false;
@@ -47,13 +44,13 @@ public class MoveHandler extends Handler {
 	 * 
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException{
-		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		//TODO: move to square where other player is should be invalid
 		if(currentPosition.canMoveTo(direction)){
 			Square newPosition = currentPosition.getNeighbor(direction);
 			currentPosition.getUsedInventory().activateAllItems();
-			game.getCurrentPlayer().incrementActions();
-			game.getCurrentPlayer().move(newPosition);
+			getGame().getCurrentPlayer().incrementActions();
+			getGame().getCurrentPlayer().move(newPosition);
 		}
 //		} catch(IllegalStateException e) {
 //			System.err.println("Player cannot move the square.");
@@ -61,9 +58,9 @@ public class MoveHandler extends Handler {
 //			System.err.println("Tried to move to a neighbor that is no square.");
 //		}
 		
-		if(game.getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
-			game.getCurrentPlayer().endTurn();
-			game.switchToNextPlayer();
+		if(getGame().getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
+			getGame().getCurrentPlayer().endTurn();
+			getGame().switchToNextPlayer();
 		}
 	}
 	
@@ -72,8 +69,8 @@ public class MoveHandler extends Handler {
 	 * @return 	true if the move causes the player to win. 
 	 */
 	public boolean endAction(){
-		Player nextPlayer = game.getNextPlayer();
-		Player currentPlayer = game.getCurrentPlayer();
+		Player nextPlayer = getGame().getNextPlayer();
+		Player currentPlayer = getGame().getCurrentPlayer();
 		
 		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
 			return true;

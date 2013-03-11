@@ -24,14 +24,15 @@ import utils.Coordinate2D;
  */
 public class GameHandler extends Handler {
 	
+	public GameHandler() {
+		super(null);
+	}
+
 	/* Handlers */
 	private EndTurnHandler endTurnHandler;
 	private MoveHandler moveHandler;
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
-	
-	/* Game */
-	private Game game;
 	
 	/* Application Window */
 	private ApplicationWindow applicationWindow;
@@ -50,10 +51,10 @@ public class GameHandler extends Handler {
 			e.printStackTrace();
 		}
 		
-    	this.endTurnHandler = new EndTurnHandler(game);
-    	this.moveHandler = new MoveHandler(game);
-    	this.pickUpHandler = new PickUpHandler(game);
-    	this.useItemHandler = new UseItemHandler(game);
+    	this.endTurnHandler = new EndTurnHandler(getGame());
+    	this.moveHandler = new MoveHandler(getGame());
+    	this.pickUpHandler = new PickUpHandler(getGame());
+    	this.useItemHandler = new UseItemHandler(getGame());
     }
     
     public MoveHandler getMoveHandler(){
@@ -79,10 +80,11 @@ public class GameHandler extends Handler {
 	 */
 	public ArrayList<Coordinate2D> getWallsRepresentation(){
 		ArrayList<Coordinate2D> wallCoor = new ArrayList<Coordinate2D>();
-		int y = game.getVSize() -1;
+		int y = getGame().getGrid().getVSize() -1;
 		int x = 0;
-		Square s = game.getPlayer(1).getStartPosition();
+		Square s = getGame().getPlayer(1).getStartPosition();
 		Square n = s;
+		
 		while(true){
 			while(true){
 				if(n.isObstructed())
@@ -112,7 +114,7 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		this.game = new Game(hSize, vSize);
+		setGame(new Game(hSize, vSize));
 	}
 	
 	

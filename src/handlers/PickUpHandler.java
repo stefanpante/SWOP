@@ -14,11 +14,9 @@ import game.Game;
  *
  */
 public class PickUpHandler extends Handler {
-
-	private Game game;
 	
 	public PickUpHandler(Game game) {
-		this.game = game;
+		super(game);
 	}
 	
 	/**
@@ -28,7 +26,7 @@ public class PickUpHandler extends Handler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(game.getCurrentPlayer().getRemainingActions() > 1){
+		if(getGame().getCurrentPlayer().getRemainingActions() > 1){
 			return true;
 		}
 		
@@ -43,10 +41,10 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		try{
-			game.getCurrentPlayer().getPosition().getPickUpInventory().take(item);
-			if(!game.getCurrentPlayer().getInventory().isFull()){
-				game.getCurrentPlayer().pickUp(item);
-				game.getCurrentPlayer().incrementActions();
+			getGame().getCurrentPlayer().getPosition().getPickUpInventory().take(item);
+			if(!getGame().getCurrentPlayer().getInventory().isFull()){
+				getGame().getCurrentPlayer().pickUp(item);
+				getGame().getCurrentPlayer().incrementActions();
 			}
 		} catch(IllegalStateException e) {
 			System.err.println("The item cannot be removed because it is not in the square inventory.");
@@ -56,7 +54,7 @@ public class PickUpHandler extends Handler {
 	}
 	
 	public Inventory showItems(){
-		return game.getCurrentPlayer().getPosition().getPickUpInventory();
+		return getGame().getCurrentPlayer().getPosition().getPickUpInventory();
 	}
 
 }

@@ -64,6 +64,15 @@ public class Game {
 	}
 	
 	/**
+	 * Returns the grid reference.
+	 * 
+	 * @return
+	 */
+	public Grid getGrid() {
+		return this.grid;
+	}
+	
+	/**
 	 * Returns all the squares by recursively visiting all
 	 * and adding them to a list.
 	 * 
