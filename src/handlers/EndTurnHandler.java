@@ -11,16 +11,11 @@ import game.Game;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class EndTurnHandler {
-
-	private Game game;
+public class EndTurnHandler extends Handler{
 	
 	public EndTurnHandler(Game game) {
-		this.game = game;
+		super(game);
 	}
-	
-
-	// TODO: warning to check if all turns are used 
 	
 	/**
 	 * 
@@ -30,20 +25,29 @@ public class EndTurnHandler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(game.getCurrentPlayer().getRemainingActions() > 0)
+		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
 			return true;
 		return false;
 	}
 
+	/**
+	 * Check to see if the player hasMoved before ending the turn.
+	 * Can be used to warn the player that he needs to move.
+	 * @return
+	 */
 	public boolean hasMoved(){
-		return game.getCurrentPlayer().hasMoved();
+		return getGame().getCurrentPlayer().hasMoved();
 	}
 	
+	/**
+	 * Ends the turn of the current player and 
+	 * sets up the game for the turn of the next player
+	 */
 	public void endTurn(){
-		game.getCurrentPlayer().endTurn();
-		game.switchToNextPlayer();
+		getGame().getCurrentPlayer().endTurn();
+		getGame().switchToNextPlayer();
 		
-		Iterator<Square> iterator = game.getAllSquares().iterator();
+		Iterator<Square> iterator = getGame().getGrid().getAllSquares().iterator();
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Board;
+package grid;
 
 import static org.junit.Assert.*;
 

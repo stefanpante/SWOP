@@ -86,20 +86,7 @@ public class Grid {
 	public void setSquare(Coordinate2D coordinate, Square square){
 		grid.put(coordinate,square);
 	}
-	
-	/**
-	 * @param coordinate
-	 * @param square
-	 */
-	private void connect(Coordinate2D coordinate, Square square) {
-		for(Direction direction: Direction.values()){
-			try{
-				square.setNeighbor(direction, getNeighbor(square, direction));
-			}catch(NoSuchElementException e){
-				// If there's no neighbor, nothing needs to be connected
-			}
-		}
-	}
+
 	
 	/**
 	 * Returns the neighbor of the given square.
@@ -117,7 +104,8 @@ public class Grid {
 			return getSquare(coordinate);
 		throw new NoSuchElementException();
 	}
-
+	
+	
 	public Square getSquare(Coordinate2D coordinate){
 		return grid.get(coordinate);
 	}
@@ -153,4 +141,118 @@ public class Grid {
 	public ArrayList<Coordinate2D> getAllCoordinates(){
 		return new ArrayList<Coordinate2D>(grid.keySet());
 	}
+	
+	//TODO: canMoveTo Square, Square 
+
+	//TODO: canMoveTo Square, Direction
+	
+	/**
+	 * Checks if there is a neighbor in the given direction for the given square.
+	 * 
+	 * @param	square
+	 * 			The square from which the check will be executed.
+	 * @param 	direction 	
+	 * 			The direction in which the check will be executed.
+	 * @return 	True if this square has a neighbor in the given direction
+	 * 			otherwise False.
+	 */
+	public boolean hasNeighbor(Square square, Direction direction){
+		try {
+			this.getNeighbor(square, direction);
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Checks if the given squares are neighbors in the given direction.
+	 * 
+	 * @param	fromSquare
+	 * 			The square which will be the starting reference point.
+	 * @param 	via 	
+	 * 			The direction in which the square should be a neighbor.
+	 * @param 	toSquare 
+	 * 			The square that should be the neighbor in the given direction of fromSquare.
+	 * @return 	true if the square is the neighbor in the given direction
+	 * 			otherwise false
+	 */
+	public boolean hasNeighbor(Square fromSquare, Direction via, Square toSquare) {
+		Square neighbor = getNeighbor(fromSquare, via);
+		if(neighbor == null)
+			return false;
+		if(neighbor.equals(toSquare))
+			return true;
+		return false;
+	}
+	
+	/**
+	 * Checks whether from the given fromSquare it is possible to move to a
+	 * neighboring square in the given direction. 
+	 * 
+	 * @param 	fromSquare
+	 * 			The square from which the canMoveTo will be checked.
+	 * @param 	direction
+	 * 			The direction of the neighbor that will be checked.
+	 * @return	true if it is possible to move in the given direction
+	 */
+	public boolean canMoveTo(Square fromSquare, Direction direction){
+		Square directionSquare;
+		try {
+			directionSquare = getNeighbor(fromSquare, direction);
+		} catch (Exception e) {
+			return false;
+		}
+		if(directionSquare.isObstructed())
+			return false;
+		if(direction.isDiagonal()){
+			Square s1 = null;
+			Square s2 = null;
+			ArrayList<Direction> dirs = direction.neighborDirections();
+			try{
+				s1 = getNeighbor(fromSquare, dirs.get(0)); 
+				s2 = getNeighbor(fromSquare, dirs.get(1));
+			} catch (Exception exp){
+				//This should never happen.
+				assert(false);
+			}
+			if(s1 != null && s2 != null){
+				if(s1.isObstructed() && s2.isObstructed()){
+					if(s1.getObstacle().equals(s2.getObstacle())){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @return A HashMap with neighbors with there direction as the key
+	 * 			and the Square as value.
+	 */
+	public HashMap<Direction, Square> getNeighbors(Square square) {
+		HashMap<Direction, Square> result = new HashMap<Direction, Square>();
+		Square neighbor = null;
+		for(Direction dir: Direction.values()){
+			try{
+				neighbor = getNeighbor(square, dir);
+				result.put(dir, neighbor);
+			} catch(NoSuchElementException ex){
+				//Happens when there is no other neighbor.
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns the neighbors of this square as a list.
+	 * 
+	 * @return Returns the neighbors of this square as a list.
+	 */
+	public ArrayList<Square> getNeighborsAsList(Square square) {
+		return new ArrayList<Square>(getNeighbors(square).values());
+	}
+	
 }

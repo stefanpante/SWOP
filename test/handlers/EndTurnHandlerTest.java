@@ -1,17 +1,26 @@
 package handlers;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import game.Game;
+
 import org.junit.Test;
 
-public class EndTurnHandlerTest {
+import player.Player;
 
-	public EndTurnHandlerTest() {
-		// TODO Auto-generated constructor stub
-	}
+public class EndTurnHandlerTest {
 	
 	
 	@Test
 	public void checkToProceedTest(){
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
+		assertTrue(mh.checkToProceed());
 		
+		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
+			game.getCurrentPlayer().incrementActions();
+		
+		assertFalse(mh.checkToProceed());
 	}
 	
 	@Test
@@ -28,5 +37,6 @@ public class EndTurnHandlerTest {
 	public void hasMoveTest(){
 		
 	}
+	
 
 }

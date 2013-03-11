@@ -24,23 +24,30 @@ import utils.Coordinate2D;
  */
 public class GameHandler extends Handler {
 	
+	/**
+	 *  Initializes the game handler
+	 * 
+	 */
+	public GameHandler() {
+		super(null);
+	}
+
 	/* Handlers */
 	private EndTurnHandler endTurnHandler;
 	private MoveHandler moveHandler;
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
 	
-	/* Game */
-	private Game game;
-	
 	/* Application Window */
-	private ApplicationWindow applicationWindow;
 	
     public static void main(String[] args) {
     	GameHandler gameHandler = new GameHandler();
     	gameHandler.startNewGame();
     }
     
+    /**
+     * Used to start a new game.
+     */
     public void startNewGame(){
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -50,69 +57,50 @@ public class GameHandler extends Handler {
 			e.printStackTrace();
 		}
 		
-    	this.endTurnHandler = new EndTurnHandler(game);
-    	this.moveHandler = new MoveHandler(game);
-    	this.pickUpHandler = new PickUpHandler(game);
-    	this.useItemHandler = new UseItemHandler(game);
+    	this.endTurnHandler = new EndTurnHandler(getGame());
+    	this.moveHandler = new MoveHandler(getGame());
+    	this.pickUpHandler = new PickUpHandler(getGame());
+    	this.useItemHandler = new UseItemHandler(getGame());
     }
     
+    /**
+     * Returns the moveHandler.
+     * @return 	the moveHandler.
+     */
     public MoveHandler getMoveHandler(){
     	return this.moveHandler;
     }
     
+    /**
+     * Returns the pickUpHandler.
+     * @return 	the pickUpHandler.
+     */
     public PickUpHandler getPickupHandler(){
     	return this.pickUpHandler;
     }
     
+    /**
+     * Returns the useItemHandler.
+     * @return	the useItemHandler
+     */
     public UseItemHandler getUseItemHandler(){
     	return this.useItemHandler;
     }
     
+    /**
+     * Returns the endTurnHandler.
+     * @return 	the endTurnHandler.
+     */
     public EndTurnHandler getEndTurnHandler(){
     	return this.endTurnHandler;
     }
-	
-	/**
-	 * Gets a coordinate-based representation of the walls in this game
-	 * 
-	 * @return	An ArrayList of coordinates indicating walls
-	 */
-	public ArrayList<Coordinate2D> getWallsRepresentation(){
-		ArrayList<Coordinate2D> wallCoor = new ArrayList<Coordinate2D>();
-		int y = game.getGrid().getVSize() -1;
-		int x = 0;
-		Square s = game.getPlayer(1).getStartPosition();
-		Square n = s;
-		while(true){
-			while(true){
-				if(n.isObstructed())
-					wallCoor.add(new Coordinate2D(x,y));
-				try{
-					n = n.getNeighbor(Direction.EAST);
-					x++;
-				} catch(Exception e){
-					break;
-				}
-			}
-			try{
-				s = s.getNeighbor(Direction.NORTH);
-				n = s;
-				y--;
-			}
-			catch(Exception e){
-				break;
-			}
-			x = 0;
-		}
-		return wallCoor;
-	}
-
+    
 	/**
 	 * @param hSize
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		this.game = new Game(hSize, vSize);
+		setGame(new Game(hSize, vSize));
 	}
 	
 	
