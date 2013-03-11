@@ -55,7 +55,7 @@ public class MoveHandler extends Handler {
 		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
 		for(Player p: otherPlayers){
 			if(p.getPosition().equals(newPosition))
-				throw New IllegalStateException("Cannot move to square were other player is positioned.")
+				throw new IllegalStateException("Cannot move to square were other player is positioned.");
 		}
 		//TODO: move to square where other player is should be invalid
 
