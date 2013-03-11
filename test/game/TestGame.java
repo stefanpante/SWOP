@@ -140,11 +140,4 @@ public class TestGame {
 		}
 		
 	}
-	
-	@Test
-	public void testGetAllSquares() {
-		Game game = new Game(10,10);
-		
-		assertEquals(game.getAllSquares().size(), 100);
-	}
 }

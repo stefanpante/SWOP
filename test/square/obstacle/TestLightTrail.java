@@ -19,9 +19,6 @@ public class TestLightTrail {
 		Square squareOne = new Square();
 		Square squareTwo = new Square();
 		Square squareThree = new Square();
-		
-		squareOne.setNeighbor(Direction.NORTH, squareTwo);
-		squareTwo.setNeighbor(Direction.NORTH, squareThree);
 
 		assertEquals(lightTrail.getLength(), 0); 
 
@@ -32,6 +29,34 @@ public class TestLightTrail {
 		assertEquals(lightTrail.getLength(), 2);
 	}
 
+	/**
+	 * The lightTrail shouldn't be longer than three squares
+	 */
+	@Test
+	public void testLightTrailLength2(){
+		LightTrail lightTrail = new LightTrail();
+		
+		Square squareOne = new Square();
+		Square squareTwo = new Square();
+		Square squareThree = new Square();
+		Square squareFour = new Square();
+
+		assertEquals(lightTrail.getLength(), 0); 
+
+		lightTrail.addSquare(squareOne);
+		assertEquals(lightTrail.getLength(), 1);
+		
+		lightTrail.addSquare(squareTwo);
+		assertEquals(lightTrail.getLength(), 2);
+		
+		lightTrail.addSquare(squareThree);
+		assertEquals(lightTrail.getLength(), 3);
+		
+		lightTrail.addSquare(squareFour);
+		assertEquals(lightTrail.getLength(), 3);
+		
+		assertFalse(lightTrail.getSquares().contains(squareOne));
+	}
 	/**
 	 * Empty light trail length must be 0.
 	 */
@@ -78,27 +103,28 @@ public class TestLightTrail {
 		assertFalse(lightTrail.isValidSquare(new Square()));
 	}
 	
-	/**
-	 * Test if not connected squares are invalid in a longer LightTrail.
-	 */
-	@Test
-	public void testIsValidNotConnectedMultiple() {
-		LightTrail lightTrail = new LightTrail();
-		
-		Square squareOne = new Square();
-		Square squareTwo = new Square();
-		
-		squareOne.setNeighbor(Direction.SOUTH, squareTwo);
-		
-		assertTrue(lightTrail.isValidSquare(squareOne));
-		
-		lightTrail.addSquare(squareOne);
-		
-		assertTrue(lightTrail.isValidSquare(squareTwo));
-		lightTrail.addSquare(squareTwo);
-		
-		assertFalse(lightTrail.isValidSquare(new Square()));
-	}
+	//TODO: what should happen with this method
+//	/**
+//	 * Test if not connected squares are invalid in a longer LightTrail.
+//	 */
+//	@Test
+//	public void testIsValidNotConnectedMultiple() {
+//		LightTrail lightTrail = new LightTrail();
+//		
+//		Square squareOne = new Square();
+//		Square squareTwo = new Square();
+//		
+//		squareOne.setNeighbor(Direction.SOUTH, squareTwo);
+//		
+//		assertTrue(lightTrail.isValidSquare(squareOne));
+//		
+//		lightTrail.addSquare(squareOne);
+//		
+//		assertTrue(lightTrail.isValidSquare(squareTwo));
+//		lightTrail.addSquare(squareTwo);
+//		
+//		assertFalse(lightTrail.isValidSquare(new Square()));
+//	}
 
 	/**
 	 * Test adding new square must be valid.
