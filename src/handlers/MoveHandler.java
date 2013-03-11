@@ -47,7 +47,6 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	//TODO: endturnhandler oproepen?
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException{
 		
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();		
