@@ -54,7 +54,7 @@ public class Player extends Observable {
 	/**
 	 * The amount of action a player has during one move
 	 */
-	public static int MAX_ALLOWED_ACTIONS = 3;
+	public static final int MAX_ALLOWED_ACTIONS = 3;
 	
 	private LightTrail lightTrail;
 	

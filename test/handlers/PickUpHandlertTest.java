@@ -9,11 +9,14 @@ import org.junit.Test;
 
 import square.Square;
 
+/**
+ * Scenario test for the "pick up" use case.
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ *
+ *TODO: refactor to use static numberofactions in turn
+ */
 public class PickUpHandlertTest {
-
-	public PickUpHandlertTest() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	/**
 	 * Test if the square does not contain item
@@ -67,6 +70,9 @@ public class PickUpHandlertTest {
 		
 		
 	}
+	/**
+	 * 
+	 */
 	@Test
 	public void checkToProceedTest(){
 		
