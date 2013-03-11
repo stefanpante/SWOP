@@ -2,11 +2,16 @@ package handlers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Random;
+
+import items.LightGrenade;
 import game.Game;
 
 import org.junit.Test;
 
 import player.Player;
+import square.Direction;
 
 /**
  * 
@@ -36,6 +41,36 @@ public class UseItemHandlerTest {
 	 */
 	@Test
 	public void testPlaceGrenade(){
+		Game game = new Game(10,10);
+		UseItemHandler uh = new UseItemHandler(game);
+		
+		LightGrenade lg = new LightGrenade();
+		game.getCurrentPlayer().getInventory().addItem(lg);
+		
+		// Item should be in the inventory of the player
+		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
+		uh.useItem(lg);
+		
+		// Item shouldn't be in the inventory of the player anymore
+		assertFalse(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
+		// Item should be in the inventory of the square
+		assertTrue(game.getCurrentPlayer().getPosition().getInventory().getAllItems().contains(lg));
+		// The state of the lightGrenade should still be inactive when placed until moved
+		assertFalse(lg.isActive());
+		
+		
+		// Item should become active when moved
+		MoveHandler mh = new MoveHandler(game);
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		while(!game.getCurrentPlayer().hasMoved()){
+			try{
+				mh.move(directions[random.nextInt(directions.length)]);
+			}
+			catch(Exception e){}
+		}
+		
+		assertTrue(lg.isActive());
 		
 	}
 	/**
@@ -44,7 +79,8 @@ public class UseItemHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceGrenade2(){
-		
+		Game game = new Game(10,10);
+		UseItemHandler uh = new UseItemHandler(game);
 	}
 	
 	/**
@@ -53,7 +89,8 @@ public class UseItemHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceGrenade3(){
-		
+		Game game = new Game(10,10);
+		UseItemHandler uh = new UseItemHandler(game);
 	}
 
 }
