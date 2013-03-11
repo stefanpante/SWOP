@@ -34,9 +34,10 @@ public class GridBuilder {
 
 	
 	/**
+	 * Returns the grid.
 	 * @return the grid
 	 */
-	private Grid getGrid() {
+	protected Grid getGrid() {
 		return grid;
 	}
 	
