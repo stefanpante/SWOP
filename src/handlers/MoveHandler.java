@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import player.Player;
 import square.Direction;
 import square.Square;
+import square.state.StateResult;
 import game.Game;
 
 /**
@@ -49,10 +50,8 @@ public class MoveHandler extends Handler {
 	//TODO: endturnhandler oproepen?
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException{
 		
-		Square currentPosition = getGame().getCurrentPlayer().getPosition();
-		
-		//Throws NoSuchElementException 
-		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction);
+		Square currentPosition = getGame().getCurrentPlayer().getPosition();		
+		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); //Throws NoSuchElementException
 	
 		// cannot move to square were other player is positioned
 		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
@@ -60,24 +59,18 @@ public class MoveHandler extends Handler {
 			if(p.getPosition().equals(newPosition))
 				throw new IllegalStateException("Cannot move to square were other player is positioned.");
 		}
+		
 		getGame().getCurrentPlayer().move(newPosition);
-		currentPosition.getUsedInventory().activateAllItems();
+		currentPosition.getInventory().activateAllItems();
 		
-		int turnsLost = newPosition.getState().resultOnMove(newPosition);
-		
-		
-		// TODO: powerfailure, from powerFailed to powerfailed, from not powerfailed to powerfailed.
-		if(getGame().getCurrentPlayer().getPosition().getUsedInventory().hasActiveLightGrenade()){
-			//-4
-			//getGame().getCurrentPlayer().endTurn();
-			getGame().switchToNextPlayer();
-		}
-		else if(turnsLost == -3){
+		StateResult stateResult = newPosition.getState().resultOnMove(newPosition);
+		if(stateResult.hasToEndTurn()){
+			if(stateResult.getLostActions() == -4){
+				
+			}
 			getGame().getCurrentPlayer().endTurn();
-			getGame().switchToNextPlayer();
 		}
 		
-		getGame().getCurrentPlayer().incrementActions();
 	}
 
 	/**
