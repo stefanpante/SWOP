@@ -50,27 +50,27 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.getPickUpInventory().addItem(lg1);
-		assertTrue(sq.getPickUpInventory().hasItem(lg1));
-		assertTrue(sq.getPickUpInventory().getSize() == 1);
+		sq.getInventory().addItem(lg1);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().getSize() == 1);
 		
-		sq.getPickUpInventory().addItem(lg2);
-		assertTrue(sq.getPickUpInventory().hasItem(lg1));
-		assertTrue(sq.getPickUpInventory().hasItem(lg2));
-		assertTrue(sq.getPickUpInventory().getSize() == 2);
+		sq.getInventory().addItem(lg2);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().getSize() == 2);
 		
-		sq.getPickUpInventory().addItem(lg3);
-		assertTrue(sq.getPickUpInventory().hasItem(lg1));
-		assertTrue(sq.getPickUpInventory().hasItem(lg2));
-		assertTrue(sq.getPickUpInventory().hasItem(lg3));
-		assertTrue(sq.getPickUpInventory().getSize() == 3);
+		sq.getInventory().addItem(lg3);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().hasItem(lg3));
+		assertTrue(sq.getInventory().getSize() == 3);
 
-		sq.getPickUpInventory().addItem(it);
-		assertTrue(sq.getPickUpInventory().hasItem(lg1));
-		assertTrue(sq.getPickUpInventory().hasItem(lg2));
-		assertTrue(sq.getPickUpInventory().hasItem(lg3));
-		assertTrue(sq.getPickUpInventory().hasItem(it));
-		assertTrue(sq.getPickUpInventory().getSize() == 4);
+		sq.getInventory().addItem(it);
+		assertTrue(sq.getInventory().hasItem(lg1));
+		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().hasItem(lg3));
+		assertTrue(sq.getInventory().hasItem(it));
+		assertTrue(sq.getInventory().getSize() == 4);
 	}
 		
 	@Test
@@ -81,12 +81,12 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
-		sq.getPickUpInventory().addItem(lg1);
-		sq.getPickUpInventory().addItem(lg2);		
-		sq.getPickUpInventory().addItem(lg3);
-		sq.getPickUpInventory().addItem(it);
+		sq.getInventory().addItem(lg1);
+		sq.getInventory().addItem(lg2);		
+		sq.getInventory().addItem(lg3);
+		sq.getInventory().addItem(it);
 		
-		Inventory inv = sq.getPickUpInventory();
+		Inventory inv = sq.getInventory();
 		assertTrue(inv.getSize() == 4);
 		assertTrue(inv.hasItem(lg1));
 		assertTrue(inv.hasItem(lg2));
@@ -106,53 +106,25 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 		
-		sq1.getPickUpInventory().addItem(lg1);
-		assertTrue(sq1.getPickUpInventory().hasItem((lg1)));
+		sq1.getInventory().addItem(lg1);
+		assertTrue(sq1.getInventory().hasItem((lg1)));
 		
 		
-		sq2.getPickUpInventory().addItem(lg2);
-		assertTrue(sq2.getPickUpInventory().hasItem(lg2));
+		sq2.getInventory().addItem(lg2);
+		assertTrue(sq2.getInventory().hasItem(lg2));
 		
-		sq3.getPickUpInventory().addItem(lg3);
-		sq3.getPickUpInventory().addItem(it);
-		assertTrue(sq3.getPickUpInventory().hasItem(lg3));
-		assertTrue(sq3.getPickUpInventory().hasItem(it));
+		sq3.getInventory().addItem(lg3);
+		sq3.getInventory().addItem(it);
+		assertTrue(sq3.getInventory().hasItem(lg3));
+		assertTrue(sq3.getInventory().hasItem(it));
 	}
 	
 	/************************************
 	 *  Neighbor tests
 	 ************************************/
-	
-	/**
-	 * Neighbor not yet set in both squares.
-	 */
-	@Test
-	public void testAddingNeighbor() {
-		Square square = new Square();
-		Square otherSquare = new Square();
-		
-		square.setNeighbor(Direction.NORTH, otherSquare);
-		
-		assertTrue(otherSquare.hasNeighbor(Direction.SOUTH));
-		assertTrue(square.hasNeighbor(Direction.NORTH));
-	}
-	
 
-	@Test
-	public void testCanHaveAsNeighbor() {
-		Square square = new Square();
-		
-		assertTrue(square.canHaveAsNeighbor(Direction.NORTH, new Square()));
-	}
 	
-	@Test
-	public void testCanHaveAsNeighborOwnSquare() {
-		Square square = new Square();
-		
-		assertFalse(square.canHaveAsNeighbor(Direction.NORTH, square));
-	}
-	
-	@Test
+//	@Test TODO: move this to TestObstacle?
 	public void testSetObstacle() {
 		Square square = new Square();
 		Square otherSquare = new Square();
@@ -168,12 +140,11 @@ public class TestSquare {
 	@Test
 	public void testIsObstructed() {
 		Square square = new Square();
-		
 		assertFalse(square.isObstructed());
 	}
 	
 	
-	@Test
+	//@Test TODO move to TestGrid?
 	public void testCanMoveTo1(){
 		GridBuilder gb = new GridBuilder(10, 10);
 		gb.constructSquares();
@@ -206,7 +177,7 @@ public class TestSquare {
 		assertFalse(tr.canMoveTo(Direction.NORTHWEST));		
 	}
 	
-	@Test
+	//@Test TODO move to TestGrid?
 	public void testCanMoveTo2(){
 		GridBuilder gb = new GridBuilder(10, 10);
 		gb.constructSquares();

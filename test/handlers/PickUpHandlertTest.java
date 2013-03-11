@@ -25,7 +25,7 @@ public class PickUpHandlertTest {
 	public void EmptyPickUpTest(){
 		Game game = new Game(10,10);
 		PickUpHandler ph = new PickUpHandler(game);
-		assertTrue(game.getCurrentPlayer().getPosition().getPickUpInventory().isEmpty());
+		assertTrue(game.getCurrentPlayer().getPosition().getInventory().isEmpty());
 		ph.pickUp(new LightGrenade());
 		
 	}
@@ -40,8 +40,8 @@ public class PickUpHandlertTest {
 		PickUpHandler ph = new PickUpHandler(game);
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
-		currentPosition.getPickUpInventory().addItem(lg);
-		assertFalse(currentPosition.getPickUpInventory().isEmpty());
+		currentPosition.getInventory().addItem(lg);
+		assertFalse(currentPosition.getInventory().isEmpty());
 		ph.pickUp(lg);
 	}
 	
@@ -55,8 +55,8 @@ public class PickUpHandlertTest {
 		PickUpHandler ph = new PickUpHandler(game);
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
-		currentPosition.getPickUpInventory().addItem(lg);
-		assertFalse(currentPosition.getPickUpInventory().isEmpty());
+		currentPosition.getInventory().addItem(lg);
+		assertFalse(currentPosition.getInventory().isEmpty());
 		
 		PlayerInventory inventory = game.getCurrentPlayer().getInventory();
 		LightGrenade item = new LightGrenade();
