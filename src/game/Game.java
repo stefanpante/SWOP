@@ -8,11 +8,13 @@ import items.Item;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Observable;
+import java.util.Random;
 import java.util.Stack;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
+import square.state.PowerFailure;
 import utils.Coordinate2D;
 
 /**
@@ -46,6 +48,11 @@ public class Game {
 	 * The currentPlayer of this Game object.
 	 */
 	private Player currentPlayer;
+	
+	/**
+	 * The possibility of a power failure in a square.
+	 */
+	private final float CHANCE_POWERFAILURE = 0.05f;
 
 	/**
 	 *Constructs a new board-based game.
@@ -194,5 +201,32 @@ public class Game {
 	 */
 	public boolean canHaveAsCurrentPlayer(Player currentPlayer) {
 		return players.contains(currentPlayer);
+	}
+	
+	/**
+	 * Sets the state of any square to a PowerFailure state with a 5% chance.
+	 */
+	public void powerFailureSquares() {
+		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
+		Random random = new Random();
+		
+		while(iterator.hasNext()) {
+			Square square = iterator.next();
+			
+			if(random.nextFloat() < CHANCE_POWERFAILURE)
+				square.setState(new PowerFailure());
+		}
+	}
+	
+	/**
+	 * Updates the states of every square, notifying them that a turn has been completed.
+	 */
+	public void updateStates() {
+		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
+		
+		while(iterator.hasNext()) {
+			Square square = iterator.next();
+			square.getState().nextTurn(square);
+		}
 	}
 }
