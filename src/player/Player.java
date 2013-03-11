@@ -112,6 +112,9 @@ public class Player extends Observable {
 	 * 			If the given position is not a valid startposition
 	 */
 	private void setStartPosition(Square pos){
+		if(pos.isObstructed()){
+			throw new IllegalArgumentException("The starposition of a player should not be obstructed");
+		}
 		this.startPosition = pos;
 		this.currentPosition = startPosition;
 	}
@@ -136,6 +139,9 @@ public class Player extends Observable {
 	 */
 	//TODO: Needs to throw an IllegalStateException when the newPosition is invalid.
 	public void move(Square newPosition) throws IllegalStateException{
+		if(newPosition.isObstructed()){
+			throw new IllegalStateException("Cannot move to a square that is obstructed");
+		}
 		currentPosition = newPosition;
 		moved = true;
 	}
@@ -155,6 +161,9 @@ public class Player extends Observable {
 	 * 			Thrown when adding the item would exceed the size of the inventory
 	 */
 	public void pickUp(Item item) throws IllegalArgumentException {
+		if(!inventory.canHaveAsItem(item)){
+			throw new IllegalArgumentException("The item cannot be added to the player inventory");
+		}
 		inventory.addItem(item);
 	}
 
