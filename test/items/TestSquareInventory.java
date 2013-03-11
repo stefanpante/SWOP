@@ -60,6 +60,8 @@ public class TestSquareInventory {
 		LightGrenade lg = new LightGrenade();
 		sqinv.addItem(lg);
 		assertTrue(sqinv.hasLightGrenade());
+		assertTrue(lg.equals(sqinv.getLightGrenade()));
+		
 		
 		LightGrenade lg2 = new LightGrenade();
 		try {
