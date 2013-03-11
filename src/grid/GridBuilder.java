@@ -196,7 +196,7 @@ public class GridBuilder {
 		candidates.remove(bL);
 		candidates.remove(topRight);
 		/*  Dispense grenades */
-		for(int i = 0; i < maxGrenades; i++){
+		for(int i = 2; i < maxGrenades; i++){
 			Coordinate coordinate = candidates.get(getRandom().nextInt(candidates.size()));
 			setGrenade(coordinate);
 			candidates.remove(coordinate);
