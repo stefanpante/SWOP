@@ -5,12 +5,15 @@ package grid;
 
 import gui.ApplicationWindow;
 
+import items.LightGrenade;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
+import sun.reflect.generics.tree.BottomSignature;
 import utils.Coordinate2D;
 
 /**
@@ -40,8 +43,8 @@ public class GridBuilder2 {
 	public Grid buildGrid(){
 		constructSquares();
 		constructWalls();
+		constructLightGrenades();
 		ApplicationWindow.MODEL.setWalls(getWalls());
-		System.out.println("Walls pushed to model");
 		return getGrid();
 	}
 
@@ -174,19 +177,40 @@ public class GridBuilder2 {
 		return wall;
 	}
 	
-	public void constructObjects(){
-		// TODO Auto-generated method stub
-	}
-	
 	public void constructLightGrenades() {
 		ArrayList<Coordinate2D> candidates = getGrid().getAllCoordinates();
 		candidates.removeAll(walls);
 		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
+		/* Place grenade within range of start squares */
+		Coordinate2D bottomLeft = new Coordinate2D(0, getGrid().getVSize());
+		Coordinate2D tR = getRandomNeighbor(bottomLeft, candidates);
+		setGrenade(tR);
+		candidates.remove(tR);
+		Coordinate2D topRight = new Coordinate2D(getGrid().getHSize(), 0);
+		Coordinate2D bL = getRandomNeighbor(topRight, candidates);
+		setGrenade(bL);
+		candidates.remove(bL);
+		/*  Dispense grenades */
 		for(int i = 0; i < maxGrenades; i++){
 			Coordinate2D coordinate = candidates.get(getRandom().nextInt(candidates.size()));
-			Square square = getGrid().getSquare(coordinate);
+			setGrenade(coordinate);
 			candidates.remove(coordinate);
 		}
+	}
+	
+	private void setGrenade(Coordinate2D coordinate){
+		Square square = getGrid().getSquare(coordinate);
+		square.getInventory().addItem(new LightGrenade());
+	}
+	
+	private Coordinate2D getRandomNeighbor(Coordinate2D coordinate, ArrayList<Coordinate2D> candidates){
+		ArrayList<Coordinate2D> realCandidates = new ArrayList<Coordinate2D>();
+		for(Coordinate2D neighbor : coordinate.getAllNeighbors()){
+			if(candidates.contains(neighbor)){
+				realCandidates.add(neighbor);
+			}
+		}
+		return realCandidates.get(getRandom().nextInt(realCandidates.size()));
 	}
 	
 	
