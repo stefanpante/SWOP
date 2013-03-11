@@ -36,10 +36,16 @@ public class GridBuilder {
 	/**
 	 * A list which contains the coordinates of the walls.
 	 */
-	private ArrayList<Coordinate> walls;
+	private ArrayList<Coordinate> wallCoordinates;
+	
+	/**
+	 * A list with all the created wall objects.
+	 */
+	private ArrayList<Wall> walls;
 	
 	public GridBuilder(int hSize, int vSize) {
-		this.walls = new ArrayList<Coordinate>();
+		this.wallCoordinates = new ArrayList<Coordinate>();
+		this.walls = new ArrayList<Wall>();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 	}
@@ -62,7 +68,7 @@ public class GridBuilder {
 		constructWalls();
 		constructLightGrenades();
 		ApplicationWindow.MODEL.setGrid(getGrid());
-		ApplicationWindow.MODEL.setWalls(getWalls());
+		ApplicationWindow.MODEL.setWalls(getWallCoordinates());
 		return getGrid();
 	}
 
@@ -151,19 +157,29 @@ public class GridBuilder {
 		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
 			ArrayList<Coordinate> wallSequence = getWall(candidates, remainingWallLength);
 			if(wallSequence.size() >= 2){
-				new Wall(getGrid().getSquares(wallSequence));
+				Wall w = new Wall(getGrid().getSquares(wallSequence));
 				removePerimeter(wallSequence, candidates);
 				remainingWallLength = remainingWallLength - wallSequence.size();
-				this.walls.addAll(wallSequence);
+				this.wallCoordinates.addAll(wallSequence);
+				walls.add(w);
 			}
 		}
 	}
 	
 	/**
 	 * Returns a list of coordinates for the walls.
+	 * 
 	 * @return a list of coordinates for the walls.
 	 */
-	public ArrayList<Coordinate> getWalls(){
+	public ArrayList<Coordinate> getWallCoordinates(){
+		return this.wallCoordinates;
+	}
+	
+	/**
+	 * Returns a list of walls
+	 * @return a list of walls.
+	 */
+	public ArrayList<Wall> getWalls(){
 		return this.walls;
 	}
 	
@@ -214,7 +230,7 @@ public class GridBuilder {
 	//TODO: i think the grenade is always positioned in the 2x2 square around startposition
 	public void constructLightGrenades() {
 		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
-		candidates.removeAll(walls);
+		candidates.removeAll(wallCoordinates);
 		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
 		/* Place grenade within range of start squares */
 		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
