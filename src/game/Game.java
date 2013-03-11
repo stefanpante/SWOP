@@ -65,39 +65,6 @@ public class Game {
 		
 		setCurrentPlayer(players.get(0));	
 	}
-	
-	/**
-	 * Returns all the squares by recursively visiting all
-	 * and adding them to a list.
-	 * 
-	 * @return
-	 */
-	public ArrayList<Square> getAllSquares() {
-		Square startPos = currentPlayer.getStartPosition();
-		ArrayList<Square> squares = new ArrayList<Square>();
-		
-		Stack<Square> stack = new Stack<Square>();
-		stack.add(startPos);
-		
-		while(!stack.isEmpty()) {
-			Square square = stack.pop();
-			Iterator<Square> iterator = square.getNeighborsAsList().iterator();
-			
-			while(iterator.hasNext()) {
-				Square otherSquare = iterator.next();
-				
-				if(!squares.contains(otherSquare)) {
-					squares.add(otherSquare);
-					stack.push(otherSquare);
-				}
-			}
-		}
-		
-		System.out.println(squares.size());
-		return squares;
-	}
-	
-
 	/**
 	 * Returns the value of the player1 of this Game as an Player.
 	 *
