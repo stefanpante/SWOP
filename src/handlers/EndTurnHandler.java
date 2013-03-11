@@ -2,7 +2,10 @@ package handlers;
 
 import java.util.Iterator;
 
+import player.Player;
+
 import square.Square;
+import square.state.StateResult;
 
 import game.Game;
 
@@ -44,6 +47,9 @@ public class EndTurnHandler extends Handler{
 	 * sets up the game for the turn of the next player
 	 */
 	public void endTurn(){
+		StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
+		int lostActions = stateresult.getLostActions();
+		getGame().getCurrentPlayer().setRemainingActions(Player.MAX_ALLOWED_ACTIONS - lostActions);
 		getGame().getCurrentPlayer().endTurn();
 		getGame().switchToNextPlayer();
 		getGame().updateStates();
