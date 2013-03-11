@@ -23,7 +23,7 @@ public class PowerFailure extends State{
 	 */
 	@Override
 	public StateResult resultOnMove(Square square) {
-		if (square.getUsedInventory().hasActiveLightGrenade())
+		if (square.getInventory().hasActiveLightGrenade())
 			return new StateResult(-4, true);
 		else
 			return new StateResult(0, true);

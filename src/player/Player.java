@@ -37,14 +37,9 @@ public class Player extends Observable {
 	private PlayerInventory inventory;
 	
 	/**
-	 * keeps track of the number of actions this user has done;
+	 * The number of remaining actions the player has left
 	 */
-	private int actions;
-	
-	/**
-	 * The number of action when the last turn ended
-	 */
-	private int previousactions;
+	private int remainingActions;
 	
 	/**
 	 * true if the user has moved during his turn
@@ -71,8 +66,7 @@ public class Player extends Observable {
 		this.setName(name);
 		
 		this.inventory = new PlayerInventory();
-		this.actions = 0;
-		this.previousactions = 0;
+		this.remainingActions = 0;
 		this.moved = false;
 		this.lightTrail = new LightTrail();
 		this.addObserver(lightTrail);
@@ -147,10 +141,11 @@ public class Player extends Observable {
 	}
 	
 	public void incrementActions(){
-		this.actions++;
+		this.remainingActions++;
 		this.setChanged();
 		this.notifyObservers(currentPosition);
 	}
+	
 
 	/**
 	 * Adds the item to the player's inventory.
@@ -175,7 +170,7 @@ public class Player extends Observable {
 	 */
 	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(itemToUse);
-		getPosition().getUsedInventory().addItem(itemToUse);
+		getPosition().getInventory().addItem(itemToUse);
 	}
 	
 	/**
@@ -209,7 +204,7 @@ public class Player extends Observable {
 	}
 	
 	public int getRemainingActions(){
-		return (this.previousactions + this.MAX_ALLOWED_ACTIONS) - this.actions;
+		return remainingActions;
 	} 
 
 	public boolean hasRemainingActions(){
@@ -217,11 +212,32 @@ public class Player extends Observable {
 	}
 	
 	/**
+	 * Used to set the remaining actions for this player.
+	 * @param actions	the number of actions the player can perform.
+	 */
+	public void setRemainingActions(int actions){
+		if(!isValidRemainingActions(actions)){
+			throw new IllegalArgumentException("This is not a valid number for remaining actions");
+		}
+		this.remainingActions = actions;
+	}
+	
+	/**
+	 * Returns if the number of actions is valid for the player
+	 * @param actions	the number of actions to be checked
+	 * @return	true	if the number of actions equals or is smaller than 
+	 * 					the number of allowed actions
+	 * 			false 	otherwise
+	 */
+	public boolean isValidRemainingActions(int actions){
+		return actions <= Player.MAX_ALLOWED_ACTIONS;
+	}
+	
+	/**
 	 * End's the player his turn.
 	 */
-	public void endTurn() {
-		this.previousactions += MAX_ALLOWED_ACTIONS;
-		actions = previousactions;
+	public void endTurn(int nextRemainingActions){
+		this.remainingActions = nextRemainingActions;
 		moved = false;
 	}
 	
