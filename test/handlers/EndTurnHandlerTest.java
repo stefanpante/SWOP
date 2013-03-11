@@ -29,6 +29,10 @@ public class EndTurnHandlerTest {
 	}
 	
 	@Test
+	public void EndTurnTestPowerFailure(){
+		
+	}
+	@Test
 	public void EndActionTest(){
 		
 	}
