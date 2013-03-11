@@ -208,7 +208,7 @@ public class Game {
 		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
 		Random random = new Random();
 		
-		while(iterator.hasNext()) {S
+		while(iterator.hasNext()) {
 			Square square = iterator.next();
 			
 			if(random.nextFloat() < CHANCE_POWERFAILURE)
