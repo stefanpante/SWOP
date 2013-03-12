@@ -97,7 +97,7 @@ public class TestGame {
 		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
-		Player player3 = new Player(null, null);
+		Player player3 = new Player(new Square(), null);
 		assertTrue(Game.isValidCurrentPlayer(player1));
 		assertTrue(Game.isValidCurrentPlayer(player2));
 		assertTrue(Game.isValidCurrentPlayer(player3));
@@ -120,7 +120,7 @@ public class TestGame {
 		 
 		try{
 			game.addPlayer(player2);
-			fail("The two player objects should not be the same");
+			fail("Two player objects should not be the same");
 		}
 		catch(Exception e){ }
 		try{
