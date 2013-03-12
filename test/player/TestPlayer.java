@@ -217,6 +217,7 @@ public class TestPlayer {
 		assertFalse(Player.isValidMove(square));
 		assertFalse(Player.isValidMove(null));
 		
+		assertFalse(player.hasMoved());
 		player.move(square);
 	}
 	
@@ -229,8 +230,10 @@ public class TestPlayer {
 		Player player = new Player(new Square(), new String("Johnny"));
 		
 		assertTrue(Player.isValidMove(square));
+		assertFalse(player.hasMoved());
 		
 		player.move(square);
+		assertTrue(player.hasMoved());
 	}
 
 }
