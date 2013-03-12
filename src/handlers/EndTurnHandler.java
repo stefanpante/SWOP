@@ -49,8 +49,8 @@ public class EndTurnHandler extends Handler{
 	public void endTurn(){
 		StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
 		int lostActions = stateresult.getLostActions();
-		getGame().getCurrentPlayer().setRemainingActions(Player.MAX_ALLOWED_ACTIONS - lostActions);
-		getGame().getCurrentPlayer().endTurn();
+		
+		getGame().getCurrentPlayer().endTurn(lostActions);
 		getGame().switchToNextPlayer();
 		getGame().updateStates();
 		getGame().powerFailureSquares();
