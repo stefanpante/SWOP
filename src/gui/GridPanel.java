@@ -11,9 +11,9 @@ import java.awt.image.ImageObserver;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import square.Square;
 import utils.Coordinate;
 
 /**
@@ -85,7 +85,15 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		showMessage();
 		this.repaint();
+	}
+	
+	public void showMessage(){
+		String msg = ApplicationWindow.MODEL.getMessage();
+		if(msg != null && msg.length() != 0){
+			JOptionPane.showMessageDialog(this, msg);
+		}
 	}
 
 }
