@@ -1,6 +1,9 @@
 package player;
 
 import static org.junit.Assert.*;
+import items.Item;
+import items.LightGrenade;
+import items.PlayerInventory;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -81,6 +84,156 @@ public class TestPlayer {
 		Player player = new Player(new Square(), new String("John"));
 		
 		player.pickUp(null);
+	}
+	
+	/**
+	 * Checks if using an item that is not in the square's inventory is invalid.
+	 */
+	@Test
+	public void testIsValidPickUp() {
+		Square square = new Square();
+		Player player = new Player(square, new String("Jan"));
+		
+		Item item = new LightGrenade();
+		assertFalse(player.isValidPickUp(null));
+		assertFalse(player.isValidPickUp(item));
+		
+		square.getInventory().addItem(item);
+		assertTrue(player.isValidPickUp(item));
+	}
+	
+	/**
+	 * Checks if using an item that is not in the square's inventory results
+	 * in an exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testPickUp() {
+		Square square = new Square();
+		Player player = new Player(square, new String("Jan"));
+		
+		Item item = new LightGrenade();
+		player.pickUp(item);
+	}
+	
+	/**
+	 * Checks if picking up an item that is null results in an exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testPickUpNull() {
+		Player player = new Player(new Square(), new String("Jan"));
+		player.pickUp(null);
+	}
+	
+	/**
+	 * Test if picking up the item actually adds it to the player inventory.
+	 */
+	@Test
+	public void testPickUpItem() {
+		Square square = new Square();
+		Item item = new LightGrenade();
+		
+		square.getInventory().addItem(item);
+		
+		Player player = new Player(square, new String("Jan met de pet"));
+		assertFalse(player.isValidPickUp(new LightGrenade()));
+		assertTrue(player.isValidPickUp(item));
+		assertEquals(player.getInventory().getSize(), 0);
+		assertFalse(player.getInventory().hasItem(item));
+		
+		player.pickUp(item);
+		assertTrue(player.getInventory().hasItem(item));
+		assertFalse(player.isValidPickUp(item));
+	}
+	
+	/**
+	 * Test if inventory which is null is invalid.
+	 */
+	@Test
+	public void testIsValidInventory() {
+		assertFalse(Player.isValidInventory(null));
+		
+		Player player = new Player(new Square(), new String("Test"));
+		PlayerInventory inventory = new PlayerInventory();
+		
+		assertTrue(Player.isValidInventory(inventory));
+		player.setInventory(inventory);
+	}
+	
+	/**
+	 * Test if setting an inventory which is null, results in exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testIsValidInventoryNull() {
+		Player player = new Player(new Square(), new String("Test"));
+		player.setInventory(null);
+	}
+	
+	/**
+	 * Test if using an item that is null results in exception.
+	 */
+	@Test(expected=IllegalStateException.class)
+	public void testUseItem() {
+		Player player = new Player(new Square(), new String("Flip"));
+		
+		player.useItem(null);
+	}
+	
+	/**
+	 * Test if using an item which is not contained in the inventory
+	 * results in an exception.
+	 */
+	@Test(expected=IllegalStateException.class)
+	public void testUseItemNotContained() {
+		Player player = new Player(new Square(), new String("Jan"));
+		
+		player.useItem(new LightGrenade());
+	}
+	
+	/**
+	 * Test using a valid item.
+	 */
+	@Test
+	public void testUseValidItem() {
+		LightGrenade lightGrenade = new LightGrenade();
+		Square square = new Square();
+		
+		Player player = new Player(square, new String("Jos"));
+		player.getInventory().addItem(lightGrenade);
+		
+		player.useItem(lightGrenade);
+		assertFalse(player.getInventory().hasItem(lightGrenade));
+	}
+	
+	/**
+	 * Test moving to a square which is obstructed
+	 * must result in an exception.
+	 */
+	@Test(expected=IllegalStateException.class)
+	public void testMoveObstructed() {
+		Square square = new Square();
+		new Wall(new Square(), square);
+		
+		Player player = new Player(new Square(), new String("Johnny"));
+		assertFalse(Player.isValidMove(square));
+		assertFalse(Player.isValidMove(null));
+		
+		assertFalse(player.hasMoved());
+		player.move(square);
+	}
+	
+	/**
+	 * Test move to a valid square.
+	 */
+	@Test
+	public void testMove() {
+		Square square = new Square();
+		Player player = new Player(new Square(), new String("Johnny"));
+		
+		assertTrue(Player.isValidMove(square));
+		assertFalse(player.hasMoved());
+		
+		player.move(square);
+		assertTrue(player.hasMoved());
 	}
 
 }

@@ -2,7 +2,11 @@ package player;
 
 import java.util.Observable;
 
+import notnullcheckweaver.NotNull;
+import notnullcheckweaver.Nullable;
+
 import square.Square;
+import square.obstacles.IObstacle;
 
 import items.Item;
 import items.PlayerInventory;
@@ -12,7 +16,8 @@ import items.PlayerInventory;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
-public class Player extends Observable {
+@NotNull
+public class Player extends Observable implements IObstacle {
 
 	/**
 	 * The start position of this player
@@ -22,6 +27,7 @@ public class Player extends Observable {
 	/**
 	 * the current position of the player
 	 */
+	@Nullable
 	private Square currentPosition;
 	
 	/**
@@ -52,18 +58,23 @@ public class Player extends Observable {
 	/**
 	 * creates a new player with a given name and start position
 	 * 
-	 * @param	startPosition	the startposition for the player
-	 * @param	name			the name for the player
+	 * @param	startPosition	
+	 * 			The startposition for the player.
+	 * @param	name			
+	 *			The name for the player.
 	 * @effect	setStartPosition(startPosition)
 	 * @effect	setName(name)
+	 * @throws	IllegalArgumentException	
+	 * 			If the startPosition is null.
+	 * @effect	setInventory(new PlayerInventory())
 	 * @throws	IllegalArgumentException	If the startPosition is null.
 	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
 	public Player(Square startPosition, String name) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
 		this.setName(name);
+		this.setInventory(new PlayerInventory());
 		
-		this.inventory = new PlayerInventory();
 		this.remainingActions = 0;
 		this.moved = false;
 	}
@@ -117,7 +128,7 @@ public class Player extends Observable {
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		
 		this.startPosition = pos;
-		this.currentPosition = startPosition;
+		addSquare(startPosition);
 	}
 	
 	/**
@@ -147,22 +158,37 @@ public class Player extends Observable {
 	}
 	
 	/**
-	 * 
-	 */
-	
-	/**
 	 * Moves the player to another square
-	 * @param newPosition	The new Position of the player
-	 * @throws IllegalStateException
-	 * 		   thrown if the player is unable to make this move 
+	 * 
+	 * @param	newPosition	The new Position of the player
+	 * @throws	IllegalStateException
+	 * 		  	thrown if the player is unable to make this move 
 	 */
-	//TODO: Needs to throw an IllegalStateException when the newPosition is invalid.
 	public void move(Square newPosition) throws IllegalStateException{
-		if(newPosition.isObstructed()){
+		if(!isValidMove(newPosition)){
 			throw new IllegalStateException("Cannot move to a square that is obstructed");
 		}
+		removeSquare(this.getPosition());
+		addSquare(newPosition);
 		currentPosition = newPosition;
 		moved = true;
+	}
+	
+	/**
+	 * A move is valid when the destination square is not null
+	 * and when it is not obstructed.
+	 * 
+	 * @param	newPosition
+	 * @return	True	If square is not null and not obstructed.
+	 * 			False	If square is null or obstructed.
+	 */
+	public static boolean isValidMove(Square newPosition) {
+		if(newPosition == null)
+			return false;
+		if(newPosition.isObstructed())
+			return false;
+		
+		return true;
 	}
 	
 	public void incrementActions(){
@@ -192,13 +218,18 @@ public class Player extends Observable {
 	 * 
 	 * @param	item
 	 * @return	True	If item is not null and if the inventory can have the item.
+	 * 					The square must also hold the item.
 	 * 			False	If the item is null or if the inventory cannot have the item.
+	 * 					Or if the square does not have the item.
 	 */
 	public boolean isValidPickUp(Item item) {
 		if(item == null)
 			return false;
 		
 		if(!inventory.canHaveAsItem(item))
+			return false;
+		
+		if(!currentPosition.getInventory().hasItem(item))
 			return false;
 		
 		return true;
@@ -235,7 +266,24 @@ public class Player extends Observable {
 	 * 			Thrown if the given inventory is not valid for the player.
 	 */
 	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
+		if(!isValidInventory(inventory))
+			throw new IllegalArgumentException("The given inventory is not valid for the player.");
+		
 		this.inventory = inventory;
+	}
+	
+	/**
+	 * An inventory is considered valid when the inventory is not null.
+	 * 
+	 * @param	inventory
+	 * @return	True	If inventory is not null
+	 * 			False	If inventory is null.
+	 */
+	public static boolean isValidInventory(PlayerInventory inventory) {
+		if(inventory == null)
+			return false;
+		
+		return true;
 	}
 	
 	/**
@@ -297,9 +345,61 @@ public class Player extends Observable {
 		moved = false;
 	}
 	
+	/**
+	 * Returns whether the player covers the given square
+	 * 
+	 * @param 	square
+	 * 			The square to check.
+	 */
+	public boolean contains(Square square) {
+		return square.equals(currentPosition);
+	}
+
+	
+	/**
+	 * Adds a given square as a square covered by the player obstacle.
+	 * 
+	 * @param 	square
+	 * 			The square to add.
+	 * @throws	IllegalArgumentException
+	 * 			If the given square can not be added as a square.
+	 * 			| !isValidSquare()
+	 */
+	public void addSquare(Square square) throws IllegalArgumentException {
+		if(!isValidSquare(square)){
+			throw new IllegalArgumentException("The given " + square + " is not a valid square");
+		}
+		currentPosition = square;
+		square.setObstacle(this);
+	}
+
+	/**
+	 * Removes the given square as a covered square of this obstacle.
+	 */
+	public void removeSquare(Square square) throws IllegalArgumentException {
+		if(!square.equals(currentPosition)){
+			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
+		}
+		currentPosition = null;
+		square.setObstacle(null);
+	}
+
+	/**
+	 * 
+	 */
+	public boolean isValidSquare(Square square) {
+		if(square == null){
+			return false;
+		}
+		if(square == currentPosition){
+			return false;
+		}
+		return false;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Player " + this.getName();
 	}
-
 }

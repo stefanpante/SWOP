@@ -3,6 +3,7 @@ package handlers;
 import static org.junit.Assert.*;
 
 
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import items.LightGrenade;
@@ -67,7 +68,7 @@ public class MoveHandlerTest {
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
 	 * Move to the east, northeast, south east, north and north west should cause an IllegalStateException for player 2
 	 */
-	@Test(expected = IllegalArgumentException.class) 
+	@Test(expected = NoSuchElementException.class) 
 	public void testIllegalMove(){
 		Game game = new Game(10,10);
 		MoveHandler mh = new MoveHandler(game);
@@ -146,8 +147,6 @@ public class MoveHandlerTest {
 		Square neighborOfEastNeighbor = game.getGrid().getNeighbor(eastNeighbor, Direction.EAST);
 		
 		Wall wall = new Wall(eastNeighbor, neighborOfEastNeighbor);
-		eastNeighbor.setObstacle(wall);
-		neighborOfEastNeighbor.setObstacle(wall);
 		
 		assertTrue(eastNeighbor.isObstructed());
 		assertTrue(neighborOfEastNeighbor.isObstructed());

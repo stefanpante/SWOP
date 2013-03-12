@@ -2,9 +2,10 @@ package square;
 
 import items.SquareInventory;
 
-import square.obstacles.Obstacle;
+import square.obstacles.IObstacle;
 import square.state.RegularState;
 import square.state.State;
+import square.state.StateResult;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -31,7 +32,7 @@ public class Square {
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
-	private Obstacle obstacle;
+	private IObstacle obstacle;
 	
 	/**
 	 * Zero argument constructor for a square.
@@ -51,10 +52,35 @@ public class Square {
 	/**
 	 * State state
 	 * 
-	 * @param regularState
+	 * @param	regularState
+	 * @throws	IllegalArgumentException	When the given state is null.
 	 */
-	public void setState(State state) {
+	public void setState(State state) throws IllegalArgumentException {
+		if(!isValidState(state))
+			throw new IllegalArgumentException("State cannot be null.");
+		
 		this.state = state;
+	}
+	
+	/**
+	 * This alerts the interal state of the square that a Turn has been ended.
+	 */
+	public void endTurn() {
+		getState().nextTurn(this);
+	}
+	
+	/**
+	 * In order for a state to be valid it must not be null.
+	 * 
+	 * @param	state
+	 * @return	True	If state is not null.
+	 * 			False	If state is null.
+	 */
+	public boolean isValidState(State state) {
+		if(state == null)
+			return false;
+		else
+			return true;
 	}
 
 	
@@ -72,7 +98,7 @@ public class Square {
 	 * @return 	An object of the Obstacle class.
 	 * 			| Obstacle
 	 */
-	public Obstacle getObstacle() {
+	public IObstacle getObstacle() {
 		return obstacle;
 	};
 
@@ -87,7 +113,7 @@ public class Square {
 	 *			| !isValidObstacle(obstacle)
 	 */
 	@Nullable
-	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
+	public void setObstacle(IObstacle obstacle) throws IllegalArgumentException {
 		if (getObstacle() != null)
 			throw new IllegalArgumentException("Obstacle already exists on this square.");
 		

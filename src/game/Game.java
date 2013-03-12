@@ -237,7 +237,7 @@ public class Game extends AbstractModel {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.getState().nextTurn(square);
+			square.endTurn();
 		}
 	}
 }
