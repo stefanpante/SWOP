@@ -19,7 +19,7 @@ import square.obstacles.Wall;
 import game.Game;
 
 /**
- * Scenario test for the Use Case "Move".
+ * <Scenario test for the Use Case "Move".
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
