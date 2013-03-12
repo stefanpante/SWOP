@@ -33,7 +33,7 @@ public class TestGrid {
 			GridBuilder gb = new GridBuilder(10,10);
 			gb.constructSquares();
 			Grid grid = gb.getGrid();
-			Square bl = grid.getSquare(new Coordinate(0,0));
+			Square bl = grid.getSquare(new Coordinate(0,9));
 			Square tr = grid.getSquare(new Coordinate(9,0));
 			
 			//TEST CORNERS.
@@ -70,7 +70,7 @@ public class TestGrid {
 			GridBuilder gb = new GridBuilder(10, 10);
 			gb.constructSquares();
 			Grid grid = gb.getGrid();
-			Square bl = grid.getSquare(new Coordinate(0,0));
+			Square bl = grid.getSquare(new Coordinate(0,9));
 			Square tr = grid.getSquare(new Coordinate(9,0));
 			
 			
@@ -113,7 +113,7 @@ public class TestGrid {
 			GridBuilder gb = new GridBuilder(10, 10);
 			gb.constructSquares();
 			Grid grid = gb.getGrid();
-			Square bl = grid.getSquare(new Coordinate(0,0));
+			Square bl = grid.getSquare(new Coordinate(0,9));
 			Square tr = grid.getSquare(new Coordinate(9,0));
 			
 			LightTrail blLightTrail = new LightTrail();

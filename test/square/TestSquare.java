@@ -46,30 +46,30 @@ public class TestSquare {
 	public void testAddItem(){
 		Square sq = new Square();
 		Item lg1 = new LightGrenade();
-		Item lg2 = new LightGrenade();
-		Item lg3 = new LightGrenade();
-		Item it = new Item();
+		Item it1 = new Item();
+		Item it2 = new Item();
+		Item it3 = new Item();
 
 		sq.getInventory().addItem(lg1);
 		assertTrue(sq.getInventory().hasItem(lg1));
 		assertTrue(sq.getInventory().getSize() == 1);
 		
-		sq.getInventory().addItem(lg2);
+		sq.getInventory().addItem(it1);
 		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(lg2));
+		assertTrue(sq.getInventory().hasItem(it1));
 		assertTrue(sq.getInventory().getSize() == 2);
 		
-		sq.getInventory().addItem(lg3);
+		sq.getInventory().addItem(it2);
 		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(lg2));
-		assertTrue(sq.getInventory().hasItem(lg3));
+		assertTrue(sq.getInventory().hasItem(it1));
+		assertTrue(sq.getInventory().hasItem(it2));
 		assertTrue(sq.getInventory().getSize() == 3);
 
-		sq.getInventory().addItem(it);
+		sq.getInventory().addItem(it3);
 		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(lg2));
-		assertTrue(sq.getInventory().hasItem(lg3));
-		assertTrue(sq.getInventory().hasItem(it));
+		assertTrue(sq.getInventory().hasItem(it1));
+		assertTrue(sq.getInventory().hasItem(it2));
+		assertTrue(sq.getInventory().hasItem(it3));
 		assertTrue(sq.getInventory().getSize() == 4);
 	}
 		
@@ -77,21 +77,21 @@ public class TestSquare {
 	public void testGetItems() {
 		Square sq = new Square();
 		Item lg1 = new LightGrenade();
-		Item lg2 = new LightGrenade();
-		Item lg3 = new LightGrenade();
-		Item it = new Item();
+		Item it1 = new Item();
+		Item it2 = new Item();
+		Item it3 = new Item();
 
 		sq.getInventory().addItem(lg1);
-		sq.getInventory().addItem(lg2);		
-		sq.getInventory().addItem(lg3);
-		sq.getInventory().addItem(it);
+		sq.getInventory().addItem(it1);		
+		sq.getInventory().addItem(it2);
+		sq.getInventory().addItem(it3);
 		
 		Inventory inv = sq.getInventory();
 		assertTrue(inv.getSize() == 4);
 		assertTrue(inv.hasItem(lg1));
-		assertTrue(inv.hasItem(lg2));
-		assertTrue(inv.hasItem(lg3));
-		assertTrue(inv.hasItem(it));
+		assertTrue(inv.hasItem(it1));
+		assertTrue(inv.hasItem(it2));
+		assertTrue(inv.hasItem(it3));
 
 	}
 

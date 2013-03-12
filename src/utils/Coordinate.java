@@ -10,6 +10,8 @@ import square.Direction;
  * Coordinate2D represents a point in 2D space, 
  * has an x-coordinate and y-coordinate
  * 
+ * (0,0) by convention is the most left upper square.
+ * 
  * @author Jonas Devlieghere, Dieter Castel, Vincent Reniers and Stefan Pante
  * @version 0.9
  *
