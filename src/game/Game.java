@@ -235,7 +235,7 @@ public class Game {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.getState().nextTurn(square);
+			square.endTurn();
 		}
 	}
 }

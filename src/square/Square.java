@@ -5,6 +5,7 @@ import items.SquareInventory;
 import square.obstacles.Obstacle;
 import square.state.RegularState;
 import square.state.State;
+import square.state.StateResult;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -59,6 +60,13 @@ public class Square {
 			throw new IllegalArgumentException("State cannot be null.");
 		
 		this.state = state;
+	}
+	
+	/**
+	 * This alerts the interal state of the square that a Turn has been ended.
+	 */
+	public void endTurn() {
+		getState().nextTurn(this);
 	}
 	
 	/**
