@@ -50,8 +50,6 @@ public class Player extends Observable {
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 3;
 	
-	private LightTrail lightTrail;
-	
 	/**
 	 * creates a new player with a given name and start position
 	 * 
@@ -67,8 +65,6 @@ public class Player extends Observable {
 		this.inventory = new PlayerInventory();
 		this.remainingActions = 0;
 		this.moved = false;
-		this.lightTrail = new LightTrail();
-		this.addObserver(lightTrail);
 	}
 	
 	/**
@@ -257,10 +253,6 @@ public class Player extends Observable {
 		setRemainingActions(Player.MAX_ALLOWED_ACTIONS - lostActions);
 		
 		moved = false;
-	}
-	
-	public LightTrail getLightTrail(){
-		return lightTrail;
 	}
 	
 	@Override
