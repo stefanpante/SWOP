@@ -125,7 +125,6 @@ public class TestGrid {
 			}
 			
 			assertTrue(blLightTrail.contains(grid.getNeighbor(bl, Direction.NORTH)));
-
 			assertTrue(blLightTrail.contains(grid.getNeighbor(bl, Direction.EAST)));
 			
 			LightTrail trLightTrail = new LightTrail();

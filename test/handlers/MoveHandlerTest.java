@@ -146,8 +146,6 @@ public class MoveHandlerTest {
 		Square neighborOfEastNeighbor = game.getGrid().getNeighbor(eastNeighbor, Direction.EAST);
 		
 		Wall wall = new Wall(eastNeighbor, neighborOfEastNeighbor);
-		eastNeighbor.setObstacle(wall);
-		neighborOfEastNeighbor.setObstacle(wall);
 		
 		assertTrue(eastNeighbor.isObstructed());
 		assertTrue(neighborOfEastNeighbor.isObstructed());

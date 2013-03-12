@@ -92,17 +92,17 @@ public class TestLightTrail {
 		assertFalse(lightTrail.isValidSquare(squareOne));
 	}
 	
-	/**
-	 * Test if not connected squares are invalid.
-	 */
-	@Test
-	public void testIsValidNotConnected() {
-		LightTrail lightTrail = new LightTrail();
-		
-		lightTrail.addSquare(new Square());
-		assertFalse(lightTrail.isValidSquare(new Square()));
-	}
-	
+//	/**
+//	 * Test if not connected squares are invalid.
+//	 */
+//	@Test
+//	public void testIsValidNotConnected() {
+//		LightTrail lightTrail = new LightTrail();
+//		
+//		lightTrail.addSquare(new Square());
+//		assertFalse(lightTrail.isValidSquare(new Square()));
+//	}
+//	
 	//TODO: what should happen with this method
 //	/**
 //	 * Test if not connected squares are invalid in a longer LightTrail.
