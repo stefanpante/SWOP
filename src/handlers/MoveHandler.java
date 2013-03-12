@@ -56,7 +56,6 @@ public class MoveHandler extends Handler {
 			if(p.getPosition().equals(newPosition))
 				throw new IllegalStateException("Cannot move to square were other player is positioned.");
 		}
-		
 		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getInventory().activateAllItems();
 		
@@ -75,7 +74,6 @@ public class MoveHandler extends Handler {
 		}
 		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
 		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
-
 	}
 
 	/**
@@ -83,10 +81,6 @@ public class MoveHandler extends Handler {
 	 * @return 	true if the move causes the player to win. 
 	 */
 	public boolean endAction(){
-		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
-		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
-
-		
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 

@@ -3,9 +3,7 @@ package player;
 import java.util.Observable;
 
 import square.Square;
-import square.obstacles.LightTrail;
 
-import items.Inventory;
 import items.Item;
 import items.PlayerInventory;
 
@@ -51,25 +49,22 @@ public class Player extends Observable {
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 3;
 	
-	private LightTrail lightTrail;
-	
 	/**
 	 * creates a new player with a given name and start position
 	 * 
-	 * @param startPosition the startposition for the player
-	 * @param name	the name for the player
-	 * @effect setStartPosition(startPosition)
-	 * @effect setName(name)
+	 * @param	startPosition	the startposition for the player
+	 * @param	name			the name for the player
+	 * @effect	setStartPosition(startPosition)
+	 * @effect	setName(name)
+	 * @throws	IllegalArgumentException	If the startPosition is null.
 	 */
-	public Player(Square startPosition, String name) {
+	public Player(Square startPosition, String name) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
 		this.setName(name);
 		
 		this.inventory = new PlayerInventory();
 		this.remainingActions = 0;
 		this.moved = false;
-		this.lightTrail = new LightTrail();
-		this.addObserver(lightTrail);
 	}
 	
 	/**
@@ -90,7 +85,9 @@ public class Player extends Observable {
 	 * 			for the player
 	 */
 	public void setName(String name) throws IllegalArgumentException{
-		if(!isValidName(name)) throw new IllegalArgumentException("Not a valid name");
+		if(!isValidName(name)) 
+			throw new IllegalArgumentException("Not a valid name");
+		
 		this.name = name;
 	}
 	
@@ -107,16 +104,34 @@ public class Player extends Observable {
 	/**
 	 * Sets the start position for the player
 	 * 
-	 * @param pos the position to be used as the start position for the player
+	 * @param	pos	the position to be used as the start position for the player
 	 * @throws 	IllegalArgumentException
 	 * 			If the given position is not a valid startposition
 	 */
-	private void setStartPosition(Square pos){
-		if(pos.isObstructed()){
-			throw new IllegalArgumentException("The starposition of a player should not be obstructed");
-		}
+	private void setStartPosition(Square pos) throws IllegalArgumentException {
+		if(!isValidStartPosition(pos))
+			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
+		
 		this.startPosition = pos;
 		this.currentPosition = startPosition;
+	}
+	
+	/**
+	 * In order for a square to be a valid starting position it cannot
+	 * be null. The square can't be obstructed.
+	 * 
+	 * @param	square
+	 * @returns	True	If the square is not null and not obstructed.
+	 * 			False	If the square is null or obstructed.
+	 */
+	public boolean isValidStartPosition(Square square) {
+		if(square == null)
+			return false;
+		
+		if(square.isObstructed())
+			return false;
+		
+		return true;
 	}
 	
 	/**
@@ -258,10 +273,6 @@ public class Player extends Observable {
 		setRemainingActions(Player.MAX_ALLOWED_ACTIONS - lostActions);
 		
 		moved = false;
-	}
-	
-	public LightTrail getLightTrail(){
-		return lightTrail;
 	}
 	
 	@Override
