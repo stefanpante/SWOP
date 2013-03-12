@@ -114,7 +114,7 @@ public class LightTrail extends Obstacle implements Observer{
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(!isValidSquare(square))
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("This square is not valid for this lighttrails");
 		
 		if(getLength() >= MAX_LENGTH)
 			getSquares().remove(MAX_LENGTH-1);
@@ -136,9 +136,7 @@ public class LightTrail extends Obstacle implements Observer{
 	public boolean isValidSquare(Square square) {
 		if(!super.isValidSquare(square))
 			return false;
-		if(getLength() == 0)
-			return true;
-		return false;
+		return true;
 	}
 	
 	/**

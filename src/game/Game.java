@@ -101,6 +101,9 @@ public class Game {
 		if(player == null){
 			throw new NullPointerException("A Player cant be null");
 		}
+		if(players.contains(player)){
+			throw new IllegalStateException("Two players should never be the same object");
+		}
 		players.add(player);
 	}
 
