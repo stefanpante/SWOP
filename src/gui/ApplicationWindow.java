@@ -10,8 +10,10 @@ import items.Item;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -124,49 +126,62 @@ public class ApplicationWindow implements ActionListener {
         playerActionPanel.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Player Actions",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        playerActionPanel.setBounds(5, 55, SIDEBAR_WIDTH-10, 120);
+        playerActionPanel.setBounds(5, 55, SIDEBAR_WIDTH-10, 175);
         sideBarPanel.setLayout(null);
         sideBarPanel.add(playerActionPanel);
+        playerActionPanel.setLayout(null);
         
-        JButton bN  = new JButton("N");
+        JButton bNW = makeNavigationButton("arrow_NW.png", "North west", "North west",true);
+        bNW.addActionListener(this);
+        bNW.setBounds(80,25,40,40);
+        bNW.setActionCommand("NW");
+        playerActionPanel.add(bNW);
+        
+        JButton bN  = makeNavigationButton("arrow_N.png", "North", "North",true);
+        bN.setBounds(125,25,40,40);
         bN.addActionListener(this);
         bN.setActionCommand("N");
         playerActionPanel.add(bN);
         
-        JButton bNE = new JButton("NE");
+        JButton bNE = makeNavigationButton("arrow_NE.png", "North east", "North east",true);
+        bNE.setBounds(170,25,40,40);
         bNE.addActionListener(this);
         bNE.setActionCommand("NE");
         playerActionPanel.add(bNE);
         
-        JButton bE  = new JButton("E");
+        JButton bE  = makeNavigationButton("arrow_E.png", "East", "East",true);
         bE.addActionListener(this);
+        bE.setBounds(170,70,40,40);
         bE.setActionCommand("E");
         playerActionPanel.add(bE);
         
-        JButton bSE = new JButton("SE");
-        bSE.addActionListener(this);
-        bSE.setActionCommand("SE");
-        playerActionPanel.add(bSE);
-        
-        JButton bS  = new JButton("S");
-        bS.addActionListener(this);
-        bS.setActionCommand("S");
-        playerActionPanel.add(bS);
-        
-        JButton bSW = new JButton("SW");
-        bSW.addActionListener(this);
-        bSW.setActionCommand("SW");
-        playerActionPanel.add(bSW);
-        
-        JButton bW  = new JButton("W");
+        JButton bW  = makeNavigationButton("arrow_W.png", "West", "West",true);
         bW.addActionListener(this);
+        bW.setBounds(80,70,40,40);
         bW.setActionCommand("W");
         playerActionPanel.add(bW);
         
-        JButton bNW = new JButton("NW");
-        bNW.addActionListener(this);
-        bNW.setActionCommand("NW");
-        playerActionPanel.add(bNW);
+        
+
+        JButton bSW = makeNavigationButton("arrow_SW.png", "South west", "South west",true);
+        bSW.addActionListener(this);
+        bSW.setBounds(80,115,40,40);
+        bSW.setActionCommand("SW");
+        playerActionPanel.add(bSW);
+        
+        JButton bS  = makeNavigationButton("arrow_S.png", "South", "South",true);
+        bS.addActionListener(this);
+        bS.setBounds(125,115,40,40);
+        bS.setActionCommand("S");
+        playerActionPanel.add(bS);
+
+        JButton bSE = makeNavigationButton("arrow_SE.png", "South east", "South east",true);
+        bSE.addActionListener(this);
+        bSE.setBounds(170,115,40,40);
+        bSE.setActionCommand("SE");
+        playerActionPanel.add(bSE);
+        
+
 
         
         /* Square Inventory Items */
@@ -174,7 +189,7 @@ public class ApplicationWindow implements ActionListener {
         inventoryPanel.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Inventories",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        inventoryPanel.setBounds(5, 175, SIDEBAR_WIDTH-10, 70);
+        inventoryPanel.setBounds(5, 230, SIDEBAR_WIDTH-10, 70);
         sideBarPanel.add(inventoryPanel);
         
         JButton pickup  = new JButton("Pick up item");
@@ -256,6 +271,27 @@ public class ApplicationWindow implements ActionListener {
 
 	private boolean is(ActionEvent e,String string){
 		return e.getActionCommand().equals(string);
+	}
+	
+	protected JButton makeNavigationButton(String imageName,
+		String actionCommand, String toolTipText, boolean border) {
+		String imgLocation = "../res/" + imageName;
+		URL imageURL = ApplicationWindow.class.getResource(imgLocation);
+		JButton button = new JButton();
+		button.setActionCommand(actionCommand);
+		button.setToolTipText(toolTipText);
+		button.addActionListener(this);
+		if (!border)
+			button.setBorder(null);
+		button.setBackground(new Color(238, 238, 238));
+		if (imageURL != null) { 
+			ImageIcon icon = new ImageIcon(imageURL, toolTipText);
+			button.setIcon(icon);
+		} else {
+			button.setText(toolTipText);
+			System.err.println("Resource " + imageName + " not found.");
+		}
+		return button;
 	}
 
 

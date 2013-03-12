@@ -51,20 +51,27 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	public void paintComponent(Graphics graphics){
 		super.paintComponent(graphics);
 		setBackground(Color.BLACK);
+		
+		/* Draw gridlines */
 		graphics.setColor(Color.WHITE);
 	    for (int i = 1; i <= rows-1; i++)
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
+	    
+	    /* Draw walls & grenades */
 	    for(Coordinate coordinate : ApplicationWindow.MODEL.getWalls())
 	    	DrawImage(graphics, coordinate, "wall");
+		for(Coordinate coordinate : ApplicationWindow.MODEL.getAllGrenades())
+		    DrawImage(graphics, coordinate, "lightgrenade");
+		
+		/* Draw light trail */
 		for(Coordinate coordinate : ApplicationWindow.MODEL.getLightTrailRed())
 		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");
 		for(Coordinate coordinate : ApplicationWindow.MODEL.getLightTrailRed())
 		    DrawImage(graphics, coordinate, "cell_lighttrail_red");	
-		for(Coordinate coordinate : ApplicationWindow.MODEL.getAllGrenades())
-		    DrawImage(graphics, coordinate, "lightgrenade");
 		
+		/* Draw player */
 		DrawImage(graphics, ApplicationWindow.MODEL.getPlayer1(), "player_blue");
 		DrawImage(graphics, ApplicationWindow.MODEL.getPlayer2(), "player_red");
 	}
@@ -72,18 +79,13 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	private void DrawImage(Graphics graphics, Coordinate coordinate, String image){
 		if(coordinate == null)
 			return;
-		// System.out.println("Draw "+ image +" at "+ coordinate);
 		Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/res/"+image+".png"));
     	graphics.drawImage(img,coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1,Color.BLACK,this);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		this.repaint();
 	}
-	
 
 }
