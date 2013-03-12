@@ -2,7 +2,7 @@ package square;
 
 import items.SquareInventory;
 
-import square.obstacles.Obstacle;
+import square.obstacles.IObstacle;
 import square.state.RegularState;
 import square.state.State;
 
@@ -31,7 +31,7 @@ public class Square {
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
-	private Obstacle obstacle;
+	private IObstacle obstacle;
 	
 	/**
 	 * Zero argument constructor for a square.
@@ -72,7 +72,7 @@ public class Square {
 	 * @return 	An object of the Obstacle class.
 	 * 			| Obstacle
 	 */
-	public Obstacle getObstacle() {
+	public IObstacle getObstacle() {
 		return obstacle;
 	};
 
@@ -87,7 +87,7 @@ public class Square {
 	 *			| !isValidObstacle(obstacle)
 	 */
 	@Nullable
-	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
+	public void setObstacle(IObstacle obstacle) throws IllegalArgumentException {
 		if (getObstacle() != null)
 			throw new IllegalArgumentException("Obstacle already exists on this square.");
 		

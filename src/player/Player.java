@@ -2,7 +2,11 @@ package player;
 
 import java.util.Observable;
 
+import notnullcheckweaver.NotNull;
+import notnullcheckweaver.Nullable;
+
 import square.Square;
+import square.obstacles.IObstacle;
 
 import items.Item;
 import items.PlayerInventory;
@@ -12,7 +16,8 @@ import items.PlayerInventory;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
-public class Player extends Observable {
+@NotNull
+public class Player extends Observable implements IObstacle {
 
 	/**
 	 * The start position of this player
@@ -22,6 +27,7 @@ public class Player extends Observable {
 	/**
 	 * the current position of the player
 	 */
+	@Nullable
 	private Square currentPosition;
 	
 	/**
@@ -52,11 +58,14 @@ public class Player extends Observable {
 	/**
 	 * creates a new player with a given name and start position
 	 * 
-	 * @param	startPosition	the startposition for the player
-	 * @param	name			the name for the player
+	 * @param	startPosition	
+	 * 			The startposition for the player.
+	 * @param	name			
+	 *			The name for the player.
 	 * @effect	setStartPosition(startPosition)
 	 * @effect	setName(name)
-	 * @throws	IllegalArgumentException	If the startPosition is null.
+	 * @throws	IllegalArgumentException	
+	 * 			If the startPosition is null.
 	 */
 	public Player(Square startPosition, String name) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
@@ -113,7 +122,7 @@ public class Player extends Observable {
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		
 		this.startPosition = pos;
-		this.currentPosition = startPosition;
+		addSquare(startPosition);
 	}
 	
 	/**
@@ -152,12 +161,12 @@ public class Player extends Observable {
 	 * @throws IllegalStateException
 	 * 		   thrown if the player is unable to make this move 
 	 */
-	//TODO: Needs to throw an IllegalStateException when the newPosition is invalid.
 	public void move(Square newPosition) throws IllegalStateException{
 		if(newPosition.isObstructed()){
 			throw new IllegalStateException("Cannot move to a square that is obstructed");
 		}
-		currentPosition = newPosition;
+		removeSquare(this.getPosition());
+		addSquare(newPosition);
 		moved = true;
 	}
 	
@@ -275,9 +284,61 @@ public class Player extends Observable {
 		moved = false;
 	}
 	
+	/**
+	 * Returns whether the player covers the given square
+	 * 
+	 * @param 	square
+	 * 			The square to check.
+	 */
+	public boolean contains(Square square) {
+		return square.equals(currentPosition);
+	}
+
+	
+	/**
+	 * Adds a given square as a square covered by the player obstacle.
+	 * 
+	 * @param 	square
+	 * 			The square to add.
+	 * @throws	IllegalArgumentException
+	 * 			If the given square can not be added as a square.
+	 * 			| !isValidSquare()
+	 */
+	public void addSquare(Square square) throws IllegalArgumentException {
+		if(!isValidSquare(square)){
+			throw new IllegalArgumentException("The given " + square + " is not a valid square");
+		}
+		currentPosition = square;
+		square.setObstacle(this);
+	}
+
+	/**
+	 * Removes the given square as a covered square of this obstacle.
+	 */
+	public void removeSquare(Square square) throws IllegalArgumentException {
+		if(!square.equals(currentPosition)){
+			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
+		}
+		currentPosition = null;
+		square.setObstacle(null);
+	}
+
+	/**
+	 * 
+	 */
+	public boolean isValidSquare(Square square) {
+		if(square == null){
+			return false;
+		}
+		if(square == currentPosition){
+			return false;
+		}
+		return false;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "Player " + this.getName();
 	}
-
 }

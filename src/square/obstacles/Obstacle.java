@@ -10,9 +10,9 @@ import square.Square;
  * Such as a wall or a light trail
  * A player cannot move through an obstacle.
  * 
- * @author vincentreniers
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public abstract class Obstacle {
+public abstract class Obstacle implements IObstacle {
 	
 	/**
 	 * An obstacle may cover a set of squares.
@@ -41,7 +41,7 @@ public abstract class Obstacle {
 	}
 	
 	/**
-	 * Adds a square to the wall.
+	 * Adds a square to the obstacle.
 	 * 
 	 * @param square
 	 * 
