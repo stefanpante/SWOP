@@ -56,14 +56,15 @@ public class Player extends Observable {
 	 * @param	name			the name for the player
 	 * @effect	setStartPosition(startPosition)
 	 * @effect	setName(name)
+	 * @effect	setInventory(new PlayerInventory())
 	 * @throws	IllegalArgumentException	If the startPosition is null.
 	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
 	public Player(Square startPosition, String name) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
 		this.setName(name);
+		this.setInventory(new PlayerInventory());
 		
-		this.inventory = new PlayerInventory();
 		this.remainingActions = 0;
 		this.moved = false;
 	}
@@ -192,13 +193,18 @@ public class Player extends Observable {
 	 * 
 	 * @param	item
 	 * @return	True	If item is not null and if the inventory can have the item.
+	 * 					The square must also hold the item.
 	 * 			False	If the item is null or if the inventory cannot have the item.
+	 * 					Or if the square does not have the item.
 	 */
 	public boolean isValidPickUp(Item item) {
 		if(item == null)
 			return false;
 		
 		if(!inventory.canHaveAsItem(item))
+			return false;
+		
+		if(!currentPosition.getInventory().hasItem(item))
 			return false;
 		
 		return true;
@@ -235,7 +241,24 @@ public class Player extends Observable {
 	 * 			Thrown if the given inventory is not valid for the player.
 	 */
 	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
+		if(!isValidInventory(inventory))
+			throw new IllegalArgumentException("The given inventory is not valid for the player.");
+		
 		this.inventory = inventory;
+	}
+	
+	/**
+	 * An inventory is considered valid when the inventory is not null.
+	 * 
+	 * @param	inventory
+	 * @return	True	If inventory is not null
+	 * 			False	If inventory is null.
+	 */
+	public static boolean isValidInventory(PlayerInventory inventory) {
+		if(inventory == null)
+			return false;
+		
+		return true;
 	}
 	
 	/**

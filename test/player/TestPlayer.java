@@ -1,6 +1,9 @@
 package player;
 
 import static org.junit.Assert.*;
+import items.Item;
+import items.LightGrenade;
+import items.PlayerInventory;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -82,5 +85,102 @@ public class TestPlayer {
 		
 		player.pickUp(null);
 	}
+	
+	/**
+	 * Checks if using an item that is not in the square's inventory is invalid.
+	 */
+	@Test
+	public void testIsValidPickUp() {
+		Square square = new Square();
+		Player player = new Player(square, new String("Jan"));
+		
+		Item item = new LightGrenade();
+		assertFalse(player.isValidPickUp(null));
+		assertFalse(player.isValidPickUp(item));
+		
+		square.getInventory().addItem(item);
+		assertTrue(player.isValidPickUp(item));
+	}
+	
+	/**
+	 * Checks if using an item that is not in the square's inventory results
+	 * in an exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testPickUp() {
+		Square square = new Square();
+		Player player = new Player(square, new String("Jan"));
+		
+		Item item = new LightGrenade();
+		player.pickUp(item);
+	}
+	
+	/**
+	 * Checks if picking up an item that is null results in an exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testPickUpNull() {
+		Player player = new Player(new Square(), new String("Jan"));
+		player.pickUp(null);
+	}
+	
+	/**
+	 * Test if picking up the item actually adds it to the player inventory.
+	 */
+	@Test
+	public void testPickUpItem() {
+		Square square = new Square();
+		Item item = new LightGrenade();
+		
+		square.getInventory().addItem(item);
+		
+		Player player = new Player(square, new String("Jan met de pet"));
+		assertFalse(player.isValidPickUp(new LightGrenade()));
+		assertTrue(player.isValidPickUp(item));
+		assertEquals(player.getInventory().getSize(), 0);
+		assertFalse(player.getInventory().hasItem(item));
+		
+		player.pickUp(item);
+		assertTrue(player.getInventory().hasItem(item));
+		assertFalse(player.isValidPickUp(item));
+	}
+	
+	/**
+	 * Test if inventory which is null is invalid.
+	 */
+	@Test
+	public void testIsValidInventory() {
+		assertFalse(Player.isValidInventory(null));
+		
+		Player player = new Player(new Square(), new String("Test"));
+		PlayerInventory inventory = new PlayerInventory();
+		
+		assertTrue(Player.isValidInventory(inventory));
+		player.setInventory(inventory);
+	}
+	
+	/**
+	 * Test if setting an inventory which is null, results in exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testIsValidInventoryNull() {
+		Player player = new Player(new Square(), new String("Test"));
+		player.setInventory(null);
+	}
+	
+	/**
+	 * Test if using an item that is null results in exception.
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testUseItem() {
+		Player player = new Player(new Square(), new String("Flip"));
+		
+		// To do
+	}
+	
+	/**
+	 * Test if using an item which is not contained in the inventory
+	 * results in an exception.
+	 */
 
 }
