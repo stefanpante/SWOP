@@ -64,10 +64,10 @@ public class TestGridBuilder {
 		gb.constructWalls();
 		Grid grid = gb.getGrid();
 		ArrayList<Coordinate> wallsPos = gb.getWallCoordinates();
-		Coordinate lowerleft = new Coordinate(0, 0);
+		Coordinate lowerleft = new Coordinate(0, vSize-1);
 		assertFalse(grid.getSquare(lowerleft).isObstructed());
 		assertFalse(wallsPos.contains(lowerleft));
-		Coordinate upperRight = new Coordinate(hSize-1, vSize-1);
+		Coordinate upperRight = new Coordinate(hSize-1, 0);
 		assertFalse(grid.getSquare(upperRight).isObstructed());
 		assertFalse(wallsPos.contains(upperRight));
 	}
@@ -128,10 +128,9 @@ public class TestGridBuilder {
 		gb.constructSquares();
 		gb.constructWalls();
 		gb.constructLightGrenades();
-		Grid grid = gb.getGrid();	
-		//TODO: CONVENTION???
-		Coordinate lowerleft = new Coordinate(0, 0);
-		for(Coordinate coor = lowerleft; coor.getY() <= 2; coor = coor.getNeighbor(Direction.NORTH)){
+		Grid grid = gb.getGrid();
+		Coordinate lowerleft = new Coordinate(0, vSize-1);
+		for(Coordinate coor = lowerleft; coor.getY() >= vSize-3; coor = coor.getNeighbor(Direction.NORTH)){
 			for(Coordinate coor2 = coor; coor2.getX() <= 2  ; coor2 = coor2.getNeighbor(Direction.EAST)){
 				System.out.println(coor2);
 				if(grid.getSquare(coor2).getInventory().hasLightGrenade()){
@@ -141,8 +140,8 @@ public class TestGridBuilder {
 			}
 		}
 		
-		Coordinate upperRight = new Coordinate(hSize-1, vSize-1);
-		for(Coordinate coor = upperRight; coor.getY() >= vSize - 3; coor = coor.getNeighbor(Direction.SOUTH)){
+		Coordinate upperRight = new Coordinate(hSize-1, 0);
+		for(Coordinate coor = upperRight; coor.getY() <= 2; coor = coor.getNeighbor(Direction.SOUTH)){
 			for(Coordinate coor2 = coor; coor2.getX() >= hSize - 3  ; coor2 = coor2.getNeighbor(Direction.WEST)){
 				System.out.println(coor2);
 				if(grid.getSquare(coor2).getInventory().hasLightGrenade()){
