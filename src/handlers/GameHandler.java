@@ -101,6 +101,9 @@ public class GameHandler extends Handler {
 	 */
 	public void createGame(int hSize, int vSize) {
 		setGame(new Game(hSize, vSize));
+		
+		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
+		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
 	}
 	
 	

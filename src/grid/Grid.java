@@ -97,11 +97,10 @@ public class Grid {
 	 * @throws NoSuchElementException
 	 */
 	public Square getNeighbor(Square square, Direction direction) throws NoSuchElementException {
-		int x = getCoordinate(square).getX(); 
-		int y = getCoordinate(square).getY(); 
-		Coordinate coordinate = new Coordinate(x, y);
-		if(contains(coordinate.getNeighbor(direction)))
-			return getSquare(coordinate);
+		Coordinate coordinate = getCoordinate(square);
+		Coordinate c = coordinate.getNeighbor(direction);
+		if(contains(c))
+			return getSquare(c);
 		throw new NoSuchElementException();
 	}
 		

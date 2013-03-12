@@ -61,8 +61,8 @@ public class Game {
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.grid = gridBuilder.buildGrid();
 		
-		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize));
-		Square topRight = grid.getSquare(new Coordinate(hSize, 0));
+		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
+		Square topRight = grid.getSquare(new Coordinate(hSize-1, 0));
 		
 		addPlayer(new Player(bottomLeft, "Player 1"));
 		addPlayer(new Player(topRight, "Player 2"));
