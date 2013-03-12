@@ -3,6 +3,7 @@ package handlers;
 import square.state.StateResult;
 
 import game.Game;
+import gui.ApplicationWindow;
 
 /**
  * The Controller/Handler to end the turn of a player
@@ -49,6 +50,7 @@ public class EndTurnHandler extends Handler{
 		getGame().switchToNextPlayer();
 		getGame().updateStates();
 		getGame().powerFailureSquares();
+		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
 	}
 
 }

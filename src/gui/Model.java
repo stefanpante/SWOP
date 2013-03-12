@@ -9,25 +9,41 @@ import items.Item;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import square.Square;
+import player.Player;
 import utils.Coordinate;
 
 /**
  * @author Jonas Devlieghere
  *
  */
-public class GameModel extends Observable {
+public class Model extends Observable {
 
 	private ArrayList<Coordinate> walls;
 	
 	private Grid grid;
-	
+	private Player currentPlayer;
+
 	private ArrayList<Coordinate> lightTrailBlue;
 	private ArrayList<Coordinate> lightTrailRed;
 	private ArrayList<Item> currentSquareInventory;
 	private ArrayList<Item> currentPlayerInventory;
 	
 	private String message = "";
+	
+	
+	/**
+	 * @return the currentPlayer 
+	 */
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	/**
+	 * @param currentPlayer the currentPlayer to set
+	 */
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+	}
 	
 	/**
 	 * @return the message
@@ -42,13 +58,15 @@ public class GameModel extends Observable {
 	 * @param message the message to set
 	 */
 	public void setMessage(String message) {
+		if(message.length() != 0)
+			update();
 		this.message = message;
 	}
 
 	private Coordinate player1;
 	private Coordinate player2;
 	
-	public GameModel(){
+	public Model(){
 		this.walls = new ArrayList<Coordinate>();
 		this.lightTrailBlue = new ArrayList<Coordinate>();
 		this.lightTrailRed = new ArrayList<Coordinate>();		

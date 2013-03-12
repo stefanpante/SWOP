@@ -2,6 +2,7 @@ package game;
 
 import grid.Grid;
 import grid.GridBuilder;
+import gui.AbstractModel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ import utils.Coordinate;
  * 
  */
 @NotNull
-public class Game {
+public class Game extends AbstractModel {
 	
 	/**
 	 * The Grid.
@@ -57,6 +58,7 @@ public class Game {
 	 * @param vSize		the vertical size of the board
 	 */
 	public Game(int hSize, int vSize){
+		super();
 		players = new ArrayList<Player>();
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.grid = gridBuilder.buildGrid();

@@ -10,6 +10,7 @@ import items.Item;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import square.Direction;
+import utils.Coordinate;
 
 
 //TODO: http://cs.nyu.edu/~yap/classes/visual/03s/lect/l7/ -> misschien handige tutorial
@@ -33,7 +35,7 @@ import square.Direction;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class ApplicationWindow implements ActionListener {
+public class ApplicationWindow extends AbstractView implements ActionListener {
 	
 	public static final int WINDOW_WIDTH 	= 800;
 	public static final int WINDOW_HEIGHT 	= 523;
@@ -46,7 +48,9 @@ public class ApplicationWindow implements ActionListener {
 	private JFrame frame;	
 	private JLabel currentPlayerLabel;
 	
-	public static GameModel MODEL = new GameModel();
+	private GridPanel gridPanel;
+	
+//	public static Model MODEL = new Model();
 
 
 	/**
@@ -97,7 +101,7 @@ public class ApplicationWindow implements ActionListener {
 		frame.setTitle("Objectron");
 
         /* GRID */
-        GridPanel gridPanel = new GridPanel(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
+        this.gridPanel = new GridPanel(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
         frame.getContentPane().add(gridPanel);
@@ -274,6 +278,15 @@ public class ApplicationWindow implements ActionListener {
 		}
 		return button;
 	}
-
+	
+	@Override
+    public void modelPropertyChange(final PropertyChangeEvent evt) {
+    	Object o = evt.getNewValue();
+        if (evt.getPropertyName().equals(Property.WALLS)) {
+        	this.gridPanel.setWalls((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(Property.GRENADES)){
+        	this.gridPanel.setGrenades((ArrayList<Coordinate>)o);
+        }
+    }
 
 }
