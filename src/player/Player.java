@@ -57,6 +57,7 @@ public class Player extends Observable {
 	 * @effect	setStartPosition(startPosition)
 	 * @effect	setName(name)
 	 * @throws	IllegalArgumentException	If the startPosition is null.
+	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
 	public Player(Square startPosition, String name) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
@@ -97,7 +98,10 @@ public class Player extends Observable {
 	 * @return true if the given name is a valid name
 	 * 		   otherwise false
 	 */
-	public boolean isValidName(String name){
+	public static boolean isValidName(String name){
+		if(name == null)
+			return false;
+		
 		return true;
 	}
 	
@@ -124,7 +128,7 @@ public class Player extends Observable {
 	 * @returns	True	If the square is not null and not obstructed.
 	 * 			False	If the square is null or obstructed.
 	 */
-	public boolean isValidStartPosition(Square square) {
+	public static boolean isValidStartPosition(Square square) {
 		if(square == null)
 			return false;
 		
@@ -176,10 +180,28 @@ public class Player extends Observable {
 	 * 			Thrown when adding the item would exceed the size of the inventory
 	 */
 	public void pickUp(Item item) throws IllegalArgumentException {
-		if(!inventory.canHaveAsItem(item)){
+		if(!isValidPickUp(item))
 			throw new IllegalArgumentException("The item cannot be added to the player inventory");
-		}
+		
 		inventory.addItem(item);
+	}
+	
+	/**
+	 * An item is valid if the item is not null and if the inventory can
+	 * have the item.
+	 * 
+	 * @param	item
+	 * @return	True	If item is not null and if the inventory can have the item.
+	 * 			False	If the item is null or if the inventory cannot have the item.
+	 */
+	public boolean isValidPickUp(Item item) {
+		if(item == null)
+			return false;
+		
+		if(!inventory.canHaveAsItem(item))
+			return false;
+		
+		return true;
 	}
 
 	/**
@@ -253,7 +275,7 @@ public class Player extends Observable {
 	 * 					the number of allowed actions
 	 * 			false 	otherwise
 	 */
-	public boolean isValidRemainingActions(int actions){
+	public static boolean isValidRemainingActions(int actions){
 		return actions <= Player.MAX_ALLOWED_ACTIONS;
 	}
 	
