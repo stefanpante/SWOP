@@ -49,6 +49,8 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	 * Paints the grid
 	 */
 	public void paintComponent(Graphics graphics){
+		super.paintComponent(graphics);
+		setBackground(Color.BLACK);
 		graphics.setColor(Color.WHITE);
 	    for (int i = 1; i <= rows-1; i++)
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
@@ -62,10 +64,9 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 		    DrawImage(graphics, coordinate, "cell_lighttrail_red");	
 		for(Coordinate coordinate : ApplicationWindow.MODEL.getAllGrenades())
 		    DrawImage(graphics, coordinate, "lightgrenade");
-			
 		
-		 DrawImage(graphics, ApplicationWindow.MODEL.getPlayer1(), "player_blue");
-		 DrawImage(graphics, ApplicationWindow.MODEL.getPlayer2(), "player_red");
+		DrawImage(graphics, ApplicationWindow.MODEL.getPlayer1(), "player_blue");
+		DrawImage(graphics, ApplicationWindow.MODEL.getPlayer2(), "player_red");
 	}
 	
 	private void DrawImage(Graphics graphics, Coordinate coordinate, String image){

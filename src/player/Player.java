@@ -249,6 +249,17 @@ public class Player extends Observable {
 		moved = false;
 	}
 	
+	/**
+	 * End's the player his turn and sets lost actions.
+	 * 
+	 * @param	lostActions	Number of actions lost for the next turn.
+	 */
+	public void endTurn(int lostActions) {
+		setRemainingActions(Player.MAX_ALLOWED_ACTIONS - lostActions);
+		
+		moved = false;
+	}
+	
 	public LightTrail getLightTrail(){
 		return lightTrail;
 	}

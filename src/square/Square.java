@@ -1,11 +1,6 @@
 package square;
 
-import items.Item;
-import items.LightGrenade;
 import items.SquareInventory;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import square.obstacles.Obstacle;
 import square.state.RegularState;
