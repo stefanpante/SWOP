@@ -15,6 +15,10 @@ public abstract class State {
 		return new StateResult(0, false);
 	}
 	
+	public StateResult resultOnMoveLG() {
+		return new StateResult(0, true);
+	}
+	
 	public StateResult resultOnStart() {
 		return new StateResult(0, false);
 	}
@@ -22,7 +26,4 @@ public abstract class State {
 	public boolean affectsNeighbors() {
 		return false;
 	}
-
-	public abstract StateResult resultOnMoveLG();
-	
 }
