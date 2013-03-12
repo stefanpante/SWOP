@@ -98,7 +98,6 @@ public class ApplicationWindow implements ActionListener {
         GridPanel gridPanel = new GridPanel(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
-        frame.getContentPane().setBackground(Color.BLACK);
         frame.getContentPane().add(gridPanel);
         
         /* SIDEBAR */
