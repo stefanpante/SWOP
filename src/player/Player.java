@@ -148,22 +148,35 @@ public class Player extends Observable {
 	}
 	
 	/**
-	 * 
-	 */
-	
-	/**
 	 * Moves the player to another square
-	 * @param newPosition	The new Position of the player
-	 * @throws IllegalStateException
-	 * 		   thrown if the player is unable to make this move 
+	 * 
+	 * @param	newPosition	The new Position of the player
+	 * @throws	IllegalStateException
+	 * 		  	thrown if the player is unable to make this move 
 	 */
-	//TODO: Needs to throw an IllegalStateException when the newPosition is invalid.
 	public void move(Square newPosition) throws IllegalStateException{
-		if(newPosition.isObstructed()){
+		if(!isValidMove(newPosition))
 			throw new IllegalStateException("Cannot move to a square that is obstructed");
-		}
+		
 		currentPosition = newPosition;
 		moved = true;
+	}
+	
+	/**
+	 * A move is valid when the destination square is not null
+	 * and when it is not obstructed.
+	 * 
+	 * @param	newPosition
+	 * @return	True	If square is not null and not obstructed.
+	 * 			False	If square is null or obstructed.
+	 */
+	public static boolean isValidMove(Square newPosition) {
+		if(newPosition == null)
+			return false;
+		if(newPosition.isObstructed())
+			return false;
+		
+		return true;
 	}
 	
 	public void incrementActions(){

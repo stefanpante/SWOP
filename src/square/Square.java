@@ -51,10 +51,28 @@ public class Square {
 	/**
 	 * State state
 	 * 
-	 * @param regularState
+	 * @param	regularState
+	 * @throws	IllegalArgumentException	When the given state is null.
 	 */
-	public void setState(State state) {
+	public void setState(State state) throws IllegalArgumentException {
+		if(!isValidState(state))
+			throw new IllegalArgumentException("State cannot be null.");
+		
 		this.state = state;
+	}
+	
+	/**
+	 * In order for a state to be valid it must not be null.
+	 * 
+	 * @param	state
+	 * @return	True	If state is not null.
+	 * 			False	If state is null.
+	 */
+	public boolean isValidState(State state) {
+		if(state == null)
+			return false;
+		else
+			return true;
 	}
 
 	

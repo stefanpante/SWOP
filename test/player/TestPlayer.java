@@ -171,16 +171,66 @@ public class TestPlayer {
 	/**
 	 * Test if using an item that is null results in exception.
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=IllegalStateException.class)
 	public void testUseItem() {
 		Player player = new Player(new Square(), new String("Flip"));
 		
-		// To do
+		player.useItem(null);
 	}
 	
 	/**
 	 * Test if using an item which is not contained in the inventory
 	 * results in an exception.
 	 */
+	@Test(expected=IllegalStateException.class)
+	public void testUseItemNotContained() {
+		Player player = new Player(new Square(), new String("Jan"));
+		
+		player.useItem(new LightGrenade());
+	}
+	
+	/**
+	 * Test using a valid item.
+	 */
+	@Test
+	public void testUseValidItem() {
+		LightGrenade lightGrenade = new LightGrenade();
+		Square square = new Square();
+		
+		Player player = new Player(square, new String("Jos"));
+		player.getInventory().addItem(lightGrenade);
+		
+		player.useItem(lightGrenade);
+		assertFalse(player.getInventory().hasItem(lightGrenade));
+	}
+	
+	/**
+	 * Test moving to a square which is obstructed
+	 * must result in an exception.
+	 */
+	@Test(expected=IllegalStateException.class)
+	public void testMoveObstructed() {
+		Square square = new Square();
+		new Wall(new Square(), square);
+		
+		Player player = new Player(new Square(), new String("Johnny"));
+		assertFalse(Player.isValidMove(square));
+		assertFalse(Player.isValidMove(null));
+		
+		player.move(square);
+	}
+	
+	/**
+	 * Test move to a valid square.
+	 */
+	@Test
+	public void testMove() {
+		Square square = new Square();
+		Player player = new Player(new Square(), new String("Johnny"));
+		
+		assertTrue(Player.isValidMove(square));
+		
+		player.move(square);
+	}
 
 }
