@@ -5,7 +5,6 @@ import java.util.Observable;
 import square.Square;
 import square.obstacles.LightTrail;
 
-import items.Inventory;
 import items.Item;
 import items.PlayerInventory;
 

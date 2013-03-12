@@ -1,10 +1,5 @@
 package handlers;
 
-import java.util.Iterator;
-
-import player.Player;
-
-import square.Square;
 import square.state.StateResult;
 
 import game.Game;
