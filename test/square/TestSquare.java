@@ -46,8 +46,8 @@ public class TestSquare {
 	public void testAddItem(){
 		Square sq = new Square();
 		Item lg1 = new LightGrenade();
-		Item lg2 = new LightGrenade();
-		Item lg3 = new LightGrenade();
+		Item lg2 = new Item();
+		Item lg3 = new Item();
 		Item it = new Item();
 
 		sq.getInventory().addItem(lg1);
@@ -76,8 +76,8 @@ public class TestSquare {
 	@Test
 	public void testGetItems() {
 		Square sq = new Square();
-		Item lg1 = new LightGrenade();
-		Item lg2 = new LightGrenade();
+		Item lg1 = new Item();
+		Item lg2 = new Item();
 		Item lg3 = new LightGrenade();
 		Item it = new Item();
 
