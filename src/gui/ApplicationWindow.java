@@ -131,58 +131,37 @@ public class ApplicationWindow implements ActionListener {
         sideBarPanel.add(playerActionPanel);
         playerActionPanel.setLayout(null);
         
-        JButton bNW = makeNavigationButton("arrow_NW.png", "North west", "North west",true);
-        bNW.addActionListener(this);
+        JButton bNW = makeNavigationButton("arrow_NW.png", "NW", "North west",true);
         bNW.setBounds(80,25,40,40);
-        bNW.setActionCommand("NW");
         playerActionPanel.add(bNW);
         
-        JButton bN  = makeNavigationButton("arrow_N.png", "North", "North",true);
+        JButton bN  = makeNavigationButton("arrow_N.png", "N", "North",true);
         bN.setBounds(125,25,40,40);
-        bN.addActionListener(this);
-        bN.setActionCommand("N");
         playerActionPanel.add(bN);
         
-        JButton bNE = makeNavigationButton("arrow_NE.png", "North east", "North east",true);
+        JButton bNE = makeNavigationButton("arrow_NE.png", "NE", "North east",true);
         bNE.setBounds(170,25,40,40);
-        bNE.addActionListener(this);
-        bNE.setActionCommand("NE");
         playerActionPanel.add(bNE);
         
-        JButton bE  = makeNavigationButton("arrow_E.png", "East", "East",true);
-        bE.addActionListener(this);
+        JButton bE  = makeNavigationButton("arrow_E.png", "E", "East",true);
         bE.setBounds(170,70,40,40);
-        bE.setActionCommand("E");
         playerActionPanel.add(bE);
         
-        JButton bW  = makeNavigationButton("arrow_W.png", "West", "West",true);
-        bW.addActionListener(this);
+        JButton bW  = makeNavigationButton("arrow_W.png", "W", "West",true);
         bW.setBounds(80,70,40,40);
-        bW.setActionCommand("W");
         playerActionPanel.add(bW);
         
-        
-
-        JButton bSW = makeNavigationButton("arrow_SW.png", "South west", "South west",true);
-        bSW.addActionListener(this);
+        JButton bSW = makeNavigationButton("arrow_SW.png", "SW", "South west",true);
         bSW.setBounds(80,115,40,40);
-        bSW.setActionCommand("SW");
         playerActionPanel.add(bSW);
         
-        JButton bS  = makeNavigationButton("arrow_S.png", "South", "South",true);
-        bS.addActionListener(this);
+        JButton bS  = makeNavigationButton("arrow_S.png", "S", "South",true);
         bS.setBounds(125,115,40,40);
-        bS.setActionCommand("S");
         playerActionPanel.add(bS);
 
-        JButton bSE = makeNavigationButton("arrow_SE.png", "South east", "South east",true);
-        bSE.addActionListener(this);
+        JButton bSE = makeNavigationButton("arrow_SE.png", "SE", "South east",true);
         bSE.setBounds(170,115,40,40);
-        bSE.setActionCommand("SE");
         playerActionPanel.add(bSE);
-        
-
-
         
         /* Square Inventory Items */
         JPanel inventoryPanel = new JPanel();
@@ -240,8 +219,6 @@ public class ApplicationWindow implements ActionListener {
     	this.frame.setVisible(true);
     }
     
-
-
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
@@ -265,7 +242,11 @@ public class ApplicationWindow implements ActionListener {
 		}else if(is(e,"NW")){
 			direction = Direction.NORTHWEST;
 		}
-		gameHandler.getMoveHandler().move(direction);
+		try{
+			gameHandler.getMoveHandler().move(direction);
+		}catch(Exception exc){
+			MODEL.setMessage(exc.getMessage());
+		}
 		MODEL.update();
 	}
 

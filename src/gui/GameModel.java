@@ -27,6 +27,24 @@ public class GameModel extends Observable {
 	private ArrayList<Item> currentSquareInventory;
 	private ArrayList<Item> currentPlayerInventory;
 	
+	private String message = "";
+	
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		String msg = message;
+		setMessage("");
+		return msg;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	private Coordinate player1;
 	private Coordinate player2;
 	
@@ -45,6 +63,7 @@ public class GameModel extends Observable {
 	public Grid getGrid(){
 		return this.grid;
 	}
+	
 	
 	public ArrayList<Coordinate> getAllGrenades(){
 		ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();

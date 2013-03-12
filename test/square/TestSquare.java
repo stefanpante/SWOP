@@ -50,6 +50,7 @@ public class TestSquare {
 		Item it2 = new Item();
 		Item it3 = new Item();
 
+
 		sq.getInventory().addItem(lg1);
 		assertTrue(sq.getInventory().hasItem(lg1));
 		assertTrue(sq.getInventory().getSize() == 1);
@@ -76,6 +77,7 @@ public class TestSquare {
 	@Test
 	public void testGetItems() {
 		Square sq = new Square();
+
 		Item lg1 = new LightGrenade();
 		Item it1 = new Item();
 		Item it2 = new Item();
