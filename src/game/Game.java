@@ -97,7 +97,13 @@ public class Game {
 	 * @param 	player
 	 * 			The player to be set
 	 */
-	public void addPlayer(Player player){
+	public void addPlayer(Player player) throws NullPointerException{
+		if(player == null){
+			throw new NullPointerException("A Player cant be null");
+		}
+		if(players.contains(player)){
+			throw new IllegalStateException("Two players should never be the same object");
+		}
 		players.add(player);
 	}
 

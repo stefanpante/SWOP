@@ -64,7 +64,8 @@ public class TestGridBuilder {
 		gb.constructWalls();
 		Grid grid = gb.getGrid();
 		ArrayList<Coordinate> wallsPos = gb.getWallCoordinates();
-		Coordinate lowerleft = new Coordinate(0, vSize-1);
+		Coordinate lowerleft = new Coordinate(0, vSize -1);
+
 		assertFalse(grid.getSquare(lowerleft).isObstructed());
 		assertFalse(wallsPos.contains(lowerleft));
 		Coordinate upperRight = new Coordinate(hSize-1, 0);

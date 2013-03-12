@@ -9,7 +9,7 @@ import utils.Coordinate;
 
 //TODO look if this test can be overhauled to use the new neighbor implementation.
 @Deprecated
-public class TestCoordinate2D {
+public class TestCoordinate {
 
 	@Test
 	public void testToString() {
@@ -17,7 +17,7 @@ public class TestCoordinate2D {
 		assertEquals(coord.toString(), new String("(1,1)"));
 	}
 	
-	public TestCoordinate2D() {
+	public TestCoordinate() {
 		
 	}
 	
@@ -37,13 +37,13 @@ public class TestCoordinate2D {
 	public void TestGetNeighbour() {
 		Coordinate coordinate = new Coordinate(1,1);
 		
-		Coordinate neighborNorthEast = new Coordinate(2,2);
-		Coordinate neighborNorth = new Coordinate(1,2);
-		Coordinate neighborNorthWest = new Coordinate(0,2);
+		Coordinate neighborNorthEast = new Coordinate(2,0);
+		Coordinate neighborNorth = new Coordinate(1,0);
+		Coordinate neighborNorthWest = new Coordinate(0,0);
 		Coordinate neighborWest = new Coordinate(0,1);
-		Coordinate neighborSouthWest = new Coordinate(0,0);
-		Coordinate neighborSouth = new Coordinate(1,0);
-		Coordinate neighborSouthEast = new Coordinate(2,0);
+		Coordinate neighborSouthWest = new Coordinate(0,2);
+		Coordinate neighborSouth = new Coordinate(1,2);
+		Coordinate neighborSouthEast = new Coordinate(2,2);
 		Coordinate neighborEast = new Coordinate(2,1);
 		
 		assertTrue(neighborNorthEast.equals(coordinate.getNeighbor(Direction.NORTHEAST)));
@@ -60,14 +60,14 @@ public class TestCoordinate2D {
 	public void TestGetNeighbourNegative() {
 		Coordinate coordinate = new Coordinate(-1,0);
 		
-		Coordinate neighborNorthEast = new Coordinate(0,1);
-		Coordinate neighborNorth = new Coordinate(-1,1); 
-		Coordinate neighborNorthWest = new Coordinate(-2,1);
-		Coordinate neighborWest = new Coordinate(-2,0); 
-		Coordinate neighborSouthWest = new Coordinate(-2,-1); 
-		Coordinate neighborSouth = new Coordinate(-1,-1); 
-		Coordinate neighborSouthEast = new Coordinate(0,-1); 
-		Coordinate neighborEast = new Coordinate(0,0); 
+		Coordinate neighborNorthEast = new Coordinate(0,-1);
+		Coordinate neighborNorth = new Coordinate(-1,-1);
+		Coordinate neighborNorthWest = new Coordinate(-2,-1);
+		Coordinate neighborWest = new Coordinate(-2,0);
+		Coordinate neighborSouthWest = new Coordinate(-2,1);
+		Coordinate neighborSouth = new Coordinate(-1,1);
+		Coordinate neighborSouthEast = new Coordinate(0,1);
+		Coordinate neighborEast = new Coordinate(0,0);
 		
 		assertTrue(neighborNorthEast.equals(coordinate.getNeighbor(Direction.NORTHEAST)));
 		assertTrue(neighborNorth.equals(coordinate.getNeighbor(Direction.NORTH)));

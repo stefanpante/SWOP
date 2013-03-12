@@ -8,9 +8,18 @@ import org.junit.Test;
 
 import player.Player;
 
+/**
+ * 
+ * Scenario test for the use case "End Turn"
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ */
 public class EndTurnHandlerTest {
 	
 	
+	/**
+	 * Tests the check to proceed
+	 */
 	@Test
 	public void checkToProceedTest(){
 		Game game = new Game(10,10);
@@ -23,6 +32,9 @@ public class EndTurnHandlerTest {
 		assertFalse(mh.checkToProceed());
 	}
 	
+	/**
+	 * Tests the basic case of endTurn
+	 */
 	@Test
 	public void EndTurnTest(){
 		
