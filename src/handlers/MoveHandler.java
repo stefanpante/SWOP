@@ -8,6 +8,7 @@ import square.Direction;
 import square.Square;
 import square.state.StateResult;
 import game.Game;
+import gui.ApplicationWindow;
 
 /**
  * Controller/Handler which controls the player move use case
@@ -47,12 +48,9 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException{
-		
+	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {	
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();		
-		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); //Throws NoSuchElementException
-	
-		// cannot move to square were other player is positioned
+		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); //Throws NoSuchElementException		// cannot move to square were other player is positioned
 		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
 		for(Player p: otherPlayers){
 			if(p.getPosition().equals(newPosition))
@@ -72,12 +70,12 @@ public class MoveHandler extends Handler {
 			int remaining = currentRemainingActions + 3 - stateResult.getLostActions();
 			getGame().getCurrentPlayer().setRemainingActions(remaining);
 			getGame().switchToNextPlayer();
-		}
-		else{
+		}else{
 			getGame().getCurrentPlayer().setRemainingActions(currentRemainingActions -1);
 		}
-		
-		
+		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
+		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
+
 	}
 
 	/**
@@ -85,6 +83,10 @@ public class MoveHandler extends Handler {
 	 * @return 	true if the move causes the player to win. 
 	 */
 	public boolean endAction(){
+		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
+		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
+
+		
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 

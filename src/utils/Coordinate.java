@@ -164,21 +164,21 @@ public class Coordinate {
 		int y = getY();
 		switch (direction) {
 		case NORTH:
-			return new Coordinate(x, y+1);
+			return new Coordinate(x, y-1);
 		case NORTHEAST:
-			return new Coordinate(x+1, y+1);
+			return new Coordinate(x+1, y-1);
 		case EAST:
 			return new Coordinate(x+1, y);
 		case SOUTHEAST:
-			return new Coordinate(x+1, y-1);
+			return new Coordinate(x+1, y+1);
 		case SOUTH:
-			return new Coordinate(x, y-1);
+			return new Coordinate(x, y+1);
 		case SOUTHWEST:
-			return new Coordinate(x-1, y-1);
+			return new Coordinate(x-1, y+1);
 		case WEST:
 			return new Coordinate(x-1, y);
 		case NORTHWEST:
-			return new Coordinate(x-1, y+1);
+			return new Coordinate(x-1, y-1);
 		default:
 			throw new IllegalArgumentException("The given direction is not valid" + direction ); 
 		}

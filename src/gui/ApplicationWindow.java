@@ -251,6 +251,8 @@ public class ApplicationWindow implements ActionListener {
 		}else if(is(e,"NW")){
 			direction = Direction.NORTHWEST;
 		}
+		gameHandler.getMoveHandler().move(direction);
+		MODEL.update();
 	}
 
 	private boolean is(ActionEvent e,String string){

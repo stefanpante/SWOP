@@ -58,45 +58,45 @@ public class GameModel extends Observable {
  	
 	public void addToLightTrailBlue(Coordinate coordinate){
 		lightTrailBlue.add(coordinate);
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public void addToLightTrailRed(Coordinate coordinate){
 		lightTrailRed.add(coordinate);
-		setChanged();
-		notifyObservers();
+		update();
 	}
-	
 		
 	public void setPlayer1(Coordinate coordinate){
 		this.player1 = coordinate;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public void setPlayer2(Coordinate coordinate){
 		this.player2 = coordinate;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public void setWalls(ArrayList<Coordinate> walls){
 		this.walls = walls;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public void setLightTrailBlue(ArrayList<Coordinate> lightTrail){
 		this.lightTrailBlue = lightTrail;
+		update();
+	}
+
+	/**
+	 * 
+	 */
+	public void update() {
 		setChanged();
 		notifyObservers();
 	}
 	
 	public void setLightTrailRed(ArrayList<Coordinate> lightTrail){
 		this.lightTrailRed = lightTrail;
-		setChanged();
-		notifyObservers();
+		update();
 	}
 	
 	public ArrayList<Coordinate> getWalls(){
