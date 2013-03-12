@@ -3,15 +3,20 @@ package handlers;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import items.LightGrenade;
 import game.Game;
+import grid.Grid;
 
 import org.junit.Test;
 
+import player.LightTrail;
 import player.Player;
 import square.Direction;
+import square.Square;
+import square.obstacles.Wall;
 
 /**
  * 
@@ -73,6 +78,7 @@ public class UseItemHandlerTest {
 		assertTrue(lg.isActive());
 		
 	}
+	
 	/**
 	 * Test the placement of a grenade when there is already an active
 	 * light grenade on the square
@@ -117,5 +123,48 @@ public class UseItemHandlerTest {
 		uh.useItem(lg);
 		
 	}
-
+	
+	/**
+	 * Try to place an item on a wall object
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testPlaceOnWall(){
+		LightGrenade lg = new LightGrenade();
+		Game game = new Game(10, 10);
+		Grid grid = game.getGrid();
+		Square obstructedSquare = null;
+		for(Square square: grid.getAllSquares()){
+			if(square.isObstructed() && square.getObstacle() instanceof Wall){
+				obstructedSquare = square;
+				break;
+			}
+		}
+		
+		game.getCurrentPlayer().move(obstructedSquare);
+		// Should never get to this.
+		UseItemHandler uh = new UseItemHandler(game);
+		game.getCurrentPlayer().getInventory().addItem(lg);
+		uh.useItem(lg);
+		
+	}
+	
+	/**
+	 * Try to place an item on a LightTrail object 
+	 */
+	@Test(expected = IllegalStateException.class)
+	public void testPlaceOnLightTrail(){
+		LightGrenade lg = new LightGrenade();
+		Game game = new Game(10, 10);
+		Grid grid = game.getGrid();
+		Random random = new Random();
+		ArrayList<Square> squaresgrid = grid.getAllSquares();
+		Square obstructedSquare = squaresgrid.get(random.nextInt(squaresgrid.size()));
+		LightTrail lt = new LightTrail();
+		lt.addSquare(obstructedSquare);
+		game.getCurrentPlayer().move(obstructedSquare);
+		// Should never get to this.
+		UseItemHandler uh = new UseItemHandler(game);
+		game.getCurrentPlayer().getInventory().addItem(lg);
+		uh.useItem(lg);
+	}
 }
