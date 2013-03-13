@@ -23,7 +23,7 @@ public class EndTurnHandlerTest {
 	@Test
 	public void checkToProceedTest(){
 		Game game = new Game(10,10);
-		MoveHandler mh = new MoveHandler(game);
+		MoveHandler mh = new MoveHandler(game,null);
 		assertTrue(mh.checkToProceed());
 		
 		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)

@@ -34,7 +34,7 @@ public class UseItemHandlerTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testCheckToProceed(){
 		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game);
+		UseItemHandler uh = new UseItemHandler(game,null);
 		assertTrue(uh.checkToProceed());
 		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS - 1; i++)
 			game.getCurrentPlayer().incrementActions();
@@ -48,7 +48,7 @@ public class UseItemHandlerTest {
 	@Test
 	public void testPlaceGrenade(){
 		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game);
+		UseItemHandler uh = new UseItemHandler(game,null);
 		
 		LightGrenade lg = new LightGrenade();
 		game.getCurrentPlayer().getInventory().addItem(lg);
@@ -66,7 +66,7 @@ public class UseItemHandlerTest {
 		
 		
 		// Item should become active when moved
-		MoveHandler mh = new MoveHandler(game);
+		MoveHandler mh = new MoveHandler(game,null);
 		Direction[] directions = Direction.values();
 		Random random = new Random();
 		while(!game.getCurrentPlayer().hasMoved()){
@@ -87,7 +87,7 @@ public class UseItemHandlerTest {
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceGrenade2(){
 		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game);
+		UseItemHandler uh = new UseItemHandler(game,null);
 		
 		LightGrenade lg2 = new LightGrenade();
 		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
@@ -109,7 +109,7 @@ public class UseItemHandlerTest {
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceGrenade3(){
 		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game);
+		UseItemHandler uh = new UseItemHandler(game,null);
 		
 		LightGrenade lg2 = new LightGrenade();
 		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
@@ -143,7 +143,7 @@ public class UseItemHandlerTest {
 		
 		game.getCurrentPlayer().move(obstructedSquare);
 		// Should never get to this.
-		UseItemHandler uh = new UseItemHandler(game);
+		UseItemHandler uh = new UseItemHandler(game,null);
 		game.getCurrentPlayer().getInventory().addItem(lg);
 		uh.useItem(lg);
 		
@@ -164,7 +164,7 @@ public class UseItemHandlerTest {
 		lt.addSquare(obstructedSquare);
 		game.getCurrentPlayer().move(obstructedSquare);
 		// Should never get to this.
-		UseItemHandler uh = new UseItemHandler(game);
+		UseItemHandler uh = new UseItemHandler(game,null);
 		game.getCurrentPlayer().getInventory().addItem(lg);
 		uh.useItem(lg);
 	}

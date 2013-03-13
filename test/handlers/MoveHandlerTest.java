@@ -35,7 +35,7 @@ public class MoveHandlerTest {
 	@Before
 	public void init(){
 		game = new Game(10,10);
-		mh = new MoveHandler(game);
+		mh = new MoveHandler(game,null);
 	}
 	
 	/**
