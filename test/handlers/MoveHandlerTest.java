@@ -131,7 +131,7 @@ public class MoveHandlerTest {
 		Random random = new Random();
 		Direction direction = null;
 		Square next = null;
-		while(next == null || next.isObstructed()){ 
+		while(next == null || next.isObstructed()|| next.getInventory().hasLightGrenade()){ 
 			direction = directions[random.nextInt(directions.length)];
 			try{
 			next = game.getGrid().getNeighbor(currentPosition, direction);
@@ -173,7 +173,7 @@ public class MoveHandlerTest {
 		Random random = new Random();
 		Direction direction = null;
 		Square next = null;
-		while(next == null || next.isObstructed()){ 
+		while(next == null || next.isObstructed() || next.getInventory().hasLightGrenade()){ 
 			direction = directions[random.nextInt(directions.length)];
 			try{
 			next = game.getGrid().getNeighbor(currentPosition, direction);
@@ -315,11 +315,33 @@ public class MoveHandlerTest {
 	 * Tests if the endAction method is valid
 	 */
 	@Test
-	public void testEndAction(){
-		// TODO: rekening houden met de lighttrail en het feit dat de andere player een obstacle is.
-		assertFalse(mh.canEndAction());
+	public void testCanEndAction(){
+		
+		assertFalse(mh.wins());
+		
+		Square currentPosition = game.getCurrentPlayer().getStartPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		
+		Direction direction = null;
+		Square next = null;
+		while(next == null || next.isObstructed()){ 
+			direction = directions[random.nextInt(directions.length)];
+			try{
+			next = game.getGrid().getNeighbor(currentPosition, direction);
+			}
+			catch(Exception e){}
+		}
+		
+		game.getNextPlayer().move(next);
+		// to remove the lighttrail 
+		game.getNextPlayer().decrementActions();
+		game.getNextPlayer().decrementActions();
+		game.getNextPlayer().decrementActions();
+		game.getNextPlayer().decrementActions();
+	
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
-		assertTrue(mh.canEndAction());
+		assertTrue(mh.wins());
 	}
 
 
