@@ -75,7 +75,7 @@ public class Player extends Observable implements IObstacle {
 		this.setName(name);
 		this.setInventory(new PlayerInventory());
 		
-		this.remainingActions = 0;
+		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
 	}
 	
