@@ -148,7 +148,7 @@ public class MoveHandlerTest {
 		//assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS -1);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4 + Player.MAX_ALLOWED_ACTIONS);
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions);
 		
 		
 		
@@ -190,7 +190,7 @@ public class MoveHandlerTest {
 		mh.move(direction);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 2);
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4);
 	}
 	
 	/**
@@ -314,7 +314,7 @@ public class MoveHandlerTest {
 	 * Tests if the endAction method is valid
 	 */
 	@Test
-	public void testCanEndAction(){
+	public void testHasWon(){
 		
 		assertFalse(mh.hasWon());
 		
