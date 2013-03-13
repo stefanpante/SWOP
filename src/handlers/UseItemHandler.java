@@ -47,13 +47,10 @@ public class UseItemHandler extends Handler {
 	 * Or when the player cannot use the item on the square.
 	 */
 	public void useItem(Item item) {
-		try{
-			getGame().getCurrentPlayer().useItem(item);
-		} catch(IllegalStateException e) {
-			System.err.println("Item is not in player his inventory:" + item);
-		} catch(IllegalArgumentException e) {
-			System.err.println("Item cannot be used on the square.");
-		}
+		getGame().getCurrentPlayer().useItem(item);
+    	firePropertyChange(GameHandler.GRENADES_PROPERTY, super.getGrenadeLocations());
+    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, super.getPlayerItems());
+
 	}
 	
 	
