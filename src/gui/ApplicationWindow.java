@@ -127,7 +127,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         sideBarPanel.add(currentPlayerPanel);
         
         currentPlayerLabel = new JLabel();
-        currentPlayerLabel.setText("Speler 1");
+        currentPlayerLabel.setText("...");
         currentPlayerPanel.add(currentPlayerLabel);
         
         /* Action */
@@ -315,7 +315,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
         	this.gridPanel.setPlayers((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-        	this.gridPanel.setCurrentPlayer((Coordinate)o);  
+        	currentPlayerLabel.setText((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){

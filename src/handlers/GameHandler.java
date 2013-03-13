@@ -82,11 +82,11 @@ public class GameHandler extends Handler {
     	ArrayList<Coordinate> grenades = super.getGrenadeLocations();
     	ArrayList<Coordinate> walls = super.getWallLocations();
     	ArrayList<Coordinate> players = super.getPlayerLocations();
-    	
+    	walls.removeAll(players);
     	firePropertyChange(GRENADES_PROPERTY, grenades);
     	firePropertyChange(WALLS_PROPERTY, walls);
     	firePropertyChange(PLAYERS_PROPERTY, players);
-    	firePropertyChange(CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    	firePropertyChange(CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 	}
 
 	/**
