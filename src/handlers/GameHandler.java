@@ -89,6 +89,7 @@ public class GameHandler extends Handler {
     	firePropertyChange(WALLS_PROPERTY, walls);
     	firePropertyChange(PLAYERS_PROPERTY, players);
     	firePropertyChange(CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
+    	firePropertyChange(LIGHT_TRAILS_PROPERTY, super.getLightTrailLocations());
 	}
 
 	/**
