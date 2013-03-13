@@ -260,7 +260,29 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveToPowerFailure(){
-		fail("Not yet implemented");
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
+		
+		Player currentPlayer = game.getCurrentPlayer();
+		
+		int remainingActions = currentPlayer.getRemainingActions();
+		// Place a grenade on a position near the player
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(currentPosition, direction);
+		}
+		
+		next.setState(new PowerFailure());
+		mh.move(direction);
+		// Test the effect of the LightGrenade
+		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
+		assertEquals(currentPlayer.getRemainingActions(), 2);
 	}
 	
 	/**
