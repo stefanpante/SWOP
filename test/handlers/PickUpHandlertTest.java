@@ -24,7 +24,7 @@ public class PickUpHandlertTest {
 	@Test(expected = IllegalStateException.class)
 	public void EmptyPickUpTest(){
 		Game game = new Game(10,10);
-		PickUpHandler ph = new PickUpHandler(game);
+		PickUpHandler ph = new PickUpHandler(game,null);
 		assertTrue(game.getCurrentPlayer().getPosition().getInventory().isEmpty());
 		ph.pickUp(new LightGrenade());
 		
@@ -37,7 +37,7 @@ public class PickUpHandlertTest {
 	@Test(expected = IllegalStateException.class)
 	public void pickUpTest(){
 		Game game = new Game(10,10);
-		PickUpHandler ph = new PickUpHandler(game);
+		PickUpHandler ph = new PickUpHandler(game,null);
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 		currentPosition.getInventory().addItem(lg);
@@ -52,7 +52,7 @@ public class PickUpHandlertTest {
 	@Test(expected = IllegalStateException.class)
 	public void pickUpFullInventoryTest(){
 		Game game = new Game(10,10);
-		PickUpHandler ph = new PickUpHandler(game);
+		PickUpHandler ph = new PickUpHandler(game,null);
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 		currentPosition.getInventory().addItem(lg);
