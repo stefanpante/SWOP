@@ -79,7 +79,7 @@ public class MoveHandler extends Handler {
     		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
     	}
     	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
-    	System.out.println(getGame().getCurrentPlayer().getPosition());
+    	System.out.println(getGame().getCurrentPlayer() +" - " +getGame().getCurrentPlayer().getPosition().hashCode());
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory().getAllItems());
 	}
 
