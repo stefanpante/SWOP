@@ -5,9 +5,10 @@ package grid;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Test;
 
-import player.LightTrail;
+import square.obstacles.LightTrail;
 
 import square.Direction;
 import square.Square;

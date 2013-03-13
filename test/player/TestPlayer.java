@@ -235,5 +235,27 @@ public class TestPlayer {
 		player.move(square);
 		assertTrue(player.hasMoved());
 	}
+	
+	/**
+	 * Test move, the square the player is moving to must become
+	 * an obstacle. And the square moving from must become non-obstructed.
+	 */
+	@Test
+	public void testMoveObstacle() {
+		Square square = new Square();
+		Square squareTo = new Square();
+		Player player = new Player(square, new String("Jan met de Pet"));
+		
+		assertTrue(square.isObstructed());
+		assertFalse(squareTo.isObstructed());
+		assertEquals(square.getObstacle(), player);
+		
+		player.move(squareTo);
+		
+		assertFalse(square.isObstructed());
+		assertTrue(squareTo.isObstructed());
+		assertEquals(squareTo.getObstacle(), player);
+		
+	}
 
 }

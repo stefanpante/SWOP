@@ -15,8 +15,10 @@ import player.Player;
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
+import square.state.PowerFailure;
 
 import game.Game;
+import grid.GridBuilder;
 
 /**
  * <Scenario test for the Use Case "Move".
@@ -122,7 +124,35 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveOntoActiveLightGrenade(){
-		fail("Not yet implemented");
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
+		
+		Player currentPlayer = game.getCurrentPlayer();
+		
+		int remainingActions = currentPlayer.getRemainingActions();
+		// Place a grenade on a position near the player
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(currentPosition, direction);
+		}
+		
+		LightGrenade lg = new LightGrenade();
+		next.getInventory().addItem(lg);
+		lg.activate();
+		
+		mh.move(direction);
+		// Test the effect of the LightGrenade
+		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 1);
+		
+		
+		
 	}
 	
 	/**
@@ -131,7 +161,33 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveOntoActiveLightGrenadePowerFailure(){
-		fail("Not yet implemented");
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
+		
+		Player currentPlayer = game.getCurrentPlayer();
+		
+		int remainingActions = currentPlayer.getRemainingActions();
+		// Place a grenade on a position near the player
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(currentPosition, direction);
+		}
+		
+		next.setState(new PowerFailure());
+		LightGrenade lg = new LightGrenade();
+		next.getInventory().addItem(lg);
+		lg.activate();
+		
+		mh.move(direction);
+		// Test the effect of the LightGrenade
+		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 2);
 	}
 	
 	/**
@@ -172,7 +228,31 @@ public class MoveHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testMoveToOtherPlayer() {
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
 		
+		Player otherPlayer =  game.getNextPlayer();
+		
+		// Search a neighboring square of the other player position where the current player
+		// can be situated, to test the move to.
+		Square otherPos = otherPlayer.getPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		
+		Square next = game.getGrid().getNeighbor(otherPos, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(otherPos, direction);
+		}
+		
+		Player currentPlayer = game.getCurrentPlayer();
+		currentPlayer.move(next);
+		
+		assertTrue(game.getCurrentPlayer() == currentPlayer);
+		mh.move(direction.opposite());
+				
 	}
 	
 	/**

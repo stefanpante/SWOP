@@ -27,7 +27,7 @@ public class EndTurnHandlerTest {
 		assertTrue(mh.checkToProceed());
 		
 		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
-			game.getCurrentPlayer().incrementActions();
+			game.getCurrentPlayer().decrementActions();
 		
 		assertFalse(mh.checkToProceed());
 	}
