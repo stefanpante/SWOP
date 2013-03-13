@@ -62,6 +62,7 @@ public class MoveHandler extends Handler {
 			Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
 			setRemainingActions(newPosition);
 			getGame().getCurrentPlayer().move(newPosition);
+			
 			currentPosition.getInventory().activateAllItems();
 			
 			
