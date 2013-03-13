@@ -24,6 +24,11 @@ import utils.Coordinate;
  */
 public class GameHandler extends Handler {
 	
+	public static final String WALLS_PROPERTY 			= "Walls";
+	public static final String GRENADES_PROPERTY 		= "Grenades";	
+	public static final String PLAYERS_PROPERTY 		= "Players";	
+	public static final String CURRENT_PLAYER_PROPERTY 	= "CurrentPlayer";
+	
 	/**
 	 *  Initializes the game handler
 	 * 
@@ -52,11 +57,27 @@ public class GameHandler extends Handler {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 			ApplicationWindow window = new ApplicationWindow(this);
+			addPropertyChangeListener(window);
 			window.setVisible();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    	// REMOVE THIS SHIT
+    	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
+    	ArrayList<Coordinate> walls = new ArrayList<Coordinate>();
+    	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+    		Square square = getGame().getGrid().getSquare(coordinate);
+    		if(square.getInventory().hasLightGrenade()){
+    			grenades.add(coordinate);
+    		}else if(square.isObstructed()){
+    			walls.add(coordinate);
+    		}
+    			
+    	}
 		
+    	firePropertyChange(GRENADES_PROPERTY, grenades);
+    	firePropertyChange(WALLS_PROPERTY, walls);
+    	
     	this.endTurnHandler = new EndTurnHandler(getGame());
     	this.moveHandler = new MoveHandler(getGame());
     	this.pickUpHandler = new PickUpHandler(getGame());
@@ -101,6 +122,7 @@ public class GameHandler extends Handler {
 	 */
 	public void createGame(int hSize, int vSize) {
 		setGame(new Game(hSize, vSize));
+		
 //		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
 //		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
 	}

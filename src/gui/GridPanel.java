@@ -34,6 +34,8 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	private ArrayList<Coordinate> grenades;
 	private ArrayList<Coordinate> players;
 	
+	private Coordinate currentPlayer;
+	
 	/**
 	 * 
 	 * Creates a new GridCanvas with the specified width and height in pixels.
@@ -50,6 +52,13 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 		this.cols = cols;
 		this.rowHeight = height/rows;
 		this.colWidth = width/cols;
+		this.walls = getEmptyCoordinateList();
+		this.grenades = getEmptyCoordinateList();
+		this.players = getEmptyCoordinateList();
+	}
+	
+	private ArrayList<Coordinate> getEmptyCoordinateList(){
+		return new ArrayList<Coordinate>();
 	}
 	
 	/**
@@ -65,6 +74,12 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
+	   
+	    /* Current player */
+	    if(currentPlayer != null){
+		    setBackground(Color.GRAY);
+		    graphics.drawRect(currentPlayer.getX()*colWidth, currentPlayer.getY()*rowHeight, colWidth, rowHeight);
+	    }
 	    
 	    /* Draw walls & grenades */
 	    for(Coordinate coordinate : walls)
@@ -81,8 +96,6 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 		/* Draw Players */
 		for(int i = 0; i < players.size(); i++)
 			DrawImage(graphics, players.get(i), "player_"+i);
-		
-
 	}
 	
 	private void DrawImage(Graphics graphics, Coordinate coordinate, String image){
@@ -133,9 +146,24 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	/**
 	 * @param o
 	 */
-	public void setGrenades(ArrayList<Coordinate> o) {
+	public void setGrenades(ArrayList<Coordinate> grenades) {
 		this.grenades = grenades;
 		this.repaint();		
 	}
+
+	/**
+	 * @param o
+	 */
+	public void setPlayers(ArrayList<Coordinate> players) {
+		this.players = players;
+		this.repaint();		
+	}
+	
+	public void setCurrentPlayer(Coordinate coordinate){
+		this.currentPlayer = coordinate;
+		this.repaint();
+	}
+	
+	
 
 }
