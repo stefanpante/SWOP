@@ -34,7 +34,7 @@ public class PickUpHandlertTest {
 	 * Test the pick up when there is an item on the square 
 	 * and the player's inventory is not full
 	 */
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void pickUpTest(){
 		Game game = new Game(10,10);
 		PickUpHandler ph = new PickUpHandler(game,null);
@@ -49,7 +49,7 @@ public class PickUpHandlertTest {
 	 * Test the pick up when there is an item on the square,
 	 * but the inventory of the player is full.
 	 */
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void pickUpFullInventoryTest(){
 		Game game = new Game(10,10);
 		PickUpHandler ph = new PickUpHandler(game,null);
