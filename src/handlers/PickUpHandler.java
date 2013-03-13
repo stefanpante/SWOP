@@ -53,6 +53,7 @@ public class PickUpHandler extends Handler {
 		//TODO: getGame().getCurrentPlayer().incrementActions();
 		
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, super.getGrenadeLocations());
+    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, super.getPlayerItems());
 	}
 	
 	/**
