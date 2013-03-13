@@ -60,7 +60,7 @@ public abstract class Handler {
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);
     		
-    		if(square.getInventory().hasLightGrenade())
+    		if(square.getInventory().hasLightGrenade() && !square.getInventory().hasActiveItem())
     			grenades.add(coordinate);
     	}
     	
@@ -137,5 +137,11 @@ public abstract class Handler {
 	 */
 	protected void setGame(Game game) {
 		this.game = game;
+	}
+	
+	public void endAction(){
+    	firePropertyChange(GameHandler.GRENADES_PROPERTY, getGrenadeLocations());
+    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
+    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getPlayerItems());   	
 	}
 }
