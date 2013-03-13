@@ -28,7 +28,7 @@ public class EndTurnHandlerTest {
 	@Test
 	public void checkToProceedTest(){
 		Game game = new Game(10,10);
-		EndTurnHandler eh = new EndTurnHandler(game);
+		EndTurnHandler eh = new EndTurnHandler(game, null);
 		assertTrue(eh.checkToProceed());
 		
 		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
@@ -41,9 +41,9 @@ public class EndTurnHandlerTest {
 	@Test 
 	public void hasMoveTest(){	
 		Game game = new Game(10,10);
-		EndTurnHandler eh = new EndTurnHandler(game);
+		EndTurnHandler eh = new EndTurnHandler(game, null);
 		assertFalse(eh.hasMoved());
-		MoveHandler mh = new MoveHandler(game);
+		MoveHandler mh = new MoveHandler(game, null);
 		
 		
 		Direction direction = getValidMoveDirection(game);
