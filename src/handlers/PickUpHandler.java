@@ -57,6 +57,7 @@ public class PickUpHandler extends Handler {
 			getGame().getCurrentPlayer().pickUp(item);
 			getGame().getCurrentPlayer().incrementActions();
 		}
+		
     	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);

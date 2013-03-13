@@ -165,13 +165,10 @@ public class Player extends Observable implements IObstacle {
 	public boolean isValidPickUp(Item item) {
 		if(item == null)
 			return false;
-		
 		if(!inventory.canHaveAsItem(item))
 			return false;
-		
-		if(!currentPosition.getInventory().hasItem(item))
-			return false;
-		
+//		if(!getPosition().getInventory().hasItem(item))
+//			return false;
 		return true;
 	}
 	
