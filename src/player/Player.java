@@ -165,12 +165,11 @@ public class Player extends Observable implements IObstacle {
 	 * 		  	thrown if the player is unable to make this move 
 	 */
 	public void move(Square newPosition) throws IllegalStateException{
-		if(!isValidMove(newPosition)){
+		if(!isValidMove(newPosition))
 			throw new IllegalStateException("Cannot move to a square that is obstructed");
-		}
+		
 		removeSquare(this.getPosition());
 		addSquare(newPosition);
-		currentPosition = newPosition;
 		moved = true;
 	}
 	
@@ -377,15 +376,19 @@ public class Player extends Observable implements IObstacle {
 	 * Removes the given square as a covered square of this obstacle.
 	 */
 	public void removeSquare(Square square) throws IllegalArgumentException {
-		if(!square.equals(currentPosition)){
+		if(!square.equals(currentPosition))
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
-		}
+		
 		currentPosition = null;
 		square.setObstacle(null);
 	}
 
 	/**
+	 * A new position square is valid when it is not null and
+	 * when it does not equal the current square.
 	 * 
+	 * @returns	True	Square is not null and does not equal current position.
+	 * @returns	False	Square is null or equals current position.
 	 */
 	public boolean isValidSquare(Square square) {
 		if(square == null)
