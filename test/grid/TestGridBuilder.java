@@ -89,7 +89,8 @@ public class TestGridBuilder {
 				squareSet.add(sq);
 				for(Direction dir: Direction.values()){
 					try{
-						squareSet.add(grid.getNeighbor(sq, dir));
+						Square neighbor = grid.getNeighbor(sq, dir);
+							squareSet.add(neighbor);
 					} catch(NoSuchElementException e){
 						//NOOP
 					}
