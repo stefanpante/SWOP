@@ -23,7 +23,6 @@ public abstract class Handler {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-    	System.out.println(listener +" added as PropertyChangeListener");
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 

@@ -182,11 +182,19 @@ public class Game extends AbstractModel {
 	 * @return	Returns all players, except the current player
 	 */
 	public ArrayList<Player> getOtherPlayers(){
-		ArrayList<Player> otherPlayers = new ArrayList<Player>(players);
+		ArrayList<Player> otherPlayers = getPlayers();
 		otherPlayers.remove(currentPlayer);
-		
 		return otherPlayers;
 	}
+	
+	/**
+	 * Returns all players
+	 * @return Returns all players of this game
+	 */
+	public ArrayList<Player> getPlayers(){
+		return new ArrayList<Player>(this.players);
+	}
+	
 	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
 	 * @param 	currentPlayer

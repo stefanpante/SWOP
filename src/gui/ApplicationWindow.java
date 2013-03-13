@@ -287,8 +287,11 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	this.gridPanel.setGrenades((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
         	this.gridPanel.setPlayers((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
+        	this.gridPanel.setCurrentPlayer((Coordinate)o);        	
+        }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
+        	JOptionPane.showMessageDialog(frame, (String)o);
         }
-        
     }
 
 }

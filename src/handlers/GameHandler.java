@@ -28,6 +28,7 @@ public class GameHandler extends Handler {
 	public static final String GRENADES_PROPERTY 		= "Grenades";	
 	public static final String PLAYERS_PROPERTY 		= "Players";	
 	public static final String CURRENT_PLAYER_PROPERTY 	= "CurrentPlayer";
+	public static final Object MESSAGE_PROPERTY 		= "Message";
 	
 	/**
 	 *  Initializes the game handler
@@ -62,9 +63,20 @@ public class GameHandler extends Handler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	// REMOVE THIS SHIT
+    	this.endTurnHandler = new EndTurnHandler(getGame());
+    	this.moveHandler = new MoveHandler(getGame());
+    	this.pickUpHandler = new PickUpHandler(getGame());
+    	this.useItemHandler = new UseItemHandler(getGame());
+    	populateGui();
+    }
+    
+    /**
+	 * 
+	 */
+	private void populateGui() {
     	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
     	ArrayList<Coordinate> walls = new ArrayList<Coordinate>();
+    	ArrayList<Coordinate> players = new ArrayList<Coordinate>();
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);
     		if(square.getInventory().hasLightGrenade()){
@@ -74,17 +86,17 @@ public class GameHandler extends Handler {
     		}
     			
     	}
-		
+    	for(Player player : getGame().getPlayers()){
+    		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
+    	}
+    	walls.removeAll(players);
     	firePropertyChange(GRENADES_PROPERTY, grenades);
     	firePropertyChange(WALLS_PROPERTY, walls);
-    	
-    	this.endTurnHandler = new EndTurnHandler(getGame());
-    	this.moveHandler = new MoveHandler(getGame());
-    	this.pickUpHandler = new PickUpHandler(getGame());
-    	this.useItemHandler = new UseItemHandler(getGame());
-    }
-    
-    /**
+    	firePropertyChange(PLAYERS_PROPERTY, players);
+    	firePropertyChange(CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+	}
+
+	/**
      * Returns the moveHandler.
      * @return 	the moveHandler.
      */
@@ -122,9 +134,6 @@ public class GameHandler extends Handler {
 	 */
 	public void createGame(int hSize, int vSize) {
 		setGame(new Game(hSize, vSize));
-		
-//		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
-//		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
 	}
 	
 	
