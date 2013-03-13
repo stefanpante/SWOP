@@ -1,7 +1,6 @@
 package handlers;
 
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
 import player.Player;
 
@@ -17,7 +16,10 @@ import gui.ApplicationWindow;
  *
  */
 public class EndTurnHandler extends Handler{
-
+	
+	boolean confirmed = false;
+	boolean doEndTurn = false;
+	
 	/**
 	 * @param game
 	 * @param window
@@ -25,7 +27,36 @@ public class EndTurnHandler extends Handler{
 	public EndTurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 	}
-
+	
+	/**
+	 * This method sets the confirmed flag on true and 
+	 * 	sets the doEndTurn on the given boolean
+	 * 
+	 * @param 	doEndTurn
+	 * 			True 	if you really want to end your turn.
+	 * 			False	if you don't want to end your turn.
+	 * @effect	endTurn()
+	 * 			If the given value is true.
+	 */
+	public void confirm(boolean doEndTurn){
+		confirmed = true;
+		this.doEndTurn  = doEndTurn;
+		endTurn();
+	}
+	
+	public void resetConfirm(){
+		confirmed = false;
+		doEndTurn = false;
+	}
+	
+	public boolean isConfirmed(){
+		return confirmed;
+	}
+	
+	public boolean getDoEndTurn(){
+		return doEndTurn;
+	}
+	
 	/**
 	 * 
 	 * Checks the precondition for the end turn use case
@@ -49,22 +80,32 @@ public class EndTurnHandler extends Handler{
 		return getGame().getCurrentPlayer().hasMoved();
 	}
 	
+	
+	
 	/**
 	 * Ends the turn of the current player and 
 	 * sets up the game for the turn of the next player
+	 * 
+	 * @throws	IllegalStateException
+	 * 			If 
 	 */
-	public void endTurn(){
-		StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
-		int lostActions = stateresult.getLostActions();
-		
-		getGame().getCurrentPlayer().endTurn(lostActions);
-		getGame().switchToNextPlayer();
-		getGame().updateStates();
-		getGame().powerFailureSquares();
-		
-		
-    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
-    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory());
+	public void endTurn() throws IllegalStateException{
+		if(!isConfirmed()){
+			throw new IllegalStateException("Do you want to confirm ending your turn?");
+		}
+		if(getDoEndTurn()){
+			StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
+			int lostActions = stateresult.getLostActions();
+			
+			getGame().getCurrentPlayer().endTurn(lostActions);
+			getGame().switchToNextPlayer();
+			getGame().updateStates();
+			getGame().powerFailureSquares();
+			
+			firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory());
+			resetConfirm();
+		} 
 	}
 
 }
