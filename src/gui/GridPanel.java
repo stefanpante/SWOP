@@ -96,6 +96,15 @@ public class GridPanel extends JPanel {
 		/* Draw Players */
 		for(int i = 0; i < players.size(); i++)
 			DrawImage(graphics, players.get(i), "player_"+i);
+		
+		/* Draw LightTrails */
+		int index = 0;
+		for(Player player: lightTrails.keySet()) {
+			for(Coordinate coord: lightTrails.get(player))
+				DrawImage(graphics, coord, "cell_lighttrail_" + index);
+			
+			index++;
+		}
 	}
 	
 	private void DrawImage(Graphics graphics, Coordinate coordinate, String image){

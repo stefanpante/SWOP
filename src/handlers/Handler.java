@@ -114,6 +114,7 @@ public abstract class Handler {
 	public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
 		HashMap<Player, LightTrail> map = getGame().getLightTrails();
 		Iterator<Player> iterator = map.keySet().iterator();
+		ArrayList<Coordinate> players = getPlayerLocations();
 		
 		HashMap<Player, ArrayList<Coordinate>> hashMap = new HashMap<Player, ArrayList<Coordinate>>();
 		
@@ -124,7 +125,7 @@ public abstract class Handler {
 			ArrayList<Square> squares = map.get(player).getSquares();
 			
 			for(Coordinate coordinate : getGame().getGrid().getAllCoordinates())
-	    		if(squares.contains(getGame().getGrid().getSquare(coordinate)))
+	    		if(squares.contains(getGame().getGrid().getSquare(coordinate)) && !players.contains(coordinate))
 	    			coords.add(coordinate);
 	    		
 	    	hashMap.put(player, coords);
