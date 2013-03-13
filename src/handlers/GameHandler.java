@@ -78,25 +78,9 @@ public class GameHandler extends Handler {
 	 * This is information that the GUI can use.
 	 */
 	private void populateGui() {
-    	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
-    	ArrayList<Coordinate> walls = new ArrayList<Coordinate>();
-    	ArrayList<Coordinate> players = new ArrayList<Coordinate>();
-    	
-    	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
-    		Square square = getGame().getGrid().getSquare(coordinate);
-    		
-    		if(square.getInventory().hasLightGrenade()){
-    			grenades.add(coordinate);
-    		}else if(square.isObstructed()){
-    			walls.add(coordinate);
-    		}
-    	}
-    	
-    	for(Player player : getGame().getPlayers()){
-    		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
-    	}
-    	
-    	walls.removeAll(players);
+    	ArrayList<Coordinate> grenades = super.getGrenadeLocations();
+    	ArrayList<Coordinate> walls = super.getWallLocations();
+    	ArrayList<Coordinate> players = super.getPlayerLocations();
     	
     	firePropertyChange(GRENADES_PROPERTY, grenades);
     	firePropertyChange(WALLS_PROPERTY, walls);
