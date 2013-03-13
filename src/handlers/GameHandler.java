@@ -88,11 +88,11 @@ public class GameHandler extends Handler {
     		}else if(square.isObstructed()){
     			walls.add(coordinate);
     		}
-    			
     	}
     	for(Player player : getGame().getPlayers()){
     		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
     	}
+    	
     	walls.removeAll(players);
     	firePropertyChange(GRENADES_PROPERTY, grenades);
     	firePropertyChange(WALLS_PROPERTY, walls);

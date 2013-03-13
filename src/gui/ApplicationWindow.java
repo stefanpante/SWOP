@@ -182,13 +182,18 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
             {
 				ArrayList<Item> items = squareInventory;
 				Item[] a = new Item[items.size()];
-
+				items.toArray(a);
                 Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
                     "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
                     a, 
                     null);
-                if(input != null)
-                	gameHandler.getPickupHandler().pickUp(input);
+                if(input != null){
+                	try{
+                		gameHandler.getPickupHandler().pickUp(input);
+                	}catch(Exception exc){
+            			showException(exc);
+            		}
+                }
             }
         });      
         inventoryPanel.add(pickup);
@@ -249,8 +254,12 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		try{
 			gameHandler.getMoveHandler().move(direction);
 		}catch(Exception exc){
-			JOptionPane.showMessageDialog(frame, exc.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
+			showException(exc);
 		}
+	}
+	
+	private void showException(Exception exc){
+		JOptionPane.showMessageDialog(frame, exc.getMessage(), "Uh! Oh!", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private boolean is(ActionEvent e,String string){

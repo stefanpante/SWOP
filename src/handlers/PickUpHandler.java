@@ -6,6 +6,10 @@ import items.Item;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import square.Square;
+import utils.Coordinate;
 
 import game.Game;
 import gui.ApplicationWindow;
@@ -48,17 +52,19 @@ public class PickUpHandler extends Handler {
 	 * @param item
 	 */
 	public void pickUp(Item item){
-		try{
-			getGame().getCurrentPlayer().getPosition().getInventory().take(item);
-			if(!getGame().getCurrentPlayer().getInventory().isFull()){
-				getGame().getCurrentPlayer().pickUp(item);
-				getGame().getCurrentPlayer().incrementActions();
-			}
-		} catch(IllegalStateException e) {
-			System.err.println("The item cannot be removed because it is not in the square inventory.");
-		} catch(IllegalArgumentException e) {
-			System.err.println("Picking item resulted in overfull player inventory.");
+		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
+		if(!getGame().getCurrentPlayer().getInventory().isFull()){
+			getGame().getCurrentPlayer().pickUp(item);
+			getGame().getCurrentPlayer().incrementActions();
 		}
+    	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
+    	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+    		Square square = getGame().getGrid().getSquare(coordinate);
+    		if(square.getInventory().hasLightGrenade()){
+    			grenades.add(coordinate);
+    		}
+    	}
+    	firePropertyChange(GameHandler.GRENADES_PROPERTY, grenades);
 	}
 	
 	public Inventory showItems(){
