@@ -89,7 +89,7 @@ public class GameHandler extends Handler {
     			grenades.add(coordinate);
     		}else if(square.isObstructed()){
     			walls.add(coordinate);
-    		}		
+    		}
     	}
     	
     	for(Player player : getGame().getPlayers()){

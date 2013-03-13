@@ -80,7 +80,6 @@ public class MoveHandler extends Handler {
     	}
     	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory().getAllItems());
-
 	}
 
 	/**
