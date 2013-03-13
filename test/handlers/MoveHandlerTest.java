@@ -14,6 +14,7 @@ import player.Player;
 
 import square.Direction;
 import square.Square;
+import square.obstacles.LightTrail;
 import square.obstacles.Wall;
 import square.state.PowerFailure;
 
@@ -202,6 +203,7 @@ public class MoveHandlerTest {
 		Square eastNeighbor = game.getGrid().getNeighbor(position, Direction.EAST);
 		Square neighborOfEastNeighbor = game.getGrid().getNeighbor(eastNeighbor, Direction.EAST);
 		
+		@SuppressWarnings("unused")
 		Wall wall = new Wall(eastNeighbor, neighborOfEastNeighbor);
 		
 		assertTrue(eastNeighbor.isObstructed());
@@ -219,8 +221,24 @@ public class MoveHandlerTest {
 		Game game = new Game(10,10);
 		MoveHandler mh = new MoveHandler(game);
 		
-		// replace the grid representation with a grid without walls
-		// TODO: wait until grid is implemented
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(currentPosition, direction);
+		}
+		
+		LightTrail lt = new LightTrail();
+		lt.addSquare(next);
+		
+		// Move to a lighttrail should not be allowed.
+		mh.move(direction);
+		
 	}
 	
 	/**
@@ -260,7 +278,29 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveToPowerFailure(){
-		fail("Not yet implemented");
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
+		
+		Player currentPlayer = game.getCurrentPlayer();
+		
+		int remainingActions = currentPlayer.getRemainingActions();
+		// Place a grenade on a position near the player
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(currentPosition, direction);
+		}
+		
+		next.setState(new PowerFailure());
+		mh.move(direction);
+		// Test the effect of the LightGrenade
+		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
+		assertEquals(currentPlayer.getRemainingActions(), 2);
 	}
 	
 	/**
