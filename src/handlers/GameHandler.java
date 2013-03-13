@@ -21,15 +21,15 @@ import utils.Coordinate;
  */
 public class GameHandler extends Handler {
 	
-	public static final String WALLS_PROPERTY 			= "Walls";
-	public static final String GRENADES_PROPERTY 		= "Grenades";	
-	public static final String PLAYERS_PROPERTY 		= "Players";	
-	public static final String CURRENT_PLAYER_PROPERTY 	= "CurrentPlayer";
-	public static final String MESSAGE_PROPERTY 		= "Message";
+	public static final String WALLS_PROPERTY 				= "Walls";
+	public static final String GRENADES_PROPERTY 			= "Grenades";	
+	public static final String PLAYERS_PROPERTY 			= "Players";	
+	public static final String CURRENT_PLAYER_PROPERTY 		= "CurrentPlayer";
+	public static final String MESSAGE_PROPERTY 			= "Message";
 	public static final String SQUARE_INVENTORY_PROPERTY	= "SquareInventory";
 	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
-	public static final String END_TURN_PROPERTY 		= "EndTurnProperty";
-	public static final String LIGHT_TRAILS_PROPERTY	= "LightTrails";
+	public static final String END_TURN_PROPERTY 			= "EndTurnProperty";
+	public static final String LIGHT_TRAILS_PROPERTY		= "LightTrails";
 	
 	/**
 	 *  Initializes the game handler
