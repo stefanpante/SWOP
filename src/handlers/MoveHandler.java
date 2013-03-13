@@ -35,9 +35,9 @@ public class MoveHandler extends Handler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 0){
+		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
 			return true;
-		}
+			
 		return false;
 	}
 
@@ -73,9 +73,11 @@ public class MoveHandler extends Handler {
 	private void setRemainingActions(Square newPosition){
 		StateResult stateResult = newPosition.getState().resultOnMove();
 		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions() -1;
+		
 		if(newPosition.getInventory().hasActiveLightGrenade()){
 			stateResult = newPosition.getState().resultOnMoveLG();
 		}
+		
 		if(stateResult.hasToEndTurn()){
 			getGame().getCurrentPlayer().endTurn();
 			int remaining = Player.MAX_ALLOWED_ACTIONS - stateResult.getLostActions();
@@ -91,9 +93,11 @@ public class MoveHandler extends Handler {
 	 */
 	private void setPropertyChanges(){
 		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
+		
     	for(Player player : getGame().getPlayers()){
     		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
     	}
+    	
     	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
     	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
@@ -103,7 +107,7 @@ public class MoveHandler extends Handler {
 	 * Checks if the end of the move causes the current player to win.
 	 * @return 	true if the move causes the player to win. 
 	 */
-	public boolean wins(){
+	public boolean hasWon(){
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 
