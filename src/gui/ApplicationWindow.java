@@ -6,8 +6,10 @@ package gui;
 import grid.Grid;
 import handlers.GameHandler;
 import items.Item;
+import items.PlayerInventory;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -50,6 +52,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	
 	private GridPanel gridPanel;
 	private ArrayList<Item> squareInventory;
+	private ArrayList<Item> playerInventory;
 	
 //	public static Model MODEL = new Model();
 
@@ -63,6 +66,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
     public ApplicationWindow(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
         this.squareInventory = new ArrayList<Item>();
+        this.playerInventory = new ArrayList<Item>();
     }
     
     /**
@@ -180,9 +184,8 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         pickup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				ArrayList<Item> items = squareInventory;
-				Item[] a = new Item[items.size()];
-				items.toArray(a);
+				Item[] a = new Item[squareInventory.size()];
+				squareInventory.toArray(a);
                 Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
                     "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
                     a, 
@@ -197,24 +200,28 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
             }
         });      
         inventoryPanel.add(pickup);
-//        
-//        JButton use = new JButton("Use item");
-//        use.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e)
-//            {
-//				ArrayList<Item> items = MODEL.getCurrentPlayerInventory();
-//				Item[] a = new Item[items.size()];
-//				MODEL.getCurrentPlayerInventory().toArray(a);
-//
-//                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
-//                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
-//                    a, 
-//                    null);
-//                if(input != null)
-//                	gameHandler.getUseItemHandler().useItem(input);
-//            }
-//        });      
-//        inventoryPanel.add(use);       
+        
+        JButton use = new JButton("Use item");
+        use.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				Item[] a = new Item[playerInventory.size()];
+				playerInventory.toArray(a);
+
+                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
+                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
+                    a, 
+                    null);
+                if(input != null){
+	            	try{
+	                	gameHandler.getUseItemHandler().useItem(input);
+	            	}catch(Exception exc){
+	        			showException(exc);
+	        		}
+                }
+            }
+        });      
+        inventoryPanel.add(use);       
  
 
 
@@ -302,7 +309,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
-        	this.gridPanel.setCurrentPlayer((Coordinate)o);      	
+        	this.playerInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
         	JOptionPane.showMessageDialog(frame, (String)o);
         }
