@@ -8,6 +8,7 @@ import player.Player;
 import square.Direction;
 import square.Square;
 import square.state.StateResult;
+import utils.Coordinate;
 import game.Game;
 import gui.ApplicationWindow;
 
@@ -73,8 +74,11 @@ public class MoveHandler extends Handler {
 			getGame().getCurrentPlayer().setRemainingActions(currentRemainingActions -1);
 		}
 		
-//		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
-//		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
+		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
+    	for(Player player : getGame().getPlayers()){
+    		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
+    	}
+    	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
 	}
 
 	/**

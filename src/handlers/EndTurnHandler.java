@@ -1,8 +1,12 @@
 package handlers;
 
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
+import player.Player;
 
 import square.state.StateResult;
+import utils.Coordinate;
 
 import game.Game;
 import gui.ApplicationWindow;
@@ -57,7 +61,9 @@ public class EndTurnHandler extends Handler{
 		getGame().switchToNextPlayer();
 		getGame().updateStates();
 		getGame().powerFailureSquares();
-//		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
+		
+		
+    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
 	}
 
 }
