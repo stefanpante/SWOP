@@ -48,9 +48,7 @@ public class UseItemHandler extends Handler {
 	 */
 	public void useItem(Item item) {
 		getGame().getCurrentPlayer().useItem(item);
-    	firePropertyChange(GameHandler.GRENADES_PROPERTY, super.getGrenadeLocations());
-    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, super.getPlayerItems());
-
+		endAction();
 	}
 	
 	

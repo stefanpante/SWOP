@@ -58,11 +58,12 @@ public class MoveHandler extends Handler {
 		// cannot move to square were other player is positioned
 		
 		getGame().getCurrentPlayer().move(newPosition);
+		endAction();
 		currentPosition.getInventory().activateAllItems();
 		
 		setRemainingActions(newPosition);
 		setPropertyChanges();
-
+		
 	}
 	
 	/**
@@ -102,7 +103,7 @@ public class MoveHandler extends Handler {
 	 * Checks if the end of the move causes the current player to win.
 	 * @return 	true if the move causes the player to win. 
 	 */
-	public boolean endAction(){
+	public boolean canEndAction(){
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 
