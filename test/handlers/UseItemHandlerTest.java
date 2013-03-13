@@ -1,6 +1,7 @@
 package handlers;
 
 import static org.junit.Assert.assertFalse;
+
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ import grid.Grid;
 
 import org.junit.Test;
 
-import player.LightTrail;
 import player.Player;
 import square.Direction;
 import square.Square;
+import square.obstacles.LightTrail;
 import square.obstacles.Wall;
 
 /**

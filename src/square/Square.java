@@ -108,15 +108,9 @@ public class Square {
 	 * @param 	obstacle
 	 *			The obstacle to set.
 	 * @post 	The given value is the current value of the obstacle of this Square.
-	 * @throws 	IllegalArgumentException
-	 *			If the given argument is not a valid obstacle.
-	 *			| !isValidObstacle(obstacle)
 	 */
 	@Nullable
 	public void setObstacle(IObstacle obstacle) throws IllegalArgumentException {
-		if (getObstacle() != null)
-			throw new IllegalArgumentException("Obstacle already exists on this square.");
-		
 		this.obstacle = obstacle;
 	};
 	
