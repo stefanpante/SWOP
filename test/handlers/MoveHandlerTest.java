@@ -39,19 +39,6 @@ public class MoveHandlerTest {
 	}
 	
 	/**
-	 * IncrementActions causes IllegalArgumentException due to the setObstacle in Square
-	 */
-	@Test(expected = IllegalArgumentException.class) // needed to catch exceptions
-	public void testCheckToProceed(){
-		assertTrue(mh.checkToProceed());
-		
-		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
-			game.getCurrentPlayer().incrementActions();
-		
-		assertFalse(mh.checkToProceed());
-	}
-
-	/**
 	 *  tests the check to proceed after real moves.
 	 */
 	@Test
@@ -143,10 +130,9 @@ public class MoveHandlerTest {
 		// Search for a square that isn't obstructed
 		Direction[] directions = Direction.values();
 		Random random = new Random();
-		Direction direction = directions[random.nextInt(directions.length)];
-		
-		Square next = game.getGrid().getNeighbor(currentPosition, direction);
-		while(next.isObstructed()){
+		Direction direction = null;
+		Square next = null;
+		while(next == null || next.isObstructed()){ 
 			direction = directions[random.nextInt(directions.length)];
 			next = game.getGrid().getNeighbor(currentPosition, direction);
 		}

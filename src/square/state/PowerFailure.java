@@ -23,13 +23,16 @@ public class PowerFailure extends State{
 	 */
 	@Override
 	public StateResult resultOnMove() {
-		return new StateResult(0, true);
+		return new StateResult(-1, true);
 	}
 
-	
+	/**
+	 * If positioned on a powerfailure and lightgrenade, turns are just 2 actions
+	 * and the player loses 4 actions
+	 */
 	@Override
 	public StateResult resultOnMoveLG(){
-		return new StateResult(-4, true);
+		return new StateResult(-5, true);
 	}
 	
 	/**

@@ -50,21 +50,10 @@ public class PickUpHandler extends Handler {
 	public void pickUp(Item item){
 		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
 		
-		if(!getGame().getCurrentPlayer().getInventory().isFull()){
-			getGame().getCurrentPlayer().pickUp(item);
-			getGame().getCurrentPlayer().incrementActions();
-		}
+		getGame().getCurrentPlayer().pickUp(item);
+		getGame().getCurrentPlayer().incrementActions();
 		
-    	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
-    	
-    	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
-    		Square square = getGame().getGrid().getSquare(coordinate);
-    		
-    		if(square.getInventory().hasLightGrenade())
-    			grenades.add(coordinate);
-    	}
-    	
-    	firePropertyChange(GameHandler.GRENADES_PROPERTY, grenades);
+    	firePropertyChange(GameHandler.GRENADES_PROPERTY, super.getGrenadeLocations());
 	}
 	
 	/**
