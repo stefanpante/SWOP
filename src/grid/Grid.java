@@ -101,7 +101,7 @@ public class Grid {
 		Coordinate c = coordinate.getNeighbor(direction);
 		if(contains(c))
 			return getSquare(c);
-		throw new NoSuchElementException();
+		throw new NoSuchElementException("You have reached the bounds of the grid!");
 	}
 		
 	
