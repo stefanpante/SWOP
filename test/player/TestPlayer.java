@@ -87,35 +87,6 @@ public class TestPlayer {
 	}
 	
 	/**
-	 * Checks if using an item that is not in the square's inventory is invalid.
-	 */
-	@Test
-	public void testIsValidPickUp() {
-		Square square = new Square();
-		Player player = new Player(square, new String("Jan"));
-		
-		Item item = new LightGrenade();
-		assertFalse(player.isValidPickUp(null));
-		assertFalse(player.isValidPickUp(item));
-		
-		square.getInventory().addItem(item);
-		assertTrue(player.isValidPickUp(item));
-	}
-	
-	/**
-	 * Checks if using an item that is not in the square's inventory results
-	 * in an exception.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void testPickUp() {
-		Square square = new Square();
-		Player player = new Player(square, new String("Jan"));
-		
-		Item item = new LightGrenade();
-		player.pickUp(item);
-	}
-	
-	/**
 	 * Checks if picking up an item that is null results in an exception.
 	 */
 	@Test(expected=IllegalArgumentException.class)
@@ -135,7 +106,6 @@ public class TestPlayer {
 		square.getInventory().addItem(item);
 		
 		Player player = new Player(square, new String("Jan met de pet"));
-		assertFalse(player.isValidPickUp(new LightGrenade()));
 		assertTrue(player.isValidPickUp(item));
 		assertEquals(player.getInventory().getSize(), 0);
 		assertFalse(player.getInventory().hasItem(item));
