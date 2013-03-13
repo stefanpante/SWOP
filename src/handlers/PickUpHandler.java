@@ -49,9 +49,8 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
-		
 		getGame().getCurrentPlayer().pickUp(item);
-		getGame().getCurrentPlayer().incrementActions();
+		//TODO: getGame().getCurrentPlayer().incrementActions();
 		
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, super.getGrenadeLocations());
 	}

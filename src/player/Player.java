@@ -167,8 +167,6 @@ public class Player extends Observable implements IObstacle {
 			return false;
 		if(!inventory.canHaveAsItem(item))
 			return false;
-		if(!getPosition().getInventory().hasItem(item))
-			return false;
 		return true;
 	}
 	

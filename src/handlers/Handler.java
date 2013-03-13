@@ -4,14 +4,13 @@
 package handlers;
 
 import game.Game;
+import items.Item;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.Observable;
 
 import player.Player;
-
 import square.Square;
 import utils.Coordinate;
 
@@ -102,6 +101,24 @@ public abstract class Handler {
     	walls.removeAll(players);
     	
     	return walls;
+	}
+	
+	/**
+	 * Get a list of Items of the current square.
+	 * 
+	 * @return	ArrayList<item>	List of all items of the current square.
+	 */
+	public ArrayList<Item> getSquareItems(){
+		return getGame().getCurrentPlayer().getPosition().getInventory().getAllItems();
+	}
+	
+	/**
+	 * Get a list of Items of the current player.
+	 * 
+	 * @return	ArrayList<item>	List of all items of the current player.
+	 */
+	public ArrayList<Item> getPlayerItems(){
+		return getGame().getCurrentPlayer().getInventory().getAllItems();
 	}
 	
 	/**
