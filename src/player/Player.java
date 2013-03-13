@@ -221,8 +221,20 @@ public class Player extends Observable implements IObstacle {
 		moved = true;
 	}
 	
+	/**
+	 * Increments the remaining actions by one and notifies the observers of this player.
+	 */
 	public void incrementActions(){
 		this.remainingActions++;
+		this.setChanged();
+		this.notifyObservers(currentPosition);
+	}
+	
+	/**
+	 * Decrements the remaining actions by one and notifies the observers of this player.
+	 */
+	public void decrementActions(){
+		this.remainingActions--;
 		this.setChanged();
 		this.notifyObservers(currentPosition);
 	}
