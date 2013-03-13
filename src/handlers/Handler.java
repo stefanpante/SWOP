@@ -34,8 +34,6 @@ public abstract class Handler {
         propertyChangeSupport.firePropertyChange(propertyName, new Object(), newValue);
     }
     
-    
-    
 	public Handler(Game game) {
 		this();
 		this.game = game;
