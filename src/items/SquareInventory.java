@@ -59,10 +59,6 @@ public class SquareInventory extends Inventory {
 											+ item
 											+ " is not a valid item for this "
 											+ this);
-		if(hasActiveItem()){
-			throw new IllegalStateException("An item cannot be added to a squareinventory" +
-					"if it contains an active item");
-		}
 		super.addItem(item);
 	}	
 	
