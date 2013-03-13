@@ -154,7 +154,7 @@ public abstract class Inventory{
 	 */
 	public void addItem(Item item) throws IllegalStateException{
 		if(!canHaveAsItem(item))
-			throw new IllegalStateException("The inventory is full, cannot add another item.");
+			throw new IllegalStateException("The inventory is full or already contains the item.");
 		else
 			items.add(item);
 	}

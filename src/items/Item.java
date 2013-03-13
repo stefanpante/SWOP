@@ -6,33 +6,15 @@ package items;
  * @author vincentreniers
  */
 public class Item {
-	
-	long code;
-	
-
-
-	public Item(){
-		setCode(System.nanoTime());
-	}
-	
-	/**
-	 * @return the code
-	 */
-	public long getCode() {
-		return code;
-	}
-
-	/**
-	 * @param code the code to set
-	 */
-	private void setCode(long code) {
-		this.code = code;
-	}
 
 	/**
 	 * This flag indicates if the item is active or inactive.
 	 */
 	private ItemState currentState = ItemState.INACTIVE;
+
+	public Item(){
+	}
+
 	
 	/**
 	 * Returns whether the item is active or inactive.
@@ -73,37 +55,6 @@ public class Item {
 		return "Item";
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (code ^ (code >>> 32));
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Item other = (Item) obj;
-		if (getCode() != other.getCode()) {
-			return false;
-		}
-		return true;
-	}
 	
 	
 
