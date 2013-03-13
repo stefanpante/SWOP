@@ -57,6 +57,7 @@ public class TestLightTrail {
 		
 		assertFalse(lightTrail.getSquares().contains(squareOne));
 	}
+	
 	/**
 	 * Empty light trail length must be 0.
 	 */

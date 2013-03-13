@@ -1,9 +1,10 @@
 package square.obstacles;
 
-
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Queue;
 
 import square.Square;
 
@@ -14,94 +15,22 @@ import square.Square;
  * @author jonas, vincent
  */
 public class LightTrail extends Obstacle implements Observer{
+	
 	public static final int LENGTH = 2;
 
-	private HashMap<Integer,Square> trail;
+	private Queue<Square> trail;
+	
+	/**
+	 * Maximum length of a LightTrail.
+	 */
 	public static final int MAX_LENGTH = 3;
 	
 	/**
-	 * The counter of this LightTrail object.
+	 * Initialises a new linkedList for the LightTrail.
 	 */
-	private int counter;
-
-	
-	public LightTrail(){
-		trail = new HashMap<Integer,Square>();
-		counter = 0;
+	public LightTrail() {
+		trail  = new LinkedList<Square>();
 	}
-	
-	/**
-	 * Returns the value of the counter of this LightTrail as an int.
-	 * 
-	 * @return An object of the int class. | int
-	 */
-	public int getCounter() {
-		return counter;
-	};
-	
-	/**
-	 * Sets the value of the counter of LightTrail if the given value is valid.
-	 * 
-	 * @param counter
-	 *            The counter to set.
-	 * @post The given value is the current value of the counter of this
-	 *       LightTrail.
-	 * @throws IllegalArgumentException
-	 *             If the given argument is not a valid counter. |
-	 *             !isValidCounter(counter)
-	 */
-	private void setCounter(int counter) {
-		if (!isValidCounter(counter)) {
-			throw new IllegalArgumentException(
-					"The argument ("
-							+ counter
-							+ ") is not a valid agrument of the field counter from the class LightTrail");
-		}
-		this.counter = counter;
-	};
-
-	/**
-	 * Check whether the given counter is a valid counter for all the objects of
-	 * LightTrail.
-	 * 
-	 * @param counter
-	 *            The counter to check.
-	 * @return True if and only if the given value is not null, has the correct
-	 *         type, ...
-	 */
-	public static boolean isValidCounter(int counter) {
-		return counter >= 0;
-	}
-
-	private void increaseCounter() {
-		int newCounter = getCounter() + 1;
-		setCounter(newCounter);
-	}
-
-	private void addToTrail(int id, Square square) {
-		if(isValidSquare(square)){
-			trail.put(id, square);
-			addSquare(square);
-		}
-	}
-
-	private void removeFromTrail(int id) {
-		removeSquare(trail.get(id));
-		trail.remove(id);
-	}
-
-	/**
-	 * Remove the squares which are no longer covered by a light trail
-	 */
-	private void clearTrail() {
-		int smallestId = getCounter() - LENGTH;
-		for (Integer id : trail.keySet()) {
-			if (id <= smallestId) {
-				removeFromTrail(id);
-			}
-		}
-	}
-
 	
 	/**
 	 * Extend the light trail by adding a new square to the trail.
@@ -116,10 +45,24 @@ public class LightTrail extends Obstacle implements Observer{
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException("This square is not valid for this lighttrails");
 		
-		if(getLength() >= MAX_LENGTH)
-			getSquares().remove(MAX_LENGTH-1);
+		if(getLength() >= MAX_LENGTH) 
+			this.removeSquare(getLastSquare());
 		
 		super.addSquare(square);
+		this.trail.add(square);
+	}
+	
+	/**
+	 * Removes a square of the obstacle.
+	 * 
+	 * @param 	square
+	 * 
+	 * @throws 	IllegalArgumentException 
+	 * 			If the square is not valid.
+	 */
+	public void removeSquare(Square square) throws IllegalArgumentException {
+		super.removeSquare(square);
+		trail.remove(square);
 	}
 	
 	/**
@@ -136,6 +79,7 @@ public class LightTrail extends Obstacle implements Observer{
 	public boolean isValidSquare(Square square) {
 		if(!super.isValidSquare(square))
 			return false;
+		
 		return true;
 	}
 	
@@ -158,9 +102,7 @@ public class LightTrail extends Obstacle implements Observer{
 	public void update(Observable o, Object arg) {
 		if(arg !=null){
 			Square square = (Square) arg;
-			increaseCounter();
-			addToTrail(getCounter(), square);
-			clearTrail();	
+			this.addSquare(square);
 		}
 	}
 	
