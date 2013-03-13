@@ -143,10 +143,9 @@ public class MoveHandlerTest {
 		// Search for a square that isn't obstructed
 		Direction[] directions = Direction.values();
 		Random random = new Random();
-		Direction direction = directions[random.nextInt(directions.length)];
-		
-		Square next = game.getGrid().getNeighbor(currentPosition, direction);
-		while(next.isObstructed()){
+		Direction direction = null;
+		Square next = null;
+		while(next == null || next.isObstructed()){ 
 			direction = directions[random.nextInt(directions.length)];
 			next = game.getGrid().getNeighbor(currentPosition, direction);
 		}

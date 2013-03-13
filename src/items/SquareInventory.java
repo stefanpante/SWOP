@@ -59,9 +59,29 @@ public class SquareInventory extends Inventory {
 											+ item
 											+ " is not a valid item for this "
 											+ this);
+		if(hasActiveItem()){
+			throw new IllegalStateException("An item cannot be added to a squareinventory" +
+					"if it contains an active item");
+		}
 		super.addItem(item);
 	}	
 	
+	/**
+	 * Returns if the inventory contains an active item
+	 * @return
+	 */
+	public boolean hasActiveItem(){
+		boolean result = false;
+		for(Item item: super.getAllItems()){
+			if(item.isActive()){
+				result = true;
+				break;
+			}
+		}
+		
+		return result;
+		
+	}
 	/**
 	 * Returns whether the given item can be used as an item of this UsedItemInventory.
 	 * 

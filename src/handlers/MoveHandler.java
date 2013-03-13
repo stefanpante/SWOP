@@ -49,25 +49,23 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {	
+	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
+		// Gets the current Position of the player
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();		
-		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); //Throws NoSuchElementException		// cannot move to square were other player is positioned
-		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
-		for(Player p: otherPlayers){
-			if(p.getPosition().equals(newPosition))
-				throw new IllegalStateException("Cannot move to square were other player is positioned.");
-		}
+		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); //Throws NoSuchElementException	
+		checkOtherPlayers(newPosition);// cannot move to square were other player is positioned
+		
 		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getInventory().activateAllItems();
 		
 		StateResult stateResult = newPosition.getState().resultOnMove();
-		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions();
+		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions() -1;
 		if(newPosition.getInventory().hasActiveLightGrenade()){
 			stateResult = newPosition.getState().resultOnMoveLG();
 		}
 		if(stateResult.hasToEndTurn()){
 			getGame().getCurrentPlayer().endTurn();
-			int remaining = currentRemainingActions + 3 - stateResult.getLostActions();
+			int remaining = Player.MAX_ALLOWED_ACTIONS - stateResult.getLostActions();
 			getGame().getCurrentPlayer().setRemainingActions(remaining);
 			getGame().switchToNextPlayer();
 		}else{
@@ -81,6 +79,14 @@ public class MoveHandler extends Handler {
     	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory().getAllItems());
 
+	}
+	
+	private void checkOtherPlayers(Square newPosition){
+		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
+		for(Player p: otherPlayers){
+			if(p.getPosition().equals(newPosition))
+				throw new IllegalStateException("Cannot move to square were other player is positioned.");
+		}
 	}
 
 	/**
