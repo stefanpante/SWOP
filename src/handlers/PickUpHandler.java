@@ -35,10 +35,11 @@ public class PickUpHandler extends Handler {
 	 * 			False	Otherwise.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 1)
-			return true;
+		if(getGame().getCurrentPlayer().getRemainingActions() == 1 && 
+				!getGame().getCurrentPlayer().hasMoved() )
+			return false;
 		
-		return false;
+		return true;
 	}
 	
 	
@@ -48,9 +49,12 @@ public class PickUpHandler extends Handler {
 	 * @param item
 	 */
 	public void pickUp(Item item){
+		if(!checkToProceed()){
+			throw new IllegalStateException("You should move! Otherwise you'll lose the game!");
+		}
 		getGame().getCurrentPlayer().pickUp(item);
 		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
-		//TODO: getGame().getCurrentPlayer().incrementActions();
+		getGame().getCurrentPlayer().decrementActions();
 		endAction();
 	}
 	

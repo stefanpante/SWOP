@@ -47,7 +47,11 @@ public class UseItemHandler extends Handler {
 	 * Or when the player cannot use the item on the square.
 	 */
 	public void useItem(Item item) {
+		if(!checkToProceed()){
+			throw new IllegalStateException("You should move! Otherwise you'll lose the game!");
+		}
 		getGame().getCurrentPlayer().useItem(item);
+		getGame().getCurrentPlayer().decrementActions();
 		endAction();
 	}
 	
