@@ -66,24 +66,6 @@ public class LightTrail extends Obstacle implements Observer{
 	}
 	
 	/**
-	 * Checks if the square is valid. The square must not be a duplicate
-	 * and it must be connected to the last square in the LightTrail.
-	 * 
-	 * @param	Square	The square.
-	 * @return	True	If the square is no duplicate and connected to the last
-	 * 					square in the lightTrail. If there is at least one square.
-	 * 			False	If it is a duplicate or not connected to the last square
-	 * 					in the trail. If there is at least one square.
-	 */
-	@Override
-	public boolean isValidSquare(Square square) {
-		if(!super.isValidSquare(square))
-			return false;
-		
-		return true;
-	}
-	
-	/**
 	 * Returns the last square that was added in the LightTrail.
 	 * 
 	 * @return	Square	If the trail is not empty the last one is returned.
