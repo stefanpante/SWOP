@@ -287,18 +287,20 @@ public class MoveHandlerTest {
 		
 		Player currentPlayer = game.getCurrentPlayer();
 		
-		// Place search for a square that isn't obstructed near the player
+		// search for a square that isn't obstructed near the player
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		Direction[] directions = Direction.values();
 		Random random = new Random();
-		Direction direction = directions[random.nextInt(directions.length)];
 		
-		Square next = game.getGrid().getNeighbor(currentPosition, direction);
-		while(next.isObstructed()){
+		Direction direction = null;
+		Square next = null;
+		while(next == null || next.isObstructed()){ 
 			direction = directions[random.nextInt(directions.length)];
+			try{
 			next = game.getGrid().getNeighbor(currentPosition, direction);
+			}
+			catch(Exception e){}
 		}
-		
 		// Set a PowerFailure on the square
 		next.setState(new PowerFailure());
 		
@@ -315,9 +317,9 @@ public class MoveHandlerTest {
 	@Test
 	public void testEndAction(){
 		// TODO: rekening houden met de lighttrail en het feit dat de andere player een obstacle is.
-		assertFalse(mh.endAction());
+		assertFalse(mh.canEndAction());
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
-		assertTrue(mh.endAction());
+		assertTrue(mh.canEndAction());
 	}
 
 
