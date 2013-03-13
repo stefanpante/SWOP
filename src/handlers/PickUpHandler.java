@@ -1,26 +1,23 @@
 package handlers;
 
 import items.Inventory;
+
 import items.Item;
 
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import square.Square;
 import utils.Coordinate;
 
 import game.Game;
-import gui.ApplicationWindow;
 
 /**
  * Handler/Controller for the pick up use case
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class PickUpHandler extends Handler {
-
 	
 	/**
 	 * @param game
@@ -32,15 +29,14 @@ public class PickUpHandler extends Handler {
 
 
 	/**
-	 * Checks the precondition for the pick up use case
-	 * returns true if the preconditions are satisfied
-	 * @return 	true if the precondition is satisfied
-	 * 			otherwise false.
+	 * Checks the precondition for the pick up use case.
+	 * 
+	 * @return 	True	If the precondition is satisfied
+	 * 			False	Otherwise.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 1){
+		if(getGame().getCurrentPlayer().getRemainingActions() > 1)
 			return true;
-		}
 		
 		return false;
 	}
@@ -53,20 +49,29 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
+		
 		if(!getGame().getCurrentPlayer().getInventory().isFull()){
 			getGame().getCurrentPlayer().pickUp(item);
 			getGame().getCurrentPlayer().incrementActions();
 		}
+		
     	ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
+    	
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);
-    		if(square.getInventory().hasLightGrenade()){
+    		
+    		if(square.getInventory().hasLightGrenade())
     			grenades.add(coordinate);
-    		}
     	}
+    	
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, grenades);
 	}
 	
+	/**
+	 * Shows all the items that are on the current player's position.
+	 * 
+	 * @return	Inventory	The square inventory of the current player's position.
+	 */
 	public Inventory showItems(){
 		return getGame().getCurrentPlayer().getPosition().getInventory();
 	}
