@@ -3,8 +3,6 @@
  */
 package grid;
 
-import gui.ApplicationWindow;
-
 import items.LightGrenade;
 
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.Random;
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
-import sun.reflect.generics.tree.BottomSignature;
 import utils.Coordinate;
 
 /**
@@ -67,6 +64,7 @@ public class GridBuilder {
 		constructSquares();
 		constructWalls();
 		constructLightGrenades();
+
 //		ApplicationWindow.MODEL.setGrid(getGrid());
 //		ApplicationWindow.MODEL.setWalls(getWallCoordinates());
 		return getGrid();

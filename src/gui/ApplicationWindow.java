@@ -1,4 +1,4 @@
-/**
+	/**
  * 
  */
 package gui;
@@ -61,7 +61,6 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	 */
     public ApplicationWindow(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
-    	initialize();
     }
     
     /**
@@ -219,6 +218,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
      * Turns the Jframe on
      */
     public void setVisible(){
+    	initialize();
     	this.frame.setVisible(true);
     }
     
@@ -277,14 +277,18 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		return button;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-    public void modelPropertyChange(final PropertyChangeEvent evt) {
+    public void propertyChange(final PropertyChangeEvent evt) {
     	Object o = evt.getNewValue();
-        if (evt.getPropertyName().equals(Property.WALLS)) {
+        if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
         	this.gridPanel.setWalls((ArrayList<Coordinate>)o);
-        }else if(evt.getPropertyName().equals(Property.GRENADES)){
+        }else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
         	this.gridPanel.setGrenades((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
+        	this.gridPanel.setPlayers((ArrayList<Coordinate>)o);
         }
+        
     }
 
 }
