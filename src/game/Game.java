@@ -5,12 +5,14 @@ import grid.GridBuilder;
 import gui.AbstractModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
+import square.obstacles.LightTrail;
 import square.state.PowerFailure;
 import utils.Coordinate;
 
@@ -50,6 +52,11 @@ public class Game extends AbstractModel {
 	 * The possibility of a power failure in a square.
 	 */
 	private final float CHANCE_POWERFAILURE = 0.05f;
+	
+	/**
+	 * Collection of LightTrails associated with every player.
+	 */
+	private HashMap<Player, LightTrail> lightTrails;
 
 	/**
 	 *Constructs a new board-based game.
@@ -71,27 +78,6 @@ public class Game extends AbstractModel {
 		
 		setCurrentPlayer(players.get(0));	
 	}
-	/**
-	 * Returns the value of the player1 of this Game as an Player.
-	 *
-	 * @return 	An object of the Player class.
-	 * 			| Player
-	 */
-	public Player getPlayer(int i) throws IllegalArgumentException {
-		if(i >= players.size())
-			throw new IllegalArgumentException();
-		return players.get(i);
-	}
-	
-	/**
-	 * Returns the grid of this game
-	 * 
-	 * @return	The grid of this game
-	 * 			| Grid
-	 */
-	public Grid getGrid(){
-		return this.grid;
-	}
 	
 	/**
 	 * Add the player to this game
@@ -100,13 +86,30 @@ public class Game extends AbstractModel {
 	 * 			The player to be set
 	 */
 	public void addPlayer(Player player) throws NullPointerException{
-		if(player == null){
+		if(player == null)
 			throw new NullPointerException("A Player cant be null");
-		}
-		if(players.contains(player)){
+		
+		if(players.contains(player))
 			throw new IllegalStateException("Two players should never be the same object");
-		}
+		
+		addLightTrail(player);
 		players.add(player);
+	}
+	
+	/**
+	 * Adds a LightTrail for a given player.
+	 * 
+	 * @param	player	The player which needs a LightTrail.
+	 * @throws	IllegalStateException	If there already exists a LightTrail for the player.
+	 */
+	private void addLightTrail(Player player) throws IllegalStateException {
+		if(lightTrails.containsKey(player))
+			throw new IllegalStateException("Cannot set a LightTrail twice for the same player " + player);
+		
+		LightTrail lightTrail = new LightTrail();
+		lightTrails.put(player,  lightTrail);
+		
+		player.addObserver(lightTrail);
 	}
 
 	/**
@@ -118,16 +121,16 @@ public class Game extends AbstractModel {
 	public static boolean isValidPlayer(Player player) {
 		return player != null;
 	}
-
+	
 	/**
-	 * Returns the value of the currentPlayer of this Game as an Player.
-	 *
-	 * @return 	An object of the Player class.
-	 * 			| Player
+	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
+	 * @param 	currentPlayer
+	 *			The currentPlayer to check.
+	 * @return	True
 	 */
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	};
+	public static boolean isValidCurrentPlayer(Player currentPlayer) {
+		return !(currentPlayer == null);
+	}
 
 	/**
 	 * Sets the value of the currentPlayer of Game if the given value is valid. 
@@ -164,6 +167,38 @@ public class Game extends AbstractModel {
 	}
 	
 	/**
+	 * Returns the value of the currentPlayer of this Game as an Player.
+	 *
+	 * @return 	An object of the Player class.
+	 * 			| Player
+	 */
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	};
+	
+	/**
+	 * Returns the grid of this game
+	 * 
+	 * @return	The grid of this game
+	 * 			| Grid
+	 */
+	public Grid getGrid(){
+		return this.grid;
+	}
+	
+	/**
+	 * Returns the value of the player1 of this Game as an Player.
+	 *
+	 * @return 	An object of the Player class.
+	 * 			| Player
+	 */
+	public Player getPlayer(int i) throws IllegalArgumentException {
+		if(i >= players.size())
+			throw new IllegalArgumentException();
+		return players.get(i);
+	}
+	
+	/**
 	 * Gets the player instance which isn't the current player.
 	 * e.g.: If the currentPlayer is player 1, player 2 is returned
 	 * @pre		currentPlayer == player1 || currentPlayer == player2
@@ -193,16 +228,6 @@ public class Game extends AbstractModel {
 	 */
 	public ArrayList<Player> getPlayers(){
 		return new ArrayList<Player>(this.players);
-	}
-	
-	/**
-	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.
-	 * @param 	currentPlayer
-	 *			The currentPlayer to check.
-	 * @return	True
-	 */
-	public static boolean isValidCurrentPlayer(Player currentPlayer) {
-		return !(currentPlayer == null);
 	}
 	
 	/**
