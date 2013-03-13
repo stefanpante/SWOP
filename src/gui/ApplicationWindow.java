@@ -49,6 +49,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	private JLabel currentPlayerLabel;
 	
 	private GridPanel gridPanel;
+	private ArrayList<Item> squareInventory;
 	
 //	public static Model MODEL = new Model();
 
@@ -61,6 +62,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	 */
     public ApplicationWindow(GameHandler gameHandler) {
         this.gameHandler = gameHandler;
+        this.squareInventory = new ArrayList<Item>();
     }
     
     /**
@@ -174,23 +176,22 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         inventoryPanel.setBounds(5, 230, SIDEBAR_WIDTH-10, 70);
         sideBarPanel.add(inventoryPanel);
         
-//        JButton pickup  = new JButton("Pick up item");
-//        pickup.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e)
-//            {
-//				ArrayList<Item> items = MODEL.getCurrentSquareInventory();
-//				Item[] a = new Item[items.size()];
-//				MODEL.getCurrentSquareInventory().toArray(a);
-//
-//                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
-//                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
-//                    a, 
-//                    null);
-//                if(input != null)
-//                	gameHandler.getPickupHandler().pickUp(input);
-//            }
-//        });      
-//        inventoryPanel.add(pickup);
+        JButton pickup  = new JButton("Pick up item");
+        pickup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				ArrayList<Item> items = squareInventory;
+				Item[] a = new Item[items.size()];
+
+                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
+                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
+                    a, 
+                    null);
+                if(input != null)
+                	gameHandler.getPickupHandler().pickUp(input);
+            }
+        });      
+        inventoryPanel.add(pickup);
 //        
 //        JButton use = new JButton("Use item");
 //        use.addActionListener(new ActionListener() {
@@ -248,7 +249,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		try{
 			gameHandler.getMoveHandler().move(direction);
 		}catch(Exception exc){
-//			MODEL.setMessage(exc.getMessage());
+			JOptionPane.showMessageDialog(frame, exc.getMessage(), "Message", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -288,7 +289,11 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
         	this.gridPanel.setPlayers((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-        	this.gridPanel.setCurrentPlayer((Coordinate)o);        	
+        	this.gridPanel.setCurrentPlayer((Coordinate)o);  
+        }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
+        	this.squareInventory = (ArrayList<Item>)o;
+        }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
+        	this.gridPanel.setCurrentPlayer((Coordinate)o);      	
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
         	JOptionPane.showMessageDialog(frame, (String)o);
         }

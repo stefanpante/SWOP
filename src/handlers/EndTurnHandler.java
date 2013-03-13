@@ -64,6 +64,7 @@ public class EndTurnHandler extends Handler{
 		
 		
     	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory());
 	}
 
 }
