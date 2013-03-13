@@ -18,7 +18,6 @@ import gui.ApplicationWindow;
 public class EndTurnHandler extends Handler{
 	
 	boolean confirmed = false;
-	boolean doEndTurn = false;
 	
 	/**
 	 * @param game
@@ -28,34 +27,14 @@ public class EndTurnHandler extends Handler{
 		super(game, listener);
 	}
 	
-	/**
-	 * This method sets the confirmed flag on true and 
-	 * 	sets the doEndTurn on the given boolean
-	 * 
-	 * @param 	doEndTurn
-	 * 			True 	if you really want to end your turn.
-	 * 			False	if you don't want to end your turn.
-	 * @effect	endTurn()
-	 * 			If the given value is true.
-	 */
-	public void confirm(boolean doEndTurn){
-		confirmed = true;
-		this.doEndTurn  = doEndTurn;
-		endTurn();
-	}
-	
 	public void resetConfirm(){
 		confirmed = false;
-		doEndTurn = false;
 	}
 	
 	public boolean isConfirmed(){
 		return confirmed;
 	}
 	
-	public boolean getDoEndTurn(){
-		return doEndTurn;
-	}
 	
 	/**
 	 * 
@@ -91,9 +70,8 @@ public class EndTurnHandler extends Handler{
 	 */
 	public void endTurn() throws IllegalStateException{
 		if(!isConfirmed()){
-			throw new IllegalStateException("Do you want to confirm ending your turn?");
-		}
-		if(getDoEndTurn()){
+			firePropertyChange(GameHandler.END_TUNR_PROPERTY, "Do you want to confirm ending your turn?");
+		}else{
 			StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
 			int lostActions = stateresult.getLostActions();
 			
@@ -101,12 +79,17 @@ public class EndTurnHandler extends Handler{
 			getGame().switchToNextPlayer();
 			getGame().updateStates();
 			getGame().powerFailureSquares();
-			
-			firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
-    		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory());
 			resetConfirm();
 		}
 		endAction();
+	}
+
+	/**
+	 * @param b
+	 */
+	public void confirm(boolean b) {
+		this.confirmed = b;
+		endTurn();
 	}
 
 }

@@ -58,8 +58,8 @@ public class MoveHandler extends Handler {
 		// cannot move to square were other player is positioned
 		
 		getGame().getCurrentPlayer().move(newPosition);
-		endAction();
 		currentPosition.getInventory().activateAllItems();
+		endAction();
 		
 		setRemainingActions(newPosition);
 		setPropertyChanges();
