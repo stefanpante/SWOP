@@ -380,9 +380,9 @@ public class Player extends Observable implements IObstacle {
 	 * 			| !isValidSquare()
 	 */
 	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidSquare(square)){
+		if(!isValidSquare(square))
 			throw new IllegalArgumentException("The given " + square + " is not a valid square");
-		}
+		
 		currentPosition = square;
 		square.setObstacle(this);
 	}
