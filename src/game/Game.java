@@ -56,7 +56,7 @@ public class Game extends AbstractModel {
 	/**
 	 * Collection of LightTrails associated with every player.
 	 */
-	private HashMap<Player, LightTrail> lightTrails;
+	private HashMap<Player, LightTrail> lightTrails = new HashMap<Player, LightTrail>();
 
 	/**
 	 *Constructs a new board-based game.
