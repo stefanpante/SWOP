@@ -1,6 +1,9 @@
 package handlers;
 
+import player.Player;
+
 import square.state.StateResult;
+import utils.Coordinate;
 
 import game.Game;
 import gui.ApplicationWindow;
@@ -15,10 +18,13 @@ public class EndTurnHandler extends Handler{
 	boolean confirmed = false;
 	boolean doEndTurn = false;
 	
-	public EndTurnHandler(Game game) {
-		super(game);
+	/**
+	 * @param game
+	 * @param window
+	 */
+	public EndTurnHandler(Game game, PropertyChangeListener listener) {
+		super(game, listener);
 	}
-	
 	
 	/**
 	 * This method sets the confirmed flag on true and 
@@ -93,7 +99,9 @@ public class EndTurnHandler extends Handler{
 			getGame().switchToNextPlayer();
 			getGame().updateStates();
 			getGame().powerFailureSquares();
-	//		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
+			
+			firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory());
 			resetConfirm();
 		} 
 	}

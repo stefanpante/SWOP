@@ -8,6 +8,7 @@ import player.Player;
 import square.Direction;
 import square.Square;
 import square.state.StateResult;
+import utils.Coordinate;
 import game.Game;
 import gui.ApplicationWindow;
 
@@ -48,33 +49,53 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {	
-		Square currentPosition = getGame().getCurrentPlayer().getPosition();		
-		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); //Throws NoSuchElementException		// cannot move to square were other player is positioned
-		ArrayList<Player> otherPlayers = getGame().getOtherPlayers();
-		for(Player p: otherPlayers){
-			if(p.getPosition().equals(newPosition))
-				throw new IllegalStateException("Cannot move to square were other player is positioned.");
-		}
+	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
+		// Gets the current Position of the player
+		Square currentPosition = getGame().getCurrentPlayer().getPosition();
+		
+		//Throws NoSuchElementException
+		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
+		// cannot move to square were other player is positioned
+		
 		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getInventory().activateAllItems();
 		
+		setRemainingActions(newPosition);
+		setPropertyChanges();
+
+	}
+	
+	/**
+	 * Sets the remaining actions of the current player
+	 * @param newPosition
+	 */
+	private void setRemainingActions(Square newPosition){
 		StateResult stateResult = newPosition.getState().resultOnMove();
-		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions();
+		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions() -1;
 		if(newPosition.getInventory().hasActiveLightGrenade()){
 			stateResult = newPosition.getState().resultOnMoveLG();
 		}
 		if(stateResult.hasToEndTurn()){
 			getGame().getCurrentPlayer().endTurn();
-			int remaining = currentRemainingActions + 3 - stateResult.getLostActions();
+			int remaining = Player.MAX_ALLOWED_ACTIONS - stateResult.getLostActions();
 			getGame().getCurrentPlayer().setRemainingActions(remaining);
 			getGame().switchToNextPlayer();
 		}else{
 			getGame().getCurrentPlayer().setRemainingActions(currentRemainingActions -1);
 		}
-		
-//		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
-//		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
+	}
+	
+	/**
+	 * firesPropertyChanges for the GUI
+	 */
+	private void setPropertyChanges(){
+		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
+    	for(Player player : getGame().getPlayers()){
+    		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
+    	}
+    	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
+    	System.out.println(getGame().getCurrentPlayer() +" - " +getGame().getCurrentPlayer().getPosition().hashCode());
+    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getGame().getCurrentPlayer().getPosition().getInventory().getAllItems());
 	}
 
 	/**

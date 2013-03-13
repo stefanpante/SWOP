@@ -165,13 +165,10 @@ public class Player extends Observable implements IObstacle {
 	public boolean isValidPickUp(Item item) {
 		if(item == null)
 			return false;
-		
 		if(!inventory.canHaveAsItem(item))
 			return false;
-		
-		if(!currentPosition.getInventory().hasItem(item))
+		if(!getPosition().getInventory().hasItem(item))
 			return false;
-		
 		return true;
 	}
 	
@@ -250,7 +247,6 @@ public class Player extends Observable implements IObstacle {
 	public void pickUp(Item item) throws IllegalArgumentException {
 		if(!isValidPickUp(item))
 			throw new IllegalArgumentException("The item cannot be added to the player inventory");
-		
 		inventory.addItem(item);
 	}
 

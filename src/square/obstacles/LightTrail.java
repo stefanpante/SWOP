@@ -66,24 +66,6 @@ public class LightTrail extends Obstacle implements Observer{
 	}
 	
 	/**
-	 * Checks if the square is valid. The square must not be a duplicate
-	 * and it must be connected to the last square in the LightTrail.
-	 * 
-	 * @param	Square	The square.
-	 * @return	True	If the square is no duplicate and connected to the last
-	 * 					square in the lightTrail. If there is at least one square.
-	 * 			False	If it is a duplicate or not connected to the last square
-	 * 					in the trail. If there is at least one square.
-	 */
-	@Override
-	public boolean isValidSquare(Square square) {
-		if(!super.isValidSquare(square))
-			return false;
-		
-		return true;
-	}
-	
-	/**
 	 * Returns the last square that was added in the LightTrail.
 	 * 
 	 * @return	Square	If the trail is not empty the last one is returned.
@@ -95,14 +77,35 @@ public class LightTrail extends Obstacle implements Observer{
 		else
 			return null;
 	}
+	
+	/**
+	 * Returns the newest square which was recently added.
+	 * 
+	 * @return	Square	If the trail is not empty the newest one is returned.
+	 * 			Null	If the trail is empty.
+	 */
+	public Square getNewestSquare() {
+		if(getLength() >= 1)
+			return getSquares().get(getLength() - 1);
+		else
+			return null;
+	}
 
 	/**
 	 * Method that gets called when the observable object changes.
+	 * 
+	 * If the square given is the same as the last square we know
+	 * this does not need to be added. But because of an action that
+	 * we are notified of, the last square must be removed.
 	 */
 	public void update(Observable o, Object arg) {
 		if(arg !=null){
 			Square square = (Square) arg;
-			this.addSquare(square);
+			
+			if(getNewestSquare() == square)
+				this.removeSquare(getLastSquare());
+			else
+				this.addSquare(square);
 		}
 	}
 	

@@ -255,7 +255,6 @@ public class TestPlayer {
 		assertFalse(square.isObstructed());
 		assertTrue(squareTo.isObstructed());
 		assertEquals(squareTo.getObstacle(), player);
-		
 	}
 
 }

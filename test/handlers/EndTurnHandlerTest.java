@@ -88,5 +88,8 @@ public class EndTurnHandlerTest {
 	public void EndActionTest(){
 		
 	}
-
+	@Test 
+	public void hasMoveTest(){
+		
+	}
 }
