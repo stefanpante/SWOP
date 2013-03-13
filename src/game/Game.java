@@ -204,13 +204,13 @@ public class Game extends AbstractModel {
 	/**
 	 * Returns all the LightTrails that are in the game.
 	 * 
-	 * @return	ArrayList<LightTrail>	All LightTrails associated with every player.
+	 * @return	ArrayList<Player,LightTrail>	All LightTrails associated with every player.
 	 */
-	public ArrayList<LightTrail> getLightTrails() {
-		ArrayList<LightTrail> list = new ArrayList<LightTrail>();
-		list.addAll(lightTrails.values());
+	public HashMap<Player, LightTrail> getLightTrails() {
+		HashMap<Player, LightTrail> hashMap = new HashMap<Player, LightTrail>();
+		hashMap.putAll(this.lightTrails);
 		
-		return list;
+		return hashMap;
 	}
 	
 	/**

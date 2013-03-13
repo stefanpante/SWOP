@@ -9,9 +9,12 @@ import items.Item;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import player.Player;
 import square.Square;
+import square.obstacles.LightTrail;
 import utils.Coordinate;
 
 /**
@@ -104,14 +107,30 @@ public abstract class Handler {
 	}
 	
 	/**
-	 * Get a list of all coordinates which have a LightTrail.
+	 * Get a list of all coordinates which have a LightTrail with their associated Player.
 	 * 
-	 * @return	ArrayList<Coordinate> List of coordinates which have a LightTrail.
+	 * @return	ArrayList<Player, ArrayList<Coordinate>> List of coordinates which have a LightTrail.
 	 */
-	public ArrayList<Coordinate> getLightTrailLocations() {
+	public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
+		HashMap<Player, LightTrail> map = getGame().getLightTrails();
+		Iterator<Player> iterator = map.keySet().iterator();
 		
+		HashMap<Player, ArrayList<Coordinate>> hashMap = new HashMap<Player, ArrayList<Coordinate>>();
 		
-		return null;
+		while(iterator.hasNext()) {
+			Player player = iterator.next();
+			
+			ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+			ArrayList<Square> squares = map.get(player).getSquares();
+			
+			for(Coordinate coordinate : getGame().getGrid().getAllCoordinates())
+	    		if(squares.contains(getGame().getGrid().getSquare(coordinate)))
+	    			coords.add(coordinate);
+	    		
+	    	hashMap.put(player, coords);
+		}
+		
+		return hashMap;
 	}
 	
 	/**
@@ -155,5 +174,6 @@ public abstract class Handler {
     	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getPlayerItems());   	
     	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
+    	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
 	}
 }

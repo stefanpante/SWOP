@@ -10,11 +10,14 @@ import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import player.Player;
 
 import utils.Coordinate;
 
@@ -34,7 +37,8 @@ public class GridPanel extends JPanel {
 	private ArrayList<Coordinate> walls;
 	private ArrayList<Coordinate> grenades;
 	private ArrayList<Coordinate> players;
-	private ArrayList<Coordinate> lightTrails;
+	
+	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
 	
 	private Coordinate currentPlayer;
 	
@@ -154,7 +158,7 @@ public class GridPanel extends JPanel {
 	 * 
 	 * @param lightTrails
 	 */
-	public void setLightTrails(ArrayList<Coordinate> lightTrails) {
+	public void setLightTrails(HashMap<Player,ArrayList<Coordinate>> lightTrails) {
 		this.lightTrails = lightTrails;
 		this.repaint();
 	}
