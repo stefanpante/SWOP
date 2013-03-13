@@ -18,6 +18,7 @@ import square.obstacles.Wall;
 import square.state.PowerFailure;
 
 import game.Game;
+import grid.GridBuilder;
 
 /**
  * <Scenario test for the Use Case "Move".
@@ -227,7 +228,31 @@ public class MoveHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testMoveToOtherPlayer() {
+		Game game = new Game(10,10);
+		MoveHandler mh = new MoveHandler(game);
 		
+		Player otherPlayer =  game.getNextPlayer();
+		
+		// Search a neighboring square of the other player position where the current player
+		// can be situated, to test the move to.
+		Square otherPos = otherPlayer.getPosition();
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		Direction direction = directions[random.nextInt(directions.length)];
+		
+		
+		Square next = game.getGrid().getNeighbor(otherPos, direction);
+		while(next.isObstructed()){
+			direction = directions[random.nextInt(directions.length)];
+			next = game.getGrid().getNeighbor(otherPos, direction);
+		}
+		
+		Player currentPlayer = game.getCurrentPlayer();
+		currentPlayer.move(next);
+		
+		assertTrue(game.getCurrentPlayer() == currentPlayer);
+		mh.move(direction.opposite());
+				
 	}
 	
 	/**
