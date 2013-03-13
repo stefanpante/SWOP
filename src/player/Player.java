@@ -351,6 +351,8 @@ public class Player extends Observable implements IObstacle {
 	 * End's the player his turn.
 	 */
 	public void endTurn(){
+		setRemainingActions(Player.MAX_ALLOWED_ACTIONS);
+		
 		moved = false;
 	}
 	
