@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -23,7 +24,7 @@ import utils.Coordinate;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class GridPanel extends JPanel implements ImageObserver, Observer {
+public class GridPanel extends JPanel {
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;
@@ -74,12 +75,6 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 	    	graphics.drawLine(0, i * rowHeight, width, i * rowHeight);
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
-	   
-	    /* Current player */
-	    if(currentPlayer != null){
-		    setBackground(Color.GRAY);
-		    graphics.drawRect(currentPlayer.getX()*colWidth, currentPlayer.getY()*rowHeight, colWidth, rowHeight);
-	    }
 	    
 	    /* Draw walls & grenades */
 	    for(Coordinate coordinate : walls)
@@ -104,12 +99,6 @@ public class GridPanel extends JPanel implements ImageObserver, Observer {
 		Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/res/"+image+".png"));
     	graphics.drawImage(img,coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1,Color.BLACK,this);
 	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		this.repaint();
-	}
-	
 	
 	
 	public void showMessage(){

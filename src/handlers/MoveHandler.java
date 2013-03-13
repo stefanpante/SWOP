@@ -1,5 +1,6 @@
 package handlers;
 
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -18,12 +19,11 @@ import gui.ApplicationWindow;
 public class MoveHandler extends Handler {
 
 	/**
-	 * Basic constructor that initiates the moveHandler with the given game. 
-	 * 
 	 * @param game
+	 * @param window
 	 */
-	public MoveHandler(Game game) {
-		super(game);
+	public MoveHandler(Game game, PropertyChangeListener listener) {
+		super(game, listener);
 	}
 
 	/**
@@ -72,6 +72,7 @@ public class MoveHandler extends Handler {
 		}else{
 			getGame().getCurrentPlayer().setRemainingActions(currentRemainingActions -1);
 		}
+		
 //		ApplicationWindow.MODEL.setPlayer1(getGame().getGrid().getCoordinate(getGame().getPlayer(0).getPosition()));
 //		ApplicationWindow.MODEL.setPlayer2(getGame().getGrid().getCoordinate(getGame().getPlayer(1).getPosition()));
 	}

@@ -23,7 +23,6 @@ public abstract class Handler {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-    	System.out.println(listener +" added as PropertyChangeListener");
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
@@ -35,11 +34,14 @@ public abstract class Handler {
         propertyChangeSupport.firePropertyChange(propertyName, new Object(), newValue);
     }
     
-    
-    
 	public Handler(Game game) {
 		this();
 		this.game = game;
+	}
+
+	public Handler(Game game,  PropertyChangeListener listener) {
+		this(game);
+		addPropertyChangeListener(listener);
 	}
 	
 	/**
