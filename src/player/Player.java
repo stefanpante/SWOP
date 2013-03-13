@@ -332,7 +332,7 @@ public class Player extends Observable implements IObstacle {
 	 * Used to set the remaining actions for this player.
 	 * @param actions	the number of actions the player can perform.
 	 */
-	public void setRemainingActions(int actions){
+	private void setRemainingActions(int actions){
 		if(!isValidRemainingActions(actions)){
 			throw new IllegalArgumentException("This is not a valid number for remaining actions");
 		}
@@ -348,7 +348,8 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * End's the player his turn.
+	 * End's the player his turn. Sets the player his remaining actions 
+	 * for the new turn to the maximum allowed actions.
 	 */
 	public void endTurn(){
 		setRemainingActions(Player.MAX_ALLOWED_ACTIONS);
@@ -357,13 +358,13 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * End's the player his turn and sets lost actions.
+	 * End's the player his turn and sets the new remaining actions, depending
+	 * on the conditions in which the turn was ended
 	 * 
 	 * @param	lostActions	Number of actions lost for the next turn.
 	 */
-	public void endTurn(int lostActions) {
-		setRemainingActions(Player.MAX_ALLOWED_ACTIONS - lostActions);
-		
+	public void endTurn(int newActions) {
+		setRemainingActions(newActions);
 		moved = false;
 	}
 	

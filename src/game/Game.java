@@ -163,6 +163,13 @@ public class Game extends AbstractModel {
 	 * 			if(old.currentPlayer == player2) new.currentPlayer == player1
 	 */
 	public void switchToNextPlayer() {
+		Player candidate = getNextPlayer();
+		while(candidate.getRemainingActions() < 0){
+			int ra = candidate.getRemainingActions();
+			candidate.endTurn(ra + Player.MAX_ALLOWED_ACTIONS);
+			int nextPlayer = (players.indexOf(candidate) + 1) % players.size();
+			candidate = players.get(nextPlayer);
+		}
 		this.currentPlayer = getNextPlayer();
 	}
 	

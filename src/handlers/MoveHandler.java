@@ -55,36 +55,44 @@ public class MoveHandler extends Handler {
 		
 		//Throws NoSuchElementException
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
-		// cannot move to square were other player is positioned
 		
 		getGame().getCurrentPlayer().move(newPosition);
 		currentPosition.getInventory().activateAllItems();
-		endAction();
+		
 		
 		setRemainingActions(newPosition);
+		endAction();
 		setPropertyChanges();
 		
 	}
-	
 	/**
 	 * Sets the remaining actions of the current player
 	 * @param newPosition
 	 */
 	private void setRemainingActions(Square newPosition){
+		// Gets the result of the state for the new position
 		StateResult stateResult = newPosition.getState().resultOnMove();
-		int currentRemainingActions = getGame().getCurrentPlayer().getRemainingActions() -1;
-		
-		if(newPosition.getInventory().hasActiveLightGrenade()){
-			stateResult = newPosition.getState().resultOnMoveLG();
-		}
-		
 		if(stateResult.hasToEndTurn()){
-			getGame().getCurrentPlayer().endTurn();
-			int remaining = Player.MAX_ALLOWED_ACTIONS - stateResult.getLostActions();
-			getGame().getCurrentPlayer().setRemainingActions(remaining);
-			getGame().switchToNextPlayer();
-		}else{
-			getGame().getCurrentPlayer().setRemainingActions(currentRemainingActions -1);
+			if(newPosition.getInventory().hasActiveLightGrenade()){
+				int ra = getGame().getCurrentPlayer().getRemainingActions();
+				getGame().getCurrentPlayer().endTurn(ra - 4);
+				getGame().switchToNextPlayer();
+			}
+			else{
+				getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS - 1);
+				getGame().switchToNextPlayer();
+			}
+		}
+		else{
+			if(newPosition.getInventory().hasActiveLightGrenade()){
+				int ra = getGame().getCurrentPlayer().getRemainingActions();
+				getGame().getCurrentPlayer().endTurn(ra);
+				getGame().switchToNextPlayer();
+			}
+			
+			else{
+				getGame().getCurrentPlayer().decrementActions();
+			}
 		}
 	}
 	
