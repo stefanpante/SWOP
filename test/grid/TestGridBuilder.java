@@ -82,28 +82,33 @@ public class TestGridBuilder {
 		gb.constructWalls();
 		Grid grid = gb.getGrid();
 		ArrayList<Wall> walls = gb.getWalls();
+		HashSet<Square> wallSquares = new HashSet<Square>();
 		HashSet<Square> wallNeighborSquares = new HashSet<Square>();
 		HashSet<Square> squareSet = new HashSet<Square>();
 		for(Wall w :walls){
 			for(Square sq: w.getSquares()){
-				squareSet.add(sq);
+				if(!wallSquares.contains(sq)){
+					wallSquares.add(sq);
+				} else  {
+					//This would mean that walls intersect.
+					assert(false);
+				}
 				for(Direction dir: Direction.values()){
 					try{
 						Square neighbor = grid.getNeighbor(sq, dir);
-							squareSet.add(neighbor);
+						if(!w.getSquares().contains(neighbor)){
+							wallNeighborSquares.add(neighbor);
+						}
 					} catch(NoSuchElementException e){
 						//NOOP
 					}
 				}
 			}
-			
-			for(Square s: squareSet){
-				assertFalse(wallNeighborSquares.contains(s));
-				wallNeighborSquares.add(s);
-			}
-			squareSet.clear();
 		}
-		assertTrue(true);
+		
+		for(Square s: wallNeighborSquares){
+			assertFalse(wallSquares.contains(s));
+		}
 	}
 	
 	
