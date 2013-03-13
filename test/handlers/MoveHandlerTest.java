@@ -316,7 +316,7 @@ public class MoveHandlerTest {
 	@Test
 	public void testCanEndAction(){
 		
-		assertFalse(mh.wins());
+		assertFalse(mh.hasWon());
 		
 		Square currentPosition = game.getCurrentPlayer().getStartPosition();
 		Direction[] directions = Direction.values();
@@ -340,7 +340,7 @@ public class MoveHandlerTest {
 		game.getNextPlayer().decrementActions();
 	
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
-		assertTrue(mh.wins());
+		assertTrue(mh.hasWon());
 	}
 
 
