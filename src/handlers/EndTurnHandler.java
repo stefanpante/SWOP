@@ -18,10 +18,11 @@ public class EndTurnHandler extends Handler{
 	
 	/**
 	 * 
-	 * Checks the precondition for the pick up use case
-	 * returns true if the preconditions are satisfied
+	 * Checks the precondition for the end turn use case
+	 * returns true if the preconditions are satisfied.
+	 * 
 	 * @return 	true if the precondition is satisfied
-	 * 			otherwise false.
+	 * 			false otherwise.
 	 */
 	public boolean checkToProceed(){
 		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
@@ -50,7 +51,7 @@ public class EndTurnHandler extends Handler{
 		getGame().switchToNextPlayer();
 		getGame().updateStates();
 		getGame().powerFailureSquares();
-		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
+//		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
 	}
 
 }

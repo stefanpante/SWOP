@@ -67,8 +67,8 @@ public class GridBuilder {
 		constructSquares();
 		constructWalls();
 		constructLightGrenades();
-		ApplicationWindow.MODEL.setGrid(getGrid());
-		ApplicationWindow.MODEL.setWalls(getWallCoordinates());
+//		ApplicationWindow.MODEL.setGrid(getGrid());
+//		ApplicationWindow.MODEL.setWalls(getWallCoordinates());
 		return getGrid();
 	}
 

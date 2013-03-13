@@ -2,6 +2,7 @@ package square;
 
 import static org.junit.Assert.*;
 
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,7 +18,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-import player.LightTrail;
 import square.obstacles.Obstacle;
 import square.obstacles.Wall;
 

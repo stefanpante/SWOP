@@ -75,32 +75,8 @@ public class Player extends Observable implements IObstacle {
 		this.setName(name);
 		this.setInventory(new PlayerInventory());
 		
-		this.remainingActions = 0;
+		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
-	}
-	
-	/**
-	 * Returns the name of the player.
-	 * 
-	 * @return	The name of this player. 
-	 * 
-	 */
-	public String getName(){
-		return name;
-	}
-	
-	/**
-	 * sets the name for the player
-	 * @param 	name	the name which is given to the player
-	 * @throws 	IllegalArgumentException
-	 * 			thrown if the given name is not a valid name 
-	 * 			for the player
-	 */
-	public void setName(String name) throws IllegalArgumentException{
-		if(!isValidName(name)) 
-			throw new IllegalArgumentException("Not a valid name");
-		
-		this.name = name;
 	}
 	
 	/**
@@ -114,21 +90,6 @@ public class Player extends Observable implements IObstacle {
 			return false;
 		
 		return true;
-	}
-	
-	/**
-	 * Sets the start position for the player
-	 * 
-	 * @param	pos	the position to be used as the start position for the player
-	 * @throws 	IllegalArgumentException
-	 * 			If the given position is not a valid startposition
-	 */
-	private void setStartPosition(Square pos) throws IllegalArgumentException {
-		if(!isValidStartPosition(pos))
-			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
-		
-		this.startPosition = pos;
-		addSquare(startPosition);
 	}
 	
 	/**
@@ -150,31 +111,6 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * returns the startposition of this player
-	 * @return Square startposition
-	 */
-	public Square getStartPosition(){
-		return startPosition;
-	}
-	
-	/**
-	 * Moves the player to another square
-	 * 
-	 * @param	newPosition	The new Position of the player
-	 * @throws	IllegalStateException
-	 * 		  	thrown if the player is unable to make this move 
-	 */
-	public void move(Square newPosition) throws IllegalStateException{
-		if(!isValidMove(newPosition)){
-			throw new IllegalStateException("Cannot move to a square that is obstructed");
-		}
-		removeSquare(this.getPosition());
-		addSquare(newPosition);
-		currentPosition = newPosition;
-		moved = true;
-	}
-	
-	/**
 	 * A move is valid when the destination square is not null
 	 * and when it is not obstructed.
 	 * 
@@ -191,25 +127,29 @@ public class Player extends Observable implements IObstacle {
 		return true;
 	}
 	
-	public void incrementActions(){
-		this.remainingActions++;
-		this.setChanged();
-		this.notifyObservers(currentPosition);
+	/**
+	 * An inventory is considered valid when the inventory is not null.
+	 * 
+	 * @param	inventory
+	 * @return	True	If inventory is not null
+	 * 			False	If inventory is null.
+	 */
+	public static boolean isValidInventory(PlayerInventory inventory) {
+		if(inventory == null)
+			return false;
+		
+		return true;
 	}
 	
-
 	/**
-	 * Adds the item to the player's inventory.
-	 * 
-	 * @param	item
-	 * @throws	IllegalArgumentException
-	 * 			Thrown when adding the item would exceed the size of the inventory
+	 * Returns if the number of actions is valid for the player
+	 * @param actions	the number of actions to be checked
+	 * @return	true	if the number of actions equals or is smaller than 
+	 * 					the number of allowed actions
+	 * 			false 	otherwise
 	 */
-	public void pickUp(Item item) throws IllegalArgumentException {
-		if(!isValidPickUp(item))
-			throw new IllegalArgumentException("The item cannot be added to the player inventory");
-		
-		inventory.addItem(item);
+	public static boolean isValidRemainingActions(int actions){
+		return actions <= Player.MAX_ALLOWED_ACTIONS;
 	}
 	
 	/**
@@ -234,6 +174,73 @@ public class Player extends Observable implements IObstacle {
 		
 		return true;
 	}
+	
+	/**
+	 * A new position square is valid when it is not null and
+	 * when it does not equal the current square.
+	 * 
+	 * @returns	True	Square is not null and does not equal current position.
+	 * @returns	False	Square is null or equals current position.
+	 */
+	public boolean isValidSquare(Square square) {
+		if(square == null)
+			return false;
+		if(square == currentPosition)
+			return false;
+		return true;
+	}
+	
+	/**
+	 * Sets the start position for the player
+	 * 
+	 * @param	pos	the position to be used as the start position for the player
+	 * @throws 	IllegalArgumentException
+	 * 			If the given position is not a valid startposition
+	 */
+	private void setStartPosition(Square pos) throws IllegalArgumentException {
+		if(!isValidStartPosition(pos))
+			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
+		
+		this.startPosition = pos;
+		addSquare(startPosition);
+	}
+	
+	/**
+	 * Moves the player to another square
+	 * 
+	 * @param	newPosition	The new Position of the player
+	 * @throws	IllegalStateException
+	 * 		  	thrown if the player is unable to make this move 
+	 */
+	public void move(Square newPosition) throws IllegalStateException{
+		if(!isValidMove(newPosition))
+			throw new IllegalStateException("Cannot move to a square that is obstructed");
+		
+		removeSquare(this.getPosition());
+		addSquare(newPosition);
+		moved = true;
+	}
+	
+	public void incrementActions(){
+		this.remainingActions++;
+		this.setChanged();
+		this.notifyObservers(currentPosition);
+	}
+	
+
+	/**
+	 * Adds the item to the player's inventory.
+	 * 
+	 * @param	item
+	 * @throws	IllegalArgumentException
+	 * 			Thrown when adding the item would exceed the size of the inventory
+	 */
+	public void pickUp(Item item) throws IllegalArgumentException {
+		if(!isValidPickUp(item))
+			throw new IllegalArgumentException("The item cannot be added to the player inventory");
+		
+		inventory.addItem(item);
+	}
 
 	/**
 	 * Method to select the item which the player is going to use
@@ -251,11 +258,40 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
+	 * Returns the name of the player.
+	 * 
+	 * @return	The name of this player. 
+	 * 
+	 */
+	public String getName(){
+		return name;
+	}
+	
+	/**
 	 * Returns the player's inventory.
 	 * @return the inventory of this player
 	 */
 	public PlayerInventory getInventory(){
 		return inventory;
+	}
+	
+	/**
+	 * returns the current position of the player
+	 */
+	public Square getPosition() {
+		return currentPosition;
+	}
+	
+	public int getRemainingActions(){
+		return remainingActions;
+	}
+	
+	/**
+	 * returns the startposition of this player
+	 * @return Square startposition
+	 */
+	public Square getStartPosition(){
+		return startPosition;
 	}
 	
 	/**
@@ -273,36 +309,17 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * An inventory is considered valid when the inventory is not null.
-	 * 
-	 * @param	inventory
-	 * @return	True	If inventory is not null
-	 * 			False	If inventory is null.
+	 * sets the name for the player
+	 * @param 	name	the name which is given to the player
+	 * @throws 	IllegalArgumentException
+	 * 			thrown if the given name is not a valid name 
+	 * 			for the player
 	 */
-	public static boolean isValidInventory(PlayerInventory inventory) {
-		if(inventory == null)
-			return false;
+	public void setName(String name) throws IllegalArgumentException{
+		if(!isValidName(name)) 
+			throw new IllegalArgumentException("Not a valid name");
 		
-		return true;
-	}
-	
-	/**
-	 * returns the current position of the player
-	 */
-	public Square getPosition() {
-		return currentPosition;
-	}
-	
-	public boolean hasMoved(){
-		return moved;
-	}
-	
-	public int getRemainingActions(){
-		return remainingActions;
-	} 
-
-	public boolean hasRemainingActions(){
-		return getRemainingActions() > 0;
+		this.name = name;
 	}
 	
 	/**
@@ -316,15 +333,12 @@ public class Player extends Observable implements IObstacle {
 		this.remainingActions = actions;
 	}
 	
-	/**
-	 * Returns if the number of actions is valid for the player
-	 * @param actions	the number of actions to be checked
-	 * @return	true	if the number of actions equals or is smaller than 
-	 * 					the number of allowed actions
-	 * 			false 	otherwise
-	 */
-	public static boolean isValidRemainingActions(int actions){
-		return actions <= Player.MAX_ALLOWED_ACTIONS;
+	public boolean hasMoved(){
+		return moved;
+	}
+
+	public boolean hasRemainingActions(){
+		return getRemainingActions() > 0;
 	}
 	
 	/**
@@ -366,9 +380,9 @@ public class Player extends Observable implements IObstacle {
 	 * 			| !isValidSquare()
 	 */
 	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidSquare(square)){
+		if(!isValidSquare(square))
 			throw new IllegalArgumentException("The given " + square + " is not a valid square");
-		}
+		
 		currentPosition = square;
 		square.setObstacle(this);
 	}
@@ -377,24 +391,11 @@ public class Player extends Observable implements IObstacle {
 	 * Removes the given square as a covered square of this obstacle.
 	 */
 	public void removeSquare(Square square) throws IllegalArgumentException {
-		if(!square.equals(currentPosition)){
+		if(!square.equals(currentPosition))
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
-		}
+		
 		currentPosition = null;
 		square.setObstacle(null);
-	}
-
-	/**
-	 * 
-	 */
-	public boolean isValidSquare(Square square) {
-		if(square == null){
-			return false;
-		}
-		if(square == currentPosition){
-			return false;
-		}
-		return false;
 	}
 
 	

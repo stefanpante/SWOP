@@ -175,43 +175,42 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         inventoryPanel.setBounds(5, 230, SIDEBAR_WIDTH-10, 70);
         sideBarPanel.add(inventoryPanel);
         
-        JButton pickup  = new JButton("Pick up item");
-        pickup.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-				ArrayList<Item> items = MODEL.getCurrentSquareInventory();
-				Item[] a = new Item[items.size()];
-				MODEL.getCurrentSquareInventory().toArray(a);
-
-                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
-                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
-                    a, 
-                    null);
-                if(input != null)
-                	gameHandler.getPickupHandler().pickUp(input);
-            }
-        });      
-        inventoryPanel.add(pickup);
-        
-        JButton use = new JButton("Use item");
-        use.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-				ArrayList<Item> items = MODEL.getCurrentPlayerInventory();
-				Item[] a = new Item[items.size()];
-				MODEL.getCurrentPlayerInventory().toArray(a);
-
-                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
-                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
-                    a, 
-                    null);
-                if(input != null)
-                	gameHandler.getUseItemHandler().useItem(input);
-            }
-        });      
-        inventoryPanel.add(use);       
+//        JButton pickup  = new JButton("Pick up item");
+//        pickup.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e)
+//            {
+//				ArrayList<Item> items = MODEL.getCurrentSquareInventory();
+//				Item[] a = new Item[items.size()];
+//				MODEL.getCurrentSquareInventory().toArray(a);
+//
+//                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
+//                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
+//                    a, 
+//                    null);
+//                if(input != null)
+//                	gameHandler.getPickupHandler().pickUp(input);
+//            }
+//        });      
+//        inventoryPanel.add(pickup);
+//        
+//        JButton use = new JButton("Use item");
+//        use.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e)
+//            {
+//				ArrayList<Item> items = MODEL.getCurrentPlayerInventory();
+//				Item[] a = new Item[items.size()];
+//				MODEL.getCurrentPlayerInventory().toArray(a);
+//
+//                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
+//                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
+//                    a, 
+//                    null);
+//                if(input != null)
+//                	gameHandler.getUseItemHandler().useItem(input);
+//            }
+//        });      
+//        inventoryPanel.add(use);       
  
-        MODEL.addObserver(gridPanel);
 
 
     }
@@ -249,9 +248,8 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		try{
 			gameHandler.getMoveHandler().move(direction);
 		}catch(Exception exc){
-			MODEL.setMessage(exc.getMessage());
+//			MODEL.setMessage(exc.getMessage());
 		}
-		MODEL.update();
 	}
 
 	private boolean is(ActionEvent e,String string){
