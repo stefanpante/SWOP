@@ -7,6 +7,7 @@ package handlers;
 
 import items.Item;
 
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import javax.swing.UIManager;
@@ -60,14 +61,15 @@ public class GameHandler extends Handler {
 			ApplicationWindow window = new ApplicationWindow(this);
 			addPropertyChangeListener(window);
 			window.setVisible();
+	    	this.endTurnHandler = new EndTurnHandler(getGame(), window);
+	    	this.moveHandler = new MoveHandler(getGame(),window);
+	    	this.pickUpHandler = new PickUpHandler(getGame(),window);
+	    	this.useItemHandler = new UseItemHandler(getGame(),window);
+	    	populateGui();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	this.endTurnHandler = new EndTurnHandler(getGame());
-    	this.moveHandler = new MoveHandler(getGame());
-    	this.pickUpHandler = new PickUpHandler(getGame());
-    	this.useItemHandler = new UseItemHandler(getGame());
-    	populateGui();
+
     }
     
     /**

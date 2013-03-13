@@ -3,10 +3,12 @@ package handlers;
 import items.Inventory;
 import items.Item;
 
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import game.Game;
+import gui.ApplicationWindow;
 
 /**
  * Handler/Controller for the pick up use case
@@ -14,11 +16,17 @@ import game.Game;
  *
  */
 public class PickUpHandler extends Handler {
+
 	
-	public PickUpHandler(Game game) {
-		super(game);
+	/**
+	 * @param game
+	 * @param window
+	 */
+	public PickUpHandler(Game game, PropertyChangeListener listener) {
+		super(game, listener);
 	}
-	
+
+
 	/**
 	 * Checks the precondition for the pick up use case
 	 * returns true if the preconditions are satisfied

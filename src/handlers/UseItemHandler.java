@@ -4,10 +4,12 @@ import items.Inventory;
 
 import items.Item;
 
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import game.Game;
+import gui.ApplicationWindow;
 
 /**
  * Handler/Controller for the use case in which 
@@ -17,14 +19,15 @@ import game.Game;
  */
 public class UseItemHandler extends Handler {
 	
-	/** 
-	 * Creates the handler for the usage of an item
-	 * @param game
-	 */
-	public UseItemHandler(Game game) {
-		super(game);
-	}
 	
+	/**
+	 * @param game
+	 * @param window
+	 */
+	public UseItemHandler(Game game, PropertyChangeListener listener) {
+		super(game, listener);
+	}
+
 	/**
 	 * Checks the precondition for the use item case
 	 * returns true if the preconditions are satisfied

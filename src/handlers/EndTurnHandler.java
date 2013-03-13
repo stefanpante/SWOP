@@ -1,5 +1,7 @@
 package handlers;
 
+import java.beans.PropertyChangeListener;
+
 import square.state.StateResult;
 
 import game.Game;
@@ -11,11 +13,15 @@ import gui.ApplicationWindow;
  *
  */
 public class EndTurnHandler extends Handler{
-	
-	public EndTurnHandler(Game game) {
-		super(game);
+
+	/**
+	 * @param game
+	 * @param window
+	 */
+	public EndTurnHandler(Game game, PropertyChangeListener listener) {
+		super(game, listener);
 	}
-	
+
 	/**
 	 * 
 	 * Checks the precondition for the end turn use case

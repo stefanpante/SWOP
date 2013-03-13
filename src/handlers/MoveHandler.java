@@ -1,5 +1,6 @@
 package handlers;
 
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -18,12 +19,11 @@ import gui.ApplicationWindow;
 public class MoveHandler extends Handler {
 
 	/**
-	 * Basic constructor that initiates the moveHandler with the given game. 
-	 * 
 	 * @param game
+	 * @param window
 	 */
-	public MoveHandler(Game game) {
-		super(game);
+	public MoveHandler(Game game, PropertyChangeListener listener) {
+		super(game, listener);
 	}
 
 	/**

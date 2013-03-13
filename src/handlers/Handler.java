@@ -38,6 +38,11 @@ public abstract class Handler {
 		this();
 		this.game = game;
 	}
+
+	public Handler(Game game,  PropertyChangeListener listener) {
+		this(game);
+		addPropertyChangeListener(listener);
+	}
 	
 	/**
 	 * Returns the reference to the game.
