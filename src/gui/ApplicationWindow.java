@@ -127,7 +127,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         sideBarPanel.add(currentPlayerPanel);
         
         currentPlayerLabel = new JLabel();
-        currentPlayerLabel.setText("Speler 1");
+        currentPlayerLabel.setText("...");
         currentPlayerPanel.add(currentPlayerLabel);
         
         /* Action */
@@ -177,7 +177,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         inventoryPanel.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Inventories",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        inventoryPanel.setBounds(5, 230, SIDEBAR_WIDTH-10, 70);
+        inventoryPanel.setBounds(5, 230, SIDEBAR_WIDTH-10, 100);
         sideBarPanel.add(inventoryPanel);
         
         JButton pickup  = new JButton("Pick up item");
@@ -221,11 +221,21 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
                 }
             }
         });      
-        inventoryPanel.add(use);       
- 
-
-
-    }
+        inventoryPanel.add(use);  
+        
+        JButton end = new JButton("End turn");
+        end.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+            	try{
+                	gameHandler.getEndTurnHandler().endTurn();
+            	}catch(Exception exc){
+        			showException(exc);
+        		}
+            }
+        }); 
+        inventoryPanel.add(end);
+   }
     
     /**
      * Turns the Jframe on
@@ -305,14 +315,26 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
         	this.gridPanel.setPlayers((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-        	this.gridPanel.setCurrentPlayer((Coordinate)o);  
+        	currentPlayerLabel.setText((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
         	this.playerInventory = (ArrayList<Item>)o;
+        }else if(evt.getPropertyName().equals(GameHandler.END_TUNR_PROPERTY)){
+        	confirmEndTurn((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
         	JOptionPane.showMessageDialog(frame, (String)o);
         }
     }
+
+	/**
+	 * @param o
+	 */
+	private void confirmEndTurn(String msg) {
+		int optionPane = JOptionPane.showConfirmDialog(frame, msg, "End Turn", JOptionPane.YES_NO_OPTION);	
+		if(optionPane == 0){
+			gameHandler.getEndTurnHandler().confirm(true);
+		}
+	}
 
 }
