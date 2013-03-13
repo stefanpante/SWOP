@@ -70,7 +70,7 @@ public class EndTurnHandler extends Handler{
 	 */
 	public void endTurn() throws IllegalStateException{
 		if(!isConfirmed()){
-			firePropertyChange(GameHandler.END_TUNR_PROPERTY, "Do you want to confirm ending your turn?");
+			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
 		}else{
 			StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
 			int lostActions = stateresult.getLostActions();
