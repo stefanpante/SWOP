@@ -11,6 +11,8 @@ import org.junit.Test;
 import player.Player;
 
 import square.Square;
+import square.state.PowerFailure;
+import square.state.RegularState;
 
 public class TestGame {
 
@@ -129,5 +131,31 @@ public class TestGame {
 		}
 		catch(Exception e){}
 		
+	}
+	
+	/**
+	 * Test if update states eventually convert PowerFailure square into RegularState.
+	 */
+	@Test
+	public void testUpdateStates() {
+		Game game = new Game(10,10);
+		
+		Square square = game.getGrid().getAllSquares().get(0);
+		Square squareTwo = game.getGrid().getAllSquares().get(1);
+		square.setState(new PowerFailure());
+		
+		assertTrue(square.getState() instanceof PowerFailure);
+		game.updateStates();
+		
+		squareTwo.setState(new PowerFailure());
+		
+		assertTrue(square.getState() instanceof PowerFailure);
+		game.updateStates();
+		
+		assertTrue(square.getState() instanceof PowerFailure);
+		game.updateStates();
+		
+		assertTrue(square.getState() instanceof RegularState);
+		assertTrue(squareTwo.getState() instanceof PowerFailure);
 	}
 }

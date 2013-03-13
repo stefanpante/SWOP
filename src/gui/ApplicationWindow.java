@@ -175,7 +175,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         /* Square Inventory Items */
         JPanel inventoryPanel = new JPanel();
         inventoryPanel.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Inventories",
+				.getBorder("TitledBorder.border"), "Actions",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
         inventoryPanel.setBounds(5, 230, SIDEBAR_WIDTH-10, 100);
         sideBarPanel.add(inventoryPanel);

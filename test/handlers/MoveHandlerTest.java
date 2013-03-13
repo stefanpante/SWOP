@@ -122,10 +122,10 @@ public class MoveHandlerTest {
 		
 		Player currentPlayer = game.getCurrentPlayer();
 		int remainingActions = currentPlayer.getRemainingActions();
+		assertEquals(remainingActions, Player.MAX_ALLOWED_ACTIONS);
 		
 		// Place a grenade on a position near the player
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-		
 		// Search for a square that isn't obstructed
 		Direction[] directions = Direction.values();
 		Random random = new Random();
@@ -143,13 +143,12 @@ public class MoveHandlerTest {
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
 		lg.activate();
-		
 		// move to the square containing the active LightGrenade
 		mh.move(direction);
-		
+		//assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS -1);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 1);
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4 + Player.MAX_ALLOWED_ACTIONS);
 		
 		
 		
@@ -317,7 +316,7 @@ public class MoveHandlerTest {
 	@Test
 	public void testCanEndAction(){
 		
-		assertFalse(mh.wins());
+		assertFalse(mh.hasWon());
 		
 		Square currentPosition = game.getCurrentPlayer().getStartPosition();
 		Direction[] directions = Direction.values();
@@ -341,7 +340,7 @@ public class MoveHandlerTest {
 		game.getNextPlayer().decrementActions();
 	
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
-		assertTrue(mh.wins());
+		assertTrue(mh.hasWon());
 	}
 
 
