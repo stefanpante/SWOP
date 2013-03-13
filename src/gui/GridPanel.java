@@ -34,6 +34,7 @@ public class GridPanel extends JPanel {
 	private ArrayList<Coordinate> walls;
 	private ArrayList<Coordinate> grenades;
 	private ArrayList<Coordinate> players;
+	private ArrayList<Coordinate> lightTrails;
 	
 	private Coordinate currentPlayer;
 	
@@ -148,11 +149,19 @@ public class GridPanel extends JPanel {
 		this.repaint();		
 	}
 	
+	/**
+	 * Updates the GridPanel with the new LightTrails.
+	 * 
+	 * @param lightTrails
+	 */
+	public void setLightTrails(ArrayList<Coordinate> lightTrails) {
+		this.lightTrails = lightTrails;
+		this.repaint();
+	}
+	
 	public void setCurrentPlayer(Coordinate coordinate){
 		this.currentPlayer = coordinate;
 		this.repaint();
 	}
-	
-	
 
 }

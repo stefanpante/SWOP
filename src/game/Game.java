@@ -184,6 +184,36 @@ public class Game extends AbstractModel {
 	};
 	
 	/**
+	 * Returns the LightTrail associated with the Player.
+	 * 
+	 * @param	player
+	 * @return	LightTrail	If the player has an associated LightTrail.
+	 * @throws	IllegalStateException	If the player does not have a LightTrail.
+	 * 									Or if the player given is null.
+	 */
+	public LightTrail getLightTrail(Player player) throws IllegalStateException {
+		if(player == null) 
+			throw new IllegalStateException("The given player is null.");
+		
+		if(!lightTrails.containsKey(player)) 
+			throw new IllegalStateException("The player " + player +  " does not have a LightTrail.");
+		
+		return lightTrails.get(player);
+	}
+	
+	/**
+	 * Returns all the LightTrails that are in the game.
+	 * 
+	 * @return	ArrayList<LightTrail>	All LightTrails associated with every player.
+	 */
+	public ArrayList<LightTrail> getLightTrails() {
+		ArrayList<LightTrail> list = new ArrayList<LightTrail>();
+		list.addAll(lightTrails.values());
+		
+		return list;
+	}
+	
+	/**
 	 * Returns the grid of this game
 	 * 
 	 * @return	The grid of this game

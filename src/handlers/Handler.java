@@ -104,6 +104,17 @@ public abstract class Handler {
 	}
 	
 	/**
+	 * Get a list of all coordinates which have a LightTrail.
+	 * 
+	 * @return	ArrayList<Coordinate> List of coordinates which have a LightTrail.
+	 */
+	public ArrayList<Coordinate> getLightTrailLocations() {
+		
+		
+		return null;
+	}
+	
+	/**
 	 * Get a list of Items of the current square.
 	 * 
 	 * @return	ArrayList<item>	List of all items of the current square.
