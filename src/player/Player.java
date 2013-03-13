@@ -352,7 +352,8 @@ public class Player extends Observable implements IObstacle {
 	 * for the new turn to the maximum allowed actions.
 	 */
 	public void endTurn(){
-		this.remainingActions = Player.MAX_ALLOWED_ACTIONS;
+		setRemainingActions(Player.MAX_ALLOWED_ACTIONS);
+		
 		moved = false;
 	}
 	

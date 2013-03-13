@@ -248,7 +248,6 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		Direction direction = null;
 		if(is(e,"N")){
@@ -320,7 +319,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
         	this.playerInventory = (ArrayList<Item>)o;
-        }else if(evt.getPropertyName().equals(GameHandler.END_TUNR_PROPERTY)){
+        }else if(evt.getPropertyName().equals(GameHandler.END_TURN_PROPERTY)){
         	confirmEndTurn((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
         	JOptionPane.showMessageDialog(frame, (String)o);

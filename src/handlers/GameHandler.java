@@ -28,7 +28,7 @@ public class GameHandler extends Handler {
 	public static final String MESSAGE_PROPERTY 		= "Message";
 	public static final String SQUARE_INVENTORY_PROPERTY	= "SquareInventory";
 	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
-	public static final String END_TUNR_PROPERTY 		= "EndTurnProperty";
+	public static final String END_TURN_PROPERTY 		= "EndTurnProperty";
 	
 	/**
 	 *  Initializes the game handler
