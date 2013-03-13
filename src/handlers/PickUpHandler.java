@@ -35,13 +35,11 @@ public class PickUpHandler extends Handler {
 	 * 			False	Otherwise.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() == 1 && 
-				!getGame().getCurrentPlayer().hasMoved() )
-			return false;
+		if(getGame().getCurrentPlayer().getRemainingActions() > 1 )
+			return true;
 		
-		return true;
+		return false;
 	}
-	
 	
 	/**
 	 * The player pickups the item he wants if his inventory allows it,
@@ -50,12 +48,22 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		if(!checkToProceed()){
-			throw new IllegalStateException("You should move! Otherwise you'll lose the game!");
+			if(!getGame().getCurrentPlayer().hasMoved()){
+			String name = getGame().getCurrentPlayer().getName();
+			throw new IllegalStateException(name +" hasn't moved in this turn " +
+					"and has no actions left" + name + "has lost the game" );
+			}
+			else{
+				getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
+				getGame().switchToNextPlayer();
+			}
 		}
-		getGame().getCurrentPlayer().pickUp(item);
-		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
-		getGame().getCurrentPlayer().decrementActions();
-		endAction();
+		else{
+			getGame().getCurrentPlayer().pickUp(item);
+			getGame().getCurrentPlayer().getPosition().getInventory().take(item);
+			getGame().getCurrentPlayer().decrementActions();
+			endAction();
+		}
 	}
 	
 	/**

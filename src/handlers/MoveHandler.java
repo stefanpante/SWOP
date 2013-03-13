@@ -50,19 +50,25 @@ public class MoveHandler extends Handler {
 	 * 
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
-		// Gets the current Position of the player
-		Square currentPosition = getGame().getCurrentPlayer().getPosition();
-		
-		//Throws NoSuchElementException
-		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
-		
-		getGame().getCurrentPlayer().move(newPosition);
-		currentPosition.getInventory().activateAllItems();
-		
-		
-		setRemainingActions(newPosition);
-		endAction();
-		setPropertyChanges();
+		if(!checkToProceed()){
+			getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
+			getGame().switchToNextPlayer();
+		}
+		else{
+			// Gets the current Position of the player
+			Square currentPosition = getGame().getCurrentPlayer().getPosition();
+			
+			//Throws NoSuchElementException
+			Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
+			setRemainingActions(newPosition);
+			getGame().getCurrentPlayer().move(newPosition);
+			currentPosition.getInventory().activateAllItems();
+			
+			
+			
+			endAction();
+			setPropertyChanges();
+		}
 		
 	}
 	/**

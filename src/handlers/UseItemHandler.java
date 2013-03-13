@@ -35,10 +35,10 @@ public class UseItemHandler extends Handler {
 	 * 			otherwise false.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 1){
-			return true; 
-		}
-		else return false;
+		if(getGame().getCurrentPlayer().getRemainingActions() > 1 )
+			return true;
+		
+		return false;
 	}
 	
 	/**
@@ -48,11 +48,21 @@ public class UseItemHandler extends Handler {
 	 */
 	public void useItem(Item item) {
 		if(!checkToProceed()){
-			throw new IllegalStateException("You should move! Otherwise you'll lose the game!");
+			if(!getGame().getCurrentPlayer().hasMoved()){
+			String name = getGame().getCurrentPlayer().getName();
+			throw new IllegalStateException(name +" hasn't moved in this turn " +
+					"and has no actions left" + name + "has lost the game" );
+			}
+			else{
+				getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
+				getGame().switchToNextPlayer();
+			}
 		}
-		getGame().getCurrentPlayer().useItem(item);
-		getGame().getCurrentPlayer().decrementActions();
-		endAction();
+		else{
+			getGame().getCurrentPlayer().useItem(item);
+			getGame().getCurrentPlayer().decrementActions();
+			endAction();
+		}
 	}
 	
 	

@@ -29,19 +29,6 @@ import square.obstacles.Wall;
 public class UseItemHandlerTest {
 
 	/**
-	 * The player should have more than action left 
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testCheckToProceed(){
-		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game,null);
-		assertTrue(uh.checkToProceed());
-		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS - 1; i++)
-			game.getCurrentPlayer().incrementActions();
-		assertFalse(uh.checkToProceed());
-	}
-	
-	/**
 	 * Test the placement of a grenade on a square when there is
 	 * no other grenade placed on the square or used on the square
 	 */

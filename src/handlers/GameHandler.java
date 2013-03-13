@@ -45,6 +45,7 @@ public class GameHandler extends Handler {
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
 	
+	
 	/* Application Window */
 	
     public static void main(String[] args) {
