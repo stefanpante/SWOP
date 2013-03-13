@@ -74,7 +74,7 @@ public class Coordinate {
 	 * 		
 	 */
 	public void setX(int x) throws IllegalArgumentException{
-		if(!isValidX(x)) throw new IllegalArgumentException();
+		if(!isValidX(x)) throw new IllegalArgumentException("The given x("+x+") is not a valid x coordinate.");
 		this.x = x;
 	}
 
@@ -84,7 +84,7 @@ public class Coordinate {
 	 * @param y
 	 */
 	public void setY(int y) throws IllegalArgumentException{
-		if(!isValidY(y)) throw new IllegalArgumentException();
+		if(!isValidY(y)) throw new IllegalArgumentException("The given y("+y+") is not a valid y coordinate.");
 		this.y = y;
 	}
 
@@ -103,7 +103,7 @@ public class Coordinate {
 	 * Returns whether the given number is a valid y coordinate.
 	 * 
 	 * @param y
-	 * @return Always true since the coordinates have no constraints.
+	 * @return 	Always true since the coordinates have no constraints.
 	 * 			| result == true
 	 */
 	public static boolean isValidY(int y){
@@ -120,46 +120,10 @@ public class Coordinate {
 	}
 
 	/**
-	* Check whether this Coordinate is equal to the given object.
-	* Compares the x and y coordinates if the given object is also
-	* a Coordinate2D
-	*
-	* @return	True if <obj> is an effective Coordinate2D with the same
-	* 			x and y coordinate.
-	* 			| (obj != null) && (obj instance of Coordinate2D) &&
-	* 			| (((Coordinate2D) obj).getX() == getX())
-	* 			| (((Coordinate2D) obj).getY() == getY())
-	*/
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == null){
-			return false;
-		}
-		if(!(obj instanceof Coordinate)){
-			return false;
-		}
-		if(this.getX() != ((Coordinate) obj).getX()){
-			return false;
-		}
-		if(this.getY() != ((Coordinate) obj).getY()){
-			return false;
-		}
-		return true;
-	}
-
-	/*TODO: currently we state that the coordinates can have negative values 
-	 * 		if however we use negative numbers the hashCode won't be correct.
-	 */
-	@Override
-	public int hashCode() {
-		return (int) (Math.pow(2, this.getX()) * Math.pow(3, this.getY()));
-	}
-
-	/**
-	 * Returns the closest neighbouring coordinate in the given direction
+	 * Returns the closest neighboring coordinate in the given direction
 	 * 
-	 * @param 	direction the direction in which the neighbour is wanted
-	 * @return 	the closest neighbour in the given direction
+	 * @param 	direction the direction in which the neighbor is wanted
+	 * @return 	the closest neighbor in the given direction
 	 */
 	public Coordinate getNeighbor(Direction direction){
 		int x = getX();
@@ -186,6 +150,10 @@ public class Coordinate {
 		}
 	}
 	
+	/**
+	 * Returns a list of all eight neighbors of this coordinate.
+	 * @return
+	 */
 	public ArrayList<Coordinate> getAllNeighbors(){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		coordinates.add(new Coordinate(x+1, y));
@@ -197,5 +165,50 @@ public class Coordinate {
 		coordinates.add(new Coordinate(x	, y-1));
 		coordinates.add(new Coordinate(x	, y+1));
 		return coordinates;
+	}
+
+	/**
+	 * Returns the hashcode of this coordinate.
+	 * 	Hashcodes are the same if the x and y coordinate are the same. 
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
+	/**
+	* Check whether this Coordinate is equal to the given object.
+	* Compares the x and y coordinates if the given object is also
+	* a Coordinate.
+	*
+	* @return	True if <obj> is an effective Coordinate with the same
+	* 			x and y coordinate.
+	* 			| (obj != null) && (obj instance of Coordinate2D) &&
+	* 			| (((Coordinate2D) obj).getX() == getX())
+	* 			| (((Coordinate2D) obj).getY() == getY())
+	*/
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Coordinate)) {
+			return false;
+		}
+		Coordinate other = (Coordinate) obj;
+		if (x != other.x) {
+			return false;
+		}
+		if (y != other.y) {
+			return false;
+		}
+		return true;
 	}
 }
