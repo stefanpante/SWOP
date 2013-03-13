@@ -50,7 +50,7 @@ public class PickUpHandler extends Handler {
 	public void pickUp(Item item){
 		getGame().getCurrentPlayer().pickUp(item);
 		getGame().getCurrentPlayer().getPosition().getInventory().take(item);
-		//TODO: getGame().getCurrentPlayer().incrementActions();
+		getGame().getCurrentPlayer().decrementActions();
 		endAction();
 	}
 	

@@ -48,6 +48,7 @@ public class UseItemHandler extends Handler {
 	 */
 	public void useItem(Item item) {
 		getGame().getCurrentPlayer().useItem(item);
+		getGame().getCurrentPlayer().decrementActions();
 		endAction();
 	}
 	
