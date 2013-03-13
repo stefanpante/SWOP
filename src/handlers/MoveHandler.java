@@ -103,7 +103,7 @@ public class MoveHandler extends Handler {
 	 * Checks if the end of the move causes the current player to win.
 	 * @return 	true if the move causes the player to win. 
 	 */
-	public boolean canEndAction(){
+	public boolean wins(){
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 
