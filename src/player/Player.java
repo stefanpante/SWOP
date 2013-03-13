@@ -388,13 +388,11 @@ public class Player extends Observable implements IObstacle {
 	 * 
 	 */
 	public boolean isValidSquare(Square square) {
-		if(square == null){
+		if(square == null)
 			return false;
-		}
-		if(square == currentPosition){
+		if(square == currentPosition)
 			return false;
-		}
-		return false;
+		return true;
 	}
 
 	
