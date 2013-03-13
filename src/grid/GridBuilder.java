@@ -1,6 +1,3 @@
-/**
- * 
- */
 package grid;
 
 import items.LightGrenade;
