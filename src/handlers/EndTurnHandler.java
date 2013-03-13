@@ -50,7 +50,7 @@ public class EndTurnHandler extends Handler{
 		getGame().switchToNextPlayer();
 		getGame().updateStates();
 		getGame().powerFailureSquares();
-		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
+//		ApplicationWindow.MODEL.setCurrentPlayer(getGame().getCurrentPlayer());
 	}
 
 }
