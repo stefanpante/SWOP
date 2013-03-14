@@ -31,11 +31,6 @@ public class Player extends Observable implements IObstacle {
 	private Square currentPosition;
 	
 	/**
-	 * The name of this player
-	 */
-	private String name;
-	
-	/**
 	 * The inventory of the player
 	 */
 	private PlayerInventory inventory;
@@ -75,26 +70,13 @@ public class Player extends Observable implements IObstacle {
 	 * @throws	IllegalArgumentException	If the startPosition is null.
 	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
-	public Player(Square startPosition, String name) throws IllegalArgumentException {
+	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
-		this.setName(name);
+		this.setID(id);
 		this.setInventory(new PlayerInventory());
 		
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
-	}
-	
-	/**
-	 * returns true for now
-	 * @param name 	the name which has to be checked
-	 * @return true if the given name is a valid name
-	 * 		   otherwise false
-	 */
-	public static boolean isValidName(String name){
-		if(name == null)
-			return false;
-		
-		return true;
 	}
 	
 	/**
@@ -278,7 +260,7 @@ public class Player extends Observable implements IObstacle {
 	 * 
 	 */
 	public String getName(){
-		return name;
+		return "Player " + getID();
 	}
 	
 	/**
@@ -328,20 +310,6 @@ public class Player extends Observable implements IObstacle {
 			throw new IllegalArgumentException("The given inventory is not valid for the player.");
 		
 		this.inventory = inventory;
-	}
-	
-	/**
-	 * sets the name for the player
-	 * @param 	name	the name which is given to the player
-	 * @throws 	IllegalArgumentException
-	 * 			thrown if the given name is not a valid name 
-	 * 			for the player
-	 */
-	public void setName(String name) throws IllegalArgumentException{
-		if(!isValidName(name)) 
-			throw new IllegalArgumentException("Not a valid name");
-		
-		this.name = name;
 	}
 	
 	/**

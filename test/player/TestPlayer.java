@@ -37,15 +37,6 @@ public class TestPlayer {
 	public void tearDown() throws Exception {
 	}
 	
-	/**
-	 * Given an invalid name, an exception must be thrown.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void testInvalidName() {
-		assertFalse(Player.isValidName(null));
-		
-		new Player(new Square(), null);
-	}
 	
 	/**
 	 * Given an invalid square, an exception must be thrown.
@@ -54,7 +45,7 @@ public class TestPlayer {
 	public void testInvalidSquare() {
 		assertFalse(Player.isValidStartPosition(null));
 		
-		new Player(null, new String("John"));
+		new Player(null, 0);
 	}
 	
 	/**
@@ -65,7 +56,7 @@ public class TestPlayer {
 		Square square = new Square();
 		new Wall(new Square(), square);
 		
-		new Player(square, new String("Johnny"));
+		new Player(square, 0);
 	}
 	
 	/**
@@ -81,7 +72,7 @@ public class TestPlayer {
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidPickUp() {
-		Player player = new Player(new Square(), new String("John"));
+		Player player = new Player(new Square(), 0);
 		
 		player.pickUp(null);
 	}
@@ -91,7 +82,7 @@ public class TestPlayer {
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testPickUpNull() {
-		Player player = new Player(new Square(), new String("Jan"));
+		Player player = new Player(new Square(), 0);
 		player.pickUp(null);
 	}
 	
@@ -105,7 +96,7 @@ public class TestPlayer {
 		
 		square.getInventory().addItem(item);
 		
-		Player player = new Player(square, new String("Jan met de pet"));
+		Player player = new Player(square, 0);
 		assertTrue(player.isValidPickUp(item));
 		assertEquals(player.getInventory().getSize(), 0);
 		assertFalse(player.getInventory().hasItem(item));
@@ -122,7 +113,7 @@ public class TestPlayer {
 	public void testIsValidInventory() {
 		assertFalse(Player.isValidInventory(null));
 		
-		Player player = new Player(new Square(), new String("Test"));
+		Player player = new Player(new Square(), 0);
 		PlayerInventory inventory = new PlayerInventory();
 		
 		assertTrue(Player.isValidInventory(inventory));
@@ -134,7 +125,7 @@ public class TestPlayer {
 	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testIsValidInventoryNull() {
-		Player player = new Player(new Square(), new String("Test"));
+		Player player = new Player(new Square(), 0);
 		player.setInventory(null);
 	}
 	
@@ -143,7 +134,7 @@ public class TestPlayer {
 	 */
 	@Test(expected=IllegalStateException.class)
 	public void testUseItem() {
-		Player player = new Player(new Square(), new String("Flip"));
+		Player player = new Player(new Square(), 0);
 		
 		player.useItem(null);
 	}
@@ -154,7 +145,7 @@ public class TestPlayer {
 	 */
 	@Test(expected=IllegalStateException.class)
 	public void testUseItemNotContained() {
-		Player player = new Player(new Square(), new String("Jan"));
+		Player player = new Player(new Square(), 0);
 		
 		player.useItem(new LightGrenade());
 	}
@@ -167,7 +158,7 @@ public class TestPlayer {
 		LightGrenade lightGrenade = new LightGrenade();
 		Square square = new Square();
 		
-		Player player = new Player(square, new String("Jos"));
+		Player player = new Player(square, 0);
 		player.getInventory().addItem(lightGrenade);
 		
 		player.useItem(lightGrenade);
@@ -183,7 +174,7 @@ public class TestPlayer {
 		Square square = new Square();
 		new Wall(new Square(), square);
 		
-		Player player = new Player(new Square(), new String("Johnny"));
+		Player player = new Player(new Square(), 0);
 		assertFalse(Player.isValidMove(square));
 		assertFalse(Player.isValidMove(null));
 		
@@ -197,7 +188,7 @@ public class TestPlayer {
 	@Test
 	public void testMove() {
 		Square square = new Square();
-		Player player = new Player(new Square(), new String("Johnny"));
+		Player player = new Player(new Square(), 0);
 		
 		assertTrue(Player.isValidMove(square));
 		assertFalse(player.hasMoved());
@@ -214,7 +205,7 @@ public class TestPlayer {
 	public void testMoveObstacle() {
 		Square square = new Square();
 		Square squareTo = new Square();
-		Player player = new Player(square, new String("Jan met de Pet"));
+		Player player = new Player(square, 0);
 		
 		assertTrue(square.isObstructed());
 		assertFalse(squareTo.isObstructed());

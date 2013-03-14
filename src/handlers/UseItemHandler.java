@@ -56,6 +56,7 @@ public class UseItemHandler extends Handler {
 			else{
 				getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
 				getGame().switchToNextPlayer();
+		    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			}
 		}
 		else{
