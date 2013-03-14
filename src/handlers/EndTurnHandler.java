@@ -82,7 +82,7 @@ public class EndTurnHandler extends Handler{
 			getGame().powerFailureSquares();
 			resetConfirm();
 		}
-		endAction();
+		fireChanges();
 	}
 
 	/**

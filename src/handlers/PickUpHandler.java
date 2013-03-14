@@ -64,8 +64,8 @@ public class PickUpHandler extends Handler {
 			getGame().getCurrentPlayer().getPosition().getInventory().take(item);
 			getGame().getCurrentPlayer().decrementActions();
 			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
-			endAction();
 		}
+		fireChanges();
 	}
 	
 	/**

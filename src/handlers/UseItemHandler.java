@@ -53,7 +53,6 @@ public class UseItemHandler extends Handler {
 				throw new IllegalStateException(name +" hasn't moved in this turn " +
 						"and has no actions left" + name + "has lost the game" );
 			}else{
-				
 				getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
 				getGame().switchToNextPlayer();
 		    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
@@ -64,7 +63,7 @@ public class UseItemHandler extends Handler {
 			getGame().getCurrentPlayer().getPosition().getInventory().activate(item);
 			getGame().getCurrentPlayer().decrementActions();
 			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
-			endAction();
+			fireChanges();
 		}
 	}
 	

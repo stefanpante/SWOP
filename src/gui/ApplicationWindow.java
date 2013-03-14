@@ -192,19 +192,24 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         pickup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				Item[] a = new Item[squareInventory.size()];
-				squareInventory.toArray(a);
-                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
-                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
-                    a, 
-                    null);
-                if(input != null){
-                	try{
-                		gameHandler.getPickupHandler().pickUp(input);
-                	}catch(Exception exc){
-            			showException(exc);
-            		}
-                }
+				if(squareInventory.isEmpty()){
+					showMessage("This square does not contain any items.");
+				}else{
+					Item[] a = new Item[squareInventory.size()];
+					squareInventory.toArray(a);
+	                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
+	                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
+	                    a, 
+	                    null);
+	                if(input != null){
+	                	try{
+	                		gameHandler.getPickupHandler().pickUp(input);
+	                	}catch(Exception exc){
+	            			showException(exc);
+	            		}
+	                }
+				}
+
             }
         });      
         inventoryPanel.add(pickup);
@@ -213,20 +218,25 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         use.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				Item[] a = new Item[playerInventory.size()];
-				playerInventory.toArray(a);
+				if(playerInventory.isEmpty()){
+					showMessage("Your inventory is empty.");
+				}else{
+					Item[] a = new Item[playerInventory.size()];
+					playerInventory.toArray(a);
 
-                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
-                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
-                    a, 
-                    null);
-                if(input != null){
-	            	try{
-	                	gameHandler.getUseItemHandler().useItem(input);
-	            	}catch(Exception exc){
-	        			showException(exc);
-	        		}
-                }
+	                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
+	                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
+	                    a, 
+	                    null);
+	                if(input != null){
+		            	try{
+		                	gameHandler.getUseItemHandler().useItem(input);
+		            	}catch(Exception exc){
+		        			showException(exc);
+		        		}
+	                }
+				}
+
             }
         });      
         inventoryPanel.add(use);  
@@ -327,9 +337,10 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	String playerName = (String)o;
         	if(!this.currentPlayerLabel.getText().equals(playerName)){
         		this.currentPlayerLabel.setText(playerName);
-        		JOptionPane.showMessageDialog(frame,
-        			    "It's now "+playerName+ "'s turn.");
+        		showMessage("It's now "+playerName+ "'s turn.");
         	}
+        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
+        	this.gridPanel.setCurrentPlayer((Coordinate)o);
         }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
@@ -340,6 +351,14 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	JOptionPane.showMessageDialog(frame, (String)o);
         }
     }
+
+	/**
+	 * @param message
+	 */
+	public void showMessage(String message) {
+		JOptionPane.showMessageDialog(frame,
+			    message);
+	}
 
 	/**
 	 * @param o

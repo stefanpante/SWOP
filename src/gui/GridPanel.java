@@ -5,20 +5,18 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import player.Player;
-
+import sun.java2d.loops.DrawRect;
 import utils.Coordinate;
 
 /**
@@ -62,6 +60,7 @@ public class GridPanel extends JPanel {
 		this.grenades = getEmptyCoordinateList();
 		this.players = getEmptyCoordinateList();
 		this.lightTrails = new HashMap<Player,ArrayList<Coordinate>>();
+		this.currentPlayer = new Coordinate(0, 0);
 	}
 	
 	private ArrayList<Coordinate> getEmptyCoordinateList(){
@@ -86,14 +85,12 @@ public class GridPanel extends JPanel {
 	    for(Coordinate coordinate : walls)
 	    	DrawImage(graphics, coordinate, "wall");
 		for(Coordinate coordinate : grenades)
-		    DrawImage(graphics, coordinate, "lightgrenade");
+		    DrawImage(graphics, coordinate, "lightgrenade");	
 		
-//		/* Draw light trail */
-//		for(Coordinate coordinate : ApplicationWindow.MODEL.getLightTrailRed())
-//		    DrawImage(graphics, coordinate, "cell_lighttrail_blue");
-//		for(Coordinate coordinate : ApplicationWindow.MODEL.getLightTrailRed())
-//		    DrawImage(graphics, coordinate, "cell_lighttrail_red");	
+		graphics.setColor(Color.ORANGE);
+		graphics.drawRect(getCurrentPlayer().getX()*colWidth,getCurrentPlayer().getY()*rowHeight,colWidth,rowHeight);
 		
+
 		/* Draw Players */
 		for(int i = 0; i < players.size(); i++)
 			DrawImage(graphics, players.get(i), "player_"+i);
@@ -174,5 +171,14 @@ public class GridPanel extends JPanel {
 		this.currentPlayer = coordinate;
 		this.repaint();
 	}
+
+	/**
+	 * @return the currentPlayer
+	 */
+	public Coordinate getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	
 
 }
