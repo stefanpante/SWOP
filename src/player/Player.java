@@ -198,14 +198,19 @@ public class Player extends Observable implements IObstacle {
 		if(!isValidMove(newPosition))
 			throw new IllegalStateException("Cannot move to a square that is obstructed");
 		
+		alertObservers();
+		
 		removeSquare(this.getPosition());
 		addSquare(newPosition);
 		moved = true;
+		
+		decrementActions();
 	}
 	
 	/**
 	 * Increments the remaining actions by one and notifies the observers of this player.
 	 */
+	@Deprecated
 	public void incrementActions(){
 		this.remainingActions++;
 		this.setChanged();
@@ -220,6 +225,12 @@ public class Player extends Observable implements IObstacle {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+	}
+	
+	/**
+	 * This notifies the observers.
+	 */
+	public void alertObservers() {
 		this.setChanged();
 		this.notifyObservers(currentPosition);
 	}
@@ -236,6 +247,9 @@ public class Player extends Observable implements IObstacle {
 		if(!isValidPickUp(item))
 			throw new IllegalArgumentException("The item cannot be added to the player inventory");
 		inventory.addItem(item);
+		
+		alertObservers();
+		decrementActions();
 	}
 
 	/**
@@ -251,6 +265,9 @@ public class Player extends Observable implements IObstacle {
 	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(itemToUse);
 		getPosition().getInventory().addItem(itemToUse);
+		
+		alertObservers();
+		decrementActions();
 	}
 	
 	/**

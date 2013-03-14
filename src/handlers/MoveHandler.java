@@ -97,10 +97,6 @@ public class MoveHandler extends Handler {
 				getGame().getCurrentPlayer().endTurn(ra);
 				getGame().switchToNextPlayer();
 			}
-			
-			else{
-				getGame().getCurrentPlayer().decrementActions();
-			}
 		}
 	}
 	
