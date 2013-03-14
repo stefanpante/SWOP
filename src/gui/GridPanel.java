@@ -98,12 +98,9 @@ public class GridPanel extends JPanel {
 			DrawImage(graphics, players.get(i), "player_"+i);
 		
 		/* Draw LightTrails */
-		int index = 0;
 		for(Player player: lightTrails.keySet()) {
 			for(Coordinate coord: lightTrails.get(player))
-				DrawImage(graphics, coord, "cell_lighttrail_" + index);
-			
-			index++;
+				DrawImage(graphics, coord, "cell_lighttrail_" + (player.getID() - 1));
 		}
 	}
 	
