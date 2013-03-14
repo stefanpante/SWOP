@@ -76,7 +76,7 @@ public class EndTurnHandler extends Handler{
 			getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS  + penalty);
 			getGame().switchToNextPlayer();
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-			getGame().updateStates();
+			
 			resetConfirm();
 		}
 		fireChanges();
