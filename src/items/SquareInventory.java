@@ -153,6 +153,14 @@ public class SquareInventory extends Inventory {
 		}
 	}
 	
+	public void wearOut(){
+		for(Item item: super.getAllItems()){
+			if(item.isActive()){
+				item.wearOut();
+			}
+		}
+	}
+	
 	
 //	/**
 //	 * This method will activate all items in inactive state in this inventory.

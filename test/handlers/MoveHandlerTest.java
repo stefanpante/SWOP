@@ -97,16 +97,15 @@ public class MoveHandlerTest {
 
 		currentPosition.getInventory().addItem(lg);
 		assertFalse(lg.isActive());
-
-		Random random = new Random();
 		while(!game.getCurrentPlayer().hasMoved()){
-			Direction[] directions = Direction.values();
-			Direction direction = directions[random.nextInt(directions.length)];
+
+			Direction direction = Direction.getRandom();
 			try{
 				mh.move(direction);
 				System.out.println(game.getCurrentPlayer().hasMoved());
 			}
-			catch(Exception e){}
+			catch(Exception e){System.out.println("ni bwoge");}
+			System.out.println(direction);
 		}
 
 		// When moved, the LightGrenade on the previous square should become active
@@ -128,14 +127,13 @@ public class MoveHandlerTest {
 		// Place a grenade on a position near the player
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		// Search for a square that isn't obstructed
-		Direction[] directions = Direction.values();
-		Random random = new Random();
+
 		Direction direction = null;
 		Square next = null;
 		while(next == null || next.isObstructed()|| next.getInventory().hasLightGrenade()){ 
-			direction = directions[random.nextInt(directions.length)];
+			direction = Direction.getRandom();
 			try{
-			next = game.getGrid().getNeighbor(currentPosition, direction);
+				next = game.getGrid().getNeighbor(currentPosition, direction);
 			}
 			catch(Exception e){}
 		}
@@ -146,8 +144,6 @@ public class MoveHandlerTest {
 		lg.activate();
 		// move to the square containing the active LightGrenade
 		mh.move(direction);
-		//assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS -1);
-		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		assertEquals(currentPlayer.getRemainingActions(), remainingActions);
 		

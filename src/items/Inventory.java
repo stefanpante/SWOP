@@ -64,6 +64,7 @@ public abstract class Inventory{
 		return this.getSize() >= this.getMaximumSize();
 	}
 
+	
 	/**
 	 * Checks if the inventory is empty.
 	 * 
