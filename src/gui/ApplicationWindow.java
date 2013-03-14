@@ -91,13 +91,18 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
     private void initialize() {
     	int hSize = 0, vSize = 0;
     	while(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
+    		try{
 	    	hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the horizontal grid size (>="+Grid.MIN_HSIZE+")", 
 	    			"Game Dimensions", 1));
 	    	vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the vertical grid size (>="+Grid.MIN_VSIZE+")", 
 	    			"Game Dimensions", 1));
+    		}catch(Exception exc){
+    			// Alegria
+    		}
 	    	if(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
 	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again.");
 	    	}
+	    	
     	}
     	setSize(hSize, vSize);
 
@@ -319,7 +324,12 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         }else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
         	this.gridPanel.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-        	currentPlayerLabel.setText((String)o);
+        	String playerName = (String)o;
+        	if(!this.currentPlayerLabel.getText().equals(playerName)){
+        		this.currentPlayerLabel.setText(playerName);
+        		JOptionPane.showMessageDialog(frame,
+        			    "It's now "+playerName+ "'s turn.");
+        	}
         }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){

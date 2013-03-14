@@ -65,10 +65,6 @@ public class MoveHandler extends Handler {
 			
 			setRemainingActions(newPosition);
 			
-			currentPosition.getInventory().activateAllItems();
-			
-			
-			
 			endAction();
 			setPropertyChanges();
 		}

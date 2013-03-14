@@ -61,6 +61,7 @@ public class GridPanel extends JPanel {
 		this.walls = getEmptyCoordinateList();
 		this.grenades = getEmptyCoordinateList();
 		this.players = getEmptyCoordinateList();
+		this.lightTrails = new HashMap<Player,ArrayList<Coordinate>>();
 	}
 	
 	private ArrayList<Coordinate> getEmptyCoordinateList(){

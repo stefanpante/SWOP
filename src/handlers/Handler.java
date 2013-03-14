@@ -59,14 +59,12 @@ public abstract class Handler {
 	 */
 	public ArrayList<Coordinate> getGrenadeLocations() {
 		ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
-    	
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);
     		
     		if(square.getInventory().hasLightGrenade() && !square.getInventory().hasActiveItem())
     			grenades.add(coordinate);
     	}
-    	
     	return grenades;
 	}
 	
