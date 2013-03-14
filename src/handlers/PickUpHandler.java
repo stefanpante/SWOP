@@ -1,15 +1,8 @@
 package handlers;
 
 import items.Inventory;
-
 import items.Item;
-
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-
-import square.Square;
-import utils.Coordinate;
-
 import game.Game;
 
 /**

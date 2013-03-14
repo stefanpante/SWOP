@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 import player.Player;
 import square.Direction;
 import square.Square;
-import square.state.StateResult;
 import utils.Coordinate;
 import game.Game;
 import gui.ApplicationWindow;
@@ -76,25 +75,9 @@ public class MoveHandler extends Handler {
 	 */
 	private void setRemainingActions(Square newPosition){
 		// Gets the result of the state for the new position
-		StateResult stateResult = newPosition.getState().resultOnMove();
-		if(stateResult.hasToEndTurn()){
-			if(newPosition.getInventory().hasActiveLightGrenade()){
-				int ra = getGame().getCurrentPlayer().getRemainingActions();
-				getGame().getCurrentPlayer().endTurn(ra - 4);
-				getGame().switchToNextPlayer();
-			}
-			else{
-				getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS - 1);
-				getGame().switchToNextPlayer();
-			}
-		}
-		else{
-			if(newPosition.getInventory().hasActiveLightGrenade()){
-				int ra = getGame().getCurrentPlayer().getRemainingActions();
-				getGame().getCurrentPlayer().endTurn(ra);
-				getGame().switchToNextPlayer();
-			}
-		}
+		int penalty = newPosition.getPenalty();
+		getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS + penalty);
+		getGame().switchToNextPlayer();
 	}
 	
 	/**

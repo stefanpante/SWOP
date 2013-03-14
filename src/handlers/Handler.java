@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import apple.laf.JRSUIConstants.State;
-
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;

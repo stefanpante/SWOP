@@ -4,7 +4,6 @@ import java.beans.PropertyChangeListener;
 
 import player.Player;
 
-import square.state.StateResult;
 import utils.Coordinate;
 
 import game.Game;
@@ -72,10 +71,9 @@ public class EndTurnHandler extends Handler{
 		if(!isConfirmed()){
 			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
 		}else{
-			StateResult stateresult = getGame().getCurrentPlayer().getPosition().getState().resultOnStart();
-			int lostActions = stateresult.getLostActions();
-			
-			getGame().getCurrentPlayer().endTurn(lostActions);
+			int penalty = getGame().getCurrentPlayer().getPosition().getPenalty();
+		
+			getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS  + penalty);
 			getGame().switchToNextPlayer();
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			getGame().updateStates();

@@ -5,11 +5,7 @@ import items.Inventory;
 import items.Item;
 
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import game.Game;
-import gui.ApplicationWindow;
 
 /**
  * Handler/Controller for the use case in which 
