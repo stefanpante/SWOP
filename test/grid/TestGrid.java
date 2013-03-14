@@ -6,6 +6,7 @@ package grid;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import org.junit.Test;
@@ -189,8 +190,30 @@ public class TestGrid {
 		}
 		
 		@Test
-		public void testLulz(){
-			assert(true);
+		public void testNeighbors(){
+			GridBuilder gb = new GridBuilder(10, 10);
+			gb.constructSquares();
+			
+			Grid grid = gb.getGrid();
+			
+			Coordinate coord = new Coordinate(0,0);
+			Square square = grid.getSquare(coord);
+			
+			HashMap<Direction, Square> neighbors = grid.getNeighbors(square);
+			assertEquals(neighbors.values().size(), 3);
+			
+			Square neighborSquare = grid.getNeighbor(square, Direction.SOUTHEAST);
+			assertTrue(neighbors.containsValue(neighborSquare));
+			assertTrue(grid.hasNeighbor(square, Direction.SOUTHEAST, neighborSquare));
+			
+			coord = new Coordinate(2,2);
+			square = grid.getSquare(coord);
+			neighbors = grid.getNeighbors(square);
+			assertEquals(neighbors.values().size(), 8);
+			
+			neighborSquare = grid.getNeighbor(square, Direction.SOUTHEAST);
+			assertTrue(neighbors.containsValue(neighborSquare));
+			assertTrue(grid.hasNeighbor(square, Direction.SOUTHEAST, neighborSquare));
 		}
 		
 }
