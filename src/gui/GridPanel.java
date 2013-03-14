@@ -35,6 +35,7 @@ public class GridPanel extends JPanel {
 	private ArrayList<Coordinate> walls;
 	private ArrayList<Coordinate> grenades;
 	private ArrayList<Coordinate> players;
+	private ArrayList<Coordinate> powerFails;
 	
 	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
 	
@@ -59,6 +60,7 @@ public class GridPanel extends JPanel {
 		this.walls = getEmptyCoordinateList();
 		this.grenades = getEmptyCoordinateList();
 		this.players = getEmptyCoordinateList();
+		this.powerFails = getEmptyCoordinateList();
 		this.lightTrails = new HashMap<Player,ArrayList<Coordinate>>();
 		this.currentPlayer = new Coordinate(0, 0);
 	}
@@ -81,6 +83,13 @@ public class GridPanel extends JPanel {
 	    for (int i = 1; i <= cols-1; i++)
 	    	graphics.drawLine(i * colWidth, 0, i * colWidth, height);
 	    
+	    /* Draw power failed squares */
+	    for(Coordinate coordinate: powerFails){
+	    	Graphics2D g = (Graphics2D)graphics;
+	    	g.setColor(Color.DARK_GRAY);
+	    	g.fill(new Rectangle2D.Double(coordinate.getX()*colWidth+1,coordinate.getY()*rowHeight+1,colWidth-1,rowHeight-1));
+	    }
+	    
 	    /* Draw walls & grenades */
 	    for(Coordinate coordinate : walls)
 	    	DrawImage(graphics, coordinate, "wall");
@@ -90,7 +99,6 @@ public class GridPanel extends JPanel {
 		graphics.setColor(Color.ORANGE);
 		graphics.drawRect(getCurrentPlayer().getX()*colWidth,getCurrentPlayer().getY()*rowHeight,colWidth,rowHeight);
 		
-
 		/* Draw Players */
 		for(int i = 0; i < players.size(); i++)
 			DrawImage(graphics, players.get(i), "player_"+i);
@@ -177,6 +185,20 @@ public class GridPanel extends JPanel {
 	 */
 	public Coordinate getCurrentPlayer() {
 		return currentPlayer;
+	}
+
+	/**
+	 * @return the powerFails
+	 */
+	public ArrayList<Coordinate> getPowerFails() {
+		return powerFails;
+	}
+
+	/**
+	 * @param powerFails the powerFails to set
+	 */
+	public void setPowerFails(ArrayList<Coordinate> powerFails) {
+		this.powerFails = powerFails;
 	}
 	
 	

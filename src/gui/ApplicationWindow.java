@@ -6,10 +6,8 @@ package gui;
 import grid.Grid;
 import handlers.GameHandler;
 import items.Item;
-import items.PlayerInventory;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -27,7 +25,6 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import player.Player;
-
 import square.Direction;
 import utils.Coordinate;
 
@@ -240,6 +237,8 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
             }
         });      
         inventoryPanel.add(use);  
+ 
+
         
         JButton end = new JButton("End turn");
         end.addActionListener(new ActionListener() {
@@ -253,7 +252,19 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
             }
         }); 
         inventoryPanel.add(end);
+        
+        JButton newGame = new JButton("New game");
+        newGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+				frame.dispose();
+				gameHandler.main(null);
+            }
+        });      
+        inventoryPanel.add(newGame);  
    }
+    
+    
     
     /**
      * Turns the Jframe on
@@ -302,7 +313,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	
 	protected JButton makeNavigationButton(String imageName,
 		String actionCommand, String toolTipText, boolean border) {
-		String imgLocation = "../res/" + imageName;
+		String imgLocation = "/res/" + imageName;
 		URL imageURL = ApplicationWindow.class.getResource(imgLocation);
 		JButton button = new JButton();
 		button.setActionCommand(actionCommand);
@@ -331,6 +342,8 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	this.gridPanel.setGrenades((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
         	this.gridPanel.setPlayers((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
+        	this.gridPanel.setPowerFails((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
         	this.gridPanel.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import apple.laf.JRSUIConstants.State;
+
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;
@@ -172,8 +174,17 @@ public abstract class Handler {
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, getGrenadeLocations());
     	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
     	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
-    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getPlayerItems());   	
+    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   	
     	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
     	firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    	firePropertyChange(GameHandler.POWER_FAILS_PROPERTY, getPowerFails());
+
+	}
+
+	/**
+	 * @return
+	 */
+	private ArrayList<Coordinate> getPowerFails() {
+		return new ArrayList<Coordinate>();
 	}
 }
