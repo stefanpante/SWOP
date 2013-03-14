@@ -49,11 +49,11 @@ public class PickUpHandler extends Handler {
 	public void pickUp(Item item){
 		if(!checkToProceed()){
 			if(!getGame().getCurrentPlayer().hasMoved()){
-			String name = getGame().getCurrentPlayer().getName();
-			throw new IllegalStateException(name +" hasn't moved in this turn " +
-					"and has no actions left" + name + "has lost the game" );
-			}
-			else{
+				String name = getGame().getCurrentPlayer().getName();
+				throw new IllegalStateException(name +" hasn't moved in this turn " +
+						"and has no actions left" + name + "has lost the game" );
+			}else{
+				firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Could not proceed: Move is over.");
 				getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
 				getGame().switchToNextPlayer();
 		    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
@@ -63,6 +63,7 @@ public class PickUpHandler extends Handler {
 			getGame().getCurrentPlayer().pickUp(item);
 			getGame().getCurrentPlayer().getPosition().getInventory().take(item);
 			getGame().getCurrentPlayer().decrementActions();
+			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
 			endAction();
 		}
 	}
