@@ -401,7 +401,6 @@ public class Player extends Observable implements IObstacle {
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
 		
 		currentPosition = null;
-		square.setObstacle(null);
 	}
 
 	
