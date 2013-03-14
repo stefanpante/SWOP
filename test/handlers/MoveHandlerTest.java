@@ -110,6 +110,7 @@ public class MoveHandlerTest {
 		}
 
 		// When moved, the LightGrenade on the previous square should become active
+		assertTrue(game.getCurrentPlayer().hasMoved());
 		assertTrue(lg.isActive());
 		assertTrue(currentPosition.getInventory().hasActiveLightGrenade());
 	}
@@ -179,7 +180,7 @@ public class MoveHandlerTest {
 		}
 		
 		// Set the state of the square to PowerFailure
-		next.setState(new PowerFailureState());
+		next.powerFail();
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
 		lg.activate();
@@ -299,7 +300,7 @@ public class MoveHandlerTest {
 			catch(Exception e){}
 		}
 		// Set a PowerFailure on the square
-		next.setState(new PowerFailureState());
+		next.powerFail();
 		
 		// Move to the square with the PowerFailure
 		mh.move(direction);

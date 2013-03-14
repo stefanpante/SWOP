@@ -56,7 +56,7 @@ public class UseItemHandler extends Handler {
 		}
 		else{
 			getGame().getCurrentPlayer().useItem(item);
-			getGame().getCurrentPlayer().getPosition().getInventory().activate(item);
+			//getGame().getCurrentPlayer().getPosition().getInventory().activate(item);
 			getGame().getCurrentPlayer().decrementActions();
 			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
 			fireChanges();

@@ -1,5 +1,7 @@
 package handlers;
 
+import items.LightGrenade;
+
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -36,7 +38,7 @@ public class MoveHandler extends Handler {
 	public boolean checkToProceed(){
 		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
 			return true;
-			
+
 		return false;
 	}
 
@@ -56,18 +58,21 @@ public class MoveHandler extends Handler {
 		else{
 			// Gets the current Position of the player
 			Square currentPosition = getGame().getCurrentPlayer().getPosition();
-			
+			if(currentPosition.getInventory().hasLightGrenade()){
+				LightGrenade lg = currentPosition.getInventory().getLightGrenade();
+				currentPosition.getInventory().activate(lg);
+			}
 			//Throws NoSuchElementException
 			Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
 			getGame().getCurrentPlayer().move(newPosition);
-			
+
 			setRemainingActions(newPosition);
-			
-			
+
+
 			setPropertyChanges();
 		}
 		fireChanges();
-		
+
 	}
 	/**
 	 * Sets the remaining actions of the current player
@@ -75,24 +80,26 @@ public class MoveHandler extends Handler {
 	 */
 	private void setRemainingActions(Square newPosition){
 		// Gets the result of the state for the new position
-		int penalty = newPosition.getPenalty();
-		getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS + penalty);
-		getGame().switchToNextPlayer();
+		if(newPosition.hasPenalty()){
+			int penalty = newPosition.getPenalty();
+			getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS + penalty);
+			getGame().switchToNextPlayer();
+		}
 	}
-	
+
 	/**
 	 * firesPropertyChanges for the GUI
 	 */
 	private void setPropertyChanges(){
 		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
-		
-    	for(Player player : getGame().getPlayers()){
-    		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
-    	}
-    	
-    	firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
-    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
-    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
+
+		for(Player player : getGame().getPlayers()){
+			players.add(getGame().getGrid().getCoordinate(player.getPosition()));
+		}
+
+		firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
+		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
+		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
 	}
 
 	/**
