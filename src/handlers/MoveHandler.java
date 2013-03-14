@@ -68,7 +68,6 @@ public class MoveHandler extends Handler {
 			getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
 			setRemainingActions(newPosition);
 
-
 			setPropertyChanges();
 		}else{
 			throw new IllegalStateException("You can't move to there! (" + direction+")");

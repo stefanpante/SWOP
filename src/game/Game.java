@@ -171,6 +171,7 @@ public class Game extends AbstractModel {
 			candidate = players.get(nextPlayer);
 		}
 		this.currentPlayer = getNextPlayer();
+		powerFailureSquares();
 	}
 	
 	/**
@@ -288,8 +289,8 @@ public class Game extends AbstractModel {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			
 			if(random.nextFloat() <= CHANCE_POWERFAILURE){
+				System.out.println("Y");
 				square.powerFail();
 				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
 				for(Square s: neighbors){
