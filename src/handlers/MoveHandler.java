@@ -55,7 +55,7 @@ public class MoveHandler extends Handler {
 			getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
 			getGame().switchToNextPlayer();
 		}
-		else{
+		else if(getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), direction)){
 			// Gets the current Position of the player
 			Square currentPosition = getGame().getCurrentPlayer().getPosition();
 			if(currentPosition.getInventory().hasLightGrenade()){
@@ -70,6 +70,8 @@ public class MoveHandler extends Handler {
 
 
 			setPropertyChanges();
+		}else{
+			throw new IllegalStateException("You can't move to there! (" + direction+")");
 		}
 		fireChanges();
 
