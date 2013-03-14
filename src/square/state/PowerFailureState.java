@@ -3,21 +3,23 @@ package square.state;
 import square.Square;
 
 /**
+ * This state indicates that a square is experiencing a power failure.
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class RegularState extends State{
+public class PowerFailureState extends State{
 
 	public int getPenalty() {
-		return 0;
+		return -1;
 	}
 
 	public boolean hasPenalty() {
-		return false;
+		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return super.toString() + "Regular";
+		return super.toString() + "Power Failed";
 	}
+	
 }
