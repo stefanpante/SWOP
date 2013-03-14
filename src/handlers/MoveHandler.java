@@ -4,6 +4,7 @@ import items.LightGrenade;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
 import player.Player;
@@ -114,7 +115,18 @@ public class MoveHandler extends Handler {
 		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
 			return true;
 		}
+
 		return false;
+	}
+	
+	public boolean hasLost(){
+		boolean stuck = true;
+		for(Entry<Direction, Square> entry : getGame().getGrid().getNeighbors(getGame().getCurrentPlayer().getPosition()).entrySet()){
+			if(getGame().getGrid().canMoveTo(entry.getValue(), entry.getKey())){
+				stuck = false;
+			}
+		}
+		return stuck;
 	}
 
 }
