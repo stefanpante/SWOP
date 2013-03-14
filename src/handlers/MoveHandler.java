@@ -113,7 +113,6 @@ public class MoveHandler extends Handler {
 		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
 			return true;
 		}
-
 		return false;
 	}
 

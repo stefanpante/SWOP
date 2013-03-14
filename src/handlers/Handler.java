@@ -15,6 +15,7 @@ import java.util.Iterator;
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;
+import square.state.PowerFailureState;
 import utils.Coordinate;
 
 /**
@@ -183,6 +184,13 @@ public abstract class Handler {
 	 * @return
 	 */
 	private ArrayList<Coordinate> getPowerFails() {
-		return new ArrayList<Coordinate>();
+		ArrayList<Coordinate> list = new ArrayList<Coordinate>();
+		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+			Square square = getGame().getGrid().getSquare(coordinate);
+			if(square.getState() instanceof PowerFailureState){
+				list.add(coordinate);
+			}
+		}
+		return list;
 	}
 }
