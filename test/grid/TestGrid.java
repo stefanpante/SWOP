@@ -5,6 +5,8 @@ package grid;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 
 import org.junit.Test;
 
@@ -24,7 +26,6 @@ public class TestGrid {
 	public Square getSquare(){
 		return new Square();
 	}
-
 	
 	/**
 	 * Test canMoveTo in the corners without walls.
@@ -135,8 +136,8 @@ public class TestGrid {
 			//TEST CORNERS.
 			//	Bottem Left
 			//		Impossible
-			System.out.println(grid.getNeighbor(bl,Direction.NORTH).isObstructed());
-			System.out.println(grid.getNeighbor(bl,Direction.EAST).isObstructed());
+			assertTrue(grid.getNeighbor(bl,Direction.NORTH).isObstructed());
+			assertTrue(grid.getNeighbor(bl,Direction.EAST).isObstructed());
 
 			assertFalse(grid.canMoveTo(bl, Direction.NORTH));
 			assertFalse(grid.canMoveTo(bl, Direction.NORTHEAST));
@@ -158,5 +159,38 @@ public class TestGrid {
 			
 		}
 		
+		/**
+		 * Tests using getSquares() by adding a bunch of squares to the grid.
+		 */
+		@Test
+		public void testGetSquares(){
+			GridBuilder gb = new GridBuilder(10, 10);
+			gb.constructSquares();
+			Grid grid = gb.getGrid();
+			Coordinate co11 = new Coordinate(1, 1);
+			Coordinate co01 = new Coordinate(0, 1);
+			Coordinate co00 = new Coordinate(0, 0);
+			Coordinate coMin11 = new Coordinate(-1, 1);
+			Coordinate co99= new Coordinate(9, 9);
 
+			ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+			coordinates.add(co11);
+			coordinates.add(co01);
+			coordinates.add(co00);
+			coordinates.add(coMin11);
+			coordinates.add(co99);
+			
+			ArrayList<Square> squares = grid.getSquares(coordinates);
+			assertTrue(squares.contains(grid.getSquare(co11)));
+			assertTrue(squares.contains(grid.getSquare(co01)));
+			assertTrue(squares.contains(grid.getSquare(co00)));
+			assertTrue(squares.contains(grid.getSquare(co99)));
+			assertEquals(4,squares.size());
+		}
+		
+		@Test
+		public void testLulz(){
+			assert(true);
+		}
+		
 }
