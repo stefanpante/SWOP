@@ -41,6 +41,11 @@ public class Player extends Observable implements IObstacle {
 	private PlayerInventory inventory;
 	
 	/**
+	 * The player's ID.
+	 */
+	private int ID = -1;
+	
+	/**
 	 * The number of remaining actions the player has left
 	 */
 	private int remainingActions;
@@ -226,6 +231,9 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
+	 * @pre	This must be called before making an action.
+	 * 		Otherwise the currentPosition is the new one.
+	 * 
 	 * Decrements the remaining actions by one and notifies the observers of this player.
 	 */
 	public void decrementActions(){
@@ -271,6 +279,14 @@ public class Player extends Observable implements IObstacle {
 	 */
 	public String getName(){
 		return name;
+	}
+	
+	/**
+	 * Returns the player's id.
+	 * @return
+	 */
+	public int getID() {
+		return this.ID;
 	}
 	
 	/**
@@ -326,6 +342,19 @@ public class Player extends Observable implements IObstacle {
 			throw new IllegalArgumentException("Not a valid name");
 		
 		this.name = name;
+	}
+	
+	/**
+	 * Set's the player id.
+	 * 
+	 * @param	id
+	 * @throws	IllegalStateException	If the ID is already set it cannot be overwritten.
+	 */
+	public void setID(int id) throws IllegalStateException {
+		if(this.ID != -1)
+			throw new IllegalStateException("The player ID has already been set.");
+		
+		this.ID = id;
 	}
 	
 	/**
