@@ -13,7 +13,7 @@ import org.junit.Test;
 import player.Player;
 import square.Direction;
 import square.Square;
-import square.state.PowerFailure;
+import square.state.PowerFailureState;
 import square.state.State;
 
 import game.Game;
@@ -62,7 +62,7 @@ public class UserInteractionTest {
 			Player currentPlayer = game.getCurrentPlayer();
 			State state = game.getCurrentPlayer().getPosition().getState();
 			int numberOfActions = Player.MAX_ALLOWED_ACTIONS;
-			if(state instanceof PowerFailure){
+			if(state instanceof PowerFailureState){
 				numberOfActions -= 1;
 			}
 			j = 1;
@@ -71,7 +71,7 @@ public class UserInteractionTest {
 			Square next = game.getGrid().getNeighbor(currentPosition, direction);
 			if(mh == null) System.out.println("null");
 			mh.move(direction);
-			if(next.getState() instanceof PowerFailure){
+			if(next.getState() instanceof PowerFailureState){
 				j = 3;
 			}
 			
@@ -84,7 +84,7 @@ public class UserInteractionTest {
 					currentPosition = game.getCurrentPlayer().getPosition();
 					next = game.getGrid().getNeighbor(currentPosition, direction);
 					mh2.move(direction);
-					if(next.getState() instanceof PowerFailure){
+					if(next.getState() instanceof PowerFailureState){
 						break;
 					}
 					

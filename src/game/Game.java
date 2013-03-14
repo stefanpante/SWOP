@@ -13,7 +13,7 @@ import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;
-import square.state.PowerFailure;
+import square.state.PowerFailureState;
 import utils.Coordinate;
 
 /**
@@ -290,10 +290,10 @@ public class Game extends AbstractModel {
 			Square square = iterator.next();
 			
 			if(random.nextFloat() <= CHANCE_POWERFAILURE){
-				square.setState(new PowerFailure());
+				square.setState(new PowerFailureState());
 				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
 				for(Square s: neighbors){
-					s.setState(new PowerFailure());
+					s.setState(new PowerFailureState());
 				}
 			}
 		}

@@ -62,11 +62,15 @@ public class EndTurnHandlerTest {
 		Random random = new Random();
 		Direction direction = directions[random.nextInt(directions.length)];
 		Square currentPosition = game.getCurrentPlayer().getPosition();
+		Square next = null;
+		while(next != null && next.isObstructed()){
+			try {
+				direction = directions[random.nextInt(directions.length)];
+				next = game.getGrid().getNeighbor(currentPosition, direction);
+			} catch (Exception e) {
 
-		Square next = game.getGrid().getNeighbor(currentPosition, direction);
-		while(next.isObstructed()){
-			direction = directions[random.nextInt(directions.length)];
-			next = game.getGrid().getNeighbor(currentPosition, direction);
+			}
+			
 		}
 		return direction;
 	}

@@ -17,7 +17,7 @@ import square.Direction;
 import square.Square;
 import square.obstacles.LightTrail;
 import square.obstacles.Wall;
-import square.state.PowerFailure;
+import square.state.PowerFailureState;
 
 import game.Game;
 import grid.GridBuilder;
@@ -179,7 +179,7 @@ public class MoveHandlerTest {
 		}
 		
 		// Set the state of the square to PowerFailure
-		next.setState(new PowerFailure());
+		next.setState(new PowerFailureState());
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
 		lg.activate();
@@ -299,7 +299,7 @@ public class MoveHandlerTest {
 			catch(Exception e){}
 		}
 		// Set a PowerFailure on the square
-		next.setState(new PowerFailure());
+		next.setState(new PowerFailureState());
 		
 		// Move to the square with the PowerFailure
 		mh.move(direction);
