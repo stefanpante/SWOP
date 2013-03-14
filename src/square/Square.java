@@ -3,9 +3,9 @@ package square;
 import items.SquareInventory;
 
 import square.obstacles.IObstacle;
+import square.state.PowerFailureState;
 import square.state.RegularState;
 import square.state.State;
-import square.state.StateResult;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -16,7 +16,7 @@ import notnullcheckweaver.Nullable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 @NotNull
-public class Square {
+public class Square implements Penalty{
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -27,19 +27,23 @@ public class Square {
 	 * State of the current square. May be a power failure.
 	 */
 	private State state;
-	
+	// Sets for how many turns the current state will be active
+	private int remainingTurns;
 	/**
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
 	private IObstacle obstacle;
 	
+	
 	/**
 	 * Zero argument constructor for a square.
 	 */
 	public Square (){
 		this.inventory = new SquareInventory();
-		this.state = new RegularState();
+		this.state = RegularState.getInstance();
+		this.remainingTurns = 0;
+
 	}
 	
 	/**
@@ -60,13 +64,6 @@ public class Square {
 			throw new IllegalArgumentException("State cannot be null.");
 		
 		this.state = state;
-	}
-	
-	/**
-	 * This alerts the interal state of the square that a Turn has been ended.
-	 */
-	public void endTurn() {
-		getState().nextTurn(this);
 	}
 	
 	/**
@@ -131,5 +128,33 @@ public class Square {
 	 */
 	public boolean isObstructed(){
 			return obstacle != null;
+	}
+	
+	/**
+	 * Ends the turn. Checks if the state of the square needs to change
+	 */
+	public void endTurn(){
+		if(remainingTurns == 0){
+			this.state = RegularState.getInstance();
+		}
+		else if(remainingTurns > 0){
+			remainingTurns--;
+		}
+	}
+	
+	public void powerFail(){
+		remainingTurns = PowerFailureState.TURNS_ACTIVE;
+		this.state = PowerFailureState.getInstance();
+	}
+
+	public int getPenalty() {
+		int res = 0;
+		if(this.getInventory().hasActiveLightGrenade())
+			res = this.getInventory().getLightGrenade().getPenalty();
+		return res + state.getPenalty(); 
+	}
+
+	public boolean hasPenalty() {
+		return state.hasPenalty() || this.getInventory().hasActiveLightGrenade();
 	}
 }

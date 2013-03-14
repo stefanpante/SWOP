@@ -9,12 +9,25 @@ import square.Square;
  */
 public class PowerFailureState extends State{
 
+	// eager singleton implementation
+	public static int TURNS_ACTIVE = 3;
+	private static final PowerFailureState POWERFAILURE = new PowerFailureState();
+	private PowerFailureState(){
+		
+	}
 	public int getPenalty() {
 		return -1;
 	}
 
 	public boolean hasPenalty() {
 		return true;
+	}
+	/**
+	 * Returns the single instance of this PowerFailure
+	 * @return
+	 */
+	public static PowerFailureState getInstance(){
+		return POWERFAILURE;
 	}
 	
 	@Override
