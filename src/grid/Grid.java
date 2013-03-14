@@ -268,15 +268,11 @@ public class Grid {
 		Coordinate c = coordinate.getNeighbor(direction);
 		try{
 			return getSquare(c);
-<<<<<<< HEAD
 		}catch(NoSuchElementException ex){
 			throw new NoSuchElementException("There is no neighbor in "+ direction 
 					+" direction of the "+ square 
 					+" at coordinate " + coordinate+".");
 		}
-=======
-		throw new NoSuchElementException("You have reached the bounds of the grid!");
->>>>>>> branch 'master' of https://github.com/stefanpante/SWOP.git
 	}
 		
 	/**
