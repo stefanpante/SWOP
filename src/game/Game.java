@@ -290,10 +290,10 @@ public class Game extends AbstractModel {
 			Square square = iterator.next();
 			
 			if(random.nextFloat() <= CHANCE_POWERFAILURE){
-				square.setState(new PowerFailureState());
+				square.powerFail();
 				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
 				for(Square s: neighbors){
-					s.setState(new PowerFailureState());
+					s.powerFail();
 				}
 			}
 		}

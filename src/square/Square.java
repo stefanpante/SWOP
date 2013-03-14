@@ -62,7 +62,6 @@ public class Square implements Penalty{
 	public void setState(State state) throws IllegalArgumentException {
 		if(!isValidState(state))
 			throw new IllegalArgumentException("State cannot be null.");
-		
 		this.state = state;
 	}
 	
@@ -144,9 +143,9 @@ public class Square implements Penalty{
 	
 	public void powerFail(){
 		remainingTurns = PowerFailureState.TURNS_ACTIVE;
-		this.state = PowerFailureState.getInstance();
+		setState(PowerFailureState.getInstance());
 	}
-
+	
 	public int getPenalty() {
 		int res = 0;
 		if(this.getInventory().hasActiveLightGrenade())
