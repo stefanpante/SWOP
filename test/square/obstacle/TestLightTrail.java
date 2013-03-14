@@ -79,6 +79,47 @@ public class TestLightTrail {
 		lightTrail.addSquare(squareOne);
 		lightTrail.addSquare(squareOne);
 	}
+	
+	/**
+	 * Test if adding a square results in the square
+	 * beeing set as obstructed.
+	 */
+	@Test
+	public void testAdding() {
+		LightTrail lightTrail = new LightTrail();
+		
+		Square squareOne = new Square();
+		assertFalse(squareOne.isObstructed());
+		
+		lightTrail.addSquare(squareOne);
+		assertTrue(squareOne.isObstructed());
+		
+		Square squareTwo = new Square();
+		assertFalse(squareTwo.isObstructed());
+		
+		lightTrail.addSquare(squareTwo);
+		assertTrue(squareTwo.isObstructed());
+	}
+	
+	/**
+	 * Test adding a square after maximum capacity,
+	 * the last one is set to non obstructed.
+	 */
+	@Test
+	public void testAddingMax() {
+		LightTrail lightTrail = new LightTrail();
+		
+		Square firstSquare = new Square();
+		lightTrail.addSquare(firstSquare);
+		
+		assertTrue(firstSquare.isObstructed());
+		
+		lightTrail.addSquare(new Square());
+		lightTrail.addSquare(new Square());
+		lightTrail.addSquare(new Square());
+		
+		assertFalse(firstSquare.isObstructed());
+	}
 
 	/**
 	 * Duplicate square must not be valid.
@@ -92,40 +133,6 @@ public class TestLightTrail {
 		lightTrail.addSquare(squareOne);
 		assertFalse(lightTrail.isValidSquare(squareOne));
 	}
-	
-//	/**
-//	 * Test if not connected squares are invalid.
-//	 */
-//	@Test
-//	public void testIsValidNotConnected() {
-//		LightTrail lightTrail = new LightTrail();
-//		
-//		lightTrail.addSquare(new Square());
-//		assertFalse(lightTrail.isValidSquare(new Square()));
-//	}
-//	
-	//TODO: what should happen with this method
-//	/**
-//	 * Test if not connected squares are invalid in a longer LightTrail.
-//	 */
-//	@Test
-//	public void testIsValidNotConnectedMultiple() {
-//		LightTrail lightTrail = new LightTrail();
-//		
-//		Square squareOne = new Square();
-//		Square squareTwo = new Square();
-//		
-//		squareOne.setNeighbor(Direction.SOUTH, squareTwo);
-//		
-//		assertTrue(lightTrail.isValidSquare(squareOne));
-//		
-//		lightTrail.addSquare(squareOne);
-//		
-//		assertTrue(lightTrail.isValidSquare(squareTwo));
-//		lightTrail.addSquare(squareTwo);
-//		
-//		assertFalse(lightTrail.isValidSquare(new Square()));
-//	}
 
 	/**
 	 * Test adding new square must be valid.

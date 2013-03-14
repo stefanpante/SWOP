@@ -31,14 +31,14 @@ public class Player extends Observable implements IObstacle {
 	private Square currentPosition;
 	
 	/**
-	 * The name of this player
-	 */
-	private String name;
-	
-	/**
 	 * The inventory of the player
 	 */
 	private PlayerInventory inventory;
+	
+	/**
+	 * The player's ID.
+	 */
+	private int ID = -1;
 	
 	/**
 	 * The number of remaining actions the player has left
@@ -70,26 +70,13 @@ public class Player extends Observable implements IObstacle {
 	 * @throws	IllegalArgumentException	If the startPosition is null.
 	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
-	public Player(Square startPosition, String name) throws IllegalArgumentException {
+	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
-		this.setName(name);
+		this.setID(id);
 		this.setInventory(new PlayerInventory());
 		
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
-	}
-	
-	/**
-	 * returns true for now
-	 * @param name 	the name which has to be checked
-	 * @return true if the given name is a valid name
-	 * 		   otherwise false
-	 */
-	public static boolean isValidName(String name){
-		if(name == null)
-			return false;
-		
-		return true;
 	}
 	
 	/**
@@ -211,14 +198,19 @@ public class Player extends Observable implements IObstacle {
 		if(!isValidMove(newPosition))
 			throw new IllegalStateException("Cannot move to a square that is obstructed");
 		
+		alertObservers();
+		
 		removeSquare(this.getPosition());
 		addSquare(newPosition);
 		moved = true;
+		
+		decrementActions();
 	}
 	
 	/**
 	 * Increments the remaining actions by one and notifies the observers of this player.
 	 */
+	@Deprecated
 	public void incrementActions(){
 		this.remainingActions++;
 		this.setChanged();
@@ -226,10 +218,19 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
+	 * @pre	This must be called before making an action.
+	 * 		Otherwise the currentPosition is the new one.
+	 * 
 	 * Decrements the remaining actions by one and notifies the observers of this player.
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+	}
+	
+	/**
+	 * This notifies the observers.
+	 */
+	public void alertObservers() {
 		this.setChanged();
 		this.notifyObservers(currentPosition);
 	}
@@ -246,6 +247,9 @@ public class Player extends Observable implements IObstacle {
 		if(!isValidPickUp(item))
 			throw new IllegalArgumentException("The item cannot be added to the player inventory");
 		inventory.addItem(item);
+		
+		alertObservers();
+		decrementActions();
 	}
 
 	/**
@@ -261,6 +265,9 @@ public class Player extends Observable implements IObstacle {
 	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(itemToUse);
 		getPosition().getInventory().addItem(itemToUse);
+		
+		alertObservers();
+		decrementActions();
 	}
 	
 	/**
@@ -270,7 +277,15 @@ public class Player extends Observable implements IObstacle {
 	 * 
 	 */
 	public String getName(){
-		return name;
+		return "Player " + getID();
+	}
+	
+	/**
+	 * Returns the player's id.
+	 * @return
+	 */
+	public int getID() {
+		return this.ID;
 	}
 	
 	/**
@@ -315,17 +330,16 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * sets the name for the player
-	 * @param 	name	the name which is given to the player
-	 * @throws 	IllegalArgumentException
-	 * 			thrown if the given name is not a valid name 
-	 * 			for the player
+	 * Set's the player id.
+	 * 
+	 * @param	id
+	 * @throws	IllegalStateException	If the ID is already set it cannot be overwritten.
 	 */
-	public void setName(String name) throws IllegalArgumentException{
-		if(!isValidName(name)) 
-			throw new IllegalArgumentException("Not a valid name");
+	public void setID(int id) throws IllegalStateException {
+		if(this.ID != -1)
+			throw new IllegalStateException("The player ID has already been set.");
 		
-		this.name = name;
+		this.ID = id;
 	}
 	
 	/**
@@ -404,7 +418,6 @@ public class Player extends Observable implements IObstacle {
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
 		
 		currentPosition = null;
-		square.setObstacle(null);
 	}
 
 	

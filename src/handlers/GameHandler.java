@@ -25,6 +25,7 @@ public class GameHandler extends Handler {
 	public static final String GRENADES_PROPERTY 			= "Grenades";	
 	public static final String PLAYERS_PROPERTY 			= "Players";	
 	public static final String CURRENT_PLAYER_PROPERTY 		= "CurrentPlayer";
+	public static final String CURRENT_POSITION_PROPERTY 	= "CurrentPosition";
 	public static final String MESSAGE_PROPERTY 			= "Message";
 	public static final String SQUARE_INVENTORY_PROPERTY	= "SquareInventory";
 	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
@@ -90,6 +91,7 @@ public class GameHandler extends Handler {
     	firePropertyChange(PLAYERS_PROPERTY, players);
     	firePropertyChange(CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
     	firePropertyChange(LIGHT_TRAILS_PROPERTY, super.getLightTrailLocations());
+    	fireChanges();
 	}
 
 	/**

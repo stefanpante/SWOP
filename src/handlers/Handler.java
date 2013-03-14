@@ -59,14 +59,12 @@ public abstract class Handler {
 	 */
 	public ArrayList<Coordinate> getGrenadeLocations() {
 		ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
-    	
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);
     		
     		if(square.getInventory().hasLightGrenade() && !square.getInventory().hasActiveItem())
     			grenades.add(coordinate);
     	}
-    	
     	return grenades;
 	}
 	
@@ -170,11 +168,12 @@ public abstract class Handler {
 		this.game = game;
 	}
 	
-	public void endAction(){
+	public void fireChanges(){
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, getGrenadeLocations());
+    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
     	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getPlayerItems());   	
-    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
     	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
+    	firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
 	}
 }

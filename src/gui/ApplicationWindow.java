@@ -91,13 +91,18 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
     private void initialize() {
     	int hSize = 0, vSize = 0;
     	while(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
+    		try{
 	    	hSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the horizontal grid size (>="+Grid.MIN_HSIZE+")", 
 	    			"Game Dimensions", 1));
 	    	vSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter a value for the vertical grid size (>="+Grid.MIN_VSIZE+")", 
 	    			"Game Dimensions", 1));
+    		}catch(Exception exc){
+    			// Alegria
+    		}
 	    	if(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
 	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again.");
 	    	}
+	    	
     	}
     	setSize(hSize, vSize);
 
@@ -187,19 +192,24 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         pickup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				Item[] a = new Item[squareInventory.size()];
-				squareInventory.toArray(a);
-                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
-                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
-                    a, 
-                    null);
-                if(input != null){
-                	try{
-                		gameHandler.getPickupHandler().pickUp(input);
-                	}catch(Exception exc){
-            			showException(exc);
-            		}
-                }
+				if(squareInventory.isEmpty()){
+					showMessage("This square does not contain any items.");
+				}else{
+					Item[] a = new Item[squareInventory.size()];
+					squareInventory.toArray(a);
+	                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to pick up?",
+	                    "Pick up item", JOptionPane.QUESTION_MESSAGE, null,
+	                    a, 
+	                    null);
+	                if(input != null){
+	                	try{
+	                		gameHandler.getPickupHandler().pickUp(input);
+	                	}catch(Exception exc){
+	            			showException(exc);
+	            		}
+	                }
+				}
+
             }
         });      
         inventoryPanel.add(pickup);
@@ -208,20 +218,25 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         use.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
             {
-				Item[] a = new Item[playerInventory.size()];
-				playerInventory.toArray(a);
+				if(playerInventory.isEmpty()){
+					showMessage("Your inventory is empty.");
+				}else{
+					Item[] a = new Item[playerInventory.size()];
+					playerInventory.toArray(a);
 
-                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
-                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
-                    a, 
-                    null);
-                if(input != null){
-	            	try{
-	                	gameHandler.getUseItemHandler().useItem(input);
-	            	}catch(Exception exc){
-	        			showException(exc);
-	        		}
-                }
+	                Item input = (Item) JOptionPane.showInputDialog(null, "What item would you like to use?",
+	                    "Use item", JOptionPane.QUESTION_MESSAGE, null,
+	                    a, 
+	                    null);
+	                if(input != null){
+		            	try{
+		                	gameHandler.getUseItemHandler().useItem(input);
+		            	}catch(Exception exc){
+		        			showException(exc);
+		        		}
+	                }
+				}
+
             }
         });      
         inventoryPanel.add(use);  
@@ -319,7 +334,13 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         }else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
         	this.gridPanel.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-        	currentPlayerLabel.setText((String)o);
+        	String playerName = (String)o;
+        	if(!this.currentPlayerLabel.getText().equals(playerName)){
+        		this.currentPlayerLabel.setText(playerName);
+        		showMessage("It's now "+playerName+ "'s turn.");
+        	}
+        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
+        	this.gridPanel.setCurrentPlayer((Coordinate)o);
         }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
         	this.squareInventory = (ArrayList<Item>)o;
         }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
@@ -330,6 +351,14 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	JOptionPane.showMessageDialog(frame, (String)o);
         }
     }
+
+	/**
+	 * @param message
+	 */
+	public void showMessage(String message) {
+		JOptionPane.showMessageDialog(frame,
+			    message);
+	}
 
 	/**
 	 * @param o

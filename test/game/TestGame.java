@@ -69,7 +69,7 @@ public class TestGame {
 		
 		game.setCurrentPlayer(player2);
 		assertTrue(game.getCurrentPlayer() == player2);
-		Player player = new Player(null, null);
+		Player player = new Player(null, 0);
 		
 		try{
 			game.setCurrentPlayer(player);
@@ -99,7 +99,7 @@ public class TestGame {
 		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
-		Player player3 = new Player(new Square(), "Stefan");
+		Player player3 = new Player(new Square(), 0);
 		assertTrue(Game.isValidCurrentPlayer(player1));
 		assertTrue(Game.isValidCurrentPlayer(player2));
 		assertTrue(Game.isValidCurrentPlayer(player3));

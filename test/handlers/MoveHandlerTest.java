@@ -333,11 +333,12 @@ public class MoveHandlerTest {
 		}
 		
 		game.getNextPlayer().move(next);
+		
 		// to remove the lighttrail 
-		game.getNextPlayer().decrementActions();
-		game.getNextPlayer().decrementActions();
-		game.getNextPlayer().decrementActions();
-		game.getNextPlayer().decrementActions();
+		game.getNextPlayer().alertObservers();
+		game.getNextPlayer().alertObservers();
+		game.getNextPlayer().alertObservers();
+		game.getNextPlayer().alertObservers();
 	
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
 		assertTrue(mh.hasWon());
