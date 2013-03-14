@@ -11,7 +11,7 @@ import org.junit.Test;
 import player.Player;
 
 import square.Square;
-import square.state.PowerFailure;
+import square.state.PowerFailureState;
 import square.state.RegularState;
 
 public class TestGame {
@@ -142,20 +142,20 @@ public class TestGame {
 		
 		Square square = game.getGrid().getAllSquares().get(0);
 		Square squareTwo = game.getGrid().getAllSquares().get(1);
-		square.setState(new PowerFailure());
+		square.setState(new PowerFailureState());
 		
-		assertTrue(square.getState() instanceof PowerFailure);
+		assertTrue(square.getState() instanceof PowerFailureState);
 		game.updateStates();
 		
-		squareTwo.setState(new PowerFailure());
+		squareTwo.setState(new PowerFailureState());
 		
-		assertTrue(square.getState() instanceof PowerFailure);
+		assertTrue(square.getState() instanceof PowerFailureState);
 		game.updateStates();
 		
-		assertTrue(square.getState() instanceof PowerFailure);
+		assertTrue(square.getState() instanceof PowerFailureState);
 		game.updateStates();
 		
 		assertTrue(square.getState() instanceof RegularState);
-		assertTrue(squareTwo.getState() instanceof PowerFailure);
+		assertTrue(squareTwo.getState() instanceof PowerFailureState);
 	}
 }
