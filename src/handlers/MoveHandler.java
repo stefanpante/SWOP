@@ -53,7 +53,6 @@ public class MoveHandler extends Handler {
 		if(!checkToProceed()){
 			getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
 			getGame().switchToNextPlayer();
-	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 		}
 		else{
 			// Gets the current Position of the player
@@ -65,9 +64,10 @@ public class MoveHandler extends Handler {
 			
 			setRemainingActions(newPosition);
 			
-			endAction();
+			
 			setPropertyChanges();
 		}
+		fireChanges();
 		
 	}
 	/**
