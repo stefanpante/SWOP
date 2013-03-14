@@ -150,8 +150,6 @@ public class MoveHandlerTest {
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		assertEquals(currentPlayer.getRemainingActions(), remainingActions);
 		
-		
-		
 	}
 	
 	/**

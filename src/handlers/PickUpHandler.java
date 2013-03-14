@@ -35,7 +35,7 @@ public class PickUpHandler extends Handler {
 	 * 			False	Otherwise.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 1 )
+		if(getGame().getCurrentPlayer().getRemainingActions() > 0 )
 			return true;
 		
 		return false;
