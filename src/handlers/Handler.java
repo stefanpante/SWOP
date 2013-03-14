@@ -174,7 +174,6 @@ public abstract class Handler {
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, getGrenadeLocations());
     	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
     	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getPlayerItems());   	
-    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
     	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
 	}
 }

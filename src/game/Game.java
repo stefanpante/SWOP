@@ -73,14 +73,8 @@ public class Game extends AbstractModel {
 		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
 		Square topRight = grid.getSquare(new Coordinate(hSize-1, 0));
 		
-		Player player = new Player(bottomLeft, "Player 1");
-		Player playerTwo = new Player(topRight, "Player 2");
-		
-		player.setID(1);
-		playerTwo.setID(2);
-		
-		addPlayer(player);
-		addPlayer(playerTwo);
+		addPlayer(new Player(bottomLeft, 1));
+		addPlayer(new Player(topRight, 2));
 		
 		setCurrentPlayer(players.get(0));	
 	}
