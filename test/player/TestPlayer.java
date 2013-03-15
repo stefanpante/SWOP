@@ -204,17 +204,14 @@ public class TestPlayer {
 	@Test
 	public void testMoveObstacle() {
 		Square square = new Square();
-		Square squareTo = new Square();
+		Square square2 = new Square();
 		Player player = new Player(square, 0);
 		
 		assertTrue(square.isObstructed());
-		assertFalse(squareTo.isObstructed());
+		assertFalse(square2.isObstructed());
 		assertEquals(square.getObstacle(), player);
 		
-		player.move(squareTo);
-		
-		assertTrue(squareTo.isObstructed());
-		assertEquals(squareTo.getObstacle(), player);
+		player.move(square2);
 	}
 
 }

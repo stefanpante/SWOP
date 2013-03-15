@@ -19,8 +19,10 @@ public class EndTurnHandler extends Handler{
 	boolean confirmed = false;
 	
 	/**
+	 * 
+	
 	 * @param game
-	 * @param window
+	 * @param listener
 	 */
 	public EndTurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
