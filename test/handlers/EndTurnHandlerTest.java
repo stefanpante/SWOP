@@ -37,7 +37,9 @@ public class EndTurnHandlerTest {
 		assertFalse(eh.checkToProceed());
 	}
 
-	
+	/**
+	 * tests if the player has moved.
+	 */
 	@Test 
 	public void hasMoveTest(){	
 		Game game = new Game(10,10);
@@ -57,16 +59,21 @@ public class EndTurnHandlerTest {
 	}
 
 
+	/**
+	 * returns a valid move direction
+	 * @param game
+	 * @return
+	 */
 	private Direction getValidMoveDirection(Game game) {
-		Direction[] directions = Direction.values();
-		Random random = new Random();
-		Direction direction = directions[random.nextInt(directions.length)];
+		Direction direction = null;
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		Square next = null;
-		while(next != null && next.isObstructed()){
+		while(next == null || next.isObstructed()){
 			try {
-				direction = directions[random.nextInt(directions.length)];
+				direction = Direction.getRandomDirection();
+				System.out.println("direction");
 				next = game.getGrid().getNeighbor(currentPosition, direction);
+				System.out.println(next);
 			} catch (Exception e) {
 
 			}
@@ -75,21 +82,9 @@ public class EndTurnHandlerTest {
 		return direction;
 	}
 	
-	
-	/**
-	 * Tests the basic case of endTurn
-	 */
-	@Test
-	public void EndTurnTest(){
-		
-	}
-	
 	@Test
 	public void EndTurnTestPowerFailure(){
 		
 	}
-	@Test
-	public void EndActionTest(){
-		
-	}
+
 }

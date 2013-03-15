@@ -235,19 +235,20 @@ public class GridBuilder {
 		Coordinate topRight = new Coordinate(getGrid().getHSize()-1, 0);
 		ArrayList<Coordinate> topRightList = new ArrayList<Coordinate>();
 		
-		for(Coordinate coor = bottomLeft; coor.getY() >= getGrid().getVSize()-4; coor = coor.getNeighbor(Direction.NORTH)){
-			for(Coordinate coor2 = coor; coor2.getX() <= 3  ; coor2 = coor2.getNeighbor(Direction.EAST)){
+		for(Coordinate coor = bottomLeft; coor.getY() >= getGrid().getVSize()-3; coor = coor.getNeighbor(Direction.NORTH)){
+			for(Coordinate coor2 = coor; coor2.getX() <= 2  ; coor2 = coor2.getNeighbor(Direction.EAST)){
 				if(!getGrid().getSquare(coor2).isObstructed())
 					bottomLeftList.add(coor2);
 			}
 		}
-		
-		for(Coordinate coor = topRight; coor.getY() <= 3; coor = coor.getNeighbor(Direction.SOUTH)){
-			for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-4  ; coor2 = coor2.getNeighbor(Direction.WEST)){
+		bottomLeftList.remove(bottomLeft);
+		for(Coordinate coor = topRight; coor.getY() <= 2; coor = coor.getNeighbor(Direction.SOUTH)){
+			for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-3  ; coor2 = coor2.getNeighbor(Direction.WEST)){
 				if(!getGrid().getSquare(coor2).isObstructed())
 					topRightList.add(coor2);
 			}
 		}
+		topRightList.remove(topRight);
 		assert bottomLeftList.size() > 0;
 		assert topRightList.size() > 0;
 		setGrenade(pickRandomly(bottomLeftList));
