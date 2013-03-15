@@ -142,12 +142,14 @@ public class TestGame {
 		
 		Square square = game.getGrid().getAllSquares().get(0);
 		Square squareTwo = game.getGrid().getAllSquares().get(1);
-		square.setState(new PowerFailureState());
+		
+		assertTrue(square.getState() instanceof RegularState);
+		square.powerFail();
 		
 		assertTrue(square.getState() instanceof PowerFailureState);
 		game.updateStates();
 		
-		squareTwo.setState(new PowerFailureState());
+		squareTwo.powerFail();
 		
 		assertTrue(square.getState() instanceof PowerFailureState);
 		game.updateStates();

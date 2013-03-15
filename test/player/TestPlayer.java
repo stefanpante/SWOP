@@ -199,7 +199,7 @@ public class TestPlayer {
 	
 	/**
 	 * Test move, the square the player is moving to must become
-	 * an obstacle. And the square moving from must become non-obstructed.
+	 * an obstacle. The square moving from remains obstructed.
 	 */
 	@Test
 	public void testMoveObstacle() {
@@ -213,9 +213,14 @@ public class TestPlayer {
 		
 		player.move(square2);
 		
+<<<<<<< HEAD
 		assertFalse(square.isObstructed());
 		assertTrue(square2.isObstructed());
 		assertEquals(square2.getObstacle(), player);
+=======
+		assertTrue(squareTo.isObstructed());
+		assertEquals(squareTo.getObstacle(), player);
+>>>>>>> branch 'master' of https://github.com/stefanpante/SWOP.git
 	}
 
 }
