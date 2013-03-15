@@ -37,7 +37,9 @@ public class EndTurnHandlerTest {
 		assertFalse(eh.checkToProceed());
 	}
 
-	
+	/**
+	 * tests if the player has moved.
+	 */
 	@Test 
 	public void hasMoveTest(){	
 		Game game = new Game(10,10);
@@ -57,6 +59,11 @@ public class EndTurnHandlerTest {
 	}
 
 
+	/**
+	 * returns a valid move direction
+	 * @param game
+	 * @return
+	 */
 	private Direction getValidMoveDirection(Game game) {
 		Direction direction = null;
 		Square currentPosition = game.getCurrentPlayer().getPosition();
@@ -73,15 +80,6 @@ public class EndTurnHandlerTest {
 			
 		}
 		return direction;
-	}
-	
-	
-	/**
-	 * Tests the basic case of endTurn
-	 */
-	@Test
-	public void EndTurnTest(){
-		
 	}
 	
 	@Test
