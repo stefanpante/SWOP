@@ -1,4 +1,4 @@
-package handlers;
+package scenariotests;
 
 import static org.junit.Assert.assertFalse;
 
@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Random;
 
+import handlers.MoveHandler;
+import handlers.UseItemHandler;
 import items.LightGrenade;
 import game.Game;
 import grid.Grid;
