@@ -1,6 +1,3 @@
-/**
- * 
- */
 package handlers;
 
 import game.Game;
@@ -21,7 +18,7 @@ import square.state.PowerFailureState;
 import utils.Coordinate;
 
 /**
- * Handler  class.
+ * Handler class (abstract) that will be implemented by all our use case handlers.
  */
 public abstract class Handler {
 
@@ -203,6 +200,9 @@ public abstract class Handler {
 		this.game = game;
 	}
 	
+	/**
+	 * Fires all property changes when called.
+	 */
 	public void fireChanges(){
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, getGrenadeLocations());
     	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());

@@ -4,7 +4,6 @@ import items.LightGrenade;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 
 import player.Player;
@@ -15,6 +14,7 @@ import game.Game;
 
 /**
  * Controller/Handler which controls the player move use case
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
@@ -81,6 +81,7 @@ public class MoveHandler extends Handler {
 		}
 		endAction();
 	}
+	
 	/**
 	 * Sets the remaining actions of the current player
 	 * @param newPosition
@@ -108,7 +109,4 @@ public class MoveHandler extends Handler {
 		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
 		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
 	}
-
-
-
 }

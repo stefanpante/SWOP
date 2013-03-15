@@ -5,6 +5,8 @@ import items.LightGrenade;
 import java.util.ArrayList;
 import java.util.Random;
 
+import be.kuleuven.cs.som.annotate.Basic;
+
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
@@ -39,8 +41,10 @@ public class GridBuilder {
 	
 	/**
 	 * Creates a new Gridbuilder with parameters to create a new grid.
-	 * @param hSize		The horizontal size of the grid this gridBuilder will build.
-	 * @param vSize		The vertical size of the grid this gridBuilder will build.
+	 * @param 	hSize		
+	 * 			The horizontal size of the grid this gridBuilder will build.
+	 * @param 	vSize		
+	 * 			The vertical size of the grid this gridBuilder will build.
 	 */
 	public GridBuilder(int hSize, int vSize) {
 		this.wallCoordinates = new ArrayList<Coordinate>();
@@ -52,15 +56,19 @@ public class GridBuilder {
 	
 	/**
 	 * Returns the grid.
-	 * @return the grid
+	 * 
+	 * This method should only be called when the gridBuilder has done all his work.
 	 */
+	@Basic
 	protected Grid getGrid() {
 		return grid;
 	}
 	
 	/**
-	 * Constructs the grid as a whole, creates the Squares, walls and places the lighGrenades.
-	 * @return the grid that has been built
+	 * Constructs the grid as a whole, creates the Squares, 
+	 * 	walls and places the lighGrenades.
+	 * 
+	 * @return The grid that has been built.
 	 */
 	public Grid buildGrid(){
 		constructSquares();
@@ -72,6 +80,8 @@ public class GridBuilder {
 
 
 	/**
+	 * Sets the given grid as the gird of this gridBuilder.
+	 * 
 	 * @param grid the grid to set
 	 */
 	private void setGrid(Grid grid) {
@@ -81,6 +91,7 @@ public class GridBuilder {
 
 	/**
 	 * Creates a new square.
+	 * 
 	 * @return a new square object
 	 */
 	private Square getSquare(){
@@ -88,7 +99,8 @@ public class GridBuilder {
 	}	
 
 	/**
-	 * returns the random generator.
+	 * Returns the random generator.
+	 * 
 	 * @return the random generator.
 	 */	
 	public Random getRandom() {
@@ -97,6 +109,8 @@ public class GridBuilder {
 
 
 	/**
+	 * Sets the given random as the random of this GridBuilder.
+	 * 
 	 * @param random the random to set
 	 */
 	public void setRandom(Random random) {
@@ -154,6 +168,7 @@ public class GridBuilder {
 	
 	/**
 	 * Returns a list of walls
+	 * 
 	 * @return a list of walls.
 	 */
 	public ArrayList<Wall> getWalls(){
@@ -162,8 +177,11 @@ public class GridBuilder {
 	
 	/**
 	 * Removes all squares around a wall of a list of candidates
-	 * @param wall	the wall of which the perimeter will be removed.
-	 * @param candidates the list of squares of which the perimeter of the wall will be removed.
+	 * 
+	 * @param 	wall	
+	 * 			the wall of which the perimeter will be removed.
+	 * @param 	candidates 
+	 * 			the list of squares of which the perimeter of the wall will be removed.
 	 */
 	private void removePerimeter(ArrayList<Coordinate> coordinates, ArrayList<Coordinate> candidates) {
 		for(Coordinate coordinate : coordinates){
@@ -178,9 +196,12 @@ public class GridBuilder {
 
 	/**
 	 * Returns a list of coordinates representing a wall.
-	 * @param candidates
-	 * @param maxWallLength
-	 * @return
+	 * 
+	 * @param 	candidates
+	 * 			A list of coordinates that are candidates for having a wall.
+	 * @param 	maxWallLength
+	 * 			The maximum amount of squares a single wall can cover.
+	 * @return	A list of coordinates that now have a wall placed on it.
 	 */
 	private ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
 		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
@@ -204,6 +225,9 @@ public class GridBuilder {
 		return wall;
 	}
 	
+	/**
+	 * Places lightGrenades on the grid according to the constraints.
+	 */
 	protected void constructLightGrenades() {
 		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		candidates.removeAll(wallCoordinates);
@@ -227,6 +251,9 @@ public class GridBuilder {
 		}
 	}
 	
+	/**
+	 * Places a lightGrenade in the 3x3 rectangle around the start positions.
+	 */
 	private void placeIn3x3(){
 		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
 		ArrayList<Coordinate> bottomLeftList = new ArrayList<Coordinate>();
@@ -255,30 +282,27 @@ public class GridBuilder {
 	}
 	
 	/**
-	 * @param bottomLeftList
+	 * Picks a random coordinate out of the list of coordinates.
+	 * 
+	 * @param 	arrayList
+	 * 			The list of which you want to get a random coordinate.	
 	 */
 	private Coordinate pickRandomly(ArrayList<Coordinate> arrayList) {
 		return arrayList.get(getRandom().nextInt(arrayList.size()));
 	}
-
-
+	
+	/**
+	 * Places a grenade at the given coordinate.
+	 * 
+	 * @param 	coordinate
+	 * 			The coordinate of the square on which you want to place a lightGrenade.
+	 * @throws 	IllegalStateException
+	 * 			When the square at the given coordinate already has a lightGrenade.
+	 */
 	private void setGrenade(Coordinate coordinate) throws IllegalStateException {
 		Square square = getGrid().getSquare(coordinate);
 		if(square.getInventory().hasLightGrenade())
 			throw new IllegalStateException();
 		square.getInventory().addItem(new LightGrenade());
 	}
-	
-	private Coordinate getRandomNeighbor(Coordinate coordinate, ArrayList<Coordinate> candidates){
-		ArrayList<Coordinate> realCandidates = new ArrayList<Coordinate>();
-		for(Coordinate neighbor : coordinate.getAllNeighbors()){
-			if(candidates.contains(neighbor)){
-				realCandidates.add(neighbor);
-			}
-		}
-		return realCandidates.get(getRandom().nextInt(realCandidates.size()));
-	}
-	
-	
-
 }

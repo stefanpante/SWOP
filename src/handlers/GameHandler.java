@@ -2,16 +2,11 @@
 package handlers;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 import javax.swing.UIManager;
 
-import player.Player;
-
 import game.Game;
 import gui.ApplicationWindow;
-import square.Direction;
-import square.Square;
 import utils.Coordinate;
 
 /**
@@ -135,8 +130,4 @@ public class GameHandler extends Handler {
 	public void createGame(int hSize, int vSize) {
 		setGame(new Game(hSize, vSize));
 	}
-	
-
-	
-	
 }

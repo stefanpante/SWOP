@@ -25,10 +25,11 @@ public abstract class Inventory{
 	private  ArrayList<Item> items;
 
 	/**
-	 * Creates a new instance of the Inventory class
+	 * Creates a new instance of the Inventory class with given size.
 	 * 
-	 * @param	size	the size of the new inventory
-	 * @effect setSize(size)
+	 * @param	size	
+	 * 			The size of the new inventory.
+	 * @effect	setSize(size)
 	 */
 	@Raw
 	public Inventory(int size) throws IllegalArgumentException {
@@ -37,18 +38,21 @@ public abstract class Inventory{
 	}
 
 	/**
-	 * Creates a new instance of the Inventory class
-	 * @effect 	setSize(Integer.MAX_VALUE)
+	 * Creates a new instance of the Inventory class with unlimited size.
+	 * 
+	 * @effect 	Inventory(Integer.MAX_VALUE)
 	 */	
 	public Inventory(){
 		this(Integer.MAX_VALUE);
 	}
 
 	/**
-	 * Checks if the given size is valid for this inventory
-	 * @param maximumSize size parameter
-	 * @return 	true if the size is larger or equal to zero
-	 * 			false otherwise
+	 * Checks if the given size is valid for this inventory.
+	 * 
+	 * @param 	maximumSize 
+	 * 			The size to check.
+	 * @return 	True 	if the size is larger or equal to zero.
+	 * 			False 	otherwise.
 	 */
 	public static boolean isValidMaximumSize(int maximumSize){
 		return maximumSize >= 0;
@@ -68,8 +72,8 @@ public abstract class Inventory{
 	/**
 	 * Checks if the inventory is empty.
 	 * 
-	 * @return 	True if the inventory is empty,
-	 * 			otherwise False.
+	 * @return 	True 	if the inventory is empty,
+	 * 			False 	otherwise.
 	 */
 	@Basic
 	public boolean isEmpty(){
@@ -81,6 +85,7 @@ public abstract class Inventory{
 	 * 
 	 * @return	An integer representing the maximum size of this inventory.
 	 */
+	@Basic
 	public int getMaximumSize(){
 		return this.maximumSize;
 	}
@@ -239,5 +244,4 @@ public abstract class Inventory{
 		}
 		return description;
 	}
-
 }

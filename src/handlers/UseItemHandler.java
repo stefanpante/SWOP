@@ -1,7 +1,5 @@
 package handlers;
 
-import items.Inventory;
-
 import items.Item;
 
 import java.beans.PropertyChangeListener;
@@ -10,11 +8,11 @@ import game.Game;
 /**
  * Handler/Controller for the use case in which 
  * an item is used
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class UseItemHandler extends Handler {
-	
 	
 	/**
 	 * Constructs a new UseItemHandler with the given game and given listener.
@@ -63,7 +61,4 @@ public class UseItemHandler extends Handler {
 		}
 		endAction();
 	}
-	
-
-
 }

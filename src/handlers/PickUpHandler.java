@@ -1,6 +1,5 @@
 package handlers;
 
-import items.Inventory;
 import items.Item;
 import java.beans.PropertyChangeListener;
 

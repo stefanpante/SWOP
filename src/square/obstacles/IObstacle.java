@@ -3,7 +3,7 @@ package square.obstacles;
 import square.Square;
 
 /**
- * Interface that is used for implementing 
+ * Interface that is used for implementing.
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
