@@ -26,18 +26,18 @@ public class TestState {
 	@Test
 	public void testPowerFailure() {
 		Square square = new Square();
-		square.setState(new PowerFailureState());
+		square.powerFail();
 		
-		assertTrue(square.getState() instanceof PowerFailureState);
+		assertEquals(PowerFailureState.getInstance(),square.getState());
 		square.endTurn();
 		
-		assertTrue(square.getState() instanceof PowerFailureState);
+		assertEquals(PowerFailureState.getInstance(),square.getState());
 		square.endTurn();
 		
-		assertTrue(square.getState() instanceof PowerFailureState);
+		assertEquals(PowerFailureState.getInstance(),square.getState());
 		square.endTurn();
 		
-		assertTrue(square.getState() instanceof RegularState);
+		assertEquals(RegularState.getInstance(),square.getState());
 	}
 
 }

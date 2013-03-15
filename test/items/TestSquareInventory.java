@@ -154,41 +154,6 @@ public class TestSquareInventory {
 	}
 	
 	@Test
-	public void testActivateAllItems(){
-		SquareInventory sqinv = new SquareInventory();
-		LightGrenade inactive_lg = new LightGrenade();
-
-		Item active_i1 = new Item();
-		active_i1.activate();
-		Item active_i2 = new Item();
-		active_i2.activate();
-
-		Item inactive_i1 = new Item();
-		Item inactive_i2 = new Item();
-		
-		Item wornItem = new Item();
-		wornItem.activate();
-		wornItem.wearOut();
-		
-		sqinv.addItem(inactive_lg);
-		sqinv.addItem(active_i1);
-		sqinv.addItem(active_i2);
-		sqinv.addItem(inactive_i1);
-		sqinv.addItem(inactive_i2);
-		sqinv.addItem(wornItem);
-		
-		sqinv.activateAllItems();
-		
-		assertTrue(inactive_lg.isActive());
-		assertTrue(active_i1.isActive());
-		assertTrue(active_i2.isActive());
-		assertTrue(inactive_i1.isActive());
-		assertTrue(inactive_i2.isActive());
-		assertFalse(wornItem.isActive());
-	}
-	
-	
-	@Test
 	public void testGetItems(){
 		SquareInventory sqinv = new SquareInventory();
 		
