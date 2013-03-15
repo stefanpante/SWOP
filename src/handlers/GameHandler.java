@@ -1,8 +1,4 @@
 
-//TODO: refactor to startNewGameHandler?
-/**
- * 
- */
 package handlers;
 
 import java.util.ArrayList;
@@ -11,8 +7,6 @@ import javax.swing.UIManager;
 
 import game.Game;
 import gui.ApplicationWindow;
-import player.Player;
-import square.Square;
 import utils.Coordinate;
 
 /**
@@ -32,6 +26,8 @@ public class GameHandler extends Handler {
 	public static final String END_TURN_PROPERTY 			= "EndTurnProperty";
 	public static final String LIGHT_TRAILS_PROPERTY		= "LightTrails";
 	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
+	public static final String WIN_PROPERTY 				= "Win";
+	public static final String LOSE_PROPERTY				= "Lose";
 	
 	/**
 	 *  Initializes the game handler

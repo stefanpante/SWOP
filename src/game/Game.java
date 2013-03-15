@@ -2,7 +2,6 @@ package game;
 
 import grid.Grid;
 import grid.GridBuilder;
-import gui.AbstractModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +12,6 @@ import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;
-import square.state.PowerFailureState;
 import utils.Coordinate;
 
 /**
@@ -31,7 +29,7 @@ import utils.Coordinate;
  * 
  */
 @NotNull
-public class Game extends AbstractModel {
+public class Game {
 	
 	/**
 	 * The Grid.
