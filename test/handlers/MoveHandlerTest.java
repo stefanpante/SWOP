@@ -99,7 +99,7 @@ public class MoveHandlerTest {
 		assertFalse(lg.isActive());
 		while(!game.getCurrentPlayer().hasMoved()){
 
-			Direction direction = Direction.getRandomOrientation();
+			Direction direction = Direction.getRandomDirection();
 			try{
 				mh.move(direction);
 				System.out.println(game.getCurrentPlayer().hasMoved());
@@ -131,7 +131,7 @@ public class MoveHandlerTest {
 		Direction direction = null;
 		Square next = null;
 		while(next == null || next.isObstructed()|| next.getInventory().hasLightGrenade()){ 
-			direction = Direction.getRandomOrientation();
+			direction = Direction.getRandomDirection();
 			try{
 				next = game.getGrid().getNeighbor(currentPosition, direction);
 			}
