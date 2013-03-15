@@ -65,7 +65,7 @@ public class MoveHandlerTest {
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
 	 * Move to the east, northeast, south east, north and north west should cause an IllegalStateException for player 2
 	 */
-	@Test(expected = NoSuchElementException.class) 
+	@Test(expected = IllegalStateException.class) 
 	public void testIllegalMove(){
 		
 		// For the first player, all these moves should throw an NoSuchElementException
