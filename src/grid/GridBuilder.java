@@ -204,8 +204,6 @@ public class GridBuilder {
 		return wall;
 	}
 	
-	
-	//TODO: i think the grenade is always positioned in the 2x2 square around startposition
 	protected void constructLightGrenades() {
 		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		candidates.removeAll(wallCoordinates);

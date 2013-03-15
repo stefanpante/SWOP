@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import player.Player;
-import sun.java2d.loops.DrawRect;
 import utils.Coordinate;
 
 /**
@@ -26,6 +25,8 @@ import utils.Coordinate;
  *
  */
 public class GridPanel extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 	
 	private int width, height, rows, cols;
 	private int rowHeight, colWidth;

@@ -28,9 +28,6 @@ import player.Player;
 import square.Direction;
 import utils.Coordinate;
 
-
-//TODO: http://cs.nyu.edu/~yap/classes/visual/03s/lect/l7/ -> misschien handige tutorial
-
 /**
  * The application window of the game. Is used for the graphical user interface
  * 
@@ -54,8 +51,6 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	private ArrayList<Item> squareInventory;
 	private ArrayList<Item> playerInventory;
 	
-//	public static Model MODEL = new Model();
-
 
 	/**
 	 * Creates a new applicationWindow with a given GuiHandler.
@@ -303,14 +298,42 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Visualize the given exception
+	 * 
+	 * @param 	exc
+	 * 			The exception to visualize
+	 */
 	private void showException(Exception exc){
 		JOptionPane.showMessageDialog(frame, exc.getMessage(), "Uh! Oh!", JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * Helper method to compate actions
+	 * 
+	 * @param 	e	
+	 * 			The action event
+	 * @param 	string
+	 * 			The string to compare to
+	 * @return
+	 */
 	private boolean is(ActionEvent e,String string){
 		return e.getActionCommand().equals(string);
 	}
 	
+	/**
+	 * Create a navigation button with the given image
+	 * 
+	 * @param 	imageName
+	 * 			The name of the image
+	 * @param 	actionCommand
+	 * 			The action command
+	 * @param 	toolTipText
+	 * 			The tool tip text
+	 * @param 	border
+	 * 			Show border or not
+	 * @return
+	 */
 	protected JButton makeNavigationButton(String imageName,
 		String actionCommand, String toolTipText, boolean border) {
 		String imgLocation = "/res/" + imageName;
@@ -332,6 +355,11 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		return button;
 	}
 	
+	/**
+	 * Update the GUI with the received property
+	 * @param	evt 
+	 * 			The PropertyChangeEvent
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
     public void propertyChange(final PropertyChangeEvent evt) {
@@ -362,11 +390,20 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	confirmEndTurn((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
         	JOptionPane.showMessageDialog(frame, (String)o);
+        }else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
+        	String player = (String)o;
+        	JOptionPane.showMessageDialog(frame, player+ " has won the game!");
+        }else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
+        	String player = (String)o;
+        	JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
         }
     }
 
 	/**
-	 * @param message
+	 * Show the player the given message.
+	 * 
+	 * @param 	message
+	 * 			The message to be shown
 	 */
 	public void showMessage(String message) {
 		JOptionPane.showMessageDialog(frame,
@@ -374,10 +411,13 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	}
 
 	/**
-	 * @param o
+	 * Ask the player to confirm ending his or her turn.
+	 * 
+	 * @param 	msg
+	 * 			The message to be shown.
 	 */
-	private void confirmEndTurn(String msg) {
-		int optionPane = JOptionPane.showConfirmDialog(frame, msg, "End Turn", JOptionPane.YES_NO_OPTION);	
+	private void confirmEndTurn(String message) {
+		int optionPane = JOptionPane.showConfirmDialog(frame, message, "End Turn", JOptionPane.YES_NO_OPTION);	
 		if(optionPane == 0){
 			gameHandler.getEndTurnHandler().confirm(true);
 		}

@@ -12,7 +12,6 @@ import square.Direction;
 import square.Square;
 import utils.Coordinate;
 import game.Game;
-import gui.ApplicationWindow;
 
 /**
  * Controller/Handler which controls the player move use case
