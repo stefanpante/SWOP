@@ -184,7 +184,7 @@ public class GridBuilder {
 	 */
 	private ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
 		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
-		Direction direction = Direction.getRandom();
+		Direction direction = Direction.getRandomOrientation();
 		int maxPercentageLength;
 		/* Determine length */
 		if(direction == Direction.NORTH){
@@ -211,27 +211,62 @@ public class GridBuilder {
 		candidates.removeAll(wallCoordinates);
 		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
 		/* Place grenade within range of start squares */
-		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
-		Coordinate tR = getRandomNeighbor(bottomLeft, candidates);
-		setGrenade(tR);
-		candidates.remove(tR);
-		candidates.remove(bottomLeft);
+		placeIn3x3();
 		
+		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
 		Coordinate topRight = new Coordinate(getGrid().getHSize()-1, 0);
-		Coordinate bL = getRandomNeighbor(topRight, candidates);
-		setGrenade(bL);
-		candidates.remove(bL);
+		candidates.remove(bottomLeft);
 		candidates.remove(topRight);
 		/*  Dispense grenades */
 		for(int i = 2; i < maxGrenades; i++){
 			Coordinate coordinate = candidates.get(getRandom().nextInt(candidates.size()));
-			setGrenade(coordinate);
+			try{
+				setGrenade(coordinate);				
+			}catch(Exception e){
+				i--;
+			}
 			candidates.remove(coordinate);
 		}
 	}
 	
-	private void setGrenade(Coordinate coordinate){
+	private void placeIn3x3(){
+		Coordinate bottomLeft = new Coordinate(0, getGrid().getVSize()-1);
+		ArrayList<Coordinate> bottomLeftList = new ArrayList<Coordinate>();
+		Coordinate topRight = new Coordinate(getGrid().getHSize()-1, 0);
+		ArrayList<Coordinate> topRightList = new ArrayList<Coordinate>();
+		
+		for(Coordinate coor = bottomLeft; coor.getY() >= getGrid().getVSize()-4; coor = coor.getNeighbor(Direction.NORTH)){
+			for(Coordinate coor2 = coor; coor2.getX() <= 3  ; coor2 = coor2.getNeighbor(Direction.EAST)){
+				if(!getGrid().getSquare(coor2).isObstructed())
+					bottomLeftList.add(coor2);
+			}
+		}
+		
+		for(Coordinate coor = topRight; coor.getY() <= 3; coor = coor.getNeighbor(Direction.SOUTH)){
+			for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-4  ; coor2 = coor2.getNeighbor(Direction.WEST)){
+				if(!getGrid().getSquare(coor2).isObstructed())
+					topRightList.add(coor2);
+			}
+		}
+		assert bottomLeftList.size() > 0;
+		assert topRightList.size() > 0;
+		setGrenade(pickRandomly(bottomLeftList));
+		setGrenade(pickRandomly(topRightList));
+		
+	}
+	
+	/**
+	 * @param bottomLeftList
+	 */
+	private Coordinate pickRandomly(ArrayList<Coordinate> arrayList) {
+		return arrayList.get(getRandom().nextInt(arrayList.size()));
+	}
+
+
+	private void setGrenade(Coordinate coordinate) throws IllegalStateException {
 		Square square = getGrid().getSquare(coordinate);
+		if(square.getInventory().hasLightGrenade())
+			throw new IllegalStateException();
 		square.getInventory().addItem(new LightGrenade());
 	}
 	

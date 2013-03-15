@@ -142,8 +142,9 @@ public class SquareInventory extends Inventory {
 	/**
 	 * Active the given item. 
 	 * 
-	 * @param item
-	 * @throws IllegalStateException
+	 * @param 	item	the item to be activated
+	 * @throws 	IllegalStateException
+	 * 			Thrown if the given item is not in this inventory.
 	 */
 	public void activate(Item item)throws IllegalStateException{
 		if(!this.hasItem(item)){
@@ -153,6 +154,9 @@ public class SquareInventory extends Inventory {
 		}
 	}
 	
+	/**
+	 * Wears out all the item in this inventory.
+	 */
 	public void wearOut(){
 		for(Item item: super.getAllItems()){
 			if(item.isActive()){
@@ -178,6 +182,9 @@ public class SquareInventory extends Inventory {
 		return result;
 	}
 	
+	/**
+	 * Returns the string representation
+	 */
 	@Override
 	public String toString() {
 		String result = "Square ";
