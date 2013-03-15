@@ -71,8 +71,7 @@ public class TestGame {
 		
 		game.setCurrentPlayer(player2);
 		assertTrue(game.getCurrentPlayer() == player2);
-		Player player = new Player(null, 0);
-		
+		Player player = new Player(null, 0);		
 		try{
 			game.setCurrentPlayer(player);
 			fail("Player shouldn't be valid");
