@@ -142,7 +142,7 @@ public class Square implements Penalty{
 	}
 	
 	public void powerFail(){
-		remainingTurns = PowerFailureState.TURNS_ACTIVE;
+		remainingTurns = PowerFailureState.TURNS_ACTIVE - 1;
 		setState(PowerFailureState.getInstance());
 	}
 	

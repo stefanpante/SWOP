@@ -37,6 +37,11 @@ public class GridBuilder {
 	 */
 	private ArrayList<Wall> walls;
 	
+	/**
+	 * 
+	 * @param hSize
+	 * @param vSize
+	 */
 	public GridBuilder(int hSize, int vSize) {
 		this.wallCoordinates = new ArrayList<Coordinate>();
 		this.walls = new ArrayList<Wall>();

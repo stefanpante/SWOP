@@ -496,6 +496,9 @@ public class Grid {
 	}
 	
 	
+	/**
+	 * Returns a string representation of the grid.
+	 */
 	@Override
 	public String toString() {
 		return "Grid (hSize="+getHSize()+", vSize" + getVSize()+")";
