@@ -17,8 +17,9 @@ public class UseItemHandler extends Handler {
 	
 	
 	/**
-	 * @param game
-	 * @param window
+	 * Constructs a new UseItemHandler with the given game and given listener.
+	 * @param game		The game which this UseItemHandler will use.
+	 * @param listener	The PropertyChangelistener for this UseItemHandler.
 	 */
 	public UseItemHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
@@ -63,10 +64,6 @@ public class UseItemHandler extends Handler {
 		endAction();
 	}
 	
-	
-	public Inventory showItems(){
-		return getGame().getCurrentPlayer().getInventory();
-	}
 
 
 }

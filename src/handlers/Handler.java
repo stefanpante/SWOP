@@ -25,37 +25,69 @@ import utils.Coordinate;
  */
 public abstract class Handler {
 
+	/**
+	 * The game which this handler uses.
+	 */
 	private Game game;
+	
+	/**
+	 * Used to signal property changes
+	 */
     protected PropertyChangeSupport propertyChangeSupport;
 
+    /**
+     * constructs a new Handler object.
+     */
     public Handler()
     {
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
-    }
-
-    protected void firePropertyChange(String propertyName, Object newValue) {
-        propertyChangeSupport.firePropertyChange(propertyName, new Object(), newValue);
-    }
-    
+    /**
+	 * Creates a new handler with a given game.
+	 * @param game the game that will be used by this handler.
+	 */
 	public Handler(Game game) {
 		this();
 		this.game = game;
 	}
 
+	/**
+	 * Creates a new handler with a given game and given propertychangelistener
+	 * @param game		the game which will be used
+	 * @param listener	the propertyChangeListener which will be used.
+	 */
 	public Handler(Game game,  PropertyChangeListener listener) {
 		this(game);
 		addPropertyChangeListener(listener);
 	}
-	
+
 	/**
+     * Adds a new PropertyChangelistener
+     * @param listener the listener to be added.
+     */
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    /**
+     * Removes a propertychangelistener.
+     * @param listener 	Which listener to remove from this handler/
+     */
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+
+    /**
+     * Used to fire a propertyChange.
+     * @param propertyName 	the name of the property that has been modified.
+     * @param newValue		The new value associated with the property.
+     */
+    protected void firePropertyChange(String propertyName, Object newValue) {
+        propertyChangeSupport.firePropertyChange(propertyName, new Object(), newValue);
+    }
+    
+    /**
 	 * Get a list of coordinates of Grenades that are in the Grid.
 	 * 
 	 * @return	ArrayList<Coordinate>	List of all coordinates which contain a grenade.
@@ -189,7 +221,7 @@ public abstract class Handler {
 	}
 
 	/**
-	 * @return
+	 * Returns a list of coordinates with powerFailures.
 	 */
 	private ArrayList<Coordinate> getPowerFails() {
 		ArrayList<Coordinate> list = new ArrayList<Coordinate>();
@@ -207,7 +239,7 @@ public abstract class Handler {
 	 * Checks if the end of the move causes the current player to win.
 	 * @return 	true if the move causes the player to win. 
 	 */
-	private boolean hasWon(){
+	public boolean hasWon(){
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 
@@ -219,10 +251,10 @@ public abstract class Handler {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Check if the current player is stuck, if he is stuck, he will lose the game.
+	 * @return	a boolean which represents the loss of the game.
 	 */
-	private boolean hasLost(){
+	public boolean hasLost(){
 		boolean stuck = true;
 		for(Entry<Direction, Square> entry : getGame().getGrid().getNeighbors(getGame().getCurrentPlayer().getPosition()).entrySet()){
 			if(getGame().getGrid().canMoveTo(entry.getValue(), entry.getKey())){

@@ -17,19 +17,24 @@ public class EndTurnHandler extends Handler{
 	boolean confirmed = false;
 	
 	/**
-	 * 
-	
-	 * @param game
-	 * @param listener
+	 *  Creates a new EndTurnhandler with a given game and listener.
+	 * @param game		the game which this handler uses.
+	 * @param listener	the listener for this handler.
 	 */
 	public EndTurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 	}
 	
+	/**
+	 * resets the confirm ( used because the player needs to confirm he wants to end his turn
+	 */
 	public void resetConfirm(){
 		confirmed = false;
 	}
 	
+	/**
+	 * Returns whether the player has confirmed.
+	 */
 	public boolean isConfirmed(){
 		return confirmed;
 	}
@@ -85,7 +90,8 @@ public class EndTurnHandler extends Handler{
 	}
 
 	/**
-	 * @param b
+	 * sets the confirm.
+	 * @param b 	a boolean which sets the confirm.
 	 */
 	public void confirm(boolean b) {
 		this.confirmed = b;
