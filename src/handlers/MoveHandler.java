@@ -21,8 +21,9 @@ import game.Game;
 public class MoveHandler extends Handler {
 
 	/**
-	 * @param game
-	 * @param window
+	 * Creates a new MoveHandler with a given game and a given listener
+	 * @param game		the game which this MoveHandler will use
+	 * @param listener	the PropertyChangeListener which this MoveHandler will use.
 	 */
 	public MoveHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);

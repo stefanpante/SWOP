@@ -15,8 +15,9 @@ import game.Game;
 public class PickUpHandler extends Handler {
 	
 	/**
-	 * @param game
-	 * @param window
+	 * Constructs a new PickUpHandler with the given game and given listener.
+	 * @param game		the game which this PickUpHandler will use.
+	 * @param listener	the PropertyChangeListener which this PickUpHandler will use.
 	 */
 	public PickUpHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
@@ -39,7 +40,7 @@ public class PickUpHandler extends Handler {
 	/**
 	 * The player pickups the item he wants if his inventory allows it,
 	 * otherwise he will not receive the item and will lose an action.
-	 * @param item
+	 * @param item	the item which will be picked up.
 	 */
 	public void pickUp(Item item){
 		if(!checkToProceed()){
@@ -63,14 +64,4 @@ public class PickUpHandler extends Handler {
 		}
 		fireChanges();
 	}
-	
-	/**
-	 * Shows all the items that are on the current player's position.
-	 * 
-	 * @return	Inventory	The square inventory of the current player's position.
-	 */
-	public Inventory showItems(){
-		return getGame().getCurrentPlayer().getPosition().getInventory();
-	}
-
 }
