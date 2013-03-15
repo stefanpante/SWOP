@@ -12,7 +12,6 @@ import square.Direction;
 import square.Square;
 import utils.Coordinate;
 import game.Game;
-import gui.ApplicationWindow;
 
 /**
  * Controller/Handler which controls the player move use case
@@ -61,7 +60,11 @@ public class MoveHandler extends Handler {
 			Square currentPosition = getGame().getCurrentPlayer().getPosition();
 			if(currentPosition.getInventory().hasLightGrenade()){
 				LightGrenade lg = currentPosition.getInventory().getLightGrenade();
-				currentPosition.getInventory().activate(lg);
+				try{
+					currentPosition.getInventory().activate(lg);
+				} catch (Exception exc) {
+					// Catched exception, if try to activate wornout item. -> ignore
+				}
 			}
 			//Throws NoSuchElementException
 			Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 

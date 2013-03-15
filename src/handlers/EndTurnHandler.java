@@ -4,10 +4,8 @@ import java.beans.PropertyChangeListener;
 
 import player.Player;
 
-import utils.Coordinate;
 
 import game.Game;
-import gui.ApplicationWindow;
 
 /**
  * The Controller/Handler to end the turn of a player

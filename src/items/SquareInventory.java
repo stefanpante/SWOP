@@ -1,11 +1,7 @@
 package items;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import be.kuleuven.cs.som.annotate.Basic;
-
-import notnullcheckweaver.Nullable;
 
 /**
  * This class describes the inventory of a square. 

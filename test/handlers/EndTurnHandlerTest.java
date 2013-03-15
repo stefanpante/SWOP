@@ -1,9 +1,8 @@
 package handlers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Random;
 
 import game.Game;
 
@@ -12,6 +11,7 @@ import org.junit.Test;
 import player.Player;
 import square.Direction;
 import square.Square;
+import square.state.PowerFailureState;
 
 /**
  * 
@@ -53,14 +53,12 @@ public class EndTurnHandlerTest {
 		//Move in a valid direction.
 		mh.move(direction);
 		
-		assertTrue(eh.hasMoved());
-		
-		
+		assertTrue(eh.hasMoved());		
 	}
 
 
 	/**
-	 * returns a valid move direction
+	 * Returns a valid move direction
 	 * @param game
 	 * @return
 	 */
@@ -84,7 +82,14 @@ public class EndTurnHandlerTest {
 	
 	@Test
 	public void EndTurnTestPowerFailure(){
+		Game game = new Game(10,10);
+		EndTurnHandler eh = new EndTurnHandler(game, null);
+		assertTrue(eh.checkToProceed());
 		
+		while(!game.getCurrentPlayer().getPosition().getState().equals(PowerFailureState.getInstance())){
+			game.powerFailureSquares();
+		}
+		assertEquals(2,game.getCurrentPlayer().getRemainingActions());
 	}
 
 }
