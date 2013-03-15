@@ -10,17 +10,21 @@ import items.Item;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
@@ -50,6 +54,8 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	private GridPanel gridPanel;
 	private ArrayList<Item> squareInventory;
 	private ArrayList<Item> playerInventory;
+	
+	
 	
 
 	/**
@@ -97,7 +103,10 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	    	
     	}
     	setSize(hSize, vSize);
+    	
 
+    	
+    	
     	/* Windows */
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -110,6 +119,11 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
         gridPanel.setFocusable(true);
         frame.getContentPane().add(gridPanel);
+        
+    	/* Cheats */
+    	gridPanel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK), "noPowerFails" );
+    	gridPanel.getActionMap().put("noPowerFails", new EnterAction());
+
         
         /* SIDEBAR */
         JPanel sideBarPanel = new JPanel();
@@ -420,6 +434,19 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		int optionPane = JOptionPane.showConfirmDialog(frame, message, "End Turn", JOptionPane.YES_NO_OPTION);	
 		if(optionPane == 0){
 			gameHandler.getEndTurnHandler().confirm(true);
+		}
+	}
+	
+	static class CheatAction extends AbstractAction {
+		private GameHandler gameHandler;
+		public EnterAction(GameHandler gameHandler){
+			this.gameHandler = gameHandler;
+		}
+		
+		public void actionPerformed(ActionEvent ae){
+			if(ae.getActionCommand().equals("noPowerFails")){
+				gameHandler.getGame().
+			}
 		}
 	}
 

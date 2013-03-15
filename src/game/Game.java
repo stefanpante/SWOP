@@ -55,6 +55,11 @@ public class Game {
 	 * Collection of LightTrails associated with every player.
 	 */
 	private HashMap<Player, LightTrail> lightTrails = new HashMap<Player, LightTrail>();
+	
+	/**
+	 * Boolean indicating the game is over
+	 */
+	private boolean active;
 
 	/**
 	 *Constructs a new board-based game.
@@ -64,6 +69,7 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		super();
+		start();
 		players = new ArrayList<Player>();
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.grid = gridBuilder.buildGrid();
@@ -312,6 +318,27 @@ public class Game {
 			Square square = iterator.next();
 			square.endTurn();
 		}
+	}
+	
+	/**
+<<<<<<< HEAD
+	 * Return if the current game is end
+	 * 
+	 * @return	The state of the game
+	 */
+	public boolean isActive(){
+		return this.active;
+	}
+
+	public void start() {
+		this.active = true;
+	}
+	
+	/**
+	 * End the current game
+	 */
+	public void end() {
+		this.active = false;
 	}
 	
 	/**

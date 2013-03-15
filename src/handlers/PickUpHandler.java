@@ -43,6 +43,7 @@ public class PickUpHandler extends Handler {
 	 * @param item	the item which will be picked up.
 	 */
 	public void pickUp(Item item){
+		startAction();
 		if(!checkToProceed()){
 			if(!getGame().getCurrentPlayer().hasMoved()){
 				String name = getGame().getCurrentPlayer().getName();
@@ -62,6 +63,6 @@ public class PickUpHandler extends Handler {
 			
 			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
 		}
-		fireChanges();
+		endAction();
 	}
 }
