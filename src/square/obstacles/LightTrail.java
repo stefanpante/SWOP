@@ -11,7 +11,7 @@ import square.Square;
  * LightTrail is a trail that is left behind the player while he
  * executes actions on the grid. The LightTrail is an obstacle.
  * 
- * @author jonas, vincent
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class LightTrail extends Obstacle implements Observer{
 	
