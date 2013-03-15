@@ -32,6 +32,7 @@ public class Item {
 	
 	/**
 	 * Returns the state of the item.
+	 * 
 	 * @return the state of the item.
 	 */
 	public ItemState getState(){
@@ -40,6 +41,7 @@ public class Item {
 	
 	/**
 	 * Activates the item.
+	 * 
 	 * @throws 	IllegalStateException
 	 * 			thrown if the current state isn't inactive. An item can only go to
 	 * 			an active state from an inactive one.
@@ -52,7 +54,8 @@ public class Item {
 	
 	/**
 	 * Wears the item out.
-	 * @throws IllegalStateException
+	 * 
+	 * @throws 	IllegalStateException
 	 * 			Can only wear an item out when the current state is active.
 	 * 			Otherwise, an IllegalStateException is thrown
 	 */		
@@ -64,8 +67,9 @@ public class Item {
 	
 	/**
 	 * Deactivates the item
-	 * @throws IllegalStateException
-	 * 		   Can only deactivate an item if the current state is active.
+	 * 
+	 * @throws 	IllegalStateException
+	 * 		   	Can only deactivate an item if the current state is active.
 	 * 			Otherwise, an IllegalStateException is thrown
 	 */
 	public void deactivate() throws IllegalStateException{
@@ -82,9 +86,4 @@ public class Item {
 	public String toString() {
 		return "Item";
 	}
-
-	
-	
-
-	
 }

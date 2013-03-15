@@ -1,11 +1,15 @@
 package items;
 
 /**
+ * A player inventory.
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class PlayerInventory extends Inventory {
+	
+	/**
+	 * The maximum size 
+	 */
 	public static int PLAYER_INVENTORY_SIZE = 6;
 
 	/**
@@ -23,5 +27,4 @@ public class PlayerInventory extends Inventory {
 	public String toString() {
 		return "Player " + super.toString();
 	}
-
 }

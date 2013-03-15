@@ -10,7 +10,6 @@ import square.Penalty;
  */
 public class LightGrenade extends Item implements Penalty{
 	
-	
 	/**
 	 * returns the number of actions the player loses
 	 *  when he comes in contact with a lightgrenade.

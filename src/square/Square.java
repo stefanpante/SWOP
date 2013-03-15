@@ -17,6 +17,8 @@ import notnullcheckweaver.Nullable;
  */
 @NotNull
 public class Square implements Penalty{
+	
+	private long id;
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -43,6 +45,7 @@ public class Square implements Penalty{
 		this.inventory = new SquareInventory();
 		this.state = RegularState.getInstance();
 		this.remainingTurns = 0;
+		this.id = System.nanoTime();
 
 	}
 	
@@ -165,4 +168,38 @@ public class Square implements Penalty{
 	public boolean hasPenalty() {
 		return state.hasPenalty() || this.getInventory().hasActiveLightGrenade();
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Square other = (Square) obj;
+		if (id != other.id) {
+			return false;
+		}
+		return true;
+	}
+	
+	
 }
