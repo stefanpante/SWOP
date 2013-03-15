@@ -122,8 +122,8 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         
     	/* Cheats */
     	gridPanel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK), "noPowerFails" );
-    	gridPanel.getActionMap().put("noPowerFails", new EnterAction());
-
+    	gridPanel.getActionMap().put("noPowerFails", new CheatAction(3));
+    	gridPanel.setFocusable(true);
         
         /* SIDEBAR */
         JPanel sideBarPanel = new JPanel();
@@ -437,15 +437,20 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 		}
 	}
 	
-	static class CheatAction extends AbstractAction {
-		private GameHandler gameHandler;
-		public EnterAction(GameHandler gameHandler){
-			this.gameHandler = gameHandler;
+    private class CheatAction extends AbstractAction {
+		private int type;
+		
+		public CheatAction(int type){
+			this.type = type;
 		}
 		
 		public void actionPerformed(ActionEvent ae){
-			if(ae.getActionCommand().equals("noPowerFails")){
-				gameHandler.getGame().
+			switch (type) {
+			case 3:
+				gameHandler.getGame().clearPowerFailures();
+				gameHandler.fireChanges();
+				showMessage("CHEAT ACTIVATED: Power failures removed this turn.");
+				break;
 			}
 		}
 	}
