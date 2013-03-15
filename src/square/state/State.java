@@ -10,6 +10,9 @@ import square.Square;
  */
 public abstract class State implements Penalty {
 
+	/**
+	 * Returns a string representation of this object.
+	 */
 	@Override
 	public String toString() {
 		return "State: ";
