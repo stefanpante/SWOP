@@ -66,8 +66,9 @@ public class MoveHandler extends Handler {
 			//Throws NoSuchElementException
 			Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
 			getGame().getCurrentPlayer().move(newPosition);
-			getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
+			
 			setRemainingActions(newPosition);
+			getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
 
 			setPropertyChanges();
 		}else{
