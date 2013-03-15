@@ -239,7 +239,7 @@ public abstract class Handler {
 	 * Checks if the end of the move causes the current player to win.
 	 * @return 	true if the move causes the player to win. 
 	 */
-	private boolean hasWon(){
+	public boolean hasWon(){
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 
@@ -251,10 +251,10 @@ public abstract class Handler {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Check if the current player is stuck, if he is stuck, he will lose the game.
+	 * @return	a boolean which represents the loss of the game.
 	 */
-	private boolean hasLost(){
+	public boolean hasLost(){
 		boolean stuck = true;
 		for(Entry<Direction, Square> entry : getGame().getGrid().getNeighbors(getGame().getCurrentPlayer().getPosition()).entrySet()){
 			if(getGame().getGrid().canMoveTo(entry.getValue(), entry.getKey())){
