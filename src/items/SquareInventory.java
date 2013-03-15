@@ -161,22 +161,6 @@ public class SquareInventory extends Inventory {
 		}
 	}
 	
-	
-//	/**
-//	 * This method will activate all items in inactive state in this inventory.
-//	 * 
-//	 * @throws 	IllegalStateException
-//	 * 			If this inventory cannot have active items.
-//	 * 			| isOnlyInactiveItems()
-//	 */
-//	public void activateAllItems() throws IllegalStateException{
-//		for (Item it : getAllItems()) {
-//			if(it.getState() == ItemState.INACTIVE){
-//				it.activate();
-//			}
-//		}
-//	}
-//	
 	/**
 	 * Returns all the items in this inventory that have a certain state. 
 	 * 
