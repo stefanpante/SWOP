@@ -347,6 +347,10 @@ public class Player extends Observable implements IObstacle {
 	 * @param actions	the number of actions the player can perform.
 	 */
 	private void setRemainingActions(int actions){
+		if(actions == Integer.MAX_VALUE){
+			this.remainingActions = actions;
+			return;
+		}
 		if(!isValidRemainingActions(actions)){
 			throw new IllegalArgumentException("This is not a valid number for remaining actions");
 		}
