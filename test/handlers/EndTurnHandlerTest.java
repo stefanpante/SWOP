@@ -86,8 +86,5 @@ public class EndTurnHandlerTest {
 	public void EndTurnTestPowerFailure(){
 		
 	}
-	@Test
-	public void EndActionTest(){
-		
-	}
+
 }
