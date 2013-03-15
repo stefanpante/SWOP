@@ -169,10 +169,12 @@ public enum Direction {
 	/**
 	 * @return
 	 */
-	public static Direction getRandom() {
+	public static Direction getRandomOrientation() {
 		Random random = new Random();
 		if(random.nextBoolean())
 			return Direction.NORTH;
 		return Direction.EAST;
 	}
+	
+	
 }

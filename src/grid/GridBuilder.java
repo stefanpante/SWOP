@@ -184,7 +184,7 @@ public class GridBuilder {
 	 */
 	private ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
 		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
-		Direction direction = Direction.getRandom();
+		Direction direction = Direction.getRandomOrientation();
 		int maxPercentageLength;
 		/* Determine length */
 		if(direction == Direction.NORTH){
