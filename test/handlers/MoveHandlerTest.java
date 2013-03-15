@@ -143,7 +143,11 @@ public class MoveHandlerTest {
 		next.getInventory().addItem(lg);
 		lg.activate();
 		// move to the square containing the active LightGrenade
+		assertTrue(next.getInventory().hasActiveLightGrenade());
+		assertTrue(next.hasPenalty());
+		
 		mh.move(direction);
+		
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		assertEquals(currentPlayer.getRemainingActions(), remainingActions);
 		
