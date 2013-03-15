@@ -68,7 +68,7 @@ public class MoveHandlerTest {
 	@Test(expected = IllegalStateException.class) 
 	public void testIllegalMove(){
 		
-		// For the first player, all these moves should throw an NoSuchElementException
+		// For the first player, all these moves should throw an IllegalStateException
 		mh.move(Direction.WEST);
 		mh.move(Direction.NORTHWEST);
 		mh.move(Direction.SOUTHWEST);
@@ -78,7 +78,7 @@ public class MoveHandlerTest {
 		game.switchToNextPlayer();
 
 		
-		// For the second player, all these moves should throw an NoSuchElementException
+		// For the second player, all these moves should throw an IllegalStateException
 		mh.move(Direction.EAST);
 		mh.move(Direction.NORTHEAST);
 		mh.move(Direction.SOUTHEAST);
@@ -99,7 +99,7 @@ public class MoveHandlerTest {
 		assertFalse(lg.isActive());
 		while(!game.getCurrentPlayer().hasMoved()){
 
-			Direction direction = Direction.getRandom();
+			Direction direction = Direction.getRandomOrientation();
 			try{
 				mh.move(direction);
 				System.out.println(game.getCurrentPlayer().hasMoved());
@@ -131,7 +131,7 @@ public class MoveHandlerTest {
 		Direction direction = null;
 		Square next = null;
 		while(next == null || next.isObstructed()|| next.getInventory().hasLightGrenade()){ 
-			direction = Direction.getRandom();
+			direction = Direction.getRandomOrientation();
 			try{
 				next = game.getGrid().getNeighbor(currentPosition, direction);
 			}
@@ -185,7 +185,7 @@ public class MoveHandlerTest {
 		mh.move(direction);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4);
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4 + 3);
 	}
 	
 	/**
