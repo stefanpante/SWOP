@@ -7,8 +7,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * @author jonas
- *
+ * Class representing an abstract view
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+
  */
 public abstract class AbstractView implements PropertyChangeListener {
 
