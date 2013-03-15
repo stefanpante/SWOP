@@ -212,15 +212,6 @@ public class TestPlayer {
 		assertEquals(square.getObstacle(), player);
 		
 		player.move(square2);
-		
-<<<<<<< HEAD
-		assertFalse(square.isObstructed());
-		assertTrue(square2.isObstructed());
-		assertEquals(square2.getObstacle(), player);
-=======
-		assertTrue(squareTo.isObstructed());
-		assertEquals(squareTo.getObstacle(), player);
->>>>>>> branch 'master' of https://github.com/stefanpante/SWOP.git
 	}
 
 }
