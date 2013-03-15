@@ -38,9 +38,9 @@ public class GridBuilder {
 	private ArrayList<Wall> walls;
 	
 	/**
-	 * 
-	 * @param hSize
-	 * @param vSize
+	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 * @param hSize		The horizontal size of the grid this gridBuilder will build.
+	 * @param vSize		The vertical size of the grid this gridBuilder will build.
 	 */
 	public GridBuilder(int hSize, int vSize) {
 		this.wallCoordinates = new ArrayList<Coordinate>();
@@ -67,8 +67,6 @@ public class GridBuilder {
 		constructWalls();
 		constructLightGrenades();
 
-//		ApplicationWindow.MODEL.setGrid(getGrid());
-//		ApplicationWindow.MODEL.setWalls(getWallCoordinates());
 		return getGrid();
 	}
 
@@ -90,9 +88,9 @@ public class GridBuilder {
 	}	
 
 	/**
-	 * returns the randomgenerator
-	 * @return the random
-	 */
+	 * returns the random generator.
+	 * @return the random generator.
+	 */	
 	public Random getRandom() {
 		return random;
 	}
@@ -120,30 +118,9 @@ public class GridBuilder {
 	}
 
 	/**
-	 *
-	 * returns the maximal permitted length of wall, which depends on the
-	 * orientation of the wall
-	 *
-	 * @param 	orientation the orientation of the wall
-	 * @return 	the maximal length which is permitted for a wall in this grid
-	 * @throws 	IllegalArgumentException
-	 *
-	 */
-	private int getMaxLengthWall(Direction direction) throws IllegalArgumentException{
-		switch(direction){
-		case NORTH:
-			return (int) (getGrid().getHSize() * Grid.LENGTH_PERCENTAGE_WALL);
-		case EAST:
-			return (int) (getGrid().getVSize() * Grid.LENGTH_PERCENTAGE_WALL);
-		default:	
-			throw new IllegalArgumentException("This orientation is not supported:" + direction);
-		}
-	}
-
-	/**
 	 * Adds walls to the grid
 	 */
-	public void constructWalls() {
+	protected void constructWalls() {
 		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		int totalWallLength = Math.round(Grid.PERCENTAGE_WALLS * candidates.size());
 		
@@ -227,8 +204,9 @@ public class GridBuilder {
 		return wall;
 	}
 	
+	
 	//TODO: i think the grenade is always positioned in the 2x2 square around startposition
-	public void constructLightGrenades() {
+	protected void constructLightGrenades() {
 		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		candidates.removeAll(wallCoordinates);
 		int maxGrenades = (int) Math.ceil(getGrid().getHSize() * getGrid().getVSize() * Grid.PERCENTAGE_GRENADES);
