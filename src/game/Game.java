@@ -76,7 +76,8 @@ public class Game extends AbstractModel {
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
 		
-		setCurrentPlayer(players.get(0));	
+		setCurrentPlayer(players.get(0));
+		powerFailureSquares();
 	}
 	
 	/**
