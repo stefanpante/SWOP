@@ -65,10 +65,10 @@ public class MoveHandlerTest {
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
 	 * Move to the east, northeast, south east, north and north west should cause an IllegalStateException for player 2
 	 */
-	@Test(expected = NoSuchElementException.class) 
+	@Test(expected = IllegalStateException.class) 
 	public void testIllegalMove(){
 		
-		// For the first player, all these moves should throw an NoSuchElementException
+		// For the first player, all these moves should throw an IllegalStateException
 		mh.move(Direction.WEST);
 		mh.move(Direction.NORTHWEST);
 		mh.move(Direction.SOUTHWEST);
@@ -78,7 +78,7 @@ public class MoveHandlerTest {
 		game.switchToNextPlayer();
 
 		
-		// For the second player, all these moves should throw an NoSuchElementException
+		// For the second player, all these moves should throw an IllegalStateException
 		mh.move(Direction.EAST);
 		mh.move(Direction.NORTHEAST);
 		mh.move(Direction.SOUTHEAST);
@@ -185,7 +185,7 @@ public class MoveHandlerTest {
 		mh.move(direction);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4);
+		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4 + 3);
 	}
 	
 	/**
