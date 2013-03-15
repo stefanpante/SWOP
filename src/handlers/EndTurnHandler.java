@@ -73,6 +73,7 @@ public class EndTurnHandler extends Handler{
 		}else{
 			int penalty = getGame().getCurrentPlayer().getPosition().getPenalty();
 		
+			System.out.println(penalty);
 			getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS  + penalty);
 			getGame().switchToNextPlayer();
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());

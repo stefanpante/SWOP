@@ -43,6 +43,7 @@ public class EndTurnHandlerTest {
 	@Test 
 	public void hasMoveTest(){	
 		Game game = new Game(10,10);
+		game.clearPowerFailures();
 		EndTurnHandler eh = new EndTurnHandler(game, null);
 		assertFalse(eh.hasMoved());
 		MoveHandler mh = new MoveHandler(game, null);
@@ -51,8 +52,7 @@ public class EndTurnHandlerTest {
 		Direction direction = getValidMoveDirection(game);
 		
 		//Move in a valid direction.
-		mh.move(direction);
-		
+		mh.move(direction);		
 		assertTrue(eh.hasMoved());		
 	}
 
@@ -80,16 +80,18 @@ public class EndTurnHandlerTest {
 		return direction;
 	}
 	
+	/**
+	 * Tests what happens if the player ends a turn on a powerfailure
+	 */
 	@Test
 	public void EndTurnTestPowerFailure(){
 		Game game = new Game(10,10);
+		Player player = game.getCurrentPlayer();
 		EndTurnHandler eh = new EndTurnHandler(game, null);
 		assertTrue(eh.checkToProceed());
-		
-		while(!game.getCurrentPlayer().getPosition().getState().equals(PowerFailureState.getInstance())){
-			game.powerFailureSquares();
-		}
-		assertEquals(2,game.getCurrentPlayer().getRemainingActions());
+		game.getCurrentPlayer().getPosition().powerFail();
+		eh.confirm(true);
+		assertEquals(2,player.getRemainingActions());
 	}
 
 }
