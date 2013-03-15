@@ -199,7 +199,7 @@ public class TestPlayer {
 	
 	/**
 	 * Test move, the square the player is moving to must become
-	 * an obstacle. And the square moving from must become non-obstructed.
+	 * an obstacle. The square moving from remains obstructed.
 	 */
 	@Test
 	public void testMoveObstacle() {
@@ -213,7 +213,6 @@ public class TestPlayer {
 		
 		player.move(squareTo);
 		
-		assertFalse(square.isObstructed());
 		assertTrue(squareTo.isObstructed());
 		assertEquals(squareTo.getObstacle(), player);
 	}
