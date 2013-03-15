@@ -118,7 +118,7 @@ public class UserInteractionTest {
 		Square next = null;
 		Direction direction = null;
 		while(next == null ||next.isObstructed() || next.getInventory().hasActiveLightGrenade()){
-			direction = Direction.getRandom();
+			direction = Direction.getRandomDirection();
 			try{
 				next = game.getGrid().getNeighbor(currentPosition, direction);
 			}

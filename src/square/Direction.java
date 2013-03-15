@@ -167,12 +167,26 @@ public enum Direction {
 	abstract public boolean isDiagonal();
 
 	/**
-	 * @return
+	 * Either North or East representing resp. vertical and horizontal orientation.
+	 * 
+	 * @return	North or East with a 50%.
 	 */
-	public static Direction getRandom() {
+	public static Direction getRandomOrientation() {
 		Random random = new Random();
 		if(random.nextBoolean())
 			return Direction.NORTH;
 		return Direction.EAST;
 	}
+	
+	
+	/**
+	 * Returns a random direction with an even chance.
+	 */
+	public static Direction getRandomDirection() {
+		Random random = new Random();
+		Direction[] dir = values();
+		return dir[random.nextInt(dir.length)];
+	}
+	
+	
 }
