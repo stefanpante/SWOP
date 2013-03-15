@@ -8,6 +8,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import be.kuleuven.cs.som.taglet.PreTaglet;
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
+
 import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
@@ -64,8 +68,10 @@ public class Game {
 	/**
 	 *Constructs a new board-based game.
 	 * 
-	 * @param hSize		the horizontal size of the board
-	 * @param vSize		the vertical size of the board
+	 * @param 	hSize		
+	 * 			the horizontal size of the board
+	 * @param 	vSize	
+	 * 			the vertical size of the board
 	 */
 	public Game(int hSize, int vSize){
 		super();
@@ -163,7 +169,7 @@ public class Game {
 	/**
 	 * Switches player. e.g.: if the current player is the first player,
 	 * the current player will be set to player 2
-	 * @pre		currentPlayer == player1 || currentPlayer == player2
+	 * @Pre		currentPlayer == player1 || currentPlayer == player2
 	 * @post	if(old.currentPlayer == player1) new.currentPlayer == player2
 	 * 			if(old.currentPlayer == player2) new.currentPlayer == player1
 	 */
@@ -178,7 +184,6 @@ public class Game {
 		}
 		
 		this.currentPlayer = getNextPlayer();
-		
 		powerFailureSquares();
 		updateStates();
 	}
@@ -187,8 +192,8 @@ public class Game {
 	 * Returns the value of the currentPlayer of this Game as an Player.
 	 *
 	 * @return 	An object of the Player class.
-	 * 			| Player
 	 */
+	@Basic @Raw
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	};

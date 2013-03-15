@@ -1,4 +1,4 @@
-package handlers;
+package scenariotests;
 
 import org.junit.Test;
 

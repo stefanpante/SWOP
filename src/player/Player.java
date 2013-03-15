@@ -2,6 +2,8 @@ package player;
 
 import java.util.Observable;
 
+import be.kuleuven.cs.som.annotate.Basic;
+
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
@@ -218,7 +220,7 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * @pre	This must be called before making an action.
+	 * @Pre	This must be called before making an action.
 	 * 		Otherwise the currentPosition is the new one.
 	 * 
 	 * Decrements the remaining actions by one and notifies the observers of this player.
@@ -282,7 +284,6 @@ public class Player extends Observable implements IObstacle {
 	
 	/**
 	 * Returns the player's id.
-	 * @return
 	 */
 	public int getID() {
 		return this.ID;
@@ -297,19 +298,23 @@ public class Player extends Observable implements IObstacle {
 	}
 	
 	/**
-	 * returns the current position of the player
+	 * Returns the current position of the player.
 	 */
+	@Basic
 	public Square getPosition() {
 		return currentPosition;
 	}
 	
+	/**
+	 * Returns the current remaining actions of the player.
+	 */
+	@Basic
 	public int getRemainingActions(){
 		return remainingActions;
 	}
 	
 	/**
-	 * returns the startposition of this player
-	 * @return Square startposition
+	 * Returns the start position of this player.
 	 */
 	public Square getStartPosition(){
 		return startPosition;
@@ -344,7 +349,9 @@ public class Player extends Observable implements IObstacle {
 	
 	/**
 	 * Used to set the remaining actions for this player.
-	 * @param actions	the number of actions the player can perform.
+	 * 
+	 * @param 	actions	
+	 * 			The number of actions the player can perform.
 	 */
 	private void setRemainingActions(int actions){
 		if(actions == Integer.MAX_VALUE){
@@ -357,10 +364,22 @@ public class Player extends Observable implements IObstacle {
 		this.remainingActions = actions;
 	}
 	
+	/**
+	 * Returns whether the current player has already moved 
+	 * 	since the last call of endTurn()
+	 * @return
+	 */
 	public boolean hasMoved(){
 		return moved;
 	}
 
+	/**
+	 * Returns whether this player still has remaning actions.
+	 * 
+	 * @return	True	If this player has more then 0 remaining actions.
+	 * 			False	otherwise.
+	 * 			| getRemainingActions() > 0
+	 */
 	public boolean hasRemainingActions(){
 		return getRemainingActions() > 0;
 	}
@@ -416,11 +435,15 @@ public class Player extends Observable implements IObstacle {
 
 	/**
 	 * Removes the given square as a covered square of this obstacle.
+	 * 
+	 * @post	getPosition() == null
+	 * @throws	IllegalArgumentException
+	 * 			If the given square is not the currentPosition of this player.
+	 * 			| !square.equals(getPosition())
 	 */
 	public void removeSquare(Square square) throws IllegalArgumentException {
-		if(!square.equals(currentPosition))
+		if(!square.equals(this.getPosition()))
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
-		
 		currentPosition = null;
 	}
 

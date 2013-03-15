@@ -1,4 +1,4 @@
-package handlers;
+package scenariotests;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
+import handlers.MoveHandler;
 import items.LightGrenade;
 
 import org.junit.Before;

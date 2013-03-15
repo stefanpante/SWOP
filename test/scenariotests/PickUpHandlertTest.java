@@ -1,6 +1,7 @@
-package handlers;
+package scenariotests;
 
 import static org.junit.Assert.*;
+import handlers.PickUpHandler;
 import items.LightGrenade;
 import items.PlayerInventory;
 import game.Game;
