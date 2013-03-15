@@ -17,6 +17,7 @@ import square.state.PowerFailureState;
 import square.state.State;
 
 import game.Game;
+import grid.GridBuilder;
 import gui.ApplicationWindow;
 import handlers.GameHandler;
 import handlers.Handler;
@@ -35,13 +36,13 @@ public class UserInteractionTest {
 
 	private Game game;
 	private ArrayList<Handler> handlers;
-	private static int NUMBEROFTESTS = 100;
+	private static int NUMBEROFTESTS = 1;
 	private MoveHandler mh;
-	private GameHandler gh;
 
 	@Before
 	public void initialize(){
 		game = new Game(10,10);
+		game.clearPowerFailures();
 		handlers = new ArrayList<Handler>();
 		mh = new MoveHandler(game, null);
 		handlers.add(mh);
@@ -50,64 +51,67 @@ public class UserInteractionTest {
 	}
 	/**
 	 * Test switch player after three randomActions
+	 * TODO: rekening houden met dat turns worden overgeslagen
 	 */
 	@Test
 	public void testSwitch(){
+
 		Random random = new Random();
 		int length = handlers.size();
 		int i = 0;
 		int j = 0;
+
 		while( i < NUMBEROFTESTS){
-			initialize();
+
 			Player currentPlayer = game.getCurrentPlayer();
-			State state = game.getCurrentPlayer().getPosition().getState();
 			int numberOfActions = Player.MAX_ALLOWED_ACTIONS;
-			if(state instanceof PowerFailureState){
-				numberOfActions -= 1;
-			}
 			j = 1;
+
+			// Always one move 
 			Direction direction = getValidDirection();
 			Square currentPosition = game.getCurrentPlayer().getPosition();
 			Square next = game.getGrid().getNeighbor(currentPosition, direction);
-			if(mh == null) System.out.println("null");
+			next.getInventory().wearOut();
 			mh.move(direction);
-			if(next.getState() instanceof PowerFailureState){
-				j = 3;
-			}
-			
-			while(j < numberOfActions){
-				
+			while((j <= numberOfActions)){
+
 				Handler handler = handlers.get(random.nextInt(length));
+
 				if(handler instanceof MoveHandler){
+
 					MoveHandler mh2 = (MoveHandler) handler;
 					direction = getValidDirection();
+
 					currentPosition = game.getCurrentPlayer().getPosition();
 					next = game.getGrid().getNeighbor(currentPosition, direction);
+					next.getInventory().wearOut();
 					mh2.move(direction);
-					if(next.getState() instanceof PowerFailureState){
-						break;
-					}
-					
+					assertEquals(currentPlayer, game.getCurrentPlayer());
+
 				}
-				
+
 				if(handler instanceof PickUpHandler){
 					PickUpHandler ph = (PickUpHandler) handler;
 					Item item = placeItem();
 					ph.pickUp(item);
+					assertEquals(currentPlayer, game.getCurrentPlayer());
+		
 				}
 
 				if(handler instanceof UseItemHandler){
 					UseItemHandler uh = (UseItemHandler) handler;
 					Item item = placeItemInPlayer();
 					uh.useItem(item);
+					assertEquals(currentPlayer, game.getCurrentPlayer());
+	
 
 				}
-				
 				j++;
+
 			}
 			assertFalse(game.getCurrentPlayer().equals(currentPlayer));
 			j = 0;
-			
+			initialize();
 			i++;
 		}
 	}
@@ -117,7 +121,9 @@ public class UserInteractionTest {
 
 		Square next = null;
 		Direction direction = null;
-		while(next == null ||next.isObstructed() || next.getInventory().hasActiveLightGrenade()){
+		while(next == null ||next.isObstructed() 
+				|| next.getInventory().hasActiveLightGrenade()
+				|| !game.getGrid().canMoveTo(currentPosition, direction)){
 			direction = Direction.getRandomDirection();
 			try{
 				next = game.getGrid().getNeighbor(currentPosition, direction);
@@ -127,24 +133,32 @@ public class UserInteractionTest {
 
 		return direction;
 	}
-	
+
 	private Item placeItem(){
-			Item item = new LightGrenade();
-			
-			Square currentPosition = game.getCurrentPlayer().getPosition();
-			try{
-				currentPosition.getInventory().addItem(item);
-			}
-			catch(Exception e){
-				item = currentPosition.getInventory().getLightGrenade();
-			}
-			return item;
+		Item item = new LightGrenade();
+
+		Square currentPosition = game.getCurrentPlayer().getPosition();
+		try{
+			currentPosition.getInventory().addItem(item);
+		}
+		catch(Exception e){
+			item = currentPosition.getInventory().getLightGrenade();
+		}
+		return item;
 	}
-	
+
 	private Item placeItemInPlayer(){
 		Item item = new LightGrenade();
 		Player player = game.getCurrentPlayer();
+		Square current = player.getPosition();
+		if(current.getInventory().hasLightGrenade()){
+			LightGrenade lg = current.getInventory().getLightGrenade();
+			current.getInventory().take(lg);
+
+		}
 		player.getInventory().addItem(item);
+
+
 		return item;
 	}
 

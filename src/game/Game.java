@@ -321,6 +321,7 @@ public class Game {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * Return if the current game is end
 	 * 
 	 * @return	The state of the game
@@ -338,5 +339,17 @@ public class Game {
 	 */
 	public void end() {
 		this.active = false;
+	}
+	
+	/**
+	 * Clears all powerFailures, for testing purposes.
+	 */
+	public void clearPowerFailures(){
+		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
+		
+		while(iterator.hasNext()) {
+			Square square = iterator.next();
+			square.powerGain();
+		}
 	}
 }

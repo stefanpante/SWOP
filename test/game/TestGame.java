@@ -1,6 +1,7 @@
 package game;
 
 import static org.junit.Assert.*;
+import grid.Grid;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import player.Player;
 
+import square.Direction;
 import square.Square;
 import square.state.PowerFailureState;
 import square.state.RegularState;
@@ -69,8 +71,7 @@ public class TestGame {
 		
 		game.setCurrentPlayer(player2);
 		assertTrue(game.getCurrentPlayer() == player2);
-		Player player = new Player(null, 0);
-		
+		Player player = new Player(null, 0);		
 		try{
 			game.setCurrentPlayer(player);
 			fail("Player shouldn't be valid");
@@ -139,25 +140,34 @@ public class TestGame {
 	@Test
 	public void testUpdateStates() {
 		Game game = new Game(10,10);
-		
-		Square square = game.getGrid().getAllSquares().get(0);
+		Grid grid = game.getGrid();
+		Square square = grid.getAllSquares().get(0);
+
+		grid.getCoordinate(square);
+		while(square.getState().equals(PowerFailureState.getInstance()) ){
+			try {
+				square = grid.getNeighbor(square, Direction.getRandomDirection());
+			} catch (Exception e) {
+
+			}
+		}
 		Square squareTwo = game.getGrid().getAllSquares().get(1);
 		
-		assertTrue(square.getState() instanceof RegularState);
+		
+		assertEquals(RegularState.getInstance(),square.getState());
 		square.powerFail();
 		
-		assertTrue(square.getState() instanceof PowerFailureState);
+		assertEquals(PowerFailureState.getInstance(),square.getState());
 		game.updateStates();
 		
 		squareTwo.powerFail();
 		
-		assertTrue(square.getState() instanceof PowerFailureState);
+		assertEquals(PowerFailureState.getInstance(),square.getState());
 		game.updateStates();
 		
-		assertTrue(square.getState() instanceof PowerFailureState);
+		assertEquals(PowerFailureState.getInstance(),square.getState());
 		game.updateStates();
 		
-		assertTrue(square.getState() instanceof RegularState);
-		assertTrue(squareTwo.getState() instanceof PowerFailureState);
+		assertEquals(RegularState.getInstance(),square.getState());
 	}
 }

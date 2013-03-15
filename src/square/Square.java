@@ -146,6 +146,10 @@ public class Square implements Penalty{
 		setState(PowerFailureState.getInstance());
 	}
 	
+	public void powerGain(){
+		setState(RegularState.getInstance());
+	}
+	
 	public int getPenalty() {
 		int res = 0;
 		
