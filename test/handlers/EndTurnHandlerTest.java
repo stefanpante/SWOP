@@ -69,9 +69,7 @@ public class EndTurnHandlerTest {
 		while(next == null || next.isObstructed()){
 			try {
 				direction = Direction.getRandomDirection();
-				System.out.println("direction");
 				next = game.getGrid().getNeighbor(currentPosition, direction);
-				System.out.println(next);
 			} catch (Exception e) {
 
 			}

@@ -124,7 +124,6 @@ public class TestGrid {
 				blLightTrail.addSquare(grid.getNeighbor(bl, Direction.NORTH));
 				blLightTrail.addSquare(grid.getNeighbor(bl, Direction.EAST));
 			} catch (Exception e) {
-				System.out.println("YES");
 			}
 			
 			assertTrue(blLightTrail.contains(grid.getNeighbor(bl, Direction.NORTH)));
