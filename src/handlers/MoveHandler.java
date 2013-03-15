@@ -51,6 +51,7 @@ public class MoveHandler extends Handler {
 	 * 
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
+		startAction();
 		if(!checkToProceed()){
 			getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
 			getGame().switchToNextPlayer();
@@ -77,8 +78,7 @@ public class MoveHandler extends Handler {
 		}else{
 			throw new IllegalStateException("You can't move to there! (" + direction+")");
 		}
-		fireChanges();
-
+		endAction();
 	}
 	/**
 	 * Sets the remaining actions of the current player
@@ -108,29 +108,6 @@ public class MoveHandler extends Handler {
 		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
 	}
 
-	/**
-	 * Checks if the end of the move causes the current player to win.
-	 * @return 	true if the move causes the player to win. 
-	 */
-	public boolean hasWon(){
-		Player nextPlayer = getGame().getNextPlayer();
-		Player currentPlayer = getGame().getCurrentPlayer();
 
-		if(nextPlayer.getStartPosition() == currentPlayer.getPosition()){
-			return true;
-		}
-
-		return false;
-	}
-	
-	public boolean hasLost(){
-		boolean stuck = true;
-		for(Entry<Direction, Square> entry : getGame().getGrid().getNeighbors(getGame().getCurrentPlayer().getPosition()).entrySet()){
-			if(getGame().getGrid().canMoveTo(entry.getValue(), entry.getKey())){
-				stuck = false;
-			}
-		}
-		return stuck;
-	}
 
 }

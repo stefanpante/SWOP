@@ -11,8 +11,10 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import player.Player;
+import square.Direction;
 import square.Square;
 import square.obstacles.LightTrail;
 import square.state.PowerFailureState;
@@ -156,7 +158,7 @@ public abstract class Handler {
 	 * 
 	 * @return
 	 */
-	protected Game getGame() {
+	public Game getGame() {
 		return this.game;
 	}
 	
@@ -177,7 +179,13 @@ public abstract class Handler {
     	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
     	firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
     	firePropertyChange(GameHandler.POWER_FAILS_PROPERTY, getPowerFails());
-
+    	if(hasWon()){
+    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
+    		getGame().end();
+    	}else if(hasLost()){
+    		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
+    		getGame().end();
+    	}
 	}
 
 	/**
@@ -193,4 +201,45 @@ public abstract class Handler {
 		}
 		return list;
 	}
+	
+	
+	/**
+	 * Checks if the end of the move causes the current player to win.
+	 * @return 	true if the move causes the player to win. 
+	 */
+	private boolean hasWon(){
+		Player nextPlayer = getGame().getNextPlayer();
+		Player currentPlayer = getGame().getCurrentPlayer();
+
+		if(nextPlayer.getStartPosition().equals(currentPlayer.getPosition())){
+			return true;
+		}
+
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private boolean hasLost(){
+		boolean stuck = true;
+		for(Entry<Direction, Square> entry : getGame().getGrid().getNeighbors(getGame().getCurrentPlayer().getPosition()).entrySet()){
+			if(getGame().getGrid().canMoveTo(entry.getValue(), entry.getKey())){
+				stuck = false;
+			}
+		}
+		return stuck;
+	}
+	
+	public void startAction(){
+		if(!getGame().isActive())
+			throw new IllegalStateException("The game is over");
+		fireChanges();
+	}
+	
+	public void endAction(){
+		fireChanges();
+	}
+	
 }

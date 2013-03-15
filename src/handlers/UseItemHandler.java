@@ -33,7 +33,6 @@ public class UseItemHandler extends Handler {
 	public boolean checkToProceed(){
 		if(getGame().getCurrentPlayer().getRemainingActions() > 1 )
 			return true;
-		
 		return false;
 	}
 	
@@ -43,6 +42,7 @@ public class UseItemHandler extends Handler {
 	 * Or when the player cannot use the item on the square.
 	 */
 	public void useItem(Item item) {
+		startAction();
 		if(!checkToProceed()){
 			if(!getGame().getCurrentPlayer().hasMoved()){
 				String name = getGame().getCurrentPlayer().getName();
@@ -59,8 +59,8 @@ public class UseItemHandler extends Handler {
 			//getGame().getCurrentPlayer().getPosition().getInventory().activate(item);
 			getGame().getCurrentPlayer().decrementActions();
 			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
-			fireChanges();
 		}
+		endAction();
 	}
 	
 	
