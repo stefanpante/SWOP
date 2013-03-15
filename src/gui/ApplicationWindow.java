@@ -390,6 +390,12 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	confirmEndTurn((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
         	JOptionPane.showMessageDialog(frame, (String)o);
+        }else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
+        	String player = (String)o;
+        	JOptionPane.showMessageDialog(frame, player+ " has won the game!");
+        }else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
+        	String player = (String)o;
+        	JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
         }
     }
 
