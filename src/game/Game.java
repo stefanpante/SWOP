@@ -315,4 +315,16 @@ public class Game extends AbstractModel {
 			square.endTurn();
 		}
 	}
+	
+	/**
+	 * Clears all powerFailures, for testing purposes.
+	 */
+	public void clearPowerFailures(){
+		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
+		
+		while(iterator.hasNext()) {
+			Square square = iterator.next();
+			square.powerGain();
+		}
+	}
 }
