@@ -123,7 +123,10 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
     	/* Cheats */
     	gridPanel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK), "noPowerFails" );
     	gridPanel.getActionMap().put("noPowerFails", new CheatAction(3));
+    	gridPanel.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.SHIFT_MASK), "moreRemainingActions" );
+    	gridPanel.getActionMap().put("moreRemainingActions", new CheatAction(4));
     	gridPanel.setFocusable(true);
+        
         
         /* SIDEBAR */
         JPanel sideBarPanel = new JPanel();
@@ -411,6 +414,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         	String player = (String)o;
         	JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
         }
+        gridPanel.requestFocus();
     }
 
 	/**
@@ -449,7 +453,11 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 			case 3:
 				gameHandler.getGame().clearPowerFailures();
 				gameHandler.fireChanges();
-				showMessage("CHEAT ACTIVATED: Power failures removed this turn.");
+				System.out.println("Cheat 3 activated");
+				break;
+			case 4:
+				gameHandler.getGame().getCurrentPlayer().endTurn(Integer.MAX_VALUE);
+				System.out.println("Cheat 4 activated");
 				break;
 			}
 		}
