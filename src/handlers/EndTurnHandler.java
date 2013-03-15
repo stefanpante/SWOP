@@ -70,7 +70,6 @@ public class EndTurnHandler extends Handler{
 	 * sets up the game for the turn of the next player
 	 * 
 	 * @throws	IllegalStateException
-	 * 			If 
 	 */
 	public void endTurn() throws IllegalStateException{
 		startAction();
@@ -91,10 +90,13 @@ public class EndTurnHandler extends Handler{
 
 	/**
 	 * sets the confirm.
-	 * @param b 	a boolean which sets the confirm.
+	 * @param 	bool 
+	 * 			A boolean which sets the confirm.
+	 * @effect	endTurn()
+	 * @post	bool = isConfirmed()
 	 */
-	public void confirm(boolean b) {
-		this.confirmed = b;
+	public void confirm(boolean bool) {
+		this.confirmed = bool;
 		endTurn();
 	}
 
