@@ -255,13 +255,12 @@ public abstract class Handler {
 	 * @return	a boolean which represents the loss of the game.
 	 */
 	public boolean hasLost(){
-		boolean stuck = true;
 		for(Entry<Direction, Square> entry : getGame().getGrid().getNeighbors(getGame().getCurrentPlayer().getPosition()).entrySet()){
-			if(getGame().getGrid().canMoveTo(entry.getValue(), entry.getKey())){
-				stuck = false;
+			if(getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), entry.getKey())){
+				return false;
 			}
 		}
-		return stuck;
+		return true; 
 	}
 	
 	public void startAction(){
