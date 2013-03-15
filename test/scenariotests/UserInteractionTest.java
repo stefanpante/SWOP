@@ -73,32 +73,39 @@ public class UserInteractionTest {
 			Square next = game.getGrid().getNeighbor(currentPosition, direction);
 			next.getInventory().wearOut();
 			mh.move(direction);
-			while((j <= numberOfActions)){
+			while((j < numberOfActions)){
 
 				Handler handler = handlers.get(random.nextInt(length));
 
 				if(handler instanceof MoveHandler){
-
+					game.clearPowerFailures();
 					MoveHandler mh2 = (MoveHandler) handler;
 					direction = getValidDirection();
 
 					currentPosition = game.getCurrentPlayer().getPosition();
 					next = game.getGrid().getNeighbor(currentPosition, direction);
-					next.getInventory().wearOut();
+					if(next.getInventory().hasLightGrenade()){
+						LightGrenade lg = next.getInventory().getLightGrenade();
+						next.getInventory().take(lg);
+					}
 					mh2.move(direction);
 					assertEquals(currentPlayer, game.getCurrentPlayer());
+					
 
 				}
 
 				if(handler instanceof PickUpHandler){
+					game.clearPowerFailures();
 					PickUpHandler ph = (PickUpHandler) handler;
 					Item item = placeItem();
 					ph.pickUp(item);
 					assertEquals(currentPlayer, game.getCurrentPlayer());
+				
 		
 				}
 
 				if(handler instanceof UseItemHandler){
+					game.clearPowerFailures();
 					UseItemHandler uh = (UseItemHandler) handler;
 					Item item = placeItemInPlayer();
 					uh.useItem(item);
