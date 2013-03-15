@@ -148,8 +148,13 @@ public class Square implements Penalty{
 	
 	public int getPenalty() {
 		int res = 0;
+		
+		if(this.getInventory().hasActiveLightGrenade() && PowerFailureState.getInstance() != getState())
+			return 0;
+		
 		if(this.getInventory().hasActiveLightGrenade())
 			res = this.getInventory().getLightGrenade().getPenalty();
+		
 		return res + state.getPenalty(); 
 	}
 
