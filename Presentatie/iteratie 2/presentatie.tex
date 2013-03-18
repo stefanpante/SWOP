@@ -81,6 +81,21 @@ Uren gepresteerd: 45 uur per persoon.
 \end{center}
 \end{frame}
 
+
+\begin{frame}{Handlers and view}
+MVA (Model-View-Adapter) 
+\begin{itemize}
+	\item Model en View communiceren niet rechtstreeks
+	\item Handlers zijn \textbf{mediating controllers}
+	\item \textit{ApplicationWindow} implementeert \textit{PropertyChangeListener}
+\end{itemize}
+Handlers
+\begin{itemize}
+	\item Handler voor elke Use-Case
+	\item Geen GUI controller meer
+\end{itemize}
+\end{frame}
+
 \subsection{Grid}
 \begin{frame}{Grid}
 \begin{center}
@@ -96,13 +111,47 @@ Uren gepresteerd: 45 uur per persoon.
 \end{center}
 \end{frame}
 
-\begin{frame}{Obstacle Oberserver}
+\begin{frame}{Obstacle}
+\begin{center}
+\begin{itemize}
+	\item Interface \textit{IObstacle}
+	\item  Abstracte klasse \textit{Obstacle} implementeert \textit{IObstacle}
+	\begin{itemize}
+		\item \textit{LightTrail} implementeert \textit{Obstacle}
+		\item \textit{Wall} implementeert \textit{Obstacle}
+	\end{itemize}
+	\item \textit{Player} implementeert \textit{IObstacle}
+	\item \textit{Square} kan \textit{Obstacle} bevatten
+\end{itemize}
+LightTrail implementeert de \textit{Observer} interface.
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Obstacle}
 \begin{center}
 \includegraphics[width=0.70\linewidth]{images/obstacleObserverClassDiagram}
 \end{center}
 \end{frame}
 
 \subsection{States and Penalty}
+
+\begin{frame}{States and Penalty}
+\begin{itemize}
+	\item State Pattern
+	\begin{itemize}
+		\item Square heeft meerdere toestanden: \textit{RegularState}, \textit{PowerFailureState}
+		\item Square zorgt voor overgang van staat
+	\end{itemize}
+	\item Chain of Responsibility (Command)
+	\begin{itemize}
+		\item State bepaalt eigen penalty
+		\item LightGrenade bepaalt eigen penalty
+		\item Square is eigenaar van concept penalty
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{States and Penalty}
 \begin{center}
 \includegraphics[width=0.90\linewidth]{images/classDiagramStateAndPanelty}
@@ -113,14 +162,42 @@ Uren gepresteerd: 45 uur per persoon.
 
 \section{System State Diagrams}
 \subsection{Start New Game}
+\begin{frame}{Start New Game}
+\begin{center}
+%\includegraphics[width=0.90\linewidth]{images/SSDStartNewGame}
+\end{center}
+\end{frame}
+
 \subsection{Move}
+\begin{frame}{Move}
+\begin{center}
+%\includegraphics[width=0.90\linewidth]{images/SSDMove}
+\end{center}
+\end{frame}
+
 \subsection{Pick Up Item}
+\begin{frame}{Pick Up Item}
+\begin{center}
+%\includegraphics[width=0.90\linewidth]{images/SSDPickUpItem}
+\end{center}
+\end{frame}
+
 \subsection{Use Item}
+\begin{frame}{Use Item}
+\begin{center}
+%\includegraphics[width=0.90\linewidth]{images/SSDPickUpItem}
+\end{center}
+\end{frame}
+
 \subsection{End Turn}
+\begin{frame}{End Turn}
+\begin{center}
+%\includegraphics[width=0.90\linewidth]{images/SSDEndTurn}
+\end{center}
+\end{frame}
 
 
-
-
+\section{Slot}
 \begin{frame}{Besluit}
 \vspace{0.8in}
 \begin{center}

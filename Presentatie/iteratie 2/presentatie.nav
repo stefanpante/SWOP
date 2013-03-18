@@ -24,29 +24,48 @@
 \headcommand {\beamer@framepages {7}{7}}
 \headcommand {\slideentry {2}{1}{2}{8/8}{MVC}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{9}{Grid}}\headcommand {\beamer@subsectionpages {7}{8}}
-\headcommand {\slideentry {2}{2}{1}{9/9}{Grid}{0}}
+\headcommand {\slideentry {2}{1}{3}{9/9}{MVC}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{10}{Obstacles}}\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\slideentry {2}{3}{1}{10/10}{Obstacles}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{10}{Grid}}\headcommand {\beamer@subsectionpages {7}{9}}
+\headcommand {\slideentry {2}{2}{1}{10/10}{Grid}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {2}{3}{2}{11/11}{Obstacles}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{11}{Obstacles}}\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {2}{3}{1}{11/11}{Obstacles}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{2}{4}{12}{States and Penalty}}\headcommand {\beamer@subsectionpages {10}{11}}
-\headcommand {\slideentry {2}{4}{1}{12/12}{States and Penalty}{0}}
+\headcommand {\slideentry {2}{3}{2}{12/12}{Obstacles}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\sectionentry {3}{System State Diagrams}{13}{System State Diagrams}{0}}
-\headcommand {\beamer@sectionpages {7}{12}}
-\headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{13}{Start New Game}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{13}{Move}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{13}{Pick Up Item}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{13}{Use Item}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{13}{End Turn}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\slideentry {3}{5}{1}{13/13}{End Turn}{0}}
+\headcommand {\slideentry {2}{3}{3}{13/13}{Obstacles}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@partpages {1}{13}}
-\headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\beamer@sectionpages {13}{13}}
-\headcommand {\beamer@documentpages {13}}
-\headcommand {\def \inserttotalframenumber {13}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{14}{States and Penalty}}\headcommand {\beamer@subsectionpages {11}{13}}
+\headcommand {\slideentry {2}{4}{1}{14/14}{States and Penalty}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {2}{4}{2}{15/15}{States and Penalty}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\sectionentry {3}{System State Diagrams}{16}{System State Diagrams}{0}}
+\headcommand {\beamer@sectionpages {7}{15}}
+\headcommand {\beamer@subsectionpages {14}{15}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{16}{Start New Game}}\headcommand {\beamer@subsectionpages {16}{15}}
+\headcommand {\slideentry {3}{1}{1}{16/16}{Start New Game}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{17}{Move}}\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\slideentry {3}{2}{1}{17/17}{Move}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{18}{Pick Up Item}}\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\slideentry {3}{3}{1}{18/18}{Pick Up Item}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{19}{Use Item}}\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\slideentry {3}{4}{1}{19/19}{Use Item}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{20}{End Turn}}\headcommand {\beamer@subsectionpages {19}{19}}
+\headcommand {\slideentry {3}{5}{1}{20/20}{End Turn}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\sectionentry {4}{Slot}{21}{Slot}{0}}
+\headcommand {\beamer@sectionpages {16}{20}}
+\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\slideentry {4}{0}{2}{21/21}{}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@partpages {1}{21}}
+\headcommand {\beamer@subsectionpages {21}{21}}
+\headcommand {\beamer@sectionpages {21}{21}}
+\headcommand {\beamer@documentpages {21}}
+\headcommand {\def \inserttotalframenumber {21}}
