@@ -19,13 +19,34 @@
 \headcommand {\sectionentry {2}{Het ontwerp}{7}{Het ontwerp}{0}}
 \headcommand {\beamer@sectionpages {3}{6}}
 \headcommand {\beamer@subsectionpages {6}{6}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{7}{Basisstructuur}}\headcommand {\beamer@subsectionpages {7}{6}}
-\headcommand {\slideentry {2}{1}{1}{7/7}{Basisstructuur}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{7}{MVC}}\headcommand {\beamer@subsectionpages {7}{6}}
+\headcommand {\slideentry {2}{1}{1}{7/7}{MVC}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {2}{1}{2}{8/8}{Basisstructuur}{0}}
+\headcommand {\slideentry {2}{1}{2}{8/8}{MVC}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@partpages {1}{8}}
-\headcommand {\beamer@subsectionpages {7}{8}}
-\headcommand {\beamer@sectionpages {7}{8}}
-\headcommand {\beamer@documentpages {8}}
-\headcommand {\def \inserttotalframenumber {8}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{9}{Grid}}\headcommand {\beamer@subsectionpages {7}{8}}
+\headcommand {\slideentry {2}{2}{1}{9/9}{Grid}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{10}{Obstacles}}\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\slideentry {2}{3}{1}{10/10}{Obstacles}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {2}{3}{2}{11/11}{Obstacles}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{12}{States and Penalty}}\headcommand {\beamer@subsectionpages {10}{11}}
+\headcommand {\slideentry {2}{4}{1}{12/12}{States and Penalty}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\sectionentry {3}{System State Diagrams}{13}{System State Diagrams}{0}}
+\headcommand {\beamer@sectionpages {7}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{13}{Start New Game}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{13}{Move}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{13}{Pick Up Item}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{13}{Use Item}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{13}{End Turn}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\slideentry {3}{5}{1}{13/13}{End Turn}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@sectionpages {13}{13}}
+\headcommand {\beamer@documentpages {13}}
+\headcommand {\def \inserttotalframenumber {13}}
