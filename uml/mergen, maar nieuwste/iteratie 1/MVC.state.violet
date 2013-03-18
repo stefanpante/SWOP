@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_09" class="java.beans.XMLDecoder">
+ <object class="com.horstmann.violet.StateDiagramGraph">
+  <void method="addNode">
+   <object class="com.horstmann.violet.StateNode" id="StateNode0">
+    <void property="name">
+     <void property="text">
+      <string>View: GUI</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double0">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double0">
+       <void class="java.awt.geom.Point2D$Double" method="getField">
+        <string>y</string>
+        <void method="set">
+         <object idref="Point2D$Double0">
+          <void method="setLocation">
+           <double>330.0</double>
+           <double>135.0</double>
+          </void>
+         </object>
+         <double>135.0</double>
+        </void>
+       </void>
+      </object>
+      <double>330.0</double>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.StateNode" id="StateNode1">
+    <void property="name">
+     <void property="text">
+      <string>Model: Grid
+(Square, Wall, Obstacle,  ...)</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double1">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double1">
+       <void class="java.awt.geom.Point2D$Double" method="getField">
+        <string>y</string>
+        <void method="set">
+         <object idref="Point2D$Double1">
+          <void method="setLocation">
+           <double>459.0</double>
+           <double>423.0</double>
+          </void>
+         </object>
+         <double>423.0</double>
+        </void>
+       </void>
+      </object>
+      <double>459.0</double>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.StateNode" id="StateNode2">
+    <void property="name">
+     <void property="text">
+      <string>Controller: Handlers</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double2">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double2">
+       <void class="java.awt.geom.Point2D$Double" method="getField">
+        <string>y</string>
+        <void method="set">
+         <object idref="Point2D$Double2">
+          <void method="setLocation">
+           <double>476.0</double>
+           <double>251.0</double>
+          </void>
+         </object>
+         <double>251.0</double>
+        </void>
+       </void>
+      </object>
+      <double>476.0</double>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.StateTransitionEdge">
+    <void property="label">
+     <string>Player Event</string>
+    </void>
+   </object>
+   <object idref="StateNode0"/>
+   <object idref="StateNode2"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.StateTransitionEdge">
+    <void property="label">
+     <string>Next view</string>
+    </void>
+   </object>
+   <object idref="StateNode2"/>
+   <object idref="StateNode0"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.StateTransitionEdge">
+    <void property="label">
+     <string>Change in data</string>
+    </void>
+   </object>
+   <object idref="StateNode2"/>
+   <object idref="StateNode1"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.StateTransitionEdge">
+    <void property="label">
+     <string>Result</string>
+    </void>
+   </object>
+   <object idref="StateNode1"/>
+   <object idref="StateNode2"/>
+  </void>
+ </object>
+</java>
