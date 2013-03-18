@@ -14,8 +14,6 @@ import square.Square;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class LightTrail extends Obstacle implements Observer{
-	
-	public static final int LENGTH = 2;
 
 	private Queue<Square> trail;
 	
