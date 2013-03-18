@@ -7,6 +7,10 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="unitTest"/>
+	<classpathentry kind="src" path="intermediateScenarioTest"/>
+	<classpathentry kind="src" path="useCaseScenarioTest"/>
+	<classpathentry kind="src" path="userSessionScenarioTest"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/AnnotationsDoclets.JAR"/>
