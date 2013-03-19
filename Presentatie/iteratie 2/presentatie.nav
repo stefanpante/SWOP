@@ -50,31 +50,27 @@
 \headcommand {\beamer@subsectionentry {0}{3}{2}{17}{Move}}\headcommand {\beamer@subsectionpages {16}{16}}
 \headcommand {\slideentry {3}{2}{1}{17/17}{Move}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{18}{Move}}\headcommand {\beamer@subsectionpages {17}{17}}
-\headcommand {\slideentry {3}{3}{1}{18/18}{Move}{0}}
+\headcommand {\slideentry {3}{2}{2}{18/18}{Move}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{19}{Pick Up Item}}\headcommand {\beamer@subsectionpages {18}{18}}
-\headcommand {\slideentry {3}{4}{1}{19/19}{Pick Up Item}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{19}{Pick Up Item}}\headcommand {\beamer@subsectionpages {17}{18}}
+\headcommand {\slideentry {3}{3}{1}{19/19}{Pick Up Item}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{20}{Pick Up Item}}\headcommand {\beamer@subsectionpages {19}{19}}
-\headcommand {\slideentry {3}{5}{1}{20/20}{Pick Up Item}{0}}
+\headcommand {\slideentry {3}{3}{2}{20/20}{Pick Up Item}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@subsectionentry {0}{3}{6}{21}{Use Item}}\headcommand {\beamer@subsectionpages {20}{20}}
-\headcommand {\slideentry {3}{6}{1}{21/21}{Use Item}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{21}{Use Item}}\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\slideentry {3}{4}{1}{21/21}{Use Item}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\beamer@subsectionentry {0}{3}{7}{22}{Use Item}}\headcommand {\beamer@subsectionpages {21}{21}}
-\headcommand {\slideentry {3}{7}{1}{22/22}{Use Item}{0}}
+\headcommand {\slideentry {3}{4}{2}{22/22}{Use Item}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\beamer@subsectionentry {0}{3}{8}{23}{End Turn}}\headcommand {\beamer@subsectionpages {22}{22}}
-\headcommand {\slideentry {3}{8}{1}{23/23}{End Turn}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{23}{End Turn}}\headcommand {\beamer@subsectionpages {21}{22}}
+\headcommand {\slideentry {3}{5}{1}{23/23}{End Turn}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\beamer@subsectionentry {0}{3}{9}{24}{End Turn}}\headcommand {\beamer@subsectionpages {23}{23}}
-\headcommand {\slideentry {3}{9}{1}{24/24}{End Turn}{0}}
+\headcommand {\slideentry {3}{5}{2}{24/24}{End Turn}{0}}
 \headcommand {\beamer@framepages {24}{24}}
 \headcommand {\sectionentry {4}{Slot}{25}{Slot}{0}}
 \headcommand {\beamer@sectionpages {16}{24}}
-\headcommand {\beamer@subsectionpages {24}{24}}
-\headcommand {\slideentry {4}{0}{2}{25/25}{}{0}}
+\headcommand {\beamer@subsectionpages {23}{24}}
+\headcommand {\slideentry {4}{0}{3}{25/25}{}{0}}
 \headcommand {\beamer@framepages {25}{25}}
 \headcommand {\beamer@partpages {1}{25}}
 \headcommand {\beamer@subsectionpages {25}{25}}
