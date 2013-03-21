@@ -3,8 +3,10 @@ package items;
 /**
  * Parent class for all sorts of items.
  * 
- * @author vincentreniers
- */
+ * TODO: decide whether to implement the State pattern for items
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ **/
 public class Item {
 
 	/**
@@ -84,6 +86,6 @@ public class Item {
 	 */
 	@Override
 	public String toString() {
-		return "Item";
+		return "Item [" + getState() +"]";
 	}
 }

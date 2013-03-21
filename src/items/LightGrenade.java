@@ -30,6 +30,6 @@ public class LightGrenade extends Item implements Penalty{
 	 */
 	@Override
 	public String toString() {
-		return "LightGrenade";
+		return super.toString() + " LightGrenade";
 	}
 }
