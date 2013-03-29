@@ -11,7 +11,7 @@ import square.Direction;
  *
  */
 @NotNull
-public class IdentityDisc extends Item {
+public class IdentityDisc extends Item implements Launchable {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.

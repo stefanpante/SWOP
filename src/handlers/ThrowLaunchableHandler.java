@@ -8,18 +8,18 @@ import java.beans.PropertyChangeListener;
 
 import square.Direction;
 
-public class ThrowItemHandler extends Handler {
+public class ThrowLaunchableHandler extends Handler {
 
-	public ThrowItemHandler() {
+	public ThrowLaunchableHandler() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ThrowItemHandler(Game game) {
+	public ThrowLaunchableHandler(Game game) {
 		super(game);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ThrowItemHandler(Game game, PropertyChangeListener listener) {
+	public ThrowLaunchableHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 		// TODO Auto-generated constructor stub
 	}
