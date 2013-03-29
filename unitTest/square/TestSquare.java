@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-import square.obstacles.Obstacle;
+import square.obstacles.MultiObstacle;
 import square.obstacles.Wall;
 
 
@@ -132,7 +132,7 @@ public class TestSquare {
 		Square otherSquare = new Square();
 		
 		
-		Obstacle wall = new Wall(square, otherSquare);
+		MultiObstacle wall = new Wall(square, otherSquare);
 		
 		assertEquals(square.getObstacle(), wall);
 		assertTrue(square.isObstructed());

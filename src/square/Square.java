@@ -2,7 +2,7 @@ package square;
 
 import items.SquareInventory;
 
-import square.obstacles.IObstacle;
+import square.obstacles.Obstacle;
 import square.state.PowerFailureState;
 import square.state.RegularState;
 import square.state.State;
@@ -35,7 +35,7 @@ public class Square implements Penalty{
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
-	private IObstacle obstacle;
+	private Obstacle obstacle;
 	
 	
 	/**
@@ -97,7 +97,7 @@ public class Square implements Penalty{
 	 * @return 	An object of the Obstacle class.
 	 * 			| Obstacle
 	 */
-	public IObstacle getObstacle() {
+	public Obstacle getObstacle() {
 		return obstacle;
 	};
 
@@ -109,7 +109,7 @@ public class Square implements Penalty{
 	 * @post 	The given value is the current value of the obstacle of this Square.
 	 */
 	@Nullable
-	public void setObstacle(IObstacle obstacle) throws IllegalArgumentException {
+	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
 		this.obstacle = obstacle;
 	};
 	

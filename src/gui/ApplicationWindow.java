@@ -107,7 +107,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 
     	
     	
-    	/* Windows */
+    	/* Windows */	
         frame = new JFrame();
         frame.setBounds(100, 100, WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,7 +116,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 
         /* GRID */
         this.gridPanel = new GridPanel(GRID_WIDTH, GRID_WIDTH, this.vSize, this.hSize);
-        gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);
+        gridPanel.setBounds(0, 0, GRID_WIDTH, GRID_WIDTH);	
         gridPanel.setFocusable(true);
         frame.getContentPane().add(gridPanel);
         

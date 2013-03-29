@@ -13,7 +13,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class LightTrail extends Obstacle implements Observer{
+public class LightTrail extends MultiObstacle implements Observer{
 
 	private Queue<Square> trail;
 	

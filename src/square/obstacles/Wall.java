@@ -14,7 +14,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public class Wall extends Obstacle{
+public class Wall extends MultiObstacle{
 	
 	public static int MIN_SIZE = 2;
 	/**

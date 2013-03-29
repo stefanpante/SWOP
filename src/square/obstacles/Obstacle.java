@@ -1,104 +1,53 @@
 package square.obstacles;
 
-
-import java.util.ArrayList;
-
 import square.Square;
 
 /**
- * Super class where any obstacle grid inherits its general properties from.
- * Such as a wall or a light trail
- * A player cannot move through an obstacle.
+ * Interface that is used for implementing.
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
  */
-public abstract class Obstacle implements IObstacle {
-	
-	/**
-	 * An obstacle may cover a set of squares.
-	 */
-	private ArrayList<Square> squares; 
-	
-	public Obstacle(){
-		squares = new ArrayList<Square>();
-	}
-	/**
-	 * Returns a list of squares which the obstacle covers.
-	 */
-	public ArrayList<Square> getSquares() {
-		return this.squares;
-	}
+public interface Obstacle {
 	
 	/**
 	 * Checks if a square is contained in the obstacle.
 	 * 
-	 * @param	square	Square to check if it is contained.
-	 * @return	True	If square is contained.
-	 * 			False	If square is not contained.
+	 * @param	square	
+	 * 			Square to check if it is contained.
+	 * @return	True	If square is part of this obstacle.
+	 * 			False	If square is not part of this obstacle.
 	 */
-	public boolean contains(Square square){
-		return this.squares.contains(square);
-	}
+	public boolean contains(Square square);
+	
 	
 	/**
 	 * Adds a square to the obstacle.
 	 * 
-	 * @param square
-	 * 
-	 * @throws IllegalArgumentException If a duplicate square is given an exception is thrown.
+	 * @param 	square
+	 * 			The square to add.
+	 * @throws 	IllegalArgumentException
+	 * 			If the given square cannot be added to the obstacle.
 	 */
-	public void addSquare(Square square) throws IllegalArgumentException {
-		if(isValidSquare(square)){
-			getSquares().add(square);
-			square.setObstacle(this);
-		}else{
-			throw new IllegalArgumentException("The square is invalid.");
-		}
-	}
+	public void addSquare(Square square) throws IllegalArgumentException;
+	
 	
 	/**
-	 * Removes a square of the obstacle.
+	 * Removes a square from the obstacle if possible. 
 	 * 
 	 * @param 	square
-	 * 
-	 * @throws 	IllegalArgumentException 
-	 * 			If the square is not 
+	 * 			The square to remove. 
+	 * @throws 	IllegalArgumentException
+	 * 			When the square cannot be removed.
 	 */
-	public void removeSquare(Square square) throws IllegalArgumentException {
-		if(!getSquares().contains(square)){
-			throw new IllegalArgumentException("A square that is not added can not part of the obstacle cannot be removed.");
-		}else{
-			square.setObstacle(null);
-			getSquares().remove(square);
-		}
-	}
-	
+	public void removeSquare(Square square) throws IllegalArgumentException;
 	
 	/**
-	 * Check whether the given square can be added to this obstacle.
-	 * The added square may not already be contained in the existing obstacle.
-	 * No duplicates may be added.
+	 * Returns whether the given square is a valid square for this object.
 	 * 
 	 * @param 	square
-	 * 			The square to be checked
-	 * @return	True	if and only if the square is connected to one of the squares.
-	 * 			False	If the square is a duplicate or it is not connected to any other
-	 * 					square.
+	 * 			The square to check.
+	 * @return	True if the square can be added to this obstacle.
 	 */
-	public boolean isValidSquare(Square square){
-		if(square == null)
-			return false; 
-		if(getSquares().contains(square))
-			return false;
-		return true;
-	}
-	
-	/**
-	 * Get the current length of the obstacle.
-	 */
-	public int getLength() {
-		return getSquares().size();
-	}
-	
-	
+	public boolean isValidSquare(Square square);
 }

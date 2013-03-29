@@ -8,7 +8,7 @@ import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
 import square.Square;
-import square.obstacles.IObstacle;
+import square.obstacles.Obstacle;
 
 import items.Item;
 import items.PlayerInventory;
@@ -19,7 +19,7 @@ import items.PlayerInventory;
  *
  */
 @NotNull
-public class Player extends Observable implements IObstacle {
+public class Player extends Observable implements Obstacle {
 
 	/**
 	 * The start position of this player

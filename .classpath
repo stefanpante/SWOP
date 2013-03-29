@@ -12,10 +12,11 @@
 	<classpathentry kind="src" path="useCaseScenarioTest"/>
 	<classpathentry kind="src" path="userSessionScenarioTest"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0"/>
 	<classpathentry kind="lib" path="lib/AnnotationsDoclets.JAR"/>
 	<classpathentry kind="lib" path="lib/notnullcheckweaver-weaver.jar"/>
 	<classpathentry kind="lib" path="lib/notnullcheckweaver.jar"/>
 	<classpathentry kind="lib" path="lib/simplegui.jar"/>
+	<classpathentry kind="lib" path="lib/cofoja-1.0-r139.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
