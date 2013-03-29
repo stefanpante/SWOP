@@ -8,6 +8,7 @@ import items.IdentityDisc;
 import game.Game;
 import handlers.MoveHandler;
 import handlers.PickUpHandler;
+import handlers.ThrowItemHandler;
 import handlers.UseItemHandler;
 
 import org.junit.Test;
@@ -127,21 +128,21 @@ public class IdentityDiscUsageTest {
 	}
 
 	/**
-	 * Throw an identitydisc into a direction specified. Assert that is moves 4 squares
+	 * throwItem an identitydisc into a direction specified. Assert that is moves 4 squares
 	 * (no obstacles or boundaries)
 	 */
 	@Test
-	public void testThrowIdentityDisc(){
+	public void testthrowItemIdentityDisc(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);	
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
 		game.clearObstacles();
 
-		// Throw the identity disc in all possible directions.
+		// throwItem the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
-		// All possible throw directions
+		// All possible throwItem directions
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 
@@ -151,8 +152,8 @@ public class IdentityDiscUsageTest {
 			IdentityDisc id = new IdentityDisc();
 			// Player should have identitydisc in inventory
 			game.getCurrentPlayer().getInventory().addItem(id);
-			// throw the identitydisc in the given direction
-			ih.throw(id,direction);
+			// throwItem the identitydisc in the given direction
+			ih.throwItem(id,direction);
 			Square position = game.getCurrentPlayer().getPosition();
 			position = game.getGrid().getNeighbor(position, direction);
 			position = game.getGrid().getNeighbor(position, direction);
@@ -166,31 +167,31 @@ public class IdentityDiscUsageTest {
 	}
 	
 	/**
-	 * Try to throw a identitydisc which isn't in the players inventory.
+	 * Try to throwItem a identitydisc which isn't in the players inventory.
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void throwDiskNotInPlayer(){
+	public void throwItemDiskNotInPlayer(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);
-		ih.throw(new IdentityDisc(), Direction.NORTH);
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);
+		ih.throwItem(new IdentityDisc(), Direction.NORTH);
 	}
 
 	/**
-	 * Throw a charged disk, assert that it stops at a boundary
+	 * throwItem a charged disk, assert that it stops at a boundary
 	 */
 	//TODO: replace hard coded coordinates with hSize -1 and vSize -1
 	@Test
-	public void throwChargedDisk(){
+	public void throwItemChargedDisk(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);	
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
 		game.clearObstacles();
 
-		// Throw the identity disc in all possible directions.
+		// throwItem the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
-		// All possible throw directions
+		// All possible throwItem directions
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 
@@ -198,16 +199,16 @@ public class IdentityDiscUsageTest {
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id);
-		// throw the identitydisc in the given direction
-		ih.throw(id,Direction.NORTH);
+		// throwItem the identitydisc in the given direction
+		ih.throwItem(id,Direction.NORTH);
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,0)).getInventory().hasItem(id);
 
 		// new identity disc
 		ChargedIdentityDisc id2 = new ChargedIdentityDisc();
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id2);
-		// throw the identitydisc in the given direction
-		ih.throw(id2,Direction.SOUTH);
+		// throwItem the identitydisc in the given direction
+		ih.throwItem(id2,Direction.SOUTH);
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,9)).getInventory().hasItem(id2));
 
 
@@ -215,34 +216,34 @@ public class IdentityDiscUsageTest {
 		ChargedIdentityDisc id3 = new ChargedIdentityDisc();
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id3);
-		// throw the identitydisc in the given direction
-		ih.throw(id3,Direction.WEST);
+		// throwItem the identitydisc in the given direction
+		ih.throwItem(id3,Direction.WEST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,9)).getInventory().hasItem(id3);
 
 		// new identity disc
 		ChargedIdentityDisc id4 = new ChargedIdentityDisc();
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id4);
-		// throw the identitydisc in the given direction
-		ih.throw(id4,Direction.EAST);
+		// throwItem the identitydisc in the given direction
+		ih.throwItem(id4,Direction.EAST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,4)).getInventory().hasItem(id4);
 	}
 
 	/**
-	 * Throw an identity disc when there is a wall in the way. assert that it drops in front of the wall
+	 * throwItem an identity disc when there is a wall in the way. assert that it drops in front of the wall
 	 */
 	@Test
-	public void throwDiskWall(){
+	public void throwItemDiskWall(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);	
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
 		game.clearObstacles();
 
-		// Throw the identity disc in all possible directions.
+		// throwItem the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
-		// All possible throw directions
+		// All possible throwItem directions
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 
@@ -253,26 +254,26 @@ public class IdentityDiscUsageTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 
-		ih.throw(id, Direction.WEST);
+		ih.throwItem(id, Direction.WEST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(5,4)).getInventory().hasItem(id));
 
 	}
 
 	/**
-	 * Throw a charged disk at a wall. Assert that it drops in front of the wall
+	 * throwItem a charged disk at a wall. Assert that it drops in front of the wall
 	 */
 	@Test
-	public void throwChargedDiskWall(){
+	public void throwItemChargedDiskWall(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);	
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
 		game.clearObstacles();
 
-		// Throw the identity disc in all possible directions.
+		// throwItem the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
-		// All possible throw directions
+		// All possible throwItem directions
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 
@@ -283,42 +284,42 @@ public class IdentityDiscUsageTest {
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 
-		ih.throw(id, Direction.WEST);
+		ih.throwItem(id, Direction.WEST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(8,4)).getInventory().hasItem(id));
 	}
 
 	/**
-	 * Throw an identity disc in the direction of the boundary the grid and test for effects
+	 * throwItem an identity disc in the direction of the boundary the grid and test for effects
 	 */
 	@Test
-	public void throwDiskBoundary(){
+	public void throwItemDiskBoundary(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);	
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
 		game.clearObstacles();
 
-		// Throw the identity disc in all possible directions.
+		// throwItem the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(2,4));
-		// All possible throw directions
+		// All possible throwItem directions
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 		
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
-		ih.throw(id, Direction.EAST)
+		ih.throwItem(id, Direction.EAST)
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,4)).getInventory().hasItem(id));
 		
 
 	}
 	/**
-	 * Throw an identity disc at another player. Assert that the other player loses a turn.
+	 * throwItem an identity disc at another player. Assert that the other player loses a turn.
 	 */
 	@Test
 	public void hitOtherPlayer(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);
 
 		// Make sure there aren't any obstacles and powerfailures in the way
 		game.clearPowerFailures();
@@ -335,8 +336,8 @@ public class IdentityDiscUsageTest {
 		// The inventory of the player should contain the identityDisc
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
-		// throw the identity disc at the other player
-		ih.throw(id, Direction.NORTH);
+		// throwItem the identity disc at the other player
+		ih.throwItem(id, Direction.NORTH);
 
 		// Assert the effect of the identityDisc
 		assertTrue(game.getNextPlayer().getPosition().getInventory().hasItem(id));
@@ -348,12 +349,12 @@ public class IdentityDiscUsageTest {
 	}
 
 	/**
-	 * Throw a charged Disk at another player, assert that he loses a turn.
+	 * throwItem a charged Disk at another player, assert that he loses a turn.
 	 */
 	@Test
 	public void chargedDiskAtOtherPlayer(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);
 
 		// Make sure there aren't any obstacles and powerfailures in the way
 		game.clearPowerFailures();
@@ -370,8 +371,8 @@ public class IdentityDiscUsageTest {
 		// The inventory of the player should contain the identityDisc
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
-		// throw the identity disc at the other player
-		ih.throw(id, Direction.WEST);
+		// throwItem the identity disc at the other player
+		ih.throwItem(id, Direction.WEST);
 
 		// Assert the effect of the identityDisc
 		assertTrue(game.getNextPlayer().getPosition().getInventory().hasItem(id));
@@ -381,13 +382,13 @@ public class IdentityDiscUsageTest {
 	}
 
 	/**
-	 * Throw a Identity disc at a transporter. Assert that it is teleported to the other square connected and moves further
+	 * throwItem a Identity disc at a transporter. Assert that it is teleported to the other square connected and moves further
 	 * to the teleporter.
 	 */
 	@Test 
-	public void throwDiscTeleporter(){
+	public void throwItemDiscTeleporter(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);
 		
 		// Make sure the grid is clear
 		game.clearPowerFailures();
@@ -401,18 +402,18 @@ public class IdentityDiscUsageTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		ih.throw(id, Direction.NORTH);
+		ih.throwItem(id, Direction.NORTH);
 		// Get the square were the disc should land.
 		assertTrue(game.getGrid().getSquare(new Coordinate(3,2)).getInventory().hasItem(id));
 	}
 
 	/**
-	 * Throw a charged disk at a teleporter. assert that it is teleporter and continued along its path
+	 * throwItem a charged disk at a teleporter. assert that it is teleporter and continued along its path
 	 */
 	@Test
-	public void throwChargedDiskTeleporter(){
+	public void throwItemChargedDiskTeleporter(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);
 		
 		// Make sure the grid is clear
 		game.clearPowerFailures();
@@ -426,18 +427,18 @@ public class IdentityDiscUsageTest {
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		ih.throw(id, Direction.NORTH);
+		ih.throwItem(id, Direction.NORTH);
 		// Get the square were the disc should land.
 		assertTrue(game.getGrid().getSquare(new Coordinate(3,0)).getInventory().hasItem(id));
 	}
 
 	/**
-	 * Throw the identity disc over a powerfailure. assert that it loses one in range
+	 * throwItem the identity disc over a powerfailure. assert that it loses one in range
 	 */
 	@Test 
-	public void throwDiscPowerFailure(){
+	public void throwItemDiscPowerFailure(){
 		Game game = new Game(10,10);
-		IdentityDiscHandler ih = new IdentityDiscHandler(game, null);
+		ThrowItemHandler ih = new ThrowItemHandler(game, null);
 		
 		// Make sure the grid is clear
 		game.clearPowerFailures();
@@ -451,7 +452,7 @@ public class IdentityDiscUsageTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		ih.throw(id, Direction.NORTH);
+		ih.throwItem(id, Direction.NORTH);
 		// Get the square were the disc should land.
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,6)).getInventory().hasItem(id));
 	}
