@@ -47,6 +47,15 @@ public class PickUpHandlertTest {
 	}
 	
 	/**
+	 * Try to pick up an item on the square that is already used by another player.
+	 */
+	
+	@Test(expected = IllegalStateException.class)
+	public void pickUpWornTest(){
+		//TODO: implementation
+	}
+	
+	/**
 	 * Test the pick up when there is an item on the square,
 	 * but the inventory of the player is full.
 	 */

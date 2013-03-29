@@ -38,29 +38,7 @@ public class MoveHandlerTest {
 		game = new Game(10,10);
 		mh = new MoveHandler(game,null);
 	}
-	
-//	/**
-//	 *  tests the check to proceed after real moves.
-//	 */
-//	@Test
-//	public void testCheckToProceedAfterMove(){
-//		
-//		Direction[] directions = Direction.values();
-//		Random random = new Random();
-//		int moves = 0;
-//		
-//		assertTrue(mh.checkToProceed());
-//		while(moves < 3){
-//			try{
-//				mh.move(directions[random.nextInt(directions.length)]);
-//				moves++;
-//			}
-//			catch(Exception e){}
-//		}
-//		
-//		assertFalse(mh.checkToProceed());
-//	}
-//	
+
 	/**
 	 * Players are in start position, 
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
