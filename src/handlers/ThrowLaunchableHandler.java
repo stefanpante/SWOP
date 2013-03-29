@@ -1,6 +1,7 @@
 package handlers;
 
 import game.Game;
+import grid.TrajectoryMediator;
 
 import items.Item;
 import items.Launchable;
