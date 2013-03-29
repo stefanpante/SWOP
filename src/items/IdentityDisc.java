@@ -240,4 +240,9 @@ public class IdentityDisc extends Item implements Launchable {
 		}
 		return result;
 	}
+
+	@Override
+	public int getRange() {
+		return MAX_TRAVEL_DISTANCE_UNCHARGED;
+	}
 }
