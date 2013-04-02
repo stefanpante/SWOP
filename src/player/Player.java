@@ -40,7 +40,7 @@ public class Player extends Observable implements Obstacle {
 	/**
 	 * The player's ID.
 	 */
-	private int ID = -1;
+	private final int ID;
 	
 	/**
 	 * The number of remaining actions the player has left
