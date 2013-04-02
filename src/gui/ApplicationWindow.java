@@ -4,7 +4,6 @@
 package gui;
 
 import grid.Grid;
-import handler.GameHandler;
 import item.Item;
 
 import java.awt.Color;
@@ -27,6 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import controller.GameHandler;
 
 import player.Player;
 import square.Direction;
