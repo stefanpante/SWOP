@@ -2,6 +2,8 @@ package player;
 
 import java.util.Observable;
 
+import penalty.PenaltyValue;
+
 import be.kuleuven.cs.som.annotate.Basic;
 
 import notnullcheckweaver.NotNull;
@@ -337,12 +339,11 @@ public class Player extends Observable implements Obstacle {
 	}
 	
 	/**
-	 * Set's the player id.
+	 * Set's the player id. private because the id of a player is final.
 	 * 
 	 * @param	id
-	 * @throws	IllegalStateException	If the ID is already set it cannot be overwritten.
 	 */
-	public void setID(int id){
+	private void setID(int id){
 		this.ID = id;
 	}
 	
