@@ -111,12 +111,11 @@ public class Player extends Observable implements Obstacle {
 	 * @return	True	If square is not null and not obstructed.
 	 * 			False	If square is null or obstructed.
 	 */
-	public static boolean isValidMove(Square newPosition) {
+	public static boolean isValidPosition(Square newPosition) {
 		if(newPosition == null)
 			return false;
 		if(newPosition.isObstructed())
 			return false;
-		
 		return true;
 	}
 	
@@ -200,18 +199,20 @@ public class Player extends Observable implements Obstacle {
 	 * @throws	IllegalStateException
 	 * 		  	thrown if the player is unable to make this move 
 	 */
-	public void move(Square newPosition) throws IllegalStateException{
-		if(!isValidMove(newPosition))
-			throw new IllegalStateException("Cannot move to a square that is obstructed");
-		
-		alertObservers();
-		
-		removeSquare(this.getPosition());
-		addSquare(newPosition);
+	public void move(Square position) throws IllegalStateException{
+		setPosition(position);
 		moved = true;
-		
 		decrementActions();
 	}
+	
+	public void setPosition(Square position){
+		if(!isValidPosition(position))
+			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
+		alertObservers();
+		removeSquare(this.getPosition());
+		addSquare(position);
+	}
+	
 	
 	/**
 	 * Increments the remaining actions by one and notifies the observers of this player.
@@ -424,7 +425,6 @@ public class Player extends Observable implements Obstacle {
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException("The given " + square + " is not a valid square");
-		
 		currentPosition = square;
 		square.setObstacle(this);
 	}
@@ -442,6 +442,8 @@ public class Player extends Observable implements Obstacle {
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
 		currentPosition = null;
 	}
+	
+	
 
 	
 	@Override

@@ -27,7 +27,7 @@ public class TeleportHandler extends Handler {
 		Square destination = getGame().getGrid().getSquareWith(teleport.getDestination());
 		if(!canTeleportTo(destination))
 			throw new IllegalStateException("Cannot teleport to location containing another player.");
-		
+		getGame().getCurrentPlayer().setPosition(destination);
 		endAction();
 	}
 	

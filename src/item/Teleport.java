@@ -11,7 +11,12 @@ import square.Square;
  */
 public class Teleport extends Item {
 	
+	
 	private Teleport destination;
+	
+	public Teleport(){
+		
+	}
 	
 	public Teleport (Teleport desitination) throws IllegalArgumentException {
 		setDestination(desitination);
@@ -33,7 +38,6 @@ public class Teleport extends Item {
 		this.destination = destination;
 	}
 
-
 	/**
 	 * Checks whether the given teleport is a valid destination for this
 	 * teleport.
@@ -46,7 +50,5 @@ public class Teleport extends Item {
 	private boolean isValidDestionation(Teleport destination) {
 		return destination != null;
 	}
-	
-	
 	
 }

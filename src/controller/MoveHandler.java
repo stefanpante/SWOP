@@ -83,6 +83,7 @@ public class MoveHandler extends Handler {
 		endAction();
 	}
 	
+
 	/**
 	 * Sets the remaining actions of the current player
 	 * @param newPosition
