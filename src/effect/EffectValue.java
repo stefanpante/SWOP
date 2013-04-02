@@ -73,7 +73,23 @@ public class EffectValue {
 		return this.actionsLost;
 	}
 	
-	
+	/**
+	 * Takes the sum of both lost actions and lost turns.
+	 * 
+	 * @param	value
+	 * @throws	IllegalArgumentException	When the given actionsLost is not valid.
+	 * @throws	IllegalArgumentException	When the given turnsLost is not valid.
+	 * @returns	EffectValue					The resulting effect.
+	 */
+	public EffectValue addEffect(EffectValue value) throws IllegalArgumentException {
+		int actionsLost = this.getActionsLost() + value.getActionsLost();
+		int turnsLost = this.getTurnsLost() + value.getTurnsLost();
+		
+		this.setActionsLost(actionsLost);
+		this.setTurnsLost(turnsLost);
+		
+		return this;
+	}
 	
 	/**
 	 * Sets the number of turns lost to the given parameter

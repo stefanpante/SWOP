@@ -1,19 +1,14 @@
 package controller;
 
-import item.LightGrenade;
-
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-
-import effect.EffectValue;
 
 import event.GameEvent;
 import event.MoveEvent;
 
 import player.Player;
 import square.Direction;
-import square.Square;
 import util.Coordinate;
 import game.Game;
 

@@ -22,7 +22,7 @@ import notnullcheckweaver.Nullable;
 @NotNull
 public class Square implements Effect{
 	
-	private long id;
+	private final long id;
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -33,14 +33,17 @@ public class Square implements Effect{
 	 * State of the current square. May be a power failure.
 	 */
 	private SquareState state;
-	// Sets for how many turns the current state will be active
+	
+	/**
+	 *  Sets for how many turns the current state will be active
+	 */
 	private int remainingTurns;
+	
 	/**
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
 	private Obstacle obstacle;
-	
 	
 	/**
 	 * Zero argument constructor for a square.
@@ -50,7 +53,6 @@ public class Square implements Effect{
 		this.state = RegularState.getInstance();
 		this.remainingTurns = 0;
 		this.id = System.nanoTime();
-
 	}
 	
 	/**
@@ -195,29 +197,26 @@ public class Square implements Effect{
 
 	@Override
 	public EffectValue getEffectBeforeAction() {
-		return new EffectValue();
+		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectBeforeAction();
+		EffectValue powerEffect = this.getState().getEffectBeforeAction();
+		
+		return grenadeEffect.addEffect(powerEffect);
 	}
 
 	@Override
 	public EffectValue getEffectDuringAction() {
-		EffectValue effectValue = new EffectValue();
+		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectDuringAction();
+		EffectValue powerEffect = this.getState().getEffectDuringAction();
 		
-		int result = 0;
-		
-		/*if(this.getInventory().hasActiveLightGrenade() && PowerFailureState.getInstance() != getState())
-			return 0;
-		
-		if(this.getInventory().hasActiveLightGrenade())
-			result = this.getInventory().getLightGrenade().getPenalty();
-		
-		return result + state.getPenalty();  */
-		
-		return effectValue;
+		return grenadeEffect.addEffect(powerEffect);
 	}
 
 	@Override
 	public EffectValue getEffectAfterAction() {
-		return new EffectValue();
+		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectAfterAction();
+		EffectValue powerEffect = this.getState().getEffectAfterAction();
+		
+		return grenadeEffect.addEffect(powerEffect);
 	}
 	
 	
