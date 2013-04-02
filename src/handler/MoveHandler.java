@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import penalty.PenaltyValue;
 import player.Player;
 import square.Direction;
 import square.Square;
@@ -89,8 +90,8 @@ public class MoveHandler extends Handler {
 	private void setRemainingActions(Square newPosition){
 		// Gets the result of the state for the new position
 		if(newPosition.hasPenalty()){
-			int penalty = newPosition.getPenalty();
-			getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS + penalty);
+			PenaltyValue penaltyValue = newPosition.getPenalty();
+			getGame().getCurrentPlayer().endTurn(penaltyValue);
 			getGame().switchToNextPlayer();
 		}
 	}

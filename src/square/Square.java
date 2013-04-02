@@ -2,6 +2,7 @@ package square;
 
 
 import penalty.Penalty;
+import penalty.PenaltyValue;
 import item.inventory.SquareInventory;
 
 
@@ -156,16 +157,20 @@ public class Square implements Penalty{
 		setState(RegularState.getInstance());
 	}
 	
-	public int getPenalty() {
-		int res = 0;
+	public PenaltyValue getPenalty() {
+
+		PenaltyValue penaltyValue = new PenaltyValue();
+		//TODO: implement this shit.
+//		int res = 0;
+//		if(this.getInventory().hasActiveLightGrenade() && PowerFailureState.getInstance() != getState())
+//			return 0;
+//		
+//		if(this.getInventory().hasActiveLightGrenade())
+//			res = this.getInventory().getLightGrenade().getPenalty();
+//		
+//		return res + state.getPenalty(); 
 		
-		if(this.getInventory().hasActiveLightGrenade() && PowerFailureState.getInstance() != getState())
-			return 0;
-		
-		if(this.getInventory().hasActiveLightGrenade())
-			res = this.getInventory().getLightGrenade().getPenalty();
-		
-		return res + state.getPenalty(); 
+		return penaltyValue;
 	}
 
 	public boolean hasPenalty() {

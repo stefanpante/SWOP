@@ -2,6 +2,7 @@ package handler;
 
 import java.beans.PropertyChangeListener;
 
+import penalty.PenaltyValue;
 import player.Player;
 
 
@@ -76,10 +77,9 @@ public class EndTurnHandler extends Handler{
 		if(!isConfirmed()){
 			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
 		}else{
-			int penalty = getGame().getCurrentPlayer().getPosition().getPenalty();
+			PenaltyValue penaltyValue = getGame().getCurrentPlayer().getPosition().getPenalty();
 		
-			System.out.println(penalty);
-			getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS  + penalty);
+			getGame().getCurrentPlayer().endTurn(penaltyValue);
 			getGame().switchToNextPlayer();
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			

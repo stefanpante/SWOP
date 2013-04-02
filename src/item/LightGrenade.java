@@ -1,6 +1,7 @@
 package item;
 
 import penalty.Penalty;
+import penalty.PenaltyValue;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -14,8 +15,8 @@ public class LightGrenade extends Item implements Penalty{
 	 * returns the number of actions the player loses
 	 *  when he comes in contact with a lightgrenade.
 	 */
-	public int getPenalty() {
-		return -3;
+	public PenaltyValue getPenalty() {
+		return new PenaltyValue(0, -3);
 	}
 
 	/**
