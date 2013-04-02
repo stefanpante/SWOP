@@ -172,5 +172,5 @@ public class SquareInventory extends Inventory {
 	public String toString() {
 		String result = "Square ";
 		return result + super.toString();
-	}
+	} 
 }

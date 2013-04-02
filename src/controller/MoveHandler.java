@@ -42,6 +42,7 @@ public class MoveHandler extends Handler {
 		startAction();
 		GameEvent moveEvent = new MoveEvent(getGame(), direction);
 		moveEvent.run();
+		setPropertyChanges();
 		endAction();
 	}
 	

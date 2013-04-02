@@ -451,4 +451,12 @@ public class Player extends Observable implements Obstacle {
 	public String toString() {
 		return "Player " + this.getName();
 	}
+
+	/**
+	 * A player doesn't bounce back a launchable item when he is hit by it.
+	 */
+	@Override
+	public boolean bouncesBack() {
+		return false;
+	}
 }
