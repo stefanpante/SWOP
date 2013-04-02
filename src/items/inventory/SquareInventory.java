@@ -1,4 +1,8 @@
-package items;
+package items.inventory;
+
+import items.Item;
+import items.ItemState;
+import items.LightGrenade;
 
 import java.util.ArrayList;
 

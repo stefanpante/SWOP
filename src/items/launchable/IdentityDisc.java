@@ -1,5 +1,6 @@
-package items;
+package items.launchable;
 
+import items.Item;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 import square.Direction;

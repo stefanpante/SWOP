@@ -1,4 +1,4 @@
-package items;
+package items.launchable;
 
 public class ChargedIdentityDisc {
 

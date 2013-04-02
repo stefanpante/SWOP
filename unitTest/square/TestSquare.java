@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 import grid.GridBuilder;
-import items.Inventory;
 import items.Item;
 import items.LightGrenade;
+import items.inventory.Inventory;
 
 import org.junit.After;
 import org.junit.AfterClass;

@@ -3,7 +3,7 @@ package scenariotests;
 import static org.junit.Assert.*;
 import handlers.PickUpHandler;
 import items.LightGrenade;
-import items.PlayerInventory;
+import items.inventory.PlayerInventory;
 import game.Game;
 
 import org.junit.Test;

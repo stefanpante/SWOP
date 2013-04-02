@@ -3,7 +3,7 @@ package player;
 import static org.junit.Assert.*;
 import items.Item;
 import items.LightGrenade;
-import items.PlayerInventory;
+import items.inventory.PlayerInventory;
 
 import org.junit.After;
 import org.junit.AfterClass;

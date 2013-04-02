@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import items.IdentityDisc;
+import items.launchable.IdentityDisc;
 import game.Game;
 import handlers.MoveHandler;
 import handlers.PickUpHandler;

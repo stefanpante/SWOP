@@ -2,6 +2,8 @@ package items;
 
 import static org.junit.Assert.*;
 
+import items.inventory.SquareInventory;
+
 import java.util.ArrayList;
 
 import org.junit.After;

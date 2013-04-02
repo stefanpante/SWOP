@@ -11,7 +11,7 @@ import square.Square;
 import square.obstacles.Obstacle;
 
 import items.Item;
-import items.PlayerInventory;
+import items.inventory.PlayerInventory;
 
 /**
  * Player class
