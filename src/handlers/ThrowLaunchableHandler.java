@@ -9,6 +9,7 @@ import items.Launchable;
 import java.beans.PropertyChangeListener;
 
 import square.Direction;
+import square.Square;
 
 public class ThrowLaunchableHandler extends Handler {
 
@@ -17,16 +18,13 @@ public class ThrowLaunchableHandler extends Handler {
 	 */
 	TrajectoryMediator trajectoryMediator;
 	
-	public ThrowLaunchableHandler() {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * Creates an new ThrowLaunchableHandler with a given game instance.
 	 * @param game	The given game instance
 	 */
 	public ThrowLaunchableHandler(Game game) {
 		super(game);
+		trajectoryMediator = new TrajectoryMediator(game.getGrid());
 	}
 
 	/**
@@ -36,6 +34,7 @@ public class ThrowLaunchableHandler extends Handler {
 	 */
 	public ThrowLaunchableHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
+		trajectoryMediator = new TrajectoryMediator(game.getGrid());
 	}
 	
 	/**
@@ -44,7 +43,11 @@ public class ThrowLaunchableHandler extends Handler {
 	 * @param direction		the direction in which the launchable is thrown.
 	 */
 	public void throwLaunchable(Launchable launchable, Direction direction){
-		
+		Square startSquare = getGame().getCurrentPlayer().getPosition();
+		int maximumRange = 	launchable.getRange();
+		Square endSquare = trajectoryMediator.getEndSquare(startSquare, direction, maximumRange);
+		//TODO: check if player is hit in mediator 
+		endSquare.getInventory().addItem(launchable);
 	}
 
 }
