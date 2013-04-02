@@ -1,6 +1,6 @@
 package item;
 
-import square.Penalty;
+import penalty.Penalty;
 
 /**
  * This class extends Item and represents a LightGrenade object.

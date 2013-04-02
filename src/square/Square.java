@@ -1,11 +1,14 @@
 package square;
 
+
+import penalty.Penalty;
 import item.inventory.SquareInventory;
+
 
 import square.obstacles.Obstacle;
 import square.state.PowerFailureState;
 import square.state.RegularState;
-import square.state.State;
+import square.state.SquareState;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -28,7 +31,7 @@ public class Square implements Penalty{
 	/**
 	 * State of the current square. May be a power failure.
 	 */
-	private State state;
+	private SquareState state;
 	// Sets for how many turns the current state will be active
 	private int remainingTurns;
 	/**
@@ -52,7 +55,7 @@ public class Square implements Penalty{
 	/**
 	 * Returns the state of the square.
 	 */
-	public State getState() {
+	public SquareState getState() {
 		return this.state;
 	}
 	
@@ -62,7 +65,7 @@ public class Square implements Penalty{
 	 * @param	regularState
 	 * @throws	IllegalArgumentException	When the given state is null.
 	 */
-	public void setState(State state) throws IllegalArgumentException {
+	public void setState(SquareState state) throws IllegalArgumentException {
 		if(!isValidState(state))
 			throw new IllegalArgumentException("State cannot be null.");
 		this.state = state;
@@ -75,7 +78,7 @@ public class Square implements Penalty{
 	 * @return	True	If state is not null.
 	 * 			False	If state is null.
 	 */
-	public boolean isValidState(State state) {
+	public boolean isValidState(SquareState state) {
 		if(state == null)
 			return false;
 		else

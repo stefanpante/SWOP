@@ -1,6 +1,6 @@
 package square.state;
 
-import square.Penalty;
+import penalty.Penalty;
 import square.Square;
 
 /**
@@ -8,13 +8,13 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public abstract class State implements Penalty {
+public abstract class SquareState implements Penalty {
 
 	/**
 	 * Returns a string representation of this object.
 	 */
 	@Override
 	public String toString() {
-		return "State: ";
+		return "Square State: ";
 	}
 }

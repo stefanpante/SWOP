@@ -8,7 +8,7 @@ import square.Square;
  * Implemented with a singleton
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class RegularState extends State{
+public class RegularState extends SquareState{
 
 	// eager implementation of singleton
 	private static final RegularState REGULAR = new RegularState();
