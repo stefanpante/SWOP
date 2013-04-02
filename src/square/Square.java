@@ -1,5 +1,6 @@
 package square;
 
+import penalty.Penalty;
 import items.inventory.SquareInventory;
 
 import square.obstacles.Obstacle;

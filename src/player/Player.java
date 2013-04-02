@@ -57,6 +57,8 @@ public class Player extends Observable implements Obstacle {
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 3;
 	
+	private PenaltyValue penaltyValue;
+	
 	/**
 	 * creates a new player with a given name and start position
 	 * 
@@ -340,10 +342,7 @@ public class Player extends Observable implements Obstacle {
 	 * @param	id
 	 * @throws	IllegalStateException	If the ID is already set it cannot be overwritten.
 	 */
-	public void setID(int id) throws IllegalStateException {
-		if(this.ID != -1)
-			throw new IllegalStateException("The player ID has already been set.");
-		
+	public void setID(int id){
 		this.ID = id;
 	}
 	
