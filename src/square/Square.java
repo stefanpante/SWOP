@@ -208,6 +208,4 @@ public class Square implements Penalty{
 		}
 		return true;
 	}
-	
-	
 }

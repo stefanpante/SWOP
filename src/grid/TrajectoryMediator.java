@@ -1,5 +1,7 @@
 package grid;
 
+import java.util.NoSuchElementException;
+
 import square.Direction;
 import square.Square;
 
@@ -38,10 +40,28 @@ public class TrajectoryMediator {
 	 * 			The maximum range of this trajectory.
 	 * @return
 	 */
-	//TODO: finish
 	public Square getEndSquare(Square startSquare, Direction direction, int maximumRange){
 		Square prevSquare = startSquare;
 		Square currentSquare;
-		return null;
+		int currentRange = 0;
+		//TODO implement powerfailure and teleport
+		try{
+			currentSquare = grid.getNeighbor(prevSquare, direction);
+		} catch(NoSuchElementException e){
+			return startSquare;
+		}
+		while(!currentSquare.isObstructed() && currentRange < maximumRange){
+			prevSquare = currentSquare;
+			try {
+				currentSquare = grid.getNeighbor(prevSquare, direction);
+			} catch (NoSuchElementException e) {
+				return prevSquare;
+			}
+			currentRange++;
+		}
+		if(currentSquare.getObstacle().bouncesBack()){
+			return prevSquare;
+		}
+		return currentSquare;
 	}
 }

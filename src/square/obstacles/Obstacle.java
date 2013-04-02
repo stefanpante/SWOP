@@ -50,4 +50,12 @@ public interface Obstacle {
 	 * @return	True if the square can be added to this obstacle.
 	 */
 	public boolean isValidSquare(Square square);
+		
+	/**
+	 * Returns whether the obstacle bounces a launchable item 
+	 * 	back onto the previous square it passed or not. 
+	 * 
+	 * @return	True if the obstacle bounces the item back.
+	 */
+	public boolean bouncesBack();
 }

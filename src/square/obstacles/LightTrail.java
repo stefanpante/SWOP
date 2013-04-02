@@ -105,5 +105,15 @@ public class LightTrail extends MultiObstacle implements Observer{
 				this.addSquare(square);
 		}
 	}
+
+	/**
+	 * The LightTrail bounces a launchable item back onto the previous square it passed.
+	 * 
+	 * @return	True always.
+	 */
+	@Override
+	public boolean bouncesBack() {
+		return true;
+	}
 	
 }

@@ -42,4 +42,14 @@ public class Wall extends MultiObstacle{
 			super.addSquare(sq);
 		}
 	}
+	
+	/**
+	 * The Wall bounces a launchable item back onto the previous square it passed.
+	 * 
+	 * @return	True always.
+	 */
+	@Override
+	public boolean bouncesBack() {
+		return true;
+	}
 }
