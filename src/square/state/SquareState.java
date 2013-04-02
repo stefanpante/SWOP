@@ -1,6 +1,6 @@
 package square.state;
 
-import square.Penalty;
+import penalty.Penalty;
 import square.Square;
 
 /**

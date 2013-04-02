@@ -17,11 +17,6 @@ public class IdentityDisc extends LaunchableItem {
 	 * The maximum travel distance of an uncharged identity disc.
 	 */
 	public static int MAX_TRAVEL_DISTANCE_UNCHARGED = 4;
-	
-	/**
-	 * The isCharged of this IdentityDisc object.
-	 */
-	private final boolean isCharged;
 
 	/**
 	 * The currentTravelDistance of this IdentityDisc object.
@@ -40,36 +35,13 @@ public class IdentityDisc extends LaunchableItem {
 	private int maxRangePenalty;
 	
 	/**
-	 * Default constructor that makes an uncharged IdentityDisc
+	 * One argument constructor that makes an Identity Disc.
 	 * 
-	 * @effect	this(false);
-	 */
-	public IdentityDisc() {
-		this(false);
-	}
-
-	/**
-	 * One argument constructor that makes a
-	 * 
-	 * @param 	isCharged
-	 * 			Boolean indicating whether this is a charged identity disc or not.
-	 * @post	isCharged = new.isCharged()
 	 * @effect	setMaxRangePenalty(0)
 	 */
-	public IdentityDisc(boolean isCharged) {
-		this.isCharged = isCharged;
+	public IdentityDisc() {
 		setMaxRangePenalty(0);
 	}
-
-	/**
-	 * Returns the value of the isCharged of this IdentityDisc as a boolean.
-	 *
-	 * @return 	Whether or not this identity disc is charged.
-	 * 			| boolean
-	 */
-	public boolean isCharged() {
-		return isCharged;
-	};
 	
 	/**
 	 * Returns the value of the currentTravelDistance of this IdentityDisc as an int.
@@ -122,10 +94,7 @@ public class IdentityDisc extends LaunchableItem {
 	 * 			True 	otherwise.
 	 */
 	public boolean canHaveAsDistanceTraveled(int currentTravelDistance) {
-		if(!isCharged()){
-			return currentTravelDistance <= MAX_TRAVEL_DISTANCE_UNCHARGED + getMaxRangePenalty();		
-		}
-		return true;
+		return currentTravelDistance <= MAX_TRAVEL_DISTANCE_UNCHARGED + getMaxRangePenalty();		
 	}
 
 	/**
@@ -234,10 +203,11 @@ public class IdentityDisc extends LaunchableItem {
 	
 	@Override
 	public String toString() {
-		String result = super.toString() + " IdentityDisc (charged=" + isCharged() +")";
-		if(this.isActive()){
+		String result = super.toString() + " IdentityDisc";
+		
+		if(this.isActive())
 			result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
-		}
+		
 		return result;
 	}
 
