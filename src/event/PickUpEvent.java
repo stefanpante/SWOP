@@ -3,21 +3,20 @@
  */
 package event;
 
-import game.Game;
 import item.Item;
-import controller.GameHandler;
+import game.Game;
 
 /**
  * @author jonas
  *
  */
-public class UseItemEvent extends ActionEvent {
+public class PickUpEvent extends ActionEvent {
 
 	/**
 	 * @param game
 	 * @param args
 	 */
-	public UseItemEvent(Game game, Object... args) {
+	public PickUpEvent(Game game, Object...args) {
 		super(game, args);
 	}
 	
@@ -25,10 +24,10 @@ public class UseItemEvent extends ActionEvent {
 		return (Item) getArgument(0);
 	}
 	
-
 	@Override
-	protected void duringGameEvent(){
-		getGame().getCurrentPlayer().useItem(getItem());
+	public void duringGameEvent(){
+		getGame().getCurrentPlayer().pickUp(getItem());
+		getGame().getCurrentPlayer().getPosition().getInventory().take(getItem());
 	}
 	
 	@Override
