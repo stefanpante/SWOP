@@ -31,7 +31,6 @@ public class MoveEvent extends ActionEvent {
 		/* Check wether it's possible to move in the given direction */
 		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
 			throw new IllegalStateException("Cannot move to given direction.");
-
 		}
 		/* Activate Light Grenades on square leaving square */
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();

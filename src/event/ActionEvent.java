@@ -30,7 +30,16 @@ public abstract class ActionEvent extends GameEvent {
 	
 	@Override
 	protected void afterGameEvent() {
-		
+		if(getGame().getCurrentPlayer().getRemainingActions() <= 0){
+			if(!getGame().getCurrentPlayer().hasMoved()){
+				getGame().end();
+				throw new IllegalStateException("The current player hasn't moved in this turn " +
+						"and has no actions left and therefore lost the game");
+			}else{
+				getGame().getCurrentPlayer().endTurn();
+				getGame().switchToNextPlayer();
+			}
+		}
 	}
 	
 

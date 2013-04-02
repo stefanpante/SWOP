@@ -3,6 +3,10 @@ package controller;
 import item.Item;
 
 import java.beans.PropertyChangeListener;
+
+import event.GameEvent;
+import event.MoveEvent;
+import event.UseItemEvent;
 import game.Game;
 
 /**
@@ -22,18 +26,6 @@ public class UseItemHandler extends Handler {
 	public UseItemHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 	}
-
-	/**
-	 * Checks the precondition for the use item case
-	 * returns true if the preconditions are satisfied
-	 * @return 	true if the precondition is satisfied
-	 * 			otherwise false.
-	 */
-	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 1 )
-			return true;
-		return false;
-	}
 	
 	/**
 	 * Uses the given item for the player. Exceptions are handled when
@@ -42,23 +34,9 @@ public class UseItemHandler extends Handler {
 	 */
 	public void useItem(Item item) {
 		startAction();
-		if(!checkToProceed()){
-			if(!getGame().getCurrentPlayer().hasMoved()){
-				String name = getGame().getCurrentPlayer().getName();
-				throw new IllegalStateException(name +" hasn't moved in this turn " +
-						"and has no actions left" + name + "has lost the game" );
-			}else{
-				getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
-				getGame().switchToNextPlayer();
-		    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-			}
-		}
-		else{
-			getGame().getCurrentPlayer().useItem(item);
-			//getGame().getCurrentPlayer().getPosition().getInventory().activate(item);
-			getGame().getCurrentPlayer().decrementActions();
-			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
-		}
+		GameEvent useItemEvent = new UseItemEvent(getGame(), item);
+		useItemEvent.run();
+		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
 		endAction();
 	}
 }

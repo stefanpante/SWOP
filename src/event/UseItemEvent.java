@@ -3,8 +3,9 @@
  */
 package event;
 
-import controller.GameHandler;
 import game.Game;
+import item.Item;
+import controller.GameHandler;
 
 /**
  * @author jonas
@@ -20,6 +21,10 @@ public class UseItemEvent extends ActionEvent {
 		super(game, args);
 	}
 	
+	private Item getItem(){
+		return (Item) getArgument(0);
+	}
+	
 	@Override
 	protected void beforeGameEvent() {
 		super.beforeGameEvent();
@@ -27,16 +32,13 @@ public class UseItemEvent extends ActionEvent {
 
 	@Override
 	protected void duringGameEvent(){
-		super.duringGameEvent();
+		getGame().getCurrentPlayer().useItem(getItem());
 	}
 	
 	@Override
 	protected void afterGameEvent() {
+		getGame().getCurrentPlayer().decrementActions();
 		super.afterGameEvent();
 	}
-	
-	
-	
-
 
 }
