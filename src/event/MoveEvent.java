@@ -54,7 +54,6 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void afterGameEvent() {
-		super.afterGameEvent();
 		Square newPosition = getGame().getCurrentPlayer().getPosition();
 		if(newPosition.hasPenalty()){
 			PenaltyValue penaltyValue = newPosition.getPenalty();
@@ -62,6 +61,7 @@ public class MoveEvent extends ActionEvent {
 			getGame().switchToNextPlayer();
 		}
 		getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
+		super.afterGameEvent();
 	}
 
 }

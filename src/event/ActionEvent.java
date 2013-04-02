@@ -24,6 +24,11 @@ public abstract class ActionEvent extends GameEvent {
 	}
 
 	@Override
+	protected void duringGameEvent(){
+		
+	}
+	
+	@Override
 	protected void afterGameEvent() {
 		
 	}
