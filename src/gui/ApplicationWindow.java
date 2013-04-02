@@ -4,7 +4,6 @@
 package gui;
 
 import grid.Grid;
-import handler.GameHandler;
 import item.Item;
 
 import java.awt.Color;
@@ -29,6 +28,8 @@ import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import penalty.PenaltyValue;
+import controller.GameHandler;
+
 import player.Player;
 import square.Direction;
 import util.Coordinate;

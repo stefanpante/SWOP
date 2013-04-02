@@ -1,4 +1,4 @@
-package handler;
+package controller;
 
 import game.Game;
 import item.Item;
