@@ -3,6 +3,7 @@
  */
 package event;
 
+import item.LightGrenade;
 import penalty.PenaltyValue;
 import game.Game;
 import square.Direction;
@@ -26,10 +27,23 @@ public class MoveEvent extends ActionEvent {
 	@Override
 	protected void beforeGameEvent() {
 		super.beforeGameEvent();
-		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection()))
+		/* Check wether it's possible to move in the given direction */
+		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
 			throw new IllegalStateException("Cannot move to given direction.");
-	}
 
+		}
+		/* Activate Light Grenades on square leaving square */
+		Square currentPosition = getGame().getCurrentPlayer().getPosition();
+		if(currentPosition.getInventory().hasLightGrenade()){
+			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
+			try{
+				currentPosition.getInventory().activate(lg);
+			} catch (Exception exc) {
+				// Catched exception, if try to activate wornout item. -> ignore
+			}
+		}
+
+	}
 
 	@Override
 	protected void duringGameEvent() {

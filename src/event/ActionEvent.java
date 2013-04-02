@@ -17,21 +17,17 @@ public abstract class ActionEvent extends GameEvent {
 
 	@Override
 	protected void beforeGameEvent() {
-		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
+		if(!getGame().isActive())
+			throw new IllegalStateException("The game is over");
+		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
 			throw new IllegalStateException("The current player has no remaining action left.");
 	}
 
 	@Override
 	protected void afterGameEvent() {
-		endAction();
-	}
-	
-	private void startAction(){
 		
 	}
 	
-	private void endAction(){
-		
-	}
+
 
 }

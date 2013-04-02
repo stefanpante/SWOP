@@ -16,6 +16,7 @@ public abstract class GameEvent {
 	
 	public GameEvent(Game game, Object[] args){
 		setGame(game);
+		setArgs(args);
 	}
 	
 	private void setGame(Game game){

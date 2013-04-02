@@ -324,6 +324,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	 * 			The exception to visualize
 	 */
 	private void showException(Exception exc){
+		exc.printStackTrace();
 		JOptionPane.showMessageDialog(frame, exc.getMessage(), "Uh! Oh!", JOptionPane.ERROR_MESSAGE);
 	}
 

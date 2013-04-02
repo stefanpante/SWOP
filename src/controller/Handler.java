@@ -268,8 +268,6 @@ public abstract class Handler {
 	
 	
 	public void startAction(){
-		if(!getGame().isActive())
-			throw new IllegalStateException("The game is over");
 		fireChanges();
 	}
 	
