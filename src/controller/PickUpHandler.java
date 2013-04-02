@@ -5,6 +5,9 @@ import item.Item;
 import java.beans.PropertyChangeListener;
 
 import effect.EffectValue;
+import event.GameEvent;
+import event.PickUpEvent;
+import event.UseItemEvent;
 
 import player.Player;
 import game.Game;
@@ -26,19 +29,7 @@ public class PickUpHandler extends Handler {
 	}
 
 
-	/**
-	 * Checks the precondition for the pick up use case.
-	 * 
-	 * @return 	True	If the precondition is satisfied
-	 * 			False	Otherwise.
-	 */
-	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 0 )
-			return true;
-		
-		return false;
-	}
-	
+
 	/**
 	 * The player pickups the item he wants if his inventory allows it,
 	 * otherwise he will not receive the item and will lose an action.
@@ -46,25 +37,9 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		startAction();
-		if(!checkToProceed()){
-			if(!getGame().getCurrentPlayer().hasMoved()){
-				String name = getGame().getCurrentPlayer().getName();
-				throw new IllegalStateException(name +" hasn't moved in this turn " +
-						"and has no actions left" + name + "has lost the game" );
-			}else{
-				firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Could not proceed: Move is over.");
-				EffectValue penaltyValue = getGame().getCurrentPlayer().getPosition().getEffectDuringAction();
-				getGame().getCurrentPlayer().endTurn(penaltyValue); //TODO: depends on powerfailure
-				getGame().switchToNextPlayer();
-		    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-			}
-		}
-		else{
-			getGame().getCurrentPlayer().pickUp(item);
-			getGame().getCurrentPlayer().getPosition().getInventory().take(item);
-			
-			firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
-		}
+		GameEvent pickUpEvent = new PickUpEvent(getGame(), item);
+		pickUpEvent.run();
+		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
 		endAction();
 	}
 }
