@@ -25,7 +25,8 @@ public class PenaltyValue {
 	/**
 	 * Sets the number of actions lost to the given parameter.
 	 * @param actionsLost	the number of actions lost.
-	 * @throws
+	 * @throws IllegalArgumentException
+	 * 			When the given actionsLost is not valid.
 	 */
 	public void setActionsLost(int actionsLost) throws IllegalArgumentException{
 		if(!isValidActionsLost(actionsLost)){
@@ -45,12 +46,21 @@ public class PenaltyValue {
 		return actionsLost <= 0;
 	}
 	
+	/**
+	 * Returns the number of actions lost.
+	 * @return
+	 */
+	public int getActionsLost(){
+		return this.actionsLost;
+	}
+	
 	
 	
 	/**
 	 * Sets the number of turns lost to the given parameter
 	 * @param turnsLost		the number of turns lost.
-	 * @throws
+	 * @throws IllegalArgumentException
+	 * 			When the given turnsLost is not valid.
 	 */
 	public void setTurnsLost(int turnsLost) throws IllegalArgumentException{
 		if(!isValidTurnsLost(turnsLost)){
@@ -67,6 +77,14 @@ public class PenaltyValue {
 	 */
 	public boolean isValidTurnsLost(int turnsLost){
 		return turnsLost >= 0;
+	}
+	
+	/**
+	 * Returns the number of turns lost.
+	 * @return
+	 */
+	public int getTurnsLost(){
+		return turnsLost;
 	}
 
 
