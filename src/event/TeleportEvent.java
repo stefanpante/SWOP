@@ -20,7 +20,6 @@ public class TeleportEvent extends GameEvent {
 	 */
 	public TeleportEvent(Game game, Object... args) {
 		super(game, args);
-		// TODO Auto-generated constructor stub
 	}
 	
 	private Teleport getTeleport(){
