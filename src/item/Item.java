@@ -1,4 +1,4 @@
-package items;
+package item;
 
 /**
  * Parent class for all sorts of items.

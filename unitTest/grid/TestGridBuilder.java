@@ -14,7 +14,7 @@ import org.junit.Test;
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * @author jonas

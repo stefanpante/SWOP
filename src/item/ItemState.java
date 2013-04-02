@@ -1,4 +1,4 @@
-package items;
+package item;
 
 /** 
  * Represents the state of an item.

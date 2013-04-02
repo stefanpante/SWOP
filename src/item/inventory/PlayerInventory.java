@@ -1,4 +1,4 @@
-package items.inventory;
+package item.inventory;
 
 /**
  * A player inventory.

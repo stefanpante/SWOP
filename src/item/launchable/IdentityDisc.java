@@ -1,6 +1,5 @@
-package items.launchable;
+package item.launchable;
 
-import items.Item;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 import square.Direction;
@@ -12,7 +11,7 @@ import square.Direction;
  *
  */
 @NotNull
-public class IdentityDisc extends Item implements Launchable {
+public class IdentityDisc extends LaunchableItem {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.

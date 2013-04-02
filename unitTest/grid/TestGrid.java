@@ -16,7 +16,7 @@ import square.obstacles.LightTrail;
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * @author jonas

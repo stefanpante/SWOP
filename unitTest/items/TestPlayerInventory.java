@@ -1,7 +1,9 @@
 package items;
 
 import static org.junit.Assert.*;
-import items.inventory.PlayerInventory;
+import item.Item;
+import item.LightGrenade;
+import item.inventory.PlayerInventory;
 
 import org.junit.AfterClass;
 import org.junit.Test;

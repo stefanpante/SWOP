@@ -1,9 +1,11 @@
 package items;
 
 import static org.junit.Assert.*;
-import items.inventory.Inventory;
-import items.inventory.PlayerInventory;
-import items.inventory.SquareInventory;
+import item.Item;
+import item.LightGrenade;
+import item.inventory.Inventory;
+import item.inventory.PlayerInventory;
+import item.inventory.SquareInventory;
 
 import  org.junit.Assert.*;
 

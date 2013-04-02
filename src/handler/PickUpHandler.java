@@ -1,6 +1,7 @@
-package handlers;
+package handler;
 
-import items.Item;
+import item.Item;
+
 import java.beans.PropertyChangeListener;
 
 import player.Player;

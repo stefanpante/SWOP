@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import player.Player;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * 

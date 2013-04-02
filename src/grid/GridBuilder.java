@@ -1,6 +1,6 @@
 package grid;
 
-import items.LightGrenade;
+import item.LightGrenade;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,7 +10,7 @@ import be.kuleuven.cs.som.annotate.Basic;
 import square.Direction;
 import square.Square;
 import square.obstacles.Wall;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * 

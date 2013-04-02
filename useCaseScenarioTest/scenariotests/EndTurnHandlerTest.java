@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import game.Game;
-import handlers.EndTurnHandler;
-import handlers.MoveHandler;
+import handler.EndTurnHandler;
+import handler.MoveHandler;
 
 import org.junit.Test;
 

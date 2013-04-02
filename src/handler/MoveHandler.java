@@ -1,6 +1,6 @@
-package handlers;
+package handler;
 
-import items.LightGrenade;
+import item.LightGrenade;
 
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import player.Player;
 import square.Direction;
 import square.Square;
-import utils.Coordinate;
+import util.Coordinate;
 import game.Game;
 
 /**

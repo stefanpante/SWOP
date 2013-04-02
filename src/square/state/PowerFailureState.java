@@ -7,7 +7,7 @@ import square.Square;
  * Implemented as a singleton.
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class PowerFailureState extends State{
+public class PowerFailureState extends SquareState{
 
 	// eager singleton implementation
 	public static int TURNS_ACTIVE = 3;
