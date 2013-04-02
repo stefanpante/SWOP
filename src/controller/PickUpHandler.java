@@ -4,6 +4,7 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
+import penalty.PenaltyValue;
 import player.Player;
 import game.Game;
 
@@ -51,8 +52,8 @@ public class PickUpHandler extends Handler {
 						"and has no actions left" + name + "has lost the game" );
 			}else{
 				firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Could not proceed: Move is over.");
-				int penalty = getGame().getCurrentPlayer().getPosition().getPenalty();
-				getGame().getCurrentPlayer().endTurn(Player.MAX_ALLOWED_ACTIONS + penalty); //TODO: depends on powerfailure
+				PenaltyValue penaltyValue = getGame().getCurrentPlayer().getPosition().getPenalty();
+				getGame().getCurrentPlayer().endTurn(penaltyValue); //TODO: depends on powerfailure
 				getGame().switchToNextPlayer();
 		    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			}

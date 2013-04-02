@@ -27,6 +27,7 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import penalty.PenaltyValue;
 import controller.GameHandler;
 
 import player.Player;
@@ -457,7 +458,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 				System.out.println("Cheat 3 activated");
 				break;
 			case 4:
-				gameHandler.getGame().getCurrentPlayer().endTurn(Integer.MAX_VALUE);
+				gameHandler.getGame().getCurrentPlayer().endTurn(new PenaltyValue());
 				System.out.println("Cheat 4 activated");
 				break;
 			}

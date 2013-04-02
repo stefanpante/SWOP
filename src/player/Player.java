@@ -391,9 +391,14 @@ public class Player extends Observable implements Obstacle {
 	 * 
 	 * @param	lostActions	Number of actions lost for the next turn.
 	 */
-	public void endTurn(int newActions) {
-		setRemainingActions(newActions);
+	public void endTurn(PenaltyValue penaltyValue) {
+		setPenalty(penaltyValue);
 		moved = false;
+	}
+	
+	//TODO this method should handle all the calculations with the penalty
+	public void setPenalty(PenaltyValue penaltyValue){
+		
 	}
 	
 	/**
