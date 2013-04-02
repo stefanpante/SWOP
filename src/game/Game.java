@@ -8,15 +8,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import be.kuleuven.cs.som.taglet.PreTaglet;
-import be.kuleuven.cs.som.annotate.Basic;
-import be.kuleuven.cs.som.annotate.Raw;
-
 import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;
 import utils.Coordinate;
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 
 /**
  * Game class, this class controls the flow of the game
@@ -30,7 +28,6 @@ import utils.Coordinate;
  * 			| isValidPlayer(getPlayer1())
  * @invar   currentPlayer is valid current player for the game
  * 			| isValidCurrentPlayer(getCurrentPlayer())
- * 
  */
 @NotNull
 public class Game {
