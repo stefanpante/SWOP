@@ -1,5 +1,13 @@
 package penalty;
 
+/**
+ * Represents the value a penalty holds.
+ * A penalty can cause lost turns and actions.
+ * This class represents these values.
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ */
 public class PenaltyValue {
 
 	/**
@@ -11,6 +19,15 @@ public class PenaltyValue {
 	 * the number of actions lost.
 	 */
 	private int actionsLost;
+	
+	
+	/**
+	 * Constructs a new PenaltyValue with turns lost and actions lost initialized to zero. 
+	 */
+	public PenaltyValue(){
+		this.setActionsLost(0);
+		this.setActionsLost(0);
+	}
 	
 	/**
 	 * Constructs a new penaltyValue with the given parameters.
@@ -39,11 +56,13 @@ public class PenaltyValue {
 	
 	/**
 	 * returns whether the given actions lost is valid for penaltyValue.
+	 * The actions lost is valid when they are equal to or larger than zero.
+	 * 
 	 * @param actionsLost	the given number of actions to check.
 	 * @return true if the number of actions is valid, otherwise false.
 	 */
 	public boolean isValidActionsLost(int actionsLost){
-		return actionsLost <= 0;
+		return actionsLost >= 0;
 	}
 	
 	/**
@@ -72,6 +91,8 @@ public class PenaltyValue {
 	
 	/**
 	 * Checks whether the given turns lost is valid for penaltyValue.
+	 * The turnslost is valid when they are equal to or larger than zero.
+	 * 
 	 * @param turnsLost		the number of turns lost.
 	 * @return true if the number of turns lost is valid, otherwise false.
 	 */
