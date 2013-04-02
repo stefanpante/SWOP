@@ -1,5 +1,6 @@
 package square.state;
 
+import effect.EffectValue;
 import square.Square;
 
 /**
@@ -16,18 +17,11 @@ public class PowerFailureState extends SquareState{
 		
 	}
 	
-	/**
-	 * Returns the number of actions a player will use if he enters the square with a
-	 * PowerFailureState.
-	 */
-	public int getPenalty() {
-		return -1;
-	}
 
 	/**
 	 * Returns whether the current state causes a penalty
 	 */
-	public boolean hasPenalty() {
+	public boolean hasEffect() {
 		return true;
 	}
 	/**
@@ -45,6 +39,21 @@ public class PowerFailureState extends SquareState{
 	@Override
 	public String toString() {
 		return super.toString() + "Power Failed";
+	}
+	
+	@Override
+	public EffectValue getEffectBeforeAction() {
+		return new EffectValue(0, 1);
+	}
+	
+	@Override
+	public EffectValue getEffectDuringAction() {
+		return new EffectValue(1, 0);
+	}
+	
+	@Override
+	public EffectValue getEffectAfterAction() {
+		return new EffectValue(0, 0);
 	}
 	
 }

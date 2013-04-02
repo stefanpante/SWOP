@@ -2,7 +2,8 @@ package player;
 
 import java.util.Observable;
 
-import penalty.PenaltyValue;
+import effect.EffectValue;
+
 
 import be.kuleuven.cs.som.annotate.Basic;
 
@@ -59,7 +60,7 @@ public class Player extends Observable implements Obstacle {
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 3;
 	
-	private PenaltyValue penaltyValue;
+	private EffectValue penaltyValue;
 	
 	/**
 	 * creates a new player with a given name and start position
@@ -392,13 +393,13 @@ public class Player extends Observable implements Obstacle {
 	 * 
 	 * @param	lostActions	Number of actions lost for the next turn.
 	 */
-	public void endTurn(PenaltyValue penaltyValue) {
+	public void endTurn(EffectValue penaltyValue) {
 		setPenalty(penaltyValue);
 		moved = false;
 	}
 	
 	//TODO this method should handle all the calculations with the penalty
-	public void setPenalty(PenaltyValue penaltyValue){
+	public void setPenalty(EffectValue penaltyValue){
 		
 	}
 	
