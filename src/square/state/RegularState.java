@@ -1,7 +1,5 @@
 package square.state;
 
-import square.Square;
-
 
 /**
  * Class representing a regular state.
@@ -17,13 +15,6 @@ public class RegularState extends SquareState{
 	private RegularState(){
 		super();
 	}
-	
-	/**
-	 * returns the penalty caused by entering a square with this state.
-	 */
-	public int getPenalty() {
-		return 0;
-	}
 
 	/**
 	 * Returns the single instance of RegularState
@@ -36,7 +27,7 @@ public class RegularState extends SquareState{
 	/**
 	 * Returns whether this state has a penalty or not.
 	 */
-	public boolean hasPenalty() {
+	public boolean hasEffect() {
 		return false;
 	}
 
@@ -47,4 +38,5 @@ public class RegularState extends SquareState{
 	public String toString() {
 		return super.toString() + "Regular";
 	}
+	
 }

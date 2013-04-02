@@ -3,8 +3,9 @@
  */
 package event;
 
+import effect.EffectValue;
+
 import item.LightGrenade;
-import penalty.PenaltyValue;
 import game.Game;
 import square.Direction;
 import square.Square;
@@ -55,8 +56,8 @@ public class MoveEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent() {
 		Square newPosition = getGame().getCurrentPlayer().getPosition();
-		if(newPosition.hasPenalty()){
-			PenaltyValue penaltyValue = newPosition.getPenalty();
+		if(newPosition.hasEffect()){
+			EffectValue penaltyValue = newPosition.getEffectAfterAction();
 			getGame().getCurrentPlayer().endTurn(penaltyValue);
 			getGame().switchToNextPlayer();
 		}

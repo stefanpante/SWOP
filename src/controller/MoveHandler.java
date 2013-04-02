@@ -6,10 +6,11 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import effect.EffectValue;
+
 import event.GameEvent;
 import event.MoveEvent;
 
-import penalty.PenaltyValue;
 import player.Player;
 import square.Direction;
 import square.Square;
@@ -48,7 +49,7 @@ public class MoveHandler extends Handler {
 		moveEvent.run();
 		endAction();
 	}
-
+	
 	/**
 	 * firesPropertyChanges for the GUI
 	 */

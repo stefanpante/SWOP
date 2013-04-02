@@ -1,8 +1,8 @@
 package square;
 
 
-import penalty.Penalty;
-import penalty.PenaltyValue;
+import effect.Effect;
+import effect.EffectValue;
 import item.inventory.SquareInventory;
 
 
@@ -20,7 +20,7 @@ import notnullcheckweaver.Nullable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 @NotNull
-public class Square implements Penalty{
+public class Square implements Effect{
 	
 	private long id;
 		
@@ -156,25 +156,9 @@ public class Square implements Penalty{
 	public void powerGain(){
 		setState(RegularState.getInstance());
 	}
-	
-	public PenaltyValue getPenalty() {
 
-		PenaltyValue penaltyValue = new PenaltyValue();
-		//TODO: implement this shit.
-//		int res = 0;
-//		if(this.getInventory().hasActiveLightGrenade() && PowerFailureState.getInstance() != getState())
-//			return 0;
-//		
-//		if(this.getInventory().hasActiveLightGrenade())
-//			res = this.getInventory().getLightGrenade().getPenalty();
-//		
-//		return res + state.getPenalty(); 
-		
-		return penaltyValue;
-	}
-
-	public boolean hasPenalty() {
-		return state.hasPenalty() || this.getInventory().hasActiveLightGrenade();
+	public boolean hasEffect() {
+		return state.hasEffect() || this.getInventory().hasActiveLightGrenade();
 	}
 
 	/* (non-Javadoc)
@@ -207,6 +191,33 @@ public class Square implements Penalty{
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public EffectValue getEffectBeforeAction() {
+		return new EffectValue();
+	}
+
+	@Override
+	public EffectValue getEffectDuringAction() {
+		EffectValue effectValue = new EffectValue();
+		
+		int result = 0;
+		
+		/*if(this.getInventory().hasActiveLightGrenade() && PowerFailureState.getInstance() != getState())
+			return 0;
+		
+		if(this.getInventory().hasActiveLightGrenade())
+			result = this.getInventory().getLightGrenade().getPenalty();
+		
+		return result + state.getPenalty();  */
+		
+		return effectValue;
+	}
+
+	@Override
+	public EffectValue getEffectAfterAction() {
+		return new EffectValue();
 	}
 	
 	

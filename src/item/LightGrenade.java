@@ -1,7 +1,7 @@
 package item;
 
-import penalty.Penalty;
-import penalty.PenaltyValue;
+import effect.Effect;
+import effect.EffectValue;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -9,20 +9,12 @@ import penalty.PenaltyValue;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class LightGrenade extends Item implements Penalty{
-	
-	/**
-	 * returns the number of actions the player loses
-	 *  when he comes in contact with a lightgrenade.
-	 */
-	public PenaltyValue getPenalty() {
-		return new PenaltyValue(0, -3);
-	}
+public class LightGrenade extends Item implements Effect{
 
 	/**
 	 * returns if this object has a penalty.
 	 */
-	public boolean hasPenalty() {
+	public boolean hasEffect() {
 		return true;
 	}
 	
@@ -32,5 +24,30 @@ public class LightGrenade extends Item implements Penalty{
 	@Override
 	public String toString() {
 		return super.toString() + " LightGrenade";
+	}
+
+	/**
+	 * No special effect is required before reaching a LightGrenade.
+	 */
+	@Override
+	public EffectValue getEffectBeforeAction() {
+		return new EffectValue();
+	}
+
+	/**
+	 * If an action is occuring during an active LightGrenade, the 
+	 * player loses 3 actions.
+	 */
+	@Override
+	public EffectValue getEffectDuringAction() {
+		return new EffectValue(0, -3);
+	}
+
+	/**
+	 * Once the action is completed, the effect is already inflicted.
+	 */
+	@Override
+	public EffectValue getEffectAfterAction() {
+		return new EffectValue();
 	}
 }
