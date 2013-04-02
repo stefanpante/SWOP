@@ -1,4 +1,4 @@
-package penalty;
+package effect;
 
 /**
  * Represents the value a penalty holds.
@@ -8,7 +8,7 @@ package penalty;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class PenaltyValue {
+public class EffectValue {
 
 	/**
 	 * The number of turns lost 
@@ -24,7 +24,7 @@ public class PenaltyValue {
 	/**
 	 * Constructs a new PenaltyValue with turns lost and actions lost initialized to zero. 
 	 */
-	public PenaltyValue(){
+	public EffectValue(){
 		this.setActionsLost(0);
 		this.setActionsLost(0);
 	}
@@ -34,7 +34,7 @@ public class PenaltyValue {
 	 * @param turnsLost		the number of turns lost.
 	 * @param actionsLost	the number of actions lost.
 	 */
-	public PenaltyValue(int turnsLost, int actionsLost) {
+	public EffectValue(int turnsLost, int actionsLost) {
 		this.setActionsLost(actionsLost);
 		this.setTurnsLost(turnsLost);
 	}

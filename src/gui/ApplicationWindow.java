@@ -3,6 +3,7 @@
  */
 package gui;
 
+import effect.EffectValue;
 import grid.Grid;
 import item.Item;
 
@@ -27,7 +28,6 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-import penalty.PenaltyValue;
 import controller.GameHandler;
 
 import player.Player;
@@ -324,6 +324,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 	 * 			The exception to visualize
 	 */
 	private void showException(Exception exc){
+		exc.printStackTrace();
 		JOptionPane.showMessageDialog(frame, exc.getMessage(), "Uh! Oh!", JOptionPane.ERROR_MESSAGE);
 	}
 
@@ -458,7 +459,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 				System.out.println("Cheat 3 activated");
 				break;
 			case 4:
-				gameHandler.getGame().getCurrentPlayer().endTurn(new PenaltyValue());
+				gameHandler.getGame().getCurrentPlayer().endTurn(new EffectValue());
 				System.out.println("Cheat 4 activated");
 				break;
 			}

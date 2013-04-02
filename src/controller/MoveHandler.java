@@ -6,7 +6,11 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import penalty.PenaltyValue;
+import effect.EffectValue;
+
+import event.GameEvent;
+import event.MoveEvent;
+
 import player.Player;
 import square.Direction;
 import square.Square;
@@ -30,19 +34,6 @@ public class MoveHandler extends Handler {
 		super(game, listener);
 	}
 
-	/**
-	 * Checks the precondition for the move use case
-	 * returns true if the preconditions are satisfied
-	 * 
-	 * @return 	true if the precondition is satisfied
-	 * 			otherwise false.
-	 */
-	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
-			return true;
-
-		return false;
-	}
 
 	/**
 	 * Moves in the given direction if it's possible, if it isn't
@@ -54,49 +45,12 @@ public class MoveHandler extends Handler {
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
 		startAction();
-		if(!checkToProceed()){
-			getGame().getCurrentPlayer().endTurn(); //TODO: depends on powerfailure
-			getGame().switchToNextPlayer();
-		}
-		else if(getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), direction)){
-			// Gets the current Position of the player
-			Square currentPosition = getGame().getCurrentPlayer().getPosition();
-			if(currentPosition.getInventory().hasLightGrenade()){
-				LightGrenade lg = currentPosition.getInventory().getLightGrenade();
-				try{
-					currentPosition.getInventory().activate(lg);
-				} catch (Exception exc) {
-					// Catched exception, if try to activate wornout item. -> ignore
-				}
-			}
-			//Throws NoSuchElementException
-			Square newPosition = getGame().getGrid().getNeighbor(currentPosition, direction); 
-			getGame().getCurrentPlayer().move(newPosition);
-			
-			setRemainingActions(newPosition);
-			getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
-
-			setPropertyChanges();
-		}else{
-			throw new IllegalStateException("You can't move to there! (" + direction+")");
-		}
+		GameEvent moveEvent = new MoveEvent(getGame(), direction);
+		moveEvent.run();
+		setPropertyChanges();
 		endAction();
 	}
 	
-
-	/**
-	 * Sets the remaining actions of the current player
-	 * @param newPosition
-	 */
-	private void setRemainingActions(Square newPosition){
-		// Gets the result of the state for the new position
-		if(newPosition.hasPenalty()){
-			PenaltyValue penaltyValue = newPosition.getPenalty();
-			getGame().getCurrentPlayer().endTurn(penaltyValue);
-			getGame().switchToNextPlayer();
-		}
-	}
-
 	/**
 	 * firesPropertyChanges for the GUI
 	 */
