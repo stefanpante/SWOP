@@ -42,7 +42,7 @@ public class Player extends Observable implements Obstacle {
 	/**
 	 * The player's ID.
 	 */
-	private int ID = -1;
+	private final int ID;
 	
 	/**
 	 * The number of remaining actions the player has left
@@ -78,11 +78,11 @@ public class Player extends Observable implements Obstacle {
 	 */
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
-		this.setID(id);
 		this.setInventory(new PlayerInventory());
 		
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
+		this.ID = id;
 	}
 	
 	/**
@@ -336,15 +336,6 @@ public class Player extends Observable implements Obstacle {
 			throw new IllegalArgumentException("The given inventory is not valid for the player.");
 		
 		this.inventory = inventory;
-	}
-	
-	/**
-	 * Set's the player id. private because the id of a player is final.
-	 * 
-	 * @param	id
-	 */
-	private void setID(int id){
-		this.ID = id;
 	}
 	
 	/**
