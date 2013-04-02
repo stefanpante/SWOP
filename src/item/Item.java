@@ -1,5 +1,10 @@
 package item;
 
+import item.state.ActiveState;
+import item.state.ItemState;
+import item.state.InactiveState;
+import item.state.WornState;
+
 /**
  * Parent class for all sorts of items.
  * 
@@ -18,7 +23,7 @@ public class Item {
 	 * Constructs a new item with an inactive state
 	 */
 	public Item(){
-		currentState = ItemState.INACTIVE;
+		currentState = new InactiveState();
 	}
 
 	
@@ -29,7 +34,7 @@ public class Item {
 	 * 			False when the item is inactive.
 	 */
 	public boolean isActive() {
-		return this.currentState == ItemState.ACTIVE;
+		return this.currentState instanceof ActiveState;
 	}
 	
 	/**
@@ -49,9 +54,9 @@ public class Item {
 	 * 			an active state from an inactive one.
 	 */
 	public void activate() throws IllegalStateException {
-		if(this.currentState != ItemState.INACTIVE)
+		if(isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
-		this.currentState = ItemState.ACTIVE;
+		this.currentState = new ActiveState();
 	}
 	
 	/**
@@ -62,9 +67,9 @@ public class Item {
 	 * 			Otherwise, an IllegalStateException is thrown
 	 */		
 	public void wearOut() throws IllegalStateException {
-		if(this.currentState != ItemState.ACTIVE)
+		if(!isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the used state.");
-		this.currentState = ItemState.WORN;
+		this.currentState = new WornState();
 	}
 	
 	/**
@@ -75,9 +80,9 @@ public class Item {
 	 * 			Otherwise, an IllegalStateException is thrown
 	 */
 	public void deactivate() throws IllegalStateException{
-		if(this.currentState != ItemState.ACTIVE)
+		if(!isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
-		this.currentState = ItemState.INACTIVE;
+		this.currentState = new InactiveState();
 	}
 	
 	

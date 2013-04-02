@@ -1,8 +1,8 @@
 package item.inventory;
 
 import item.Item;
-import item.ItemState;
 import item.LightGrenade;
+import item.state.ItemState;
 
 import java.util.ArrayList;
 
@@ -163,23 +163,6 @@ public class SquareInventory extends Inventory {
 				item.wearOut();
 			}
 		}
-	}
-	
-	/**
-	 * Returns all the items in this inventory that have a certain state. 
-	 * 
-	 * @param 	state
-	 * 			The state which all returned items must have.
-	 * @return	All items of this inventory that have a certain state.
-	 */
-	public ArrayList<Item> getItems(ItemState state){
-		ArrayList<Item> result = new ArrayList<Item>();
-		for (Item it : getAllItems()) {
-			if(it.getState() == state){
-				result.add(it);
-			}
-		}
-		return result;
 	}
 	
 	/**

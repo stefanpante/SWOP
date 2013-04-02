@@ -7,6 +7,6 @@ package item.state;
  * @author jonas
  *
  */
-public class PassiveState {
+public class InactiveState extends ItemState {
 
 }
