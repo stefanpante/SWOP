@@ -1,6 +1,6 @@
 package square;
 
-import items.inventory.SquareInventory;
+import item.inventory.SquareInventory;
 
 import square.obstacles.Obstacle;
 import square.state.PowerFailureState;

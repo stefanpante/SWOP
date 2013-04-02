@@ -2,7 +2,10 @@ package items;
 
 import static org.junit.Assert.*;
 
-import items.inventory.SquareInventory;
+import item.Item;
+import item.ItemState;
+import item.LightGrenade;
+import item.inventory.SquareInventory;
 
 import java.util.ArrayList;
 

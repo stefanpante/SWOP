@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Random;
 
-import handlers.MoveHandler;
-import handlers.UseItemHandler;
-import items.LightGrenade;
+import handler.MoveHandler;
+import handler.UseItemHandler;
+import item.LightGrenade;
 import game.Game;
 import grid.Grid;
 

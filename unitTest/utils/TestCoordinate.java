@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import square.Direction;
-import utils.Coordinate;
+import util.Coordinate;
 
 
 public class TestCoordinate {

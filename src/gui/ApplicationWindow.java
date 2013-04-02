@@ -4,8 +4,8 @@
 package gui;
 
 import grid.Grid;
-import handlers.GameHandler;
-import items.Item;
+import handler.GameHandler;
+import item.Item;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ import javax.swing.border.TitledBorder;
 
 import player.Player;
 import square.Direction;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * The application window of the game. Is used for the graphical user interface

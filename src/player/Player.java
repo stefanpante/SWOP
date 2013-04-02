@@ -10,8 +10,8 @@ import notnullcheckweaver.Nullable;
 import square.Square;
 import square.obstacles.Obstacle;
 
-import items.Item;
-import items.inventory.PlayerInventory;
+import item.Item;
+import item.inventory.PlayerInventory;
 
 /**
  * Player class
