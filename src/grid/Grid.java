@@ -1,15 +1,16 @@
 package grid;
 
+import item.Item;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-import be.kuleuven.cs.som.annotate.Basic;
-import be.kuleuven.cs.som.annotate.Raw;
-
 import square.Direction;
 import square.Square;
 import util.Coordinate;
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 
 /**
  * This class describes a grid object.
@@ -368,6 +369,21 @@ public class Grid {
 	@Basic @Raw
 	public ArrayList<Square> getAllSquares(){
 		return new ArrayList<Square>(grid.values());
+	}
+	
+	/**
+	 * Return the square containing the given item.
+	 * 
+	 * @param 	item
+	 * 			The item the square contians
+	 * @return	The square containing the given item
+	 */	
+	public Square getSquareWith(Item item) {
+		for(Square square : getAllSquares()){
+			if(square.getInventory().hasItem(item))
+				return square;
+		}
+		throw new IllegalArgumentException("No squares containing "+item);
 	}
 	
 	/**
