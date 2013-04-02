@@ -1,8 +1,8 @@
-package handlers;
+package handler;
 
 import game.Game;
 
-import items.Item;
+import item.Item;
 
 import java.beans.PropertyChangeListener;
 

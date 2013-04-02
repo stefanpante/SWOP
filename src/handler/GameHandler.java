@@ -1,5 +1,5 @@
 
-package handlers;
+package handler;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 
 import game.Game;
 import gui.ApplicationWindow;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * 

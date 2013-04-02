@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import handlers.MoveHandler;
-import items.LightGrenade;
+import handler.MoveHandler;
+import item.LightGrenade;
 
 import org.junit.Before;
 import org.junit.Test;

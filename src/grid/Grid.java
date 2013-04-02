@@ -9,7 +9,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 
 import square.Direction;
 import square.Square;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * This class describes a grid object.

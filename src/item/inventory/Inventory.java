@@ -1,6 +1,6 @@
-package items.inventory;
+package item.inventory;
 
-import items.Item;
+import item.Item;
 
 import java.util.ArrayList;
 

@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import game.Game;
-import handlers.MoveHandler;
-import handlers.PickUpHandler;
+import handler.MoveHandler;
+import handler.PickUpHandler;
 import square.Direction;
 import square.Square;
 import square.obstacles.LightTrail;
-import utils.Coordinate;
+import util.Coordinate;
 
 public class TeleporterUsageTest {
 

@@ -12,7 +12,7 @@ import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
 import square.obstacles.LightTrail;
-import utils.Coordinate;
+import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 

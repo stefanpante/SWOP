@@ -1,7 +1,7 @@
-package handlers;
+package handler;
 
 import game.Game;
-import items.Item;
+import item.Item;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -15,7 +15,7 @@ import square.Direction;
 import square.Square;
 import square.obstacles.LightTrail;
 import square.state.PowerFailureState;
-import utils.Coordinate;
+import util.Coordinate;
 
 /**
  * Handler class (abstract) that will be implemented by all our use case handlers.
