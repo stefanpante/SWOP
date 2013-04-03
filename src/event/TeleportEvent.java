@@ -12,7 +12,7 @@ import square.Square;
  * @author jonas
  *
  */
-public class TeleportEvent extends GameEvent {
+public class TeleportEvent extends AbstractGameEvent {
 	
 	private Teleport teleport;
 	
@@ -49,6 +49,12 @@ public class TeleportEvent extends GameEvent {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	protected void afterGameEvent() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

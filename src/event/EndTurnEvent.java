@@ -10,7 +10,7 @@ import game.Game;
  * @author jonas
  *
  */
-public class EndTurnEvent extends GameEvent {
+public class EndTurnEvent extends AbstractGameEvent {
 
 	/**
 	 * @param game
@@ -29,6 +29,12 @@ public class EndTurnEvent extends GameEvent {
 	@Override
 	protected void afterGameEvent() {
 		getGame().switchToNextPlayer();
+	}
+
+	@Override
+	protected void beforeGameEvent() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
