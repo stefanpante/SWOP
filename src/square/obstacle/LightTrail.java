@@ -1,4 +1,4 @@
-package square.obstacles;
+package square.obstacle;
 
 import java.util.LinkedList;
 import java.util.Observable;

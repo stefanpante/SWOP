@@ -11,7 +11,7 @@ import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
 import square.Square;
-import square.obstacles.Obstacle;
+import square.obstacle.Obstacle;
 
 import item.Item;
 import item.inventory.PlayerInventory;
@@ -382,7 +382,8 @@ public class Player extends Observable implements Obstacle {
 	 * for the new turn to the maximum allowed actions.
 	 */
 	public void endTurn(){
-		setRemainingActions(Player.MAX_ALLOWED_ACTIONS);
+		//TODO: dit mag niet meer met de nieuwe effectValue!
+		//setRemainingActions(Player.MAX_ALLOWED_ACTIONS);
 		
 		moved = false;
 	}
@@ -398,6 +399,7 @@ public class Player extends Observable implements Obstacle {
 		// TODO: change the EffectValue to represent the end turn
 		moved = false;
 	}
+	
 	
 
 	/**

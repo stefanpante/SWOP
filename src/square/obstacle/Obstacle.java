@@ -1,4 +1,4 @@
-package square.obstacles;
+package square.obstacle;
 
 import square.Square;
 

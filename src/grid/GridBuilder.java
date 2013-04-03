@@ -9,7 +9,7 @@ import be.kuleuven.cs.som.annotate.Basic;
 
 import square.Direction;
 import square.Square;
-import square.obstacles.Wall;
+import square.obstacle.Wall;
 import util.Coordinate;
 
 /**
