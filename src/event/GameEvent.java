@@ -9,6 +9,8 @@ import game.Game;
  * @author jonas
  *
  */
+
+//TODO this class may be removed.
 public class GameEvent extends AbstractGameEvent {
 	
 	
