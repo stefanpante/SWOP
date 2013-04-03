@@ -3,6 +3,9 @@
  */
 package event;
 
+import java.util.Observer;
+
+import controller.TurnHandler;
 import effect.EffectValue;
 import game.Game;
 
@@ -12,10 +15,19 @@ import game.Game;
  */
 public abstract class ActionEvent extends AbstractGameEvent {
 	
+	public static Observer OBSERVER;
+	
 	protected EffectValue effectValue;
 	
 	public ActionEvent(Game game) {
 		super(game);
+		if(OBSERVER == null)
+			throw new IllegalStateException("ActionEvent cannot be created without it's observer set.");
+		addObserver(OBSERVER);
+	}
+	
+	public static void setObserver(Observer observer){
+		OBSERVER = observer;
 	}
 	
 	@Override
@@ -25,6 +37,9 @@ public abstract class ActionEvent extends AbstractGameEvent {
 		duringGameEvent();
 		afterGameEvent();
 		afterActionEvent();
+		// Observer Pattern
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
@@ -45,17 +60,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	}
 	
 	protected void afterActionEvent() {
-		
-		if(getGame().getCurrentPlayer().getRemainingActions() <= 0){
-			if(!getGame().getCurrentPlayer().hasMoved()){
-				getGame().end();
-				throw new IllegalStateException("The current player hasn't moved in this turn " +
-						"and has no actions left and therefore lost the game");
-			}else{
-				getGame().getCurrentPlayer().endTurn();
-				getGame().switchToNextPlayer();
-			}
-		}
+		//TODO : Update player's effectValue 
 	}
 	
 

@@ -3,13 +3,15 @@
  */
 package event;
 
+import java.util.Observable;
+
 import game.Game;
 
 /**
  * @author Jonas Devlieghere
  *
  */
-public abstract class AbstractGameEvent {
+public abstract class AbstractGameEvent extends Observable {
 
 	private Game game;
 	

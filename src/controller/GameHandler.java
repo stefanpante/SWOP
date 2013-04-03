@@ -42,6 +42,7 @@ public class GameHandler extends Handler {
 	private MoveHandler moveHandler;
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
+	private TurnHandler turnHandler;
 	
 	
 	/* Application Window */
@@ -65,6 +66,7 @@ public class GameHandler extends Handler {
 	    	this.moveHandler = new MoveHandler(getGame(),window);
 	    	this.pickUpHandler = new PickUpHandler(getGame(),window);
 	    	this.useItemHandler = new UseItemHandler(getGame(),window);
+	    	this.turnHandler = new TurnHandler(getGame(), window);
 	    	
 	    	this.populateGui();
 		} 
@@ -97,6 +99,14 @@ public class GameHandler extends Handler {
      */
     public MoveHandler getMoveHandler(){
     	return this.moveHandler;
+    }
+    
+	/**
+     * Returns the turnHandler.
+     * @return 	the moveHandler.
+     */
+    public TurnHandler getTurnHandler(){
+    	return this.turnHandler;
     }
     
     /**

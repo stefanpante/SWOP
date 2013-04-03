@@ -3,6 +3,8 @@
  */
 package event;
 
+import java.util.Observer;
+
 import game.Game;
 import item.launchable.LaunchableItem;
 

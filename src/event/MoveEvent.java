@@ -4,9 +4,11 @@
 package event;
 
 import effect.EffectValue;
-
-import item.LightGrenade;
 import game.Game;
+import item.LightGrenade;
+
+import java.util.Observer;
+
 import square.Direction;
 import square.Square;
 
