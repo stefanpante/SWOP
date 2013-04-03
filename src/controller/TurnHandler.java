@@ -41,14 +41,14 @@ public class TurnHandler extends Handler implements Observer {
 	 * 
 	 * @return	True if and only if the player has remaining actions
 	 */
-	private boolean isEndOfTurn(){
+	public boolean isEndOfTurn(){
 		return getGame().getCurrentPlayer().getRemainingActions() <= 0;
 	}
 	
 	/**
 	 * End the current turn
 	 */
-	private void endTurn(){
+	public void endTurn(){
 		if(!getGame().getCurrentPlayer().hasMoved()){
 			getGame().end();
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
@@ -62,7 +62,7 @@ public class TurnHandler extends Handler implements Observer {
 	/**
 	 * Start a new turn
 	 */
-	private void startTurn(){
+	public void startTurn(){
 		increaseCurrentPlayerCount();
 		//TODO: Reset player count
 	}
