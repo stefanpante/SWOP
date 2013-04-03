@@ -394,23 +394,44 @@ public class Player extends Observable implements Obstacle {
 	 * @param	lostActions	Number of actions lost for the next turn.
 	 */
 	public void endTurn(EffectValue penaltyValue) {
-		setEffectValue(penaltyValue);
+		calculateEffectValue(penaltyValue);
 		// TODO: change the EffectValue to represent the end turn
 		moved = false;
 	}
 	
-	//TODO this method should handle all the calculations with the penalty
-	public void setEffectValue(EffectValue effectVal){
-		//XXX: Does this work?
+
+	/**
+	 * Calculates the effectValue and the remaining actions for this player.
+	 * 
+	 * @param effectVal
+	 */
+	private void calculateEffectValue(EffectValue effectVal){
+
+		// Gets the current lost turns of the player
 		int turnsLost = this.effectValue.getTurnsLost();
+		// Gets the current actions lost of the player
 		int actionsLost = this.effectValue.getActionsLost();
 		
+		// adds the turns Lost to the current turns lost.
 		turnsLost 	+=  effectVal.getTurnsLost();
+		// adds the number of turns lost caused by actions lost.
 		turnsLost 	+=  effectVal.getActionsLost()/ Player.MAX_ALLOWED_ACTIONS;
-		actionsLost +=  effectVal.getActionsLost() % Player.MAX_ALLOWED_ACTIONS;
+		// adds extra actions lost  to the current actions lost
+		actionsLost +=  (effectVal.getActionsLost() % Player.MAX_ALLOWED_ACTIONS);
+		// Maybe the new actions lost causes an extra turn to be lost.
+		turnsLost 	+=	(actionsLost / Player.MAX_ALLOWED_ACTIONS);
+		// Calculate the new actions lost 
+		actionsLost %=  Player.MAX_ALLOWED_ACTIONS;
 		
-		this.effectValue = new EffectValue(turnsLost, actionsLost);
+		// Sets the remaining actions of the player.
+		this.remainingActions = Player.MAX_ALLOWED_ACTIONS - actionsLost;
+		// effectValue stores the number of turns lost
+		this.effectValue = new EffectValue(turnsLost, 0);
 		
+	}
+	
+	public EffectValue getEffectValue(){
+		return this.effectValue;
 	}
 	
 	/**
