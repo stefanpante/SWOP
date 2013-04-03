@@ -15,7 +15,7 @@ import game.Game;
  */
 public abstract class ActionEvent extends AbstractGameEvent {
 	
-	public static Observer OBSERVER;
+	
 	
 	protected EffectValue effectValue;
 	
@@ -26,9 +26,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 		addObserver(OBSERVER);
 	}
 	
-	public static void setObserver(Observer observer){
-		OBSERVER = observer;
-	}
+	
 	
 	@Override
 	public void run() {

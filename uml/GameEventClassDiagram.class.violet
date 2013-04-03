@@ -11,7 +11,7 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+ AbstractGameEvent(game:Game)
+      <string>+ «constructor» AbstractGameEvent(game:Game)
 + getGame(): Game
 + run()
 # beforeGameEvent()
@@ -23,7 +23,8 @@
     </void>
     <void property="name">
      <void property="text">
-      <string>AbstractGameEvent</string>
+      <string>&lt;i&gt;AbstractGameEvent&lt;/i&gt;
+</string>
      </void>
     </void>
    </object>

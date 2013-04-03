@@ -38,6 +38,9 @@ public abstract class AbstractGameEvent extends Observable {
 		afterGameEvent();
 	}
 	
+	public static void setObserver(Observer observer){
+		OBSERVER = observer;
+	}
 	protected abstract void beforeGameEvent();
 	protected abstract void duringGameEvent();
 	protected abstract void afterGameEvent();
