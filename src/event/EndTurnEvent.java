@@ -17,7 +17,7 @@ public class EndTurnEvent extends AbstractGameEvent {
 	 * @param args
 	 */
 	public EndTurnEvent(Game game) {
-		super(game, null);
+		super(game);
 	}
 
 	@Override

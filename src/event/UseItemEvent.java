@@ -12,17 +12,20 @@ import controller.GameHandler;
  *
  */
 public class UseItemEvent extends ActionEvent {
+	
+	private Item item;
 
 	/**
 	 * @param game
 	 * @param args
 	 */
 	public UseItemEvent(Game game, Item item) {
-		super(game, item);
+		super(game);
+		this.item = item;
 	}
 	
 	private Item getItem(){
-		return (Item) getArgument(0);
+		return this.item;
 	}
 	
 

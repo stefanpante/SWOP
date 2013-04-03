@@ -11,17 +11,20 @@ import game.Game;
  *
  */
 public class PickUpEvent extends ActionEvent {
+	
+	private Item item;
 
 	/**
 	 * @param game
 	 * @param args
 	 */
 	public PickUpEvent(Game game, Item item) {
-		super(game, item);
+		super(game);
+		this.item = item;
 	}
 	
 	private Item getItem(){
-		return (Item) getArgument(0);
+		return this.item;
 	}
 	
 	@Override

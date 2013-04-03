@@ -15,8 +15,8 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	 * @param game
 	 * @param args
 	 */
-	public ThrowLaunchableEvent(Game game, Object... args) {
-		super(game, args);
+	public ThrowLaunchableEvent(Game game) {
+		super(game);
 	}
 
 }

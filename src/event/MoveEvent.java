@@ -16,13 +16,15 @@ import square.Square;
  */
 public class MoveEvent extends ActionEvent {
 
+	private Direction direction;
 
 	public MoveEvent(Game game, Direction dir) {
-		super(game, dir);
+		super(game);
+		this.direction = dir;
 	}
 	
 	private Direction getDirection(){
-		return (Direction) getArgument(0);
+		return this.direction;
 	}
 	
 	@Override

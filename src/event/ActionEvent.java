@@ -11,8 +11,8 @@ import game.Game;
  */
 public abstract class ActionEvent extends AbstractGameEvent {
 
-	public ActionEvent(Game game, Object... args) {
-		super(game, args);
+	public ActionEvent(Game game) {
+		super(game);
 	}
 
 	@Override

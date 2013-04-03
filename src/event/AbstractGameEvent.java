@@ -6,35 +6,28 @@ package event;
 import game.Game;
 
 /**
- * @author jonas
+ * @author Jonas Devlieghere
  *
  */
 public abstract class AbstractGameEvent {
 
 	private Game game;
-	private Object[] args;
 	
-	public AbstractGameEvent(Game game, Object[] args){
+	public AbstractGameEvent(Game game){
 		setGame(game);
-		setArgs(args);
 	}
 	
 	private void setGame(Game game){
 		this.game = game;
 	}
 	
-	private void setArgs(Object[] args){
-		this.args = args;
-	}
-	
 	public Game getGame(){
 		return this.game;
 	}
 	
-	public Object getArgument(int id){
-		return args[id];
-	}
-	
+	/**
+	 * Run this Game Event
+	 */
 	public void run() {
 		beforeGameEvent();
 		duringGameEvent();

@@ -14,16 +14,19 @@ import square.Square;
  */
 public class TeleportEvent extends AbstractGameEvent {
 	
+	private Teleport teleport;
+	
 	/**
 	 * @param game
 	 * @param args
 	 */
-	public TeleportEvent(Game game) {
-		super(game, null);
+	public TeleportEvent(Game game, Teleport teleport) {
+		super(game);
+		this.teleport = teleport;
 	}
 	
 	private Teleport getTeleport(){
-		return (Teleport)getArgument(0);
+		return this.teleport;
 	}
 
 	@Override
