@@ -4,6 +4,7 @@
 package event;
 
 import java.util.Observable;
+import java.util.Observer;
 
 import game.Game;
 
@@ -14,6 +15,7 @@ import game.Game;
 public abstract class AbstractGameEvent extends Observable {
 
 	private Game game;
+	public static Observer OBSERVER;
 	
 	public AbstractGameEvent(Game game){
 		setGame(game);
