@@ -394,23 +394,32 @@ public class Player extends Observable implements Obstacle {
 	 * @param	lostActions	Number of actions lost for the next turn.
 	 */
 	public void endTurn(EffectValue penaltyValue) {
-		setEffectValue(penaltyValue);
+		calculateEffectValue(penaltyValue);
 		// TODO: change the EffectValue to represent the end turn
 		moved = false;
 	}
 	
-	//TODO this method should handle all the calculations with the penalty
-	public void setEffectValue(EffectValue effectVal){
+
+	/**
+	 * 
+	 * @param effectVal
+	 */
+	private void calculateEffectValue(EffectValue effectVal){
 		//XXX: Does this work?
 		int turnsLost = this.effectValue.getTurnsLost();
 		int actionsLost = this.effectValue.getActionsLost();
 		
 		turnsLost 	+=  effectVal.getTurnsLost();
 		turnsLost 	+=  effectVal.getActionsLost()/ Player.MAX_ALLOWED_ACTIONS;
-		actionsLost +=  effectVal.getActionsLost() % Player.MAX_ALLOWED_ACTIONS;
+		actionsLost +=  effectVal.getActionsLost();
+		actionsLost %=  Player.MAX_ALLOWED_ACTIONS;
 		
 		this.effectValue = new EffectValue(turnsLost, actionsLost);
 		
+	}
+	
+	public EffectValue getEffectValue(){
+		return this.effectValue;
 	}
 	
 	/**
