@@ -278,8 +278,6 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
         inventoryPanel.add(newGame);  
    }
     
-    
-    
     /**
      * Turns the Jframe on
      */

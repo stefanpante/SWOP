@@ -12,7 +12,7 @@ import square.Square;
  * @author jonas
  *
  */
-public class TeleportEvent extends AbstractGameEvent {
+public class TeleportEvent extends GameEvent {
 	
 	private Teleport teleport;
 	
@@ -42,10 +42,6 @@ public class TeleportEvent extends AbstractGameEvent {
 		getGame().getCurrentPlayer().setPosition(destination);
 	}
 
-	@Override
-	protected void afterGameEvent() {
-		// TODO Auto-generated method stub
-	}
 	
 	private boolean canTeleportTo(Square destination){
 		for(Player otherPlayer : getGame().getOtherPlayers()){

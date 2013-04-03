@@ -9,7 +9,7 @@ import game.Game;
  * @author jonas
  *
  */
-public abstract class ActionEvent extends AbstractGameEvent {
+public abstract class ActionEvent extends GameEvent {
 
 	public ActionEvent(Game game) {
 		super(game);
@@ -17,6 +17,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 
 	@Override
 	protected void beforeGameEvent() {
+		super.beforeGameEvent();
 		if(!getGame().isActive())
 			throw new IllegalStateException("The game is over");
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
@@ -25,11 +26,12 @@ public abstract class ActionEvent extends AbstractGameEvent {
 
 	@Override
 	protected void duringGameEvent(){
-		
+		super.duringGameEvent();
 	}
 	
 	@Override
 	protected void afterGameEvent() {
+		super.afterGameEvent();
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0){
 			if(!getGame().getCurrentPlayer().hasMoved()){
 				getGame().end();
