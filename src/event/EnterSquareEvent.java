@@ -11,7 +11,7 @@ import square.Square;
  * @author Jonas Devlieghere
  *
  */
-public class EnterSquareEvent extends GameEvent {
+public class EnterSquareEvent extends AbstractGameEvent {
 
 	private Square square;
 	
@@ -33,6 +33,18 @@ public class EnterSquareEvent extends GameEvent {
 			TeleportEvent teleportEvent = new TeleportEvent(getGame(), teleport);
 			teleportEvent.run();
 		}
+	}
+
+	@Override
+	protected void beforeGameEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void afterGameEvent() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
