@@ -28,14 +28,6 @@ public abstract class SquareState implements Effect {
 	}
 
 	/**
-	 * In a standard square state no special effects are required during an action.
-	 */
-	@Override
-	public EffectValue getEffectDuringAction() {
-		return new EffectValue();
-	}
-
-	/**
 	 * In a standard square state no special effects are required after an action.
 	 */
 	@Override

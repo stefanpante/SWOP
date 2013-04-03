@@ -22,7 +22,7 @@ public class EndTurnEvent extends GameEvent {
 
 	@Override
 	protected void duringGameEvent() {
-		EffectValue penaltyValue = getGame().getCurrentPlayer().getPosition().getEffectDuringAction();
+		EffectValue penaltyValue = getGame().getCurrentPlayer().getPosition().getEffectAfterAction();
 		getGame().getCurrentPlayer().endTurn(penaltyValue);
 	}
 

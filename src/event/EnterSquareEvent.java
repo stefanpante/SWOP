@@ -27,11 +27,6 @@ public class EnterSquareEvent extends GameEvent {
 
 	@Override
 	protected void duringGameEvent() {
-		// Handle case where there's an active light grenade on the current square
-		if(getSquare().getInventory().hasActiveItem()){
-			ExplosionEvent explosionEvent = new ExplosionEvent(getGame());
-			explosionEvent.run();
-		}
 		// Handle case where there's a teleport on the current square
 		// FIXME: (!) Incorrect since not yet implemented (!)
 		if(getSquare().getInventory().hasItem(new Teleport())){

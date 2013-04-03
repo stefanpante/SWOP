@@ -12,10 +12,6 @@ public interface Effect {
 	 */
 	public abstract EffectValue getEffectBeforeAction();
 	
-	/**
-	 * Returns number of actions the player when the action has started.
-	 */
-	public abstract EffectValue getEffectDuringAction();
 	
 	/**
 	 * Returns number of actions the player when the action is completed.

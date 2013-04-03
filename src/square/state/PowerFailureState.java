@@ -47,13 +47,8 @@ public class PowerFailureState extends SquareState{
 	}
 	
 	@Override
-	public EffectValue getEffectDuringAction() {
-		return new EffectValue(1, 0);
-	}
-	
-	@Override
 	public EffectValue getEffectAfterAction() {
-		return new EffectValue(0, 0);
+		return new EffectValue(1, 0);
 	}
 	
 }
