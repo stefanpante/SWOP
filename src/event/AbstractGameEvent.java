@@ -37,5 +37,6 @@ public abstract class AbstractGameEvent {
 	protected abstract void beforeGameEvent();
 	protected abstract void duringGameEvent();
 	protected abstract void afterGameEvent();
+
 	
 }

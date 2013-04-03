@@ -49,6 +49,7 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void duringGameEvent() {
+		super.duringGameEvent();
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
@@ -56,6 +57,7 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void afterGameEvent() {
+		super.afterGameEvent();
 		Square newPosition = getGame().getCurrentPlayer().getPosition();
 		if(newPosition.hasEffect()){
 			EffectValue penaltyValue = newPosition.getEffectAfterAction();
@@ -63,7 +65,6 @@ public class MoveEvent extends ActionEvent {
 			getGame().switchToNextPlayer();
 		}
 		getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
-		super.afterGameEvent();
 	}
 
 }

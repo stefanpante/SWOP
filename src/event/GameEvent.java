@@ -10,7 +10,8 @@ import game.Game;
  *
  */
 public class GameEvent extends AbstractGameEvent {
-
+	
+	
 	public GameEvent(Game game) {
 		super(game);
 	}
@@ -19,7 +20,6 @@ public class GameEvent extends AbstractGameEvent {
 	protected void beforeGameEvent() {
 		if(!getGame().isActive())
 			throw new IllegalStateException("The game is over.");
-
 	}
 
 	@Override
@@ -31,5 +31,4 @@ public class GameEvent extends AbstractGameEvent {
 	protected void afterGameEvent() {
 
 	}
-
 }
