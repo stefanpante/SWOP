@@ -339,24 +339,7 @@ public class Player extends Observable implements Obstacle {
 		
 		this.inventory = inventory;
 	}
-	
-	/**
-	 * Used to set the remaining actions for this player.
-	 * 
-	 * @param 	actions	
-	 * 			The number of actions the player can perform.
-	 */
-	private void setRemainingActions(int actions){
-		if(actions == Integer.MAX_VALUE){
-			this.remainingActions = actions;
-			return;
-		}
-		if(!isValidRemainingActions(actions)){
-			throw new IllegalArgumentException("This is not a valid number for remaining actions");
-		}
-		this.remainingActions = actions;
-	}
-	
+		
 	/**
 	 * Returns whether the current player has already moved 
 	 * 	since the last call of endTurn()
@@ -409,7 +392,7 @@ public class Player extends Observable implements Obstacle {
 	 */
 	// FIXME: StefAnus
 	// TODO: Moet kunnen worden opgeroepen bij elk event
-	private void calculateEffectValue(EffectValue effectVal){
+	public void calculateEffectValue(EffectValue effectVal){
 
 		// Gets the current lost turns of the player
 		int turnsLost = this.effectValue.getTurnsLost();
