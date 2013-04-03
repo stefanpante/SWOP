@@ -36,7 +36,12 @@ public class PickUpEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent() {
 		getGame().getCurrentPlayer().decrementActions();
-		super.afterGameEvent();
+	}
+
+	@Override
+	protected void beforeGameEvent() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

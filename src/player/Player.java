@@ -405,6 +405,8 @@ public class Player extends Observable implements Obstacle {
 	 * 
 	 * @param effectVal
 	 */
+	// FIXME: StefAnus
+	// TODO: Moet kunnen worden opgeroepen bij elk event
 	private void calculateEffectValue(EffectValue effectVal){
 
 		// Gets the current lost turns of the player

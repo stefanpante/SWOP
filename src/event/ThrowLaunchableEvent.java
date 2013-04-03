@@ -27,4 +27,31 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		return this.launchableItem;
 	}
 
+	/* (non-Javadoc)
+	 * @see event.AbstractGameEvent#beforeGameEvent()
+	 */
+	@Override
+	protected void beforeGameEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see event.AbstractGameEvent#duringGameEvent()
+	 */
+	@Override
+	protected void duringGameEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see event.AbstractGameEvent#afterGameEvent()
+	 */
+	@Override
+	protected void afterGameEvent() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

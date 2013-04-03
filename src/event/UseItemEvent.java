@@ -37,7 +37,15 @@ public class UseItemEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent() {
 		getGame().getCurrentPlayer().decrementActions();
-		super.afterGameEvent();
+	}
+
+	/* (non-Javadoc)
+	 * @see event.AbstractGameEvent#beforeGameEvent()
+	 */
+	@Override
+	protected void beforeGameEvent() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

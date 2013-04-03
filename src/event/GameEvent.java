@@ -18,8 +18,7 @@ public class GameEvent extends AbstractGameEvent {
 
 	@Override
 	protected void beforeGameEvent() {
-		if(!getGame().isActive())
-			throw new IllegalStateException("The game is over.");
+
 	}
 
 	@Override

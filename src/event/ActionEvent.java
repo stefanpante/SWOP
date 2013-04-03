@@ -10,7 +10,7 @@ import game.Game;
  * @author jonas
  *
  */
-public abstract class ActionEvent extends GameEvent {
+public abstract class ActionEvent extends AbstractGameEvent {
 	
 	protected EffectValue effectValue;
 	
@@ -20,15 +20,11 @@ public abstract class ActionEvent extends GameEvent {
 	
 	@Override
 	public void run() {
-		// Run code before Game Event
-		super.beforeGameEvent();
+		beforeActionEvent();
 		beforeGameEvent();
-		// Run code during Game Event
-		super.duringGameEvent();
 		duringGameEvent();
-		// Run code after Game Event
 		afterGameEvent();
-		super.afterGameEvent();
+		afterActionEvent();
 	}
 	
 	/**
@@ -41,14 +37,15 @@ public abstract class ActionEvent extends GameEvent {
 		this.effectValue.addEffect(effectValue);
 	}
 
-	@Override
-	protected void beforeGameEvent() {
+	protected void beforeActionEvent() {
+		if(!getGame().isActive())
+			throw new IllegalStateException("The game is over.");
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
 			throw new IllegalStateException("The current player has no remaining action left.");
 	}
 	
-	@Override
-	protected void afterGameEvent() {
+	protected void afterActionEvent() {
+		
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0){
 			if(!getGame().getCurrentPlayer().hasMoved()){
 				getGame().end();

@@ -29,7 +29,6 @@ public class MoveEvent extends ActionEvent {
 	
 	@Override
 	protected void beforeGameEvent() {
-		super.beforeGameEvent();
 		/* Check wether it's possible to move in the given direction */
 		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
 			throw new IllegalStateException("Cannot move to given direction.");
@@ -49,7 +48,6 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void duringGameEvent() {
-		super.duringGameEvent();
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
@@ -57,7 +55,6 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void afterGameEvent() {
-		super.afterGameEvent();
 		Square newPosition = getGame().getCurrentPlayer().getPosition();
 		if(newPosition.hasEffect()){
 			EffectValue penaltyValue = newPosition.getEffectAfterAction();

@@ -5,11 +5,10 @@ package event;
 
 import item.Teleport;
 import game.Game;
-import player.Player;
 import square.Square;
 
 /**
- * @author jonas
+ * @author Jonas Devlieghere
  *
  */
 public class EnterSquareEvent extends GameEvent {
