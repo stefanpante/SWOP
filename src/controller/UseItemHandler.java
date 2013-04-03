@@ -4,7 +4,7 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import event.GameEvent;
+import event.AbstractGameEvent;
 import event.MoveEvent;
 import event.UseItemEvent;
 import game.Game;
@@ -34,7 +34,7 @@ public class UseItemHandler extends Handler {
 	 */
 	public void useItem(Item item) {
 		startAction();
-		GameEvent useItemEvent = new UseItemEvent(getGame(), item);
+		AbstractGameEvent useItemEvent = new UseItemEvent(getGame(), item);
 		useItemEvent.run();
 		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
 		endAction();

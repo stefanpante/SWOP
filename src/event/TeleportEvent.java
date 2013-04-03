@@ -12,14 +12,14 @@ import square.Square;
  * @author jonas
  *
  */
-public class TeleportEvent extends GameEvent {
+public class TeleportEvent extends AbstractGameEvent {
 	
 	/**
 	 * @param game
 	 * @param args
 	 */
-	public TeleportEvent(Game game, Object... args) {
-		super(game, args);
+	public TeleportEvent(Game game) {
+		super(game, null);
 	}
 	
 	private Teleport getTeleport(){

@@ -10,14 +10,14 @@ import game.Game;
  * @author jonas
  *
  */
-public class EndTurnEvent extends GameEvent {
+public class EndTurnEvent extends AbstractGameEvent {
 
 	/**
 	 * @param game
 	 * @param args
 	 */
-	public EndTurnEvent(Game game, Object... args) {
-		super(game, args);
+	public EndTurnEvent(Game game) {
+		super(game, null);
 	}
 
 	@Override

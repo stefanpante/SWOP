@@ -9,12 +9,12 @@ import game.Game;
  * @author jonas
  *
  */
-public abstract class GameEvent {
+public abstract class AbstractGameEvent {
 
 	private Game game;
 	private Object[] args;
 	
-	public GameEvent(Game game, Object[] args){
+	public AbstractGameEvent(Game game, Object[] args){
 		setGame(game);
 		setArgs(args);
 	}
