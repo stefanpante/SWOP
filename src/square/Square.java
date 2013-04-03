@@ -204,14 +204,6 @@ public class Square implements Effect{
 	}
 
 	@Override
-	public EffectValue getEffectDuringAction() {
-		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectDuringAction();
-		EffectValue powerEffect = this.getState().getEffectDuringAction();
-		
-		return grenadeEffect.addEffect(powerEffect);
-	}
-
-	@Override
 	public EffectValue getEffectAfterAction() {
 		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectAfterAction();
 		EffectValue powerEffect = this.getState().getEffectAfterAction();

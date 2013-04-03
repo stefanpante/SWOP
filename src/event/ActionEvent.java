@@ -3,6 +3,7 @@
  */
 package event;
 
+import effect.EffectValue;
 import game.Game;
 
 /**
@@ -10,7 +11,8 @@ import game.Game;
  *
  */
 public abstract class ActionEvent extends GameEvent {
-
+	
+	
 	public ActionEvent(Game game) {
 		super(game);
 	}
@@ -18,8 +20,6 @@ public abstract class ActionEvent extends GameEvent {
 	@Override
 	protected void beforeGameEvent() {
 		super.beforeGameEvent();
-		if(!getGame().isActive())
-			throw new IllegalStateException("The game is over");
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
 			throw new IllegalStateException("The current player has no remaining action left.");
 	}

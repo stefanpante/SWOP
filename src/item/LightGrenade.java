@@ -35,19 +35,10 @@ public class LightGrenade extends Item implements Effect{
 	}
 
 	/**
-	 * If an action is occuring during an active LightGrenade, the 
-	 * player loses 3 actions.
-	 */
-	@Override
-	public EffectValue getEffectDuringAction() {
-		return new EffectValue(0, -3);
-	}
-
-	/**
 	 * Once the action is completed, the effect is already inflicted.
 	 */
 	@Override
 	public EffectValue getEffectAfterAction() {
-		return new EffectValue();
+		return new EffectValue(0, -3);
 	}
 }
