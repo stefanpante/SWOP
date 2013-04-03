@@ -16,8 +16,8 @@ public class PickUpEvent extends ActionEvent {
 	 * @param game
 	 * @param args
 	 */
-	public PickUpEvent(Game game, Object...args) {
-		super(game, args);
+	public PickUpEvent(Game game, Item item) {
+		super(game, item);
 	}
 	
 	private Item getItem(){

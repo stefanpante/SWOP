@@ -17,8 +17,8 @@ import square.Square;
 public class MoveEvent extends ActionEvent {
 
 
-	public MoveEvent(Game game, Object... args) {
-		super(game, args);
+	public MoveEvent(Game game, Direction dir) {
+		super(game, dir);
 	}
 	
 	private Direction getDirection(){

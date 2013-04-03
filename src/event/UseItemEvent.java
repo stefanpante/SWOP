@@ -17,8 +17,8 @@ public class UseItemEvent extends ActionEvent {
 	 * @param game
 	 * @param args
 	 */
-	public UseItemEvent(Game game, Object... args) {
-		super(game, args);
+	public UseItemEvent(Game game, Item item) {
+		super(game, item);
 	}
 	
 	private Item getItem(){

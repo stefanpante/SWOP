@@ -5,7 +5,7 @@ import item.Item;
 import java.beans.PropertyChangeListener;
 
 import effect.EffectValue;
-import event.GameEvent;
+import event.AbstractGameEvent;
 import event.PickUpEvent;
 import event.UseItemEvent;
 
@@ -37,7 +37,7 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		startAction();
-		GameEvent pickUpEvent = new PickUpEvent(getGame(), item);
+		AbstractGameEvent pickUpEvent = new PickUpEvent(getGame(), item);
 		pickUpEvent.run();
 		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
 		endAction();

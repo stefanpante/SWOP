@@ -9,9 +9,9 @@ import game.Game;
  * @author jonas
  *
  */
-public abstract class ActionEvent extends GameEvent {
+public abstract class ActionEvent extends AbstractGameEvent {
 
-	public ActionEvent(Game game, Object[] args) {
+	public ActionEvent(Game game, Object... args) {
 		super(game, args);
 	}
 

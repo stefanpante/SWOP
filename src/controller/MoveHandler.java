@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import event.GameEvent;
+import event.AbstractGameEvent;
 import event.MoveEvent;
 
 import player.Player;
@@ -40,7 +40,7 @@ public class MoveHandler extends Handler {
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
 		startAction();
-		GameEvent moveEvent = new MoveEvent(getGame(), direction);
+		AbstractGameEvent moveEvent = new MoveEvent(getGame(), direction);
 		moveEvent.run();
 		setPropertyChanges();
 		endAction();
