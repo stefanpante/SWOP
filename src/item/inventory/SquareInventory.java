@@ -2,6 +2,7 @@ package item.inventory;
 
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import item.state.ItemState;
 
 import java.util.ArrayList;
@@ -112,6 +113,14 @@ public class SquareInventory extends Inventory {
 		return true;
 	}
 	
+	
+	//XXX: TEMPORARY SOLUTION
+	public boolean hasTeleport(){
+		if(getTeleport() == null)
+			return false;
+		return true;
+	}
+	
 	/**
 	 * Returns the only light grenade in this inventory.
 	 * 
@@ -125,6 +134,14 @@ public class SquareInventory extends Inventory {
 		return null;
 	}
 	
+	//XXX: TEMPORARY SOLUTION
+	public Teleport getTeleport(){
+		for(Item it: getAllItems()){
+			if(it instanceof Teleport)
+				return (Teleport) it; 
+		}
+		return null;
+	}
 	
 	/**
 	 * Returns whether this inventory has an active LightGrenade.

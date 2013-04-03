@@ -11,7 +11,7 @@ import java.util.Random;
 import notnullcheckweaver.NotNull;
 import player.Player;
 import square.Square;
-import square.obstacles.LightTrail;
+import square.obstacle.LightTrail;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;

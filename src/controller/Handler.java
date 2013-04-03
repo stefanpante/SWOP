@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import player.Player;
 import square.Direction;
 import square.Square;
-import square.obstacles.LightTrail;
+import square.obstacle.LightTrail;
 import square.state.PowerFailureState;
 import util.Coordinate;
 

@@ -6,7 +6,7 @@ import effect.EffectValue;
 import item.inventory.SquareInventory;
 
 
-import square.obstacles.Obstacle;
+import square.obstacle.Obstacle;
 import square.state.PowerFailureState;
 import square.state.RegularState;
 import square.state.SquareState;
