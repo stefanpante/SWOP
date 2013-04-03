@@ -1,7 +1,7 @@
 package effect;
 
 /**
- * Represents the value a penalty holds.
+ * Represents the value an effect holds.
  * A penalty can cause lost turns and actions.
  * This class represents these values.
  * 
@@ -22,7 +22,7 @@ public class EffectValue {
 	
 	
 	/**
-	 * Constructs a new PenaltyValue with turns lost and actions lost initialized to zero. 
+	 * Constructs a new EffectValue with turns lost and actions lost initialized to zero. 
 	 */
 	public EffectValue(){
 		this.setActionsLost(0);
@@ -30,7 +30,7 @@ public class EffectValue {
 	}
 	
 	/**
-	 * Constructs a new penaltyValue with the given parameters.
+	 * Constructs a new Effect with the given parameters.
 	 * @param turnsLost		the number of turns lost.
 	 * @param actionsLost	the number of actions lost.
 	 */
@@ -55,7 +55,7 @@ public class EffectValue {
 	}
 	
 	/**
-	 * returns whether the given actions lost is valid for penaltyValue.
+	 * returns whether the given actions lost is valid for Effect.
 	 * The actions lost is valid when they are equal to or larger than zero.
 	 * 
 	 * @param actionsLost	the given number of actions to check.
@@ -106,7 +106,7 @@ public class EffectValue {
 	}
 	
 	/**
-	 * Checks whether the given turns lost is valid for penaltyValue.
+	 * Checks whether the given turns lost is valid for Effect.
 	 * The turnslost is valid when they are equal to or larger than zero.
 	 * 
 	 * @param turnsLost		the number of turns lost.
