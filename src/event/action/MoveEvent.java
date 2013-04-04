@@ -1,11 +1,12 @@
 /**
  * 
  */
-package event;
+package event.action;
 
-import effect.EffectValue;
+import event.effect.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
+import item.Teleport;
 
 import java.util.Observer;
 
@@ -53,14 +54,20 @@ public class MoveEvent extends ActionEvent {
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
+		// FIXME: Dummycode
+		if(newPosition.getInventory().hasItem(new Teleport())){
+			Teleport teleport = (Teleport) newPosition.getInventory().getItem(0);
+			TeleportEvent teleportEvent = new TeleportEvent(getGame(), teleport);
+			teleportEvent.run();
+		}
 	}
 
 	@Override
 	protected void afterGameEvent() {
 		Square newPosition = getGame().getCurrentPlayer().getPosition();
 		if(newPosition.hasEffect()){
-			EffectValue penaltyValue = newPosition.getEffectAfterAction();
-			getGame().getCurrentPlayer().endTurn(penaltyValue);
+			// FIXME: EffectValue penaltyValue = newPosition.getEffectAfterAction();
+			//		  getGame().getCurrentPlayer().endTurn(penaltyValue);
 			getGame().switchToNextPlayer();
 		}
 		getGame().getCurrentPlayer().getPosition().getInventory().wearOut();

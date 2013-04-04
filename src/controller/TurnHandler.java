@@ -3,7 +3,7 @@
  */
 package controller;
 
-import event.ActionEvent;
+import event.action.ActionEvent;
 import game.Game;
 
 import java.beans.PropertyChangeListener;
