@@ -4,11 +4,7 @@ package square;
 import effect.Effect;
 import item.inventory.SquareInventory;
 
-
 import square.obstacle.Obstacle;
-import square.state.PowerFailureState;
-import square.state.RegularState;
-import square.state.SquareState;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -31,12 +27,7 @@ public class Square{
 	/**
 	 * State of the current square. May be a power failure.
 	 */
-	private SquareState state;
-	
-	/**
-	 *  Sets for how many turns the current state will be active
-	 */
-	private int remainingTurns;
+	private Power power;
 	
 	/**
 	 * The obstacle of this Square object.
@@ -49,28 +40,15 @@ public class Square{
 	 */
 	public Square (){
 		this.inventory = new SquareInventory();
-		this.state = RegularState.getInstance();
-		this.remainingTurns = 0;
+		this.power = new Power();
 		this.id = System.nanoTime();
 	}
 	
 	/**
 	 * Returns the state of the square.
 	 */
-	public SquareState getState() {
-		return this.state;
-	}
-	
-	/**
-	 * State state
-	 * 
-	 * @param	regularState
-	 * @throws	IllegalArgumentException	When the given state is null.
-	 */
-	public void setState(SquareState state) throws IllegalArgumentException {
-		if(!isValidState(state))
-			throw new IllegalArgumentException("State cannot be null.");
-		this.state = state;
+	public Power getPower() {
+		return this.power;
 	}
 	
 	/**
@@ -80,7 +58,7 @@ public class Square{
 	 * @return	True	If state is not null.
 	 * 			False	If state is null.
 	 */
-	public boolean isValidState(SquareState state) {
+	public boolean isValidState(Power state) {
 		if(state == null)
 			return false;
 		else
@@ -135,31 +113,6 @@ public class Square{
 	 */
 	public boolean isObstructed(){
 			return obstacle != null;
-	}
-	
-	/**
-	 * Ends the turn. Checks if the state of the square needs to change
-	 */
-	public void endTurn(){
-		if(remainingTurns == 0){
-			this.state = RegularState.getInstance();
-		}
-		else if(remainingTurns > 0){
-			remainingTurns--;
-		}
-	}
-	
-	public void powerFail(){
-		remainingTurns = PowerFailureState.TURNS_ACTIVE - 1;
-		setState(PowerFailureState.getInstance());
-	}
-	
-	public void powerGain(){
-		setState(RegularState.getInstance());
-	}
-
-	public boolean hasEffect() {
-		return state.hasEffect() || this.getInventory().hasActiveLightGrenade();
 	}
 
 	/* (non-Javadoc)
