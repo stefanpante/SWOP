@@ -96,9 +96,7 @@ public class SquareGUI implements Drawable{
 
 		// Draw the square
 		gui.rect(position.x, position.y, width, height);
-		if(shape != null){
-			gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height /*-  GridGui.MARGIN*2*/);
-		}
+
 
 	}
 
