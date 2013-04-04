@@ -182,8 +182,6 @@ public class Game {
 		}
 		
 		this.currentPlayer = getNextPlayer();
-		powerFailureSquares();
-		updateStates();
 	}
 	
 	/**
@@ -311,17 +309,6 @@ public class Game {
 		}
 	}
 	
-	/**
-	 * Updates the states of every square, notifying them that a turn has been completed.
-	 */
-	public void updateStates() {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			square.getPower().decreaseTurn();
-		}
-	}
 	
 	/**
 	 * Return if the current game is end
