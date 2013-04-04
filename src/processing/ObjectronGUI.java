@@ -33,11 +33,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	public void setup(){
 		// sets the size from the applet to a fourth of the screen.
-		size(displayWidth - 100, displayHeight - 100);
+		size(550, 550);
 		
 		// sets the framerate to 60 frames per second.
 		frameRate(60);
-		PVector position = new PVector(100, 100);
+		PVector position = new PVector(25, 25);
 		this.grid = new GridGui(position, this, 500,500, 10, 10);
 		
 		
