@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.UIManager;
 
 import processing.ObjectronGUI;
+import processing.core.PApplet;
 
 import util.Coordinate;
 
@@ -26,7 +27,13 @@ public class ProcessingHandler extends Handler {
 	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
 	public static final String WIN_PROPERTY 				= "Win";
 	public static final String LOSE_PROPERTY				= "Lose";
+	private ObjectronGUI objectronGUI;
 	
+	
+	public ProcessingHandler(ObjectronGUI objectronGUI){
+		this.objectronGUI = objectronGUI;
+		startNewGame();
+	}
 	/**
 	 *  Initializes the game handler
 	 * 
@@ -42,14 +49,6 @@ public class ProcessingHandler extends Handler {
 	private UseItemHandler useItemHandler;
 	private TurnHandler turnHandler;
 	
-	
-	/* Application Window */
-	
-    public static void main(String[] args) {
-    	ProcessingHandler processingHandler = new ProcessingHandler();
-    	processingHandler.startNewGame();
-    }
-    
     /**
      * Used to start a new game.
      */

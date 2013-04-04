@@ -10,6 +10,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import controller.GameHandler;
+import controller.ProcessingHandler;
 
 import player.Player;
 import processing.core.PApplet;
@@ -30,6 +31,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	
 	GridGui grid;
 	
+	ProcessingHandler obj;
 	//FIXME: remove this shit
 	PShape shape;
 	/**
@@ -40,9 +42,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		size(550, 550);
 		
 		// sets the framerate to 60 frames per second.
-		frameRate(60);
+		//frameRate(60);
 		PVector position = new PVector(25, 25);
 		this.grid = new GridGui(position, this, 500,500, 10, 10);
+		obj = new ProcessingHandler(this);
 		
 		
 		
@@ -73,6 +76,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		Object o = evt.getNewValue();
+		if(o == null) System.out.println("Event object is null");
         if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
         	this.grid.setWalls((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
@@ -85,8 +89,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         	this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
         	String playerName = (String)o;
-        	if(!this.currentPlayerLabel.equals(playerName)){
-        		this.currentPlayerLabel = playerName;
+        	if(!this.currentPlayerName.equals(playerName)){
+        		this.currentPlayerName = playerName;
         		showMessage("It's now "+playerName+ "'s turn.");
         	}
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
@@ -108,8 +112,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         }
 		
 	}
-	
-	private String currentPlayerName;
+	private String currentPlayerName = "";
 
 	private void confirmEndTurn(String o) {
 		// TODO Auto-generated method stub

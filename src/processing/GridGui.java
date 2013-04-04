@@ -68,6 +68,11 @@ public class GridGui implements Drawable{
 		this.hCells = hCells;
 		this.vCells = vCells;
 		this.squares = new HashMap<Coordinate, SquareGUI>();
+		walls = new ArrayList<Coordinate>();
+		grenades = new ArrayList<Coordinate>();
+		players = new ArrayList<Coordinate>();
+		powerFails = new ArrayList<Coordinate>();
+		lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
 		this.initGrid();
 	}
 
@@ -132,36 +137,42 @@ public class GridGui implements Drawable{
 
 	public void setWalls(ArrayList<Coordinate> o) {
 		this.walls = o;
+		resetGrid();
 
 	}
 
 
 	public void setGrenades(ArrayList<Coordinate> o) {
 		this.grenades = o;
+		resetGrid();
 
 	}
 
 
 	public void setPlayers(ArrayList<Coordinate> o) {
 		this.players = o;
+		resetGrid();
 
 	}
 
 
 	public void setPowerFails(ArrayList<Coordinate> o) {
 		this.powerFails = o;
+		resetGrid();
 
 	}
 
 
 	public void setLightTrails(HashMap<Player, ArrayList<Coordinate>> o) {
 		this.lightTrails = o;
+		resetGrid();
 
 	}
 
 
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
+		resetGrid();
 
 	}
 
@@ -169,8 +180,9 @@ public class GridGui implements Drawable{
 		for(SquareGUI s : squares.values()){
 			s.reset();
 		}
-		
+		System.out.println("Wall coordinates");
 		for(Coordinate coor: walls){
+			System.out.println("Wall:" + coor);
 			squares.get(coor).setVisibility(false);
 		}
 		
