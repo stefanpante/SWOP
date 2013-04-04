@@ -1,25 +1,37 @@
 package item;
 
+import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
 /**
- * @author jonas
+ * Implements a teleport with a certain destination.
+ * @author jonas, Dieter
  *
  */
 public class Teleport extends Item {
 	
-	
+	/**
+	 * The destination of this teleport.
+	 */
 	private Teleport destination;
 	
+	/**
+	 * Zero argument constructor that makes a new Teleport with no destination.
+	 */
 	public Teleport(){
 		
 	}
 	
+	/**
+	 * Constructor that gets an initial destination as argument.
+	 */
 	public Teleport (Teleport desitination) throws IllegalArgumentException {
 		setDestination(desitination);
 	}
 
 	/**
+	 * The destination of this teleport.
+	 * 
 	 * @return the destination
 	 */
 	public Teleport getDestination() {
@@ -27,24 +39,41 @@ public class Teleport extends Item {
 	}
 
 	/**
-	 * @param destination the destination to set
+	 * Sets the destination of this Teleport to the given destination
+	 * 	if that is a valid one.
+	 * 
+	 * @param 	destination 
+	 * 			The destination to set.
+	 * @throws	IllegalArgumentException
+	 * 			If the given destination is not valid.
+	 * 			| !isValidDestination(destination) || !canHaveAsDestination(destination)
 	 */
 	public void setDestination(Teleport destination) throws IllegalArgumentException {
-		if(!isValidDestionation(destination))
-			throw new IllegalArgumentException();
+		if(!isValidDestination(destination) || !canHaveAsDestination(destination))
+			throw new IllegalArgumentException("The given destination is not a valid one for this Teleport");
 		this.destination = destination;
 	}
 
 	/**
-	 * Checks whether the given teleport is a valid destination for this
-	 * teleport.
+	 * Checks whether the given destination is a valid destination for this
+	 * Teleport.
 	 * 
 	 * @param 	destination
 	 * 			The destination to check
-	 * @return	True if and only if the square is nut null
-	 * 			and not obstructed
+	 * @return	True if and only if the destination is not this teleport.
 	 */
-	private boolean isValidDestionation(Teleport destination) {
+	private boolean canHaveAsDestination(Teleport destination) {
+		return !destination.equals(this);
+	}
+	
+	/**
+	 * Checks whether the given teleport is a valid destination for all Teleports.
+	 * 
+	 * @param 	destination
+	 * 			The destination to check
+	 * @return	True if and only if the destination is not null.
+	 */
+	public static boolean isValidDestination(Teleport destination){
 		return destination != null;
 	}
 
@@ -58,6 +87,18 @@ public class Teleport extends Item {
 	public void acceptRemoveSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
 		sqInv.removeTeleport(this);
+	}
+
+	@Override
+	public void acceptAddPlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.addTeleport(this);
+	}
+
+	@Override
+	public void acceptRemovePlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.removeTeleport(this);
 	}
 	
 }

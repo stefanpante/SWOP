@@ -163,30 +163,25 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		String result = "Square ";
 		return result + super.toString();
 	}
-
-	@Override
-	public void removeItem(Item it) {
-		//NO op.
-	}
-
+	
 	@Override
 	public void addChargedDisc(ChargedDisc chargedDisc) {
-		//No specific operation needed for an IdenityDisc.		
+		//No specific operation needed yet.
 	}
 
 	@Override
 	public void removeChargedDisc(ChargedDisc chargedDisc) {
-		//No specific operation needed for an IdenityDisc.		
+		//No specific operation needed yet.
 	}
 
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) {
-		//No specific operation needed for an IdenityDisc.
+		//No specific operation needed yet.
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc) {
-		//No specific operation needed for an IdenityDisc.
+		//No specific operation needed yet.
 	}
 
 	@Override
