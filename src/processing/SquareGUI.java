@@ -43,7 +43,7 @@ public class SquareGUI implements Drawable{
 		this.gui = objectronGUI;
 		this.position = new PVector();
 		this.visible = true;
-		//this.shape = objectronGUI.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
+		this.shape = objectronGUI.loadShape(getClass().getResource("/res/wall.svg").getPath());
 
 	}
 
@@ -75,11 +75,11 @@ public class SquareGUI implements Drawable{
 			// Draw the square
 			gui.rect(position.x , position.y, width, height);
 			if(shape != null)
-				gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
+				//gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
 
 			if(!visible){
 				gui.fill(gui.color(255));
-				gui.rect(position.x + GridGui.MARGIN, position.y + GridGui.MARGIN, width- 2 * GridGui.MARGIN, height- 2 * GridGui.MARGIN);
+				gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height /*-  GridGui.MARGIN*2*/);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class SquareGUI implements Drawable{
 		// Draw the square
 		gui.rect(position.x, position.y, width, height);
 		if(shape != null){
-			gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
+			gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height /*-  GridGui.MARGIN*2*/);
 		}
 
 	}
