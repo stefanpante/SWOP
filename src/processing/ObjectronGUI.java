@@ -6,11 +6,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
 import controlP5.Bang;
 import controlP5.ControlP5;
+import controlP5.Group;
 import controller.GameHandler;
 import controller.ProcessingHandler;
 
@@ -38,7 +40,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	public void setup(){
 		// sets the size from the applet to a fourth of the screen.
-		size(550, 550);
+		size(850, 550);
 		shapes = new Shapes(this);
 		// sets the framerate to 60 frames per second.
 		//frameRate(60);
@@ -46,16 +48,32 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		this.grid = new GridGui(position, this, 500,500, 10, 10);
 		obj = new ProcessingHandler(this);
 		inputController = new ControlP5(this);
-		bang =  inputController.addBang("moveLeft");
 		
+		squareInventoryGroup = inputController.addGroup("Square Inventory");
+		squareInventoryGroup.setPosition(new PVector(550,35));
+		squareInventoryGroup.setWidth(275);
+		squareInventoryGroup.setBackgroundHeight(100);
+        squareInventoryGroup.setBackgroundColor(SquareGUI.LIGHTER_GREY);
+        squareInventoryGroup.setColorBackground(SquareGUI.PLAYERBLUE);
 		
-		
+        playerInventoryGroup = inputController.addGroup("Player Inventory");
+        playerInventoryGroup.setPosition(new PVector(550,155));
+        playerInventoryGroup.setWidth(275);
+        playerInventoryGroup.setBackgroundHeight(100);
+        playerInventoryGroup.setBackgroundColor(SquareGUI.LIGHTER_GREY);
+        playerInventoryGroup.setColorBackground(SquareGUI.PLAYERBLUE);        
+        
+        bang =  inputController.addBang("moveLeft");
+		bang.setGroup(squareInventoryGroup);
+		bang.setColorBackground(SquareGUI.PLAYERBLUE);
 	}
 	
 	public void moveLeft(){
 		obj.getMoveHandler().move(Direction.EAST);
 	}
 	Bang bang;
+	Group squareInventoryGroup;
+	Group playerInventoryGroup;
 	float width = 50;
 	float height = 50;
 	float margin = 5;
