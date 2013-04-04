@@ -3,7 +3,10 @@ package items;
 import static org.junit.Assert.*;
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import item.inventory.PlayerInventory;
+import item.launchable.ChargedDisc;
+import item.launchable.IdentityDisc;
 
 import org.junit.AfterClass;
 import org.junit.Test;
@@ -33,9 +36,9 @@ public class TestPlayerInventory {
 		LightGrenade lg2 = new LightGrenade();
 		LightGrenade lg3 = new LightGrenade();
 
-		Item it1 = new Item();
-		Item it2 = new Item();
-		Item it3 = new Item();
+		Item it1 = new IdentityDisc();
+		Item it2 = new ChargedDisc();
+		Item it3 = new IdentityDisc();
 
 		assertEquals(0, pi1.getSize());
 		pi1.addItem(it1);
@@ -60,10 +63,10 @@ public class TestPlayerInventory {
 		LightGrenade lg2 = new LightGrenade();
 		LightGrenade lg3 = new LightGrenade();
 
-		Item it1 = new Item();
-		Item it2 = new Item();
-		Item it3 = new Item();
-		Item it4 = new Item();
+		Item it1 = new IdentityDisc();
+		Item it2 = new ChargedDisc();
+		Item it3 = new IdentityDisc();
+		Item it4 = new IdentityDisc();
 
 		assertEquals(0, pi1.getSize());
 		pi1.addItem(it1);
@@ -83,4 +86,9 @@ public class TestPlayerInventory {
 		//Should throw exception cause limit is 6.
 	}
 
+	@Test(expected=IllegalStateException.class)
+	public void testAddTeleport(){
+		PlayerInventory pi1 = new PlayerInventory();
+		pi1.addItem(new Teleport());
+	}
 }
