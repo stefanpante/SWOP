@@ -55,7 +55,6 @@ public class ProcessingHandler extends Handler {
     public void startNewGame(){
 		try {
 			createGame(10,10);
-			ObjectronGUI objectronGUI = new ObjectronGUI();
 			addPropertyChangeListener(objectronGUI);
 			
 	    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
