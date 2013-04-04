@@ -54,13 +54,27 @@ public class Teleport extends Item {
 	}
 	
 	@Override
-	public void acceptPlayerInventory(PlayerInventory plInv) {
+	public void acceptAddPlayerInventory(PlayerInventory plInv) 
+			throws IllegalStateException {
 		plInv.addItem(this);		
 	}
 
 	@Override
-	public void acceptSquareInventory(SquareInventory sqInv) {
+	public void acceptAddSquareInventory(SquareInventory sqInv) 
+			throws IllegalStateException {
 		sqInv.addItem(this);		
+	}
+
+	@Override
+	public void acceptRemovePlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.take(this);
+	}
+
+	@Override
+	public void acceptRemoveSquareInventory(SquareInventory sqInv)
+			throws IllegalStateException {
+		sqInv.removeItem(this);
 	}
 	
 }

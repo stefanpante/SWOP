@@ -3,10 +3,9 @@ package item.inventory;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import item.state.ItemState;
-
-import java.util.ArrayList;
-
+import item.launchable.ChargedDisc;
+import item.launchable.IdentityDisc;
+import item.visitor.AddRemoveItemVisitor;
 
 /**
  * This class describes the inventory of a square. 
@@ -14,9 +13,17 @@ import java.util.ArrayList;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
- * TODO: Implement the visitor pattern when there are more items then only a LightGrenade.
  */
-public class SquareInventory extends Inventory {
+public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
+	
+	/**
+	 * Holds the only possible Teleport in this SquareInventory.
+	 */
+	private Teleport teleport;
+	/**
+	 * Holds the only possible LightGrenade in this SquareInventory.
+	 */
+	private LightGrenade lightGrenade;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -29,6 +36,8 @@ public class SquareInventory extends Inventory {
 	 */
 	public SquareInventory(int size) {
 		super(size);
+		teleport = null;	
+		lightGrenade = null;
 	}
 
 	/**
@@ -39,19 +48,20 @@ public class SquareInventory extends Inventory {
 	 * @effect	super(size)
 	 */
 	public SquareInventory() {
-		super();
+		super();	
 	}
 	
 	/**
-	 * Adds a given item to this UsedItemInventory if possible. 
+	 * Adds a given item to this SquareInventory if possible. 
 	 * 
 	 * @param 	item
 	 * 			The item to add.
 	 * @throws	IllegalStateException
 	 * 			If the given item is not a valid item 
-	 * 			for any UsedItemInventory or for this one.
+	 * 			for any SquareInventory or for this one.
 	 * 			| !isValidItem(item) || !canHaveAsItem(item)
 	 * @effect	| super.addItem(item)
+	 * @effect	| item.acceptAddSquareInventory(this)
 	 */
 	@Override
 	public void addItem(Item item) throws IllegalStateException {
@@ -60,25 +70,33 @@ public class SquareInventory extends Inventory {
 											+ item
 											+ " is not a valid item for this "
 											+ this);
+		item.acceptAddSquareInventory(this);
 		super.addItem(item);
 	}	
 	
 	/**
-	 * Returns if the inventory contains an active item
-	 * @return
+	 * Takes a given from this SquareInventory if possible. 
+	 * 
+	 * @param 	item
+	 * 			The item to remove.
+	 * @throws	IllegalStateException
+	 * 			If the given item is not a valid item 
+	 * 			for any SquareInventory or for this one.
+	 * 			| !isValidItem(item)
+	 * @effect	| super.addItem(item)
+	 * @effect	| item.acceptRemoveSquareInventory(this)
 	 */
-	public boolean hasActiveItem(){
-		boolean result = false;
-		for(Item item: super.getAllItems()){
-			if(item.isActive()){
-				result = true;
-				break;
-			}
-		}
-		
-		return result;
-		
+	@Override
+	public void take(Item item) throws IllegalStateException {
+		if(!isValidItem(item))
+			throw new IllegalStateException("This"
+											+ item
+											+ "can not be removed from this "
+											+ this);
+		item.acceptRemoveSquareInventory(this);
+		super.take(item);
 	}
+	
 	/**
 	 * Returns whether the given item can be used as an item of this UsedItemInventory.
 	 * 
@@ -94,14 +112,11 @@ public class SquareInventory extends Inventory {
 		if(!super.canHaveAsItem(item)){
 			return false;
 		}
-		if(item instanceof LightGrenade && hasLightGrenade()){
-			return false;
-		}
 		return true;
 	}
 	
 	/**
-	 * Returns whether this UsedItemInventory has a LightGrenade.
+	 * Returns whether this SquareInventory has a LightGrenade.
 	 * 
 	 * @param 	item
 	 * 			The item to check.
@@ -113,8 +128,10 @@ public class SquareInventory extends Inventory {
 		return true;
 	}
 	
-	
-	//XXX: TEMPORARY SOLUTION
+	/**
+	 * Returns whether this SquareInventory
+	 * @return
+	 */
 	public boolean hasTeleport(){
 		if(getTeleport() == null)
 			return false;
@@ -127,59 +144,15 @@ public class SquareInventory extends Inventory {
 	 * @return	The LightGrenade in this inventory if there is none returns null.
 	 */
 	public LightGrenade getLightGrenade(){
-		for(Item it : getAllItems()){
-			if(it instanceof LightGrenade)
-				 return (LightGrenade) it;
-		}
-		return null;
+		return this.lightGrenade;
 	}
 	
-	//XXX: TEMPORARY SOLUTION
+	/**
+	 * Returns the only Teleport in this inventory.
+	 * @return
+	 */
 	public Teleport getTeleport(){
-		for(Item it: getAllItems()){
-			if(it instanceof Teleport)
-				return (Teleport) it; 
-		}
-		return null;
-	}
-	
-	/**
-	 * Returns whether this inventory has an active LightGrenade.
-	 * 
-	 * @return 	True if and only if this inventory has an active LightGrenade.
-	 * 			| getLightGrenade().isActive()
-	 */
-	public boolean hasActiveLightGrenade(){
-		LightGrenade lg = getLightGrenade();
-		if(lg == null)
-			return false;
-		return getLightGrenade().isActive();
-	}
-	
-	/**
-	 * Active the given item. 
-	 * 
-	 * @param 	item	the item to be activated
-	 * @throws 	IllegalStateException
-	 * 			Thrown if the given item is not in this inventory.
-	 */
-	public void activate(Item item)throws IllegalStateException{
-		if(!this.hasItem(item)){
-			throw new IllegalStateException("The "+ item + " is not in " + this);
-		} else {
-			item.activate();
-		}
-	}
-	
-	/**
-	 * Wears out all the item in this inventory.
-	 */
-	public void wearOut(){
-		for(Item item: super.getAllItems()){
-			if(item.isActive()){
-				item.wearOut();
-			}
-		}
+		return this.teleport;
 	}
 	
 	/**
@@ -189,5 +162,50 @@ public class SquareInventory extends Inventory {
 	public String toString() {
 		String result = "Square ";
 		return result + super.toString();
+	}
+
+	@Override
+	public void removeItem(Item it) {
+		//NO op.
+	}
+
+	@Override
+	public void addChargedDisc(ChargedDisc chargedDisc) {
+		//No specific operation needed for an IdenityDisc.		
+	}
+
+	@Override
+	public void removeChargedDisc(ChargedDisc chargedDisc) {
+		//No specific operation needed for an IdenityDisc.		
+	}
+
+	@Override
+	public void addIdentityDisc(IdentityDisc identityDisc) {
+		//No specific operation needed for an IdenityDisc.
+	}
+
+	@Override
+	public void removeIdentityDisc(IdentityDisc identityDisc) {
+		//No specific operation needed for an IdenityDisc.
+	}
+
+	@Override
+	public void addLightGrenade(LightGrenade lightGrenade) {
+		this.lightGrenade = lightGrenade;
+	}
+
+	@Override
+	public void removeLightGrenade(LightGrenade lightGrenade) {
+		this.lightGrenade = null;
+	}
+
+	@Override
+	public void addTeleport(Teleport teleport) {
+		this.teleport = teleport;
+	}
+
+	@Override
+	public void removeTeleport(Teleport teleport) {
+		this.teleport = null;
 	} 
 }
