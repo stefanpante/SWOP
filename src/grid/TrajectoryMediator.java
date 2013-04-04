@@ -42,6 +42,7 @@ public class TrajectoryMediator {
 	 */
 	public Square getEndSquare(Square startSquare, Direction direction, int maximumRange){
 		Square prevSquare = startSquare;
+		
 		Square currentSquare;
 		int currentRange = 0;
 		//TODO implement powerfailure and teleport
