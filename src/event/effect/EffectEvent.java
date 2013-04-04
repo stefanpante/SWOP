@@ -5,7 +5,6 @@ package event.effect;
 
 import java.util.ArrayList;
 
-import effect.EffectValue;
 import event.AbstractGameEvent;
 import game.Game;
 
@@ -28,7 +27,7 @@ public abstract class EffectEvent extends AbstractGameEvent {
 	public void add(EffectEvent event){
 		combinations.add(event);
 	}
-	
+		
 	@Override
 	public void run(){
 		super.run();

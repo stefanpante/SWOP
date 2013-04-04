@@ -2,7 +2,6 @@ package square;
 
 
 import effect.Effect;
-import effect.EffectValue;
 import item.inventory.SquareInventory;
 
 
@@ -20,7 +19,7 @@ import notnullcheckweaver.Nullable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 @NotNull
-public class Square implements Effect{
+public class Square{
 	
 	private final long id;
 		
@@ -195,21 +194,7 @@ public class Square implements Effect{
 		return true;
 	}
 
-	@Override
-	public EffectValue getEffectBeforeAction() {
-		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectBeforeAction();
-		EffectValue powerEffect = this.getState().getEffectBeforeAction();
-		
-		return grenadeEffect.addEffect(powerEffect);
-	}
 
-	@Override
-	public EffectValue getEffectAfterAction() {
-		EffectValue grenadeEffect = this.getInventory().getLightGrenade().getEffectAfterAction();
-		EffectValue powerEffect = this.getState().getEffectAfterAction();
-		
-		return grenadeEffect.addEffect(powerEffect);
-	}
 	
 	
 }

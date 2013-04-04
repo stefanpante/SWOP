@@ -2,8 +2,6 @@ package player;
 
 import java.util.Observable;
 
-import effect.EffectValue;
-
 
 import be.kuleuven.cs.som.annotate.Basic;
 
@@ -59,9 +57,7 @@ public class Player extends Observable implements Obstacle {
 	 * The amount of action a player has during one move
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 3;
-	
-	private EffectValue effectValue;
-	
+		
 	/**
 	 * creates a new player with a given name and start position
 	 * 
@@ -371,56 +367,53 @@ public class Player extends Observable implements Obstacle {
 		moved = false;
 	}
 	
-	/**
-	 * End's the player his turn and sets the new remaining actions, depending
-	 * on the conditions in which the turn was ended
-	 * 
-	 * @param	lostActions	Number of actions lost for the next turn.
-	 */
-	public void endTurn(EffectValue penaltyValue) {
-		calculateEffectValue(penaltyValue);
-		// TODO: change the EffectValue to represent the end turn
-		moved = false;
-	}
-	
+//	/**
+//	 * End's the player his turn and sets the new remaining actions, depending
+//	 * on the conditions in which the turn was ended
+//	 * 
+//	 * @param	lostActions	Number of actions lost for the next turn.
+//	 */
+//	public void endTurn(EffectValue penaltyValue) {
+//		calculateEffectValue(penaltyValue);
+//		// TODO: change the EffectValue to represent the end turn
+//		moved = false;
+//	}
+//	
+//	
+//
+//	/**
+//	 * Calculates the effectValue and the remaining actions for this player.
+//	 * 
+//	 * @param effectVal
+//	 */
+//	// FIXME: StefAnus
+//	// TODO: Moet kunnen worden opgeroepen bij elk event
+//	public void calculateEffectValue(EffectValue effectVal){
+//
+//		// Gets the current lost turns of the player
+//		int turnsLost = this.effectValue.getTurnsLost();
+//		// Gets the current actions lost of the player
+//		int actionsLost = this.effectValue.getActionsLost();
+//		
+//		// adds the turns Lost to the current turns lost.
+//		turnsLost 	+=  effectVal.getTurnsLost();
+//		// adds the number of turns lost caused by actions lost.
+//		turnsLost 	+=  effectVal.getActionsLost()/ Player.MAX_ALLOWED_ACTIONS;
+//		// adds extra actions lost  to the current actions lost
+//		actionsLost +=  (effectVal.getActionsLost() % Player.MAX_ALLOWED_ACTIONS);
+//		// Maybe the new actions lost causes an extra turn to be lost.
+//		turnsLost 	+=	(actionsLost / Player.MAX_ALLOWED_ACTIONS);
+//		// Calculate the new actions lost 
+//		actionsLost %=  Player.MAX_ALLOWED_ACTIONS;
+//		
+//		// Sets the remaining actions of the player.
+//		this.remainingActions = Player.MAX_ALLOWED_ACTIONS - actionsLost;
+//		// effectValue stores the number of turns lost
+//		this.effectValue = new EffectValue(turnsLost, 0);
+//		
+//	}
 	
 
-	/**
-	 * Calculates the effectValue and the remaining actions for this player.
-	 * 
-	 * @param effectVal
-	 */
-	// FIXME: StefAnus
-	// TODO: Moet kunnen worden opgeroepen bij elk event
-	public void calculateEffectValue(EffectValue effectVal){
-
-		// Gets the current lost turns of the player
-		int turnsLost = this.effectValue.getTurnsLost();
-		// Gets the current actions lost of the player
-		int actionsLost = this.effectValue.getActionsLost();
-		
-		// adds the turns Lost to the current turns lost.
-		turnsLost 	+=  effectVal.getTurnsLost();
-		// adds the number of turns lost caused by actions lost.
-		turnsLost 	+=  effectVal.getActionsLost()/ Player.MAX_ALLOWED_ACTIONS;
-		// adds extra actions lost  to the current actions lost
-		actionsLost +=  (effectVal.getActionsLost() % Player.MAX_ALLOWED_ACTIONS);
-		// Maybe the new actions lost causes an extra turn to be lost.
-		turnsLost 	+=	(actionsLost / Player.MAX_ALLOWED_ACTIONS);
-		// Calculate the new actions lost 
-		actionsLost %=  Player.MAX_ALLOWED_ACTIONS;
-		
-		// Sets the remaining actions of the player.
-		this.remainingActions = Player.MAX_ALLOWED_ACTIONS - actionsLost;
-		// effectValue stores the number of turns lost
-		this.effectValue = new EffectValue(turnsLost, 0);
-		
-	}
-	
-	public EffectValue getEffectValue(){
-		return this.effectValue;
-	}
-	
 	/**
 	 * Returns whether the player covers the given square
 	 * 
