@@ -6,6 +6,11 @@ import item.Teleport;
 import item.launchable.ChargedDisc;
 import item.launchable.IdentityDisc;
 
+/**
+ * Visitor implementation for adding or removing specific items from an inventory.
+ * 
+ * @author Dieter
+ */
 public interface AddRemoveItemVisitor {
 	
 	 public void addItem(Item it) throws IllegalStateException;
