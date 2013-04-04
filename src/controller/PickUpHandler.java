@@ -4,10 +4,9 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import effect.EffectValue;
 import event.AbstractGameEvent;
-import event.PickUpEvent;
-import event.UseItemEvent;
+import event.action.PickUpEvent;
+import event.action.UseItemEvent;
 
 import player.Player;
 import game.Game;

@@ -1,7 +1,6 @@
 package square.state;
 
 import effect.Effect;
-import effect.EffectValue;
 import square.Square;
 
 /**
@@ -19,19 +18,4 @@ public abstract class SquareState implements Effect {
 		return "Square State: ";
 	}
 	
-	/**
-	 * In a standard square state no special effects are required before an action.
-	 */
-	@Override
-	public EffectValue getEffectBeforeAction() {
-		return new EffectValue();
-	}
-
-	/**
-	 * In a standard square state no special effects are required after an action.
-	 */
-	@Override
-	public EffectValue getEffectAfterAction() {
-		return new EffectValue();
-	}
 }

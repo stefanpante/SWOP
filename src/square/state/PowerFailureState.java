@@ -1,6 +1,5 @@
 package square.state;
 
-import effect.EffectValue;
 import square.Square;
 
 /**
@@ -41,14 +40,5 @@ public class PowerFailureState extends SquareState{
 		return super.toString() + "Power Failed";
 	}
 	
-	@Override
-	public EffectValue getEffectBeforeAction() {
-		return new EffectValue(0, 1);
-	}
-	
-	@Override
-	public EffectValue getEffectAfterAction() {
-		return new EffectValue(1, 0);
-	}
 	
 }

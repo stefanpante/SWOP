@@ -3,7 +3,6 @@
  */
 package gui;
 
-import effect.EffectValue;
 import grid.Grid;
 import item.Item;
 
@@ -457,7 +456,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
 				System.out.println("Cheat 3 activated");
 				break;
 			case 4:
-				gameHandler.getGame().getCurrentPlayer().endTurn(new EffectValue());
+				gameHandler.getGame().getCurrentPlayer().endTurn();
 				System.out.println("Cheat 4 activated");
 				break;
 			}

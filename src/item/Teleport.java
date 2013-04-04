@@ -3,6 +3,8 @@
  */
 package item;
 
+import item.inventory.PlayerInventory;
+import item.inventory.SquareInventory;
 import square.Square;
 
 /**
@@ -49,6 +51,16 @@ public class Teleport extends Item {
 	 */
 	private boolean isValidDestionation(Teleport destination) {
 		return destination != null;
+	}
+	
+	@Override
+	public void acceptPlayerInventory(PlayerInventory plInv) {
+		plInv.addItem(this);		
+	}
+
+	@Override
+	public void acceptSquareInventory(SquareInventory sqInv) {
+		sqInv.addItem(this);		
 	}
 	
 }

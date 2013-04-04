@@ -2,8 +2,6 @@ package controller;
 
 import java.beans.PropertyChangeListener;
 
-import effect.EffectValue;
-import event.EndTurnEvent;
 import event.AbstractGameEvent;
 
 import player.Player;
@@ -80,8 +78,7 @@ public class EndTurnHandler extends Handler{
 		if(!isConfirmed()){
 			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
 		}else{
-			AbstractGameEvent endTurnEvent = new EndTurnEvent(getGame());
-			endTurnEvent.run();
+			getGame().getCurrentPlayer().endTurn();
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			resetConfirm();
 		}

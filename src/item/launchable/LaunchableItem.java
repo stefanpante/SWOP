@@ -11,7 +11,7 @@ import item.Item;
 public abstract class LaunchableItem extends Item {
 	
 	/**
-	 * The maximum range of the item when launched.
+	 * The max imum range of the item when launched.
 	 * 
 	 * @return
 	 */

@@ -1,12 +1,12 @@
 /**
  * 
  */
-package event;
+package event.action;
 
 import java.util.Observer;
 
 import controller.TurnHandler;
-import effect.EffectValue;
+import event.AbstractGameEvent;
 import game.Game;
 
 /**
@@ -14,19 +14,13 @@ import game.Game;
  *
  */
 public abstract class ActionEvent extends AbstractGameEvent {
-	
-	
-	
-	protected EffectValue effectValue;
-	
+		
 	public ActionEvent(Game game) {
 		super(game);
 		if(OBSERVER == null)
 			throw new IllegalStateException("ActionEvent cannot be created without it's observer set.");
 		addObserver(OBSERVER);
 	}
-	
-	
 	
 	@Override
 	public void run() {
@@ -40,16 +34,6 @@ public abstract class ActionEvent extends AbstractGameEvent {
 		notifyObservers();
 	}
 	
-	/**
-	 * Add the given effect to this Action Event.
-	 * 
-	 * @param 	effectValue
-	 * 			The effect value to be added to this action event
-	 */
-	protected void addEffect(EffectValue effectValue){
-		this.effectValue.addEffect(effectValue);
-	}
-
 	protected void beforeActionEvent() {
 		if(!getGame().isActive())
 			throw new IllegalStateException("The game is over.");

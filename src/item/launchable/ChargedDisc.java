@@ -1,5 +1,8 @@
 package item.launchable;
 
+import item.inventory.PlayerInventory;
+import item.inventory.SquareInventory;
+
 public class ChargedDisc extends IdentityDisc {
 	
 	/**
@@ -22,4 +25,13 @@ public class ChargedDisc extends IdentityDisc {
 			return true;
 	}
 	
+	@Override
+	public void acceptPlayerInventory(PlayerInventory plInv) {
+		plInv.addItem(this);		
+	}
+
+	@Override
+	public void acceptSquareInventory(SquareInventory sqInv) {
+		sqInv.addItem(this);		
+	}
 }

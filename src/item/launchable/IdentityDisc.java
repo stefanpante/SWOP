@@ -1,5 +1,7 @@
 package item.launchable;
 
+import item.inventory.PlayerInventory;
+import item.inventory.SquareInventory;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 import square.Direction;
@@ -204,15 +206,22 @@ public class IdentityDisc extends LaunchableItem {
 	@Override
 	public String toString() {
 		String result = super.toString() + " IdentityDisc";
-		
-		if(this.isActive())
-			result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
-		
+		result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
 		return result;
 	}
 
 	@Override
 	public int getRange() {
 		return MAX_TRAVEL_DISTANCE_UNCHARGED;
+	}
+	
+	@Override
+	public void acceptPlayerInventory(PlayerInventory plInv) {
+		plInv.addItem(this);		
+	}
+
+	@Override
+	public void acceptSquareInventory(SquareInventory sqInv) {
+		sqInv.addItem(this);		
 	}
 }
