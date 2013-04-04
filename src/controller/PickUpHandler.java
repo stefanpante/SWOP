@@ -4,7 +4,6 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import effect.EffectValue;
 import event.AbstractGameEvent;
 import event.action.PickUpEvent;
 import event.action.UseItemEvent;

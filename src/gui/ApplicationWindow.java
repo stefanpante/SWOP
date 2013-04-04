@@ -3,7 +3,6 @@
  */
 package gui;
 
-import effect.EffectValue;
 import grid.Grid;
 import item.Item;
 
