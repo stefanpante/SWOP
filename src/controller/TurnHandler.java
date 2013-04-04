@@ -25,6 +25,7 @@ public class TurnHandler extends Handler implements Observer {
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 		ActionEvent.setObserver(this);
+		counter = new HashMap<Player,Integer>();
 		for(Player player : getGame().getPlayers()){
 			counter.put(player, 0);
 		}
