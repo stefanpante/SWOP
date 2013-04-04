@@ -1,11 +1,6 @@
-/**
- * 
- */
 package item;
 
-import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
-import square.Square;
 
 /**
  * @author jonas
@@ -52,25 +47,13 @@ public class Teleport extends Item {
 	private boolean isValidDestionation(Teleport destination) {
 		return destination != null;
 	}
-	
-	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv) 
-			throws IllegalStateException {
-		plInv.addItem(this);		
-	}
 
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) 
 			throws IllegalStateException {
 		sqInv.addItem(this);		
 	}
-
-	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
-		plInv.take(this);
-	}
-
+	
 	@Override
 	public void acceptRemoveSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
