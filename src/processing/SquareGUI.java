@@ -43,7 +43,8 @@ public class SquareGUI implements Drawable{
 		this.gui = objectronGUI;
 		this.position = new PVector();
 		this.visible = true;
-		this.shape = objectronGUI.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
+		//this.shape = objectronGUI.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
+		
 	}
 	
 	/**
@@ -90,7 +91,9 @@ public class SquareGUI implements Drawable{
 
 		// Draw the square
 		gui.rect(position.x, position.y, width, height);
-		gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
+		if(shape != null){
+			gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
+		}
 
 	}
 
@@ -99,6 +102,9 @@ public class SquareGUI implements Drawable{
 	 */
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
+		if(!visible){
+			return false;
+		}
 		if(mouseX > position.x && mouseX < position.x + width){
 			if(mouseY > position.y && mouseY < position.y + height){
 				return true;
@@ -140,6 +146,10 @@ public class SquareGUI implements Drawable{
 	
 	public boolean isVisible(){
 		return visible;
+	}
+	
+	public void reset(){
+		this.shape = null;
 	}
 
 }
