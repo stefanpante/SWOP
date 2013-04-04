@@ -302,10 +302,10 @@ public class Game {
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
 			if(random.nextFloat() <= CHANCE_POWERFAILURE){
-				square.powerFail();
+				square.getPower().fail();
 				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
 				for(Square s: neighbors){
-					s.powerFail();
+					s.getPower().fail();
 				}
 			}
 		}
@@ -319,7 +319,7 @@ public class Game {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.endTurn();
+			square.getPower().decreaseTurn();
 		}
 	}
 	
@@ -351,7 +351,7 @@ public class Game {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.powerGain();
+			square.getPower().fail();
 		}
 	}
 }
