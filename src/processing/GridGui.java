@@ -83,7 +83,6 @@ public class GridGui implements Drawable{
 
 		float swidth = (width - hCells * MARGIN) / hCells;
 		float sHeight = (height- vCells * MARGIN) / vCells;
-		System.out.println(swidth);
 		for(int i = 0; i < vCells; i++){
 			for(int j = 0; j < hCells; j++){
 				SquareGUI s = new SquareGUI(objectronGUI);
@@ -180,11 +179,33 @@ public class GridGui implements Drawable{
 		for(SquareGUI s : squares.values()){
 			//s.reset();
 		}
-		System.out.println("Wall coordinates");
-		for(Coordinate coor: walls){
-			System.out.println("Wall:" + coor);
-			squares.get(coor).setVisibility(false);
+		
+		
+		
+		for(Coordinate coor: grenades){
+			SquareGUI s = squares.get(coor);
+			squares.get(coor).setShape(Shapes.lightgrenade);
+
 		}
+		
+		for(Coordinate coor: powerFails){
+			SquareGUI s = squares.get(coor);
+			if(s.hasShape()){
+				s.setShape(Shapes.powerFailureItem);
+			}
+			else s.setShape(Shapes.powerFail);
+
+		}
+		
+		
+		
+		for(Coordinate coor: walls){
+			squares.get(coor).setShape(Shapes.wall);
+		}
+		squares.get(players.get(0)).setColor(SquareGUI.PLAYERBLUE);
+		squares.get(players.get(1)).setColor(SquareGUI.PLAYERRED);
+		
+		
 		
 	}
 

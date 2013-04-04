@@ -15,7 +15,14 @@ public class SquareGUI implements Drawable{
 	 *  Integer representation of color(204,204,204)
 	 */
 	public static int LIGHT_GREY = -3355444;
-
+	
+	/**
+	 * 
+	 */
+	public static int PLAYERRED = -48060;
+	public static int PLAYERBLUE = -13388315;
+	
+	private int color;
 	/**
 	 * The width of the square
 	 */
@@ -43,7 +50,8 @@ public class SquareGUI implements Drawable{
 		this.gui = objectronGUI;
 		this.position = new PVector();
 		this.visible = true;
-		this.shape = objectronGUI.loadShape(getClass().getResource("/res/wall.svg").getPath());
+		color = LIGHTER_GREY;
+		//this.shape = objectronGUI.loadShape(getClass().getResource("/res/wall.svg").getPath());
 
 	}
 
@@ -71,16 +79,13 @@ public class SquareGUI implements Drawable{
 			gui.noStroke();
 
 			// set the fill color of the square to lighter grey
-			gui.fill(LIGHTER_GREY);
+			gui.fill(color);
 			// Draw the square
 			gui.rect(position.x , position.y, width, height);
 			if(shape != null)
-				//gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
-
-			if(!visible){
-				gui.fill(gui.color(255));
-				gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height /*-  GridGui.MARGIN*2*/);
-		}
+				if(shape.equals(Shapes.wall))
+					gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height/*-  GridGui.MARGIN*2*/);
+				else gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
 	}
 
 	/**
@@ -96,9 +101,6 @@ public class SquareGUI implements Drawable{
 
 		// Draw the square
 		gui.rect(position.x, position.y, width, height);
-		if(shape != null){
-			gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height /*-  GridGui.MARGIN*2*/);
-		}
 
 	}
 
@@ -118,6 +120,10 @@ public class SquareGUI implements Drawable{
 
 		return false;
 
+	}
+	
+	public void setShape(PShape shape){
+		this.shape = shape;
 	}
 
 	/**
@@ -155,6 +161,18 @@ public class SquareGUI implements Drawable{
 
 	public void reset(){
 		this.shape = null;
+		this.color = LIGHTER_GREY;
+	}
+	
+	public void setColor(int color){
+		
+	}
+	public boolean hasShape(){
+		return (shape != null);
+	}
+	
+	public PShape getShape(){
+		return this.shape;
 	}
 
 }

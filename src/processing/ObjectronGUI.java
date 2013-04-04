@@ -27,6 +27,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	
 	GridGui grid;
 	
+	private Shapes shapes;
 	ProcessingHandler obj;
 	//FIXME: remove this shit
 	PShape shape;
@@ -36,7 +37,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void setup(){
 		// sets the size from the applet to a fourth of the screen.
 		size(550, 550);
-		
+		shapes = new Shapes(this);
 		// sets the framerate to 60 frames per second.
 		//frameRate(60);
 		PVector position = new PVector(25, 25);

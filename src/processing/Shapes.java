@@ -24,7 +24,7 @@ public class Shapes {
 		this.identityDisc = gui.loadShape(getClass().getResource("/res/identitydisc.svg").getPath());
 		this.chargedIdentityDisc = gui.loadShape(getClass().getResource("/res/chargedidentitydisc.svg").getPath());
 		this.lightgrenade = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
-		this.powerFailureItem = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
+		this.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
 	}
 
 
