@@ -51,13 +51,13 @@ public class Teleport extends Item {
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) 
 			throws IllegalStateException {
-		sqInv.addItem(this);		
+		sqInv.addTeleport(this);		
 	}
 	
 	@Override
 	public void acceptRemoveSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
-		sqInv.removeItem(this);
+		sqInv.removeTeleport(this);
 	}
 	
 }

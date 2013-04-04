@@ -218,12 +218,12 @@ public class IdentityDisc extends LaunchableItem {
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) 
 			throws IllegalStateException {
-		sqInv.addItem(this);		
+		sqInv.addIdentityDisc(this);		
 	}
 
 	@Override
 	public void acceptRemoveSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
-		sqInv.removeItem(this);
+		sqInv.removeIdentityDisc(this);
 	}
 }

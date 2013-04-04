@@ -3,9 +3,11 @@ package items;
 import static org.junit.Assert.*;
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import item.inventory.Inventory;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import item.launchable.IdentityDisc;
 
 import  org.junit.Assert.*;
 
@@ -59,8 +61,8 @@ public class TestInventory {
 	public void testAddingOverCapacity() {
 		Inventory inventory = new SquareInventory(1);
 		
-		inventory.addItem(new Item());
-		inventory.addItem(new Item());
+		inventory.addItem(new Teleport());
+		inventory.addItem(new LightGrenade());
 	}
 	
 	@Test(expected=IllegalStateException.class)
@@ -116,7 +118,7 @@ public class TestInventory {
 		Inventory inventory = new SquareInventory();
 		Item item = null;
 		for(int i = 0; i < 10; i ++){
-			item = new Item();
+			item = new IdentityDisc();
 			inventory.addItem(item);
 		}
 		
@@ -131,7 +133,7 @@ public class TestInventory {
 		Inventory inventory = new SquareInventory();
 		Item item = null;
 		for(int i = 0; i < 10; i ++){
-			item = new Item();
+			item = new IdentityDisc();
 			inventory.addItem(item);
 		}
 		
@@ -160,7 +162,7 @@ public class TestInventory {
 	@Test 
 	public void testIsValidItem(){
 		Item item = new LightGrenade();
-		Item item2 = new Item();
+		Item item2 = new IdentityDisc();
 		
 		assertFalse(Inventory.isValidItem(null));
 		assertTrue(Inventory.isValidItem(item));
@@ -188,7 +190,7 @@ public class TestInventory {
 			fail("Setting maximum size to a greater size should be allowed");
 		}
 		for(int i = 0; i < 24; i ++){
-			Item item = new Item();
+			Item item = new IdentityDisc();
 			inventory.addItem(item);
 		} 
 		
