@@ -1,10 +1,23 @@
 package processing;
 
+import item.Item;
+
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.JOptionPane;
+
+import controller.GameHandler;
+
+import player.Player;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import util.Coordinate;
 
-public class ObjectronGUI extends PApplet{
+public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	/**
 	 * SearialVersionUID
@@ -34,6 +47,12 @@ public class ObjectronGUI extends PApplet{
 	float width = 50;
 	float height = 50;
 	float margin = 5;
+
+	private Object currentPlayerLabel;
+
+	private ArrayList<Item> squareInventory;
+
+	private ArrayList<Item> playerInventory;
 	
 	/**
 	 * Draws the entire game
@@ -43,6 +62,58 @@ public class ObjectronGUI extends PApplet{
 		grid.draw();
 		grid.mouseOver(mouseX, mouseY);
 		grid.mouseOver(pmouseX, pmouseY);
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		Object o = evt.getNewValue();
+        if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
+        	this.grid.setWalls((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
+        	this.grid.setGrenades((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
+        	this.grid.setPlayers((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
+        	this.grid.setPowerFails((ArrayList<Coordinate>)o);
+        }else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
+        	this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
+        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
+        	String playerName = (String)o;
+        	if(!this.currentPlayerLabel.equals(playerName)){
+        		this.currentPlayerLabel = playerName;
+        		showMessage("It's now "+playerName+ "'s turn.");
+        	}
+        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
+        	this.grid.setCurrentPlayer((Coordinate)o);
+        }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
+        	this.squareInventory = (ArrayList<Item>)o;
+        }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
+        	this.playerInventory = (ArrayList<Item>)o;
+        }else if(evt.getPropertyName().equals(GameHandler.END_TURN_PROPERTY)){
+        	confirmEndTurn((String)o);
+        }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
+        	JOptionPane.showMessageDialog(frame, (String)o);
+        }else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
+        	String player = (String)o;
+        	JOptionPane.showMessageDialog(frame, player+ " has won the game!");
+        }else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
+        	String player = (String)o;
+        	JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
+        }
+		
+	}
+	
+	private String currentPlayerName;
+
+	private void confirmEndTurn(String o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void showMessage(String string) {
+		// TODO Auto-generated method stub
 		
 	}
 	

@@ -32,6 +32,8 @@ public class SquareGUI implements Drawable{
 	private PVector position;
 	private ObjectronGUI gui;
 	private PShape shape;
+	
+	private boolean visible;
 
 	/**
 	 * 
@@ -40,7 +42,8 @@ public class SquareGUI implements Drawable{
 	public SquareGUI(ObjectronGUI objectronGUI){
 		this.gui = objectronGUI;
 		this.position = new PVector();
-		this.shape = objectronGUI.loadShape(getClass().getResource("/res/powerfailure.svg").getPath());
+		this.visible = true;
+		this.shape = objectronGUI.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
 	}
 	
 	/**
@@ -129,6 +132,14 @@ public class SquareGUI implements Drawable{
 	
 	public void setWidth(float width){
 		this.width = width;
+	}
+	
+	public void setVisibility(boolean visible){
+		this.visible = visible;
+	}
+	
+	public boolean isVisible(){
+		return visible;
 	}
 
 }

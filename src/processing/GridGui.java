@@ -1,8 +1,11 @@
 package processing;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import player.Player;
 import processing.core.PVector;
+import util.Coordinate;
 
 public class GridGui implements Drawable{
 	
@@ -44,7 +47,17 @@ public class GridGui implements Drawable{
 	/**
 	 * The list of squares to be drawn onto the grid.
 	 */
-	private ArrayList<SquareGUI> squares;
+	private HashMap<Coordinate, SquareGUI> squares;
+	
+	/**
+	 * 
+	 */
+	private ArrayList<Coordinate> walls;
+	private ArrayList<Coordinate> grenades;
+	private ArrayList<Coordinate> players;
+	private ArrayList<Coordinate> powerFails;
+	
+	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
 	
 	public GridGui(PVector position, ObjectronGUI objectronGUI, float width, float height, int hCells, int vCells) {
 		this.position = position;
@@ -53,7 +66,7 @@ public class GridGui implements Drawable{
 		this.width = width;
 		this.hCells = hCells;
 		this.vCells = vCells;
-		this.squares = new ArrayList<SquareGUI>();
+		this.squares = new HashMap<Coordinate, SquareGUI>();
 		this.initGrid();
 	}
 	
@@ -71,7 +84,7 @@ public class GridGui implements Drawable{
 				s.setHeight(sHeight);
 				s.setWidth(swidth);
 				s.setPosition(x, y);
-				squares.add(s);
+				squares.put(new Coordinate(j,i),s);
 				x += swidth + MARGIN;
 			}
 			x = position.x;
@@ -86,7 +99,7 @@ public class GridGui implements Drawable{
 	 */
 	@Override
 	public void draw() {
-		for(SquareGUI square : squares){
+		for(SquareGUI square : squares.values()){
 			square.draw();
 		}
 		
@@ -97,7 +110,7 @@ public class GridGui implements Drawable{
 	//
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
-		for(SquareGUI square : squares){
+		for(SquareGUI square : squares.values()){
 			if(square.mouseHit(mouseX, mouseY))
 				return true;
 		}
@@ -110,9 +123,52 @@ public class GridGui implements Drawable{
 
 	@Override
 	public void mouseOver(int mouseX, int mouseY) {
-		for(SquareGUI square: squares){
+		for(SquareGUI square: squares.values()){
 			square.mouseOver(mouseX, mouseY);
 		}
 	}
 
+
+	public void setWalls(ArrayList<Coordinate> o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setGrenades(ArrayList<Coordinate> o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setPlayers(ArrayList<Coordinate> o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setPowerFails(ArrayList<Coordinate> o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setLightTrails(HashMap<Player, ArrayList<Coordinate>> o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setCurrentPlayer(Coordinate o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setCurrentPlayer(Coordinate o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
