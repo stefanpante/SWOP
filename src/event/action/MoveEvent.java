@@ -1,9 +1,10 @@
 /**
  * 
  */
-package event;
+package event.action;
 
 import effect.EffectValue;
+import event.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
 import item.Teleport;

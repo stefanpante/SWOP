@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import event.AbstractGameEvent;
-import event.MoveEvent;
+import event.action.MoveEvent;
 
 import player.Player;
 import square.Direction;

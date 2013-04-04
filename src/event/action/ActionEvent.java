@@ -1,12 +1,13 @@
 /**
  * 
  */
-package event;
+package event.action;
 
 import java.util.Observer;
 
 import controller.TurnHandler;
 import effect.EffectValue;
+import event.AbstractGameEvent;
 import game.Game;
 
 /**

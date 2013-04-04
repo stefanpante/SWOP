@@ -26,7 +26,7 @@ public class EffectValue {
 	 */
 	public EffectValue(){
 		this.setActionsLost(0);
-		this.setActionsLost(0);
+		this.setTurnsLost(0);
 	}
 	
 	/**

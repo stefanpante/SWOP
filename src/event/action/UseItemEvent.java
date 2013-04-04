@@ -1,18 +1,19 @@
 /**
  * 
  */
-package event;
+package event.action;
 
 import java.util.Observer;
 
-import item.Item;
 import game.Game;
+import item.Item;
+import controller.GameHandler;
 
 /**
  * @author jonas
  *
  */
-public class PickUpEvent extends ActionEvent {
+public class UseItemEvent extends ActionEvent {
 	
 	private Item item;
 
@@ -20,7 +21,7 @@ public class PickUpEvent extends ActionEvent {
 	 * @param game
 	 * @param args
 	 */
-	public PickUpEvent(Game game, Item item) {
+	public UseItemEvent(Game game, Item item) {
 		super(game);
 		this.item = item;
 	}
@@ -29,10 +30,10 @@ public class PickUpEvent extends ActionEvent {
 		return this.item;
 	}
 	
+
 	@Override
-	public void duringGameEvent(){
-		getGame().getCurrentPlayer().pickUp(getItem());
-		getGame().getCurrentPlayer().getPosition().getInventory().take(getItem());
+	protected void duringGameEvent(){
+		getGame().getCurrentPlayer().useItem(getItem());
 	}
 	
 	@Override
@@ -40,6 +41,9 @@ public class PickUpEvent extends ActionEvent {
 		getGame().getCurrentPlayer().decrementActions();
 	}
 
+	/* (non-Javadoc)
+	 * @see event.AbstractGameEvent#beforeGameEvent()
+	 */
 	@Override
 	protected void beforeGameEvent() {
 		// TODO Auto-generated method stub
