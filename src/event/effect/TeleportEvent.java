@@ -1,8 +1,9 @@
 /**
  * 
  */
-package event;
+package event.effect;
 
+import event.AbstractGameEvent;
 import player.Player;
 import game.Game;
 import item.Teleport;
@@ -12,14 +13,10 @@ import square.Square;
  * @author jonas
  *
  */
-public class TeleportEvent extends AbstractGameEvent {
+public class TeleportEvent extends EffectEvent {
 	
 	private Teleport teleport;
 	
-	/**
-	 * @param game
-	 * @param args
-	 */
 	public TeleportEvent(Game game, Teleport teleport) {
 		super(game);
 		this.teleport = teleport;
@@ -41,7 +38,6 @@ public class TeleportEvent extends AbstractGameEvent {
 		Square destination = getGame().getGrid().getSquareWith(getTeleport().getDestination());
 		getGame().getCurrentPlayer().setPosition(destination);
 	}
-
 	
 	private boolean canTeleportTo(Square destination){
 		for(Player otherPlayer : getGame().getOtherPlayers()){
@@ -53,9 +49,6 @@ public class TeleportEvent extends AbstractGameEvent {
 
 	@Override
 	protected void afterGameEvent() {
-		// TODO Auto-generated method stub
-		
+		// Nothing to do here
 	}
-	
-	
 }

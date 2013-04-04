@@ -4,7 +4,7 @@
 package event.action;
 
 import effect.EffectValue;
-import event.TeleportEvent;
+import event.effect.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
 import item.Teleport;
