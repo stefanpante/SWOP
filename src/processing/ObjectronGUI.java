@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import controlP5.Bang;
+import controlP5.ControlP5;
 import controller.GameHandler;
 import controller.ProcessingHandler;
 
@@ -16,6 +18,7 @@ import player.Player;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import square.Direction;
 import util.Coordinate;
 
 public class ObjectronGUI extends PApplet implements PropertyChangeListener{
@@ -29,8 +32,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	
 	private Shapes shapes;
 	ProcessingHandler obj;
-	//FIXME: remove this shit
-	PShape shape;
+	ControlP5 inputController;
 	/**
 	 * initializes the objectron gui
 	 */
@@ -43,11 +45,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		PVector position = new PVector(25, 25);
 		this.grid = new GridGui(position, this, 500,500, 10, 10);
 		obj = new ProcessingHandler(this);
+		inputController = new ControlP5(this);
+		bang =  inputController.addBang("moveLeft");
 		
 		
 		
 	}
 	
+	public void moveLeft(){
+		obj.getMoveHandler().move(Direction.EAST);
+	}
+	Bang bang;
 	float width = 50;
 	float height = 50;
 	float margin = 5;

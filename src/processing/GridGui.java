@@ -179,15 +179,15 @@ public class GridGui implements Drawable{
 		for(SquareGUI s : squares.values()){
 			//s.reset();
 		}
-		
-		
-		
+
+
+
 		for(Coordinate coor: grenades){
 			SquareGUI s = squares.get(coor);
 			squares.get(coor).setShape(Shapes.lightgrenade);
 
 		}
-		
+
 		for(Coordinate coor: powerFails){
 			SquareGUI s = squares.get(coor);
 			if(s.hasShape()){
@@ -196,17 +196,29 @@ public class GridGui implements Drawable{
 			else s.setShape(Shapes.powerFail);
 
 		}
-		
-		
-		
+
+
+
 		for(Coordinate coor: walls){
 			squares.get(coor).setShape(Shapes.wall);
 		}
-		squares.get(players.get(0)).setColor(SquareGUI.PLAYERBLUE);
-		squares.get(players.get(1)).setColor(SquareGUI.PLAYERRED);
-		
-		
-		
+
+		try{
+			SquareGUI s = squares.get(players.get(0));
+			if(s != null)
+				s.setColor(s.PLAYERBLUE);
+		} catch(Exception jonas){}
+
+		try{
+			SquareGUI s = squares.get(players.get(1));
+			if(s != null)
+				s.setColor(s.PLAYERRED);
+		}
+		catch (Exception dieter){}
+
+
+
+
 	}
 
 }
