@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 public class SquareGUI implements Drawable{
 
-	
+
 	/**
 	 * Integer representation of color(241,241,241)
 	 */
@@ -32,7 +32,7 @@ public class SquareGUI implements Drawable{
 	private PVector position;
 	private ObjectronGUI gui;
 	private PShape shape;
-	
+
 	private boolean visible;
 
 	/**
@@ -44,9 +44,9 @@ public class SquareGUI implements Drawable{
 		this.position = new PVector();
 		this.visible = true;
 		//this.shape = objectronGUI.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
-		
+
 	}
-	
+
 	/**
 	 * Constructs a new SquareGUi.
 	 * @param Position
@@ -66,16 +66,21 @@ public class SquareGUI implements Drawable{
 	 */
 	@Override
 	public void draw() {
-		// no stroke on the square.
-		gui.noStroke();
+		
+			// no stroke on the square.
+			gui.noStroke();
 
-		// set the fill color of the square to lighter grey
-		gui.fill(LIGHTER_GREY);
-		// Draw the square
-		gui.rect(position.x , position.y, width, height);
-		gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
+			// set the fill color of the square to lighter grey
+			gui.fill(LIGHTER_GREY);
+			// Draw the square
+			gui.rect(position.x , position.y, width, height);
+			if(shape != null)
+				gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
 
-
+			if(!visible){
+				gui.fill(gui.color(255));
+				gui.rect(position.x + GridGui.MARGIN, position.y + GridGui.MARGIN, width- 2 * GridGui.MARGIN, height- 2 * GridGui.MARGIN);
+		}
 	}
 
 	/**
@@ -126,28 +131,28 @@ public class SquareGUI implements Drawable{
 		}
 
 	}
-	
+
 	public void setPosition(float x, float y){
 		this.position.x = x;
 		this.position.y = y;
 	}
-	
+
 	public void setHeight(float height){
 		this.height = height;
 	}
-	
+
 	public void setWidth(float width){
 		this.width = width;
 	}
-	
+
 	public void setVisibility(boolean visible){
 		this.visible = visible;
 	}
-	
+
 	public boolean isVisible(){
 		return visible;
 	}
-	
+
 	public void reset(){
 		this.shape = null;
 	}
