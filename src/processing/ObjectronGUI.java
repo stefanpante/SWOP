@@ -19,6 +19,10 @@ import util.Coordinate;
 
 public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
+	public ObjectronGUI(){
+		setup();
+	}
+	
 	/**
 	 * SearialVersionUID
 	 */
