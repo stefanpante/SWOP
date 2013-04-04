@@ -177,7 +177,7 @@ public class GridGui implements Drawable{
 
 	public void resetGrid(){
 		for(SquareGUI s : squares.values()){
-			//s.reset();
+			s.reset();
 		}
 
 
