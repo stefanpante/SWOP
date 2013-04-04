@@ -12,6 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import player.Player;
+import square.Square;
 
 /**
  * @author Jonas Devlieghere
@@ -56,6 +57,8 @@ public class TurnHandler extends Handler implements Observer {
 		}else{
 			getGame().getCurrentPlayer().endTurn();
 			getGame().switchToNextPlayer();
+			for(Square square : getGame().getGrid().getAllSquares())
+				square.getPower().decreaseTurn();
 		}
 	}
 	

@@ -41,9 +41,9 @@ public class MoveEvent extends ActionEvent {
 		if(currentPosition.getInventory().hasLightGrenade()){
 			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
 			try{
-				currentPosition.getInventory().activate(lg);
+				lg.activate();
 			} catch (Exception exc) {
-				// Catched exception, if try to activate wornout item. -> ignore
+				exc.printStackTrace();
 			}
 		}
 
@@ -63,14 +63,8 @@ public class MoveEvent extends ActionEvent {
 	}
 
 	@Override
-	protected void afterGameEvent() {
-		Square newPosition = getGame().getCurrentPlayer().getPosition();
-		if(newPosition.hasEffect()){
-			// FIXME: EffectValue penaltyValue = newPosition.getEffectAfterAction();
-			//		  getGame().getCurrentPlayer().endTurn(penaltyValue);
-			getGame().switchToNextPlayer();
-		}
-		getGame().getCurrentPlayer().getPosition().getInventory().wearOut();
+	protected void afterGameEvent(){
+		getGame().switchToNextPlayer();
 	}
 
 }

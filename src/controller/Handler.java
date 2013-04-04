@@ -2,6 +2,7 @@ package controller;
 
 import game.Game;
 import item.Item;
+import item.LightGrenade;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -14,7 +15,6 @@ import player.Player;
 import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
-import square.state.PowerFailureState;
 import util.Coordinate;
 
 /**
@@ -94,8 +94,11 @@ public abstract class Handler {
     	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
     		Square square = getGame().getGrid().getSquare(coordinate);
     		
-    		if(square.getInventory().hasLightGrenade() && !square.getInventory().hasActiveItem())
-    			grenades.add(coordinate);
+    		if(square.getInventory().hasLightGrenade()){
+        		LightGrenade lg = square.getInventory().getLightGrenade();
+        		if(lg.isActive())
+        			grenades.add(coordinate);
+    		}
     	}
     	return grenades;
 	}
@@ -227,7 +230,7 @@ public abstract class Handler {
 		ArrayList<Coordinate> list = new ArrayList<Coordinate>();
 		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
 			Square square = getGame().getGrid().getSquare(coordinate);
-			if(square.getState() instanceof PowerFailureState){
+			if(square.getPower().isFailing()){
 				list.add(coordinate);
 			}
 		}

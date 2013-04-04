@@ -18,7 +18,7 @@ public class Power {
 	 * 
 	 * @return	True if and only if the power is failing
 	 */
-	public boolean isFailed(){
+	public boolean isFailing(){
 		return this.failed;
 	}
 	
