@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import item.Item;
 import item.ItemState;
 import item.LightGrenade;
+import item.Teleport;
 import item.inventory.SquareInventory;
+import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 
@@ -45,8 +47,8 @@ public class TestSquareInventory {
 	@Test
 	public void testCanHaveAsItemFull(){
 		SquareInventory sqinv1 = new SquareInventory(1);
-		Item it1 = new Item();
-		Item it2 = new Item();
+		Item it1 = new Teleport();
+		Item it2 = new IdentityDisc();
 		sqinv1.addItem(it1);
 		assertFalse(sqinv1.canHaveAsItem(it2));
 	}
@@ -54,7 +56,7 @@ public class TestSquareInventory {
 	@Test
 	public void testCanHaveAsItemTwice(){
 		SquareInventory sqinv1 = new SquareInventory(1);
-		Item it1 = new Item();
+		Item it1 = new IdentityDisc();
 		sqinv1.addItem(it1);
 		assertFalse(sqinv1.canHaveAsItem(it1));
 	}
@@ -102,22 +104,11 @@ public class TestSquareInventory {
 		}
 	}
 	
-	@Test
-	public void testAddActiveItem3(){
-		SquareInventory sqinv = new SquareInventory();
-		Item it = new Item();
-		LightGrenade lg = new LightGrenade();
-		it.activate();
-		lg.activate();
-		sqinv.addItem(it);
-		sqinv.addItem(lg);
-	}
-	
 	
 	@Test
 	public void testHasLightGrenade(){
 		SquareInventory sqinv = new SquareInventory();
-		Item it = new Item();
+		Item it = new IdentityDisc();
 		LightGrenade lg = new LightGrenade();
 		
 		assertFalse(sqinv.hasLightGrenade());
@@ -130,92 +121,4 @@ public class TestSquareInventory {
 		sqinv.take(lg);
 		assertFalse(sqinv.hasLightGrenade());
 	}
-	
-	@Test
-	public void testActivate(){
-		SquareInventory sqinv = new SquareInventory();
-		LightGrenade lg = new LightGrenade();
-		
-		sqinv.addItem(lg);
-		sqinv.activate(lg);
-		assertTrue(lg.isActive());
-	}
-	
-	@Test
-	public void testHasActiveLightGrenade(){
-		SquareInventory sqinv = new SquareInventory();
-		LightGrenade lg = new LightGrenade();
-
-		lg.activate();
-		sqinv.addItem(lg);
-		assertTrue(sqinv.hasActiveLightGrenade());
-		sqinv.take(lg);
-		assertFalse(sqinv.hasActiveLightGrenade());
-		lg.deactivate();
-		sqinv.addItem(lg);
-		assertFalse(sqinv.hasActiveLightGrenade());
-		sqinv.activate(lg);
-		assertTrue(sqinv.hasActiveLightGrenade());		
-	}
-	
-	@Test
-	public void testGetItems(){
-		SquareInventory sqinv = new SquareInventory();
-		
-		//Create and add inactive items
-		Item it_inactive1 = new Item();
-		sqinv.addItem(it_inactive1);
-		Item it_inactive2 = new Item();
-		sqinv.addItem(it_inactive2);
-		LightGrenade it_inactive3 = new LightGrenade();
-		sqinv.addItem(it_inactive3);
-
-		
-		//Create and add active items
-		Item it_active1 = new Item();
-		it_active1.activate();
-		sqinv.addItem(it_active1);
-		Item it_active2 = new Item();
-		it_active2.activate();
-		sqinv.addItem(it_active2);
-		Item it_active3 = new Item();
-		it_active3.activate();
-		sqinv.addItem(it_active3);
-
-		//Create and add worn out items
-		Item it_worn1 = new Item();
-		it_worn1.activate();
-		it_worn1.wearOut();
-		sqinv.addItem(it_worn1);
-		Item it_worn2 = new Item();
-		it_worn2.activate();
-		it_worn2.wearOut();
-		sqinv.addItem(it_worn2);
-		Item it_worn3 = new Item();
-		it_worn3.activate();
-		it_worn3.wearOut();
-		sqinv.addItem(it_worn3);
-		
-		
-		ArrayList<Item> actives = sqinv.getItems(ItemState.ACTIVE);
-		ArrayList<Item> inactives = sqinv.getItems(ItemState.INACTIVE);
-		ArrayList<Item> wornouts = sqinv.getItems(ItemState.WORN);
-
-		assertEquals(3, actives.size());
-		
-		assertTrue(actives.contains(it_active1));
-		assertTrue(actives.contains(it_active2));
-		assertTrue(actives.contains(it_active3));
-		
-		assertEquals(3, inactives.size());
-		assertTrue(inactives.contains(it_inactive1));
-		assertTrue(inactives.contains(it_inactive2));
-		assertTrue(inactives.contains(it_inactive3));
-		
-		assertEquals(3, wornouts.size());
-		assertTrue(wornouts.contains(it_worn1));
-		assertTrue(wornouts.contains(it_worn2));
-		assertTrue(wornouts.contains(it_worn3));
-	}
-	
 }

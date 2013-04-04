@@ -1,7 +1,5 @@
 package item;
 
-import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
 import item.visitor.VisitableItem;
 
 /**
