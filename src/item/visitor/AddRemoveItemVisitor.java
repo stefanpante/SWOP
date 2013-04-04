@@ -13,9 +13,6 @@ import item.launchable.IdentityDisc;
  */
 public interface AddRemoveItemVisitor {
 	
-	 public void addItem(Item it) throws IllegalStateException;
-	 public void removeItem(Item it) throws IllegalStateException;
-	 
 	 public void addChargedDisc(ChargedDisc chargedDisc) throws IllegalStateException;
 	 public void removeChargedDisc(ChargedDisc chargedDisc) throws IllegalStateException;
 	 

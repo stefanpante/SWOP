@@ -99,4 +99,16 @@ public class LightGrenade extends Item implements Effect{
 			throws IllegalStateException {
 		sqInv.removeLightGrenade(this);
 	}
+
+	@Override
+	public void acceptAddPlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.addLightGrenade(this);
+	}
+
+	@Override
+	public void acceptRemovePlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.removeLightGrenade(this);
+	}
 }

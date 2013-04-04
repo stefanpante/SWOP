@@ -226,4 +226,16 @@ public class IdentityDisc extends LaunchableItem {
 			throws IllegalStateException {
 		sqInv.removeIdentityDisc(this);
 	}
+
+	@Override
+	public void acceptAddPlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.addIdentityDisc(this);
+	}
+
+	@Override
+	public void acceptRemovePlayerInventory(PlayerInventory plInv)
+			throws IllegalStateException {
+		plInv.removeIdentityDisc(this);
+	}
 }
