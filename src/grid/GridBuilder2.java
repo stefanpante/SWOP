@@ -10,8 +10,6 @@ import item.launchable.IdentityDisc;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.SpringLayout.Constraints;
-
 import square.Square;
 import square.obstacle.Obstacle;
 import square.obstacle.Wall;
@@ -101,7 +99,6 @@ public class GridBuilder2 {
 			}
 		}		
 	}
-
 	
 	/**
 	 * Place light grenades at the the given coordinates, in respect with the given constraint.
@@ -116,7 +113,7 @@ public class GridBuilder2 {
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		
 		for(Coordinate coordinate : coordinates)
-			placeItem(coordinate, new LightGrenade());
+			placeItem(getGrid().getSquare(coordinate), new LightGrenade());
 	}
 	
 	/**
@@ -132,13 +129,31 @@ public class GridBuilder2 {
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		
 		for(Coordinate coordinate : coordinates)
-			placeItem(coordinate, new IdentityDisc());
+			placeItem(getGrid().getSquare(coordinate), new IdentityDisc());
 	}
 	
-	public void placeWalls(ArrayList<Coordinate> coordinates, GridConstraint constraint){
+	/**
+	 * Place walls on the given coordinates
+	 * 
+	 * @param 	coordinates
+	 * 			The coordinates where to place the walls
+	 * @param 	constraint
+	 * 			The constraint for placing walls;
+	 */
+	public void placeWalls(ArrayList<Wall> walls, GridConstraint constraint){
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		for(Wall wall : walls){
+			for(Square square : wall.getSquares()){
+				coordinates.add(getGrid().getCoordinate(square));
+			}
+		}
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-		
+		for(Wall wall : walls){
+			for(Square square : wall.getSquares()){
+				placeObstacle(square, wall);
+			}
+		}
 	}
 	
 	/**
@@ -180,8 +195,8 @@ public class GridBuilder2 {
 	 * @param 	item
 	 * 			The item to be placed on the given coordinate
 	 */
-	private void placeItem(Coordinate coordinate, Item item){
-		getGrid().getSquare(coordinate).getInventory().addItem(item);
+	private void placeItem(Square square, Item item){
+		square.getInventory().addItem(item);
 	}
 	
 	/**
@@ -192,7 +207,7 @@ public class GridBuilder2 {
 	 * @param 	obstacle
 	 * 			The obstacle to be placed on the given coordinate
 	 */
-	private void placeObstacle(Coordinate coordinate, Obstacle obstacle){
-		getGrid().getSquare(coordinate).setObstacle(obstacle);
+	private void placeObstacle(Square square, Obstacle obstacle){
+		square.setObstacle(obstacle);
 	}
 }
