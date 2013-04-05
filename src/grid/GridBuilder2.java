@@ -39,9 +39,40 @@ public class GridBuilder2 {
 	private Random random;
 	
 	private ArrayList<Wall> walls;
+
 	
+	/**
+	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 * @param 	hSize		
+	 * 			The horizontal size of the grid this gridBuilder will build.
+	 * @param 	vSize		
+	 * 			The vertical size of the grid this gridBuilder will build.
+	 */
+	public GridBuilder2(int hSize, int vSize) {
+		setGrid(new Grid(hSize, vSize));
+		setRandom(new Random());
+		setSquares();
+		setConstraints();
+		build(randomWallLocations(WALL_CONSTRAINT),
+				randomLocations(LIGHT_GRENADE_CONSTRAINT),
+				randomLocations(IDENTITY_DISK_CONSTRAINT));
+	}
 	
-	public GridBuilder2(){
+	public GridBuilder2(int hSize, int vSize, ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+		setGrid(new Grid(hSize, vSize));
+		setRandom(new Random());
+		setSquares();
+		setConstraints();
+		build(walls,lightGrenades,identityDisks);
+	}
+	
+	private void build(ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+		placeWalls(walls, WALL_CONSTRAINT);
+		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
+		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
+	}
+	
+	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
 		excluded.add(getBottomLeft());
 		excluded.add(getTopRight());
@@ -57,38 +88,7 @@ public class GridBuilder2 {
 		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
 	}
 	
-	/**
-	 * Creates a new Gridbuilder with parameters to create a new grid.
-	 * @param 	hSize		
-	 * 			The horizontal size of the grid this gridBuilder will build.
-	 * @param 	vSize		
-	 * 			The vertical size of the grid this gridBuilder will build.
-	 */
-	public GridBuilder2(int hSize, int vSize) {
-		this();
-		setGrid(new Grid(hSize, vSize));
-		setRandom(new Random());
-		setSquares();
-		build(randomWallLocations(WALL_CONSTRAINT),
-				randomLocations(LIGHT_GRENADE_CONSTRAINT),
-				randomLocations(IDENTITY_DISK_CONSTRAINT));
-	}
 	
-	public GridBuilder2(int hSize, int vSize, ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
-		this();
-		setGrid(new Grid(hSize, vSize));
-		setRandom(new Random());
-		setSquares();
-		build(walls,lightGrenades,identityDisks);
-	}
-	
-	private void build(ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
-		placeWalls(walls, WALL_CONSTRAINT);
-		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
-		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
-	}
-	
-
 	/**
 	 * Returns the grid.
 	 * 
@@ -148,10 +148,12 @@ public class GridBuilder2 {
 		candidates.removeAll(constraint.getExcluded());
 		
 		// Removed obstructed squares from candidates
+		ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
 		for(Coordinate coordinate : candidates){
 			if(getGrid().getSquare(coordinate).isObstructed())
-				candidates.remove(coordinate);
+				toBeRemoved.add(coordinate);
 		}
+		candidates.removeAll(toBeRemoved);
 		
 		// Add one square from evey list of included coordinates
 		for(ArrayList<Coordinate> includes : constraint.getIncluded()){
@@ -283,12 +285,7 @@ public class GridBuilder2 {
 	 * 			The constraint for placing walls;
 	 */
 	protected void placeWalls(ArrayList<Wall> walls, GridConstraint constraint){
-		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-		for(Wall wall : walls){
-			for(Square square : wall.getSquares()){
-				coordinates.add(getGrid().getCoordinate(square));
-			}
-		}
+		ArrayList<Coordinate> coordinates = getCoordinatesOfWalls(walls);
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(Wall wall : walls){
@@ -296,6 +293,17 @@ public class GridBuilder2 {
 				placeObstacle(square, wall);
 			}
 		}
+		
+	}
+
+	public ArrayList<Coordinate> getCoordinatesOfWalls(ArrayList<Wall> walls) {
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		for(Wall wall : walls){
+			for(Square square : wall.getSquares()){
+				coordinates.add(getGrid().getCoordinate(square));
+			}
+		}
+		return coordinates;
 	}
 	
 	/**
@@ -378,7 +386,7 @@ public class GridBuilder2 {
 				}
 			}
 			break;
-		case WEST:
+		case EAST:
 			for(Coordinate coor = start; coor.getY() <= size - 1; coor = coor.getNeighbor(Direction.SOUTH)){
 				for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-size  ; coor2 = coor2.getNeighbor(Direction.WEST)){
 					if(!getGrid().getSquare(coor2).isObstructed())
