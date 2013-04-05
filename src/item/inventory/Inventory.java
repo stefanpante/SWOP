@@ -231,44 +231,38 @@ public abstract class Inventory implements AddRemoveItemVisitor{
 	}
 	
 	@Override
-	public void addItem(ChargedDisc chargedDisc)
-			throws IllegalStateException {
+	public void addItem(ChargedDisc chargedDisc) throws IllegalStateException {
+		this.addItem(chargedDisc);
+	}
+
+	@Override
+	public void removeItem(ChargedDisc chargedDisc)	throws IllegalStateException {
 		//No specific operation needed yet.
 	}
 
 	@Override
-	public void removeItem(ChargedDisc chargedDisc)
-			throws IllegalStateException {
+	public void addItem(IdentityDisc identityDisc) throws IllegalStateException {
+		this.addItem(identityDisc);
+	}
+
+	@Override
+	public void removeItem(IdentityDisc identityDisc) throws IllegalStateException {
 		//No specific operation needed yet.
 	}
 
 	@Override
-	public void addItem(IdentityDisc identityDisc)
-			throws IllegalStateException {
-		//No specific operation needed yet.
+	public void addItem(LightGrenade lightGrenade) throws IllegalStateException {
+		this.addItem(lightGrenade);
 	}
 
 	@Override
-	public void removeItem(IdentityDisc identityDisc)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void addItem(LightGrenade lightGrenade)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void removeItem(LightGrenade lightGrenade)
-			throws IllegalStateException {
+	public void removeItem(LightGrenade lightGrenade) throws IllegalStateException {
 		//No specific operation needed yet.
 	}
 	
 	@Override
 	public void addItem(Teleport teleport) throws IllegalStateException {
-		// No specific operation needed yet.
+		this.addItem(teleport);
 	}
 
 	@Override
