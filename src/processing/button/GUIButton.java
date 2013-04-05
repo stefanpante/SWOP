@@ -1,28 +1,30 @@
-package processing;
+package processing.button;
 
+import processing.Drawable;
+import processing.OConstants;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 public abstract class GUIButton implements Drawable {
 
 	
-	private PApplet gui;
+	protected PApplet gui;
 	/**
 	 * The position of the button
 	 */
-	private PVector position;
+	protected PVector position;
 	
 	/**
 	 * the width of the gui button.
 	 */
-	private float width;
+	protected float width;
 	
 	/**
 	 * The height of the gui button.
 	 */
-	private float height;
+	protected float height;
 	
-	private int color;
+	protected int color;
 	private int rolloverColor;
 	
 	
@@ -34,6 +36,11 @@ public abstract class GUIButton implements Drawable {
 		this.color = OConstants.LIGHT_GREY;
 		this.rolloverColor = OConstants.LIGHTER_GREY;
 
+	}
+	
+	public GUIButton(float width, float height, PVector position,PApplet gui) {
+		this(width, height, gui);
+		this.position = position;
 	}
 	
 	public int getColor(){

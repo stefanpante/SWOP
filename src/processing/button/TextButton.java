@@ -1,19 +1,17 @@
-package processing;
+package processing.button;
 
 import processing.core.PApplet;
-import processing.core.PShape;
 
-public abstract class ShapeButton extends GUIButton {
+public abstract class TextButton extends GUIButton {
 
 	/**
-	 * The shape of the button.s
+	 * The tekst on the text button.
 	 */
-	private PShape shape;
+	private String text;
 	
-	
-	public ShapeButton(float width, float height, PShape shape, PApplet gui) {
+	public TextButton(float width, float height, String text,  PApplet gui) {
 		super(width, height, gui);
-		// TODO Auto-generated constructor stub
+		this.text = text;
 	}
 
 	@Override
@@ -33,7 +31,7 @@ public abstract class ShapeButton extends GUIButton {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 
 	
+
 }

@@ -35,14 +35,14 @@ public class Shapes {
 		this.lightgrenade = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
 		this.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
 		
-		this.south = gui.loadShape(getClass().getResource("/res/south.svg").getPath());
-		this.north = gui.loadShape(getClass().getResource("/res/north.svg").getPath());
-		this.west  = gui.loadShape(getClass().getResource("/res/west.svg").getPath());
-		this.east  = gui.loadShape(getClass().getResource("/res/east.svg").getPath());
-		this.southeast =  gui.loadShape(getClass().getResource("/res/southeast.svg").getPath());
-		this.southwest =  gui.loadShape(getClass().getResource("/res/southwest.svg").getPath());
-		this.northeast =  gui.loadShape(getClass().getResource("/res/northeast.svg").getPath());
-		this.northwest =  gui.loadShape(getClass().getResource("/res/northwest.svg").getPath());
+		this.south = gui.loadShape(getClass().getResource("/res/directions/south.svg").getPath());
+		this.north = gui.loadShape(getClass().getResource("/res/directions/north.svg").getPath());
+		this.west  = gui.loadShape(getClass().getResource("/res/directions/west.svg").getPath());
+		this.east  = gui.loadShape(getClass().getResource("/res/directions/east.svg").getPath());
+		this.southeast =  gui.loadShape(getClass().getResource("/res/directions/southeast.svg").getPath());
+		this.southwest =  gui.loadShape(getClass().getResource("/res/directions/southwest.svg").getPath());
+		this.northeast =  gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath());
+		this.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
 	}
 
 

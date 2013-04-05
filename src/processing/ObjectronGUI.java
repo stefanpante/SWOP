@@ -63,11 +63,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         playerInventoryGroup.setBackgroundColor(OConstants.LIGHTER_GREY);
         playerInventoryGroup.setColorBackground(OConstants.PLAYERBLUE);        
         
-        bang =  inputController.addBang("moveLeft");
-		bang.setGroup(squareInventoryGroup);
-		bang.setColorBackground(OConstants.PLAYERBLUE);
+        directionalpath = new DirectionalPath(new PVector(25, 25), this);
+        
+        
 	}
 	
+	private DirectionalPath directionalpath;
 	public void moveLeft(){
 		obj.getMoveHandler().move(Direction.EAST);
 	}
@@ -92,6 +93,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		grid.draw();
 		grid.mouseOver(mouseX, mouseY);
 		grid.mouseOver(pmouseX, pmouseY);
+		directionalpath.draw();
+		directionalpath.mouseOver(mouseX, mouseY);
 		
 	}
 
