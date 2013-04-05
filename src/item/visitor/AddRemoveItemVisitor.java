@@ -9,19 +9,19 @@ import item.launchable.IdentityDisc;
 /**
  * Visitor implementation for adding or removing specific items from an inventory.
  * 
- * @author Dieter, Vincent
+ * @author Dieter
  */
 public interface AddRemoveItemVisitor {
 	
-	 public void addItem(ChargedDisc chargedDisc) throws IllegalStateException;
-	 public void removeItem(ChargedDisc chargedDisc) throws IllegalStateException;
+	 public void addChargedDisc(ChargedDisc chargedDisc) throws IllegalStateException;
+	 public void removeChargedDisc(ChargedDisc chargedDisc) throws IllegalStateException;
 	 
-	 public void addItem(IdentityDisc identityDisc) throws IllegalStateException;
-	 public void removeItem(IdentityDisc identityDisc) throws IllegalStateException;
+	 public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException;
+	 public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException;
 	 
-	 public void addItem(LightGrenade lightGrenade) throws IllegalStateException;
-	 public void removeItem(LightGrenade lightGrenade) throws IllegalStateException;
+	 public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException;
+	 public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException;
 	 
-	 public void addItem(Teleport teleport) throws IllegalStateException;
-	 public void removeItem(Teleport teleport) throws IllegalStateException;
+	 public void addTeleport(Teleport teleport) throws IllegalStateException;
+	 public void removeTeleport(Teleport teleport) throws IllegalStateException;
 }

@@ -1,11 +1,6 @@
 package item.inventory;
 
 import item.Item;
-import item.LightGrenade;
-import item.Teleport;
-import item.launchable.ChargedDisc;
-import item.launchable.IdentityDisc;
-import item.visitor.AddRemoveItemVisitor;
 
 import java.util.ArrayList;
 
@@ -18,7 +13,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public abstract class Inventory implements AddRemoveItemVisitor{
+public abstract class Inventory{
 
 	/**
 	 * The size of the inventory, should not be smaller than zero
@@ -228,46 +223,6 @@ public abstract class Inventory implements AddRemoveItemVisitor{
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
 			items.remove(item);
-	}
-	
-	@Override
-	public void addItem(ChargedDisc chargedDisc) throws IllegalStateException {
-		this.addItem(chargedDisc);
-	}
-
-	@Override
-	public void removeItem(ChargedDisc chargedDisc)	throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void addItem(IdentityDisc identityDisc) throws IllegalStateException {
-		this.addItem(identityDisc);
-	}
-
-	@Override
-	public void removeItem(IdentityDisc identityDisc) throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void addItem(LightGrenade lightGrenade) throws IllegalStateException {
-		this.addItem(lightGrenade);
-	}
-
-	@Override
-	public void removeItem(LightGrenade lightGrenade) throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-	
-	@Override
-	public void addItem(Teleport teleport) throws IllegalStateException {
-		this.addItem(teleport);
-	}
-
-	@Override
-	public void removeItem(Teleport teleport) throws IllegalStateException {
-		//No specific operation needed yet.
 	}
 
 	/**

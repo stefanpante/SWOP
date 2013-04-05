@@ -14,7 +14,7 @@ import item.visitor.AddRemoveItemVisitor;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class SquareInventory extends Inventory {
+public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	/**
 	 * Holds the only possible Teleport in this SquareInventory.
@@ -163,28 +163,48 @@ public class SquareInventory extends Inventory {
 		String result = "Square ";
 		return result + super.toString();
 	}
+	
+	@Override
+	public void addChargedDisc(ChargedDisc chargedDisc) {
+		//No specific operation needed yet.
+	}
 
 	@Override
-	public void addItem(LightGrenade lightGrenade) {
+	public void removeChargedDisc(ChargedDisc chargedDisc) {
+		//No specific operation needed yet.
+	}
+
+	@Override
+	public void addIdentityDisc(IdentityDisc identityDisc) {
+		//No specific operation needed yet.
+	}
+
+	@Override
+	public void removeIdentityDisc(IdentityDisc identityDisc) {
+		//No specific operation needed yet.
+	}
+
+	@Override
+	public void addLightGrenade(LightGrenade lightGrenade) {
 		if(hasLightGrenade())
 			throw new IllegalArgumentException("Can't add another LightGrenade to " + this);
 		this.lightGrenade = lightGrenade;
 	}
 
 	@Override
-	public void removeItem(LightGrenade lightGrenade) {
+	public void removeLightGrenade(LightGrenade lightGrenade) {
 		this.lightGrenade = null;
 	}
 
 	@Override
-	public void addItem(Teleport teleport) {
+	public void addTeleport(Teleport teleport) {
 		if(hasLightGrenade())
 			throw new IllegalArgumentException("Can't add another Teleport to " + this);
 		this.teleport = teleport;
 	}
 
 	@Override
-	public void removeItem(Teleport teleport) {
+	public void removeTeleport(Teleport teleport) {
 		this.teleport = null;
 	} 
 }
