@@ -25,8 +25,8 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsCoverage(){
-		int hSize = 40;
-		int vSize = 40;
+		int hSize = 10;
+		int vSize = 10;
 		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		double amountOfSquares = hSize*vSize;
 		Grid grid = gb.getGrid();
@@ -55,14 +55,12 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsNotOnStartPos(){
-		int hSize = 40;
-		int vSize = 40;
+		int hSize = 10;
+		int vSize = 10;
 		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		double amountOfSquares = hSize*vSize;
-		gb.constructSquares();
-		gb.constructWalls();
 		Grid grid = gb.getGrid();
-		ArrayList<Coordinate> wallsPos = gb.getWallCoordinates();
+		ArrayList<Coordinate> wallsPos = gb.getCoordinatesOfWalls(gb.getWalls());
 		Coordinate lowerleft = new Coordinate(0, vSize -1);
 
 		assertFalse(grid.getSquare(lowerleft).isObstructed());
@@ -74,11 +72,9 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsNoIntersection(){
-		int hSize = 40;
-		int vSize = 40;
+		int hSize = 10;
+		int vSize = 10;
 		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
-		gb.constructSquares();
-		gb.constructWalls();
 		Grid grid = gb.getGrid();
 		ArrayList<Wall> walls = gb.getWalls();
 		HashSet<Square> wallSquares = new HashSet<Square>();
@@ -113,11 +109,9 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsLength(){
-		int hSize = 40;
-		int vSize = 40;
+		int hSize = 10;
+		int vSize = 10;
 		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
-		gb.constructSquares();
-		gb.constructWalls();
 		Grid grid = gb.getGrid();
 		ArrayList<Wall> walls = gb.getWalls();
 		for(Wall w: walls){
@@ -128,12 +122,9 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testLGNearStart(){
-		int hSize = 40;
-		int vSize = 40;
+		int hSize = 10;
+		int vSize = 10;
 		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
-		gb.constructSquares();
-		gb.constructWalls();
-		gb.constructLightGrenades();
 		Grid grid = gb.getGrid();
 		Coordinate lowerleft = new Coordinate(0, vSize-1);
 		for(Coordinate coor = lowerleft; coor.getY() >= vSize-3; coor = coor.getNeighbor(Direction.NORTH)){

@@ -148,10 +148,12 @@ public class GridBuilder2 {
 		candidates.removeAll(constraint.getExcluded());
 		
 		// Removed obstructed squares from candidates
+		ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
 		for(Coordinate coordinate : candidates){
 			if(getGrid().getSquare(coordinate).isObstructed())
-				candidates.remove(coordinate);
+				toBeRemoved.add(coordinate);
 		}
+		candidates.removeAll(toBeRemoved);
 		
 		// Add one square from evey list of included coordinates
 		for(ArrayList<Coordinate> includes : constraint.getIncluded()){
