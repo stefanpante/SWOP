@@ -25,5 +25,11 @@ public class OConstants {
 	 * The color of the blue player.
 	 */
 	public static int PLAYERBLUE = -13388315;
+	
+	/**
+	 * standard square width
+	 */
+	
+	public static int SQUARE_WIDTH = 45;
 
 }
