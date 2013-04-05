@@ -283,12 +283,7 @@ public class GridBuilder2 {
 	 * 			The constraint for placing walls;
 	 */
 	protected void placeWalls(ArrayList<Wall> walls, GridConstraint constraint){
-		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-		for(Wall wall : walls){
-			for(Square square : wall.getSquares()){
-				coordinates.add(getGrid().getCoordinate(square));
-			}
-		}
+		ArrayList<Coordinate> coordinates = getCoordinatesOfWalls(walls);
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(Wall wall : walls){
@@ -296,6 +291,17 @@ public class GridBuilder2 {
 				placeObstacle(square, wall);
 			}
 		}
+		
+	}
+
+	public ArrayList<Coordinate> getCoordinatesOfWalls(ArrayList<Wall> walls) {
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		for(Wall wall : walls){
+			for(Square square : wall.getSquares()){
+				coordinates.add(getGrid().getCoordinate(square));
+			}
+		}
+		return coordinates;
 	}
 	
 	/**

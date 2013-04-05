@@ -27,13 +27,11 @@ public class TestGridBuilder {
 	public void testWallsCoverage(){
 		int hSize = 40;
 		int vSize = 40;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
+		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		double amountOfSquares = hSize*vSize;
-		gb.constructSquares();
-		gb.constructWalls();
 		Grid grid = gb.getGrid();
-		ArrayList<Coordinate> wallsPos = gb.getWallCoordinates();
 		ArrayList<Wall> walls = gb.getWalls();
+		ArrayList<Coordinate> wallsPos = gb.getCoordinatesOfWalls(walls);
 		Coordinate coor;
 		int coveredSquares = 0;
 		for(int x = 0; x < hSize; x++){
@@ -59,7 +57,7 @@ public class TestGridBuilder {
 	public void testWallsNotOnStartPos(){
 		int hSize = 40;
 		int vSize = 40;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
+		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		double amountOfSquares = hSize*vSize;
 		gb.constructSquares();
 		gb.constructWalls();
@@ -78,7 +76,7 @@ public class TestGridBuilder {
 	public void testWallsNoIntersection(){
 		int hSize = 40;
 		int vSize = 40;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
+		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		gb.constructSquares();
 		gb.constructWalls();
 		Grid grid = gb.getGrid();
@@ -117,7 +115,7 @@ public class TestGridBuilder {
 	public void testWallsLength(){
 		int hSize = 40;
 		int vSize = 40;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
+		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		gb.constructSquares();
 		gb.constructWalls();
 		Grid grid = gb.getGrid();
@@ -132,7 +130,7 @@ public class TestGridBuilder {
 	public void testLGNearStart(){
 		int hSize = 40;
 		int vSize = 40;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
+		GridBuilder2 gb = new GridBuilder2(hSize, vSize);
 		gb.constructSquares();
 		gb.constructWalls();
 		gb.constructLightGrenades();
