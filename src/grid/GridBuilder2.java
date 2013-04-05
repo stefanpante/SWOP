@@ -10,6 +10,9 @@ import item.launchable.IdentityDisc;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.SpringLayout.Constraints;
+
+import square.Square;
 import square.obstacle.Obstacle;
 import square.obstacle.Wall;
 import util.Coordinate;
@@ -20,6 +23,10 @@ import be.kuleuven.cs.som.annotate.Basic;
  *
  */
 public class GridBuilder2 {
+	
+	public static GridConstraint LIGHT_GRENADE_CONSTRAINT;
+	public static GridConstraint IDENTITY_DISK_CONSTRAINT;
+	public static GridConstraint WALL_CONSTRAINT;
 	
 	/**
 	 * The grid which will be build
@@ -41,8 +48,10 @@ public class GridBuilder2 {
 	public GridBuilder2(int hSize, int vSize) {
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
+		setSquares();
 	}
 	
+
 	/**
 	 * Returns the grid.
 	 * 
@@ -81,6 +90,20 @@ public class GridBuilder2 {
 	}
 	
 	/**
+	 * Adds squares to the grid
+	 */
+	private void setSquares() {
+		Coordinate coordinate;
+		for(int x = 0; x < getGrid().getHSize(); x++){
+			for(int y = 0; y < getGrid().getVSize(); y++){
+				coordinate = new Coordinate(x, y);
+				getGrid().setSquare(coordinate, new Square());
+			}
+		}		
+	}
+
+	
+	/**
 	 * Place light grenades at the the given coordinates, in respect with the given constraint.
 	 * 
 	 * @param 	coordinates
@@ -96,6 +119,14 @@ public class GridBuilder2 {
 			placeItem(coordinate, new LightGrenade());
 	}
 	
+	/**
+	 * Place identity disks on the given coordinates, in respect with the given constraint
+	 * 
+	 * @param 	coordinates
+	 * 			The coordinates where to place the identity disks
+	 * @param 	constraint
+	 * 			The constraint for placing identity disks
+	 */
 	public void placeIdentityDisk(ArrayList<Coordinate> coordinates, GridConstraint constraint){
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
@@ -121,7 +152,7 @@ public class GridBuilder2 {
 	 */
 	public boolean satisfiesConstraint(ArrayList<Coordinate> coordinates, GridConstraint constraint){
 		int totalSquaes = getGrid().getHSize()*getGrid().getVSize();
-		float percentage = totalSquaes / coordinates.size();
+		float percentage = (float) coordinates.size() / (float) totalSquaes;
 		boolean[] includes = new boolean[constraint.getIncluded().size()];
 		if(percentage > constraint.getPercentage())
 			return false;
