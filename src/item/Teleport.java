@@ -5,8 +5,8 @@ import item.inventory.SquareInventory;
 
 /**
  * Implements a teleport with a certain destination.
- * @author jonas, Dieter
- *
+ * 
+ * @author jonas, Dieter, Vincent
  */
 public class Teleport extends Item {
 	
@@ -25,8 +25,8 @@ public class Teleport extends Item {
 	/**
 	 * Constructor that gets an initial destination as argument.
 	 */
-	public Teleport (Teleport desitination) throws IllegalArgumentException {
-		setDestination(desitination);
+	public Teleport (Teleport destination) throws IllegalArgumentException {
+		setDestination(destination);
 	}
 
 	/**
@@ -78,27 +78,27 @@ public class Teleport extends Item {
 	}
 
 	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) 
+	public void acceptAddSquareInventory(SquareInventory squareInventory) 
 			throws IllegalStateException {
-		sqInv.addTeleport(this);		
+		squareInventory.addTeleport(this);		
 	}
 	
 	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv)
+	public void acceptRemoveSquareInventory(SquareInventory squareInventory)
 			throws IllegalStateException {
-		sqInv.removeTeleport(this);
+		squareInventory.removeTeleport(this);
 	}
 
 	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv)
+	public void acceptAddPlayerInventory(PlayerInventory playerInventory)
 			throws IllegalStateException {
-		plInv.addTeleport(this);
+		playerInventory.addTeleport(this);
 	}
 
 	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)
+	public void acceptRemovePlayerInventory(PlayerInventory playerInventory)
 			throws IllegalStateException {
-		plInv.removeTeleport(this);
+		playerInventory.removeTeleport(this);
 	}
 	
 }

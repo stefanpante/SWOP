@@ -9,11 +9,11 @@ import item.inventory.*;
  */
 public interface VisitableItem {
 	
-	public void acceptAddPlayerInventory(PlayerInventory plInv) throws IllegalStateException;
+	public void acceptAddPlayerInventory(PlayerInventory playerInventory) throws IllegalStateException;
 	
-	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException;
+	public void acceptRemovePlayerInventory(PlayerInventory playerInventory) throws IllegalStateException;
 		
-	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException;
+	public void acceptAddSquareInventory(SquareInventory squareInventory) throws IllegalStateException;
 		
-	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException;
+	public void acceptRemoveSquareInventory(SquareInventory squareInventory) throws IllegalStateException;
 }
