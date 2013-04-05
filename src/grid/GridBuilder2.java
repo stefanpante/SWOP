@@ -27,6 +27,7 @@ public class GridBuilder2 {
 	public GridConstraint IDENTITY_DISK_CONSTRAINT;
 	public GridConstraint WALL_CONSTRAINT;
 	
+	
 	/**
 	 * The grid which will be build
 	 */
@@ -36,6 +37,8 @@ public class GridBuilder2 {
 	 * a random generator used in various creation methods
 	 */
 	private Random random;
+	
+	private ArrayList<Wall> walls;
 	
 	
 	public GridBuilder2(){
@@ -181,6 +184,7 @@ public class GridBuilder2 {
 				walls.add(w);
 			}
 		}
+		this.walls = walls;
 		return walls;
 	}
 	
@@ -394,6 +398,10 @@ public class GridBuilder2 {
 	
 	private Coordinate getTopRight(){
 		return new Coordinate(getGrid().getHSize()-1, 0);
+	}
+	
+	protected ArrayList<Wall> getWalls(){
+		return this.walls;
 	}
 	
 }
