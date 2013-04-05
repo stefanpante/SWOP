@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-package processing;
-
-import processing.core.PShape;
-import processing.core.PVector;
-
 package processing;
 
 import processing.core.PShape;
