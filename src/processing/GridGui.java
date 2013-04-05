@@ -9,10 +9,6 @@ import util.Coordinate;
 
 public class GridGui implements Drawable{
 
-	/**
-	 * the margin between the cells of the grid.
-	 */
-	public static int MARGIN = 5;
 
 	/**
 	 * The parent object used to draw;
@@ -81,8 +77,8 @@ public class GridGui implements Drawable{
 		float x = position.x;
 		float y = position.y;
 
-		float swidth = (width - hCells * MARGIN) / hCells;
-		float sHeight = (height- vCells * MARGIN) / vCells;
+		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
+		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		for(int i = 0; i < vCells; i++){
 			for(int j = 0; j < hCells; j++){
 				SquareGUI s = new SquareGUI(objectronGUI);
@@ -90,10 +86,10 @@ public class GridGui implements Drawable{
 				s.setWidth(swidth);
 				s.setPosition(x, y);
 				squares.put(new Coordinate(j,i),s);
-				x += swidth + MARGIN;
+				x += swidth + OConstants.MARGIN;
 			}
 			x = position.x;
-			y += sHeight + MARGIN;
+			y += sHeight + OConstants.MARGIN;
 		}
 
 	}
@@ -206,13 +202,13 @@ public class GridGui implements Drawable{
 		try{
 			SquareGUI s = squares.get(players.get(0));
 			if(s != null)
-				s.setColor(s.PLAYERBLUE);
+				s.setColor(OConstants.PLAYERBLUE);
 		} catch(Exception jonas){}
 
 		try{
 			SquareGUI s = squares.get(players.get(1));
 			if(s != null)
-				s.setColor(s.PLAYERRED);
+				s.setColor(OConstants.PLAYERRED);
 		}
 		catch (Exception dieter){}
 

@@ -53,19 +53,19 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		squareInventoryGroup.setPosition(new PVector(550,35));
 		squareInventoryGroup.setWidth(275);
 		squareInventoryGroup.setBackgroundHeight(100);
-        squareInventoryGroup.setBackgroundColor(SquareGUI.LIGHTER_GREY);
-        squareInventoryGroup.setColorBackground(SquareGUI.PLAYERBLUE);
+        squareInventoryGroup.setBackgroundColor(OConstants.LIGHTER_GREY);
+        squareInventoryGroup.setColorBackground(OConstants.PLAYERBLUE);
 		
         playerInventoryGroup = inputController.addGroup("Player Inventory");
         playerInventoryGroup.setPosition(new PVector(550,155));
         playerInventoryGroup.setWidth(275);
         playerInventoryGroup.setBackgroundHeight(100);
-        playerInventoryGroup.setBackgroundColor(SquareGUI.LIGHTER_GREY);
-        playerInventoryGroup.setColorBackground(SquareGUI.PLAYERBLUE);        
+        playerInventoryGroup.setBackgroundColor(OConstants.LIGHTER_GREY);
+        playerInventoryGroup.setColorBackground(OConstants.PLAYERBLUE);        
         
         bang =  inputController.addBang("moveLeft");
 		bang.setGroup(squareInventoryGroup);
-		bang.setColorBackground(SquareGUI.PLAYERBLUE);
+		bang.setColorBackground(OConstants.PLAYERBLUE);
 	}
 	
 	public void moveLeft(){
