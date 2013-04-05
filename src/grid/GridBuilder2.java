@@ -384,7 +384,7 @@ public class GridBuilder2 {
 				}
 			}
 			break;
-		case WEST:
+		case EAST:
 			for(Coordinate coor = start; coor.getY() <= size - 1; coor = coor.getNeighbor(Direction.SOUTH)){
 				for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-size  ; coor2 = coor2.getNeighbor(Direction.WEST)){
 					if(!getGrid().getSquare(coor2).isObstructed())
