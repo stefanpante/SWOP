@@ -3,10 +3,11 @@ package scenariotests;
 import static org.junit.Assert.*;
 
 
+
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import handler.MoveHandler;
+import controller.MoveHandler;
 import item.LightGrenade;
 
 import org.junit.Before;
@@ -16,8 +17,8 @@ import player.Player;
 
 import square.Direction;
 import square.Square;
-import square.obstacles.LightTrail;
-import square.obstacles.Wall;
+import square.obstacle.LightTrail;
+import square.obstacle.Wall;
 import square.state.PowerFailureState;
 
 import game.Game;

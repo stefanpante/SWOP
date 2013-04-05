@@ -5,6 +5,7 @@ package grid;
 
 import static org.junit.Assert.*;
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 import square.Direction;
 import square.Square;
-import square.obstacles.Wall;
+import square.obstacle.Wall;
 import util.Coordinate;
 
 /**

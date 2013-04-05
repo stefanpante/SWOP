@@ -1,8 +1,9 @@
 package square.obstacle;
 
 import static org.junit.Assert.*;
+
 import square.*;
-import square.obstacles.*;
+import square.obstacle.*;
 
 import org.junit.*;
 

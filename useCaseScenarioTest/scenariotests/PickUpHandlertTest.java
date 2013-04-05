@@ -1,7 +1,8 @@
 package scenariotests;
 
 import static org.junit.Assert.*;
-import handler.PickUpHandler;
+
+import controller.PickUpHandler;
 import item.LightGrenade;
 import item.inventory.PlayerInventory;
 import game.Game;
