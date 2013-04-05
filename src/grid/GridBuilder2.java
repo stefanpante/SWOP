@@ -39,9 +39,40 @@ public class GridBuilder2 {
 	private Random random;
 	
 	private ArrayList<Wall> walls;
+
 	
+	/**
+	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 * @param 	hSize		
+	 * 			The horizontal size of the grid this gridBuilder will build.
+	 * @param 	vSize		
+	 * 			The vertical size of the grid this gridBuilder will build.
+	 */
+	public GridBuilder2(int hSize, int vSize) {
+		setGrid(new Grid(hSize, vSize));
+		setRandom(new Random());
+		setSquares();
+		setConstraints();
+		build(randomWallLocations(WALL_CONSTRAINT),
+				randomLocations(LIGHT_GRENADE_CONSTRAINT),
+				randomLocations(IDENTITY_DISK_CONSTRAINT));
+	}
 	
-	public GridBuilder2(){
+	public GridBuilder2(int hSize, int vSize, ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+		setGrid(new Grid(hSize, vSize));
+		setRandom(new Random());
+		setSquares();
+		setConstraints();
+		build(walls,lightGrenades,identityDisks);
+	}
+	
+	private void build(ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+		placeWalls(walls, WALL_CONSTRAINT);
+		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
+		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
+	}
+	
+	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
 		excluded.add(getBottomLeft());
 		excluded.add(getTopRight());
@@ -57,38 +88,7 @@ public class GridBuilder2 {
 		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
 	}
 	
-	/**
-	 * Creates a new Gridbuilder with parameters to create a new grid.
-	 * @param 	hSize		
-	 * 			The horizontal size of the grid this gridBuilder will build.
-	 * @param 	vSize		
-	 * 			The vertical size of the grid this gridBuilder will build.
-	 */
-	public GridBuilder2(int hSize, int vSize) {
-		this();
-		setGrid(new Grid(hSize, vSize));
-		setRandom(new Random());
-		setSquares();
-		build(randomWallLocations(WALL_CONSTRAINT),
-				randomLocations(LIGHT_GRENADE_CONSTRAINT),
-				randomLocations(IDENTITY_DISK_CONSTRAINT));
-	}
 	
-	public GridBuilder2(int hSize, int vSize, ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
-		this();
-		setGrid(new Grid(hSize, vSize));
-		setRandom(new Random());
-		setSquares();
-		build(walls,lightGrenades,identityDisks);
-	}
-	
-	private void build(ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
-		placeWalls(walls, WALL_CONSTRAINT);
-		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
-		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
-	}
-	
-
 	/**
 	 * Returns the grid.
 	 * 
