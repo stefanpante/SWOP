@@ -1,6 +1,7 @@
 package grid;
 
 import item.Item;
+import item.Teleport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -511,6 +512,31 @@ public class Grid {
 		return new ArrayList<Square>(getNeighbors(square).values());
 	}
 	
+	/**
+	 * Finds the square related to the given destination Teleport.
+	 * 
+	 * @param 	destination
+	 * 			The destination Teleport to find.
+	 * @return	The square having the given destination as a Teleport.
+	 * @throws 	IllegalArgumentException
+	 * 			If the given destination is null or the square of the destination is obstructed.
+	 * @throws	NoSuchElementException
+	 * 			The given destination is no finable in this grid.
+	 */
+	public Square findSquare(Teleport destination) throws IllegalArgumentException, NoSuchElementException{
+		if(destination == null){
+			throw new IllegalArgumentException("The given destination is not a valid destination");
+		}
+		for(Square square : getAllSquares()){
+			if(square.getInventory().getTeleport().equals(destination)){
+				if(square.isObstructed()){
+					throw new IllegalArgumentException("The destination is valid but the recieving teleport is obstructed. Try again later.");
+				}
+				return square;
+			}
+		}
+		throw new NoSuchElementException("The given destination could not be found in this grid");
+	}
 	
 	/**
 	 * Returns a string representation of the grid.

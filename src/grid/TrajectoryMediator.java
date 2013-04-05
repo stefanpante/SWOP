@@ -1,5 +1,8 @@
 package grid;
 
+import item.Teleport;
+
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 import square.Direction;
@@ -9,6 +12,8 @@ import square.Square;
 /**
  * A class functioning as a mediator between a grid and 
  * another class that needs a trajectory calculated
+ * 
+ * @author Dieter
  */
 public class TrajectoryMediator {
 	/**
@@ -41,25 +46,40 @@ public class TrajectoryMediator {
 	 * @return
 	 */
 	public Square getEndSquare(Square startSquare, Direction direction, int maximumRange){
-		Square prevSquare = startSquare;
-		
-		Square currentSquare;
+		Square prevSquare = null;
+		Square currentSquare = startSquare;
+		HashSet<Teleport> passedDestinations = new HashSet<Teleport>();
+		Teleport teleport = null
+				, destination = null;
+		Square destinationSquare = null; 
 		int currentRange = 0;
-		//TODO implement powerfailure and teleport
-		try{
-			currentSquare = grid.getNeighbor(prevSquare, direction);
-		} catch(NoSuchElementException e){
-			return startSquare;
-		}
-		while(!currentSquare.isObstructed() && currentRange < maximumRange){
+		do{
 			prevSquare = currentSquare;
-			try {
-				currentSquare = grid.getNeighbor(prevSquare, direction);
-			} catch (NoSuchElementException e) {
-				return prevSquare;
+			teleport = prevSquare.getInventory().getTeleport();
+			if(prevSquare.getPower().isFailing()){
+				maximumRange--;
 			}
-			currentRange++;
-		}
+			if(maximumRange > 0) {
+				try {
+					if(teleport!= null){
+						destination = teleport.getDestination();
+						if(passedDestinations.contains(destination)){
+							return prevSquare;
+						}
+						destinationSquare = grid.findSquare(destination);
+						passedDestinations.add(destination);
+						currentSquare = destinationSquare;
+					} else {
+						currentSquare = grid.getNeighbor(prevSquare, direction);
+					}
+				} catch (NoSuchElementException e) {
+					return prevSquare;
+				} catch (IllegalArgumentException e){
+					return prevSquare;
+				}	
+				currentRange++;
+			}
+		} while(!currentSquare.isObstructed() && currentRange < maximumRange);
 		if(currentSquare.getObstacle().bouncesBack()){
 			return prevSquare;
 		}
