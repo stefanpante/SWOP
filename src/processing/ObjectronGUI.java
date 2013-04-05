@@ -64,12 +64,15 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         playerInventoryGroup.setColorBackground(OConstants.PLAYERBLUE);        
         
         directionalpath = new DirectionalPath(new PVector(25, 25), this);
+        moveLeft();
         
         
 	}
 	
 	private DirectionalPath directionalpath;
+	
 	public void moveLeft(){
+		System.out.println("Moved to the left");
 		obj.getMoveHandler().move(Direction.EAST);
 	}
 	Bang bang;
@@ -96,11 +99,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		directionalpath.draw();
 		directionalpath.mouseOver(mouseX, mouseY);
 		
+		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+		System.out.println("Property changes received");
 		Object o = evt.getNewValue();
 		if(o == null) System.out.println("Event object is null");
         if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
@@ -108,6 +113,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         }else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
         	this.grid.setGrenades((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
+        	System.out.println("Player positions set");
         	this.grid.setPlayers((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
         	this.grid.setPowerFails((ArrayList<Coordinate>)o);

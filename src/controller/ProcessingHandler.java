@@ -55,7 +55,6 @@ public class ProcessingHandler extends Handler {
 		try {
 			createGame(10,10);
 			addPropertyChangeListener(objectronGUI);
-			
 	    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
 	    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
 	    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
