@@ -18,7 +18,7 @@ import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 
 /**
- * @author jonas
+ * @author Jonas Devlieghere
  *
  */
 public class GridBuilder2 {
@@ -39,9 +39,19 @@ public class GridBuilder2 {
 	
 	
 	public GridBuilder2(){
-		LIGHT_GRENADE_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES);
-		IDENTITY_DISK_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES);
-		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS);
+		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
+		excluded.add(getBottomLeft());
+		excluded.add(getTopRight());
+		
+		ArrayList<Coordinate> bottomLeftSquared = getSquaredLocation(getBottomLeft(), Direction.NORTH, 3);
+		ArrayList<Coordinate> topRightSquared = getSquaredLocation(getTopRight(), Direction.EAST, 3);
+		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
+		grenadesIncluded.add(bottomLeftSquared);
+		grenadesIncluded.add(topRightSquared);
+	
+		LIGHT_GRENADE_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded);
+		IDENTITY_DISK_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded);
+		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
 	}
 	
 	/**
@@ -52,6 +62,7 @@ public class GridBuilder2 {
 	 * 			The vertical size of the grid this gridBuilder will build.
 	 */
 	public GridBuilder2(int hSize, int vSize) {
+		this();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
@@ -61,6 +72,7 @@ public class GridBuilder2 {
 	}
 	
 	public GridBuilder2(int hSize, int vSize, ArrayList<Wall> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+		this();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
@@ -346,22 +358,42 @@ public class GridBuilder2 {
 		return getGrid().getHSize()*getGrid().getVSize();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private int getRandomIndex(ArrayList a){
 		return getRandom().nextInt(a.size());
 	}
 	
-	private ArrayList<Coordinate> getSquare(Coordinate start, Direction direction, int size){
+	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, Direction direction, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		switch (direction) {
 		case NORTH:
-			
+			for(Coordinate coor = start; coor.getY() >= getGrid().getVSize()-size; coor = coor.getNeighbor(direction)){
+				for(Coordinate coor2 = coor; coor2.getX() <= size-1  ; coor2 = coor2.getNeighbor(Direction.EAST)){
+					if(!getGrid().getSquare(coor2).isObstructed())
+						coordinates.add(coor2);
+				}
+			}
 			break;
-
 		case WEST:
-			
+			for(Coordinate coor = start; coor.getY() <= size - 1; coor = coor.getNeighbor(Direction.SOUTH)){
+				for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-size  ; coor2 = coor2.getNeighbor(Direction.WEST)){
+					if(!getGrid().getSquare(coor2).isObstructed())
+						coordinates.add(coor2);
+				}
+			}
 			break;
+		default:
+			throw new IllegalArgumentException("Cannot get squared locations in that direction");
 		}
 		return coordinates;
 	}
 
+	private Coordinate getBottomLeft(){
+		return new Coordinate(0, getGrid().getVSize()-1);
+	}
+	
+	private Coordinate getTopRight(){
+		return new Coordinate(getGrid().getHSize()-1, 0);
+	}
+	
 }

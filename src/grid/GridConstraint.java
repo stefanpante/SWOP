@@ -44,6 +44,24 @@ public class GridConstraint {
 	 * @param 	excluded
 	 * 			The list of excluded coordinates
 	 */
+	public GridConstraint(float percentage, ArrayList<Coordinate> excluded){
+		this(percentage, excluded, new ArrayList<ArrayList<Coordinate>>());
+	}
+
+		
+
+	
+	/**
+	 * Create a new constraint with a maximum percentage and 
+	 * a list of excluded and included coordinates.
+	 * 
+	 * @param 	percentage
+	 * 			The maximum percentage for this constraint
+	 * @param 	excluded
+	 * 			The list of excluded coordinates
+	 * @param	included
+	 * 			The list of lists containing included coordinates
+	 */
 	public GridConstraint(float percentage, ArrayList<Coordinate> excluded, ArrayList<ArrayList<Coordinate>> included){
 		setPercentage(percentage);
 		setExcluded(excluded);
