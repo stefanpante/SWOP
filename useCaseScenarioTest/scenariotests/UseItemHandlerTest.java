@@ -2,13 +2,14 @@ package scenariotests;
 
 import static org.junit.Assert.assertFalse;
 
+
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import handler.MoveHandler;
-import handler.UseItemHandler;
+import controller.MoveHandler;
+import controller.UseItemHandler;
 import item.LightGrenade;
 import game.Game;
 import grid.Grid;
@@ -18,8 +19,8 @@ import org.junit.Test;
 import player.Player;
 import square.Direction;
 import square.Square;
-import square.obstacles.LightTrail;
-import square.obstacles.Wall;
+import square.obstacle.LightTrail;
+import square.obstacle.Wall;
 
 /**
  * 

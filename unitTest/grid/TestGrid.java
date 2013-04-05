@@ -5,17 +5,18 @@ package grid;
 
 import static org.junit.Assert.*;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 import org.junit.Test;
 
-import square.obstacles.LightTrail;
+import square.obstacle.LightTrail;
 
 import square.Direction;
 import square.Square;
-import square.obstacles.Wall;
+import square.obstacle.Wall;
 import util.Coordinate;
 
 /**

@@ -1,6 +1,7 @@
 package player;
 
 import static org.junit.Assert.*;
+
 import item.Item;
 import item.LightGrenade;
 import item.inventory.PlayerInventory;
@@ -12,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import square.Square;
-import square.obstacles.Wall;
+import square.obstacle.Wall;
 
 /**
  * Test classes for player.

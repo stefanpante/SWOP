@@ -99,7 +99,7 @@ public class ApplicationWindow extends AbstractView implements ActionListener {
     			// Alegria
     		}
 	    	if(hSize < Grid.MIN_HSIZE || vSize < Grid.MIN_VSIZE){
-	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again.");
+	    		JOptionPane.showMessageDialog(frame, "One of the values did not meet the requirements. Please try again. \n Met de complimenten van Jonas Devlieghere.");
 	    	}
 	    	
     	}

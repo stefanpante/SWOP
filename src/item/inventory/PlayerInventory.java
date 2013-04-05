@@ -12,7 +12,7 @@ import item.visitor.AddRemoveItemVisitor;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
+public class PlayerInventory extends Inventory {
 	
 	/**
 	 * The maximum size 
@@ -40,50 +40,10 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	public String toString() {
 		return "Player " + super.toString();
 	}
-	
-	@Override
-	public void addChargedDisc(ChargedDisc chargedDisc)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
 
 	@Override
-	public void removeChargedDisc(ChargedDisc chargedDisc)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void addIdentityDisc(IdentityDisc identityDisc)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void removeIdentityDisc(IdentityDisc identityDisc)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void addLightGrenade(LightGrenade lightGrenade)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void removeLightGrenade(LightGrenade lightGrenade)
-			throws IllegalStateException {
-		//No specific operation needed yet.
-	}
-
-	@Override
-	public void addTeleport(Teleport teleport) throws IllegalStateException {
+	public void addItem(Teleport teleport) throws IllegalStateException {
 		throw new IllegalStateException("A Teleport can not be added to a players Inventory");
 	}
-
-	@Override
-	public void removeTeleport(Teleport teleport) throws IllegalStateException {
-		//No specific operation needed yet.
-	}
+	
 }

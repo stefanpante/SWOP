@@ -68,7 +68,7 @@ public class TurnHandler extends Handler implements Observer {
 	 */
 	public void startTurn(){
 		increaseCurrentPlayerCount();
-		//TODO: Reset player count
+		getGame().powerFailureSquares();
 	}
 	
 	/**

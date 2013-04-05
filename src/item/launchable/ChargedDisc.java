@@ -28,24 +28,24 @@ public class ChargedDisc extends IdentityDisc {
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) 
 			throws IllegalStateException {
-		sqInv.addChargedDisc(this);		
+		sqInv.addItem(this);		
 	}
 	
 	@Override
 	public void acceptRemoveSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
-		sqInv.removeChargedDisc(this);
+		sqInv.removeItem(this);
 	}
 	
 	@Override
 	public void acceptAddPlayerInventory(PlayerInventory plInv) 
 			throws IllegalStateException {
-		plInv.addChargedDisc(this);		
+		plInv.addItem(this);		
 	}
 	
 	@Override
 	public void acceptRemovePlayerInventory(PlayerInventory plInv)
 			throws IllegalStateException {
-		plInv.removeChargedDisc(this);
+		plInv.removeItem(this);
 	}
 }

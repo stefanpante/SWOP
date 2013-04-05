@@ -1,12 +1,13 @@
 package scenariotests;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import game.Game;
-import handler.EndTurnHandler;
-import handler.MoveHandler;
+import controller.EndTurnHandler;
+import controller.MoveHandler;
 
 import org.junit.Test;
 

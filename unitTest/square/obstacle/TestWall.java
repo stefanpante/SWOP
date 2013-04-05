@@ -2,13 +2,14 @@ package square.obstacle;
 
 import static org.junit.Assert.*;
 
+
 import java.util.ArrayList;
 
 import org.junit.*;
 
 import square.Direction;
 import square.Square;
-import square.obstacles.Wall;
+import square.obstacle.Wall;
 
 public class TestWall {
 	
