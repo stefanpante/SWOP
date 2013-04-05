@@ -12,6 +12,15 @@ public class Shapes {
 	public static PShape chargedIdentityDisc;
 	public static PShape lightgrenade;
 	public static PShape powerFailureItem;
+	public static PShape north;
+	public static PShape south;
+	public static PShape east;
+	public static PShape west;
+	public static PShape northeast;
+	public static PShape northwest;
+	public static PShape southeast;
+	public static PShape southwest;
+	
 
 	public Shapes(ObjectronGUI gui) {
 		this.gui = gui;
@@ -25,6 +34,15 @@ public class Shapes {
 		this.chargedIdentityDisc = gui.loadShape(getClass().getResource("/res/chargedidentitydisc.svg").getPath());
 		this.lightgrenade = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
 		this.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
+		
+		this.south = gui.loadShape(getClass().getResource("/res/south.svg").getPath());
+		this.north = gui.loadShape(getClass().getResource("/res/north.svg").getPath());
+		this.west  = gui.loadShape(getClass().getResource("/res/west.svg").getPath());
+		this.east  = gui.loadShape(getClass().getResource("/res/east.svg").getPath());
+		this.southeast =  gui.loadShape(getClass().getResource("/res/southeast.svg").getPath());
+		this.southwest =  gui.loadShape(getClass().getResource("/res/southwest.svg").getPath());
+		this.northeast =  gui.loadShape(getClass().getResource("/res/northeast.svg").getPath());
+		this.northwest =  gui.loadShape(getClass().getResource("/res/northwest.svg").getPath());
 	}
 
 

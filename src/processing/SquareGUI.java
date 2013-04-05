@@ -6,23 +6,17 @@ import processing.core.PVector;
 public class SquareGUI implements Drawable{
 
 
-	/**
-	 * Integer representation of color(241,241,241)
-	 */
-	public static int LIGHTER_GREY = -921103;
-
-	/**
-	 *  Integer representation of color(204,204,204)
-	 */
-	public static int LIGHT_GREY = -3355444;
 	
 	/**
-	 * 
+	 * The color of this square
 	 */
-	public static int PLAYERRED = -48060;
-	public static int PLAYERBLUE = -13388315;
-	
 	private int color;
+	
+	/**
+	 * The color when rollover
+	 */
+	private int rolloverColor;
+	
 	/**
 	 * The width of the square
 	 */
@@ -50,8 +44,8 @@ public class SquareGUI implements Drawable{
 		this.gui = objectronGUI;
 		this.position = new PVector();
 		this.visible = true;
-		color = LIGHTER_GREY;
-		//this.shape = objectronGUI.loadShape(getClass().getResource("/res/wall.svg").getPath());
+		this.color = OConstants.LIGHTER_GREY;
+		this.rolloverColor = OConstants.LIGHT_GREY;
 
 	}
 
@@ -84,8 +78,9 @@ public class SquareGUI implements Drawable{
 			gui.rect(position.x , position.y, width, height);
 			if(shape != null)
 				if(shape.equals(Shapes.wall))
-					gui.shape(shape , position.x /*+ GridGui.MARGIN*/,position.y /*+ GridGui.MARGIN*/, width /*-  GridGui.MARGIN*2*/,height/*-  GridGui.MARGIN*2*/);
-				else gui.shape(shape , position.x + GridGui.MARGIN,position.y + GridGui.MARGIN, width -  GridGui.MARGIN*2,height-  GridGui.MARGIN*2);
+					gui.shape(shape , position.x ,position.y , width ,height);
+				else gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 
+						width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
 	}
 
 	/**
@@ -97,7 +92,7 @@ public class SquareGUI implements Drawable{
 		gui.noStroke();
 
 		// Set the fill color to light grey
-		gui.fill(LIGHT_GREY, 75);
+		gui.fill(rolloverColor, 75);
 
 		// Draw the square
 		gui.rect(position.x, position.y, width, height);
@@ -161,7 +156,7 @@ public class SquareGUI implements Drawable{
 
 	public void reset(){
 		this.shape = null;
-		this.color = LIGHTER_GREY;
+		this.color = OConstants.LIGHTER_GREY;
 	}
 	
 	public void setColor(int color){
