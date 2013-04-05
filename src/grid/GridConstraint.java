@@ -4,6 +4,7 @@
 package grid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import util.Coordinate;
 
@@ -15,13 +16,13 @@ public class GridConstraint {
 	
 	private float percentage;
 	private ArrayList<Coordinate> excluded;
+	private ArrayList<ArrayList<Coordinate>> included;
 
 	/**
 	 * Create a new constraint with no constraints
 	 */
 	public GridConstraint(){
-		this(1, new ArrayList<Coordinate>());
-
+		this(1);
 	}
 	
 	/**
@@ -31,7 +32,7 @@ public class GridConstraint {
 	 * 			The percentage constraint of this contraint
 	 */
 	public GridConstraint(float percentage){
-		this(percentage, new ArrayList<Coordinate>());
+		this(percentage, new ArrayList<Coordinate>(), new ArrayList<ArrayList<Coordinate>>());
 	}
 	
 	/**
@@ -43,9 +44,10 @@ public class GridConstraint {
 	 * @param 	excluded
 	 * 			The list of excluded coordinates
 	 */
-	public GridConstraint(float percentage, ArrayList<Coordinate> excluded){
+	public GridConstraint(float percentage, ArrayList<Coordinate> excluded, ArrayList<ArrayList<Coordinate>> included){
 		setPercentage(percentage);
 		setExcluded(excluded);
+		setIncluded(included);
 	}
 	
 	/**
@@ -70,6 +72,10 @@ public class GridConstraint {
 		this.excluded = new ArrayList<Coordinate>(excluded);
 	}
 	
+	private void setIncluded(ArrayList<ArrayList<Coordinate>> included){
+		this.included = included;
+	}
+	
 	/**
 	 * Return the percentage constraint of this constraint
 	 * 
@@ -86,6 +92,15 @@ public class GridConstraint {
 	 */
 	public ArrayList<Coordinate> getExcluded(){
 		return new ArrayList<Coordinate>(this.excluded);
+	}
+	
+	/**
+	 * Return the list of coordinates that need to be included
+	 * 
+	 * @return	The list of lists of included coordinates
+	 */
+	public ArrayList<ArrayList<Coordinate>> getIncluded(){
+		return new ArrayList<ArrayList<Coordinate>>(this.included);
 	}
 	
 	

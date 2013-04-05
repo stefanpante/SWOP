@@ -4,11 +4,14 @@
 package grid;
 
 import item.Item;
+import item.LightGrenade;
+import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import square.obstacle.Obstacle;
+import square.obstacle.Wall;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 
@@ -88,12 +91,17 @@ public class GridBuilder2 {
 	public void placeLightGrenade(ArrayList<Coordinate> coordinates, GridConstraint constraint){
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
+		
+		for(Coordinate coordinate : coordinates)
+			placeItem(coordinate, new LightGrenade());
 	}
 	
 	public void placeIdentityDisk(ArrayList<Coordinate> coordinates, GridConstraint constraint){
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		
+		for(Coordinate coordinate : coordinates)
+			placeItem(coordinate, new IdentityDisc());
 	}
 	
 	public void placeWalls(ArrayList<Coordinate> coordinates, GridConstraint constraint){
@@ -114,10 +122,20 @@ public class GridBuilder2 {
 	public boolean satisfiesConstraint(ArrayList<Coordinate> coordinates, GridConstraint constraint){
 		int totalSquaes = getGrid().getHSize()*getGrid().getVSize();
 		float percentage = totalSquaes / coordinates.size();
+		boolean[] includes = new boolean[constraint.getIncluded().size()];
 		if(percentage > constraint.getPercentage())
 			return false;
 		for(Coordinate coordinate : coordinates){
 			if(constraint.getExcluded().contains(coordinate))
+				return false;
+			int i = 0;
+			for(ArrayList<Coordinate> include : constraint.getIncluded()){
+				if(include.contains(coordinate))
+					includes[i] = true;
+			}
+		}
+		for(boolean b : includes){
+			if(!b)
 				return false;
 		}
 		return true;
