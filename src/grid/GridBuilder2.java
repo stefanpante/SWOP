@@ -23,9 +23,9 @@ import be.kuleuven.cs.som.annotate.Basic;
  */
 public class GridBuilder2 {
 	
-	public static GridConstraint LIGHT_GRENADE_CONSTRAINT;
-	public static GridConstraint IDENTITY_DISK_CONSTRAINT;
-	public static GridConstraint WALL_CONSTRAINT;
+	public GridConstraint LIGHT_GRENADE_CONSTRAINT;
+	public GridConstraint IDENTITY_DISK_CONSTRAINT;
+	public GridConstraint WALL_CONSTRAINT;
 	
 	/**
 	 * The grid which will be build
@@ -36,6 +36,13 @@ public class GridBuilder2 {
 	 * a random generator used in various creation methods
 	 */
 	private Random random;
+	
+	
+	public GridBuilder2(){
+		LIGHT_GRENADE_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES);
+		IDENTITY_DISK_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES);
+		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS);
+	}
 	
 	/**
 	 * Creates a new Gridbuilder with parameters to create a new grid.
@@ -341,6 +348,20 @@ public class GridBuilder2 {
 	
 	private int getRandomIndex(ArrayList a){
 		return getRandom().nextInt(a.size());
+	}
+	
+	private ArrayList<Coordinate> getSquare(Coordinate start, Direction direction, int size){
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		switch (direction) {
+		case NORTH:
+			
+			break;
+
+		case WEST:
+			
+			break;
+		}
+		return coordinates;
 	}
 
 }

@@ -49,6 +49,11 @@ public class Grid {
 	public static float PERCENTAGE_GRENADES = 0.05f;
 
 	/**
+	 * Percentage of square covered by identity disks
+	 */
+	public static float PERCENTAGE_IDENTITY_DISKS = 0.02f;
+	
+	/**
 	 * Percentage of max length of a wall
 	 */
 	public static float LENGTH_PERCENTAGE_WALL = 0.5f;
