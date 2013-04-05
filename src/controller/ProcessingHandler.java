@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.swing.UIManager;
 
 import processing.ObjectronGUI;
-import processing.core.PApplet;
 
 import util.Coordinate;
 
