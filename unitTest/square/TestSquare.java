@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import grid.GridBuilder;
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import item.inventory.Inventory;
+import item.launchable.IdentityDisc;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,8 +20,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-import square.obstacles.MultiObstacle;
-import square.obstacles.Wall;
+import square.obstacle.MultiObstacle;
+import square.obstacle.Wall;
 
 
 
@@ -46,9 +48,9 @@ public class TestSquare {
 	public void testAddItem(){
 		Square sq = new Square();
 		Item lg1 = new LightGrenade();
-		Item it1 = new Item();
-		Item it2 = new Item();
-		Item it3 = new Item();
+		Item it1 = new Teleport();
+		Item it2 = new IdentityDisc();
+		Item it3 = new IdentityDisc();
 
 
 		sq.getInventory().addItem(lg1);
@@ -79,9 +81,9 @@ public class TestSquare {
 		Square sq = new Square();
 
 		Item lg1 = new LightGrenade();
-		Item it1 = new Item();
-		Item it2 = new Item();
-		Item it3 = new Item();
+		Item it1 = new IdentityDisc();
+		Item it2 = new IdentityDisc();
+		Item it3 = new IdentityDisc();
 
 		sq.getInventory().addItem(lg1);
 		sq.getInventory().addItem(it1);		
@@ -106,7 +108,7 @@ public class TestSquare {
 		Item lg1 = new LightGrenade();
 		Item lg2 = new LightGrenade();
 		Item lg3 = new LightGrenade();
-		Item it = new Item();
+		Item it = new IdentityDisc();
 		
 		sq1.getInventory().addItem(lg1);
 		assertTrue(sq1.getInventory().hasItem((lg1)));

@@ -14,9 +14,7 @@ public class TestState {
 	@Test
 	public void testConstructor() {
 		Square square = new Square();
-		
-		if(!(square.getState() instanceof RegularState))
-			fail("Not yet implemented");
+		assertFalse(square.getPower().isFailing());
 	}
 	
 	/**
@@ -26,8 +24,7 @@ public class TestState {
 	@Test
 	public void testPowerFailure() {
 		Square square = new Square();
-		square.powerFail();
-		
+		square.getPower().fail();
 		assertEquals(PowerFailureState.getInstance(),square.getState());
 		square.endTurn();
 		
