@@ -27,6 +27,11 @@ public class OConstants {
 	public static int PLAYERBLUE = -13388315;
 	
 	/**
+	 * The color of the labels.
+	 */
+	
+	public static int LABELGREEN = -6697984;
+	/**
 	 * standard square width
 	 */
 	

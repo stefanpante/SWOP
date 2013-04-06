@@ -18,6 +18,7 @@ import controller.GameHandler;
 import controller.ProcessingHandler;
 
 import player.Player;
+import processing.button.TextButton;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
@@ -53,12 +54,27 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * The GUI representation of the player inventory
 	 */
-	Inventory playerInventory;
+	private Inventory playerInventory;
 
 	/**
 	 * The GUI representation of the square inventory
 	 */
-	Inventory squareInventory;
+	private Inventory squareInventory;
+	
+	/**
+	 * The useitem button
+	 */
+	private TextButton useItemButton;
+	
+	/**
+	 * The pickUpItem button
+	 */
+	private TextButton pickUpButton;
+	
+	/**
+	 * The endTurnButton
+	 */
+	private TextButton endTurnButton;
 
 	/**
 	 * initializes the objectron gui
@@ -74,7 +90,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		
 		//Sets up the grid for usage.
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
-		
+		System.out.println(color(153,204,0));
 		// Creates a new ProcessingHandler.
 		obj = new ProcessingHandler(this);
 		
@@ -85,8 +101,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         squareInventory = new Inventory(new ArrayList<Item>(),new PVector(530,55), this);
         playerInventory = new Inventory(new ArrayList<Item>(), new PVector(530,255), this);
         
+        // Sets up the buttons  float width, float height, PVector position, String text,  PApplet gui
+        this.pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
+        this.useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
+        this.endTurnButton = new TextButton(145, 25, new PVector(535, 525), "end turn", this);
         // the current player's name.
-        this.currentPlayerName = "";
+        this.currentPlayerName = "Player 1";
         
         
         
@@ -127,6 +147,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// mouseOver on the player inventory
 		playerInventory.mouseOver(mouseX, mouseY);
 		
+		// Draw the buttons
+		useItemButton.draw();
+		pickUpButton.draw();
+		endTurnButton.draw();
+		
 		
 		
 	}
@@ -140,7 +165,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		this.noStroke();
 		
 		// sets the color of the label to baby blue.
-		this.fill(OConstants.PLAYERBLUE);
+		this.fill(OConstants.LABELGREEN);
 		
 		// draws the background of the labels. //FIXME: Should move to grid and inventories.
 		this.rect(25, 25, 495, 25);
@@ -158,6 +183,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		
 		// draws the text on the screen.
 		this.text(currentPlayerName, 30, 22, 490,25);
+		this.text("Square Inventory", 535, 22, 145,25);
+		this.text("Player Inventory", 535, 222, 145,25);
 	}
 	
 	/**
