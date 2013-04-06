@@ -5,6 +5,7 @@ package grid;
 
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import be.kuleuven.cs.som.annotate.Basic;
  */
 public class GridBuilder2 {
 	
+	public GridConstraint TELEPORT_CONSTRAINT;
 	public GridConstraint LIGHT_GRENADE_CONSTRAINT;
 	public GridConstraint IDENTITY_DISK_CONSTRAINT;
 	public GridConstraint WALL_CONSTRAINT;
@@ -57,25 +59,27 @@ public class GridBuilder2 {
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(randomWallLocations(WALL_CONSTRAINT), WALL_CONSTRAINT);
 		build(randomLocations(LIGHT_GRENADE_CONSTRAINT),
-				randomLocations(IDENTITY_DISK_CONSTRAINT));
+				randomLocations(IDENTITY_DISK_CONSTRAINT),
+				randomLocations(TELEPORT_CONSTRAINT));
 	}
 	
-	public GridBuilder2(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+	public GridBuilder2(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports){
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
 		setConstraints();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(randomWallLocations(WALL_CONSTRAINT), WALL_CONSTRAINT);
-		build(randomLocations(LIGHT_GRENADE_CONSTRAINT),
-				randomLocations(IDENTITY_DISK_CONSTRAINT));
+		placeWalls(walls, WALL_CONSTRAINT);
+		build(lightGrenades, identityDisks, teleports);
 	}
 	
-	private void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks){
+	private void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports){
 		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
 		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
+		placeTeleports(teleports, TELEPORT_CONSTRAINT);
 	}
 	
+
 	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
 		excluded.add(getBottomLeft());
@@ -86,10 +90,11 @@ public class GridBuilder2 {
 		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
 		grenadesIncluded.add(bottomLeftSquared);
 		grenadesIncluded.add(topRightSquared);
-	
+		
+		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
 		LIGHT_GRENADE_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded);
 		IDENTITY_DISK_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded);
-		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
+		TELEPORT_CONSTRAINT = new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded);
 	}
 	
 	
@@ -307,6 +312,49 @@ public class GridBuilder2 {
 			this.walls.add(new Wall(getGrid().getSquares(sequence)));
 		}
 		
+	}
+	
+	/**
+	 * 
+	 * @param 	teleports
+	 * 			The coordinates of the locations to place.
+	 */
+	private void placeTeleports(ArrayList<Coordinate> coordinates, GridConstraint constraint) {
+		if(!satisfiesConstraint(coordinates, constraint))
+			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
+		ArrayList<Teleport> teleports = new ArrayList<Teleport>();
+		Teleport teleport;
+		for(Coordinate coordinate : coordinates){
+			teleport = new Teleport();
+			placeItem(getGrid().getSquare(coordinate), teleport);
+			teleports.add(teleport);
+		}
+		linkTeleports(teleports, true);		
+	}
+
+	/**
+	 * Links a list of teleports according to the given boolean value.
+	 * 
+	 * @param 	teleports
+	 * 			The list of teleports to link.
+	 * @param 	linkRandomly
+	 * 			Boolean that hould be true if the linking should happen randomly.
+	 * 			Otherwise each teleport will be linked to its next neighbor in the list.
+	 */
+	private void linkTeleports(ArrayList<Teleport> teleports, boolean linkRandomly) {
+		if(linkRandomly){
+			for(Teleport tele : teleports){
+				Teleport candidateDestination = teleports.get(getRandomIndex(teleports));
+				while(candidateDestination.equals(tele)){
+					candidateDestination = teleports.get(getRandomIndex(teleports));
+				}
+				tele.setDestination(candidateDestination);
+			}
+		} else {
+			for(int i=0; i<teleports.size(); i++){
+				teleports.get(i).setDestination(teleports.get(i%teleports.size()));
+			}
+		}
 	}
 
 	/**

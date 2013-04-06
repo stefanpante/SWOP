@@ -58,6 +58,11 @@ public class Grid {
 	 */
 	public static float LENGTH_PERCENTAGE_WALL = 0.5f;
 	
+	/**
+	 * Percentage of squares with a teleport.
+	 */
+	public static float PRECENTAGE_TELEPORTS = 0.03f;
+	
 	HashMap<Coordinate, Square> grid;
 	
 	/**
