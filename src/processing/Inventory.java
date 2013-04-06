@@ -15,15 +15,51 @@ import processing.core.PVector;
 
 public class Inventory implements Drawable {
 
+	/**
+	 * The items in this inventory representation
+	 */
 	private ArrayList<Item> items;
+	
+	/**
+	 * the width of this inventory
+	 */
 	private float width;
+	
+	/**
+	 * The height of this inventory
+	 */
 	private float height;
+	
+	/*
+	 * The position of this inventory (topleft)
+	 */
 	private PVector position;
+	
+	/**
+	 * the backgroundColor of the inventory
+	 */
 	private int backgroundColor;
+	
+	/*
+	 * The last button which was pressed by the user.
+	 */
 	private ItemButton selectedButton;
+	
+	/**
+	 * The list of buttons (representing the items.
+	 */
 	private ArrayList<ItemButton> buttons;
+	
+	/**
+	 * Used for drawing.
+	 */
 	private PApplet gui;
 	
+	/**
+	 * Constructs a new inventory object. Sets the position to (0,0)
+	 * @param items the items in the inventory
+	 * @param gui the PApplet used for drawing.
+	 */
 	public Inventory(ArrayList<Item> items, PApplet gui) {
 		this.items = items;
 		this.position = new PVector();
@@ -36,13 +72,21 @@ public class Inventory implements Drawable {
 		this.initialize();
 	}
 	
+	/**
+	 * Constructs a new Inventory object
+	 * @param items		the items in the inventory
+	 * @param position	the position of this inventory
+	 * @param gui		The PApplet used for drawing.
+	 */
 	public Inventory(ArrayList<Item> items, PVector position, PApplet gui){
 		this(items, gui);
 		this.position = position;
 		this.initialize();
 	}
 
-	//public ItemButton(float width, float height, PShape shape, PVector position, PApplet gui)
+	/**
+	 * creates all the buttons.
+	 */
 	private void initialize() {
 		buttons.clear();
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
@@ -63,6 +107,11 @@ public class Inventory implements Drawable {
 		
 	}
 
+	/**
+	 * Returns the PShape( the image) associated with a certain item.
+	 * @param item
+	 * @return
+	 */
 	private PShape getShape(Item item) {
 		if(item instanceof LightGrenade){
 			return Shapes.lightgrenade;
@@ -79,6 +128,9 @@ public class Inventory implements Drawable {
 		return null;
 	}
 
+	/**
+	 * Draws the inventory on the screen.
+	 */
 	@Override
 	public void draw() {
 		gui.noStroke();
@@ -90,6 +142,9 @@ public class Inventory implements Drawable {
 
 	}
 
+	/**
+	 * what to draw when the mouse is over the inventory
+	 */
 	@Override
 	public void mouseOver(int mouseX, int mouseY) {
 		for(ItemButton button: buttons){
@@ -98,6 +153,12 @@ public class Inventory implements Drawable {
 
 	}
 
+	/**
+	 * Checks whether the mouse was pressed on the inventory.
+	 * 
+	 * @param mouseX
+	 * @param mouseY
+	 */
 	public void mousePressed(int mouseX, int mouseY){
 		for(ItemButton button: buttons){
 			if(button.mouseHit(mouseX, mouseY)){
@@ -108,16 +169,25 @@ public class Inventory implements Drawable {
 			}
 		}
 	}
+	
+	/**
+	 * always returns false, the inventory is a container for objects.
+	 */
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void setItem(ArrayList<Item> o) {
-		// TODO Auto-generated method stub
+	/**
+	 * Sets the items of this inventory
+	 * @param o
+	 */
+	public void setItems(ArrayList<Item> items) {
+		// Sets the items in the inventory
+		this.items = items;
+		// inits the buttons.
+		initialize();
 		
 	}
-
-
 }

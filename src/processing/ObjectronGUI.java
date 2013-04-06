@@ -95,7 +95,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		obj = new ProcessingHandler(this);
 		
 		// Creates the directionalPad to be used for the movement of the player.
-        directionalpad = new DirectionalPad(new PVector(25, 55), this);
         
         // Sets up the inventory representation.
         squareInventory = new Inventory(new ArrayList<Item>(),new PVector(530,55), this);
@@ -123,9 +122,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Draws the grid.
 		grid.draw();
 		
-		// Draws the controls for moving the player.
-		directionalpad.draw();
-		
 		// Draws the square inventory.
 		squareInventory.draw();
 		
@@ -138,8 +134,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// mouseOver on the grid.
 		grid.mouseOver(mouseX, mouseY);
 
-		// mouseOver on the directionalpad
-		directionalpad.mouseOver(mouseX, mouseY);
 		
 		// mouseOver on the square inventory
 		squareInventory.mouseOver(mouseX, mouseY);

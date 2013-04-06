@@ -1,5 +1,6 @@
 package processing;
 
+import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
 
@@ -31,7 +32,7 @@ public class SquareGUI implements Drawable{
 	 * The top left corner of the square.
 	 */
 	private PVector position;
-	private ObjectronGUI gui;
+	private PApplet gui;
 	private PShape shape;
 
 	private boolean visible;
@@ -40,7 +41,7 @@ public class SquareGUI implements Drawable{
 	 * 
 	 * @param objectronGUI
 	 */
-	public SquareGUI(ObjectronGUI objectronGUI){
+	public SquareGUI(PApplet objectronGUI){
 		this.gui = objectronGUI;
 		this.position = new PVector();
 		this.visible = true;
@@ -56,7 +57,7 @@ public class SquareGUI implements Drawable{
 	 * @param height
 	 * @param objectronGUI
 	 */
-	public SquareGUI(PVector Position, float width, float height, ObjectronGUI objectronGUI) {
+	public SquareGUI(PVector Position, float width, float height, PApplet objectronGUI) {
 		this.position = position;
 		this.width = width;
 		this.height = height;
@@ -168,6 +169,11 @@ public class SquareGUI implements Drawable{
 	
 	public PShape getShape(){
 		return this.shape;
+	}
+
+	public PVector getPosition() {
+		return this.position;
+		
 	}
 
 }

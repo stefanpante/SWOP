@@ -1,25 +1,45 @@
 package processing;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import processing.button.DirectionalButton;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
 import square.Direction;
+import util.Coordinate;
 
 public class DirectionalPad implements Drawable{
 
+	/**
+	 * PApplet used to draw.
+	 */
 	private PApplet gui;
+	
 	/**
 	 * Should be the position of the player.
 	 */
 	private PVector position;
+	/**
+	 * The height of the directionalPad
+	 */
 	private int height;
+	/**
+	 * The width of the directionalPad
+	 */
 	private int width;
-	private ArrayList<DirectionalButton> buttons;
+	
+	/**
+	 * The buttons which compose this directionalPad
+	 */
+	private HashMap<Direction,DirectionalButton> buttons;
 	
 	
+	/**
+	 * Constructs a new directionalPad. position is set to (0,0)
+	 * @param gui 	the PApplet used to draw.
+	 */
 	public DirectionalPad(PApplet gui) {
 		this.gui = gui;
 		this.position = new PVector();
@@ -28,65 +48,96 @@ public class DirectionalPad implements Drawable{
 		initButtons();
 	}
 	
+	/**
+	 * Constructs a new DirectionalPad.
+	 * @param position	the position of the directionalPad
+	 * @param gui		the PApplet used to draw.
+	 */
 	public DirectionalPad(PVector position, PApplet gui){
 		this(gui);
 		this.position = position;
 		initButtons();
 	}
 
+	/**
+	 * Returns the height.
+	 * @return
+	 */
 	public int getHeight(){
 		return this.height;
 	}
 	
+	/**
+	 * Returns the width.
+	 * @return
+	 */
 	public int getWidth(){
 		return this.width;
 	}
 	
+	/**
+	 * Sets the height.
+	 * @param height
+	 */
 	public void setHeight(int height){
 		this.height = height;
 	}
 	
+	/**
+	 * sets the width
+	 * @param width
+	 */
 	public void setWidth(int width){
 		this.width = width;
 		
 	}
+	/**
+	 * initializes the button.
+	 */
 	private void initButtons() {
 		int buttonWidth = (width - OConstants.MARGIN*2)/3;
 		int buttonHeight = (height - OConstants.MARGIN*2)/3;
-		buttons = new ArrayList<DirectionalButton>();
+		buttons = new HashMap<Direction,DirectionalButton>();
 		
 		
 		
 		PVector pos1 = new PVector(position.x, position.y - OConstants.MARGIN - buttonHeight);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.north,Direction.NORTH, pos1, gui));
+		DirectionalButton b1 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.north,Direction.NORTH, pos1, gui);
+		buttons.put(Direction.NORTH, b1);
 		
 		PVector pos2 = new PVector(position.x, position.y + OConstants.MARGIN + buttonHeight);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.south,Direction.SOUTH, pos2, gui));
+		DirectionalButton b2 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.south,Direction.SOUTH, pos2, gui);
+		buttons.put(Direction.SOUTH, b2);
 		
 		PVector pos3 = new PVector(position.x - OConstants.MARGIN - buttonWidth, position.y);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.west,Direction.WEST,pos3, gui));
+		DirectionalButton b3 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.west,Direction.WEST,pos3, gui);
+		buttons.put(Direction.WEST,b3);
 		
 		PVector pos4 = new PVector(position.x + OConstants.MARGIN + buttonWidth, position.y);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.east,Direction.EAST, pos4, gui));
+		DirectionalButton b4 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.east,Direction.EAST, pos4, gui);
+		buttons.put(Direction.EAST, b4);
 		
 		PVector pos5 = new PVector(pos4.x, pos1.y);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.northeast,Direction.NORTHEAST, pos5, gui));
+		DirectionalButton b5 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.northeast,Direction.NORTHEAST, pos5, gui);
+		buttons.put(Direction.NORTHEAST, b5);
 		
 		PVector pos6 = new PVector(pos3.x, pos1.y);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.northwest,Direction.NORTHWEST, pos6, gui));
+		DirectionalButton b6 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.northwest,Direction.NORTHWEST, pos6, gui);
+		buttons.put(Direction.NORTHWEST,b6);
 		
 		PVector pos7 = new PVector(pos3.x, pos2.y );
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.southwest,Direction.SOUTHWEST, pos7, gui));
-		
+		DirectionalButton b7 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.southwest,Direction.SOUTHWEST, pos7, gui);
+		buttons.put(Direction.SOUTHWEST, b7);
 		
 		PVector pos8 = new PVector(pos4.x,pos2.y);
-		buttons.add(new DirectionalButton(buttonWidth, buttonHeight, Shapes.southeast,Direction.SOUTHEAST, pos8, gui));
+		DirectionalButton b8 = new DirectionalButton(buttonWidth, buttonHeight, Shapes.southeast,Direction.SOUTHEAST, pos8, gui);
+		buttons.put(Direction.SOUTHEAST, b8);
 		
 	}
 
 	@Override
 	public void draw() {
-		for(DirectionalButton button: buttons){
+		for(DirectionalButton button: buttons.values()){
 			//button.draw();
 		}
 		
@@ -94,7 +145,7 @@ public class DirectionalPad implements Drawable{
 
 	@Override
 	public void mouseOver(int mouseX, int mouseY) {
-		for(DirectionalButton button: buttons){
+		for(DirectionalButton button: buttons.values()){
 			button.mouseOver(mouseX, mouseY);
 		}
 		
@@ -108,6 +159,15 @@ public class DirectionalPad implements Drawable{
 
 	public void mousePressed(int mouseX, int mouseY) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public HashMap<Direction, DirectionalButton> getButtons() {
+		return this.buttons;
+	}
+
+	public void setPosition(PVector position) {
+		this.position = position;
 		
 	}
 

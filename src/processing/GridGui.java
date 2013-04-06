@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import player.Player;
+import processing.button.DirectionalButton;
 import processing.core.PVector;
+import square.Direction;
 import util.Coordinate;
 
 public class GridGui implements Drawable{
 
 
+	/**
+	 * the directionalpad to be drawn onto the grid.
+	 */
+	private DirectionalPad directionalPad;
 	/**
 	 * The parent object used to draw;
 	 */
@@ -64,12 +70,16 @@ public class GridGui implements Drawable{
 		this.hCells = hCells;
 		this.vCells = vCells;
 		this.squares = new HashMap<Coordinate, SquareGUI>();
+		directionalPad = new DirectionalPad(new PVector(25, 55), objectronGUI);
 		walls = new ArrayList<Coordinate>();
 		grenades = new ArrayList<Coordinate>();
+		currentPlayer = new Coordinate(0, 0);
+		
 		players = new ArrayList<Coordinate>();
 		powerFails = new ArrayList<Coordinate>();
 		lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
 		this.initGrid();
+		adjustDirectionalPad();
 	}
 
 
@@ -102,6 +112,7 @@ public class GridGui implements Drawable{
 	public void draw() {
 		for(SquareGUI square : squares.values()){
 			square.draw();
+			directionalPad.draw();
 		}
 
 
@@ -111,13 +122,7 @@ public class GridGui implements Drawable{
 	//
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
-		for(SquareGUI square : squares.values()){
-			if(square.mouseHit(mouseX, mouseY))
-				return true;
-		}
-
 		return false;
-
 
 	}
 
@@ -127,6 +132,7 @@ public class GridGui implements Drawable{
 		for(SquareGUI square: squares.values()){
 			square.mouseOver(mouseX, mouseY);
 		}
+		directionalPad.mouseOver(mouseX, mouseY);
 	}
 
 
@@ -167,9 +173,75 @@ public class GridGui implements Drawable{
 
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
+		adjustDirectionalPad();
 		resetGrid();
 
 	}
+	
+	/**
+	 * Sets directions that are not applicable to false.
+	 */
+	private void adjustDirectionalPad(){
+		directionalPad.setPosition(getPixels(currentPlayer));
+		HashMap<Direction, DirectionalButton> buttons = directionalPad.getButtons();
+		
+		Coordinate coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY());
+		DirectionalButton b = buttons.get(Direction.WEST);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+		
+		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY());
+		b = buttons.get(Direction.EAST);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+
+		coor = new Coordinate(currentPlayer.getX(), currentPlayer.getY()-1);
+		b = buttons.get(Direction.NORTH);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+
+		coor = new Coordinate(currentPlayer.getX(), currentPlayer.getY()+1);
+		b = buttons.get(Direction.SOUTH);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+		
+		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY()-1);
+		b = buttons.get(Direction.NORTHWEST);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+		
+		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY() +1);
+		b = buttons.get(Direction.SOUTHWEST);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+		
+		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY()-1);
+		b = buttons.get(Direction.NORTHEAST);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+		
+		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY() +1);
+		b = buttons.get(Direction.SOUTHEAST);
+		b.setPosition(getPixels(coor));
+		if(!squares.containsKey(coor))
+			b.setVisibility(false);
+	}
+	
+	private PVector getPixels(Coordinate coor) {
+		if(squares.containsKey(coor)){
+		 return squares.get(coor).getPosition();
+		}
+		
+		return new PVector();
+	}
+
 
 	public void resetGrid(){
 		for(SquareGUI s : squares.values()){
@@ -211,8 +283,6 @@ public class GridGui implements Drawable{
 				s.setColor(OConstants.PLAYERRED);
 		}
 		catch (Exception dieter){}
-
-
 
 
 	}

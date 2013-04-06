@@ -1,10 +1,11 @@
 package processing;
 
+import processing.core.PApplet;
 import processing.core.PShape;
 
 public class Shapes {
 
-	private ObjectronGUI gui;
+	private PApplet gui;
 
 	public static PShape wall;
 	public static PShape powerFail;
@@ -22,7 +23,7 @@ public class Shapes {
 	public static PShape southwest;
 	
 
-	public Shapes(ObjectronGUI gui) {
+	public Shapes(PApplet gui) {
 		this.gui = gui;
 		this.initImages();
 	}

@@ -25,8 +25,6 @@ public class DirectionalButton extends ShapeButton{
 	public void draw(){
 		gui.noStroke();
 		gui.fill(getColor());
-		System.out.println(width + " \t" + height);
-		//gui.rect(position.x, position.y,width, height);
 		if(shape != null){
 			gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 
 					width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
@@ -36,12 +34,14 @@ public class DirectionalButton extends ShapeButton{
 
 	@Override
 	public void mouseOver(int mouseX, int mouseY){
-		if(mouseHit(mouseX, mouseY)){
-			gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 
-					width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
+		if(visible){
+			if(mouseHit(mouseX, mouseY)){
+				gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 
+						width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
+			}
 		}
 	}
-	
+
 	public Direction getDirection(){
 		return this.direction;
 	}

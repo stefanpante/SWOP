@@ -7,24 +7,24 @@ import processing.core.PShape;
 import processing.core.PVector;
 
 public class ItemButton extends ShapeButton {
-	
+
 	/**
 	 * The item connected to this button.
 	 */
 	private Item item;
-	
+
 	/**
 	 * If the button is selected, it should be drawn different
 	 */
 	private boolean selected;
-	
+
 	/**
 	 * The background color when the button is selected.
 	 */
 	private int selectedColor = OConstants.LIGHT_GREY;
-	
-	
-	
+
+
+
 	public ItemButton(float width, float height, PShape shape, PApplet gui) {
 		super(width, height, shape, gui);
 		selected = false;
@@ -41,35 +41,32 @@ public class ItemButton extends ShapeButton {
 
 	@Override
 	public void draw(){
-		gui.noStroke();
-		gui.fill(color);
-		
-		if(selected){
-			gui.fill(selectedColor);
-		}
-		
-		gui.rect(position.x, position.y, width, height);
-		gui.shape(shape, position.x + OConstants.MARGIN, position.y + OConstants.MARGIN, width - OConstants.MARGIN*2,
-				height - OConstants.MARGIN*2);
-	}
+		if(visible){
+			gui.noStroke();
+			gui.fill(color);
 
-	public void mouseOver(int mouseX, int mouseY){
-		if(mouseHit(mouseX, mouseY)){
-			gui.fill(selectedColor);
+			if(selected){
+				gui.fill(selectedColor);
+			}
+
 			gui.rect(position.x, position.y, width, height);
 			gui.shape(shape, position.x + OConstants.MARGIN, position.y + OConstants.MARGIN, width - OConstants.MARGIN*2,
 					height - OConstants.MARGIN*2);
 		}
 	}
-	
+
+	public void mouseOver(int mouseX, int mouseY){
+
+	}
+
 	public Item getItem(){
 		return item;
 	}
-	
+
 	public void setSelected(boolean selected){
 		this.selected = selected;
 	}
-	
+
 	public void setSelectedColor(int selectedColor){
 		this.selectedColor = selectedColor;
 	}

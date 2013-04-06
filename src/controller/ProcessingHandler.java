@@ -1,13 +1,12 @@
 package controller;
 
 import game.Game;
-import gui.ApplicationWindow;
 
 import java.util.ArrayList;
 
-import javax.swing.UIManager;
 
 import processing.ObjectronGUI;
+
 
 import util.Coordinate;
 
