@@ -30,91 +30,165 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	GridGui grid;
+	/**
+	 * The grid representation of the game.
+	 */
+	private GridGui grid;
 	
-	ProcessingHandler obj;
-	ControlP5 inputController;
-	Inventory inventory;
+	/**
+	 * The processingHandler to send changes to the game model.
+	 */
+	private ProcessingHandler obj;
+	
+	/**
+	 * The directionalPad to control the movement of the player.
+	 */
+	private DirectionalPad directionalpad;
+
+	/**
+	 * The name of the currentPlayer
+	 */
+	private String currentPlayerName;
+
+	/**
+	 * The GUI representation of the player inventory
+	 */
+	Inventory playerInventory;
+
+	/**
+	 * The GUI representation of the square inventory
+	 */
+	Inventory squareInventory;
+
 	/**
 	 * initializes the objectron gui
 	 */
 	public void setup(){
+		
 		// sets the size from the applet to a fourth of the screen.
 		size(710, 580);
-		Shapes shapes = new Shapes(this);
-		// sets the framerate to 60 frames per second.
-		//frameRate(60);
-		PVector position = new PVector(25, 55);
-		this.grid = new GridGui(position, this, 500,500, 10, 10);
-		obj = new ProcessingHandler(this);
-		inputController = new ControlP5(this);
 		
+		// Loads all the shapes used.
+		@SuppressWarnings("unused")
+		Shapes shapes = new Shapes(this);
+		
+		//Sets up the grid for usage.
+		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
+		
+		// Creates a new ProcessingHandler.
+		obj = new ProcessingHandler(this);
+		
+		// Creates the directionalPad to be used for the movement of the player.
         directionalpad = new DirectionalPad(new PVector(25, 55), this);
-        moveLeft();
         
-        //FIXME: test code for the inventory class.
-        ArrayList<Item> items = new ArrayList<Item>();
-        items.add(new LightGrenade());
-        items.add(new IdentityDisc());
-        items.add(new LightGrenade());
-        items.add(new IdentityDisc());
+        // Sets up the inventory representation.
+        squareInventory = new Inventory(new ArrayList<Item>(),new PVector(530,55), this);
+        playerInventory = new Inventory(new ArrayList<Item>(), new PVector(530,255), this);
         
-        inventory = new Inventory(items,new PVector(530,55), this);
+        // the current player's name.
+        this.currentPlayerName = "";
         
         
         
 	}
-	
-	private DirectionalPad directionalpad;
-	
-	public void moveLeft(){
-		System.out.println("Moved to the left");
-		obj.getMoveHandler().move(Direction.EAST);
-	}
-	Bang bang;
-	Group squareInventoryGroup;
-	Group playerInventoryGroup;
-	float width = 50;
-	float height = 50;
-	float margin = 5;
-
-
-	private ArrayList<Item> squareInventory;
-
-	private ArrayList<Item> playerInventory;
 	
 	/**
 	 * Draws the entire game
 	 */
 	public void draw(){
+		
+		// Sets the background color to white.
 		background(color(255));
+		
+		// Draws the grid.
 		grid.draw();
-		grid.mouseOver(mouseX, mouseY);
-		grid.mouseOver(pmouseX, pmouseY);
+		
+		// Draws the controls for moving the player.
 		directionalpad.draw();
+		
+		// Draws the square inventory.
+		squareInventory.draw();
+		
+		// Draws the player inventory.
+		playerInventory.draw();
+		
+		// Shows the player label.
+		this.drawLabels();
+		
+		// mouseOver on the grid.
+		grid.mouseOver(mouseX, mouseY);
+
+		// mouseOver on the directionalpad
 		directionalpad.mouseOver(mouseX, mouseY);
-		inventory.draw();
-		inventory.mouseOver(mouseX, mouseY);
-		this.drawPlayerLabel();
+		
+		// mouseOver on the square inventory
+		squareInventory.mouseOver(mouseX, mouseY);
+		
+		// mouseOver on the player inventory
+		playerInventory.mouseOver(mouseX, mouseY);
+		
 		
 		
 	}
 	
-	public void drawPlayerLabel(){
+	/**
+	 * Draws the player Label on the screen.
+	 */
+	public void drawLabels(){
+		
+		// no stroke around the shapes drawn.
 		this.noStroke();
+		
+		// sets the color of the label to baby blue.
 		this.fill(OConstants.PLAYERBLUE);
+		
+		// draws the background of the labels. //FIXME: Should move to grid and inventories.
 		this.rect(25, 25, 495, 25);
+		this.rect(530, 25, 155, 25);
+		this.rect(530, 225, 155, 25);
+		
+		// changes the color to white ( color of the text)
 		this.fill(color(255));
+		
+		// sets the text size.
 		this.textSize(16);
+		
+		// alignment of the box.
 		this.textAlign(LEFT, CENTER);
+		
+		// draws the text on the screen.
 		this.text(currentPlayerName, 30, 22, 490,25);
 	}
 	
+	/**
+	 * Called when the mouse button is pressed.
+	 */
 	public void mousePressed(){
-		inventory.mousePressed(mouseX, mouseY);
+		
+		// Checks if the mouse is pressed on an inventory
+		squareInventory.mousePressed(mouseX, mouseY);
+		playerInventory.mousePressed(mouseX, mouseY);
+		
+		// Checks if the directionalpad is pressed
+		directionalpad.mousePressed(mouseX, mouseY);
+		
+	}
+	
+	public void pickUp(Item item){
+		obj.getPickupHandler().pickUp(item);
+	}
+	
+	public void useItem(Item item){
+		obj.getUseItemHandler().useItem(item);
+	}
+	
+	public void endTurn(){
 		
 	}
 
+	/**
+	 * Accepts propertychanges.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -140,10 +214,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         	}
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
         	this.grid.setCurrentPlayer((Coordinate)o);
-        }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
-        	this.squareInventory = (ArrayList<Item>)o;
-        }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
-        	this.playerInventory = (ArrayList<Item>)o;
+//        }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
+//        	this.squareInventory.setItem((ArrayList<Item>) o);
+//        }else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
+//        	this.playerInventory.setItem((ArrayList<Item>) o);
         }else if(evt.getPropertyName().equals(GameHandler.END_TURN_PROPERTY)){
         	confirmEndTurn((String)o);
         }else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
@@ -157,8 +231,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         }
 		
 	}
-	private String currentPlayerName = "";
-
+	
+	
 	private void confirmEndTurn(String o) {
 		// TODO Auto-generated method stub
 		

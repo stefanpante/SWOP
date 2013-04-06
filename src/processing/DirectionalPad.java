@@ -106,5 +106,10 @@ public class DirectionalPad implements Drawable{
 		return false;
 	}
 
+	public void mousePressed(int mouseX, int mouseY) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

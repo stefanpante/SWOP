@@ -114,5 +114,10 @@ public class Inventory implements Drawable {
 		return false;
 	}
 
+	public void setItem(ArrayList<Item> o) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
