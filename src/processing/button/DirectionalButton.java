@@ -34,31 +34,15 @@ public class DirectionalButton extends ShapeButton{
 
 	}
 
-	public void rollover(){
-
+	@Override
+	public void mouseOver(int mouseX, int mouseY){
+		if(mouseHit(mouseX, mouseY)){
 			gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 
 					width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
-	
+		}
 	}
-
+	
 	public Direction getDirection(){
 		return this.direction;
 	}
-	
-	@Override
-	public void mouseOver(int mouseX, int mouseY){
-		if(hit(mouseX, mouseY)){
-			this.rollover();
-		}
-	}
-
-	@Override
-	public boolean mouseHit(int mouseX, int mouseY) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
-
 }

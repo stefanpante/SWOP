@@ -38,15 +38,7 @@ public abstract class ShapeButton extends GUIButton {
 		
 	}
 
-	
-	public boolean hit(int mouseX, int mouseY) {
-		if(mouseX >= position.x  && mouseX<= position.x + width){
-			if(mouseY >= position.y && mouseY <= position.y + height){
-				return true;
-			}
-		}
-		return false;
-	}
+
 	
 
 	

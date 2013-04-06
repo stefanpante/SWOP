@@ -24,7 +24,14 @@ public abstract class GUIButton implements Drawable {
 	 */
 	protected float height;
 	
+	/**
+	 * The standard color of the button.
+	 */
 	protected int color;
+	
+	/**
+	 * The color of the button when the mouse hovered.
+	 */
 	private int rolloverColor;
 	
 	
@@ -71,6 +78,16 @@ public abstract class GUIButton implements Drawable {
 	
 	public void setPosition(PVector position){
 		this.position = position;
+	}
+	
+	public boolean mouseHit(int mouseX, int mouseY){
+		if(mouseX >= position.x && mouseX <= position.x + width){
+			if(mouseY >= position.y && mouseY <= position.y + height){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 
