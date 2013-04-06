@@ -198,7 +198,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
 	@Override
 	public void addTeleport(Teleport teleport) {
-		if(hasLightGrenade())
+		if(hasTeleport())
 			throw new IllegalArgumentException("Can't add another Teleport to " + this);
 		this.teleport = teleport;
 	}
