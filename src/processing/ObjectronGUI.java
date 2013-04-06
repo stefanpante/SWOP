@@ -1,6 +1,8 @@
 package processing;
 
 import item.Item;
+import item.LightGrenade;
+import item.launchable.IdentityDisc;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -35,6 +37,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private Shapes shapes;
 	ProcessingHandler obj;
 	ControlP5 inputController;
+	Inventory inventory;
 	/**
 	 * initializes the objectron gui
 	 */
@@ -49,22 +52,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		obj = new ProcessingHandler(this);
 		inputController = new ControlP5(this);
 		
-		squareInventoryGroup = inputController.addGroup("Square Inventory");
-		squareInventoryGroup.setPosition(new PVector(550,35));
-		squareInventoryGroup.setWidth(275);
-		squareInventoryGroup.setBackgroundHeight(100);
-        squareInventoryGroup.setBackgroundColor(OConstants.LIGHTER_GREY);
-        squareInventoryGroup.setColorBackground(OConstants.PLAYERBLUE);
-		
-        playerInventoryGroup = inputController.addGroup("Player Inventory");
-        playerInventoryGroup.setPosition(new PVector(550,155));
-        playerInventoryGroup.setWidth(275);
-        playerInventoryGroup.setBackgroundHeight(100);
-        playerInventoryGroup.setBackgroundColor(OConstants.LIGHTER_GREY);
-        playerInventoryGroup.setColorBackground(OConstants.PLAYERBLUE);        
-        
         directionalpath = new DirectionalPath(new PVector(25, 25), this);
         moveLeft();
+        
+        //FIXME: test code for the inventory class.
+        ArrayList<Item> items = new ArrayList<Item>();
+        items.add(new LightGrenade());
+        items.add(new IdentityDisc());
+        items.add(new LightGrenade());
+        items.add(new IdentityDisc());
+        
+        inventory = new Inventory(items,new PVector(530,25), this);
+        
         
         
 	}
@@ -98,14 +97,20 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		grid.mouseOver(pmouseX, pmouseY);
 		directionalpath.draw();
 		directionalpath.mouseOver(mouseX, mouseY);
+		inventory.draw();
+		inventory.mouseOver(mouseX, mouseY);
 		
 		
+	}
+	
+	public void mousePressed(){
+		inventory.mousePressed(mouseX, mouseY);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("Property changes received");
+
 		Object o = evt.getNewValue();
 		if(o == null) System.out.println("Event object is null");
         if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {

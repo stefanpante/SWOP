@@ -16,8 +16,11 @@ import processing.core.PVector;
 public class Inventory implements Drawable {
 
 	private ArrayList<Item> items;
+	private float width;
+	private float height;
 	private PVector position;
-	private Item selectedItem;
+	private int backgroundColor;
+	private ItemButton selectedButton;
 	private ArrayList<ItemButton> buttons;
 	private PApplet gui;
 	
@@ -26,7 +29,10 @@ public class Inventory implements Drawable {
 		this.position = new PVector();
 		this.buttons = new ArrayList<ItemButton>();
 		this.gui = gui;
-		this.selectedItem = null;
+		this.backgroundColor = OConstants.LIGHTER_GREY;
+		this.width = 155;
+		this.height = 155;
+		this.selectedButton = null;
 		this.initialize();
 	}
 	
@@ -48,8 +54,8 @@ public class Inventory implements Drawable {
 			
 			//next line when line is full.
 			pos = new PVector(pos.x + OConstants.MARGIN + OConstants.SQUARE_WIDTH, 
-					pos.y + OConstants.SQUARE_WIDTH + OConstants.MARGIN);
-			if(pos.x >= (position.x - OConstants.MARGIN - OConstants.SQUARE_WIDTH)){
+					pos.y);
+			if(pos.x >= (position.x + width)){
 				pos = new PVector(position.x + OConstants.MARGIN, pos.y + OConstants.MARGIN + OConstants.SQUARE_WIDTH );
 				
 			}
@@ -75,28 +81,38 @@ public class Inventory implements Drawable {
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
+		gui.noStroke();
+		gui.fill(backgroundColor);
+		gui.rect(position.x, position.y, width, height);
+		for(ItemButton button: buttons){
+			button.draw();
+		}
 
 	}
 
 	@Override
 	public void mouseOver(int mouseX, int mouseY) {
-		// TODO Auto-generated method stub
+		for(ItemButton button: buttons){
+			button.rollover(mouseX, mouseY);
+		}
 
 	}
 
+	public void mousePressed(int mouseX, int mouseY){
+		for(ItemButton button: buttons){
+			if(button.mouseHit(mouseX, mouseY)){
+				if(selectedButton != null)
+					selectedButton.setSelected(false);
+				selectedButton = button;
+				button.setSelected(true);
+			}
+		}
+	}
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
