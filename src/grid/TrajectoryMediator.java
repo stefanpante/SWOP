@@ -11,7 +11,7 @@ import square.Square;
 
 /**
  * A class functioning as a mediator between a grid and 
- * another class that needs a trajectory calculated
+ * another class that needs a trajectory calculated.
  * 
  * @author Dieter
  */
@@ -49,8 +49,7 @@ public class TrajectoryMediator {
 		Square prevSquare = null;
 		Square currentSquare = startSquare;
 		HashSet<Teleport> passedDestinations = new HashSet<Teleport>();
-		Teleport teleport = null
-				, destination = null;
+		Teleport teleport = null, destination = null;
 		Square destinationSquare = null; 
 		int currentRange = 0;
 		do{
