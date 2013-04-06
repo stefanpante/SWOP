@@ -32,7 +32,7 @@ public abstract class GUIButton implements Drawable {
 	/**
 	 * The color of the button when the mouse hovered.
 	 */
-	private int rolloverColor;
+	protected int rolloverColor;
 	
 	
 	public GUIButton(float width, float height, PApplet gui) {

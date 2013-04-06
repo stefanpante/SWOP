@@ -90,7 +90,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		
 		//Sets up the grid for usage.
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
-		System.out.println(color(153,204,0));
+		System.out.println(color(113,151,0));
 		// Creates a new ProcessingHandler.
 		obj = new ProcessingHandler(this);
 		
@@ -152,6 +152,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		pickUpButton.draw();
 		endTurnButton.draw();
 		
+		// MouseOVer on the button
+		useItemButton.mouseOver(mouseX, mouseY);
+		pickUpButton.mouseOver(mouseX, mouseY);
+		endTurnButton.mouseOver(mouseX, mouseY);
+		
 		
 		
 	}
@@ -165,7 +170,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		this.noStroke();
 		
 		// sets the color of the label to baby blue.
-		this.fill(OConstants.LABELGREEN);
+		this.fill(OConstants.GREEN);
 		
 		// draws the background of the labels. //FIXME: Should move to grid and inventories.
 		this.rect(25, 25, 495, 25);

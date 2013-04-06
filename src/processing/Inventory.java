@@ -93,7 +93,7 @@ public class Inventory implements Drawable {
 	@Override
 	public void mouseOver(int mouseX, int mouseY) {
 		for(ItemButton button: buttons){
-			button.rollover(mouseX, mouseY);
+			button.mouseOver(mouseX, mouseY);
 		}
 
 	}

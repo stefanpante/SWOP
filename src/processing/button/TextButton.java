@@ -15,12 +15,14 @@ public class TextButton extends GUIButton {
 	public TextButton(float width, float height, PVector position, String text,  PApplet gui) {
 		super(width, height, position, gui);
 		this.text = text;
+		this.setColor(OConstants.GREEN);
+		this.setRolloverColor(OConstants.DARKER_GREEN);
 	}
 
 	@Override
 	public void draw() {
 		gui.noStroke();
-		gui.fill(OConstants.LABELGREEN);
+		gui.fill(color);
 		gui.rect(position.x, position.y, width, height);
 		
 		gui.fill(gui.color(255));
@@ -34,7 +36,15 @@ public class TextButton extends GUIButton {
 	 */
 	@Override
 	public void mouseOver(int mouseX, int mouseY) {
-		// TODO Auto-generated method stub
+		if(mouseHit(mouseX, mouseY)){
+			gui.noStroke();
+			gui.fill(rolloverColor);
+			gui.rect(position.x, position.y, width, height);
+			
+			gui.fill(gui.color(255));
+			gui.textAlign(PConstants.CENTER, PConstants.CENTER);
+			gui.text(text, position.x, position.y - 3, width, height);
+		}
 		
 	}
 

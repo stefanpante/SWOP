@@ -30,7 +30,13 @@ public class OConstants {
 	 * The color of the labels.
 	 */
 	
-	public static int LABELGREEN = -6697984;
+	public static int GREEN = -6697984;
+	
+	/**
+	 * darker green
+	 */
+	
+	public static int DARKER_GREEN = -9332992;
 	/**
 	 * standard square width
 	 */
