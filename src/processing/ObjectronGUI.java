@@ -20,6 +20,7 @@ import controller.ProcessingHandler;
 import player.Player;
 import processing.button.TextButton;
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
@@ -76,13 +77,16 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	private TextButton endTurnButton;
 
+	private int hSize = 710;
+	
+	private int vSize = 580;
 	/**
 	 * initializes the objectron gui
 	 */
 	public void setup(){
 		
 		// sets the size from the applet to a fourth of the screen.
-		size(710, 580);
+		size(hSize, vSize);
 		
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
@@ -106,6 +110,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         this.endTurnButton = new TextButton(145, 25, new PVector(535, 525), "end turn", this);
         // the current player's name.
         this.currentPlayerName = "Player 1";
+
         
         
         
@@ -150,6 +155,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		useItemButton.mouseOver(mouseX, mouseY);
 		pickUpButton.mouseOver(mouseX, mouseY);
 		endTurnButton.mouseOver(mouseX, mouseY);
+		
+		this.showMessage("You can't move in that direction");
 		
 		
 		
@@ -264,8 +271,23 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		
 	}
 
+	private int mHeight = 125;
+	private int mWidth = 300;
 	private void showMessage(String string) {
-		// TODO Auto-generated method stub
+		stroke(0, 30);
+		fill(OConstants.LIGHTER_GREY);
+		rect(hSize/2 - mWidth/2, vSize/2 - mHeight/2, mWidth, mHeight);
+		
+		noStroke();
+		fill(OConstants.GREEN);
+		rect(hSize/2 - mWidth/2+1, vSize/2 - mHeight/2+1, mWidth-1, 25);
+		fill(color(255));
+		textAlign(PConstants.LEFT, PConstants.CENTER);
+		text("Message",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1, mWidth-6, 22);
+		
+		fill(0, 90);
+		textAlign(PConstants.CENTER, PConstants.CENTER);
+		text(string,hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
 		
 	}
 	
