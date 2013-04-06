@@ -8,7 +8,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
 
 import javax.swing.JOptionPane;
 
@@ -20,7 +19,6 @@ import controller.ProcessingHandler;
 
 import player.Player;
 import processing.core.PApplet;
-import processing.core.PShape;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
@@ -34,7 +32,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	
 	GridGui grid;
 	
-	private Shapes shapes;
 	ProcessingHandler obj;
 	ControlP5 inputController;
 	Inventory inventory;
@@ -44,7 +41,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void setup(){
 		// sets the size from the applet to a fourth of the screen.
 		size(710, 580);
-		shapes = new Shapes(this);
+		Shapes shapes = new Shapes(this);
 		// sets the framerate to 60 frames per second.
 		//frameRate(60);
 		PVector position = new PVector(25, 55);
@@ -52,7 +49,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		obj = new ProcessingHandler(this);
 		inputController = new ControlP5(this);
 		
-        directionalpath = new DirectionalPath(new PVector(25, 55), this);
+        directionalpad = new DirectionalPad(new PVector(25, 55), this);
         moveLeft();
         
         //FIXME: test code for the inventory class.
@@ -68,7 +65,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         
 	}
 	
-	private DirectionalPath directionalpath;
+	private DirectionalPad directionalpad;
 	
 	public void moveLeft(){
 		System.out.println("Moved to the left");
@@ -81,7 +78,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	float height = 50;
 	float margin = 5;
 
-	private Object currentPlayerLabel;
 
 	private ArrayList<Item> squareInventory;
 
@@ -95,8 +91,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		grid.draw();
 		grid.mouseOver(mouseX, mouseY);
 		grid.mouseOver(pmouseX, pmouseY);
-		directionalpath.draw();
-		directionalpath.mouseOver(mouseX, mouseY);
+		directionalpad.draw();
+		directionalpad.mouseOver(mouseX, mouseY);
 		inventory.draw();
 		inventory.mouseOver(mouseX, mouseY);
 		this.drawPlayerLabel();
@@ -106,16 +102,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	
 	public void drawPlayerLabel(){
 		this.noStroke();
-		this.fill(OConstants.LIGHT_GREY);
+		this.fill(OConstants.PLAYERBLUE);
 		this.rect(25, 25, 495, 25);
 		this.fill(color(255));
 		this.textSize(16);
 		this.textAlign(LEFT, CENTER);
-		this.text(currentPlayerName, 30, 25, 490,25);
+		this.text(currentPlayerName, 30, 22, 490,25);
 	}
 	
 	public void mousePressed(){
 		inventory.mousePressed(mouseX, mouseY);
+		
 	}
 
 	@SuppressWarnings("unchecked")

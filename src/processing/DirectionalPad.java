@@ -8,7 +8,7 @@ import processing.core.PShape;
 import processing.core.PVector;
 import square.Direction;
 
-public class DirectionalPath implements Drawable{
+public class DirectionalPad implements Drawable{
 
 	private PApplet gui;
 	/**
@@ -20,7 +20,7 @@ public class DirectionalPath implements Drawable{
 	private ArrayList<DirectionalButton> buttons;
 	
 	
-	public DirectionalPath(PApplet gui) {
+	public DirectionalPad(PApplet gui) {
 		this.gui = gui;
 		this.position = new PVector();
 		this.height = 145;
@@ -28,7 +28,7 @@ public class DirectionalPath implements Drawable{
 		initButtons();
 	}
 	
-	public DirectionalPath(PVector position, PApplet gui){
+	public DirectionalPad(PVector position, PApplet gui){
 		this(gui);
 		this.position = position;
 		initButtons();
