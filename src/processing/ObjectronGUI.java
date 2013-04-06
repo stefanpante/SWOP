@@ -43,16 +43,16 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	public void setup(){
 		// sets the size from the applet to a fourth of the screen.
-		size(850, 550);
+		size(710, 580);
 		shapes = new Shapes(this);
 		// sets the framerate to 60 frames per second.
 		//frameRate(60);
-		PVector position = new PVector(25, 25);
+		PVector position = new PVector(25, 55);
 		this.grid = new GridGui(position, this, 500,500, 10, 10);
 		obj = new ProcessingHandler(this);
 		inputController = new ControlP5(this);
 		
-        directionalpath = new DirectionalPath(new PVector(25, 25), this);
+        directionalpath = new DirectionalPath(new PVector(25, 55), this);
         moveLeft();
         
         //FIXME: test code for the inventory class.
@@ -62,7 +62,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         items.add(new LightGrenade());
         items.add(new IdentityDisc());
         
-        inventory = new Inventory(items,new PVector(530,25), this);
+        inventory = new Inventory(items,new PVector(530,55), this);
         
         
         
@@ -99,8 +99,19 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		directionalpath.mouseOver(mouseX, mouseY);
 		inventory.draw();
 		inventory.mouseOver(mouseX, mouseY);
+		this.drawPlayerLabel();
 		
 		
+	}
+	
+	public void drawPlayerLabel(){
+		this.noStroke();
+		this.fill(OConstants.LIGHT_GREY);
+		this.rect(25, 25, 495, 25);
+		this.fill(color(255));
+		this.textSize(16);
+		this.textAlign(LEFT, CENTER);
+		this.text(currentPlayerName, 30, 25, 490,25);
 	}
 	
 	public void mousePressed(){
