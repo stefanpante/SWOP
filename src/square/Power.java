@@ -58,6 +58,7 @@ public class Power {
 	 */
 	public void fail(){
 		this.failed = true;
+		setRemainingTurns(FAILED_TURNS);
 	}
 	
 	/**

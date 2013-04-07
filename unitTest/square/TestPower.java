@@ -1,4 +1,4 @@
-package square.state;
+package square;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import square.Square;
 
-public class TestState {
+public class TestPower {
 
 	/**
 	 * Upon constructing a square, the state must be a regular state.
@@ -25,16 +25,16 @@ public class TestState {
 	public void testPowerFailure() {
 		Square square = new Square();
 		square.getPower().fail();
-		assertEquals(PowerFailureState.getInstance(),square.getState());
-		square.endTurn();
+		assertTrue(square.getPower().isFailing());
+		square.getPower().decreaseTurn();
 		
-		assertEquals(PowerFailureState.getInstance(),square.getState());
-		square.endTurn();
+		assertTrue(square.getPower().isFailing());
+		square.getPower().decreaseTurn();
 		
-		assertEquals(PowerFailureState.getInstance(),square.getState());
-		square.endTurn();
+		assertTrue(square.getPower().isFailing());
+		square.getPower().decreaseTurn();
 		
-		assertEquals(RegularState.getInstance(),square.getState());
+		assertFalse(square.getPower().isFailing());
 	}
 
 }
