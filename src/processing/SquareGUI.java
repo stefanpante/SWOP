@@ -23,9 +23,8 @@ public class SquareGUI extends GUIElement{
 	 * @param height
 	 * @param objectronGUI
 	 */
-	public SquareGUI(PVector position, float width, float height, PApplet gui) {
-		// float height, float width, PVector position, PApplet gui
-		super(height, width, position, gui);
+	public SquareGUI( float width, float height, PVector position, PApplet gui) {
+		super(width, height, position, gui);
 	}
 
 	/**
@@ -48,21 +47,7 @@ public class SquareGUI extends GUIElement{
 						width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
 	}
 
-	/**
-	 * Shows a rollover status of the square.
-	 */
-	private void rollover(){
-
-		// no stroke on the square.
-		gui.noStroke();
-
-		// Set the fill color to light grey
-		gui.fill(rolloverColor, 75);
-
-		// Draw the square
-		gui.rect(position.x, position.y, width, height);
-
-	}
+	
 
 	/**
 	 * Method which returns whether the mouse is on the square.
@@ -94,6 +79,22 @@ public class SquareGUI extends GUIElement{
 		if(mouseHit(mouseX, mouseY)){
 			this.rollover();
 		}
+
+	}
+	
+	/**
+	 * Shows a rollover status of the square.
+	 */
+	private void rollover(){
+
+		// no stroke on the square.
+		gui.noStroke();
+
+		// Set the fill color to light grey
+		gui.fill(rolloverColor, 75);
+
+		// Draw the square
+		gui.rect(position.x, position.y, width, height);
 
 	}
 

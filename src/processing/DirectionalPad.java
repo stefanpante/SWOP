@@ -112,7 +112,7 @@ public class DirectionalPad extends GUIElement{
 		
 	}
 
-	public void mouseOver(int mouseX, int mouseY) {
+	public void hover(int mouseX, int mouseY) {
 		for(DirectionalButton button: buttons.values()){
 			button.hover(mouseX, mouseY);
 		}

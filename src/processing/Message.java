@@ -1,6 +1,7 @@
 package processing;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class Message extends GUIElement {
 
@@ -14,14 +15,10 @@ public class Message extends GUIElement {
 	 */
 	protected float showDuration;
 	
-	/**
-	 * The PApplet used to draw.
-	 */
-	protected PApplet gui;
 	
-	
-	public Message() {
-		// TODO Auto-generated constructor stub
+	public Message(float width, float height, PVector position, PApplet gui) {
+		super(height, width, position, gui);
+		// float height, float width, PVector position, PApplet gui
 	}
 
 	@Override

@@ -100,7 +100,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		
 		//Sets up the grid for usage.
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
-		System.out.println(color(113,151,0));
 		// Creates a new ProcessingHandler.
 		obj = new ProcessingHandler(this);
 		
@@ -214,8 +213,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		squareInventory.mousePressed(mouseX, mouseY);
 		playerInventory.mousePressed(mouseX, mouseY);
 		
-		// Checks if the directionalpad is pressed
-		directionalpad.mousePressed(mouseX, mouseY);
 		
 	}
 	
@@ -251,12 +248,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         	this.grid.setPowerFails((ArrayList<Coordinate>)o);
         }else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
         	this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-        	String playerName = (String)o;
-        	if(!this.currentPlayerName.equals(playerName)){
-        		this.currentPlayerName = playerName;
-        		showMessage("It's now "+playerName+ "'s turn.");
-        	}
+//        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
+//        	String playerName = (String)o;
+//        	if(!this.currentPlayerName.equals(playerName)){
+//        		this.currentPlayerName = playerName;
+//        		showMessage("It's now "+playerName+ "'s turn.");
+//        	}
         }else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
         	this.grid.setCurrentPlayer((Coordinate)o);
 //        }else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){

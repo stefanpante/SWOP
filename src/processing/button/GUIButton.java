@@ -26,7 +26,7 @@ public abstract class GUIButton extends GUIElement {
 	 */
 	public GUIButton(float width, float height, PApplet gui) {
 		//float height, float width, PVector position, PApplet gui
-		super(height, width, new PVector(), gui);
+		super(width, height, new PVector(), gui);
 		super.setColor(OConstants.LIGHT_GREY);
 		
 		this.rolloverColor = OConstants.LIGHTER_GREY;

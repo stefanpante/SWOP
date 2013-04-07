@@ -42,7 +42,7 @@ public class GridGui extends GUIElement{
 
 	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
 		//float height, float width, PVector position, PApplet gui
-		super(height, width, position, gui);
+		super(width, height, position, gui);
 		
 		this.hCells = hCells;
 		this.vCells = vCells;
@@ -71,7 +71,7 @@ public class GridGui extends GUIElement{
 			for(int j = 0; j < hCells; j++){
 				PVector pos = new PVector(x,y);
 				// PVector position, float width, float height, PApplet gui
-				SquareGUI s = new SquareGUI(pos, swidth, sHeight, gui);
+				SquareGUI s = new SquareGUI( swidth, sHeight,pos, gui);
 				squares.put(new Coordinate(j,i),s);
 				x += swidth + OConstants.MARGIN;
 			}
@@ -105,7 +105,7 @@ public class GridGui extends GUIElement{
 		for(SquareGUI square: squares.values()){
 			square.hover(mouseX, mouseY);
 		}
-		directionalPad.mouseOver(mouseX, mouseY);
+		directionalPad.hover(mouseX, mouseY);
 	}
 
 

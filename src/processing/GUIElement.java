@@ -40,7 +40,7 @@ public abstract class GUIElement implements Drawable{
 	 */
 	protected PVector position;
 	
-	public GUIElement(float height, float width, PVector position, PApplet gui) {
+	public GUIElement(float width, float height, PVector position, PApplet gui) {
 		this.height = height;
 		this.width = width;
 		this.position = position;
