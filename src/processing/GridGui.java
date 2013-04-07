@@ -32,10 +32,11 @@ public class GridGui extends GUIElement{
 	 * The list of squares to be drawn onto the grid.
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
+	private ArrayList<SquareGUI> players;
 
 	private ArrayList<Coordinate> walls;
 	private ArrayList<Coordinate> grenades;
-	private ArrayList<Coordinate> players;
+	//private ArrayList<Coordinate> players;
 	private ArrayList<Coordinate> powerFails;
 	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
 	private Coordinate currentPlayer;
@@ -52,8 +53,7 @@ public class GridGui extends GUIElement{
 		this.walls = new ArrayList<Coordinate>();
 		this.grenades = new ArrayList<Coordinate>();
 		this.currentPlayer = new Coordinate(0, 0);
-
-		this.players = new ArrayList<Coordinate>();
+		this.players = new ArrayList<SquareGUI>();
 		this.powerFails = new ArrayList<Coordinate>();
 		this.lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
 		this.initGrid();
@@ -78,6 +78,13 @@ public class GridGui extends GUIElement{
 			x = position.x;
 			y += sHeight + OConstants.MARGIN;
 		}
+		SquareGUI player1 = new SquareGUI(swidth, sHeight, new PVector(), gui);
+		player1.setColor(OConstants.PLAYERBLUE);
+		players.add(player1);
+		
+		SquareGUI player2 = new SquareGUI(swidth, sHeight, new PVector(), gui);
+		player2.setColor(OConstants.PLAYERRED);
+		players.add(player2);
 
 	}
 
@@ -89,6 +96,10 @@ public class GridGui extends GUIElement{
 		for(SquareGUI square : squares.values()){
 			square.draw();
 			directionalPad.draw();
+		}
+		
+		for(SquareGUI player: players){
+			player.draw();
 		}
 
 
@@ -122,10 +133,10 @@ public class GridGui extends GUIElement{
 
 
 	public void setPlayers(ArrayList<Coordinate> o) {
-		this.players = o;
-		squares.get(o.get(0)).setColor(OConstants.PLAYERBLUE);
-		squares.get(o.get(1)).setColor(OConstants.PLAYERRED);
-		System.out.println("Players are set");
+		System.out.println(getPixels(o.get(0)));
+		players.get(0).setPosition(getPixels(o.get(0)));
+		players.get(0).setColor(OConstants.PLAYERBLUE);
+		players.get(1).setPosition(getPixels(o.get(1)));
 		
 
 
@@ -243,11 +254,6 @@ public class GridGui extends GUIElement{
 			squares.get(coor).setShape(Shapes.wall);
 		}
 
-//		SquareGUI s = squares.get(players.get(0));
-//		s.setColor(OConstants.PLAYERBLUE);
-//
-//		s = squares.get(players.get(1));
-//		s.setColor(OConstants.PLAYERRED);
 
 
 

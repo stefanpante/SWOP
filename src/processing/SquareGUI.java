@@ -97,35 +97,11 @@ public class SquareGUI extends GUIElement{
 
 	}
 
-	public void setPosition(float x, float y){
-		this.position.x = x;
-		this.position.y = y;
-	}
-
-	public void setHeight(float height){
-		this.height = height;
-	}
-
-	public void setWidth(float width){
-		this.width = width;
-	}
-
-	public void setVisibility(boolean visible){
-		this.visible = visible;
-	}
-
-	public boolean isVisible(){
-		return visible;
-	}
-
 	public void reset(){
 		this.shape = null;
 		//this.color = OConstants.LIGHTER_GREY;
 	}
-	
-	public void setColor(int color){
-		
-	}
+
 	public boolean hasShape(){
 		return (shape != null);
 	}
@@ -134,9 +110,5 @@ public class SquareGUI extends GUIElement{
 		return this.shape;
 	}
 
-	public PVector getPosition() {
-		return this.position;
-		
-	}
 
 }
