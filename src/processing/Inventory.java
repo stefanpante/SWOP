@@ -13,32 +13,13 @@ import processing.core.PShape;
 import processing.core.PVector;
 
 
-public class Inventory implements Drawable {
+public class Inventory extends GUIElement{
 
 	/**
 	 * The items in this inventory representation
 	 */
 	private ArrayList<Item> items;
-	
-	/**
-	 * the width of this inventory
-	 */
-	private float width;
-	
-	/**
-	 * The height of this inventory
-	 */
-	private float height;
-	
-	/*
-	 * The position of this inventory (topleft)
-	 */
-	private PVector position;
-	
-	/**
-	 * the backgroundColor of the inventory
-	 */
-	private int backgroundColor;
+
 	
 	/*
 	 * The last button which was pressed by the user.
@@ -49,25 +30,18 @@ public class Inventory implements Drawable {
 	 * The list of buttons (representing the items.
 	 */
 	private ArrayList<ItemButton> buttons;
-	
-	/**
-	 * Used for drawing.
-	 */
-	private PApplet gui;
-	
+
 	/**
 	 * Constructs a new inventory object. Sets the position to (0,0)
 	 * @param items the items in the inventory
 	 * @param gui the PApplet used for drawing.
 	 */
 	public Inventory(ArrayList<Item> items, PApplet gui) {
+		// float height, float width, PVector position, PApplet gui
+		super(155,155, new PVector(),gui);
 		this.items = items;
-		this.position = new PVector();
 		this.buttons = new ArrayList<ItemButton>();
-		this.gui = gui;
-		this.backgroundColor = OConstants.LIGHTER_GREY;
-		this.width = 155;
-		this.height = 155;
+		super.setColor(OConstants.LIGHTER_GREY);
 		this.selectedButton = null;
 		this.initialize();
 	}
@@ -80,7 +54,7 @@ public class Inventory implements Drawable {
 	 */
 	public Inventory(ArrayList<Item> items, PVector position, PApplet gui){
 		this(items, gui);
-		this.position = position;
+		super.setPosition(position);
 		this.initialize();
 	}
 
@@ -89,6 +63,9 @@ public class Inventory implements Drawable {
 	 */
 	private void initialize() {
 		buttons.clear();
+		if (this.position == null) {
+			System.out.println("Position is null");
+		}
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
 		for(int i = 0; i < items.size(); i++){
 			Item item = items.get(i);			
@@ -134,7 +111,7 @@ public class Inventory implements Drawable {
 	@Override
 	public void draw() {
 		gui.noStroke();
-		gui.fill(backgroundColor);
+		gui.fill(color);
 		gui.rect(position.x, position.y, width, height);
 		for(ItemButton button: buttons){
 			button.draw();
@@ -145,10 +122,9 @@ public class Inventory implements Drawable {
 	/**
 	 * what to draw when the mouse is over the inventory
 	 */
-	@Override
 	public void mouseOver(int mouseX, int mouseY) {
 		for(ItemButton button: buttons){
-			button.mouseOver(mouseX, mouseY);
+			button.hover(mouseX, mouseY);
 		}
 
 	}

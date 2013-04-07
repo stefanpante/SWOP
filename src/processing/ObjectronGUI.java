@@ -2,6 +2,7 @@ package processing;
 
 import item.Item;
 import item.LightGrenade;
+import item.launchable.ChargedDisc;
 import item.launchable.IdentityDisc;
 
 import java.beans.PropertyChangeEvent;
@@ -76,7 +77,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 * The endTurnButton
 	 */
 	private TextButton endTurnButton;
-
+	
+	/**
+	 * The start new game button
+	 */
+	private TextButton startNewGameButton;
+	
 	private int hSize = 710;
 	
 	private int vSize = 580;
@@ -99,15 +105,20 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		obj = new ProcessingHandler(this);
 		
 		// Creates the directionalPad to be used for the movement of the player.
+        ArrayList<Item> items = new ArrayList<Item>();
+        items.add(new LightGrenade());
+        items.add(new ChargedDisc());
+        items.add(new IdentityDisc());
         
         // Sets up the inventory representation.
-        squareInventory = new Inventory(new ArrayList<Item>(),new PVector(530,55), this);
-        playerInventory = new Inventory(new ArrayList<Item>(), new PVector(530,255), this);
+        squareInventory = new Inventory(items,new PVector(530,55), this);
+        playerInventory = new Inventory(items, new PVector(530,255), this);
         
         // Sets up the buttons  float width, float height, PVector position, String text,  PApplet gui
         this.pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
         this.useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
         this.endTurnButton = new TextButton(145, 25, new PVector(535, 525), "end turn", this);
+        this.startNewGameButton = new TextButton(145, 25, new PVector(535, 495), "start new game", this);
         // the current player's name.
         this.currentPlayerName = "Player 1";
 
@@ -137,7 +148,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		this.drawLabels();
 		
 		// mouseOver on the grid.
-		grid.mouseOver(mouseX, mouseY);
+		grid.hover(mouseX, mouseY);
 
 		
 		// mouseOver on the square inventory
@@ -150,13 +161,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		useItemButton.draw();
 		pickUpButton.draw();
 		endTurnButton.draw();
+		this.startNewGameButton.draw();
 		
 		// MouseOVer on the button
-		useItemButton.mouseOver(mouseX, mouseY);
-		pickUpButton.mouseOver(mouseX, mouseY);
-		endTurnButton.mouseOver(mouseX, mouseY);
+		useItemButton.hover(mouseX, mouseY);
+		pickUpButton.hover(mouseX, mouseY);
+		endTurnButton.hover(mouseX, mouseY);
 		
-		this.showMessage("You can't move in that direction");
+		//this.showMessage("You can't move in that direction");
 		
 		
 		
@@ -290,6 +302,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		text(string,hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
 		
 	}
+	
 	
 	
 

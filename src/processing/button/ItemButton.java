@@ -55,7 +55,7 @@ public class ItemButton extends ShapeButton {
 		}
 	}
 
-	public void mouseOver(int mouseX, int mouseY){
+	public void hover(int mouseX, int mouseY){
 
 	}
 

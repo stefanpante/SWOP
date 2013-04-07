@@ -33,7 +33,7 @@ public class DirectionalButton extends ShapeButton{
 	}
 
 	@Override
-	public void mouseOver(int mouseX, int mouseY){
+	public void hover(int mouseX, int mouseY){
 		if(visible){
 			if(mouseHit(mouseX, mouseY)){
 				gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 

@@ -10,7 +10,7 @@ import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
 
-public class DirectionalPad implements Drawable{
+public class DirectionalPad extends GUIElement{
 
 	/**
 	 * PApplet used to draw.
@@ -41,6 +41,8 @@ public class DirectionalPad implements Drawable{
 	 * @param gui 	the PApplet used to draw.
 	 */
 	public DirectionalPad(PApplet gui) {
+		//float height, float width, PVector position, PApplet gui
+		super(145,145, new PVector(), gui);
 		this.gui = gui;
 		this.position = new PVector();
 		this.height = 145;
@@ -55,42 +57,11 @@ public class DirectionalPad implements Drawable{
 	 */
 	public DirectionalPad(PVector position, PApplet gui){
 		this(gui);
-		this.position = position;
+		super.setPosition(position);
 		initButtons();
 	}
 
-	/**
-	 * Returns the height.
-	 * @return
-	 */
-	public int getHeight(){
-		return this.height;
-	}
 	
-	/**
-	 * Returns the width.
-	 * @return
-	 */
-	public int getWidth(){
-		return this.width;
-	}
-	
-	/**
-	 * Sets the height.
-	 * @param height
-	 */
-	public void setHeight(int height){
-		this.height = height;
-	}
-	
-	/**
-	 * sets the width
-	 * @param width
-	 */
-	public void setWidth(int width){
-		this.width = width;
-		
-	}
 	/**
 	 * initializes the button.
 	 */
@@ -137,23 +108,19 @@ public class DirectionalPad implements Drawable{
 
 	@Override
 	public void draw() {
-		for(DirectionalButton button: buttons.values()){
-			//button.draw();
-		}
+		// the directionalPad doesn't draw anything when not hovered.
 		
 	}
 
-	@Override
 	public void mouseOver(int mouseX, int mouseY) {
 		for(DirectionalButton button: buttons.values()){
-			button.mouseOver(mouseX, mouseY);
+			button.hover(mouseX, mouseY);
 		}
 		
 	}
 
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -162,14 +129,11 @@ public class DirectionalPad implements Drawable{
 		
 	}
 
+	/**
+	 * Returns the buttons in the directionalPad as an HashMap.
+	 * @return
+	 */
 	public HashMap<Direction, DirectionalButton> getButtons() {
 		return this.buttons;
 	}
-
-	public void setPosition(PVector position) {
-		this.position = position;
-		
-	}
-
-
 }

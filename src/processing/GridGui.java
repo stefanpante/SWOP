@@ -5,36 +5,18 @@ import java.util.HashMap;
 
 import player.Player;
 import processing.button.DirectionalButton;
+import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
 
-public class GridGui implements Drawable{
+public class GridGui extends GUIElement{
 
 
 	/**
 	 * the directionalpad to be drawn onto the grid.
 	 */
 	private DirectionalPad directionalPad;
-	/**
-	 * The parent object used to draw;
-	 */
-	private ObjectronGUI objectronGUI;
-
-	/**
-	 * The coordinates of the top left corner of the grid 
-	 */
-	private PVector position;
-
-	/**
-	 * the width in pixels of the grid.
-	 */
-	private float width;
-
-	/**
-	 * The height of the grid in pixels.
-	 */
-	private float height;
 
 	/**
 	 * Number of horizontal cells
@@ -51,35 +33,31 @@ public class GridGui implements Drawable{
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
 
-	/**
-	 * 
-	 */
 	private ArrayList<Coordinate> walls;
 	private ArrayList<Coordinate> grenades;
 	private ArrayList<Coordinate> players;
 	private ArrayList<Coordinate> powerFails;
-
 	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
 	private Coordinate currentPlayer;
 
-	public GridGui(PVector position, ObjectronGUI objectronGUI, float width, float height, int hCells, int vCells) {
-		this.position = position;
-		this.objectronGUI = objectronGUI;
-		this.height = height;
-		this.width = width;
+	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
+		//float height, float width, PVector position, PApplet gui
+		super(height, width, position, gui);
+		
 		this.hCells = hCells;
 		this.vCells = vCells;
 		this.squares = new HashMap<Coordinate, SquareGUI>();
-		directionalPad = new DirectionalPad(new PVector(25, 55), objectronGUI);
-		walls = new ArrayList<Coordinate>();
-		grenades = new ArrayList<Coordinate>();
-		currentPlayer = new Coordinate(0, 0);
+		this.directionalPad = new DirectionalPad(new PVector(25, 55), gui);
 		
-		players = new ArrayList<Coordinate>();
-		powerFails = new ArrayList<Coordinate>();
-		lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
+		this.walls = new ArrayList<Coordinate>();
+		this.grenades = new ArrayList<Coordinate>();
+		this.currentPlayer = new Coordinate(0, 0);
+		
+		this.players = new ArrayList<Coordinate>();
+		this.powerFails = new ArrayList<Coordinate>();
+		this.lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
 		this.initGrid();
-		adjustDirectionalPad();
+		this.adjustDirectionalPad();
 	}
 
 
@@ -91,10 +69,9 @@ public class GridGui implements Drawable{
 		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		for(int i = 0; i < vCells; i++){
 			for(int j = 0; j < hCells; j++){
-				SquareGUI s = new SquareGUI(objectronGUI);
-				s.setHeight(sHeight);
-				s.setWidth(swidth);
-				s.setPosition(x, y);
+				PVector pos = new PVector(x,y);
+				// PVector position, float width, float height, PApplet gui
+				SquareGUI s = new SquareGUI(pos, swidth, sHeight, gui);
 				squares.put(new Coordinate(j,i),s);
 				x += swidth + OConstants.MARGIN;
 			}
@@ -108,7 +85,6 @@ public class GridGui implements Drawable{
 	/**
 	 * draws the grid onto the screen.
 	 */
-	@Override
 	public void draw() {
 		for(SquareGUI square : squares.values()){
 			square.draw();
@@ -119,18 +95,15 @@ public class GridGui implements Drawable{
 
 	}
 
-	//
-	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
 		return false;
 
 	}
 
 
-	@Override
-	public void mouseOver(int mouseX, int mouseY) {
+	public void hover(int mouseX, int mouseY) {
 		for(SquareGUI square: squares.values()){
-			square.mouseOver(mouseX, mouseY);
+			square.hover(mouseX, mouseY);
 		}
 		directionalPad.mouseOver(mouseX, mouseY);
 	}

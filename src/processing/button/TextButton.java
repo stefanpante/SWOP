@@ -32,10 +32,10 @@ public class TextButton extends GUIButton {
 	}
 
 	/**
-	 * Mouseover draw
+	 * What to draw when the mouse is over this button.
 	 */
 	@Override
-	public void mouseOver(int mouseX, int mouseY) {
+	public void hover(int mouseX, int mouseY) {
 		if(mouseHit(mouseX, mouseY)){
 			gui.noStroke();
 			gui.fill(rolloverColor);

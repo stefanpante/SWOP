@@ -4,51 +4,17 @@ import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
 
-public class SquareGUI implements Drawable{
+public class SquareGUI extends GUIElement{
 
 
-	
-	/**
-	 * The color of this square
-	 */
-	private int color;
-	
 	/**
 	 * The color when rollover
 	 */
 	private int rolloverColor;
 	
-	/**
-	 * The width of the square
-	 */
-	private float width;
-
-	/**
-	 * The height of the square
-	 */
-	private float height;
-
-	/**
-	 * The top left corner of the square.
-	 */
-	private PVector position;
-	private PApplet gui;
 	private PShape shape;
 
-	private boolean visible;
 
-	/**
-	 * 
-	 * @param objectronGUI
-	 */
-	public SquareGUI(PApplet objectronGUI){
-		this.gui = objectronGUI;
-		this.position = new PVector();
-		this.visible = true;
-		this.color = OConstants.LIGHTER_GREY;
-		this.rolloverColor = OConstants.LIGHT_GREY;
-
-	}
 
 	/**
 	 * Constructs a new SquareGUi.
@@ -57,11 +23,9 @@ public class SquareGUI implements Drawable{
 	 * @param height
 	 * @param objectronGUI
 	 */
-	public SquareGUI(PVector Position, float width, float height, PApplet objectronGUI) {
-		this.position = position;
-		this.width = width;
-		this.height = height;
-		this.gui = objectronGUI;
+	public SquareGUI(PVector position, float width, float height, PApplet gui) {
+		// float height, float width, PVector position, PApplet gui
+		super(height, width, position, gui);
 	}
 
 	/**
@@ -126,8 +90,7 @@ public class SquareGUI implements Drawable{
 	 * Checks whether the mouse is over the grid and takes appropiate action
 	 * (shows a rollover status)
 	 */
-	@Override
-	public void mouseOver(int mouseX, int mouseY) {
+	public void hover(int mouseX, int mouseY) {
 		if(mouseHit(mouseX, mouseY)){
 			this.rollover();
 		}

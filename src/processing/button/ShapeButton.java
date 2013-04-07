@@ -69,7 +69,7 @@ public abstract class ShapeButton extends GUIButton {
 	 * the appropriate rollover state.
 	 */
 	@Override
-	public void mouseOver(int mouseX, int mouseY) {
+	public void hover(int mouseX, int mouseY) {
 		if(mouseHit(mouseX,mouseY)){
 			gui.noStroke();
 			gui.fill(rolloverColor);
