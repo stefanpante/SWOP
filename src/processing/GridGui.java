@@ -124,11 +124,33 @@ public class GridGui extends GUIElement{
 		this.walls = o;
 
 	}
+	
+	private void updateWalls(){
+		for(Coordinate coor: walls){
+			squares.get(coor).setShape(Shapes.wall);
+		}
+	}
 
 
 	public void setGrenades(ArrayList<Coordinate> o) {
 		this.grenades = o;
+		this.updateGrenades();
 
+	}
+	
+	private void updateGrenades(){
+		for(Coordinate coor: grenades){
+			if(squares.get(coor).getShape() == null){
+				squares.get(coor).setShape(Shapes.lightgrenade);
+			}
+			else if(squares.get(coor).getShape() == Shapes.powerFail){
+				squares.get(coor).setShape(Shapes.powerFailureItem);
+			}
+			else{
+				//TODO: set multiple items.
+				//squares.get(coor).setShape(Shapes.)
+			}
+		}
 	}
 
 
@@ -144,7 +166,26 @@ public class GridGui extends GUIElement{
 
 	public void setPowerFails(ArrayList<Coordinate> o) {
 		this.powerFails = o;
+		updatePowerFailures();
 
+	}
+	
+	private void updatePowerFailures(){
+		for(Coordinate coor: powerFails){
+			if(squares.get(coor).getShape() == null){
+				squares.get(coor).setShape(Shapes.powerFail);
+			}
+			else if(squares.get(coor).getShape() == Shapes.wall){
+				
+			}
+			else if(squares.get(coor).getShape() != Shapes.powerFail){
+				squares.get(coor).setShape(Shapes.powerFailureItem);
+			}
+			else{
+				//TODO: set multiple items.
+				//squares.get(coor).setShape(Shapes.)
+			}
+		}
 	}
 
 

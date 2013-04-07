@@ -13,18 +13,28 @@ public class Message extends GUIElement {
 	/**
 	 * The duration of the message in sec.
 	 */
-	protected float showDuration;
+	private float endFrame;
+	private float currentFrame;
 	
 	
-	public Message(float width, float height, PVector position, PApplet gui) {
+	public Message(float width, float height, PVector position, int duration, PApplet gui) {
 		super(height, width, position, gui);
+		this.endFrame = duration;
+		this.currentFrame = duration;
 		// float height, float width, PVector position, PApplet gui
 	}
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
+		if(currentFrame < endFrame){
+			// draw everything.
+			currentFrame++;
+		}
 		
+	}
+	
+	public void show(){
+		currentFrame = 0;
 	}
 
 }

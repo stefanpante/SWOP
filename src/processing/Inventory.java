@@ -166,4 +166,11 @@ public class Inventory extends GUIElement{
 		initialize();
 		
 	}
+
+	public Item getSelectedItem() {
+		if(selectedButton == null){
+			return null;
+		}
+		return selectedButton.getItem();
+	}
 }

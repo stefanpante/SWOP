@@ -147,6 +147,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		drawLabels();
 		drawInventories();
 		drawButtons(); 
+		
+		showMessage();
 	}
 
 
@@ -196,32 +198,67 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Checks if the mouse is pressed on an inventory
 		squareInventory.mousePressed(mouseX, mouseY);
 		playerInventory.mousePressed(mouseX, mouseY);
+		
+		buttonPressed();
 
 
+	}
+	
+	private void buttonPressed(){
+		if(startNewGameButton.mouseHit(mouseX, mouseY)){
+			this.startNewGame();
+		}
+		
+		if(endTurnButton.mouseHit(mouseX, mouseY)){
+			this.endTurn();
+		}
+		
+		if(useItemButton.mouseHit(mouseX, mouseY)){
+			this.useItem();
+		}
+	}
+
+	private void startNewGame() {
+		obj.startNewGame();
 	}
 
 	public void move(Direction direction){
 		obj.getMoveHandler().move(direction);
 	}
-	public void pickUp(Item item){
-		obj.getPickupHandler().pickUp(item);
+	public void pickUp(){
+		Item item = squareInventory.getSelectedItem();
+		if(item == null){
+			currentFrame = 0;
+			System.out.println("No item selected");
+		}
+		else{
+			obj.getPickupHandler().pickUp(item);
+		}
 	}
 
-	public void useItem(Item item){
-		obj.getUseItemHandler().useItem(item);
+	public void useItem(){
+		System.out.println("use item");
+		Item item = playerInventory.getSelectedItem();
+		if(item == null){
+			currentFrame = 0;
+			System.out.println("No item selected");
+		}
+		else{
+			obj.getUseItemHandler().useItem(item);
+		}
 	}
 
 	public void endTurn(){
-
+		obj.getEndTurnHandler().endTurn();
 	}
 
 	private int currentPlayerColor = OConstants.PLAYERBLUE;
 	public void changePlayer(){
-		if(currentPlayerColor == OConstants.PLAYERBLUE){
-			currentPlayerColor = OConstants.PLAYERRED;
+		if(obj.getGame().getCurrentPlayer().getID() ==1){
+			currentPlayerColor = OConstants.PLAYERBLUE;
 		}
 		else{
-			currentPlayerColor = OConstants.PLAYERBLUE;
+			currentPlayerColor = OConstants.PLAYERRED;
 		}
 		gridLabel.setColor(currentPlayerColor);
 		squareInventoryLabel.setColor(currentPlayerColor);
@@ -261,7 +298,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			//        	}
 		}else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
 			this.grid.setCurrentPlayer((Coordinate)o);
-			this.changePlayer();
+//			/this.changePlayer();
 		}else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
 			this.squareInventory.setItems((ArrayList<Item>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
@@ -277,7 +314,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			String player = (String)o;
 			JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
 		}
-
 		grid.resetGrid();
 
 	}
@@ -290,7 +326,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	private int mHeight = 125;
 	private int mWidth = 300;
-	private void showMessage(String string) {
+	private int currentFrame = 100;
+	private int endFrame = 100;
+	private void showMessage() {
+		if(currentFrame < endFrame){
 		stroke(0, 30);
 		fill(OConstants.LIGHTER_GREY);
 		rect(hSize/2 - mWidth/2, vSize/2 - mHeight/2, mWidth, mHeight);
@@ -304,7 +343,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 		fill(0, 90);
 		textAlign(PConstants.CENTER, PConstants.CENTER);
-		text(string,hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
+		text("Test",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
+		
+		currentFrame++;
+		}
 
 	}
 
