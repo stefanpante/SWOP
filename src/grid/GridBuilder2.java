@@ -63,7 +63,28 @@ public class GridBuilder2 {
 				randomLocations(TELEPORT_CONSTRAINT));
 	}
 	
-	public GridBuilder2(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports){
+	/**
+	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 * 	Currently the given coordinates will be checked on the usual constraints!
+	 * 	Keep this in mind when building test grids.
+	 * 
+	 * @param 	hSize		
+	 * 			The horizontal size of the grid this gridBuilder will build.
+	 * @param 	vSize		
+	 * 			The vertical size of the grid this gridBuilder will build.
+	 * @param	walls
+	 * 			A list of sequences of coordinates where walls should be placed.
+	 * @param	lightGrenades
+	 * 			A list of coordinates that should contain a LightGrenade.
+	 * @param	identityDisks
+	 * 			A list of coordinates that should contain a identityDisk	 
+	 * @param	teleports
+	 * 			A list of coordinates that should contain a teleport.
+	 */
+	public GridBuilder2(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
+			ArrayList<Coordinate> lightGrenades, 
+			ArrayList<Coordinate> identityDisks, 
+			ArrayList<Coordinate> teleports){
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();

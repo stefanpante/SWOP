@@ -338,7 +338,7 @@ public class Game {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.getPower().fail();
+			square.getPower().regain();
 		}
 	}
 }
