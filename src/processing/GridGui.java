@@ -43,16 +43,16 @@ public class GridGui extends GUIElement{
 	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, position, gui);
-		
+
 		this.hCells = hCells;
 		this.vCells = vCells;
 		this.squares = new HashMap<Coordinate, SquareGUI>();
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), gui);
-		
+
 		this.walls = new ArrayList<Coordinate>();
 		this.grenades = new ArrayList<Coordinate>();
 		this.currentPlayer = new Coordinate(0, 0);
-		
+
 		this.players = new ArrayList<Coordinate>();
 		this.powerFails = new ArrayList<Coordinate>();
 		this.lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
@@ -111,35 +111,35 @@ public class GridGui extends GUIElement{
 
 	public void setWalls(ArrayList<Coordinate> o) {
 		this.walls = o;
-		resetGrid();
 
 	}
 
 
 	public void setGrenades(ArrayList<Coordinate> o) {
 		this.grenades = o;
-		resetGrid();
 
 	}
 
 
 	public void setPlayers(ArrayList<Coordinate> o) {
 		this.players = o;
-		resetGrid();
+		squares.get(o.get(0)).setColor(OConstants.PLAYERBLUE);
+		squares.get(o.get(1)).setColor(OConstants.PLAYERRED);
+		System.out.println("Players are set");
+		
+
 
 	}
 
 
 	public void setPowerFails(ArrayList<Coordinate> o) {
 		this.powerFails = o;
-		resetGrid();
 
 	}
 
 
 	public void setLightTrails(HashMap<Player, ArrayList<Coordinate>> o) {
 		this.lightTrails = o;
-		resetGrid();
 
 	}
 
@@ -147,23 +147,22 @@ public class GridGui extends GUIElement{
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
 		adjustDirectionalPad();
-		resetGrid();
 
 	}
-	
+
 	/**
 	 * Sets directions that are not applicable to false.
 	 */
 	private void adjustDirectionalPad(){
 		directionalPad.setPosition(getPixels(currentPlayer));
 		HashMap<Direction, DirectionalButton> buttons = directionalPad.getButtons();
-		
+
 		Coordinate coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY());
 		DirectionalButton b = buttons.get(Direction.WEST);
 		b.setPosition(getPixels(coor));
 		if(!squares.containsKey(coor))
 			b.setVisibility(false);
-		
+
 		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY());
 		b = buttons.get(Direction.EAST);
 		b.setPosition(getPixels(coor));
@@ -181,37 +180,37 @@ public class GridGui extends GUIElement{
 		b.setPosition(getPixels(coor));
 		if(!squares.containsKey(coor))
 			b.setVisibility(false);
-		
+
 		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY()-1);
 		b = buttons.get(Direction.NORTHWEST);
 		b.setPosition(getPixels(coor));
 		if(!squares.containsKey(coor))
 			b.setVisibility(false);
-		
+
 		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY() +1);
 		b = buttons.get(Direction.SOUTHWEST);
 		b.setPosition(getPixels(coor));
 		if(!squares.containsKey(coor))
 			b.setVisibility(false);
-		
+
 		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY()-1);
 		b = buttons.get(Direction.NORTHEAST);
 		b.setPosition(getPixels(coor));
 		if(!squares.containsKey(coor))
 			b.setVisibility(false);
-		
+
 		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY() +1);
 		b = buttons.get(Direction.SOUTHEAST);
 		b.setPosition(getPixels(coor));
 		if(!squares.containsKey(coor))
 			b.setVisibility(false);
 	}
-	
+
 	private PVector getPixels(Coordinate coor) {
 		if(squares.containsKey(coor)){
-		 return squares.get(coor).getPosition();
+			return squares.get(coor).getPosition();
 		}
-		
+
 		return new PVector();
 	}
 
@@ -244,18 +243,13 @@ public class GridGui extends GUIElement{
 			squares.get(coor).setShape(Shapes.wall);
 		}
 
-		try{
-			SquareGUI s = squares.get(players.get(0));
-			if(s != null)
-				s.setColor(OConstants.PLAYERBLUE);
-		} catch(Exception jonas){}
+//		SquareGUI s = squares.get(players.get(0));
+//		s.setColor(OConstants.PLAYERBLUE);
+//
+//		s = squares.get(players.get(1));
+//		s.setColor(OConstants.PLAYERRED);
 
-		try{
-			SquareGUI s = squares.get(players.get(1));
-			if(s != null)
-				s.setColor(OConstants.PLAYERRED);
-		}
-		catch (Exception dieter){}
+
 
 
 	}

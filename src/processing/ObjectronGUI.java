@@ -12,9 +12,6 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
-import controlP5.Bang;
-import controlP5.ControlP5;
-import controlP5.Group;
 import controller.GameHandler;
 import controller.ProcessingHandler;
 
@@ -23,7 +20,6 @@ import processing.button.TextButton;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
-import square.Direction;
 import util.Coordinate;
 
 public class ObjectronGUI extends PApplet implements PropertyChangeListener{
@@ -43,11 +39,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	private ProcessingHandler obj;
 
-
-	/**
-	 * The name of the currentPlayer
-	 */
-	private String currentPlayerName;
 
 	/**
 	 * The GUI representation of the player inventory
@@ -99,9 +90,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 		//Sets up the grid for usage.
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
-		// Creates a new ProcessingHandler.
-		obj = new ProcessingHandler(this);
-
+		
 		// Creates the directionalPad to be used for the movement of the player.
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(new LightGrenade());
@@ -111,20 +100,35 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Sets up the inventory representation.
 		squareInventory = new Inventory(items,new PVector(530,55), this);
 		playerInventory = new Inventory(items, new PVector(530,255), this);
+		
+		setupButtons();
+		setupLabels();
+		// Creates a new ProcessingHandler.
+		obj = new ProcessingHandler(this);
+		obj.startNewGame();
 
-		// Sets up the buttons  float width, float height, PVector position, String text,  PApplet gui
+
+
+	}
+	
+	private void setupLabels(){
+		this.gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
+		this.gridLabel.setColor(OConstants.PLAYERBLUE);
+		this.squareInventoryLabel = new Label(155, 25, new PVector(530,25),"Square Inventory", this);
+		this.squareInventoryLabel.setColor(OConstants.PLAYERBLUE);
+		this.playerInventoryLabel = new Label(155, 25, new PVector(530,225),"Player Inventory", this);
+		this.playerInventoryLabel.setColor(OConstants.PLAYERBLUE);
+	}
+	
+	private void setupButtons(){
 		this.pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
+		this.pickUpButton.setColor(OConstants.PLAYERBLUE);
 		this.useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
+		this.useItemButton.setColor(OConstants.PLAYERBLUE);
 		this.endTurnButton = new TextButton(145, 25, new PVector(535, 525), "end turn", this);
+		this.endTurnButton.setColor(OConstants.PLAYERBLUE);
 		this.startNewGameButton = new TextButton(145, 25, new PVector(535, 495), "start new game", this);
-
-		gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
-		squareInventoryLabel = new Label(155, 25, new PVector(530,25),"Square Inventory", this);
-		playerInventoryLabel = new Label(155, 25, new PVector(530,225),"Player Inventory", this);
-
-
-
-
+		this.startNewGameButton.setColor(OConstants.PLAYERBLUE);
 	}
 
 	/**
@@ -205,6 +209,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void endTurn(){
 
 	}
+	
+	public void changePlayer(){
+		// set the color of the labels to the currentplayer color
+		// set the color of the buttons to the currentPlayer
+	}
 
 	/**
 	 * Accepts propertychanges.
@@ -221,7 +230,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			this.grid.setGrenades((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
 			System.out.println("Player positions set");
-			this.grid.setPlayers((ArrayList<Coordinate>)o);
+			ArrayList<Coordinate> players = (ArrayList<Coordinate>)o;
+			this.grid.setPlayers(players);
 		}else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
 			this.grid.setPowerFails((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
@@ -249,6 +259,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			String player = (String)o;
 			JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
 		}
+		
+		grid.resetGrid();
 
 	}
 

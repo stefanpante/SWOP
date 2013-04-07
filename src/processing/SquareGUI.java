@@ -36,7 +36,6 @@ public class SquareGUI extends GUIElement{
 			// no stroke on the square.
 			gui.noStroke();
 
-			// set the fill color of the square to lighter grey
 			gui.fill(color);
 			// Draw the square
 			gui.rect(position.x , position.y, width, height);
@@ -121,7 +120,7 @@ public class SquareGUI extends GUIElement{
 
 	public void reset(){
 		this.shape = null;
-		this.color = OConstants.LIGHTER_GREY;
+		//this.color = OConstants.LIGHTER_GREY;
 	}
 	
 	public void setColor(int color){
