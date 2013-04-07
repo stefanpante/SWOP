@@ -6,6 +6,10 @@ public class OConstants {
 	 * The margin used in the layout throughout the application
 	 */
 	public static final int MARGIN = 5;
+	
+	public static int WHITE = -1;
+	
+	public static int BLACK = -16777216;
 	/**
 	 * Integer representation of color(241,241,241)
 	 */

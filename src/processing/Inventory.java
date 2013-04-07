@@ -122,7 +122,7 @@ public class Inventory extends GUIElement{
 	/**
 	 * what to draw when the mouse is over the inventory
 	 */
-	public void mouseOver(int mouseX, int mouseY) {
+	public void hover(int mouseX, int mouseY) {
 		for(ItemButton button: buttons){
 			button.hover(mouseX, mouseY);
 		}

@@ -1,6 +1,7 @@
 package processing;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PVector;
 
 public class Label extends GUIElement{
@@ -27,9 +28,15 @@ public class Label extends GUIElement{
 	 */
 	
 
-	public Label(float width, float height, PVector position, PApplet gui) {
+	public Label(float width, float height, PVector position, String text, PApplet gui) {
 		//float width, float height, PVector position, PApplet gui
 		super(width, height, position, gui);
+		super.setColor(OConstants.GREEN);
+		this.textColor = OConstants.WHITE;
+		this.hAlign = PConstants.CENTER;
+		this.vAlign = PConstants.CENTER;
+		this.textSize = 16;
+		this.text = text;
 	}
 	
 	/**
@@ -79,16 +86,24 @@ public class Label extends GUIElement{
 	public int getVerticalAlign(){
 		return vAlign;
 	}
+	public void setText(String text){
+		this.text = text;
+	}
+	
+	public String getText(){
+		return this.text;
+	}
 
 	
 
 	@Override
 	public void draw() {
+		// Draws the background
 		gui.fill(color);
 		gui.noStroke();
-		
 		gui.rect(position.x, position.y, width, height);
 		
+		// Draws the text.
 		gui.fill(textColor);
 		gui.textSize(textSize);
 		gui.textAlign(hAlign,vAlign);
