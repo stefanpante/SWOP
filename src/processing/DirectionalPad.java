@@ -118,6 +118,11 @@ public class DirectionalPad extends GUIElement{
 		}
 		
 	}
+	
+	public void setPosition(PVector position){
+		this.position = position;
+		this.initButtons();
+	}
 
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
@@ -125,7 +130,9 @@ public class DirectionalPad extends GUIElement{
 	}
 
 	public void mousePressed(int mouseX, int mouseY) {
-		// TODO Auto-generated method stub
+		for(DirectionalButton button: buttons.values()){
+			button.mousePressed(mouseX, mouseY);
+		}
 		
 	}
 

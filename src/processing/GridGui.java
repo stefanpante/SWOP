@@ -133,7 +133,6 @@ public class GridGui extends GUIElement{
 
 
 	public void setPlayers(ArrayList<Coordinate> o) {
-		System.out.println(getPixels(o.get(0)));
 		players.get(0).setPosition(getPixels(o.get(0)));
 		players.get(0).setColor(OConstants.PLAYERBLUE);
 		players.get(1).setPosition(getPixels(o.get(1)));
@@ -157,6 +156,7 @@ public class GridGui extends GUIElement{
 
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
+		
 		adjustDirectionalPad();
 
 	}
@@ -258,6 +258,12 @@ public class GridGui extends GUIElement{
 
 
 
+	}
+
+
+	public void mousePressed(int mouseX, int mouseY) {
+		directionalPad.mousePressed(mouseX, mouseY);
+		
 	}
 
 }

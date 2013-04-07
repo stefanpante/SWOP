@@ -111,7 +111,6 @@ public abstract class Handler {
 	public ArrayList<Coordinate> getPlayerLocations() {
 		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
 		for(Player player : getGame().getPlayers()){
-			System.out.println(getGame().getGrid().getCoordinate(player.getPosition()));
     		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
     	}
 		

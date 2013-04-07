@@ -1,6 +1,7 @@
 package processing.button;
 
 import processing.OConstants;
+import processing.ObjectronGUI;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
@@ -18,6 +19,7 @@ public class DirectionalButton extends ShapeButton{
 			PApplet gui) {
 		super(width, height, shape, position, gui);
 		this.direction = direction;
+		this.visible = true;
 
 	}
 
@@ -44,5 +46,14 @@ public class DirectionalButton extends ShapeButton{
 
 	public Direction getDirection(){
 		return this.direction;
+	}
+	
+	public void mousePressed(int mouseX, int mouseY){
+		if(visible){
+			if(mouseHit(mouseX, mouseY)){
+				ObjectronGUI gui2= (ObjectronGUI) gui;
+				gui2.move(direction);
+			}
+		}
 	}
 }
