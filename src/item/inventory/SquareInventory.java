@@ -208,10 +208,8 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	}
 
 	@Override
-	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
-			throws IllegalStateException {
-		// TODO Auto-generated method stub
-		
+	public void addChargedDisc(ChargedIdentityDisc chargedDisc)	throws IllegalStateException {
+		// TODO Auto-generated method stub		
 	} 
 	
 	@Override

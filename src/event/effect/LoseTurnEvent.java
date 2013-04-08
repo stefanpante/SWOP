@@ -1,38 +1,32 @@
-/**
- * 
- */
 package event.effect;
 
 import game.Game;
+import player.Player;
 
-/**
- * @author jonas
- *
- */
 public class LoseTurnEvent extends EffectEvent {
 	
-	private int turns;
-	
-	public LoseTurnEvent(Game game, int turns) {
+	private int amount;
+	private boolean accumulating;
+
+	public LoseTurnEvent(Game game, int amount, boolean accumulating) {
 		super(game);
-		this.turns = turns;
+		this.amount = amount;
 	}
 
 	@Override
 	protected void beforeGameEvent() {
-		// Nothing to do here
+		// TODO Auto-generated method stub
 	}
 
 	@Override
 	protected void duringGameEvent() {
-		// FIXME: There's no method for checking disabled
+		Player player = getGame().getCurrentPlayer();
+		player.loseTurns(this.amount, this.accumulating);
 	}
 
 	@Override
 	protected void afterGameEvent() {
-		// Nothing to do here
+		// TODO Auto-generated method stub
 	}
-	
-	
 
 }

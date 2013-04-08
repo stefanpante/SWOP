@@ -3,12 +3,11 @@
  */
 package event.action;
 
+import event.effect.LoseTurnEvent;
 import event.effect.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
 import item.Teleport;
-
-import java.util.Observer;
 
 import square.Direction;
 import square.Square;
@@ -46,6 +45,7 @@ public class MoveEvent extends ActionEvent {
 				exc.printStackTrace();
 			}
 		}
+		
 
 	}
 
@@ -64,7 +64,10 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void afterGameEvent(){
-		
+		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
+			LoseTurnEvent lte = new LoseTurnEvent(getGame(),1,false);
+			lte.run();
+		}
 	}
 
 }

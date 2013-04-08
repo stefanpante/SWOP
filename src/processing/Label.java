@@ -3,6 +3,7 @@ package processing;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
+import util.OConstants;
 
 public class Label extends GUIElement{
 	

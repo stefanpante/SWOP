@@ -1,21 +1,21 @@
-
 package controller;
+
+import game.Game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.UIManager;
 
-import game.Game;
-import gui.ApplicationWindow;
+import processing.ObjectronGUI;
+
+
 import util.Coordinate;
 
-/**
- * 
- * @author jonas, vreniers
- */
 public class GameHandler extends Handler {
 	
+	/**
+	 * Property constants
+	 */
 	public static final String WALLS_PROPERTY 				= "Walls";
 	public static final String GRENADES_PROPERTY 			= "Grenades";	
 	public static final String PLAYERS_PROPERTY 			= "Players";	
@@ -25,13 +25,20 @@ public class GameHandler extends Handler {
 	public static final String SQUARE_INVENTORY_PROPERTY	= "SquareInventory";
 	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
 	public static final String END_TURN_PROPERTY 			= "EndTurnProperty";
+	public static final String IDENTITY_DISK_PROPERTY		= "IdentityDisk";
+	public static final String TELEPORT_PROPERTY			= "Teleport";		
 	public static final String LIGHT_TRAILS_PROPERTY		= "LightTrails";
 	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
-	public static final String IDENTITY_DISK_PROPERTY		= "IdentityDisk";
-	public static final String TELEPORT_PROPERTY			= "Teleport";	
 	public static final String WIN_PROPERTY 				= "Win";
 	public static final String LOSE_PROPERTY				= "Lose";
 	
+	private ObjectronGUI objectronGUI;
+	
+	
+	public GameHandler(ObjectronGUI objectronGUI){
+		this.objectronGUI = objectronGUI;
+		startNewGame();
+	}
 	/**
 	 *  Initializes the game handler
 	 * 
@@ -47,30 +54,19 @@ public class GameHandler extends Handler {
 	private UseItemHandler useItemHandler;
 	private TurnHandler turnHandler;
 	
-	
-	/* Application Window */
-	
-    public static void main(String[] args) {
-    	GameHandler gameHandler = new GameHandler();
-    	gameHandler.startNewGame();
-    }
-    
     /**
      * Used to start a new game.
      */
     public void startNewGame(){
 		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-			ApplicationWindow window = new ApplicationWindow(this);
-			addPropertyChangeListener(window);
-			window.setVisible();
-			
-	    	this.endTurnHandler = new EndTurnHandler(getGame(), window);
-	    	this.moveHandler = new MoveHandler(getGame(),window);
-	    	this.pickUpHandler = new PickUpHandler(getGame(),window);
-	    	this.useItemHandler = new UseItemHandler(getGame(),window);
-	    	this.turnHandler = new TurnHandler(getGame(), window);
-	    	
+			createGame(10,10);
+			addPropertyChangeListener(objectronGUI);
+	    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
+	    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
+	    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
+	    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
+	    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
+	    	turnHandler.startTurn();
 	    	this.populateGui();
 		} 
 		catch (Exception e) {
@@ -138,6 +134,7 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		setGame(new Game(hSize, vSize));
+		setGame(new Game(10, 10));
 	}
+
 }

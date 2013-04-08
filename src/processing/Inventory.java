@@ -11,6 +11,7 @@ import processing.button.ItemButton;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import util.OConstants;
 
 
 public class Inventory extends GUIElement{
@@ -63,14 +64,14 @@ public class Inventory extends GUIElement{
 	 */
 	private void initialize() {
 		buttons.clear();
-		if (this.position == null) {
-			System.out.println("Position is null");
-		}
+		selectedButton = null;
+		
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
 		for(int i = 0; i < items.size(); i++){
 			Item item = items.get(i);			
 			// Add the button to the inventory.
 			ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, getShape(item), pos, gui);
+			button.setItem(item);
 			buttons.add(button);
 			
 			//next line when line is full.
@@ -141,7 +142,9 @@ public class Inventory extends GUIElement{
 				if(selectedButton != null)
 					selectedButton.setSelected(false);
 				selectedButton = button;
+				System.out.println("Button selected!");
 				button.setSelected(true);
+				break;
 			}
 		}
 	}
@@ -169,8 +172,14 @@ public class Inventory extends GUIElement{
 
 	public Item getSelectedItem() {
 		if(selectedButton == null){
+			System.out.println("null mothafuckas");
 			return null;
 		}
 		return selectedButton.getItem();
+	}
+	
+	public void removeItem(Item item){
+		items.remove(item);
+		initialize();
 	}
 }

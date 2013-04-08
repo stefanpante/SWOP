@@ -1,41 +1,31 @@
-/**
- * 
- */
 package event.effect;
 
+import player.Player;
 import game.Game;
 
-/**
- * @author Jonas Devlieghere
- *
- */
 public class LoseActionEvent extends EffectEvent {
-
-	int actions;
 	
-	/**
-	 * @param game
-	 */
-	public LoseActionEvent(Game game, int actions) {
+	private int amount;
+
+	public LoseActionEvent(Game game, int amount) {
 		super(game);
-		this.actions = actions;
+		this.amount = amount;
 	}
 
 	@Override
 	protected void beforeGameEvent() {
-		// Nothing to do here
+
 	}
 
 	@Override
 	protected void duringGameEvent() {
-		int remainingActions = getGame().getCurrentPlayer().getRemainingActions();
-		int newRemainingActions = remainingActions - this.actions;
-		//FIXME: getGame().getCurrentPlayer().setRemainingActions(newRemainingActions);
+		Player player = getGame().getCurrentPlayer();
+		player.loseActions(this.amount);
 	}
 
 	@Override
 	protected void afterGameEvent() {
-		// Nothing to do here
+		// TODO Auto-generated method stub
 	}
 
 }

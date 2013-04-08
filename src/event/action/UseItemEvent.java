@@ -3,11 +3,8 @@
  */
 package event.action;
 
-import java.util.Observer;
-
 import game.Game;
 import item.Item;
-import controller.GameHandler;
 
 /**
  * @author jonas

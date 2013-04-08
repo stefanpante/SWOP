@@ -9,6 +9,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
+import util.OConstants;
 
 public class GridGui extends GUIElement{
 
@@ -29,18 +30,83 @@ public class GridGui extends GUIElement{
 	private int vCells;
 
 	/**
-	 * The list of squares to be drawn onto the grid.
+	 * The squares to be drawn onto the screen.
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
+	private HashMap<Coordinate, SquareGUI> items;
+	private HashMap<Coordinate, SquareGUI> powerfailItems;
+	private HashMap<Coordinate, SquareGUI> powerfails;
+	private HashMap<Coordinate, SquareGUI> teleports;
+	private HashMap<Coordinate, SquareGUI> teleportsItem;
+	private HashMap<Coordinate, SquareGUI> teleportPowerfail;
+	private HashMap<Coordinate, SquareGUI> teleportsItemPowerfails;
+
+
+
+	/**
+	 * Coordinates of the items
+	 */
+	private ArrayList<Coordinate> grenades_coors;
+	private ArrayList<Coordinate> discs_coors;
+	private ArrayList<Coordinate> chargedDiscs_coors;
+
+	/**
+	 * Coordinates of the powerfailures
+	 */
+	private ArrayList<Coordinate> powerfail_coors;
+
+	/**
+	 * Coordinates of teleports
+	 */
+	private ArrayList<Coordinate> teleport_coors;
+	/**
+	 * Coordinates of the walls
+	 */
+	private ArrayList<Coordinate> walls;
+	/**
+	 * the walls to be drawn on the screen
+	 */
+	private ArrayList<SquareGUI> walls_squares;
+	/**
+	 * The players to be drawn on the screen
+	 */
 	private ArrayList<SquareGUI> players;
 
-	private ArrayList<Coordinate> walls;
-	private ArrayList<Coordinate> grenades;
-	//private ArrayList<Coordinate> players;
-	private ArrayList<Coordinate> powerFails;
+	/**
+	 * The positions of the lightTrails per player
+	 */
 	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
+
+	/**
+	 * The position of the current player.
+	 */
 	private Coordinate currentPlayer;
 
+
+	/**
+	 * The width of a square
+	 */
+	private float squareWidth;
+
+	/**
+	 * The height of the square.
+	 */
+	private float squareHeight;
+
+	/**
+	 * 
+	 */
+	private ArrayList<SquareGUI> lightTrails_Squares;
+
+	/**
+	 * Constructs a new grid representation for the gui
+	 * @param position
+	 * @param gui
+	 * @param width
+	 * @param height
+	 * @param hCells
+	 * @param vCells
+	 */
 	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, position, gui);
@@ -48,22 +114,33 @@ public class GridGui extends GUIElement{
 		this.hCells = hCells;
 		this.vCells = vCells;
 		this.squares = new HashMap<Coordinate, SquareGUI>();
-		this.directionalPad = new DirectionalPad(new PVector(25, 55), gui);
 
-		this.walls = new ArrayList<Coordinate>();
-		this.grenades = new ArrayList<Coordinate>();
-		this.currentPlayer = new Coordinate(0, 0);
 		this.players = new ArrayList<SquareGUI>();
-		this.powerFails = new ArrayList<Coordinate>();
-		this.lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
+		this.items = new HashMap<Coordinate, SquareGUI>();
+		this.powerfailItems = new HashMap<Coordinate, SquareGUI>();
+		this.powerfails = new HashMap<Coordinate, SquareGUI>();
+		this.teleports  = new HashMap<Coordinate, SquareGUI>();
+		this.teleportsItem  = new HashMap<Coordinate, SquareGUI>();
+		this.teleportPowerfail = new HashMap<Coordinate, SquareGUI>();
+		this.teleportsItemPowerfails = new HashMap<Coordinate, SquareGUI>();
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
+		this.walls_squares = new ArrayList<SquareGUI>();
+		this.currentPlayer = new Coordinate(0,0);
+		this.grenades_coors = new ArrayList<Coordinate>();
+		this.discs_coors = new ArrayList<Coordinate>();
+		this.chargedDiscs_coors = new ArrayList<Coordinate>();
+		this.powerfail_coors = new ArrayList<Coordinate>();
+		this.teleport_coors = new ArrayList<Coordinate>();
 		this.initGrid();
+		this.directionalPad = new DirectionalPad(new PVector(25, 55), gui);
 		this.adjustDirectionalPad();
 	}
 
 
-	private float squareWidth;
-	private float squareHeight;
+
+	/**
+	 * Constructs the actual grid representation
+	 */
 	private void initGrid() {
 		float x = position.x;
 		float y = position.y;
@@ -84,7 +161,7 @@ public class GridGui extends GUIElement{
 		SquareGUI player1 = new SquareGUI(swidth, sHeight, new PVector(), gui);
 		player1.setColor(OConstants.PLAYERBLUE);
 		players.add(player1);
-		
+
 		SquareGUI player2 = new SquareGUI(swidth, sHeight, new PVector(), gui);
 		player2.setColor(OConstants.PLAYERRED);
 		players.add(player2);
@@ -97,10 +174,42 @@ public class GridGui extends GUIElement{
 	/**
 	 * draws the grid onto the screen.
 	 */
+	@Override
 	public void draw() {
 		for(SquareGUI square : squares.values()){
 			square.draw();
 			directionalPad.draw();
+		}
+
+		
+
+		
+		for(SquareGUI item: items.values()){
+			item.draw();
+		}
+		
+		for(SquareGUI item: powerfailItems.values()){
+			item.draw();
+		}
+		
+		for(SquareGUI powerfail: powerfails.values()){
+			powerfail.draw();
+		}
+		
+		for(SquareGUI teleport: teleports.values()){
+			teleport.draw();
+		}
+		
+		for(SquareGUI teleport: teleportsItem.values()){
+			teleport.draw();
+		}
+		
+		for(SquareGUI teleport: teleportPowerfail.values()){
+			teleport.draw();
+		}
+		
+		for(SquareGUI teleport: teleportsItemPowerfails.values()){
+			teleport.draw();
 		}
 		
 		for(SquareGUI player: players){
@@ -111,14 +220,29 @@ public class GridGui extends GUIElement{
 			light.draw();
 		}
 
+		for(SquareGUI wall: walls_squares){
+			wall.draw();
+		}
+		
+
 	}
 
+	/**
+	 * The Grid representation itself is not hittable, so this method
+	 * always returns false
+	 */
+	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
 		return false;
 
 	}
 
 
+	/**
+	 * Hovers over the grid.
+	 * @param mouseX	the x coordinate of the mouse
+	 * @param mouseY	the y coordinate of the mouse
+	 */
 	public void hover(int mouseX, int mouseY) {
 		for(SquareGUI square: squares.values()){
 			square.hover(mouseX, mouseY);
@@ -127,81 +251,70 @@ public class GridGui extends GUIElement{
 	}
 
 
+	/**
+	 * Sets the coordinates of the walls.
+	 * @param o
+	 */
 	public void setWalls(ArrayList<Coordinate> o) {
 		this.walls = o;
+		updateWalls();
 
 	}
-	
+
+
 	private void updateWalls(){
-		for(Coordinate coor: walls){
-			squares.get(coor).setShape(Shapes.wall);
+		walls_squares.clear();
+		for(Coordinate wall: walls){
+			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(wall), gui);
+			s.setVisibility(true);
+			s.setShape(Shapes.wall);
+			walls_squares.add(s);
 		}
 	}
 
 
+	/**
+	 * Sets the positions of the grenades.
+	 * @param o
+	 */
 	public void setGrenades(ArrayList<Coordinate> o) {
-		this.grenades = o;
-		this.updateGrenades();
-
-	}
-	
-	private void updateGrenades(){
-		for(Coordinate coor: grenades){
-			if(squares.get(coor).getShape() == null){
-				squares.get(coor).setShape(Shapes.lightgrenade);
-			}
-			else if(squares.get(coor).getShape() == Shapes.powerFail){
-				squares.get(coor).setShape(Shapes.powerFailureItem);
-			}
-			else{
-				//TODO: set multiple items.
-				//squares.get(coor).setShape(Shapes.)
-			}
-		}
+		this.grenades_coors = o;
 	}
 
-
+	/**
+	 * Changes the player positions.
+	 * @param o
+	 */
 	public void setPlayers(ArrayList<Coordinate> o) {
 		players.get(0).setPosition(getPixels(o.get(0)));
 		players.get(0).setColor(OConstants.PLAYERBLUE);
 		players.get(1).setPosition(getPixels(o.get(1)));
-		
+
 
 
 	}
 
 
+	/**
+	 * sets the position of powerfailures
+	 * @param o
+	 */
 	public void setPowerFails(ArrayList<Coordinate> o) {
-		this.powerFails = o;
-		updatePowerFailures();
+		this.powerfail_coors = o;
 
 	}
-	
-	private void updatePowerFailures(){
-		for(Coordinate coor: powerFails){
-			if(squares.get(coor).getShape() == null){
-				squares.get(coor).setShape(Shapes.powerFail);
-			}
-			else if(squares.get(coor).getShape() == Shapes.wall){
-				
-			}
-			else if(squares.get(coor).getShape() != Shapes.powerFail){
-				squares.get(coor).setShape(Shapes.powerFailureItem);
-			}
-			else{
-				//TODO: set multiple items.
-				//squares.get(coor).setShape(Shapes.)
-			}
-		}
-	}
 
 
+
+	/**
+	 * Sets the light trails of the players.
+	 * @param o
+	 */
 	public void setLightTrails(HashMap<Player, ArrayList<Coordinate>> o) {
 		this.lightTrails = o;
 		updateLightTrails();
 	}
-	
-	private ArrayList<SquareGUI> lightTrails_Squares;
+
 	private void updateLightTrails(){
 		int i = 0;
 		lightTrails_Squares.clear();
@@ -213,7 +326,7 @@ public class GridGui extends GUIElement{
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
 				s.setColor(OConstants.LIGHTTRAILCOLORS[i][0]);
 				lightTrails_Squares.add(s);
-				
+
 			}catch(Exception e){}
 			try{
 				PVector pos = getPixels(playercoor.get(1));
@@ -229,7 +342,7 @@ public class GridGui extends GUIElement{
 				s.setColor(OConstants.LIGHTTRAILCOLORS[i][2]);
 				lightTrails_Squares.add(s);
 			}catch(Exception e){}
-			
+
 			i++;
 		}
 	}
@@ -237,7 +350,7 @@ public class GridGui extends GUIElement{
 
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
-		
+
 		adjustDirectionalPad();
 
 	}
@@ -306,45 +419,105 @@ public class GridGui extends GUIElement{
 		return new PVector();
 	}
 
-
-	public void resetGrid(){
-		for(SquareGUI s : squares.values()){
-			s.reset();
-		}
-
-
-
-		for(Coordinate coor: grenades){
-			SquareGUI s = squares.get(coor);
-			squares.get(coor).setShape(Shapes.lightgrenade);
-
-		}
-
-		for(Coordinate coor: powerFails){
-			SquareGUI s = squares.get(coor);
-			if(s.hasShape()){
-				s.setShape(Shapes.powerFailureItem);
-			}
-			else s.setShape(Shapes.powerFail);
-
-		}
-
-
-
-		for(Coordinate coor: walls){
-			squares.get(coor).setShape(Shapes.wall);
-		}
-
-
-
-
-
-	}
-
-
+	/**
+	 * Checks if the press of a mouse influences the directionalPad.
+	 * @param mouseX	the x coordinate of the mouse
+	 * @param mouseY	the y coordinate of the mouse.
+	 */
 	public void mousePressed(int mouseX, int mouseY) {
 		directionalPad.mousePressed(mouseX, mouseY);
+
+	}
+
+	public void resetGrid(){
+		items.clear();
+		for(Coordinate coor : grenades_coors){
+			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+			s.setShape(Shapes.lightgrenade);
+			items.put(coor, s);
+		}
+		
+		
+		for(Coordinate coor: discs_coors){
+			if(items.containsKey(coor)){
+				items.get(coor).setShape(Shapes.items);
+			}
+			else{
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				s.setShape(Shapes.identityDisc);
+				items.put(coor, s);
+			}
+		}
+		
+		for(Coordinate coor: chargedDiscs_coors){
+			if(items.containsKey(coor)){
+				items.get(coor).setShape(Shapes.items);
+			}
+			else{
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				s.setShape(Shapes.chargedIdentityDisc);
+				items.put(coor, s);
+			}
+		}
+		
+		powerfailItems.clear();
+		powerfails.clear();
+		for(Coordinate coor: powerfail_coors){
+			if(items.containsKey(coor)){
+				SquareGUI s = items.get(coor);
+				items.remove(coor);
+				s.setShape(Shapes.powerFailureItem);
+				powerfailItems.put(coor, s);
+			}
+			else{
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				s.setShape(Shapes.powerFail);
+				powerfails.put(coor, s);
+			}
+			
+		}
+		
+		teleports.clear();
+		teleportsItem.clear();
+		teleportsItemPowerfails.clear();
+		for(Coordinate coor: teleport_coors){
+			if(items.containsKey(coor)){
+				SquareGUI s = items.get(coor);
+				items.remove(coor);
+				s.setShape(Shapes.teleportItem);
+				teleports.put(coor, s);
+			}
+			
+			if(powerfails.containsKey(coor)){
+				SquareGUI s = powerfails.get(coor);
+				powerfails.remove(coor);
+				s.setShape(Shapes.powerFailureTeleport);
+				teleportPowerfail.put(coor,s);
+			}
+			
+			if(powerfailItems.containsKey(coor)){
+				SquareGUI s = powerfailItems.get(coor);
+				powerfailItems.remove(coor);
+				s.setShape(Shapes.powerFailureTeleportItem);
+				teleportsItemPowerfails.put(coor, s);
+			}
+		}
+
+
+
+
+
+	}
+
+
+
+	public void setTeleport(ArrayList<Coordinate> o) {
+		for(Coordinate coor: o){
+			System.out.println(coor);
+		}
+		this.teleport_coors = o;
 		
 	}
+
 
 }

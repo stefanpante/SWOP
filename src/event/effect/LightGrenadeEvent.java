@@ -4,6 +4,7 @@
 package event.effect;
 
 import game.Game;
+import player.Player;
 
 /**
  * @author jonas
@@ -11,7 +12,7 @@ import game.Game;
  */
 public class LightGrenadeEvent extends EffectEvent {
 	
-	public static final int ACTIONS_LOST = 3;
+	public static final int TURNS_LOST = 1;
 
 	/**
 	 * @param game
@@ -29,8 +30,8 @@ public class LightGrenadeEvent extends EffectEvent {
 
 	@Override
 	protected void duringGameEvent() {
-		LoseActionEvent loseActionEvent = new LoseActionEvent(getGame(), ACTIONS_LOST);
-		loseActionEvent.run();
+		Player currentPlayer = getGame().getCurrentPlayer();
+		currentPlayer.loseTurns(TURNS_LOST, false);
 	}
 
 	@Override

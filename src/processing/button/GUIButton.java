@@ -1,9 +1,9 @@
 package processing.button;
 
 import processing.GUIElement;
-import processing.OConstants;
 import processing.core.PApplet;
 import processing.core.PVector;
+import util.OConstants;
 
 public abstract class GUIButton extends GUIElement {
 
@@ -66,6 +66,7 @@ public abstract class GUIButton extends GUIElement {
 	/**
 	 * Returns whether the given coordinates are over the button.
 	 */
+	@Override
 	public boolean mouseHit(int mouseX, int mouseY){
 		if(mouseX >= position.x && mouseX <= position.x + width){
 			if(mouseY >= position.y && mouseY <= position.y + height){

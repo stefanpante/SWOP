@@ -13,8 +13,6 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import controller.GameHandler;
-import controller.ProcessingHandler;
-
 import player.Player;
 import processing.button.TextButton;
 import processing.core.PApplet;
@@ -22,6 +20,7 @@ import processing.core.PConstants;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
+import util.OConstants;
 
 public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
@@ -38,7 +37,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * The processingHandler to send changes to the game model.
 	 */
-	private ProcessingHandler obj;
+	private GameHandler obj;
 
 
 	/**
@@ -82,6 +81,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * initializes the objectron gui
 	 */
+	@Override
 	public void setup(){
 
 		// sets the size from the applet to a fourth of the screen.
@@ -105,7 +105,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		setupButtons();
 		setupLabels();
 		// Creates a new ProcessingHandler.
-		obj = new ProcessingHandler(this);
+		obj = new GameHandler(this);
 		obj.startNewGame();
 
 
@@ -135,6 +135,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * Draws the entire game
 	 */
+	@Override
 	public void draw(){
 
 		// Sets the background color to white.
@@ -191,6 +192,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * Called when the mouse button is pressed.
 	 */
+	@Override
 	public void mousePressed(){
 
 		grid.mousePressed(mouseX, mouseY);
@@ -215,6 +217,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		if(useItemButton.mouseHit(mouseX, mouseY)){
 			this.useItem();
 		}
+		if(pickUpButton.mouseHit(mouseX, mouseY)){
+			this.pickUp();
+		}
 	}
 
 	private void startNewGame() {
@@ -236,7 +241,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		Item item = squareInventory.getSelectedItem();
 		if(item == null){
 			currentFrame = 0;
-			System.out.println("No item selected");
+			message = "You have no item selected";
+			currentFrame = 0;
 		}
 		else{
 			try{
@@ -274,19 +280,23 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	private int currentPlayerColor = OConstants.PLAYERBLUE;
 	public void changePlayer(){
-		if(obj.getGame().getCurrentPlayer().getID() ==1){
-			currentPlayerColor = OConstants.PLAYERBLUE;
-		}
-		else{
-			currentPlayerColor = OConstants.PLAYERRED;
-		}
-		gridLabel.setColor(currentPlayerColor);
-		squareInventoryLabel.setColor(currentPlayerColor);
-		playerInventoryLabel.setColor(currentPlayerColor);
-		useItemButton.setColor(currentPlayerColor);
-		pickUpButton.setColor(currentPlayerColor);
-		endTurnButton.setColor(currentPlayerColor);
-		startNewGameButton.setColor(currentPlayerColor);
+		try{
+			if(obj  == null){
+			}
+			if(obj.getGame().getCurrentPlayer().getID() == 1){
+				currentPlayerColor = OConstants.PLAYERBLUE;
+			}
+			else{
+				currentPlayerColor = OConstants.PLAYERRED;
+			}
+			gridLabel.setColor(currentPlayerColor);
+			squareInventoryLabel.setColor(currentPlayerColor);
+			playerInventoryLabel.setColor(currentPlayerColor);
+			useItemButton.setColor(currentPlayerColor);
+			pickUpButton.setColor(currentPlayerColor);
+			endTurnButton.setColor(currentPlayerColor);
+			startNewGameButton.setColor(currentPlayerColor);
+		}catch(NullPointerException e){}
 
 	}
 
@@ -298,7 +308,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void propertyChange(PropertyChangeEvent evt) {
 
 		Object o = evt.getNewValue();
-		if(o == null) System.out.println("Event object is null");
 		if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
 			this.grid.setWalls((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
@@ -326,15 +335,19 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(GameHandler.END_TURN_PROPERTY)){
 			confirmEndTurn((String)o);
 		}else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
-			JOptionPane.showMessageDialog(frame, (String)o);
+			message = (String) o;
+			currentFrame = 0;
 		}else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
 			String player = (String)o;
 			JOptionPane.showMessageDialog(frame, player+ " has won the game!");
 		}else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
 			String player = (String)o;
 			JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
+		}else if(evt.getPropertyName().equals(GameHandler.TELEPORT_PROPERTY)){
+			grid.setTeleport((ArrayList<Coordinate>) o);
 		}
 		grid.resetGrid();
+
 
 	}
 
@@ -342,6 +355,16 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private void confirmEndTurn(String o) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void stop(){
+		try{
+			System.exit(0);
+		}
+		catch(Exception e)
+		{}		
+		
 	}
 
 	private int mHeight = 125;
@@ -369,8 +392,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 
 	}
-	
-	private String message;
+
+	private String message = "";
 	private void showException(Exception exc){
 		exc.printStackTrace();
 		currentFrame = 0;

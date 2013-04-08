@@ -2,8 +2,6 @@ package game;
 
 import grid.Grid;
 import grid.GridBuilder;
-import grid.GridBuilder2;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,7 +73,7 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		// Build the grid
-		GridBuilder2 gridBuilder = new GridBuilder2(hSize, vSize);
+		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.grid = gridBuilder.getGrid();
 		
 		// Add players
@@ -178,7 +176,6 @@ public class Game {
 		
 		while(candidate.getRemainingActions() < 0){
 			int ra = candidate.getRemainingActions();
-			//TODO: should implement penalty?
 			candidate.endTurn();
 			int nextPlayer = (players.indexOf(candidate) + 1) % players.size();
 			candidate = players.get(nextPlayer);
@@ -310,6 +307,12 @@ public class Game {
 				}
 			}
 		}
+		
+		// Exclude starting positions
+		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
+		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
+		bottomLeft.getPower().regain();
+		topRight.getPower().regain();
 	}
 	
 	

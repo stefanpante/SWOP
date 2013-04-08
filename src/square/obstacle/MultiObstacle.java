@@ -36,6 +36,7 @@ public abstract class MultiObstacle implements Obstacle {
 	 * @return	True	If square is contained.
 	 * 			False	If square is not contained.
 	 */
+	@Override
 	public boolean contains(Square square){
 		return this.squares.contains(square);
 	}
@@ -47,6 +48,7 @@ public abstract class MultiObstacle implements Obstacle {
 	 * 
 	 * @throws IllegalArgumentException If a duplicate square is given an exception is thrown.
 	 */
+	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(isValidSquare(square)){
 			getSquares().add(square);
@@ -64,6 +66,7 @@ public abstract class MultiObstacle implements Obstacle {
 	 * @throws 	IllegalArgumentException 
 	 * 			If the square is not 
 	 */
+	@Override
 	public void removeSquare(Square square) throws IllegalArgumentException {
 		if(!getSquares().contains(square)){
 			throw new IllegalArgumentException("A square that is not added can not part of the obstacle cannot be removed.");
@@ -85,6 +88,7 @@ public abstract class MultiObstacle implements Obstacle {
 	 * 			False	If the square is a duplicate or it is not connected to any other
 	 * 					square.
 	 */
+	@Override
 	public boolean isValidSquare(Square square){
 		if(square == null)
 			return false; 

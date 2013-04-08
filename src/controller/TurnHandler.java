@@ -3,7 +3,8 @@
  */
 package controller;
 
-import event.action.ActionEvent;
+import event.AbstractGameEvent;
+import event.effect.LoseActionEvent;
 import game.Game;
 
 import java.beans.PropertyChangeListener;
@@ -24,7 +25,7 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
-		ActionEvent.setObserver(this);
+		AbstractGameEvent.setObserver(this);
 		counter = new HashMap<Player,Integer>();
 		for(Player player : getGame().getPlayers()){
 			counter.put(player, 0);
@@ -72,12 +73,18 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn(){
+		Player currentPlayer = getGame().getCurrentPlayer();
 		if(getGame().currentPlayerIsStuck()){
 			getGame().end();
     		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
 		}
 		increaseCurrentPlayerCount();
 		getGame().powerFailSquares();
+		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
+			LoseActionEvent lae = new LoseActionEvent(getGame(),1);
+			lae.run();
+		}
+
 	}
 	
 	/**

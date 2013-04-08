@@ -6,9 +6,7 @@ import java.beans.PropertyChangeListener;
 
 import event.AbstractGameEvent;
 import event.action.PickUpEvent;
-import event.action.UseItemEvent;
 
-import player.Player;
 import game.Game;
 
 /**

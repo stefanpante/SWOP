@@ -3,9 +3,6 @@
  */
 package event.action;
 
-import java.util.Observer;
-
-import controller.TurnHandler;
 import event.AbstractGameEvent;
 import game.Game;
 
@@ -24,14 +21,18 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	
 	@Override
 	public void run() {
-		beforeActionEvent();
-		beforeGameEvent();
-		duringGameEvent();
-		afterGameEvent();
-		afterActionEvent();
-		// Observer Pattern
-		setChanged();
-		notifyObservers();
+		try{
+			beforeActionEvent();
+			beforeGameEvent();
+			duringGameEvent();
+			afterGameEvent();	
+			afterActionEvent();
+		}catch(Exception e){
+			throw e;
+		}finally{
+			setChanged();
+			notifyObservers();
+		}
 	}
 	
 	protected void beforeActionEvent() {

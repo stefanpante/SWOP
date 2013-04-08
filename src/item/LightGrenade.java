@@ -76,6 +76,7 @@ public class LightGrenade extends Item implements Effect{
 	/**
 	 * returns if this object has a penalty.
 	 */
+	@Override
 	public boolean hasEffect() {
 		return true;
 	}
