@@ -146,7 +146,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		drawLabels();
 		drawInventories();
 		drawButtons(); 
-		
+
 		showMessage();
 	}
 
@@ -197,32 +197,40 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Checks if the mouse is pressed on an inventory
 		squareInventory.mousePressed(mouseX, mouseY);
 		playerInventory.mousePressed(mouseX, mouseY);
-		
+
 		buttonPressed();
 
 
 	}
-	
+
 	private void buttonPressed(){
 		if(startNewGameButton.mouseHit(mouseX, mouseY)){
 			this.startNewGame();
 		}
-		
+
 		if(endTurnButton.mouseHit(mouseX, mouseY)){
 			this.endTurn();
 		}
-		
+
 		if(useItemButton.mouseHit(mouseX, mouseY)){
 			this.useItem();
 		}
 	}
 
 	private void startNewGame() {
-		obj.startNewGame();
+		try{
+			obj.startNewGame();
+		}catch(Exception e){
+			showException(e);
+		}
 	}
 
 	public void move(Direction direction){
-		obj.getMoveHandler().move(direction);
+		try{
+			obj.getMoveHandler().move(direction);
+		}catch(Exception e){
+			showException(e);
+		}
 	}
 	public void pickUp(){
 		Item item = squareInventory.getSelectedItem();
@@ -231,7 +239,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			System.out.println("No item selected");
 		}
 		else{
-			obj.getPickupHandler().pickUp(item);
+			try{
+				obj.getPickupHandler().pickUp(item);
+			}catch(Exception e){
+				showException(e);
+			}
 		}
 	}
 
@@ -243,12 +255,20 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			System.out.println("No item selected");
 		}
 		else{
-			obj.getUseItemHandler().useItem(item);
+			try{
+				obj.getUseItemHandler().useItem(item);
+			}catch(Exception e){
+				showException(e);
+			}
 		}
 	}
 
 	public void endTurn(){
-		obj.getEndTurnHandler().endTurn();
+		try{
+			obj.getEndTurnHandler().endTurn();
+		}catch(Exception e){
+			showException(e);
+		}
 	}
 
 	private int currentPlayerColor = OConstants.PLAYERBLUE;
@@ -326,27 +346,34 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private int mHeight = 125;
 	private int mWidth = 300;
 	private int currentFrame = 100;
-	private int endFrame = 100;
+	private int endFrame = 50;
 	private void showMessage() {
 		if(currentFrame < endFrame){
-		stroke(0, 30);
-		fill(OConstants.LIGHTER_GREY);
-		rect(hSize/2 - mWidth/2, vSize/2 - mHeight/2, mWidth, mHeight);
+			stroke(0, 30);
+			fill(OConstants.LIGHTER_GREY);
+			rect(hSize/2 - mWidth/2, vSize/2 - mHeight/2, mWidth, mHeight);
 
-		noStroke();
-		fill(OConstants.GREEN);
-		rect(hSize/2 - mWidth/2+1, vSize/2 - mHeight/2+1, mWidth-1, 25);
-		fill(color(255));
-		textAlign(PConstants.LEFT, PConstants.CENTER);
-		text("Message",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1, mWidth-6, 22);
+			noStroke();
+			fill(currentPlayerColor);
+			rect(hSize/2 - mWidth/2+1, vSize/2 - mHeight/2+1, mWidth-1, 25);
+			fill(color(255));
+			textAlign(PConstants.LEFT, PConstants.CENTER);
+			text("Message",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1, mWidth-6, 22);
 
-		fill(0, 90);
-		textAlign(PConstants.CENTER, PConstants.CENTER);
-		text("Test",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
-		
-		currentFrame++;
+			fill(0,96);
+			textAlign(PConstants.CENTER, PConstants.CENTER);
+			text(message,hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
+
+			currentFrame++;
 		}
 
+	}
+	
+	private String message;
+	private void showException(Exception exc){
+		exc.printStackTrace();
+		currentFrame = 0;
+		message = exc.getMessage();
 	}
 
 
