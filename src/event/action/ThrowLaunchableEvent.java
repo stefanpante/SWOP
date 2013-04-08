@@ -3,6 +3,8 @@
  */
 package event.action;
 
+import event.effect.LoseTurnEvent;
+import player.Player;
 import square.Direction;
 import square.Square;
 import game.Game;
@@ -57,6 +59,15 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		Square endSquare = trajectoryMediator.getEndSquare(currentPosition, getDirection(), getLaunchableItem().getRange());
 		// remove the launchable from the players inventory
 		getGame().getCurrentPlayer().getInventory().take(launchableItem);
+		
+		// Checks for a hit on another player.
+		for(Player player: getGame().getOtherPlayers()){
+			if(player.getPosition() == endSquare){
+				LoseTurnEvent lte = new LoseTurnEvent(getGame(),player,1,false);
+				lte.run();
+				break;
+			}
+		}
 	}
 
 	/* (non-Javadoc)
