@@ -278,22 +278,23 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	private int currentPlayerColor = OConstants.PLAYERBLUE;
 	public void changePlayer(){
-		if(obj.getGame().getCurrentPlayer() == null){
-			System.out.println("Current player is null");
-		}
-		if(obj.getGame().getCurrentPlayer().getID() == 1){
-			currentPlayerColor = OConstants.PLAYERBLUE;
-		}
-		else{
-			currentPlayerColor = OConstants.PLAYERRED;
-		}
-		gridLabel.setColor(currentPlayerColor);
-		squareInventoryLabel.setColor(currentPlayerColor);
-		playerInventoryLabel.setColor(currentPlayerColor);
-		useItemButton.setColor(currentPlayerColor);
-		pickUpButton.setColor(currentPlayerColor);
-		endTurnButton.setColor(currentPlayerColor);
-		startNewGameButton.setColor(currentPlayerColor);
+		try{
+			if(obj  == null){
+			}
+			if(obj.getGame().getCurrentPlayer().getID() == 1){
+				currentPlayerColor = OConstants.PLAYERBLUE;
+			}
+			else{
+				currentPlayerColor = OConstants.PLAYERRED;
+			}
+			gridLabel.setColor(currentPlayerColor);
+			squareInventoryLabel.setColor(currentPlayerColor);
+			playerInventoryLabel.setColor(currentPlayerColor);
+			useItemButton.setColor(currentPlayerColor);
+			pickUpButton.setColor(currentPlayerColor);
+			endTurnButton.setColor(currentPlayerColor);
+			startNewGameButton.setColor(currentPlayerColor);
+		}catch(NullPointerException e){}
 
 	}
 
@@ -343,12 +344,23 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 		grid.resetGrid();
 
+
 	}
 
 
 	private void confirmEndTurn(String o) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void stop(){
+		try{
+			System.exit(0);
+		}
+		catch(Exception e)
+		{}		
+		
 	}
 
 	private int mHeight = 125;
@@ -376,7 +388,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 
 	}
-	
+
 	private String message = "";
 	private void showException(Exception exc){
 		exc.printStackTrace();
