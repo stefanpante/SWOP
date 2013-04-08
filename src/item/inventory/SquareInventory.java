@@ -27,6 +27,8 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	// FIXME: Ik vind hier maar iets uit (Jonas)
 	int identityDisks = 0;
+	
+	int chargedDisks = 0;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -170,21 +172,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		String result = "Square ";
 		return result + super.toString();
 	}
-	
-	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
-		//No specific operation needed yet.
-	}
-	
-
-	@Override
-	public void addIdentityDisc(IdentityDisc identityDisc) {
-		identityDisks++;
-	}
-
-	@Override
-	public void removeIdentityDisc(IdentityDisc identityDisc) {
-		identityDisks--;
-	}
 
 	@Override
 	public void addLightGrenade(LightGrenade lightGrenade) {
@@ -209,6 +196,16 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void removeTeleport(Teleport teleport) {
 		this.teleport = null;
 	}
+	
+	@Override
+	public void addIdentityDisc(IdentityDisc identityDisc) {
+		identityDisks++;
+	}
+
+	@Override
+	public void removeIdentityDisc(IdentityDisc identityDisc) {
+		identityDisks--;
+	}
 
 	@Override
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
@@ -216,4 +213,9 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		// TODO Auto-generated method stub
 		
 	} 
+	
+	@Override
+	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
+		//No specific operation needed yet.
+	}
 }

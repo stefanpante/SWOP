@@ -54,7 +54,7 @@ public class MoveEvent extends ActionEvent {
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
-		// FIXME: Dummycode
+		
 		if(newPosition.getInventory().hasTeleport()) {
 			Teleport teleport = newPosition.getInventory().getTeleport();
 			TeleportEvent teleportEvent = new TeleportEvent(getGame(), teleport);

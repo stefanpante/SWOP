@@ -39,7 +39,7 @@ public class TestTrajectoryMediator {
 		
 		
 		
-		GridBuilder2 gb = new GridBuilder2(10, 10, );
+		GridBuilder2 gb = new GridBuilder2(10, 10 );
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,0));
