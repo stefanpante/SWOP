@@ -187,31 +187,38 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	}
 
 	@Override
-	public void addLightGrenade(LightGrenade lightGrenade) {
+	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		if(hasLightGrenade())
 			throw new IllegalStateException("Can't add another LightGrenade to " + this);
+		
 		this.lightGrenade = lightGrenade;
 	}
 
 	@Override
-	public void removeLightGrenade(LightGrenade lightGrenade) {
+	public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
+		if(!this.lightGrenade.equals(lightGrenade))
+			throw new IllegalStateException("Could not remove the LightGrenade because it did not match the LightGrenade that is in place.");
+		
 		this.lightGrenade = null;
 	}
 
 	@Override
-	public void addTeleport(Teleport teleport) {
+	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		if(hasTeleport())
 			throw new IllegalStateException("Can't add another Teleport to " + this);
 		this.teleport = teleport;
 	}
 
 	@Override
-	public void removeTeleport(Teleport teleport) {
+	public void removeTeleport(Teleport teleport) throws IllegalStateException {
+		if(!this.teleport.equals(teleport))
+			throw new IllegalStateException("The given teleport to be removed is not the same one as the square's teleport.");
+		
 		this.teleport = null;
 	}
 	
 	@Override
-	public void addIdentityDisc(IdentityDisc identityDisc) {
+	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		if(this.identityDiscs.contains(identityDisc))
 			throw new IllegalStateException("Cannot add the same identityDisc twice.");
 		
@@ -219,7 +226,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	}
 
 	@Override
-	public void removeIdentityDisc(IdentityDisc identityDisc) {
+	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		if(!this.identityDiscs.contains(identityDisc))
 			throw new IllegalStateException("Cannot remove the given identityDisc:" + identityDisc);
 		
