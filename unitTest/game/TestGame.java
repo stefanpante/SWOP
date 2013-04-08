@@ -11,10 +11,7 @@ import org.junit.Test;
 
 import player.Player;
 
-import square.Direction;
 import square.Square;
-import square.state.PowerFailureState;
-import square.state.RegularState;
 
 public class TestGame {
 
@@ -134,40 +131,16 @@ public class TestGame {
 		
 	}
 	
-	/**
-	 * Test if update states eventually convert PowerFailure square into RegularState.
-	 */
 	@Test
-	public void testUpdateStates() {
+	public void testClearPowerFailures() {
 		Game game = new Game(10,10);
 		Grid grid = game.getGrid();
 		Square square = grid.getAllSquares().get(0);
-
-		grid.getCoordinate(square);
-		while(square.getState().equals(PowerFailureState.getInstance()) ){
-			try {
-				square = grid.getNeighbor(square, Direction.getRandomDirection());
-			} catch (Exception e) {
-
-			}
-		}
-		Square squareTwo = game.getGrid().getAllSquares().get(1);
 		
+		square.getPower().fail();
+		assertTrue(square.getPower().isFailing());
 		
-		assertEquals(RegularState.getInstance(),square.getState());
-		square.powerFail();
-		
-		assertEquals(PowerFailureState.getInstance(),square.getState());
-		game.updateStates();
-		
-		squareTwo.powerFail();
-		
-		assertEquals(PowerFailureState.getInstance(),square.getState());
-		game.updateStates();
-		
-		assertEquals(PowerFailureState.getInstance(),square.getState());
-		game.updateStates();
-		
-		assertEquals(RegularState.getInstance(),square.getState());
+		game.clearPowerFailures();
+		assertFalse(square.getPower().isFailing());		
 	}
 }

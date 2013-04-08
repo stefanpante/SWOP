@@ -76,7 +76,7 @@ public class OConstants {
 	/**
 	 * Convenience.
 	 */
-	public static int[][] LIGHTTRAILCOLORS = new int[][]{{PLAYERRED_80, PLAYERRED_60, PLAYERRED_40},{PLAYERBLUE_80, PLAYERBLUE_60, PLAYERBLUE_40}};
+	public static int[][] LIGHTTRAILCOLORS = new int[][]{{PLAYERBLUE_80, PLAYERBLUE_60, PLAYERBLUE_40},{PLAYERRED_80, PLAYERRED_60, PLAYERRED_40}};
  	public static int GREEN = -6697984;
 	
 	/**

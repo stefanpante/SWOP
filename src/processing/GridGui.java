@@ -324,7 +324,7 @@ public class GridGui extends GUIElement{
 				PVector pos = getPixels(playercoor.get(0));
 				// float width, float height, PVector position, PApplet gui
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
-				s.setColor(OConstants.LIGHTTRAILCOLORS[i][0]);
+				s.setColor(OConstants.LIGHTTRAILCOLORS[player.getID() -1][0]);
 				lightTrails_Squares.add(s);
 
 			}catch(Exception e){}
@@ -332,14 +332,14 @@ public class GridGui extends GUIElement{
 				PVector pos = getPixels(playercoor.get(1));
 				// float width, float height, PVector position, PApplet gui
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
-				s.setColor(OConstants.LIGHTTRAILCOLORS[i][1]);
+				s.setColor(OConstants.LIGHTTRAILCOLORS[player.getID() -1][1]);
 				lightTrails_Squares.add(s);
 			}catch(Exception e){}
 			try{
 				PVector pos = getPixels(playercoor.get(2));
 				// float width, float height, PVector position, PApplet gui
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
-				s.setColor(OConstants.LIGHTTRAILCOLORS[i][2]);
+				s.setColor(OConstants.LIGHTTRAILCOLORS[player.getID() -1][2]);
 				lightTrails_Squares.add(s);
 			}catch(Exception e){}
 

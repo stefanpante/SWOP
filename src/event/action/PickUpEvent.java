@@ -35,7 +35,7 @@ public class PickUpEvent extends ActionEvent {
 	
 	@Override
 	protected void afterGameEvent() {
-		getGame().getCurrentPlayer().decrementActions();
+		
 	}
 
 	@Override

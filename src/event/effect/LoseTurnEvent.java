@@ -1,3 +1,4 @@
+
 package event.effect;
 
 import game.Game;
@@ -44,3 +45,4 @@ public class LoseTurnEvent extends EffectEvent {
 	}
 
 }
+
