@@ -29,6 +29,7 @@ public class ItemButton extends ShapeButton {
 		super(width, height, shape, gui);
 		selected = false;
 		this.color = OConstants.LIGHTER_GREY;
+		this.visible = true;
 	}
 
 	public ItemButton(float width, float height, PShape shape,
@@ -36,6 +37,7 @@ public class ItemButton extends ShapeButton {
 		super(width, height, shape, position, gui);
 		this.color = OConstants.LIGHTER_GREY;
 		selected = false;
+		this.visible = true;
 		this.position = position;
 	}
 
@@ -61,6 +63,10 @@ public class ItemButton extends ShapeButton {
 
 	public Item getItem(){
 		return item;
+	}
+	
+	public void setItem(Item item){
+		this.item = item;
 	}
 
 	public void setSelected(boolean selected){
