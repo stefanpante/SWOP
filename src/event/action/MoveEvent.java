@@ -3,14 +3,11 @@
  */
 package event.action;
 
-import event.effect.LoseActionEvent;
 import event.effect.LoseTurnEvent;
 import event.effect.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
 import item.Teleport;
-
-import java.util.Observer;
 
 import square.Direction;
 import square.Square;

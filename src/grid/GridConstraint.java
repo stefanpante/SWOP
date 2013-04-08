@@ -4,8 +4,6 @@
 package grid;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import util.Coordinate;
 
 /**

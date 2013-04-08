@@ -97,6 +97,7 @@ public class GridGui extends GUIElement{
 	/**
 	 * draws the grid onto the screen.
 	 */
+	@Override
 	public void draw() {
 		for(SquareGUI square : squares.values()){
 			square.draw();
@@ -113,6 +114,7 @@ public class GridGui extends GUIElement{
 
 	}
 
+	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
 		return false;
 

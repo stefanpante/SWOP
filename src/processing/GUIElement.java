@@ -53,6 +53,7 @@ public abstract class GUIElement implements Drawable{
 	 * Returns the color of the button.
 	 * @return
 	 */
+	@Override
 	public int getColor(){
 		return this.color;
 	}
@@ -61,6 +62,7 @@ public abstract class GUIElement implements Drawable{
 	 * Sets the color for the button.
 	 * @param color
 	 */
+	@Override
 	public void setColor(int color){
 		this.color = color;
 	}
@@ -70,6 +72,7 @@ public abstract class GUIElement implements Drawable{
 	 * Returns the position of the button.
 	 * @return
 	 */
+	@Override
 	public PVector getPosition(){
 		return this.position;
 	}
@@ -79,6 +82,7 @@ public abstract class GUIElement implements Drawable{
 	 * @param x
 	 * @param y
 	 */
+	@Override
 	public void setPosition(float x, float y){
 		this.position.x = x;
 		this.position.y = y;
@@ -88,6 +92,7 @@ public abstract class GUIElement implements Drawable{
 	 * Sets the position for the button.
 	 * @param position
 	 */
+	@Override
 	public void setPosition(PVector position){
 		this.position = position;
 	}
@@ -113,6 +118,7 @@ public abstract class GUIElement implements Drawable{
 	/**
 	 * Returns whether the given coordinates are over the button.
 	 */
+	@Override
 	public boolean mouseHit(int mouseX, int mouseY){
 		if(mouseX >= position.x && mouseX <= position.x + width){
 			if(mouseY >= position.y && mouseY <= position.y + height){
@@ -123,6 +129,7 @@ public abstract class GUIElement implements Drawable{
 		return false;
 	}
 	
+	@Override
 	public abstract void draw();
 
 }

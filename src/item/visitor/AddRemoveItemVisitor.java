@@ -1,6 +1,5 @@
 package item.visitor;
 
-import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;

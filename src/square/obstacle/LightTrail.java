@@ -57,6 +57,7 @@ public class LightTrail extends MultiObstacle implements Observer{
 	 * @throws 	IllegalArgumentException 
 	 * 			If the square is not valid.
 	 */
+	@Override
 	public void removeSquare(Square square) throws IllegalArgumentException {
 		super.removeSquare(square);
 		trail.remove(square);
@@ -95,6 +96,7 @@ public class LightTrail extends MultiObstacle implements Observer{
 	 * this does not need to be added. But because of an action that
 	 * we are notified of, the last square must be removed.
 	 */
+	@Override
 	public void update(Observable o, Object arg) {
 		if(arg !=null){
 			Square square = (Square) arg;

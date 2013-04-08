@@ -1,7 +1,6 @@
 package square;
 
 
-import effect.Effect;
 import item.inventory.SquareInventory;
 
 import square.obstacle.Obstacle;

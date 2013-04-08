@@ -3,6 +3,7 @@
  */
 package controller;
 
+import event.AbstractGameEvent;
 import event.action.ActionEvent;
 import event.effect.LoseActionEvent;
 import game.Game;
@@ -25,7 +26,7 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
-		ActionEvent.setObserver(this);
+		AbstractGameEvent.setObserver(this);
 		counter = new HashMap<Player,Integer>();
 		for(Player player : getGame().getPlayers()){
 			counter.put(player, 0);

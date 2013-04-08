@@ -3,8 +3,6 @@
  */
 package event.effect;
 
-import java.util.ArrayList;
-
 import event.AbstractGameEvent;
 import game.Game;
 

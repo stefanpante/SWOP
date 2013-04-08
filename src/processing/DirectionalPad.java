@@ -1,14 +1,11 @@
 package processing;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import processing.button.DirectionalButton;
 import processing.core.PApplet;
-import processing.core.PShape;
 import processing.core.PVector;
 import square.Direction;
-import util.Coordinate;
 
 public class DirectionalPad extends GUIElement{
 
@@ -119,6 +116,7 @@ public class DirectionalPad extends GUIElement{
 		
 	}
 	
+	@Override
 	public void setPosition(PVector position){
 		this.position = position;
 		this.initButtons();
