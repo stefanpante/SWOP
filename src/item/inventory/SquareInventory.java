@@ -1,5 +1,7 @@
 package item.inventory;
 
+import java.util.ArrayList;
+
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -25,10 +27,15 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 */
 	private LightGrenade lightGrenade;
 	
-	// FIXME: Ik vind hier maar iets uit (Jonas)
-	int identityDisks = 0;
+	/**
+	 * Holds the collection of identityDiscs.
+	 */
+	private ArrayList<IdentityDisc> identityDiscs;
 	
-	int chargedDisks = 0;
+	/**
+	 * Holds the collection of identityDiscs.
+	 */
+	private ArrayList<ChargedIdentityDisc> chargedDiscs;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -43,6 +50,9 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		super(size);
 		teleport = null;	
 		lightGrenade = null;
+		
+		this.identityDiscs = new ArrayList<IdentityDisc>();
+		this.chargedDiscs = new ArrayList<ChargedIdentityDisc>();
 	}
 
 	/**
@@ -160,8 +170,11 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return this.teleport;
 	}
 	
-	public boolean hasIdentityDisk(){
-		return identityDisks > 0;
+	/**
+	 * Returns if there are identity discs in the inventory.
+	 */
+	public boolean hasIdentityDisc(){
+		return this.identityDiscs.size() > 0;
 	}
 	
 	/**
@@ -176,7 +189,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	@Override
 	public void addLightGrenade(LightGrenade lightGrenade) {
 		if(hasLightGrenade())
-			throw new IllegalArgumentException("Can't add another LightGrenade to " + this);
+			throw new IllegalStateException("Can't add another LightGrenade to " + this);
 		this.lightGrenade = lightGrenade;
 	}
 
@@ -188,7 +201,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	@Override
 	public void addTeleport(Teleport teleport) {
 		if(hasTeleport())
-			throw new IllegalArgumentException("Can't add another Teleport to " + this);
+			throw new IllegalStateException("Can't add another Teleport to " + this);
 		this.teleport = teleport;
 	}
 
@@ -199,21 +212,33 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) {
-		identityDisks++;
+		if(this.identityDiscs.contains(identityDisc))
+			throw new IllegalStateException("Cannot add the same identityDisc twice.");
+		
+		this.addIdentityDisc(identityDisc);
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc) {
-		identityDisks--;
+		if(!this.identityDiscs.contains(identityDisc))
+			throw new IllegalStateException("Cannot remove the given identityDisc:" + identityDisc);
+		
+		this.identityDiscs.remove(identityDisc);
 	}
 
 	@Override
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)	throws IllegalStateException {
-		// TODO Auto-generated method stub		
+		if(!this.chargedDiscs.contains(chargedDisc))
+			throw new IllegalStateException("Cannot add the given chargedDisc twice");
+		
+		this.chargedDiscs.add(chargedDisc);
 	} 
 	
 	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
-		//No specific operation needed yet.
+		if(!this.chargedDiscs.contains(chargedDisc))
+			throw new IllegalStateException("Cannot remove the given identityDisc:" + chargedDisc);
+		
+		this.chargedDiscs.remove(chargedDisc);
 	}
 }
