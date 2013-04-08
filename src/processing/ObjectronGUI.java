@@ -215,6 +215,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		if(useItemButton.mouseHit(mouseX, mouseY)){
 			this.useItem();
 		}
+		if(pickUpButton.mouseHit(mouseX, mouseY)){
+			this.pickUp();
+		}
 	}
 
 	private void startNewGame() {
@@ -236,7 +239,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		Item item = squareInventory.getSelectedItem();
 		if(item == null){
 			currentFrame = 0;
-			System.out.println("No item selected");
+			message = "You have no item selected";
+			currentFrame = 0;
 		}
 		else{
 			try{
@@ -326,7 +330,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(GameHandler.END_TURN_PROPERTY)){
 			confirmEndTurn((String)o);
 		}else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
-			JOptionPane.showMessageDialog(frame, (String)o);
+			message = (String) o;
+			currentFrame = 0;
 		}else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
 			String player = (String)o;
 			JOptionPane.showMessageDialog(frame, player+ " has won the game!");
@@ -370,7 +375,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	}
 	
-	private String message;
+	private String message = "";
 	private void showException(Exception exc){
 		exc.printStackTrace();
 		currentFrame = 0;
