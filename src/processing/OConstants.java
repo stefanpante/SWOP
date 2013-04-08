@@ -2,6 +2,7 @@ package processing;
 
 public class OConstants {
 
+	//FIXME: Transparant colors are switched around.
 	/**
 	 * The margin used in the layout throughout the application
 	 */
