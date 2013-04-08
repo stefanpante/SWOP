@@ -1,6 +1,6 @@
 package item;
 
-public enum ItemState {
+public enum LightGrenadeState {
 	ACTIVE,
 	INACTIVE,
 	WORN;
