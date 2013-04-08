@@ -362,7 +362,7 @@ public class Player extends Observable implements Obstacle {
 	 */
 	public void endTurn(){
 		//TODO: dit mag niet meer met de nieuwe effectValue!
-		//setRemainingActions(Player.MAX_ALLOWED_ACTIONS);
+		remainingActions = Player.MAX_ALLOWED_ACTIONS;
 		
 		moved = false;
 	}
