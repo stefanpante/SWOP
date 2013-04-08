@@ -13,9 +13,7 @@ public class Shapes {
 	public static PShape chargedIdentityDisc;
 	public static PShape lightgrenade;
 	public static PShape powerFailureItem;
-	public static PShape powerFailureTeleport;
-	public static PShape powerFailureTeleportItem;
-	public static PShape teleporItem;
+	
 	public static PShape north;
 	public static PShape south;
 	public static PShape east;
@@ -26,8 +24,10 @@ public class Shapes {
 	public static PShape southwest;
 
 	public static PShape items;
-
+	public static PShape powerFailureTeleport;
+	public static PShape powerFailureTeleportItem;
 	public static PShape teleportItem;
+	public static PShape teleport;
 	
 
 	public Shapes(PApplet gui) {
@@ -51,6 +51,12 @@ public class Shapes {
 		Shapes.southwest =  gui.loadShape(getClass().getResource("/res/directions/southwest.svg").getPath());
 		Shapes.northeast =  gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath());
 		Shapes.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
+		
+		Shapes.items = gui.loadShape(getClass().getResource("/res/items.svg").getPath());
+		Shapes.powerFailureTeleportItem = gui.loadShape(getClass().getResource("/res//teleportpowerfailitems.svg").getPath());
+		Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/teleportpowerfail.svg").getPath());
+		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/teleportitems.svg").getPath());
+		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());
 	}
 
 

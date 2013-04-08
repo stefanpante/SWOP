@@ -446,6 +446,7 @@ public class GridGui extends GUIElement{
 			items.put(coor, s);
 		}
 		
+		
 		for(Coordinate coor: discs_coors){
 			if(items.containsKey(coor)){
 				items.get(coor).setShape(Shapes.items);
@@ -468,6 +469,8 @@ public class GridGui extends GUIElement{
 			}
 		}
 		
+		powerfailItems.clear();
+		powerfails.clear();
 		for(Coordinate coor: powerfail_coors){
 			if(items.containsKey(coor)){
 				SquareGUI s = items.get(coor);
@@ -483,6 +486,9 @@ public class GridGui extends GUIElement{
 			
 		}
 		
+		teleports.clear();
+		teleportsItem.clear();
+		teleportsItemPowerfails.clear();
 		for(Coordinate coor: teleport_coors){
 			if(items.containsKey(coor)){
 				SquareGUI s = items.get(coor);
