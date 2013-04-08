@@ -176,8 +176,6 @@ public class TestPlayer {
 		new Wall(new Square(), square);
 		
 		Player player = new Player(new Square(), 0);
-		assertFalse(Player.isValidMove(square));
-		assertFalse(Player.isValidMove(null));
 		
 		assertFalse(player.hasMoved());
 		player.move(square);
@@ -191,7 +189,6 @@ public class TestPlayer {
 		Square square = new Square();
 		Player player = new Player(new Square(), 0);
 		
-		assertTrue(Player.isValidMove(square));
 		assertFalse(player.hasMoved());
 		
 		player.move(square);

@@ -53,6 +53,7 @@ public class GameHandler extends Handler {
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
 	private TurnHandler turnHandler;
+	private ThrowLaunchableHandler throwLaunchableHandler;
 	
     /**
      * Used to start a new game.
@@ -66,6 +67,7 @@ public class GameHandler extends Handler {
 	    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
 	    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
 	    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
+	    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
 	    	turnHandler.startTurn();
 	    	this.populateGui();
 		} 

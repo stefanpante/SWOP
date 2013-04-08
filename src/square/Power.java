@@ -1,8 +1,7 @@
 package square;
 
 public class Power {
-
-	public static final int FAILED_ACTIONS = 4;
+	
 	public static final int FAILED_TURNS = 3;
 	
 	private boolean failed;

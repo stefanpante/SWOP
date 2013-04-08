@@ -197,7 +197,7 @@ public abstract class Handler {
 			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
 				lightGrenades.add(coordinate);
 			
-			if(square.getInventory().hasIdentityDisk())
+			if(square.getInventory().hasIdentityDisc())
 				identityDisks.add(coordinate);
 			
 			if(square.isObstructed())

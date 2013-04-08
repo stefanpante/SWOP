@@ -25,8 +25,15 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 */
 	private LightGrenade lightGrenade;
 	
-	// FIXME: Ik vind hier maar iets uit (Jonas)
-	int identityDisks = 0;
+	/**
+	 * Holds the collection of identityDiscs.
+	 */
+	private int identityDiscs = 0;
+	
+	/**
+	 * Holds the collection of identityDiscs.
+	 */
+	private int chargedDiscs = 0;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -158,8 +165,11 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return this.teleport;
 	}
 	
-	public boolean hasIdentityDisk(){
-		return identityDisks > 0;
+	/**
+	 * Returns if there are identity discs in the inventory.
+	 */
+	public boolean hasIdentityDisc(){
+		return (this.identityDiscs + this.chargedDiscs) > 0;
 	}
 	
 	/**
@@ -170,51 +180,61 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		String result = "Square ";
 		return result + super.toString();
 	}
-	
-	@Override
-	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
-		//No specific operation needed yet.
-	}
-	
 
 	@Override
-	public void addIdentityDisc(IdentityDisc identityDisc) {
-		identityDisks++;
-	}
-
-	@Override
-	public void removeIdentityDisc(IdentityDisc identityDisc) {
-		identityDisks--;
-	}
-
-	@Override
-	public void addLightGrenade(LightGrenade lightGrenade) {
+	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		if(hasLightGrenade())
-			throw new IllegalArgumentException("Can't add another LightGrenade to " + this);
+			throw new IllegalStateException("Can't add another LightGrenade to " + this);
+		
 		this.lightGrenade = lightGrenade;
 	}
 
 	@Override
-	public void removeLightGrenade(LightGrenade lightGrenade) {
+	public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
+		if(!this.lightGrenade.equals(lightGrenade))
+			throw new IllegalStateException("Could not remove the LightGrenade because it did not match the LightGrenade that is in place.");
+		
 		this.lightGrenade = null;
 	}
 
 	@Override
-	public void addTeleport(Teleport teleport) {
+	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		if(hasTeleport())
-			throw new IllegalArgumentException("Can't add another Teleport to " + this);
+			throw new IllegalStateException("Can't add another Teleport to " + this);
 		this.teleport = teleport;
 	}
 
 	@Override
-	public void removeTeleport(Teleport teleport) {
+	public void removeTeleport(Teleport teleport) throws IllegalStateException {
+		if(!this.teleport.equals(teleport))
+			throw new IllegalStateException("The given teleport to be removed is not the same one as the square's teleport.");
+		
 		this.teleport = null;
+	}
+	
+	@Override
+	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
+		this.identityDiscs++;
 	}
 
 	@Override
-	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
-			throws IllegalStateException {
-		// TODO Auto-generated method stub
+	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
+		if(this.identityDiscs <= 0)
+			throw new IllegalStateException("There are no identity discs to be removed.");
 		
+		this.identityDiscs--;
+	}
+
+	@Override
+	public void addChargedDisc(ChargedIdentityDisc chargedDisc)	throws IllegalStateException {
+		this.chargedDiscs++;
 	} 
+	
+	@Override
+	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
+		if(this.chargedDiscs <= 0)
+			throw new IllegalStateException("There are no charged identity discs to be removed.");
+		
+		this.chargedDiscs--;
+	}
 }
