@@ -2,14 +2,15 @@ package TestsIteration3;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Test;
 
 import game.Game;
-import handler.MoveHandler;
-import handler.PickUpHandler;
+import controller.MoveHandler;
+import controller.PickUpHandler;
 import square.Direction;
 import square.Square;
-import square.obstacles.LightTrail;
+import square.obstacle.LightTrail;
 import util.Coordinate;
 
 public class TeleporterUsageTest {
