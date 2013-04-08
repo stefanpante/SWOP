@@ -83,25 +83,7 @@ public abstract class Handler {
     protected void firePropertyChange(String propertyName, Object newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, new Object(), newValue);
     }
-    
-    /**
-	 * Get a list of coordinates of Grenades that are in the Grid.
-	 * 
-	 * @return	ArrayList<Coordinate>	List of all coordinates which contain a grenade.
-	 */
-	public ArrayList<Coordinate> getGrenadeLocations() {
-		ArrayList<Coordinate> grenades = new ArrayList<Coordinate>();
-    	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
-    		Square square = getGame().getGrid().getSquare(coordinate);
-    		
-    		if(square.getInventory().hasLightGrenade()){
-        		LightGrenade lg = square.getInventory().getLightGrenade();
-        		if(!lg.isActive())
-        			grenades.add(coordinate);
-    		}
-    	}
-    	return grenades;
-	}
+
 	
 	/**
 	 * Get a list of coordinates of Players that are in the Grid.
@@ -116,26 +98,6 @@ public abstract class Handler {
 		return players;
 	}
 	
-	/**
-	 * Get a list of coordinates of Walls that are in the Grid.
-	 * 
-	 * @return	ArrayList<Coordinate>	List of all coordinates which contain a wall.
-	 */
-	public ArrayList<Coordinate> getWallLocations() {
-		ArrayList<Coordinate> walls = new ArrayList<Coordinate>();
-    	ArrayList<Coordinate> players = this.getPlayerLocations();
-    	
-    	for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
-    		Square square = getGame().getGrid().getSquare(coordinate);
-    		
-    		if(square.isObstructed())
-    			walls.add(coordinate);
-    	}
-    	
-    	walls.removeAll(players);
-    	
-    	return walls;
-	}
 	
 	/**
 	 * Get a list of all coordinates which have a LightTrail with their associated Player.
@@ -205,28 +167,56 @@ public abstract class Handler {
 	 * Fires all property changes when called.
 	 */
 	public void fireChanges(){
-    	firePropertyChange(GameHandler.GRENADES_PROPERTY, getGrenadeLocations());
-    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
-    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   	
-    	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
-    	firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
-    	firePropertyChange(GameHandler.POWER_FAILS_PROPERTY, getPowerFails());
+		HashMap<String, ArrayList<Coordinate>> properties = getProperties();
+		
+    	firePropertyChange(ProcessingHandler.GRENADES_PROPERTY, properties.get(ProcessingHandler.GRENADES_PROPERTY));
+    	firePropertyChange(ProcessingHandler.POWER_FAILS_PROPERTY,  properties.get(ProcessingHandler.POWER_FAILS_PROPERTY));
+    	firePropertyChange(ProcessingHandler.IDENTITY_DISK_PROPERTY, properties.get(ProcessingHandler.IDENTITY_DISK_PROPERTY));
+    	firePropertyChange(ProcessingHandler.TELEPORT_PROPERTY, properties.get(ProcessingHandler.TELEPORT_PROPERTY));
+    	
+    	firePropertyChange(ProcessingHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
+    	firePropertyChange(ProcessingHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
+    	firePropertyChange(ProcessingHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   	
+    	firePropertyChange(ProcessingHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
+    	firePropertyChange(ProcessingHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    }
 
-	}
 
-	/**
-	 * Returns a list of coordinates with powerFailures.
-	 */
-	private ArrayList<Coordinate> getPowerFails() {
-		ArrayList<Coordinate> list = new ArrayList<Coordinate>();
-		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+
+	protected HashMap<String, ArrayList<Coordinate>> getProperties(){
+		HashMap<String, ArrayList<Coordinate>> properties = new HashMap<String, ArrayList<Coordinate>>();
+		ArrayList<Coordinate> powerFailures = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> lightGrenades = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> identityDisks = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
+	
+ 		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
 			Square square = getGame().getGrid().getSquare(coordinate);
-			if(square.getPower().isFailing()){
-				list.add(coordinate);
-			}
+			if(square.getPower().isFailing())
+				powerFailures.add(coordinate);
+			
+			if(square.getInventory().hasTeleport())
+				teleports.add(coordinate);
+			
+			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
+				lightGrenades.add(coordinate);
+			
+			if(square.getInventory().hasIdentityDisk())
+				identityDisks.add(coordinate);
+			
+			if(square.isObstructed())
+				walls.add(coordinate);
+			
 		}
-		return list;
+ 		
+		properties.put(ProcessingHandler.POWER_FAILS_PROPERTY, powerFailures);
+		properties.put(ProcessingHandler.GRENADES_PROPERTY, lightGrenades);
+		properties.put(ProcessingHandler.IDENTITY_DISK_PROPERTY, identityDisks);
+		properties.put(ProcessingHandler.TELEPORT_PROPERTY, teleports);
+		properties.put(ProcessingHandler.WALLS_PROPERTY, walls);
+ 		
+		return properties;
 	}
 	
 	

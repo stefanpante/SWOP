@@ -1,7 +1,8 @@
 package items;
 
 import static org.junit.Assert.*;
-import item.ItemState;
+
+import item.LightGrenadeState;
 import item.LightGrenade;
 
 import org.junit.After;
@@ -32,7 +33,7 @@ public class TestLightGrenade {
 	public void testStateChangeInactive1() {
 		LightGrenade it = new LightGrenade();
 		it.activate();
-		assertTrue(it.getState().equals(ItemState.ACTIVE));
+		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -51,17 +52,17 @@ public class TestLightGrenade {
 	public void testStateChangeActive1() {
 		LightGrenade it = new LightGrenade();
 		it.activate();
-		assertTrue(it.getState().equals(ItemState.ACTIVE));
+		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 		assertTrue(it.isActive());
 		it.deactivate();
-		assertTrue(it.getState().equals(ItemState.INACTIVE));
+		assertTrue(it.getState().equals(LightGrenadeState.INACTIVE));
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testStateChangeActive2() {
 		LightGrenade it = new LightGrenade();
 		it.activate();
-		assertTrue(it.getState().equals(ItemState.ACTIVE));
+		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 		it.activate();
 	}
 	
@@ -69,8 +70,8 @@ public class TestLightGrenade {
 	public void testStateChangeActive3() {
 		LightGrenade it = new LightGrenade();
 		it.activate();
-		assertTrue(it.getState().equals(ItemState.ACTIVE));
+		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 		it.wearOut();
-		assertTrue(it.getState().equals(ItemState.WORN));
+		assertTrue(it.getState().equals(LightGrenadeState.WORN));
 	}
 }
