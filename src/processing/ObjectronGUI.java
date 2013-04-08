@@ -278,7 +278,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	private int currentPlayerColor = OConstants.PLAYERBLUE;
 	public void changePlayer(){
-		if(obj.getGame().getCurrentPlayer().getID() ==1){
+		if(obj.getGame().getCurrentPlayer() == null){
+			System.out.println("Current player is null");
+		}
+		if(obj.getGame().getCurrentPlayer().getID() == 1){
 			currentPlayerColor = OConstants.PLAYERBLUE;
 		}
 		else{
@@ -302,7 +305,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void propertyChange(PropertyChangeEvent evt) {
 
 		Object o = evt.getNewValue();
-		if(o == null) System.out.println("Event object is null");
 		if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
 			this.grid.setWalls((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){

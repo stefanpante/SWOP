@@ -64,10 +64,7 @@ public class Inventory extends GUIElement{
 	private void initialize() {
 		buttons.clear();
 		selectedButton = null;
-		if (this.position == null) {
-			System.out.println("Position is null");
-		}
-		System.out.println("init buttons in inventory");
+		
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
 		for(int i = 0; i < items.size(); i++){
 			Item item = items.get(i);			
