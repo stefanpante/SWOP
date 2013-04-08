@@ -3,6 +3,7 @@ package controller;
 import game.Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 import processing.ObjectronGUI;
@@ -75,15 +76,12 @@ public class ProcessingHandler extends Handler {
 	 * This is information that the GUI can use.
 	 */
 	private void populateGui() {
-    	ArrayList<Coordinate> grenades = super.getGrenadeLocations();
-    	ArrayList<Coordinate> walls = super.getWallLocations();
-    	ArrayList<Coordinate> players = super.getPlayerLocations();
+		HashMap<String, ArrayList<Coordinate>> properties = getProperties();
+		ArrayList<Coordinate> walls = properties.get(WALLS_PROPERTY);
+		ArrayList<Coordinate> players = getPlayerLocations();
     	walls.removeAll(players);
-    	firePropertyChange(GRENADES_PROPERTY, grenades);
     	firePropertyChange(WALLS_PROPERTY, walls);
     	firePropertyChange(PLAYERS_PROPERTY, players);
-    	firePropertyChange(CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-    	firePropertyChange(LIGHT_TRAILS_PROPERTY, super.getLightTrailLocations());
     	fireChanges();
 	}
 
