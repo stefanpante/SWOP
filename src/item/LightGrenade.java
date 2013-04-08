@@ -3,7 +3,6 @@ package item;
 import item.LightGrenadeState;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
-import effect.Effect;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -11,7 +10,7 @@ import effect.Effect;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class LightGrenade extends Item implements Effect{
+public class LightGrenade extends Item{
 	
 	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	
@@ -72,14 +71,7 @@ public class LightGrenade extends Item implements Effect{
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
 		this.currentState = LightGrenadeState.INACTIVE;
 	}
-	
-	/**
-	 * returns if this object has a penalty.
-	 */
-	@Override
-	public boolean hasEffect() {
-		return true;
-	}
+
 	
 	/**
 	 * Returns the string representation of this LightGrenade

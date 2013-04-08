@@ -512,9 +512,6 @@ public class GridGui extends GUIElement{
 
 
 	public void setTeleport(ArrayList<Coordinate> o) {
-		for(Coordinate coor: o){
-			System.out.println(coor);
-		}
 		this.teleport_coors = o;
 		
 	}
