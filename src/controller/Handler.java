@@ -169,16 +169,16 @@ public abstract class Handler {
 	public void fireChanges(){
 		HashMap<String, ArrayList<Coordinate>> properties = getProperties();
 		
-    	firePropertyChange(ProcessingHandler.GRENADES_PROPERTY, properties.get(ProcessingHandler.GRENADES_PROPERTY));
-    	firePropertyChange(ProcessingHandler.POWER_FAILS_PROPERTY,  properties.get(ProcessingHandler.POWER_FAILS_PROPERTY));
-    	firePropertyChange(ProcessingHandler.IDENTITY_DISK_PROPERTY, properties.get(ProcessingHandler.IDENTITY_DISK_PROPERTY));
-    	firePropertyChange(ProcessingHandler.TELEPORT_PROPERTY, properties.get(ProcessingHandler.TELEPORT_PROPERTY));
+    	firePropertyChange(GameHandler.GRENADES_PROPERTY, properties.get(GameHandler.GRENADES_PROPERTY));
+    	firePropertyChange(GameHandler.POWER_FAILS_PROPERTY,  properties.get(GameHandler.POWER_FAILS_PROPERTY));
+    	firePropertyChange(GameHandler.IDENTITY_DISK_PROPERTY, properties.get(GameHandler.IDENTITY_DISK_PROPERTY));
+    	firePropertyChange(GameHandler.TELEPORT_PROPERTY, properties.get(GameHandler.TELEPORT_PROPERTY));
     	
-    	firePropertyChange(ProcessingHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-    	firePropertyChange(ProcessingHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
-    	firePropertyChange(ProcessingHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   	
-    	firePropertyChange(ProcessingHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
-    	firePropertyChange(ProcessingHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
+    	firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
+    	firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   	
+    	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
+    	firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
     }
 
 
@@ -210,11 +210,11 @@ public abstract class Handler {
 			
 		}
  		
-		properties.put(ProcessingHandler.POWER_FAILS_PROPERTY, powerFailures);
-		properties.put(ProcessingHandler.GRENADES_PROPERTY, lightGrenades);
-		properties.put(ProcessingHandler.IDENTITY_DISK_PROPERTY, identityDisks);
-		properties.put(ProcessingHandler.TELEPORT_PROPERTY, teleports);
-		properties.put(ProcessingHandler.WALLS_PROPERTY, walls);
+		properties.put(GameHandler.POWER_FAILS_PROPERTY, powerFailures);
+		properties.put(GameHandler.GRENADES_PROPERTY, lightGrenades);
+		properties.put(GameHandler.IDENTITY_DISK_PROPERTY, identityDisks);
+		properties.put(GameHandler.TELEPORT_PROPERTY, teleports);
+		properties.put(GameHandler.WALLS_PROPERTY, walls);
  		
 		return properties;
 	}
