@@ -25,8 +25,8 @@ public class Teleport extends Item {
 	/**
 	 * Constructor that gets an initial destination as argument.
 	 */
-	public Teleport (Teleport desitination) throws IllegalArgumentException {
-		setDestination(desitination);
+	public Teleport (Teleport destination) throws IllegalArgumentException {
+		setDestination(destination);
 	}
 
 	/**
@@ -78,26 +78,22 @@ public class Teleport extends Item {
 	}
 
 	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) 
-			throws IllegalStateException {
+	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.addTeleport(this);		
 	}
 	
 	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv)
-			throws IllegalStateException {
+	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.removeTeleport(this);
 	}
 
 	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
+	public void acceptAddPlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
 		plInv.addTeleport(this);
 	}
 
 	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
+	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
 		plInv.removeTeleport(this);
 	}
 	
