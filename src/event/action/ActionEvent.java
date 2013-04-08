@@ -42,7 +42,8 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	}
 	
 	protected void afterActionEvent() {
-		//TODO : Update player's effectValue 
+		if(getGame().currentPlayerIsStuck())
+			throw new IllegalStateException("The current player is stuck.");
 	}
 	
 

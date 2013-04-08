@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import notnullcheckweaver.NotNull;
 import player.Player;
+import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import util.Coordinate;
@@ -340,5 +342,15 @@ public class Game {
 			Square square = iterator.next();
 			square.getPower().regain();
 		}
+	}
+	
+	
+	public boolean currentPlayerIsStuck(){
+		for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
+				return false;
+			}
+		}
+		return true; 
 	}
 }

@@ -59,9 +59,6 @@ public class TurnHandler extends Handler implements Observer {
 	    	if(hasWon()){
 	    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
 	    		getGame().end();
-	    	}else if(hasLost()){
-	    		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
-	    		getGame().end();
 	    	}
 			getGame().getCurrentPlayer().endTurn();
 			getGame().switchToNextPlayer();
@@ -75,6 +72,10 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn(){
+		if(getGame().currentPlayerIsStuck()){
+			getGame().end();
+    		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
+		}
 		increaseCurrentPlayerCount();
 		getGame().powerFailSquares();
 	}
