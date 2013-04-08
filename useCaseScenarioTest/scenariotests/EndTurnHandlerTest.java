@@ -90,7 +90,7 @@ public class EndTurnHandlerTest {
 		Player player = game.getCurrentPlayer();
 		EndTurnHandler eh = new EndTurnHandler(game, null);
 		assertTrue(eh.checkToProceed());
-		game.getCurrentPlayer().getPosition().powerFail();
+		game.getCurrentPlayer().getPosition().getPower().fail();
 		eh.confirm(true);
 		assertEquals(2,player.getRemainingActions());
 	}
