@@ -3,7 +3,6 @@ package item;
 import item.LightGrenadeState;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
-import effect.Effect;
 
 /**
  * This class extends Item and represents a LightGrenade object.
