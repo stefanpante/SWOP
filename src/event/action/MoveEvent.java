@@ -38,6 +38,7 @@ public class MoveEvent extends ActionEvent {
 		/* Activate Light Grenades on square leaving square */
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		if(currentPosition.getInventory().hasLightGrenade()){
+			//TODO: Wordt lightGrenade geactiveerd als player hem zelf niet gelegd heeft.?
 			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
 			try{
 				lg.activate();
@@ -62,6 +63,7 @@ public class MoveEvent extends ActionEvent {
 		}
 	}
 
+	//TODO: Does this handle the effect of a lightGrenade
 	@Override
 	protected void afterGameEvent(){
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){

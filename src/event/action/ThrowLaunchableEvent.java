@@ -4,7 +4,9 @@
 package event.action;
 
 import square.Direction;
+import square.Square;
 import game.Game;
+import grid.TrajectoryMediator;
 import item.launchable.LaunchableItem;
 
 /**
@@ -39,7 +41,6 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	 */
 	@Override
 	protected void beforeGameEvent() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -48,8 +49,14 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	 */
 	@Override
 	protected void duringGameEvent() {
-		// TODO Auto-generated method stub
-		
+		// get the start position of the launchable item
+		Square currentPosition = getGame().getCurrentPlayer().getPosition();
+		// Construct a new trajectory mediator.
+		TrajectoryMediator trajectoryMediator = new TrajectoryMediator(getGame().getGrid());
+		// determine the end position of the launchable item
+		Square endSquare = trajectoryMediator.getEndSquare(currentPosition, getDirection(), getLaunchableItem().getRange());
+		// remove the launchable from the players inventory
+		getGame().getCurrentPlayer().getInventory().take(launchableItem);
 	}
 
 	/* (non-Javadoc)
