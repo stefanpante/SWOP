@@ -24,6 +24,9 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * Holds the only possible LightGrenade in this SquareInventory.
 	 */
 	private LightGrenade lightGrenade;
+	
+	// FIXME: Ik vind hier maar iets uit (Jonas)
+	int identityDisks = 0;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -155,6 +158,10 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return this.teleport;
 	}
 	
+	public boolean hasIdentityDisk(){
+		return identityDisks > 0;
+	}
+	
 	/**
 	 * Returns the string representation
 	 */
@@ -166,22 +173,22 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	@Override
 	public void addChargedDisc(ChargedDisc chargedDisc) {
-		//No specific operation needed yet.
+		
 	}
 
 	@Override
 	public void removeChargedDisc(ChargedDisc chargedDisc) {
-		//No specific operation needed yet.
+		
 	}
 
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) {
-		//No specific operation needed yet.
+		identityDisks++;
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc) {
-		//No specific operation needed yet.
+		identityDisks--;
 	}
 
 	@Override

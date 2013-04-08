@@ -228,6 +228,36 @@ public abstract class Handler {
 		}
 		return list;
 	}
+
+	private HashMap<String, ArrayList<Coordinate>> getProperties(){
+		HashMap<String, ArrayList<Coordinate>> properties = new HashMap<String, ArrayList<Coordinate>>();
+		ArrayList<Coordinate> powerFailures = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> lightGrenades = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> identityDisks = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
+		properties.put(ProcessingHandler.POWER_FAILS_PROPERTY, powerFailures);
+		properties.put(ProcessingHandler.GRENADES_PROPERTY, lightGrenades);
+		properties.put(ProcessingHandler.IDENTITY_DISK_PROPERTY, identityDisks);
+		properties.put(ProcessingHandler.TELEPORT_PROPERTY, teleports);
+	
+ 		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+			Square square = getGame().getGrid().getSquare(coordinate);
+			if(square.getPower().isFailing())
+				powerFailures.add(coordinate);
+			
+			if(square.getInventory().hasTeleport())
+				teleports.add(coordinate);
+			
+			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
+				lightGrenades.add(coordinate);
+			
+			if(square.getInventory().hasIdentityDisk())
+				identityDisks.add(coordinate);
+			
+		}
+ 		
+		return properties;
+	}
 	
 	
 	/**
