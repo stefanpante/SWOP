@@ -3,6 +3,7 @@
  */
 package event.action;
 
+import event.effect.PowerFailureEvent;
 import event.effect.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
@@ -54,6 +55,7 @@ public class MoveEvent extends ActionEvent {
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
+		
 		// FIXME: Dummycode
 		if(newPosition.getInventory().hasTeleport()) {
 			Teleport teleport = newPosition.getInventory().getTeleport();
@@ -64,7 +66,10 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void afterGameEvent(){
-		
+		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
+			PowerFailureEvent pfe = new PowerFailureEvent(getGame());
+			pfe.run();
+		}
 	}
 
 }

@@ -3,6 +3,7 @@
  */
 package event.effect;
 
+import player.Player;
 import game.Game;
 
 /**
@@ -10,8 +11,10 @@ import game.Game;
  *
  */
 public class PowerFailureEvent extends EffectEvent {
-
+	
+	public static final int TURNS_LOST = 1;
 	public static final int ACTIONS_LOST = 1;
+	
 	
 	/**
 	 * @param game
@@ -30,8 +33,9 @@ public class PowerFailureEvent extends EffectEvent {
 
 	@Override
 	protected void duringGameEvent() {
-		LoseActionEvent loseActionEvent = new LoseActionEvent(getGame(), ACTIONS_LOST);
-		loseActionEvent.run();
+		Player currentPlayer = getGame().getCurrentPlayer();
+		currentPlayer.loseTurns(TURNS_LOST);
+		currentPlayer.loseActions(ACTIONS_LOST);
 	}
 
 	@Override
