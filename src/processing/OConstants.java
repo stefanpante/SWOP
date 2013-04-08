@@ -7,8 +7,14 @@ public class OConstants {
 	 */
 	public static final int MARGIN = 5;
 	
+	/**
+	 * White color
+	 */
 	public static int WHITE = -1;
 	
+	/**
+	 * Black color
+	 */
 	public static int BLACK = -16777216;
 	/**
 	 * Integer representation of color(241,241,241)
@@ -25,16 +31,52 @@ public class OConstants {
 	 */
 	public static int PLAYERRED = -48060;
 	
+	/*
+	 * The color of the red player, opacity 0.75.
+	 */
+	public static int PLAYERRED_75 = 1261680101;
+	
+	/*
+	 * The color of the red player, opacity 0.50.
+	 */
+	public static int PLAYERRED_50 = 842249701;
+	
+	/*
+	 * The color of the red player, opacity 0.25.
+	 */
+	public static int PLAYERRED_25 = 422819301;
+	
 	/**
 	 * The color of the blue player.
 	 */
 	public static int PLAYERBLUE = -13388315;
 	
 	/**
+	 * The color of the blue player, opacity 0.75
+	 */
+	public static int PLAYERBLUE_75 = 1275020356;
+	
+	/**
+	 * The color of the blue player, opacity 0.50
+	 */
+	public static int PLAYERBLUE_50 = 855589956;
+	
+	/**
+	 * The color of the blue player, opacity 0.25
+	 */
+	public static int PLAYERBLUE_25 = 436159556 ;
+	
+	/**
 	 * The color of the labels.
 	 */
 	
-	public static int GREEN = -6697984;
+	public static int[] PLAYERCOLORS = new int[]{PLAYERBLUE, PLAYERRED};
+	
+	/**
+	 * Convenience.
+	 */
+	public static int[][] LIGHTTRAILCOLORS = new int[][]{{PLAYERBLUE_75, PLAYERBLUE_50, PLAYERBLUE_25},{PLAYERRED_75, PLAYERRED_50, PLAYERRED_25}};
+ 	public static int GREEN = -6697984;
 	
 	/**
 	 * darker green

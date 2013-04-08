@@ -89,7 +89,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
 		Shapes shapes = new Shapes(this);
-
+		System.out.println("75 percent " + color(51,181,229, 75));
+		System.out.println("50 percent " + color(51,181,229, 50));
+		System.out.println("25 percent " + color(51,181,229,25));
 		//Sets up the grid for usage.
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
 
