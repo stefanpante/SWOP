@@ -13,6 +13,9 @@ import util.Coordinate;
 
 public class GameHandler extends Handler {
 	
+	/**
+	 * Property constants
+	 */
 	public static final String WALLS_PROPERTY 				= "Walls";
 	public static final String GRENADES_PROPERTY 			= "Grenades";	
 	public static final String PLAYERS_PROPERTY 			= "Players";	
@@ -28,6 +31,7 @@ public class GameHandler extends Handler {
 	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
 	public static final String WIN_PROPERTY 				= "Win";
 	public static final String LOSE_PROPERTY				= "Lose";
+	
 	private ObjectronGUI objectronGUI;
 	
 	
