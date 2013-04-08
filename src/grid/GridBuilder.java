@@ -13,7 +13,6 @@ import java.util.Random;
 
 import square.Direction;
 import square.Square;
-import square.obstacle.Obstacle;
 import square.obstacle.Wall;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
@@ -452,18 +451,6 @@ public class GridBuilder {
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
 		square.getInventory().addItem(item);
-	}
-	
-	/**
-	 * Place an obstacle on the given coordinate
-	 * 
-	 * @param 	coordinate
-	 * 			The coordinate to place the given obstacle on
-	 * @param 	obstacle
-	 * 			The obstacle to be placed on the given coordinate
-	 */
-	private void placeObstacle(Square square, Obstacle obstacle){
-		square.setObstacle(obstacle);
 	}
 	
 	private int getAmountOfSquares(){

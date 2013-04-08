@@ -4,7 +4,6 @@
 package controller;
 
 import event.AbstractGameEvent;
-import event.action.ActionEvent;
 import event.effect.LoseActionEvent;
 import game.Game;
 
