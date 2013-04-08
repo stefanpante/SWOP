@@ -342,6 +342,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
 			String player = (String)o;
 			JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
+		}else if(evt.getPropertyName().equals(GameHandler.TELEPORT_PROPERTY)){
+			grid.setTeleport((ArrayList<Coordinate>) o);
 		}
 		grid.resetGrid();
 

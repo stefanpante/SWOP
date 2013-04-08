@@ -180,10 +180,41 @@ public class GridGui extends GUIElement{
 			directionalPad.draw();
 		}
 
+		
+
+		
+		for(SquareGUI item: items.values()){
+			item.draw();
+		}
+		
+		for(SquareGUI item: powerfailItems.values()){
+			item.draw();
+		}
+		
+		for(SquareGUI powerfail: powerfails.values()){
+			powerfail.draw();
+		}
+		
+		for(SquareGUI teleport: teleports.values()){
+			teleport.draw();
+		}
+		
+		for(SquareGUI teleport: teleportsItem.values()){
+			teleport.draw();
+		}
+		
+		for(SquareGUI teleport: teleportPowerfail.values()){
+			teleport.draw();
+		}
+		
+		for(SquareGUI teleport: teleportsItemPowerfails.values()){
+			teleport.draw();
+		}
+		
 		for(SquareGUI player: players){
 			player.draw();
 		}
-
+		
 		for(SquareGUI light: lightTrails_Squares){
 			light.draw();
 		}
@@ -191,6 +222,7 @@ public class GridGui extends GUIElement{
 		for(SquareGUI wall: walls_squares){
 			wall.draw();
 		}
+		
 
 	}
 
@@ -246,28 +278,7 @@ public class GridGui extends GUIElement{
 	 */
 	public void setGrenades(ArrayList<Coordinate> o) {
 		this.grenades_coors = o;
-		this.updateGrenades();
-
 	}
-
-	/**
-	 * updates the grenades
-	 */
-	private void updateGrenades(){
-		for(Coordinate coor: grenades_coors){
-			if(squares.get(coor).getShape() == null){
-				squares.get(coor).setShape(Shapes.lightgrenade);
-			}
-			else if(squares.get(coor).getShape() == Shapes.powerFail){
-				squares.get(coor).setShape(Shapes.powerFailureItem);
-			}
-			else{
-				//TODO: set multiple items.
-				//squares.get(coor).setShape(Shapes.)
-			}
-		}
-	}
-
 
 	/**
 	 * Changes the player positions.
@@ -289,30 +300,9 @@ public class GridGui extends GUIElement{
 	 */
 	public void setPowerFails(ArrayList<Coordinate> o) {
 		this.powerfail_coors = o;
-		updatePowerFailures();
 
 	}
 
-	/**
-	 * Updates the powerfailures.
-	 */
-	private void updatePowerFailures(){
-		for(Coordinate coor: powerfail_coors){
-			if(squares.get(coor).getShape() == null){
-				squares.get(coor).setShape(Shapes.powerFail);
-			}
-			else if(squares.get(coor).getShape() == Shapes.wall){
-
-			}
-			else if(squares.get(coor).getShape() != Shapes.powerFail){
-				squares.get(coor).setShape(Shapes.powerFailureItem);
-			}
-			else{
-				//TODO: set multiple items.
-				//squares.get(coor).setShape(Shapes.)
-			}
-		}
-	}
 
 
 	/**
@@ -516,6 +506,16 @@ public class GridGui extends GUIElement{
 
 
 
+	}
+
+
+
+	public void setTeleport(ArrayList<Coordinate> o) {
+		for(Coordinate coor: o){
+			System.out.println(coor);
+		}
+		this.teleport_coors = o;
+		
 	}
 
 
