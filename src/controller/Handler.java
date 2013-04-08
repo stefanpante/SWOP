@@ -213,13 +213,7 @@ public abstract class Handler {
     	firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
     	firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
     	firePropertyChange(GameHandler.POWER_FAILS_PROPERTY, getPowerFails());
-    	if(hasWon()){
-    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
-    		getGame().end();
-    	}else if(hasLost()){
-    		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
-    		getGame().end();
-    	}
+
 	}
 
 	/**
@@ -263,18 +257,6 @@ public abstract class Handler {
 			}
 		}
 		return true; 
-	}
-	
-	
-
-	
-	
-	public void startAction(){
-		fireChanges();
-	}
-	
-	public void endAction(){
-		fireChanges();
 	}
 	
 }

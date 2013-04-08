@@ -74,7 +74,7 @@ public class EndTurnHandler extends Handler{
 	 * @throws	IllegalStateException
 	 */
 	public void endTurn() throws IllegalStateException{
-		startAction();
+		fireChanges();
 		if(!isConfirmed()){
 			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
 		}else{
@@ -82,7 +82,7 @@ public class EndTurnHandler extends Handler{
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			resetConfirm();
 		}
-		endAction();
+		fireChanges();
 	}
 
 	/**

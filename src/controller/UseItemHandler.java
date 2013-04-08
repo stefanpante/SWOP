@@ -33,10 +33,10 @@ public class UseItemHandler extends Handler {
 	 * Or when the player cannot use the item on the square.
 	 */
 	public void useItem(Item item) {
-		startAction();
+		fireChanges();
 		AbstractGameEvent useItemEvent = new UseItemEvent(getGame(), item);
 		useItemEvent.run();
 		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
-		endAction();
+		fireChanges();
 	}
 }

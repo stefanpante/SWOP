@@ -71,20 +71,20 @@ public class Game {
 	 * 			the vertical size of the board
 	 */
 	public Game(int hSize, int vSize){
-		super();
-		start();
-		players = new ArrayList<Player>();
+		// Build the grid
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.grid = gridBuilder.buildGrid();
 		
+		// Add players
+		this.players = new ArrayList<Player>();
 		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
 		Square topRight = grid.getSquare(new Coordinate(hSize-1, 0));
-		
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
 		
+		// Start the game
+		start();
 		setCurrentPlayer(players.get(0));
-		powerFailureSquares();
 	}
 	
 	/**
@@ -293,7 +293,7 @@ public class Game {
 	/**
 	 * Sets the state of any square to a PowerFailure state with a 5% chance.
 	 */
-	public void powerFailureSquares() {
+	public void powerFailSquares() {
 		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
 		Random random = new Random();
 		

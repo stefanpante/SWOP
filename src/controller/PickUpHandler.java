@@ -35,10 +35,10 @@ public class PickUpHandler extends Handler {
 	 * @param item	the item which will be picked up.
 	 */
 	public void pickUp(Item item){
-		startAction();
+		fireChanges();
 		AbstractGameEvent pickUpEvent = new PickUpEvent(getGame(), item);
 		pickUpEvent.run();
 		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
-		endAction();
+		fireChanges();
 	}
 }

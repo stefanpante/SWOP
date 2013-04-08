@@ -59,7 +59,7 @@ public class ProcessingHandler extends Handler {
 	    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
 	    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
 	    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
-	    	
+	    	turnHandler.startTurn();
 	    	this.populateGui();
 		} 
 		catch (Exception e) {

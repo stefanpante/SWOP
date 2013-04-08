@@ -56,10 +56,18 @@ public class TurnHandler extends Handler implements Observer {
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
 					"and has no actions left and therefore lost the game");
 		}else{
+	    	if(hasWon()){
+	    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
+	    		getGame().end();
+	    	}else if(hasLost()){
+	    		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
+	    		getGame().end();
+	    	}
 			getGame().getCurrentPlayer().endTurn();
 			getGame().switchToNextPlayer();
 			for(Square square : getGame().getGrid().getAllSquares())
 				square.getPower().decreaseTurn();
+			startTurn();
 		}
 	}
 	
@@ -68,7 +76,7 @@ public class TurnHandler extends Handler implements Observer {
 	 */
 	public void startTurn(){
 		increaseCurrentPlayerCount();
-		getGame().powerFailureSquares();
+		getGame().powerFailSquares();
 	}
 	
 	/**

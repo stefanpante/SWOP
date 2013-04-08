@@ -39,11 +39,11 @@ public class MoveHandler extends Handler {
 	 * 
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
-		startAction();
+		fireChanges();
 		AbstractGameEvent moveEvent = new MoveEvent(getGame(), direction);
 		moveEvent.run();
 		setPropertyChanges();
-		endAction();
+		fireChanges();
 	}
 	
 	/**
