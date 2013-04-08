@@ -2,6 +2,7 @@ package game;
 
 import grid.Grid;
 import grid.GridBuilder;
+import grid.GridBuilder2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,8 +75,8 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		// Build the grid
-		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
-		this.grid = gridBuilder.buildGrid();
+		GridBuilder2 gridBuilder = new GridBuilder2(hSize, vSize);
+		this.grid = gridBuilder.getGrid();
 		
 		// Add players
 		this.players = new ArrayList<Player>();
