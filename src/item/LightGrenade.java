@@ -72,14 +72,7 @@ public class LightGrenade extends Item{
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
 		this.currentState = LightGrenadeState.INACTIVE;
 	}
-	
-	/**
-	 * returns if this object has a penalty.
-	 */
-	@Override
-	public boolean hasEffect() {
-		return true;
-	}
+
 	
 	/**
 	 * Returns the string representation of this LightGrenade
