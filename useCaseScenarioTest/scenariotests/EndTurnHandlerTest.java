@@ -14,7 +14,6 @@ import org.junit.Test;
 import player.Player;
 import square.Direction;
 import square.Square;
-import square.state.PowerFailureState;
 
 /**
  * 
