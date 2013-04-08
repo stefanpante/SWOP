@@ -1,0 +1,31 @@
+package event.effect;
+
+import game.Game;
+import player.Player;
+
+public class LoseTurnEvent extends EffectEvent {
+	
+	private int amount;
+
+	public LoseTurnEvent(Game game, int amount) {
+		super(game);
+		this.amount = amount;
+	}
+
+	@Override
+	protected void beforeGameEvent() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	protected void duringGameEvent() {
+		Player player = getGame().getCurrentPlayer();
+		player.loseTurns(this.amount);
+	}
+
+	@Override
+	protected void afterGameEvent() {
+		// TODO Auto-generated method stub
+	}
+
+}

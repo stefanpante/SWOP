@@ -24,14 +24,18 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	
 	@Override
 	public void run() {
-		beforeActionEvent();
-		beforeGameEvent();
-		duringGameEvent();
-		afterGameEvent();
-		afterActionEvent();
-		// Observer Pattern
-		setChanged();
-		notifyObservers();
+		try{
+			beforeActionEvent();
+			beforeGameEvent();
+			duringGameEvent();
+			afterGameEvent();	
+			afterActionEvent();
+		}catch(Exception e){
+			throw e;
+		}finally{
+			setChanged();
+			notifyObservers();
+		}
 	}
 	
 	protected void beforeActionEvent() {

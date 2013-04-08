@@ -4,6 +4,7 @@
 package controller;
 
 import event.action.ActionEvent;
+import event.effect.LoseActionEvent;
 import game.Game;
 
 import java.beans.PropertyChangeListener;
@@ -78,6 +79,10 @@ public class TurnHandler extends Handler implements Observer {
 		}
 		increaseCurrentPlayerCount();
 		getGame().powerFailSquares();
+		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
+			LoseActionEvent lae = new LoseActionEvent(getGame(),1);
+			lae.run();
+		}
 	}
 	
 	/**

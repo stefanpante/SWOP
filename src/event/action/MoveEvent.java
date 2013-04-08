@@ -3,7 +3,8 @@
  */
 package event.action;
 
-import event.effect.PowerFailureEvent;
+import event.effect.LoseActionEvent;
+import event.effect.LoseTurnEvent;
 import event.effect.TeleportEvent;
 import game.Game;
 import item.LightGrenade;
@@ -47,6 +48,7 @@ public class MoveEvent extends ActionEvent {
 				exc.printStackTrace();
 			}
 		}
+		
 
 	}
 
@@ -67,8 +69,8 @@ public class MoveEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent(){
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
-			PowerFailureEvent pfe = new PowerFailureEvent(getGame());
-			pfe.run();
+			LoseTurnEvent lte = new LoseTurnEvent(getGame(),1);
+			lte.run();
 		}
 	}
 
