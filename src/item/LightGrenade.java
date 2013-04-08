@@ -11,7 +11,7 @@ import effect.Effect;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class LightGrenade extends Item implements Effect{
+public class LightGrenade extends Item{
 	
 	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	
