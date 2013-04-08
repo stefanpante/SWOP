@@ -215,7 +215,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		if(this.identityDiscs.contains(identityDisc))
 			throw new IllegalStateException("Cannot add the same identityDisc twice.");
 		
-		this.addIdentityDisc(identityDisc);
+		this.identityDiscs.add(identityDisc);
 	}
 
 	@Override
