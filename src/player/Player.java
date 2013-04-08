@@ -346,12 +346,16 @@ public class Player extends Observable implements Obstacle {
 	 * @throws 	IllegalArgumentException
 	 * 			Thrown when the number of turns lost is not valid.
 	 */
-	public void loseTurns(int turns) throws IllegalArgumentException{
+	public void loseTurns(int turns, boolean accumulating) throws IllegalArgumentException{
 		if(!isValidTurnsLost(turns)){
 				throw new IllegalArgumentException("The given turns lost are not valid (Should be a positive value)");
 		}
-		
-		int remActions = remainingActions - Player.MAX_ALLOWED_ACTIONS * turns;
+		int remActions;
+		if(!accumulating){
+			remActions = 0;
+		}else{
+			remActions = remainingActions - Player.MAX_ALLOWED_ACTIONS * turns;
+		}
 		this.setRemainingActions(remActions);
 	}
 	
@@ -435,6 +439,7 @@ public class Player extends Observable implements Obstacle {
 	 * 			thrown when the given remainingactions is not valid.
 	 */
 	public void setRemainingActions(int remainingActions) throws IllegalArgumentException{
+		System.out.println(this + " has " + remainingActions + " left.");
 		if(!isValidRemainingActions(remainingActions)){
 			throw new IllegalArgumentException("remaining actions is not valid!");
 		}

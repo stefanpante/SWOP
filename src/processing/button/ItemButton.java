@@ -1,10 +1,10 @@
 package processing.button;
 
 import item.Item;
-import processing.OConstants;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import util.OConstants;
 
 public class ItemButton extends ShapeButton {
 

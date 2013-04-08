@@ -3,6 +3,7 @@ package processing;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import util.OConstants;
 
 public class SquareGUI extends GUIElement{
 

@@ -1,9 +1,9 @@
 package processing.button;
 
-import processing.OConstants;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import util.OConstants;
 
 public abstract class ShapeButton extends GUIButton {
 

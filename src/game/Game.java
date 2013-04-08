@@ -176,7 +176,6 @@ public class Game {
 		
 		while(candidate.getRemainingActions() < 0){
 			int ra = candidate.getRemainingActions();
-			//TODO: should implement penalty?
 			candidate.endTurn();
 			int nextPlayer = (players.indexOf(candidate) + 1) % players.size();
 			candidate = players.get(nextPlayer);

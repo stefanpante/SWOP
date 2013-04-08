@@ -31,7 +31,7 @@ public class LightGrenadeEvent extends EffectEvent {
 	@Override
 	protected void duringGameEvent() {
 		Player currentPlayer = getGame().getCurrentPlayer();
-		currentPlayer.loseTurns(TURNS_LOST);
+		currentPlayer.loseTurns(TURNS_LOST, false);
 	}
 
 	@Override

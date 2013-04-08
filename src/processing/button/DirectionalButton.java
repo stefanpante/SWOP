@@ -1,11 +1,11 @@
 package processing.button;
 
-import processing.OConstants;
 import processing.ObjectronGUI;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
 import square.Direction;
+import util.OConstants;
 
 public class DirectionalButton extends ShapeButton{
 

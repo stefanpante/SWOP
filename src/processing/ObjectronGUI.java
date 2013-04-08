@@ -20,6 +20,7 @@ import processing.core.PConstants;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
+import util.OConstants;
 
 public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 

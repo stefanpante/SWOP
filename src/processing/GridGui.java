@@ -9,6 +9,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
+import util.OConstants;
 
 public class GridGui extends GUIElement{
 
