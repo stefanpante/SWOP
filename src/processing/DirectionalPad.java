@@ -6,6 +6,7 @@ import processing.button.DirectionalButton;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
+import util.OConstants;
 
 public class DirectionalPad extends GUIElement{
 

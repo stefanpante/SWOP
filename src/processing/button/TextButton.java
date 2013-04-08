@@ -1,9 +1,9 @@
 package processing.button;
 
-import processing.OConstants;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
+import util.OConstants;
 
 public class TextButton extends GUIButton {
 

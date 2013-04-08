@@ -66,7 +66,7 @@ public class MoveEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent(){
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
-			LoseTurnEvent lte = new LoseTurnEvent(getGame(),1);
+			LoseTurnEvent lte = new LoseTurnEvent(getGame(),1,false);
 			lte.run();
 		}
 	}

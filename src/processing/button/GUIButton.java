@@ -1,9 +1,9 @@
 package processing.button;
 
 import processing.GUIElement;
-import processing.OConstants;
 import processing.core.PApplet;
 import processing.core.PVector;
+import util.OConstants;
 
 public abstract class GUIButton extends GUIElement {
 
