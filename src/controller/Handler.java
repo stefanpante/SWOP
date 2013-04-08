@@ -96,7 +96,7 @@ public abstract class Handler {
     		
     		if(square.getInventory().hasLightGrenade()){
         		LightGrenade lg = square.getInventory().getLightGrenade();
-        		if(lg.isActive())
+        		if(!lg.isActive())
         			grenades.add(coordinate);
     		}
     	}
@@ -112,8 +112,7 @@ public abstract class Handler {
 		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
 		for(Player player : getGame().getPlayers()){
     		players.add(getGame().getGrid().getCoordinate(player.getPosition()));
-    	}
-		
+    	}	
 		return players;
 	}
 	
