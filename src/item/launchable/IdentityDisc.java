@@ -82,15 +82,17 @@ public class IdentityDisc extends LaunchableItem {
 	/**
 	 * Check whether the given currentTravelDistance is a valid currentTravelDistance for all the objects of IdentityDisc.
 	 * 
-	 * @param 	currentTravelDistance
+	 * @param 	distance
 	 *			The currentTravelDistance to check.
 	 * @return	True	If the value is not less than 0 and less than the maximum allowed distance for this disc.
 	 * 			False	If the value is less than 0 or greater than the maximum allowed distance.
 	 */
-	public static boolean isValidDistanceTraveled(int currentTravelDistance) {
-		if (currentTravelDistance < 0 && currentTravelDistance <= MAX_TRAVEL_DISTANCE) {
+	public boolean isValidDistanceTraveled(int distance) {
+		if(distance < 0)
 			return false;
-		}
+		
+		if(distance > getRange())
+			return false;
 		
 		return true;
 	}
