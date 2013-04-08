@@ -56,11 +56,14 @@ public class GridGui extends GUIElement{
 		this.players = new ArrayList<SquareGUI>();
 		this.powerFails = new ArrayList<Coordinate>();
 		this.lightTrails = new HashMap<Player, ArrayList<Coordinate>>();
+		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.initGrid();
 		this.adjustDirectionalPad();
 	}
 
 
+	private float squareWidth;
+	private float squareHeight;
 	private void initGrid() {
 		float x = position.x;
 		float y = position.y;
@@ -86,6 +89,8 @@ public class GridGui extends GUIElement{
 		player2.setColor(OConstants.PLAYERRED);
 		players.add(player2);
 
+		squareWidth = swidth;
+		squareHeight = sHeight;
 	}
 
 
@@ -101,8 +106,10 @@ public class GridGui extends GUIElement{
 		for(SquareGUI player: players){
 			player.draw();
 		}
-
-
+		
+		for(SquareGUI light: lightTrails_Squares){
+			light.draw();
+		}
 
 	}
 
@@ -191,7 +198,40 @@ public class GridGui extends GUIElement{
 
 	public void setLightTrails(HashMap<Player, ArrayList<Coordinate>> o) {
 		this.lightTrails = o;
-
+		updateLightTrails();
+	}
+	
+	private ArrayList<SquareGUI> lightTrails_Squares;
+	private void updateLightTrails(){
+		int i = 0;
+		lightTrails_Squares.clear();
+		for(Player player: lightTrails.keySet()){
+			ArrayList<Coordinate> playercoor = lightTrails.get(player);
+			try{
+				PVector pos = getPixels(playercoor.get(0));
+				// float width, float height, PVector position, PApplet gui
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
+				s.setColor(OConstants.LIGHTTRAILCOLORS[i][0]);
+				lightTrails_Squares.add(s);
+				
+			}catch(Exception e){}
+			try{
+				PVector pos = getPixels(playercoor.get(1));
+				// float width, float height, PVector position, PApplet gui
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
+				s.setColor(OConstants.LIGHTTRAILCOLORS[i][1]);
+				lightTrails_Squares.add(s);
+			}catch(Exception e){}
+			try{
+				PVector pos = getPixels(playercoor.get(2));
+				// float width, float height, PVector position, PApplet gui
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
+				s.setColor(OConstants.LIGHTTRAILCOLORS[i][2]);
+				lightTrails_Squares.add(s);
+			}catch(Exception e){}
+			
+			i++;
+		}
 	}
 
 
