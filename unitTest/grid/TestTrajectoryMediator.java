@@ -35,11 +35,8 @@ public class TestTrajectoryMediator {
 	}
 
 	@Test
-	public void testGetEndSquare() {
-		
-		
-		
-		GridBuilder2 gb = new GridBuilder2(10, 10 );
+	public void testGetEndSquare() {		
+		GridBuilder gb = new GridBuilder(10, 10);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,0));
@@ -51,7 +48,7 @@ public class TestTrajectoryMediator {
 	@Test
 	public void testGetEndSquare2() {
 		//TODO: build grid like you want.
-		GridBuilder2 gb = new GridBuilder2(10, 10);
+		GridBuilder gb = new GridBuilder(10, 10);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,0));
