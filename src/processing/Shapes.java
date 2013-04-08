@@ -13,6 +13,9 @@ public class Shapes {
 	public static PShape chargedIdentityDisc;
 	public static PShape lightgrenade;
 	public static PShape powerFailureItem;
+	public static PShape powerFailureTeleport;
+	public static PShape powerFailureTeleportItem;
+	public static PShape teleporItem;
 	public static PShape north;
 	public static PShape south;
 	public static PShape east;
@@ -21,6 +24,10 @@ public class Shapes {
 	public static PShape northwest;
 	public static PShape southeast;
 	public static PShape southwest;
+
+	public static PShape items;
+
+	public static PShape teleportItem;
 	
 
 	public Shapes(PApplet gui) {
