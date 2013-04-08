@@ -3,7 +3,7 @@ package item.inventory;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import item.launchable.ChargedDisc;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 import item.visitor.AddRemoveItemVisitor;
 
@@ -42,13 +42,13 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	}
 	
 	@Override
-	public void addChargedDisc(ChargedDisc chargedDisc)
+	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
 		//No specific operation needed yet.
 	}
 
 	@Override
-	public void removeChargedDisc(ChargedDisc chargedDisc)
+	public void removeChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
 		//No specific operation needed yet.
 	}
