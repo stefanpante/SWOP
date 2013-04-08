@@ -35,7 +35,6 @@ public class PowerFailureEvent extends EffectEvent {
 	protected void duringGameEvent() {
 		Player currentPlayer = getGame().getCurrentPlayer();
 		currentPlayer.loseTurns(TURNS_LOST);
-		currentPlayer.loseActions(ACTIONS_LOST);
 	}
 
 	@Override

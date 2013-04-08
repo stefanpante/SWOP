@@ -104,13 +104,11 @@ public class GridBuilder {
 	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
 		excluded.add(getBottomLeft());
-		excluded.add(getTopRight());
+		excluded.add(getTopRight());	
 		
-		ArrayList<Coordinate> bottomLeftSquared = getSquaredLocation(getBottomLeft(), Direction.NORTH, 3);
-		ArrayList<Coordinate> topRightSquared = getSquaredLocation(getTopRight(), Direction.EAST, 3);
 		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
-		grenadesIncluded.add(bottomLeftSquared);
-		grenadesIncluded.add(topRightSquared);
+		grenadesIncluded.add(getSquaredLocation(getBottomLeft(), Direction.NORTH, 3));
+		grenadesIncluded.add(getSquaredLocation(getTopRight(), Direction.EAST, 3));
 		
 		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
 		LIGHT_GRENADE_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded);

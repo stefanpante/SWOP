@@ -310,6 +310,12 @@ public class Game {
 				}
 			}
 		}
+		
+		// Exclude starting positions
+		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
+		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
+		bottomLeft.getPower().regain();
+		topRight.getPower().regain();
 	}
 	
 	
