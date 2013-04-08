@@ -171,6 +171,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return result + super.toString();
 	}
 	
+	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
 		//No specific operation needed yet.
 	}

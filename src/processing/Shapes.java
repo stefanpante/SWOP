@@ -29,21 +29,21 @@ public class Shapes {
 	}
 	
 	private void initImages(){
-		this.wall = gui.loadShape(getClass().getResource("/res/wall.svg").getPath());
-		this.powerFail = gui.loadShape(getClass().getResource("/res/powerfailure.svg").getPath());
-		this.identityDisc = gui.loadShape(getClass().getResource("/res/identitydisc.svg").getPath());
-		this.chargedIdentityDisc = gui.loadShape(getClass().getResource("/res/chargedidentitydisc.svg").getPath());
-		this.lightgrenade = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
-		this.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
+		Shapes.wall = gui.loadShape(getClass().getResource("/res/wall.svg").getPath());
+		Shapes.powerFail = gui.loadShape(getClass().getResource("/res/powerfailure.svg").getPath());
+		Shapes.identityDisc = gui.loadShape(getClass().getResource("/res/identitydisc.svg").getPath());
+		Shapes.chargedIdentityDisc = gui.loadShape(getClass().getResource("/res/chargedidentitydisc.svg").getPath());
+		Shapes.lightgrenade = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
+		Shapes.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
 		
-		this.south = gui.loadShape(getClass().getResource("/res/directions/south.svg").getPath());
-		this.north = gui.loadShape(getClass().getResource("/res/directions/north.svg").getPath());
-		this.west  = gui.loadShape(getClass().getResource("/res/directions/west.svg").getPath());
-		this.east  = gui.loadShape(getClass().getResource("/res/directions/east.svg").getPath());
-		this.southeast =  gui.loadShape(getClass().getResource("/res/directions/southeast.svg").getPath());
-		this.southwest =  gui.loadShape(getClass().getResource("/res/directions/southwest.svg").getPath());
-		this.northeast =  gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath());
-		this.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
+		Shapes.south = gui.loadShape(getClass().getResource("/res/directions/south.svg").getPath());
+		Shapes.north = gui.loadShape(getClass().getResource("/res/directions/north.svg").getPath());
+		Shapes.west  = gui.loadShape(getClass().getResource("/res/directions/west.svg").getPath());
+		Shapes.east  = gui.loadShape(getClass().getResource("/res/directions/east.svg").getPath());
+		Shapes.southeast =  gui.loadShape(getClass().getResource("/res/directions/southeast.svg").getPath());
+		Shapes.southwest =  gui.loadShape(getClass().getResource("/res/directions/southwest.svg").getPath());
+		Shapes.northeast =  gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath());
+		Shapes.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
 	}
 
 

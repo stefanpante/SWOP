@@ -3,9 +3,6 @@
  */
 package event.action;
 
-import java.util.Observer;
-
-
 import game.Game;
 import item.launchable.LaunchableItem;
 

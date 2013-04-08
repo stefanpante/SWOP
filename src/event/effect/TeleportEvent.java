@@ -3,7 +3,6 @@
  */
 package event.effect;
 
-import event.AbstractGameEvent;
 import player.Player;
 import game.Game;
 import item.Teleport;

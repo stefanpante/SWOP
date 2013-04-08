@@ -2,17 +2,12 @@ package controller;
 
 import game.Game;
 import item.Item;
-import item.LightGrenade;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
-
 import player.Player;
-import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import util.Coordinate;

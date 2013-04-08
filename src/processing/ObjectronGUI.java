@@ -13,8 +13,6 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import controller.GameHandler;
-import controller.GameHandler;
-
 import player.Player;
 import processing.button.TextButton;
 import processing.core.PApplet;
@@ -82,6 +80,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * initializes the objectron gui
 	 */
+	@Override
 	public void setup(){
 
 		// sets the size from the applet to a fourth of the screen.
@@ -135,6 +134,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * Draws the entire game
 	 */
+	@Override
 	public void draw(){
 
 		// Sets the background color to white.
@@ -191,6 +191,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * Called when the mouse button is pressed.
 	 */
+	@Override
 	public void mousePressed(){
 
 		grid.mousePressed(mouseX, mouseY);

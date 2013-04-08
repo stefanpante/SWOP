@@ -2,8 +2,6 @@ package game;
 
 import grid.Grid;
 import grid.GridBuilder;
-import grid.GridBuilder;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

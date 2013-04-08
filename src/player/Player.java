@@ -166,6 +166,7 @@ public class Player extends Observable implements Obstacle {
 	 * @returns	True	Square is not null and does not equal current position.
 	 * @returns	False	Square is null or equals current position.
 	 */
+	@Override
 	public boolean isValidSquare(Square square) {
 		if(square == null)
 			return false;
@@ -225,6 +226,7 @@ public class Player extends Observable implements Obstacle {
 	 * @param 	square
 	 * 			The square to check.
 	 */
+	@Override
 	public boolean contains(Square square) {
 		return square.equals(currentPosition);
 	}
@@ -449,6 +451,7 @@ public class Player extends Observable implements Obstacle {
 	 * 			If the given square can not be added as a square.
 	 * 			| !isValidSquare()
 	 */
+	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException("The given " + square + " is not a valid square");
@@ -464,6 +467,7 @@ public class Player extends Observable implements Obstacle {
 	 * 			If the given square is not the currentPosition of this player.
 	 * 			| !square.equals(getPosition())
 	 */
+	@Override
 	public void removeSquare(Square square) throws IllegalArgumentException {
 		if(!square.equals(this.getPosition()))
 			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");

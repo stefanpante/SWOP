@@ -2,11 +2,6 @@ package controller;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameEvent;
-
-import player.Player;
-
-
 import game.Game;
 
 /**
