@@ -499,4 +499,11 @@ public class GridBuilder {
 		return this.walls;
 	}
 	
+	private Coordinate getFairCoordinate(){
+		
+		
+		
+		return null;
+	}
+	
 }
