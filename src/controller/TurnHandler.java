@@ -73,6 +73,7 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn(){
+		Player currentPlayer = getGame().getCurrentPlayer();
 		if(getGame().currentPlayerIsStuck()){
 			getGame().end();
     		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
@@ -83,6 +84,7 @@ public class TurnHandler extends Handler implements Observer {
 			LoseActionEvent lae = new LoseActionEvent(getGame(),1);
 			lae.run();
 		}
+
 	}
 	
 	/**

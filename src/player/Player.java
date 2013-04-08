@@ -439,7 +439,6 @@ public class Player extends Observable implements Obstacle {
 	 * 			thrown when the given remainingactions is not valid.
 	 */
 	public void setRemainingActions(int remainingActions) throws IllegalArgumentException{
-		System.out.println(this + " has " + remainingActions + " left.");
 		if(!isValidRemainingActions(remainingActions)){
 			throw new IllegalArgumentException("remaining actions is not valid!");
 		}
