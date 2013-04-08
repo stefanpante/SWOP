@@ -173,10 +173,8 @@ public class GridBuilder {
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
 		int max = (int) (constraint.getPercentage() * getAmountOfSquares());
-		System.out.println(candidates.size());
 		// Removed excluded squares from candidates
 		candidates.removeAll(constraint.getExcluded());
-		System.out.println(candidates.size());
 		// Removed obstructed squares from candidates
 		ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
 		for(Coordinate coordinate : candidates){
@@ -184,7 +182,6 @@ public class GridBuilder {
 				toBeRemoved.add(coordinate);
 		}
 		candidates.removeAll(toBeRemoved);
-		System.out.println(candidates.size());
 		
 		// Add one square from evey list of included coordinates
 		for(ArrayList<Coordinate> includes : constraint.getIncluded()){
