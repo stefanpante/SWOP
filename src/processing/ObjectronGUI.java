@@ -257,7 +257,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		Item item = playerInventory.getSelectedItem();
 		if(item == null){
 			currentFrame = 0;
-			System.out.println("No item selected");
 		}
 		else{
 			try{
@@ -271,7 +270,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void endTurn(){
 		try{
 			obj.getEndTurnHandler().endTurn();
-			System.out.println("end turn");
 		}catch(Exception e){
 			showException(e);
 		}

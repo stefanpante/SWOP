@@ -18,10 +18,20 @@ public class LightGrenade extends Item{
 	 * Returns whether the item is active or inactive.
 	 * 
 	 * @return	True when the item is active
-	 * 			False when the item is inactive.
+	 * 			False otherwise
 	 */
 	public boolean isActive() {
 		return this.currentState == LightGrenadeState.ACTIVE;
+	}
+	
+	/**
+	 * Returns whether the LightGrenade was dropped on the square by a player
+	 * 
+	 * @return	true when the item is dropped
+	 * 			false otherwise
+	 */
+	public boolean isDropped(){
+		return (this.currentState == LightGrenadeState.DROPPED);
 	}
 	
 	/**
@@ -41,7 +51,7 @@ public class LightGrenade extends Item{
 	 * 			an active state from an inactive one.
 	 */
 	public void activate() throws IllegalStateException {
-		if(isActive())
+		if(!isDropped())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
 		this.currentState = LightGrenadeState.ACTIVE;
 	}
