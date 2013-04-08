@@ -297,7 +297,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			//        	}
 		}else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
 			this.grid.setCurrentPlayer((Coordinate)o);
-//			/this.changePlayer();
+			this.changePlayer();
 		}else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
 			this.squareInventory.setItems((ArrayList<Item>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){

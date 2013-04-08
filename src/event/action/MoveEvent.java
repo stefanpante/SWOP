@@ -64,7 +64,7 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void afterGameEvent(){
-		getGame().switchToNextPlayer();
+		
 	}
 
 }
