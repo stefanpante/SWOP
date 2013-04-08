@@ -175,6 +175,61 @@ public class Player extends Observable implements Obstacle {
 	}
 	
 	/**
+	 * Checks whether a given number of actions is a valid number of actions to lose.
+	 * @return 		true if the number is larger than or equal to zero.
+	 */
+	public boolean isValidActionsLost(int actions){
+		return (actions >= 0);
+	}
+
+	/**
+	 * Checks whether turns is a valid number of turns lost for a player.
+	 * @param turns
+	 * @return		true if the number is larger than or equal to zero.
+	 */
+	public boolean isValidTurnsLost(int turns){
+		return (turns >= 0);
+	}
+
+	/**
+	 * Returns whether the current player has already moved 
+	 * 	since the last call of endTurn()
+	 * @return
+	 */
+	public boolean hasMoved(){
+		return moved;
+	}
+
+	/**
+	 * A player doesn't bounce back a launchable item when he is hit by it.
+	 */
+	@Override
+	public boolean bouncesBack() {
+		return false;
+	}
+
+	/**
+	 * Returns whether this player still has remaning actions.
+	 * 
+	 * @return	True	If this player has more then 0 remaining actions.
+	 * 			False	otherwise.
+	 * 			| getRemainingActions() > 0
+	 */
+	public boolean hasRemainingActions(){
+		return getRemainingActions() > 0;
+	}
+
+	/**
+	 * Returns whether the player covers the given square
+	 * 
+	 * @param 	square
+	 * 			The square to check.
+	 */
+	public boolean contains(Square square) {
+		return square.equals(currentPosition);
+	}
+
+	/**
 	 * Sets the start position for the player
 	 * 
 	 * @param	pos	the position to be used as the start position for the player
@@ -189,6 +244,76 @@ public class Player extends Observable implements Obstacle {
 		addSquare(startPosition);
 	}
 	
+	public void setPosition(Square position){
+		if(!isValidPosition(position))
+			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
+		alertObservers();
+		removeSquare(this.getPosition());
+		addSquare(position);
+	}
+
+	/**
+	 * Sets an inventory for the player
+	 * @param 	inventory 
+	 * 			The new inventory for the player.
+	 * @throws 	IllegalArgumentException
+	 * 			Thrown if the given inventory is not valid for the player.
+	 */
+	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
+		if(!isValidInventory(inventory))
+			throw new IllegalArgumentException("The given inventory is not valid for the player.");
+		
+		this.inventory = inventory;
+	}
+
+	/**
+	 * Returns the name of the player.
+	 * 
+	 * @return	The name of this player. 
+	 * 
+	 */
+	public String getName(){
+		return "Player " + getID();
+	}
+
+	/**
+	 * Returns the player's id.
+	 */
+	public int getID() {
+		return this.ID;
+	}
+
+	/**
+	 * Returns the player's inventory.
+	 * @return the inventory of this player
+	 */
+	public PlayerInventory getInventory(){
+		return inventory;
+	}
+
+	/**
+	 * Returns the current position of the player.
+	 */
+	@Basic
+	public Square getPosition() {
+		return currentPosition;
+	}
+
+	/**
+	 * Returns the current remaining actions of the player.
+	 */
+	@Basic
+	public int getRemainingActions(){
+		return remainingActions;
+	}
+
+	/**
+	 * Returns the start position of this player.
+	 */
+	public Square getStartPosition(){
+		return startPosition;
+	}
+
 	/**
 	 * Moves the player to another square
 	 * 
@@ -202,25 +327,6 @@ public class Player extends Observable implements Obstacle {
 		decrementActions();
 	}
 	
-	public void setPosition(Square position){
-		if(!isValidPosition(position))
-			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
-		alertObservers();
-		removeSquare(this.getPosition());
-		addSquare(position);
-	}
-	
-	
-	/**
-	 * Increments the remaining actions by one and notifies the observers of this player.
-	 */
-	@Deprecated
-	public void incrementActions(){
-		this.remainingActions++;
-		this.setChanged();
-		this.notifyObservers(currentPosition);
-	}
-	
 	/**
 	 * @Pre	This must be called before making an action.
 	 * 		Otherwise the currentPosition is the new one.
@@ -229,6 +335,38 @@ public class Player extends Observable implements Obstacle {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+	}
+	
+
+	/**
+	 * Causes a player to lose turns.
+	 * @param turns		the number of turns a player loses.
+	 * @throws 	IllegalArgumentException
+	 * 			Thrown when the number of turns lost is not valid.
+	 */
+	public void loseTurns(int turns) throws IllegalArgumentException{
+		if(!isValidTurnsLost(turns)){
+				throw new IllegalArgumentException("The given turns lost are not valid (Should be a positive value)");
+		}
+		
+		int remActions = remainingActions - Player.MAX_ALLOWED_ACTIONS * turns;
+		this.setRemainingActions(remActions);
+	}
+	
+
+	/**
+	 * Causes a player to lose actions
+	 * @param actions	the number of actions a player loses.
+	 * @throws 	IllegalArgumentException
+	 * 			thrown when the number of actions lost is not valid.
+	 */
+	public void loseActions(int actions) throws IllegalArgumentException{
+		if(!isValidActionsLost(actions)){
+			throw new IllegalArgumentException("The given actions lost are not valid");
+		}
+		
+		int remActions = remainingActions - actions;
+		this.setRemainingActions(remActions);
 	}
 	
 	/**
@@ -275,154 +413,32 @@ public class Player extends Observable implements Obstacle {
 	}
 	
 	/**
-	 * Returns the name of the player.
+	 * End's the player his turn. Adds Player.MAX_ALLOWED_ACTIONS to the remaining actions.
 	 * 
-	 * @return	The name of this player. 
-	 * 
-	 */
-	public String getName(){
-		return "Player " + getID();
-	}
-	
-	/**
-	 * Returns the player's id.
-	 */
-	public int getID() {
-		return this.ID;
-	}
-	
-	/**
-	 * Returns the player's inventory.
-	 * @return the inventory of this player
-	 */
-	public PlayerInventory getInventory(){
-		return inventory;
-	}
-	
-	/**
-	 * Returns the current position of the player.
-	 */
-	@Basic
-	public Square getPosition() {
-		return currentPosition;
-	}
-	
-	/**
-	 * Returns the current remaining actions of the player.
-	 */
-	@Basic
-	public int getRemainingActions(){
-		return remainingActions;
-	}
-	
-	/**
-	 * Returns the start position of this player.
-	 */
-	public Square getStartPosition(){
-		return startPosition;
-	}
-	
-	/**
-	 * Sets an inventory for the player
-	 * @param 	inventory 
-	 * 			The new inventory for the player.
-	 * @throws 	IllegalArgumentException
-	 * 			Thrown if the given inventory is not valid for the player.
-	 */
-	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
-		if(!isValidInventory(inventory))
-			throw new IllegalArgumentException("The given inventory is not valid for the player.");
-		
-		this.inventory = inventory;
-	}
-		
-	/**
-	 * Returns whether the current player has already moved 
-	 * 	since the last call of endTurn()
-	 * @return
-	 */
-	public boolean hasMoved(){
-		return moved;
-	}
-
-	/**
-	 * Returns whether this player still has remaning actions.
-	 * 
-	 * @return	True	If this player has more then 0 remaining actions.
-	 * 			False	otherwise.
-	 * 			| getRemainingActions() > 0
-	 */
-	public boolean hasRemainingActions(){
-		return getRemainingActions() > 0;
-	}
-	
-	/**
-	 * End's the player his turn. Sets the player his remaining actions 
-	 * for the new turn to the maximum allowed actions.
 	 */
 	public void endTurn(){
-		//TODO: dit mag niet meer met de nieuwe effectValue!
-		remainingActions = Player.MAX_ALLOWED_ACTIONS;
+		// should perform empty action for every action left
+		while (remainingActions > 0){
+			this.setRemainingActions(remainingActions- 1);
+			alertObservers();
+		}
+		remainingActions += Player.MAX_ALLOWED_ACTIONS;
 		moved = false;
-	}
-	
-//	/**
-//	 * End's the player his turn and sets the new remaining actions, depending
-//	 * on the conditions in which the turn was ended
-//	 * 
-//	 * @param	lostActions	Number of actions lost for the next turn.
-//	 */
-//	public void endTurn(EffectValue penaltyValue) {
-//		calculateEffectValue(penaltyValue);
-//		// TODO: change the EffectValue to represent the end turn
-//		moved = false;
-//	}
-//	
-//	
-//
-//	/**
-//	 * Calculates the effectValue and the remaining actions for this player.
-//	 * 
-//	 * @param effectVal
-//	 */
-//	// FIXME: StefAnus
-//	// TODO: Moet kunnen worden opgeroepen bij elk event
-//	public void calculateEffectValue(EffectValue effectVal){
-//
-//		// Gets the current lost turns of the player
-//		int turnsLost = this.effectValue.getTurnsLost();
-//		// Gets the current actions lost of the player
-//		int actionsLost = this.effectValue.getActionsLost();
-//		
-//		// adds the turns Lost to the current turns lost.
-//		turnsLost 	+=  effectVal.getTurnsLost();
-//		// adds the number of turns lost caused by actions lost.
-//		turnsLost 	+=  effectVal.getActionsLost()/ Player.MAX_ALLOWED_ACTIONS;
-//		// adds extra actions lost  to the current actions lost
-//		actionsLost +=  (effectVal.getActionsLost() % Player.MAX_ALLOWED_ACTIONS);
-//		// Maybe the new actions lost causes an extra turn to be lost.
-//		turnsLost 	+=	(actionsLost / Player.MAX_ALLOWED_ACTIONS);
-//		// Calculate the new actions lost 
-//		actionsLost %=  Player.MAX_ALLOWED_ACTIONS;
-//		
-//		// Sets the remaining actions of the player.
-//		this.remainingActions = Player.MAX_ALLOWED_ACTIONS - actionsLost;
-//		// effectValue stores the number of turns lost
-//		this.effectValue = new EffectValue(turnsLost, 0);
-//		
-//	}
-	
+	}	
 
 	/**
-	 * Returns whether the player covers the given square
-	 * 
-	 * @param 	square
-	 * 			The square to check.
+	 * Sets the remainingActions to the given remaining actions
+	 * @param remainingActions	the new value for remaining actions
+	 * @throws IllegalArgumentException
+	 * 			thrown when the given remainingactions is not valid.
 	 */
-	public boolean contains(Square square) {
-		return square.equals(currentPosition);
+	public void setRemainingActions(int remainingActions) throws IllegalArgumentException{
+		if(!isValidRemainingActions(remainingActions)){
+			throw new IllegalArgumentException("remaining actions is not valid!");
+		}
+		
+		this.remainingActions = remainingActions;
 	}
-
 	
 	/**
 	 * Adds a given square as a square covered by the player obstacle.
@@ -460,13 +476,5 @@ public class Player extends Observable implements Obstacle {
 	@Override
 	public String toString() {
 		return "Player " + this.getName();
-	}
-
-	/**
-	 * A player doesn't bounce back a launchable item when he is hit by it.
-	 */
-	@Override
-	public boolean bouncesBack() {
-		return false;
 	}
 }
