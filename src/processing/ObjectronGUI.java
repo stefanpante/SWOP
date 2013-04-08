@@ -13,7 +13,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import controller.GameHandler;
-import controller.ProcessingHandler;
+import controller.GameHandler;
 
 import player.Player;
 import processing.button.TextButton;
@@ -38,7 +38,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	/**
 	 * The processingHandler to send changes to the game model.
 	 */
-	private ProcessingHandler obj;
+	private GameHandler obj;
 
 
 	/**
@@ -105,7 +105,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		setupButtons();
 		setupLabels();
 		// Creates a new ProcessingHandler.
-		obj = new ProcessingHandler(this);
+		obj = new GameHandler(this);
 		obj.startNewGame();
 
 
