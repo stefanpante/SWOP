@@ -7,7 +7,7 @@ import notnullcheckweaver.Nullable;
 import square.Direction;
 
 /**
- * Implementatoin of the item IdentityDisc
+ * Implementation of the item IdentityDisc
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
@@ -18,7 +18,7 @@ public class IdentityDisc extends LaunchableItem {
 	/**
 	 * The maximum travel distance of an uncharged identity disc.
 	 */
-	public static int MAX_TRAVEL_DISTANCE_UNCHARGED = 4;
+	public static int MAX_TRAVEL_DISTANCE = 4;
 
 	/**
 	 * The currentTravelDistance of this IdentityDisc object.
@@ -32,17 +32,10 @@ public class IdentityDisc extends LaunchableItem {
 	private Direction travelDirection;
 	
 	/**
-	 * The maxRangePenalty of this IdentityDisc object.
-	 */
-	private int maxRangePenalty;
-	
-	/**
-	 * One argument constructor that makes an Identity Disc.
-	 * 
-	 * @effect	setMaxRangePenalty(0)
+	 * Constructor that makes an Identity Disc.
 	 */
 	public IdentityDisc() {
-		setMaxRangePenalty(0);
+		
 	}
 	
 	/**
@@ -66,14 +59,14 @@ public class IdentityDisc extends LaunchableItem {
 	 *			If the given argument is not a valid currentTravelDistance.
 	 *			| !isValidDistanceTraveled(currentTravelDistance)
 	 */
-	public void setDistanceTraveled(int currentTravelDistance)	
-			throws IllegalArgumentException {
-		if (!isValidDistanceTraveled(currentTravelDistance) || !canHaveAsDistanceTraveled(currentTravelDistance)) {
+	public void setDistanceTraveled(int currentTravelDistance)	throws IllegalArgumentException {
+		if (!isValidDistanceTraveled(currentTravelDistance)) {
 			throw new IllegalArgumentException(
 					"The argument ("
 							+ currentTravelDistance
 							+ ") is not a valid agrument of the field currentTravelDistance from the class IdentityDisc");
 		}
+		
 		this.currentTravelDistance = currentTravelDistance;
 	};
 	
@@ -85,30 +78,20 @@ public class IdentityDisc extends LaunchableItem {
 	public void incrementDistanceTraveled() throws IllegalArgumentException {
 		setDistanceTraveled(getDistanceTraveled() +1);
 	}
-
-	/**
-	 * Returns whether the given value is a valid traveled distance for this IdentityDisc.
-	 * 
-	 * @param 	currentTravelDistance
-	 * 			The value to check.
-	 * @return	False	When this disc is charged and the given value is 
-	 * 					greater than the maximum plus the current penalty.
-	 * 			True 	otherwise.
-	 */
-	public boolean canHaveAsDistanceTraveled(int currentTravelDistance) {
-		return currentTravelDistance <= MAX_TRAVEL_DISTANCE_UNCHARGED + getMaxRangePenalty();		
-	}
-
+	
 	/**
 	 * Check whether the given currentTravelDistance is a valid currentTravelDistance for all the objects of IdentityDisc.
+	 * 
 	 * @param 	currentTravelDistance
 	 *			The currentTravelDistance to check.
-	 * @return	True if and only if the given value is not null, has the correct type, ...
+	 * @return	True	If the value is not less than 0 and less than the maximum allowed distance for this disc.
+	 * 			False	If the value is less than 0 or greater than the maximum allowed distance.
 	 */
 	public static boolean isValidDistanceTraveled(int currentTravelDistance) {
-		if (currentTravelDistance < 0) {
+		if (currentTravelDistance < 0 && currentTravelDistance <= MAX_TRAVEL_DISTANCE) {
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -156,52 +139,6 @@ public class IdentityDisc extends LaunchableItem {
 		}
 		return true;
 	}
-
-	/**
-	 * Returns the value of the maxRangePenalty of this IdentityDisc as an int.
-	 *
-	 * @return 	An object of the int class.
-	 * 			| int
-	 */
-	public int getMaxRangePenalty() {
-		return maxRangePenalty;
-	};
-
-	/**
-	 * Sets the value of the maxRangePenalty of IdentityDisc if the given value is valid. 
-	 * 
-	 * @param 	maxRangePenalty
-	 *			The maxRangePenalty to set.
-	 * @post 	The given value is the current value of the maxRangePenalty of this IdentityDisc.
-	 * 			| maxRangePenalty == new.getMaxRangePenalty()
-	 * @throws 	IllegalArgumentException
-	 *			If the given argument is not a valid maxRangePenalty.
-	 *			| !isValidMaxRangePenalty(maxRangePenalty)
-	 */
-	public void setMaxRangePenalty(int maxRangePenalty)
-			throws IllegalArgumentException {
-		if (!isValidMaxRangePenalty(maxRangePenalty)) {
-			throw new IllegalArgumentException(
-					"The argument ("
-							+ maxRangePenalty
-							+ ") is not a valid agrument of the field maxRangePenalty from the class IdentityDisc");
-		}
-		this.maxRangePenalty = maxRangePenalty;
-	};
-
-	/**
-	 * Check whether the given maxRangePenalty is a valid maxRangePenalty for all the objects of IdentityDisc.
-	 * @param 	maxRangePenalty
-	 *			The maxRangePenalty to check.
-	 * @return	True if and only if the given value is an integer smaller or equal to zero.
-	 * 			|	maxRangePenalty <= 0
-	 */
-	public static boolean isValidMaxRangePenalty(int maxRangePenalty) {
-		if (maxRangePenalty > 0) {
-			return false;
-		}
-		return true;
-	}
 	
 	@Override
 	public String toString() {
@@ -212,30 +149,26 @@ public class IdentityDisc extends LaunchableItem {
 
 	@Override
 	public int getRange() {
-		return MAX_TRAVEL_DISTANCE_UNCHARGED;
+		return MAX_TRAVEL_DISTANCE;
 	}
 
 	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) 
-			throws IllegalStateException {
+	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.addIdentityDisc(this);		
 	}
 
 	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv)
-			throws IllegalStateException {
+	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.removeIdentityDisc(this);
 	}
 
 	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
+	public void acceptAddPlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
 		plInv.addIdentityDisc(this);
 	}
 
 	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
+	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
 		plInv.removeIdentityDisc(this);
 	}
 }

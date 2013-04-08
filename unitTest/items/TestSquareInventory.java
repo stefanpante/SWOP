@@ -2,9 +2,8 @@ package items;
 
 import static org.junit.Assert.*;
 
-
 import item.Item;
-import item.ItemState;
+import item.LightGrenadeState;
 import item.LightGrenade;
 import item.Teleport;
 import item.inventory.SquareInventory;

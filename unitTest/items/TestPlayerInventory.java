@@ -1,11 +1,12 @@
 package items;
 
 import static org.junit.Assert.*;
+
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.inventory.PlayerInventory;
-import item.launchable.ChargedDisc;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
 import org.junit.AfterClass;
@@ -37,7 +38,7 @@ public class TestPlayerInventory {
 		LightGrenade lg3 = new LightGrenade();
 
 		Item it1 = new IdentityDisc();
-		Item it2 = new ChargedDisc();
+		Item it2 = new ChargedIdentityDisc();
 		Item it3 = new IdentityDisc();
 
 		assertEquals(0, pi1.getSize());
@@ -64,7 +65,7 @@ public class TestPlayerInventory {
 		LightGrenade lg3 = new LightGrenade();
 
 		Item it1 = new IdentityDisc();
-		Item it2 = new ChargedDisc();
+		Item it2 = new ChargedIdentityDisc();
 		Item it3 = new IdentityDisc();
 		Item it4 = new IdentityDisc();
 

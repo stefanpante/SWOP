@@ -6,46 +6,27 @@ import item.inventory.SquareInventory;
 public class ChargedIdentityDisc extends IdentityDisc {
 	
 	/**
-	 * The maximum travel distance of an uncharged identity disc.
+	 * The maximum travel distance of an identity disc.
 	 */
-	public static int MAX_TRAVEL_DISTANCE_UNCHARGED = Integer.MAX_VALUE;
-	
-	/**
-	 * Returns whether the given value is a valid traveled distance for this IdentityDisc.
-	 * 
-	 * @param 	currentTravelDistance
-	 * 			The value to check.
-	 * @return	False	If the given distance is negative.
-	 * 			True 	otherwise.
-	 */
-	public boolean canHaveAsDistanceTraveled(int currentTravelDistance) {
-		if(currentTravelDistance < 0) 
-			return false;
-		else
-			return true;
-	}
+	public static int MAX_TRAVEL_DISTANCE = Integer.MAX_VALUE;
 
 	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) 
-			throws IllegalStateException {
+	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.addChargedDisc(this);		
 	}
 	
 	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv)
-			throws IllegalStateException {
+	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.removeChargedDisc(this);
 	}
 	
 	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv) 
-			throws IllegalStateException {
+	public void acceptAddPlayerInventory(PlayerInventory plInv) throws IllegalStateException {
 		plInv.addChargedDisc(this);		
 	}
 	
 	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
+	public void acceptRemovePlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
 		plInv.removeChargedDisc(this);
 	}
 }
