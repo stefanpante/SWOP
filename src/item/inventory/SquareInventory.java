@@ -1,7 +1,5 @@
 package item.inventory;
 
-import java.util.ArrayList;
-
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -30,12 +28,12 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	/**
 	 * Holds the collection of identityDiscs.
 	 */
-	private ArrayList<IdentityDisc> identityDiscs;
+	private int identityDiscs = 0;
 	
 	/**
 	 * Holds the collection of identityDiscs.
 	 */
-	private ArrayList<ChargedIdentityDisc> chargedDiscs;
+	private int chargedDiscs = 0;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -50,9 +48,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		super(size);
 		teleport = null;	
 		lightGrenade = null;
-		
-		this.identityDiscs = new ArrayList<IdentityDisc>();
-		this.chargedDiscs = new ArrayList<ChargedIdentityDisc>();
 	}
 
 	/**
@@ -174,7 +169,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * Returns if there are identity discs in the inventory.
 	 */
 	public boolean hasIdentityDisc(){
-		return this.identityDiscs.size() > 0;
+		return (this.identityDiscs + this.chargedDiscs) > 0;
 	}
 	
 	/**
@@ -219,33 +214,27 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
-		if(this.identityDiscs.contains(identityDisc))
-			throw new IllegalStateException("Cannot add the same identityDisc twice.");
-		
-		this.identityDiscs.add(identityDisc);
+		this.identityDiscs++;
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
-		if(!this.identityDiscs.contains(identityDisc))
-			throw new IllegalStateException("Cannot remove the given identityDisc:" + identityDisc);
+		if(this.identityDiscs <= 0)
+			throw new IllegalStateException("There are no identity discs to be removed.");
 		
-		this.identityDiscs.remove(identityDisc);
+		this.identityDiscs--;
 	}
 
 	@Override
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)	throws IllegalStateException {
-		if(!this.chargedDiscs.contains(chargedDisc))
-			throw new IllegalStateException("Cannot add the given chargedDisc twice");
-		
-		this.chargedDiscs.add(chargedDisc);
+		this.chargedDiscs++;
 	} 
 	
 	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
-		if(!this.chargedDiscs.contains(chargedDisc))
-			throw new IllegalStateException("Cannot remove the given identityDisc:" + chargedDisc);
+		if(this.chargedDiscs <= 0)
+			throw new IllegalStateException("There are no charged identity discs to be removed.");
 		
-		this.chargedDiscs.remove(chargedDisc);
+		this.chargedDiscs--;
 	}
 }
