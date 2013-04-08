@@ -1,6 +1,6 @@
 package item;
 
-import item.ItemState;
+import item.LightGrenadeState;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 import effect.Effect;
@@ -13,7 +13,7 @@ import effect.Effect;
  */
 public class LightGrenade extends Item implements Effect{
 	
-	ItemState currentState = ItemState.INACTIVE; 
+	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	
 	/**
 	 * Returns whether the item is active or inactive.
@@ -22,7 +22,7 @@ public class LightGrenade extends Item implements Effect{
 	 * 			False when the item is inactive.
 	 */
 	public boolean isActive() {
-		return this.currentState == ItemState.ACTIVE;
+		return this.currentState == LightGrenadeState.ACTIVE;
 	}
 	
 	/**
@@ -30,7 +30,7 @@ public class LightGrenade extends Item implements Effect{
 	 * 
 	 * @return the state of the item.
 	 */
-	public ItemState getState(){
+	public LightGrenadeState getState(){
 		return this.currentState;
 	}
 	
@@ -44,7 +44,7 @@ public class LightGrenade extends Item implements Effect{
 	public void activate() throws IllegalStateException {
 		if(isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
-		this.currentState = ItemState.ACTIVE;
+		this.currentState = LightGrenadeState.ACTIVE;
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class LightGrenade extends Item implements Effect{
 	public void wearOut() throws IllegalStateException {
 		if(!isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the used state.");
-		this.currentState = ItemState.WORN;
+		this.currentState = LightGrenadeState.WORN;
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class LightGrenade extends Item implements Effect{
 	public void deactivate() throws IllegalStateException{
 		if(!isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
-		this.currentState = ItemState.INACTIVE;
+		this.currentState = LightGrenadeState.INACTIVE;
 	}
 	
 	/**

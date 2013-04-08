@@ -107,7 +107,7 @@ public class Label extends GUIElement{
 		gui.fill(textColor);
 		gui.textSize(textSize);
 		gui.textAlign(hAlign,vAlign);
-		gui.text(text, position.x, position.y, width, height);
+		gui.text(text, position.x, position.y, width, height - 3);
 		
 	}
 

@@ -3,7 +3,7 @@ package item.launchable;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
-public class ChargedDisc extends IdentityDisc {
+public class ChargedIdentityDisc extends IdentityDisc {
 	
 	/**
 	 * The maximum travel distance of an uncharged identity disc.

@@ -3,7 +3,7 @@ package item.inventory;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import item.launchable.ChargedDisc;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 import item.visitor.AddRemoveItemVisitor;
 
@@ -171,15 +171,10 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return result + super.toString();
 	}
 	
-	@Override
-	public void addChargedDisc(ChargedDisc chargedDisc) {
-		
+	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
+		//No specific operation needed yet.
 	}
-
-	@Override
-	public void removeChargedDisc(ChargedDisc chargedDisc) {
-		
-	}
+	
 
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) {
@@ -213,5 +208,12 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	@Override
 	public void removeTeleport(Teleport teleport) {
 		this.teleport = null;
+	}
+
+	@Override
+	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
+			throws IllegalStateException {
+		// TODO Auto-generated method stub
+		
 	} 
 }

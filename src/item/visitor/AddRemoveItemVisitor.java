@@ -3,7 +3,7 @@ package item.visitor;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import item.launchable.ChargedDisc;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
 /**
@@ -13,8 +13,8 @@ import item.launchable.IdentityDisc;
  */
 public interface AddRemoveItemVisitor {
 	
-	 public void addChargedDisc(ChargedDisc chargedDisc) throws IllegalStateException;
-	 public void removeChargedDisc(ChargedDisc chargedDisc) throws IllegalStateException;
+	 public void addChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException;
+	 public void removeChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException;
 	 
 	 public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException;
 	 public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException;

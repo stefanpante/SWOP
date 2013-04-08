@@ -2,7 +2,7 @@ package processing;
 
 import item.Item;
 import item.LightGrenade;
-import item.launchable.ChargedDisc;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class Inventory extends GUIElement{
 			return Shapes.identityDisc;
 		}
 		
-		if(item instanceof ChargedDisc){
+		if(item instanceof ChargedIdentityDisc){
 			return Shapes.chargedIdentityDisc;
 		}
 		

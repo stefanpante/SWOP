@@ -2,7 +2,7 @@ package processing;
 
 import item.Item;
 import item.LightGrenade;
-import item.launchable.ChargedDisc;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
 import java.beans.PropertyChangeEvent;
@@ -95,7 +95,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Creates the directionalPad to be used for the movement of the player.
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.add(new LightGrenade());
-		items.add(new ChargedDisc());
+		items.add(new ChargedIdentityDisc());
 		items.add(new IdentityDisc());
 
 		// Sets up the inventory representation.
