@@ -254,7 +254,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
 	public void useItem(){
-		System.out.println("use item");
 		Item item = playerInventory.getSelectedItem();
 		if(item == null){
 			currentFrame = 0;
