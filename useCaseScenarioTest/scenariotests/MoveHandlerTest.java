@@ -32,6 +32,8 @@ import grid.GridBuilder;
  * Scenario test for the Use Case "Move".
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * 
+ * TODO: Teleport Tests
  */
 public class MoveHandlerTest {
 
