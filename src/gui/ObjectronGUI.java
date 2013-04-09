@@ -287,7 +287,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
 		this.initialized = true;
 
-		size(w + 240, h + 50);
+		size(w + 215, h + 50);
 		gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
 		squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
 		playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
@@ -569,7 +569,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 		
 		grid.getDirectionalPad().setVisibility(true);
-		throwPad.setVisibility(false);
+		grid.getThrowPad().setVisibility(false);
 		
 	}
 
