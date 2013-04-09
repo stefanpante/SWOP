@@ -19,7 +19,6 @@ import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Wall;
-import square.state.PowerFailureState;
 
 import game.Game;
 import grid.GridBuilder;
@@ -115,7 +114,7 @@ public class MoveHandlerTest {
 		// When moved, the LightGrenade on the previous square should become active
 		assertTrue(game.getCurrentPlayer().hasMoved());
 		assertTrue(lg.isActive());
-		assertTrue(currentPosition.getInventory().hasActiveLightGrenade());
+		assertTrue(currentPosition.getInventory().getLightGrenade().isActive());
 	}
 
 	/**
@@ -149,7 +148,7 @@ public class MoveHandlerTest {
 		// move to the square containing the active LightGrenade
 		mh.move(direction);
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		if(!(currentPlayer.getPosition().getState() instanceof PowerFailureState))
+		if(!(currentPlayer.getPosition().getPower().isFailing()))
 			assertEquals(currentPlayer.getRemainingActions(), remainingActions);
 		
 	}
@@ -181,7 +180,7 @@ public class MoveHandlerTest {
 		}
 		
 		// Set the state of the square to PowerFailure
-		next.powerFail();
+		next.getPower().fail();
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
 		lg.activate();
@@ -301,7 +300,7 @@ public class MoveHandlerTest {
 			catch(Exception e){}
 		}
 		// Set a PowerFailure on the square
-		next.powerFail();
+		next.getPower().fail();
 		
 		// Move to the square with the PowerFailure
 		mh.move(direction);
