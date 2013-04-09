@@ -72,13 +72,12 @@ public class MoveEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent(){
 		/* Activate Light Grenades on square leaving square */
-		currentPosition = getGame().getCurrentPlayer().getPosition();
-		
 		if(currentPosition.getInventory().hasLightGrenade()){
 			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
 			
 			try{
 				if(lg.isDropped()){
+					System.out.println("move and is dropped");
 					lg.activate();
 				}
 			} catch (Exception exc) {
