@@ -73,6 +73,8 @@ public class MoveEvent extends ActionEvent {
 			LoseTurnEvent lte = new LoseTurnEvent(getGame(),getGame().getCurrentPlayer(),1,false);
 			lte.run();
 		}
+		
+		
 	}
 
 }
