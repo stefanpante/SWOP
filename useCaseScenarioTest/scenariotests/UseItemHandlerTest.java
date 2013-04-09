@@ -9,12 +9,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import controller.MoveHandler;
+import controller.TurnHandler;
 import controller.UseItemHandler;
 import item.LightGrenade;
 import game.Game;
 import grid.Grid;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import event.AbstractGameEvent;
 
 import player.Player;
 import square.Direction;
@@ -30,44 +34,59 @@ import square.obstacle.Wall;
  *
  */
 public class UseItemHandlerTest {
+	
+	private Game game;
+	
+	private UseItemHandler useItemHandler;
+	
+	private TurnHandler turnHandler;
+	
+	@Before
+	public void setUpBefore() {
+		game = new Game(10,10);
+		
+		useItemHandler = new UseItemHandler(game,null);
+		turnHandler = new TurnHandler(game, null);
+		
+		AbstractGameEvent.setObserver(turnHandler);
+	}
 
 	/**
 	 * Test the placement of a grenade on a square when there is
 	 * no other grenade placed on the square or used on the square
 	 */
 	@Test
-	public void testPlaceGrenade(){
-		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game,null);
-		
+	public void testPlaceGrenade(){		
 		LightGrenade lg = new LightGrenade();
 		game.getCurrentPlayer().getInventory().addItem(lg);
 		
 		// Item should be in the inventory of the player
 		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
-		uh.useItem(lg);
+		useItemHandler.useItem(lg);
 		
 		// Item shouldn't be in the inventory of the player anymore
 		assertFalse(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
 		// Item should be in the inventory of the square
 		assertTrue(game.getCurrentPlayer().getPosition().getInventory().getAllItems().contains(lg));
-		// The state of the lightGrenade should still be inactive when placed until moved
-		assertFalse(lg.isActive());
 		
+		// The state of the lightGrenade should still be inactive when placed until moved
+		assertTrue(lg.isDropped());
+		assertFalse(lg.isActive());
 		
 		// Item should become active when moved
 		MoveHandler mh = new MoveHandler(game,null);
-		Direction[] directions = Direction.values();
-		Random random = new Random();
-		while(!game.getCurrentPlayer().hasMoved()){
+		
+		for(Direction direction: Direction.values()) {
 			try{
-				mh.move(directions[random.nextInt(directions.length)]);
+				mh.move(direction);
+				System.out.println("moved");
+				break;
+			} catch (Exception e) {
 			}
-			catch(Exception e){}
 		}
 		
-		assertTrue(lg.isActive());
-		
+		System.out.println(lg.isActive());
+		assertTrue(lg.isActive());		
 	}
 	
 	/**
@@ -75,10 +94,7 @@ public class UseItemHandlerTest {
 	 * light grenade on the square
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testPlaceGrenade2(){
-		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game,null);
-		
+	public void testPlaceGrenade2(){		
 		LightGrenade lg2 = new LightGrenade();
 		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
 		lg2.activate();
@@ -89,7 +105,7 @@ public class UseItemHandlerTest {
 		// Item should be in the inventory of the player
 		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
 		// This should throw an exception
-		uh.useItem(lg);
+		useItemHandler.useItem(lg);
 	}
 	
 	/**
@@ -98,9 +114,6 @@ public class UseItemHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceGrenade3(){
-		Game game = new Game(10,10);
-		UseItemHandler uh = new UseItemHandler(game,null);
-		
 		LightGrenade lg2 = new LightGrenade();
 		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
 		lg2.wearOut();
@@ -111,8 +124,7 @@ public class UseItemHandlerTest {
 		// Item should be in the inventory of the player
 		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
 		// This should throw an exception
-		uh.useItem(lg);
-		
+		useItemHandler.useItem(lg);	
 	}
 	
 	/**
@@ -121,8 +133,8 @@ public class UseItemHandlerTest {
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceOnWall(){
 		LightGrenade lg = new LightGrenade();
-		Game game = new Game(10, 10);
 		Grid grid = game.getGrid();
+		
 		Square obstructedSquare = null;
 		for(Square square: grid.getAllSquares()){
 			if(square.isObstructed() && square.getObstacle() instanceof Wall){
@@ -133,9 +145,8 @@ public class UseItemHandlerTest {
 		
 		game.getCurrentPlayer().move(obstructedSquare);
 		// Should never get to this.
-		UseItemHandler uh = new UseItemHandler(game,null);
 		game.getCurrentPlayer().getInventory().addItem(lg);
-		uh.useItem(lg);
+		useItemHandler.useItem(lg);
 		
 	}
 	
@@ -145,17 +156,18 @@ public class UseItemHandlerTest {
 	@Test(expected = IllegalStateException.class)
 	public void testPlaceOnLightTrail(){
 		LightGrenade lg = new LightGrenade();
-		Game game = new Game(10, 10);
 		Grid grid = game.getGrid();
+		
 		Random random = new Random();
+		
 		ArrayList<Square> squaresgrid = grid.getAllSquares();
 		Square obstructedSquare = squaresgrid.get(random.nextInt(squaresgrid.size()));
+		
 		LightTrail lt = new LightTrail();
 		lt.addSquare(obstructedSquare);
 		game.getCurrentPlayer().move(obstructedSquare);
 		// Should never get to this.
-		UseItemHandler uh = new UseItemHandler(game,null);
 		game.getCurrentPlayer().getInventory().addItem(lg);
-		uh.useItem(lg);
+		useItemHandler.useItem(lg);
 	}
 }
