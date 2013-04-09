@@ -50,11 +50,11 @@ public class GridBuilder {
 	 * 			The vertical size of the grid this gridBuilder will build.
 	 */
 	public GridBuilder(int hSize, int vSize) {
-		walls = new ArrayList<Wall>();
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
 		setConstraints();
+		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(randomWallLocations(WALL_CONSTRAINT), WALL_CONSTRAINT);
 		build(randomLocations(LIGHT_GRENADE_CONSTRAINT),
@@ -88,6 +88,7 @@ public class GridBuilder {
 		setRandom(new Random());
 		setSquares();
 		setConstraints();
+		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(walls, WALL_CONSTRAINT);
 		build(lightGrenades, identityDisks, teleports);
