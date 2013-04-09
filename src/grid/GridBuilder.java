@@ -43,6 +43,19 @@ public class GridBuilder {
 
 	
 	/**
+	 * This creates a flat grid, with dimensions 10x10 and no
+	 * obstacles. No lightGrenades or any other object. This is mainly used
+	 * for testing purposes.
+	 */
+	public GridBuilder() {
+		setGrid(new Grid(10, 10));
+		setRandom(new Random());
+		setSquares();
+		setConstraints();
+		
+	}
+	
+	/**
 	 * Creates a new Gridbuilder with parameters to create a new grid.
 	 * @param 	hSize		
 	 * 			The horizontal size of the grid this gridBuilder will build.

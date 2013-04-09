@@ -4,12 +4,14 @@ import static org.junit.Assert.*;
 
 
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
 import controller.MoveHandler;
 import controller.TurnHandler;
 import item.LightGrenade;
+import item.Teleport;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -24,6 +26,7 @@ import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Wall;
+import util.Coordinate;
 
 import game.Game;
 import grid.GridBuilder;
@@ -43,6 +46,7 @@ public class MoveHandlerTest {
 	
 	private TurnHandler turnHandler;
 	
+	// TODO: Create flat grid
 	@Before
 	public void setUpBefore(){
 		game = new Game(10,10);
@@ -138,7 +142,6 @@ public class MoveHandlerTest {
 		
 		if(!(currentPlayer.getPosition().getPower().isFailing()))
 			assertEquals(currentPlayer.getRemainingActions(), 2);
-		
 	}
 	
 	/**
@@ -206,7 +209,6 @@ public class MoveHandlerTest {
 		
 		// Move to a LightTrail should not be allowed.
 		moveHandler.move(direction);
-		
 	}
 	
 	/**
@@ -230,8 +232,7 @@ public class MoveHandlerTest {
 		// Moves to the position where the other player is situated
 		assertTrue(game.getCurrentPlayer() == currentPlayer);
 		// Should throw IllegalStateException
-		moveHandler.move(direction.opposite());
-				
+		moveHandler.move(direction.opposite());		
 	}
 	
 	/**
@@ -284,15 +285,35 @@ public class MoveHandlerTest {
 	}
 	
 	@Test
-	public void testTeleport() {
+	public void testTeleport() {		
 		Square currentPosition = game.getCurrentPlayer().getStartPosition();
+		Square otherPosition = game.getNextPlayer().getStartPosition();
 		
-		Direction direction = getNonObstructedDirection(currentPosition);
-		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		Direction directionOne = getNonObstructedDirection(currentPosition);
+		Square squareOne = game.getGrid().getNeighbor(currentPosition, directionOne);
 		
-		game.getNextPlayer().move(next);		
+		Direction directionTwo = getNonObstructedDirection(otherPosition);
+		Square squareTwo = game.getGrid().getNeighbor(otherPosition, directionTwo);
+		
+		Teleport teleport = new Teleport();
+		Teleport teleportDestination = new Teleport();
+		
+		teleport.setDestination(teleportDestination);
+		teleportDestination.setDestination(teleport);
+		
+		// We have 2 squares. Now we place the teleport items.
+		squareOne.getInventory().addItem(teleport);
+		squareTwo.getInventory().addItem(teleportDestination);
+		
+		moveHandler.move(directionOne);
+		
+		// Player should now be on SquareTwo
+		assertEquals(game.getCurrentPlayer().getPosition(), squareTwo);
 	}
 	
+	/**
+	 * Finds a direction from the given square which is not obstructed.
+	 */
 	private Direction getNonObstructedDirection(Square currentPosition) {
 		Direction[] directions = Direction.values();
 		Random random = new Random();
@@ -300,7 +321,7 @@ public class MoveHandlerTest {
 		Direction direction = null;
 		Square next = null;
 		
-		while(next == null || next.isObstructed()){ 
+		while(next == null || next.isObstructed() || next.getInventory().hasTeleport() || next.getInventory().hasLightGrenade()){ 
 			direction = directions[random.nextInt(directions.length)];
 			try{
 				next = game.getGrid().getNeighbor(currentPosition, direction);

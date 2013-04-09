@@ -74,7 +74,7 @@ public class Game {
 	public Game(int hSize, int vSize){
 		// Build the grid
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
-		this.grid = gridBuilder.getGrid();
+		this.setGrid(gridBuilder.getGrid());
 		
 		// Add players
 		this.players = new ArrayList<Player>();
@@ -88,6 +88,15 @@ public class Game {
 		setCurrentPlayer(players.get(0));
 	}
 	
+	/**
+	 * Sets the grid for the game.
+	 * 
+	 * @param grid
+	 */
+	public void setGrid(Grid grid) {
+		this.grid = grid;		
+	}
+
 	/**
 	 * Add the player to this game
 	 * 
