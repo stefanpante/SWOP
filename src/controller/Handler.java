@@ -197,8 +197,8 @@ public abstract class Handler {
 			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
 				lightGrenades.add(coordinate);
 			
+
 			if(square.getInventory().hasLaunchable()){
-				//FIXME:
 				identityDisks.add(coordinate);
 			}
 			

@@ -93,7 +93,6 @@ public class LightGrenade extends Item{
 		if(isWornOut())
 			throw new IllegalStateException("Cannot drop a LightGrenade which is worn out.");
 		
-		System.out.println("LightGrenade has been dropped.");
 		this.currentState = LightGrenadeState.DROPPED;
 	}
 	

@@ -102,9 +102,8 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 											+ item
 											+ "can not be removed from this "
 											+ this);
+		
 		item.acceptRemoveSquareInventory(this);	
-		super.removeItem(item);
-
 	}
 	
 	/**
@@ -199,14 +198,19 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		if(hasLightGrenade())
 			throw new IllegalStateException("Can't add another LightGrenade to " + this);
+		
 		super.addItem(lightGrenade);
 		this.lightGrenade = lightGrenade;
 	}
 
 	@Override
 	public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
+		if(this.lightGrenade == null)
+			throw new IllegalStateException("Cannot remove the lightGrenade because there is none.");
+		
 		if(!this.lightGrenade.equals(lightGrenade))
 			throw new IllegalStateException("Could not remove the LightGrenade because it did not match the LightGrenade that is in place.");
+		
 		super.removeItem(lightGrenade);
 		this.lightGrenade = null;
 	}
@@ -221,8 +225,12 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
 	@Override
 	public void removeTeleport(Teleport teleport) throws IllegalStateException {
+		if(this.teleport == null)
+			throw new IllegalStateException("Cannot remove the teleport, because there is none.");
+		
 		if(!this.teleport.equals(teleport))
 			throw new IllegalStateException("The given teleport to be removed is not the same one as the square's teleport.");
+		
 		super.removeItem(teleport);
 		this.teleport = null;
 	}
@@ -236,6 +244,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		if(!hasLaunchable())
 			throw new IllegalStateException("There are no identity discs to be removed.");
+		
 		super.removeItem(identityDisc);
 	}
 
@@ -248,6 +257,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
 		if(!hasLaunchable())
 			throw new IllegalStateException("There are no charged identity discs to be removed.");
+		
 		super.removeItem(chargedDisc);
 	}
 
