@@ -27,6 +27,10 @@ public class UseItemEvent extends ActionEvent {
 		return this.item;
 	}
 	
+	@Override
+	protected void beforeGameEvent() {
+		
+	}
 
 	//TODO: need to set the state of an lightgrenade to dropped if used.
 	@Override
@@ -36,15 +40,6 @@ public class UseItemEvent extends ActionEvent {
 	
 	@Override
 	protected void afterGameEvent() {
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see event.AbstractGameEvent#beforeGameEvent()
-	 */
-	@Override
-	protected void beforeGameEvent() {
-		// TODO Auto-generated method stub
 		
 	}
 
