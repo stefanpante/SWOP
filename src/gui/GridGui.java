@@ -191,6 +191,7 @@ public class GridGui extends GUIElement{
 		for(SquareGUI square : squares.values()){
 			square.draw();
 			directionalPad.draw();
+			throwPad.draw();
 		}
 
 		
@@ -439,6 +440,7 @@ public class GridGui extends GUIElement{
 	 */
 	public void mousePressed(int mouseX, int mouseY) {
 		directionalPad.mousePressed(mouseX, mouseY);
+		throwPad.mousePressed(mouseX, mouseY);
 
 	}
 

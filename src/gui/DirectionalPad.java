@@ -157,4 +157,12 @@ public class DirectionalPad extends GUIElement{
 	public HashMap<Direction, DirectionalButton> getButtons() {
 		return this.buttons;
 	}
+	
+	public float getButtonWidth(){
+		return this.buttonWidth;
+	}
+	
+	public float getButtonHeight(){
+		return this.buttonHeight;
+	}
 }

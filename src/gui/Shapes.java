@@ -1,5 +1,9 @@
 package gui;
 
+import item.Item;
+import item.LightGrenade;
+import item.launchable.ChargedIdentityDisc;
+import item.launchable.IdentityDisc;
 import processing.core.PApplet;
 import processing.core.PShape;
 
@@ -57,6 +61,21 @@ public class Shapes {
 		Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/teleportpowerfail.svg").getPath());
 		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/teleportitems.svg").getPath());
 		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());
+	}
+	
+	public static PShape getShape(Item item){
+		if(item instanceof IdentityDisc){
+			return Shapes.identityDisc;
+		}
+		
+		if(item instanceof ChargedIdentityDisc){
+			return Shapes.chargedIdentityDisc;
+		}
+		
+		if(item instanceof LightGrenade){
+			return Shapes.lightgrenade;
+		}		
+		return null;
 	}
 
 
