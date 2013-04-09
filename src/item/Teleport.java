@@ -13,6 +13,7 @@ public class Teleport extends Item {
 	/**
 	 * The destination of this teleport.
 	 */
+	//TODO: Consideration final
 	private Teleport destination;
 	
 	/**
@@ -61,8 +62,12 @@ public class Teleport extends Item {
 	 * @param 	destination
 	 * 			The destination to check
 	 * @return	True if and only if the destination is not this teleport.
+	 * 			And if the given destination is not null.
 	 */
-	private boolean canHaveAsDestination(Teleport destination) {
+	public boolean canHaveAsDestination(Teleport destination) {
+		if(destination == null)
+			return false;
+		
 		return !destination.equals(this);
 	}
 	
