@@ -38,6 +38,11 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 		item.acceptAddPlayerInventory(this);
 	}
 	
+	@Override
+	public void removeItem(Item item) throws IllegalStateException{
+		item.acceptRemovePlayerInventory(this);
+	}
+	
 	/**
 	 * Returns all the Launchable items of this inventory.
 	 * 
@@ -76,7 +81,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
-		//No specific operation needed yet.
+		super.removeItem(chargedDisc);
 	}
 
 	@Override
@@ -88,7 +93,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc)
 			throws IllegalStateException {
-		//No specific operation needed yet.
+		super.removeItem(identityDisc);
 	}
 
 	@Override
@@ -100,7 +105,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void removeLightGrenade(LightGrenade lightGrenade)
 			throws IllegalStateException {
-		//No specific operation needed yet.
+		super.removeItem(lightGrenade);
 	}
 
 	@Override
@@ -110,16 +115,18 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 
 	@Override
 	public void removeTeleport(Teleport teleport) throws IllegalStateException {
-		//No specific operation needed yet.
+		throw new IllegalStateException("A Teleport can not be in a players Inventory");
 	}
 
 	@Override
 	public void addLaunchable(LaunchableItem launchable){
+		super.addItem(launchable);
 		launchableHashes.add(launchable.hashCode());
 	}
 
 	@Override
 	public void removeLaunchable(LaunchableItem launchable){
+		super.removeItem(launchable);
 		launchableHashes.remove(new Integer(launchable.hashCode()));
 	}
 }
