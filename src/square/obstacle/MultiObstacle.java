@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import square.Square;
 
 /**
- * Super class where any obstacle grid inherits its general properties from.
+ * Super class where any obstacle covering multiple squares inherits its general properties from.
  * Such as a wall or a light trail
  * A player cannot move through an obstacle.
+ * 
+ * @invar squaresPointBack()
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
@@ -103,6 +105,19 @@ public abstract class MultiObstacle implements Obstacle {
 	 */
 	public int getLength() {
 		return getSquares().size();
+	}
+	
+	/**
+	 * Since a multiObstacle is implemented bi-directionally this method should always hold 
+	 * which means every square points back to it's proper obstacle.
+	 * @return
+	 */
+	protected boolean squaresPointBack(){
+		for(Square sq: squares){
+			if(!sq.getObstacle().equals(this))
+				return false;
+		}
+		return true;
 	}
 	
 	
