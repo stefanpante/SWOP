@@ -14,7 +14,7 @@ public class DirectionalPad extends GUIElement{
 	/**
 	 * PApplet used to draw.
 	 */
-	private PApplet gui;
+	protected PApplet gui;
 	
 	/**
 	 * Should be the position of the player.
@@ -136,9 +136,19 @@ public class DirectionalPad extends GUIElement{
 		return false;
 	}
 
+//	public void mousePressed(int mouseX, int mouseY) {
+//		for(DirectionalButton button: buttons.values()){
+//			button.mousePressed(mouseX, mouseY);
+//		}
+//		
+//	}
+	
 	public void mousePressed(int mouseX, int mouseY) {
 		for(DirectionalButton button: buttons.values()){
-			button.mousePressed(mouseX, mouseY);
+			if(button.mouseHit(mouseX, mouseY)){
+				ObjectronGUI gui2= (ObjectronGUI) gui;
+				gui2.move(button.getDirection());
+			}
 		}
 		
 	}

@@ -129,6 +129,13 @@ public class GameHandler extends Handler {
     public EndTurnHandler getEndTurnHandler(){
     	return this.endTurnHandler;
     }
+    /**
+     * Returns the throwLaunchableHandler.
+     * @return	the throwLaunchableHandler.
+     */
+    public ThrowLaunchableHandler getThrowLaunchableHandler(){
+    	return this.throwLaunchableHandler;
+    }
     
 	/**
 	 * @param hSize
