@@ -501,6 +501,11 @@ public class GridGui extends GUIElement{
 				s.setShape(Shapes.powerFailureTeleportItem);
 				teleportsItemPowerfails.put(coor, s);
 			}
+			else{
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				s.setShape(Shapes.teleport);
+				teleports.put(coor, s);
+			}
 		}
 
 

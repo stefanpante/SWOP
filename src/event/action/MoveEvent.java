@@ -24,11 +24,11 @@ public class MoveEvent extends ActionEvent {
 		super(game);
 		this.direction = dir;
 	}
-	
+
 	private Direction getDirection(){
 		return this.direction;
 	}
-	
+
 	@Override
 	protected void beforeGameEvent() {
 		/* Check wether it's possible to move in the given direction */
@@ -41,12 +41,14 @@ public class MoveEvent extends ActionEvent {
 			//TODO: Wordt lightGrenade geactiveerd als player hem zelf niet gelegd heeft.?
 			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
 			try{
-				lg.activate();
+				if(lg.isDropped()){
+					lg.activate();
+				}
 			} catch (Exception exc) {
 				exc.printStackTrace();
 			}
 		}
-		
+
 
 	}
 
@@ -55,7 +57,7 @@ public class MoveEvent extends ActionEvent {
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
-		
+
 		if(newPosition.getInventory().hasTeleport()) {
 			Teleport teleport = newPosition.getInventory().getTeleport();
 			TeleportEvent teleportEvent = new TeleportEvent(getGame(), teleport);
@@ -63,7 +65,8 @@ public class MoveEvent extends ActionEvent {
 		}
 	}
 
-	//TODO: Does this handle the effect of a lightGrenade
+	//TODO: Does this handle the effect of a lightGrenade, check if the player is in the startposition of the other player
+	// to see if he has won.
 	@Override
 	protected void afterGameEvent(){
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){

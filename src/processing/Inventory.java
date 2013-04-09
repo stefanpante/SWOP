@@ -2,6 +2,7 @@ package processing;
 
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
@@ -21,12 +22,12 @@ public class Inventory extends GUIElement{
 	 */
 	private ArrayList<Item> items;
 
-	
+
 	/*
 	 * The last button which was pressed by the user.
 	 */
 	private ItemButton selectedButton;
-	
+
 	/**
 	 * The list of buttons (representing the items.
 	 */
@@ -46,7 +47,7 @@ public class Inventory extends GUIElement{
 		this.selectedButton = null;
 		this.initialize();
 	}
-	
+
 	/**
 	 * Constructs a new Inventory object
 	 * @param items		the items in the inventory
@@ -65,24 +66,26 @@ public class Inventory extends GUIElement{
 	private void initialize() {
 		buttons.clear();
 		selectedButton = null;
-		
+
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
 		for(int i = 0; i < items.size(); i++){
 			Item item = items.get(i);			
 			// Add the button to the inventory.
 			ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, getShape(item), pos, gui);
 			button.setItem(item);
-			buttons.add(button);
-			
+			if(!(item instanceof Teleport)){
+				buttons.add(button);
+			}
+
 			//next line when line is full.
 			pos = new PVector(pos.x + OConstants.MARGIN + OConstants.SQUARE_WIDTH, 
 					pos.y);
 			if(pos.x >= (position.x + width)){
 				pos = new PVector(position.x + OConstants.MARGIN, pos.y + OConstants.MARGIN + OConstants.SQUARE_WIDTH );
-				
+
 			}
 		}
-		
+
 	}
 
 	/**
@@ -94,15 +97,16 @@ public class Inventory extends GUIElement{
 		if(item instanceof LightGrenade){
 			return Shapes.lightgrenade;
 		}
-		
+
 		if(item instanceof IdentityDisc ){
 			return Shapes.identityDisc;
 		}
-		
+
 		if(item instanceof ChargedIdentityDisc){
 			return Shapes.chargedIdentityDisc;
 		}
-		
+
+
 		return null;
 	}
 
@@ -115,6 +119,9 @@ public class Inventory extends GUIElement{
 		gui.fill(color);
 		gui.rect(position.x, position.y, width, height);
 		for(ItemButton button: buttons){
+			if(button == null){
+				System.out.println("The button is null");
+			}
 			button.draw();
 		}
 
@@ -148,7 +155,7 @@ public class Inventory extends GUIElement{
 			}
 		}
 	}
-	
+
 	/**
 	 * always returns false, the inventory is a container for objects.
 	 */
@@ -163,11 +170,12 @@ public class Inventory extends GUIElement{
 	 * @param o
 	 */
 	public void setItems(ArrayList<Item> items) {
+
 		// Sets the items in the inventory
 		this.items = items;
 		// inits the buttons.
 		initialize();
-		
+
 	}
 
 	public Item getSelectedItem() {
@@ -177,7 +185,7 @@ public class Inventory extends GUIElement{
 		}
 		return selectedButton.getItem();
 	}
-	
+
 	public void removeItem(Item item){
 		items.remove(item);
 		initialize();

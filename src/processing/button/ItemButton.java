@@ -44,6 +44,7 @@ public class ItemButton extends ShapeButton {
 	@Override
 	public void draw(){
 		if(visible){
+			
 			gui.noStroke();
 			gui.fill(color);
 
