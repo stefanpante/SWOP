@@ -1,5 +1,6 @@
-package processing;
+package gui;
 
+import gui.button.TextButton;
 import item.Item;
 import item.LightGrenade;
 import item.launchable.ChargedIdentityDisc;
@@ -12,9 +13,11 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import controlP5.Button;
+import controlP5.ControlP5;
+import controlP5.Textfield;
 import controller.GameHandler;
 import player.Player;
-import processing.button.TextButton;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
@@ -28,6 +31,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 * SearialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Used to input the size of the grid.
+	 */
+	private ControlP5 inputController;
 
 	/**
 	 * The grid representation of the game.
@@ -89,16 +97,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
 		Shapes shapes = new Shapes(this);
+
+		// inputController, used for input
+		inputController = new ControlP5(this);
 		//Sets up the grid for usage.
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
 
-		// Creates the directionalPad to be used for the movement of the player.
-		ArrayList<Item> items = new ArrayList<Item>();
-		items.add(new LightGrenade());
-		items.add(new ChargedIdentityDisc());
-		items.add(new IdentityDisc());
-
 		// Sets up the inventory representation.
+		ArrayList<Item> items = new ArrayList<Item>();
 		squareInventory = new Inventory(items,new PVector(530,55), this);
 		playerInventory = new Inventory(items, new PVector(530,255), this);
 
@@ -106,12 +112,93 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		setupLabels();
 		// Creates a new ProcessingHandler.
 		obj = new GameHandler(this);
-		obj.startNewGame();
+		obj.startNewGame(10,10);
+
+		initializeInput();
+//		initialized = true;
 
 
 
 	}
 
+	private Textfield widthGrid;
+	private Textfield heightGrid;
+	private Button confirm;
+	public void initializeInput(){
+		widthGrid = inputController.addTextfield("hcells");
+		widthGrid.setPosition(hSize/4 ,100) ;
+		widthGrid.setSize(hSize/2, 35);
+		widthGrid.setAutoClear(false);
+		widthGrid.setValue(10);
+		widthGrid.setLabel("Width of the grid");
+		heightGrid = inputController.addTextfield("vcells");
+		heightGrid.setPosition(hSize/4,150);
+		heightGrid.setSize(hSize/2, 35);
+		heightGrid.setAutoClear(false);
+		heightGrid.setValue(10);
+		widthGrid.setLabel("Height of grid");
+		confirm = inputController.addButton("confirm");
+		confirm.setPosition(hSize/4,200);
+		confirm.setSize(hSize/2, 35);
+
+	}
+
+	private int hCells;
+	public void hcells(String value){
+		System.out.println(value);
+		try{
+			hCells = Integer.parseInt(value);
+			if(hCells < 10){
+				message = "number of cells needs to be equal to or larger than 10.";
+				currentFrame = 0;
+				hCells = 0;
+			}
+
+		}catch(Exception e){
+			message = "You need to input a number";
+			currentFrame = 0;
+		}
+
+	}
+	private int vCells;
+	public void vcells(String value){
+		try{
+			vCells = Integer.parseInt(value);
+			if(vCells < 10){
+				message = "number of cells needs to be equal to or larger than 10.";
+				currentFrame = 0;
+				vCells = 0;
+			}
+
+		}catch(Exception e){
+			message = "You need to input a number";
+			currentFrame = 0;
+		}
+		
+
+	}
+	
+	private boolean initialized = false;;
+	
+	public void confirm(){
+		// needed to get the values of the
+		widthGrid.submit();
+		heightGrid.submit();
+		System.out.println();
+		System.out.println("the Grid size" + hCells + " x " + vCells );
+		hideInput();
+		setUpGame();
+	}
+
+
+	public void hideInput(){
+		inputController.hide();
+
+	}
+	
+	public void showInput(){
+		inputController.show();
+	}
 	private void setupLabels(){
 		this.gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
 		this.gridLabel.setColor(OConstants.PLAYERBLUE);
@@ -141,14 +228,35 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// Sets the background color to white.
 		background(color(255));
 		// draws Everything
-		grid.draw();
-		grid.hover(mouseX, mouseY);
-
-		drawLabels();
-		drawInventories();
-		drawButtons(); 
-
-		showMessage();
+		if(initialized){
+			grid.draw();
+			grid.hover(mouseX, mouseY);
+	
+			drawLabels();
+			drawInventories();
+			drawButtons(); 
+	
+			showMessage();
+		}
+	}
+	
+	private void setUpGame(){
+		obj.startNewGame(hCells, vCells);
+		int w = 50 * hCells;
+		int h  = 50 * vCells;
+		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
+		this.initialized = true;
+		size(w + 240, h + 50);
+		gridLabel.setWidth(grid.getWidth());
+		squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		pickUpButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+		useItemButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+		playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		// update the positions of the inventories and buttons.
 	}
 
 
@@ -223,11 +331,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
 	private void startNewGame() {
-		try{
-			obj.startNewGame();
-		}catch(Exception e){
-			showException(e);
-		}
+		this.initialized = false;
+		this.showInput();
+		
 	}
 
 	public void move(Direction direction){
@@ -353,7 +459,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public void stop(){
 		try{
@@ -361,7 +467,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 		catch(Exception e)
 		{}		
-		
+
 	}
 
 	private int mHeight = 125;

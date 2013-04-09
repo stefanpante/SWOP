@@ -1,4 +1,4 @@
-package processing;
+package gui;
 
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -68,7 +68,21 @@ public abstract class GUIElement implements Drawable{
 		this.color = color;
 	}
 	
+	public void setWidth(float width){
+		this.width = width;
+	}
 	
+	public float getWidth(){
+		return this.width;
+	}
+	
+	public void setHeight(float height){
+		this.height = height;
+	}
+	
+	public float getHeight(){
+		return this.height;
+	}
 	/**
 	 * Returns the position of the button.
 	 * @return
@@ -114,6 +128,14 @@ public abstract class GUIElement implements Drawable{
 		this.visible = visible;
 	}
 	
+	
+	public void setX(float x){
+		position.x = x;
+	}
+	
+	public void setY(float y){
+		position.y = y;
+	}
 	
 	
 	/**

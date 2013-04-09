@@ -1,4 +1,4 @@
-package processing.button;
+package gui.button;
 
 import processing.core.PApplet;
 import processing.core.PConstants;

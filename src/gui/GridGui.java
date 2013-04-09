@@ -1,10 +1,11 @@
-package processing;
+package gui;
+
+import gui.button.DirectionalButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import player.Player;
-import processing.button.DirectionalButton;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
