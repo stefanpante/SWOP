@@ -8,10 +8,15 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 import controller.MoveHandler;
+import controller.TurnHandler;
 import item.LightGrenade;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import event.AbstractGameEvent;
 
 import player.Player;
 
@@ -24,19 +29,26 @@ import game.Game;
 import grid.GridBuilder;
 
 /**
- * <Scenario test for the Use Case "Move".
+ * Scenario test for the Use Case "Move".
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class MoveHandlerTest {
 
 	private Game game;
-	private MoveHandler mh;
+	
+	private MoveHandler moveHandler;
+	
+	private TurnHandler turnHandler;
 	
 	@Before
-	public void init(){
+	public void setUpBefore(){
 		game = new Game(10,10);
-		mh = new MoveHandler(game,null);
+		
+		moveHandler = new MoveHandler(game,null);
+		turnHandler = new TurnHandler(game, null);
+		
+		AbstractGameEvent.setObserver(turnHandler);
 	}
 	
 //	/**
@@ -66,25 +78,24 @@ public class MoveHandlerTest {
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
 	 * Move to the east, northeast, south east, north and north west should cause an IllegalStateException for player 2
 	 */
-	@Test(expected = IllegalStateException.class) 
+	@Test(expected = NoSuchElementException.class) 
 	public void testIllegalMove(){
 		
 		// For the first player, all these moves should throw an NoSuchElementException
-		mh.move(Direction.WEST);
-		mh.move(Direction.NORTHWEST);
-		mh.move(Direction.SOUTHWEST);
-		mh.move(Direction.SOUTH);
-		mh.move(Direction.SOUTHEAST);
+		moveHandler.move(Direction.WEST);
+		moveHandler.move(Direction.NORTHWEST);
+		moveHandler.move(Direction.SOUTHWEST);
+		moveHandler.move(Direction.SOUTH);
+		moveHandler.move(Direction.SOUTHEAST);
 
 		game.switchToNextPlayer();
-
 		
 		// For the second player, all these moves should throw an NoSuchElementException
-		mh.move(Direction.EAST);
-		mh.move(Direction.NORTHEAST);
-		mh.move(Direction.SOUTHEAST);
-		mh.move(Direction.NORTH);
-		mh.move(Direction.NORTHWEST);
+		moveHandler.move(Direction.EAST);
+		moveHandler.move(Direction.NORTHEAST);
+		moveHandler.move(Direction.SOUTHEAST);
+		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.NORTHWEST);
 	}
 
 	/**
@@ -92,23 +103,24 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveActiveLightGrenade(){
-		
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 
-		if(!currentPosition.getInventory().hasLightGrenade())
+		if(!currentPosition.getInventory().hasLightGrenade()) {
 			currentPosition.getInventory().addItem(lg);
-		else{
+			lg.drop();
+		}else{
 			lg = currentPosition.getInventory().getLightGrenade();
 		}
 		
-		while(!game.getCurrentPlayer().hasMoved()){
-
-			Direction direction = Direction.getRandomDirection();
+		for(Direction direction: Direction.values()) {
 			try{
-				mh.move(direction);
+				moveHandler.move(direction);
+				break;
 			}
-			catch(Exception e){}
+			catch(Exception e){
+				
+			}
 		}
 
 		// When moved, the LightGrenade on the previous square should become active
@@ -122,17 +134,18 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveOntoActiveLightGrenade(){
-		
 		Player currentPlayer = game.getCurrentPlayer();
 		int remainingActions = currentPlayer.getRemainingActions();
+		
 		assertEquals(remainingActions, Player.MAX_ALLOWED_ACTIONS);
 		
 		// Place a grenade on a position near the player
 		Square currentPosition = game.getCurrentPlayer().getPosition();
+		
 		// Search for a square that isn't obstructed
-
 		Direction direction = null;
 		Square next = null;
+		
 		while(next == null || next.isObstructed()|| next.getInventory().hasLightGrenade()){ 
 			direction = Direction.getRandomDirection();
 			try{
@@ -144,10 +157,13 @@ public class MoveHandlerTest {
 		// add a LightGrenade to the square
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
+		lg.drop();
 		lg.activate();
+		
 		// move to the square containing the active LightGrenade
-		mh.move(direction);
+		moveHandler.move(direction);
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
+		
 		if(!(currentPlayer.getPosition().getPower().isFailing()))
 			assertEquals(currentPlayer.getRemainingActions(), remainingActions);
 		
@@ -159,7 +175,6 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveOntoActiveLightGrenadePowerFailure(){
-		
 		Player currentPlayer = game.getCurrentPlayer();
 		int remainingActions = currentPlayer.getRemainingActions();
 		
@@ -186,7 +201,7 @@ public class MoveHandlerTest {
 		lg.activate();
 		
 		// Move to the next square
-		mh.move(direction);
+		moveHandler.move(direction);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4);
@@ -197,7 +212,6 @@ public class MoveHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testMoveToWall(){
-		
 		Square position  = game.getCurrentPlayer().getPosition();
 		Square eastNeighbor = game.getGrid().getNeighbor(position, Direction.EAST);
 		Square neighborOfEastNeighbor = game.getGrid().getNeighbor(eastNeighbor, Direction.EAST);
@@ -208,8 +222,7 @@ public class MoveHandlerTest {
 		assertTrue(eastNeighbor.isObstructed());
 		assertTrue(neighborOfEastNeighbor.isObstructed());
 		
-		mh.move(Direction.EAST);
-		
+		moveHandler.move(Direction.EAST);	
 	}
 	
 	/**
@@ -217,7 +230,6 @@ public class MoveHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testMoveToLightTrail(){
-		
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		
 		// Search for a square that isn't obstructed
@@ -238,7 +250,7 @@ public class MoveHandlerTest {
 		lt.addSquare(next);
 		
 		// Move to a LightTrail should not be allowed.
-		mh.move(direction);
+		moveHandler.move(direction);
 		
 	}
 	
@@ -247,7 +259,6 @@ public class MoveHandlerTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void testMoveToOtherPlayer() {
-		
 		Player otherPlayer =  game.getNextPlayer();
 		
 		/* 	Search a neighboring square of the other player position where the current player
@@ -273,7 +284,7 @@ public class MoveHandlerTest {
 		// Moves to the position where the other player is situated
 		assertTrue(game.getCurrentPlayer() == currentPlayer);
 		// Should throw IllegalStateException
-		mh.move(direction.opposite());
+		moveHandler.move(direction.opposite());
 				
 	}
 	
@@ -282,7 +293,6 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testMoveToPowerFailure(){
-		
 		Player currentPlayer = game.getCurrentPlayer();
 		
 		// search for a square that isn't obstructed near the player
@@ -303,7 +313,7 @@ public class MoveHandlerTest {
 		next.getPower().fail();
 		
 		// Move to the square with the PowerFailure
-		mh.move(direction);
+		moveHandler.move(direction);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		assertEquals(currentPlayer.getRemainingActions(), 2);
@@ -314,8 +324,7 @@ public class MoveHandlerTest {
 	 */
 	@Test
 	public void testHasWon(){
-		
-		assertFalse(mh.hasWon());
+		assertFalse(moveHandler.hasWon());
 		
 		Square currentPosition = game.getCurrentPlayer().getStartPosition();
 		Direction[] directions = Direction.values();
@@ -323,6 +332,7 @@ public class MoveHandlerTest {
 		
 		Direction direction = null;
 		Square next = null;
+		
 		while(next == null || next.isObstructed()){ 
 			direction = directions[random.nextInt(directions.length)];
 			try{
@@ -340,7 +350,8 @@ public class MoveHandlerTest {
 		game.getNextPlayer().alertObservers();
 	
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
-		assertTrue(mh.hasWon());
+		
+		assertTrue(moveHandler.hasWon());
 	}
 
 
