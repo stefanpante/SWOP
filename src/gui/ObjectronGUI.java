@@ -5,6 +5,7 @@ import item.Item;
 import item.LightGrenade;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
+import item.launchable.LaunchableItem;
 
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
@@ -80,7 +81,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 * The start new game button
 	 */
 	private TextButton startNewGameButton;
-
+	
+	/**
+	 * The button to throw an item.
+	 */
 	private int hSize = 710;
 
 	private int vSize = 580;
@@ -225,12 +229,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private void setupButtons(){
 		this.pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
 		this.pickUpButton.setColor(OConstants.PLAYERBLUE);
+		
 		this.useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
 		this.useItemButton.setColor(OConstants.PLAYERBLUE);
+		
 		this.endTurnButton = new TextButton(145, 25, new PVector(535, 415), "end turn", this);
 		this.endTurnButton.setColor(OConstants.PLAYERBLUE);
+		
 		this.startNewGameButton = new TextButton(145, 25, new PVector(535, 445), "start new game", this);
 		this.startNewGameButton.setColor(OConstants.PLAYERBLUE);
+		
+		//this.throwButton = new TextButton()
+		
 	}
 
 	/**
@@ -398,6 +408,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			currentFrame = 0;
 		}
 		else{
+			if(item instanceof LaunchableItem){
+				
+			}
 			try{
 				obj.getUseItemHandler().useItem(item);
 			}catch(Exception e){
@@ -534,6 +547,15 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		exc.printStackTrace();
 		currentFrame = 0;
 		message = exc.getMessage();
+	}
+
+
+	public void throwLaunchableItem(LaunchableItem launchable,
+			Direction direction) {
+		try{
+			obj.
+		}
+		
 	}
 
 
