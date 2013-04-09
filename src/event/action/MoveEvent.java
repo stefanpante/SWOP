@@ -19,12 +19,31 @@ import square.Square;
 public class MoveEvent extends ActionEvent {
 
 	private Direction direction;
+	
+	/**
+	 * Position the player is moving from.
+	 */
+	private Square currentPosition;
+	
+	/**
+	 * Position the player is moving to.
+	 */
+	private Square newPosition;
 
+	/**
+	 * Moves the player into a certain direction. 
+	 */
 	public MoveEvent(Game game, Direction dir) {
 		super(game);
 		this.direction = dir;
+		
+		currentPosition = getGame().getCurrentPlayer().getPosition();
+		newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 	}
 
+	/**
+	 * Returns the direction of the move.
+	 */
 	private Direction getDirection(){
 		return this.direction;
 	}
@@ -35,27 +54,10 @@ public class MoveEvent extends ActionEvent {
 		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
 			throw new IllegalStateException("Cannot move to given direction.");
 		}
-		/* Activate Light Grenades on square leaving square */
-		Square currentPosition = getGame().getCurrentPlayer().getPosition();
-		if(currentPosition.getInventory().hasLightGrenade()){
-			//TODO: Wordt lightGrenade geactiveerd als player hem zelf niet gelegd heeft.?
-			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
-			try{
-				if(lg.isDropped()){
-					lg.activate();
-				}
-			} catch (Exception exc) {
-				exc.printStackTrace();
-			}
-		}
-
-
 	}
 
 	@Override
 	protected void duringGameEvent() {
-		Square currentPosition = getGame().getCurrentPlayer().getPosition();
-		Square newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 		getGame().getCurrentPlayer().move(newPosition);	
 
 		if(newPosition.getInventory().hasTeleport()) {
@@ -69,6 +71,21 @@ public class MoveEvent extends ActionEvent {
 	// to see if he has won.
 	@Override
 	protected void afterGameEvent(){
+		/* Activate Light Grenades on square leaving square */
+		currentPosition = getGame().getCurrentPlayer().getPosition();
+		
+		if(currentPosition.getInventory().hasLightGrenade()){
+			LightGrenade lg = currentPosition.getInventory().getLightGrenade();
+			
+			try{
+				if(lg.isDropped()){
+					lg.activate();
+				}
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
+		}
+		
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
 			LoseTurnEvent lte = new LoseTurnEvent(getGame(),getGame().getCurrentPlayer(),1,false);
 			lte.run();

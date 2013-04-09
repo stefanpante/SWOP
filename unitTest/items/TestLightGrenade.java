@@ -32,6 +32,7 @@ public class TestLightGrenade {
 	@Test
 	public void testStateChangeInactive1() {
 		LightGrenade it = new LightGrenade();
+		it.drop();
 		it.activate();
 		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 	}
@@ -51,6 +52,7 @@ public class TestLightGrenade {
 	@Test
 	public void testStateChangeActive1() {
 		LightGrenade it = new LightGrenade();
+		it.drop();
 		it.activate();
 		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 		assertTrue(it.isActive());
@@ -69,6 +71,7 @@ public class TestLightGrenade {
 	@Test
 	public void testStateChangeActive3() {
 		LightGrenade it = new LightGrenade();
+		it.drop();
 		it.activate();
 		assertTrue(it.getState().equals(LightGrenadeState.ACTIVE));
 		it.wearOut();

@@ -30,8 +30,18 @@ public class LightGrenade extends Item{
 	 * @return	true when the item is dropped
 	 * 			false otherwise
 	 */
-	public boolean isDropped(){
+	public boolean isDropped() {
 		return (this.currentState == LightGrenadeState.DROPPED);
+	}
+	
+	/**
+	 * Returns whether the LightGrenade was worn out. This means it has already exploded.
+	 * 
+	 * @return	True	If the item is worn out.
+	 * 			False	If the item is not worn out.
+	 */
+	public boolean isWornOut() {
+		return (this.currentState == LightGrenadeState.WORN);
 	}
 	
 	/**
@@ -53,6 +63,7 @@ public class LightGrenade extends Item{
 	public void activate() throws IllegalStateException {
 		if(!isDropped())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
+		
 		this.currentState = LightGrenadeState.ACTIVE;
 	}
 	
@@ -67,6 +78,22 @@ public class LightGrenade extends Item{
 		if(!isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the used state.");
 		this.currentState = LightGrenadeState.WORN;
+	}
+	
+	/**
+	 * Drops the item.
+	 * 
+	 * @throws	IllegalStateException
+	 * 			If the item is active or worn out it cannot be dropped.
+	 */
+	public void drop() throws IllegalStateException {
+		if(isActive())
+			throw new IllegalStateException("Cannot drop a LightGrenade which is active.");
+		
+		if(isWornOut())
+			throw new IllegalStateException("Cannot drop a LightGrenade which is worn out.");
+		
+		this.currentState = LightGrenadeState.DROPPED;
 	}
 	
 	/**
