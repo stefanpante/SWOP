@@ -17,7 +17,7 @@ import item.visitor.AddRemoveItemVisitor;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class SquareInventory extends Inventory implements AddRemov께께께께께께께쾒ItemVisitor {
+public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 
 	private ArrayList<Integer> launchableHashes;
