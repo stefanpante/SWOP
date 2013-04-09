@@ -123,16 +123,8 @@ public class MoveHandlerTest {
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		
 		// Search for a square that isn't obstructed
-		Direction direction = null;
-		Square next = null;
-		
-		while(next == null || next.isObstructed()|| next.getInventory().hasLightGrenade()){ 
-			direction = Direction.getRandomDirection();
-			try{
-				next = game.getGrid().getNeighbor(currentPosition, direction);
-			}
-			catch(Exception e){}
-		}
+		Direction direction = getNonObstructedDirection(currentPosition);
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
 		// add a LightGrenade to the square
 		LightGrenade lg = new LightGrenade();
@@ -161,17 +153,8 @@ public class MoveHandlerTest {
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		
 		// Search for a position on the grid where the player can move to
-		Direction[] directions = Direction.values();
-		Random random = new Random();
-		Direction direction = null;
-		Square next = null;
-		while(next == null || next.isObstructed() || next.getInventory().hasLightGrenade()){ 
-			direction = directions[random.nextInt(directions.length)];
-			try{
-			next = game.getGrid().getNeighbor(currentPosition, direction);
-			}
-			catch(Exception e){}
-		}
+		Direction direction = getNonObstructedDirection(currentPosition);
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
 		// Set the state of the square to PowerFailure
 		next.getPower().fail();
@@ -214,18 +197,9 @@ public class MoveHandlerTest {
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		
 		// Search for a square that isn't obstructed
-		Direction[] directions = Direction.values();
-		Random random = new Random();
+		Direction direction = getNonObstructedDirection(currentPosition);
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
-		Direction direction = null;
-		Square next = null;
-		while(next == null || next.isObstructed()){ 
-			direction = directions[random.nextInt(directions.length)];
-			try{
-			next = game.getGrid().getNeighbor(currentPosition, direction);
-			}
-			catch(Exception e){}
-		}
 		// add a LightTrail to the square
 		LightTrail lt = new LightTrail();
 		lt.addSquare(next);
@@ -245,18 +219,9 @@ public class MoveHandlerTest {
 		/* 	Search a neighboring square of the other player position where the current player
 			can be situated, to test the move to. */
 		Square otherPos = otherPlayer.getPosition();
-		Direction[] directions = Direction.values();
-		Random random = new Random();
 		
-		Direction direction = null;
-		Square next = null;
-		while(next == null || next.isObstructed()){ 
-			direction = directions[random.nextInt(directions.length)];
-			try{
-			next = game.getGrid().getNeighbor(otherPos, direction);
-			}
-			catch(Exception e){}
-		}
+		Direction direction = getNonObstructedDirection(otherPos);
+		Square next = game.getGrid().getNeighbor(otherPos, direction);
 		
 		// Positions the player next to the other Player
 		Player currentPlayer = game.getCurrentPlayer();
@@ -278,19 +243,9 @@ public class MoveHandlerTest {
 		
 		// search for a square that isn't obstructed near the player
 		Square currentPosition = game.getCurrentPlayer().getPosition();
-		Direction[] directions = Direction.values();
-		Random random = new Random();
 		
-		Direction direction = null;
-		Square next = null;
-		
-		while(next == null || next.isObstructed()){ 
-			direction = directions[random.nextInt(directions.length)];
-			try{
-			next = game.getGrid().getNeighbor(currentPosition, direction);
-			}
-			catch(Exception e){}
-		}
+		Direction direction = getNonObstructedDirection(currentPosition);
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
 		// Set a PowerFailure on the square
 		next.getPower().fail();
@@ -311,19 +266,9 @@ public class MoveHandlerTest {
 		assertFalse(moveHandler.hasWon());
 		
 		Square currentPosition = game.getCurrentPlayer().getStartPosition();
-		Direction[] directions = Direction.values();
-		Random random = new Random();
 		
-		Direction direction = null;
-		Square next = null;
-		
-		while(next == null || next.isObstructed()){ 
-			direction = directions[random.nextInt(directions.length)];
-			try{
-			next = game.getGrid().getNeighbor(currentPosition, direction);
-			}
-			catch(Exception e){}
-		}
+		Direction direction = getNonObstructedDirection(currentPosition);
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
 		game.getNextPlayer().move(next);
 		
@@ -337,7 +282,34 @@ public class MoveHandlerTest {
 		
 		assertTrue(moveHandler.hasWon());
 	}
-
+	
+	@Test
+	public void testTeleport() {
+		Square currentPosition = game.getCurrentPlayer().getStartPosition();
+		
+		Direction direction = getNonObstructedDirection(currentPosition);
+		Square next = game.getGrid().getNeighbor(currentPosition, direction);
+		
+		game.getNextPlayer().move(next);		
+	}
+	
+	private Direction getNonObstructedDirection(Square currentPosition) {
+		Direction[] directions = Direction.values();
+		Random random = new Random();
+		
+		Direction direction = null;
+		Square next = null;
+		
+		while(next == null || next.isObstructed()){ 
+			direction = directions[random.nextInt(directions.length)];
+			try{
+				next = game.getGrid().getNeighbor(currentPosition, direction);
+			}
+			catch(Exception e){}
+		}
+		
+		return direction;
+	}
 
 
 }

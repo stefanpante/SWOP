@@ -65,8 +65,11 @@ public class TurnHandler extends Handler implements Observer {
 	    		getGame().end();
 	    	}
 			
-	    	EndTurnEvent endTurnEvent = new EndTurnEvent(getGame());
-	    	endTurnEvent.run();
+	    	getGame().getCurrentPlayer().endTurn();
+	    	getGame().switchToNextPlayer();
+	    	
+	    	for(Square square : getGame().getGrid().getAllSquares())
+	    		square.getPower().decreaseTurn();
 	    	
 			startTurn();
 		}
