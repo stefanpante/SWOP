@@ -1,10 +1,11 @@
-package processing;
+package gui;
+
+import gui.button.DirectionalButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import player.Player;
-import processing.button.DirectionalButton;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
@@ -132,7 +133,9 @@ public class GridGui extends GUIElement{
 		this.powerfail_coors = new ArrayList<Coordinate>();
 		this.teleport_coors = new ArrayList<Coordinate>();
 		this.initGrid();
-		this.directionalPad = new DirectionalPad(new PVector(25, 55), gui);
+		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
+		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
+		this.directionalPad = new DirectionalPad(new PVector(25, 55), swidth, sHeight, gui);
 		this.adjustDirectionalPad();
 	}
 

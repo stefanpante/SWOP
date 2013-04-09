@@ -1,4 +1,4 @@
-package processing.button;
+package gui.button;
 
 import item.Item;
 import processing.core.PApplet;

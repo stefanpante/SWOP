@@ -1,10 +1,13 @@
 package item.inventory;
 
+import java.util.ArrayList;
+
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
+import item.launchable.LaunchableItem;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -19,18 +22,41 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	 */
 	public static int PLAYER_INVENTORY_SIZE = 6;
 
+	private ArrayList<Integer> launchableHashes;
+	
 	/**
 	 * Creates a new Player Inventory. Same as a regular inventory, 
 	 * except limited to six items.
 	 */
 	public PlayerInventory() {
 		super(PLAYER_INVENTORY_SIZE);
+		launchableHashes = new ArrayList<Integer>();
 	}
 	
 	@Override
 	public void addItem(Item item) throws IllegalStateException{
 		item.acceptAddPlayerInventory(this);
-		super.addItem(item);
+	}
+	
+	/**
+	 * Returns all the Launchable items of this inventory.
+	 * 
+	 * @return An ArrayList with all the launchables.
+	 */
+	public ArrayList<LaunchableItem> getLaunchables(){
+		ArrayList<LaunchableItem> result = new ArrayList<LaunchableItem>();
+		for(Integer i : launchableHashes){
+			result.add((LaunchableItem)this.getItem(i));
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns whether or not this inventory has a launchable.
+	 * @return
+	 */
+	public boolean hasLaunchable(){
+		return launchableHashes.size()>0;
 	}
 	
 	/**
@@ -44,7 +70,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
-		//No specific operation needed yet.
+		super.addItem(chargedDisc);
 	}
 
 	@Override
@@ -56,7 +82,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc)
 			throws IllegalStateException {
-		//No specific operation needed yet.
+		super.addItem(identityDisc);
 	}
 
 	@Override
@@ -68,7 +94,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void addLightGrenade(LightGrenade lightGrenade)
 			throws IllegalStateException {
-		//No specific operation needed yet.
+		super.addItem(lightGrenade);
 	}
 
 	@Override
@@ -85,5 +111,15 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void removeTeleport(Teleport teleport) throws IllegalStateException {
 		//No specific operation needed yet.
+	}
+
+	@Override
+	public void addLaunchable(LaunchableItem launchable){
+		launchableHashes.add(launchable.hashCode());
+	}
+
+	@Override
+	public void removeLaunchable(LaunchableItem launchable){
+		launchableHashes.remove(new Integer(launchable.hashCode()));
 	}
 }

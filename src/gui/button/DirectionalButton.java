@@ -1,6 +1,6 @@
-package processing.button;
+package gui.button;
 
-import processing.ObjectronGUI;
+import gui.ObjectronGUI;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;

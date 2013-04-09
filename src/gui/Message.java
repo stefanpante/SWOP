@@ -1,4 +1,4 @@
-package processing;
+package gui;
 
 import processing.core.PApplet;
 import processing.core.PVector;

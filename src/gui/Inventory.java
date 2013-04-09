@@ -1,5 +1,6 @@
-package processing;
+package gui;
 
+import gui.button.ItemButton;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -8,7 +9,6 @@ import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 
-import processing.button.ItemButton;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;

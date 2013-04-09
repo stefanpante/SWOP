@@ -1,6 +1,6 @@
-package processing.button;
+package gui.button;
 
-import processing.GUIElement;
+import gui.GUIElement;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;

@@ -1,12 +1,12 @@
 package controller;
 
 import game.Game;
+import gui.ObjectronGUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-import processing.ObjectronGUI;
 
 
 import util.Coordinate;
@@ -37,7 +37,6 @@ public class GameHandler extends Handler {
 	
 	public GameHandler(ObjectronGUI objectronGUI){
 		this.objectronGUI = objectronGUI;
-		startNewGame();
 	}
 	/**
 	 *  Initializes the game handler
@@ -58,9 +57,9 @@ public class GameHandler extends Handler {
     /**
      * Used to start a new game.
      */
-    public void startNewGame(){
+    public void startNewGame(int hCells, int vCells){
 		try {
-			createGame(10,10);
+			createGame(hCells,vCells);
 			addPropertyChangeListener(objectronGUI);
 	    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
 	    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
@@ -136,7 +135,7 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		setGame(new Game(10, 10));
+		setGame(new Game(hSize, vSize));
 	}
 
 }

@@ -70,7 +70,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		for(Player player: getGame().getOtherPlayers()){
 			if(player.getPosition() == endSquare){
 				//FIXME: Check if the values are correct.
-				LoseTurnEvent lte = new LoseTurnEvent(getGame(),player,1,false);
+				LoseTurnEvent lte = new LoseTurnEvent(getGame(),player,1,true);
 				lte.run();
 				break;
 			}
