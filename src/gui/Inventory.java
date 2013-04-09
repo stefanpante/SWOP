@@ -71,7 +71,7 @@ public class Inventory extends GUIElement{
 		for(int i = 0; i < items.size(); i++){
 			Item item = items.get(i);			
 			// Add the button to the inventory.
-			ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, getShape(item), pos, gui);
+			ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, Shapes.getShape(item), pos, gui);
 			button.setItem(item);
 			if(!(item instanceof Teleport)){
 				buttons.add(button);
@@ -93,22 +93,6 @@ public class Inventory extends GUIElement{
 	 * @param item
 	 * @return
 	 */
-	private PShape getShape(Item item) {
-		if(item instanceof LightGrenade){
-			return Shapes.lightgrenade;
-		}
-
-		if(item instanceof IdentityDisc ){
-			return Shapes.identityDisc;
-		}
-
-		if(item instanceof ChargedIdentityDisc){
-			return Shapes.chargedIdentityDisc;
-		}
-
-
-		return null;
-	}
 
 	/**
 	 * Draws the inventory on the screen.
