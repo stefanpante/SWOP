@@ -61,11 +61,15 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		// determine the end position of the launchable item
 		Square endSquare = trajectoryMediator.getEndSquare(currentPosition, getDirection(), getLaunchableItem().getRange());
 		// remove the launchable from the players inventory
-		getGame().getCurrentPlayer().getInventory().take(launchableItem);
+		getGame().getCurrentPlayer().useItem(getLaunchableItem());
+		
+		// add the launchable to the endsquare's inventory.
+		endSquare.getInventory().addItem(launchableItem);
 		
 		// Checks for a hit on another player.
 		for(Player player: getGame().getOtherPlayers()){
 			if(player.getPosition() == endSquare){
+				//FIXME: Check if the values are correct.
 				LoseTurnEvent lte = new LoseTurnEvent(getGame(),player,1,false);
 				lte.run();
 				break;
@@ -73,8 +77,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		}
 	}
 
-	//TODO: don't know what to put in this method.
-	/* (non-Javadoc)
+	/* (non-Javadoc)s
 	 * @see event.AbstractGameEvent#afterGameEvent()
 	 */
 	@Override
