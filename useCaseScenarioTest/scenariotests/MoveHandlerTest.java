@@ -165,7 +165,7 @@ public class MoveHandlerTest {
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		
 		if(!(currentPlayer.getPosition().getPower().isFailing()))
-			assertEquals(currentPlayer.getRemainingActions(), remainingActions);
+			assertEquals(currentPlayer.getRemainingActions(), 2);
 		
 	}
 	
@@ -176,7 +176,6 @@ public class MoveHandlerTest {
 	@Test
 	public void testMoveOntoActiveLightGrenadePowerFailure(){
 		Player currentPlayer = game.getCurrentPlayer();
-		int remainingActions = currentPlayer.getRemainingActions();
 		
 		// Place a grenade on a position near the player
 		Square currentPosition = game.getCurrentPlayer().getPosition();
@@ -198,13 +197,15 @@ public class MoveHandlerTest {
 		next.getPower().fail();
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
+		lg.drop();
 		lg.activate();
 		
 		// Move to the next square
 		moveHandler.move(direction);
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), remainingActions - 4);
+		System.out.println(currentPlayer.getRemainingActions());
+		assertEquals(currentPlayer.getRemainingActions(), 1);
 	}
 	
 	/**
@@ -302,6 +303,7 @@ public class MoveHandlerTest {
 		
 		Direction direction = null;
 		Square next = null;
+		
 		while(next == null || next.isObstructed()){ 
 			direction = directions[random.nextInt(directions.length)];
 			try{
@@ -309,14 +311,16 @@ public class MoveHandlerTest {
 			}
 			catch(Exception e){}
 		}
+		
 		// Set a PowerFailure on the square
 		next.getPower().fail();
 		
 		// Move to the square with the PowerFailure
 		moveHandler.move(direction);
-		// Test the effect of the LightGrenade
+		
+		// Test the effect of the PowerFailure
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), 2);
+		assertEquals(currentPlayer.getRemainingActions(), 3);
 	}
 	
 	/**
