@@ -218,7 +218,7 @@ public abstract class Inventory{
 	 * @throws 	IllegalStateException
 	 * 		  	Thrown when the item cannot be removed, because it is not inside the inventory
 	 */
-	public void take(Item item) throws IllegalStateException{
+	public void removeItem(Item item) throws IllegalStateException{
 		if(!this.hasItem(item)) 
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 

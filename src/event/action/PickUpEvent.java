@@ -30,7 +30,7 @@ public class PickUpEvent extends ActionEvent {
 	@Override
 	public void duringGameEvent(){
 		getGame().getCurrentPlayer().pickUp(getItem());
-		getGame().getCurrentPlayer().getPosition().getInventory().take(getItem());
+		getGame().getCurrentPlayer().getPosition().getInventory().removeItem(getItem());
 	}
 	
 	@Override

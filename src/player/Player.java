@@ -405,18 +405,13 @@ public class Player extends Observable implements Obstacle {
 	/**
 	 * Method to select the item which the player is going to use
 	 * 
-	 * @param	itemToUse
+	 * @param	item
 	 * 			The item to use.
 	 * @throws	IllegalStateException
-	 * 			thrown when adding the item would exceed the size of the inventory.
-	 * @throws	IllegalArgumentException
-	 * 			If the item cannot be used on the current square.
+	 * 			when the item that is used is not inside the inventory.
 	 */
-	public void useItem(Item item) throws IllegalStateException,IllegalArgumentException {
-		inventory.take(item);
-		// Doesn't belong here
-		//getPosition().getInventory().addItem(item);
-		
+	public void useItem(Item item) throws IllegalStateException {
+		inventory.removeItem(item);
 		item.notifyUse();
 		
 		alertObservers();

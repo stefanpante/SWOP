@@ -97,14 +97,14 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * @effect	| item.acceptRemoveSquareInventory(this)
 	 */
 	@Override
-	public void take(Item item) throws IllegalStateException {
+	public void removeItem(Item item) throws IllegalStateException {
 		if(!isValidItem(item))
 			throw new IllegalStateException("This"
 											+ item
 											+ "can not be removed from this "
 											+ this);
 		item.acceptRemoveSquareInventory(this);
-		super.take(item);
+		super.removeItem(item);
 	}
 	
 	/**
