@@ -102,4 +102,8 @@ public class Teleport extends Item {
 		plInv.removeTeleport(this);
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString() + "Teleport";
+	}
 }

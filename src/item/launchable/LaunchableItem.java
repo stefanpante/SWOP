@@ -39,4 +39,9 @@ public abstract class LaunchableItem extends Item {
 	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.removeLaunchable(this);
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + "Launchable ";
+	}
 }

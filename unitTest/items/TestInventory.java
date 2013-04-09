@@ -7,6 +7,7 @@ import item.Teleport;
 import item.inventory.Inventory;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
 import  org.junit.Assert.*;
@@ -114,35 +115,30 @@ public class TestInventory {
 	}
 	
 	@Test
-	//TODO:Refactor to hashCode instead of index.
 	public void testGetItem(){
 		Inventory inventory = new SquareInventory();
-		Item item = null;
-		for(int i = 0; i < 10; i ++){
-			item = new IdentityDisc();
-			inventory.addItem(item);
-		}
+		Item item1 = new IdentityDisc();
+		Integer hash1 = item1.hashCode();
+		Item item2 = new IdentityDisc();
+		Integer hash2 = item1.hashCode();
+		Item item3 = new LightGrenade();
+		Integer hash3 = item1.hashCode();
+		Item item4 = new ChargedIdentityDisc();
+		Integer hash4 = item1.hashCode();
+		Item item5 = new Teleport();
+		Integer hash5 = item1.hashCode();
 		
-		try{
-			inventory.getItem(-1);
-			fail("Index shouldn't take negative values");
-		}
-		catch(Exception e){}
+		inventory.addItem(item1);
+		inventory.addItem(item2);
+		inventory.addItem(item3);
+		inventory.addItem(item4);
+		inventory.addItem(item5);
 		
-		try{
-			inventory.getItem(10);
-			fail("shouldnt be able to get item");
-		}
-		catch(Exception e){}
-
-		try{
-			inventory.getItem(9);
-			inventory.getItem(0);
-			inventory.getItem(4);
-		}
-		catch(Exception e){ 
-			fail("Given indices should be in range");
-		}
+		assertEquals(item1, inventory.getItem(hash1));
+		assertEquals(item1, inventory.getItem(hash2));
+		assertEquals(item1, inventory.getItem(hash3));
+		assertEquals(item1, inventory.getItem(hash4));
+		assertEquals(item1, inventory.getItem(hash5));		
 	}
 	
 	@Test 

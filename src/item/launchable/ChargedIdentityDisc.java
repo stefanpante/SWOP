@@ -34,4 +34,9 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	public void acceptRemovePlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
 		plInv.removeChargedDisc(this);
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + "Charged Identity Disc";
+	}
 }
