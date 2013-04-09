@@ -271,7 +271,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		fill(currentPlayerColor);
 		noStroke();
 		textAlign(LEFT,LEFT);
-		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), 535, 490 );
+		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
 	private void setUpGame(){
 		
