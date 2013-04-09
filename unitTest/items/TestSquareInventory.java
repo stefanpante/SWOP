@@ -92,12 +92,12 @@ public class TestSquareInventory {
 		LightGrenade lg = new LightGrenade();
 		sqinv.addItem(lg);
 		assertTrue(sqinv.hasLightGrenade());
-		sqinv.take(lg);
+		sqinv.removeItem(lg);
 		assertFalse(sqinv.hasLightGrenade());
 		assertFalse(sqinv.hasItem(lg));		
 		LightGrenade lg2 = new LightGrenade();
 		try {
-			sqinv.take(lg2);
+			sqinv.removeItem(lg2);
 			fail("You shouldn't be able to remove a non added lightGrenade");
 		} catch (Exception e) {
 			assert(true);
@@ -116,9 +116,9 @@ public class TestSquareInventory {
 		assertFalse(sqinv.hasLightGrenade());
 		sqinv.addItem(lg);
 		assertTrue(sqinv.hasLightGrenade());
-		sqinv.take(it);
+		sqinv.removeItem(it);
 		assertTrue(sqinv.hasLightGrenade());
-		sqinv.take(lg);
+		sqinv.removeItem(lg);
 		assertFalse(sqinv.hasLightGrenade());
 	}
 }

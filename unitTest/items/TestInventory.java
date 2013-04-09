@@ -107,10 +107,10 @@ public class TestInventory {
 		inventory.addItem(item);
 		assertTrue(inventory.getAllItems().contains(item));
 		
-		inventory.take(item);
+		inventory.removeItem(item);
 		assertFalse(inventory.getAllItems().contains(item));
 		
-		inventory.take(item);
+		inventory.removeItem(item);
 	}
 	
 	@Test
