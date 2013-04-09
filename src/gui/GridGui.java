@@ -20,6 +20,12 @@ public class GridGui extends GUIElement{
 	 */
 	private DirectionalPad directionalPad;
 
+	
+	/**
+	 * The throwpad used to throw an item.
+	 */
+	
+	private ThrowPad throwPad;
 	/**
 	 * Number of horizontal cells
 	 */
@@ -136,7 +142,10 @@ public class GridGui extends GUIElement{
 		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
 		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), swidth, sHeight, gui);
-		this.adjustDirectionalPad();
+		this.throwPad = new ThrowPad(new PVector(25,55), swidth, sHeight, gui);
+		throwPad.setVisibility(false);
+		this.adjustPad(directionalPad);
+		this.adjustPad(throwPad);
 	}
 
 
@@ -354,16 +363,17 @@ public class GridGui extends GUIElement{
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
 
-		adjustDirectionalPad();
+		adjustPad(directionalPad);
+		adjustPad(throwPad);
 
 	}
 
 	/**
 	 * Sets directions that are not applicable to false.
 	 */
-	private void adjustDirectionalPad(){
-		directionalPad.setPosition(getPixels(currentPlayer));
-		HashMap<Direction, DirectionalButton> buttons = directionalPad.getButtons();
+	private void adjustPad(DirectionalPad pad){
+		pad.setPosition(getPixels(currentPlayer));
+		HashMap<Direction, DirectionalButton> buttons = pad.getButtons();
 
 		Coordinate coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY());
 		DirectionalButton b = buttons.get(Direction.WEST);
@@ -516,12 +526,24 @@ public class GridGui extends GUIElement{
 
 
 	}
+	
+	public void setDiscs(ArrayList<Coordinate> o){
+		this.discs_coors = o;
+	}
+	
+	public void setChargedDiscs(ArrayList<Coordinate> o){
+		this.chargedDiscs_coors = o;
+	}
 
 
 
 	public void setTeleport(ArrayList<Coordinate> o) {
 		this.teleport_coors = o;
 		
+	}
+	
+	public DirectionalPad getDirectionalPad(){
+		return this.directionalPad;
 	}
 
 

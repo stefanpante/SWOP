@@ -41,6 +41,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	 */
 	private ControlP5 inputController;
 
+	private ThrowPad throwPad;
 	/**
 	 * The grid representation of the game.
 	 */
@@ -409,12 +410,15 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 		else{
 			if(item instanceof LaunchableItem){
-				
+				grid.getDirectionalPad().setVisibility(false);
+				throwPad.setVisibility(true);
 			}
-			try{
-				obj.getUseItemHandler().useItem(item);
-			}catch(Exception e){
-				showException(e);
+			else{
+				try{
+					obj.getUseItemHandler().useItem(item);
+				}catch(Exception e){
+					showException(e);
+				}
 			}
 		}
 	}
@@ -494,6 +498,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
 		}else if(evt.getPropertyName().equals(GameHandler.TELEPORT_PROPERTY)){
 			grid.setTeleport((ArrayList<Coordinate>) o);
+		}else if(evt.getPropertyName().equals(GameHandler.IDENTITY_DISK_PROPERTY)){
+			grid.setDiscs((ArrayList<Coordinate>) o);
+		}else if(evt.getPropertyName().equals(GameHandler.CHARGED_DISK_PROPERTY)){
+			grid.setChargedDiscs((ArrayList<Coordinate>) o);
 		}
 		grid.resetGrid();
 
@@ -549,12 +557,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		message = exc.getMessage();
 	}
 
-
 	public void throwLaunchableItem(LaunchableItem launchable,
 			Direction direction) {
 		try{
-			obj.
+			obj.getThrowLaunchableHandler().throwLaunchable(launchable, direction);
 		}
+		catch(Exception e){
+			showException(e);
+		}
+		
+		grid.getDirectionalPad().setVisibility(true);
+		throwPad.setVisibility(false);
 		
 	}
 

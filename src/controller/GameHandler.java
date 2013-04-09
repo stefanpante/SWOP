@@ -26,6 +26,7 @@ public class GameHandler extends Handler {
 	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
 	public static final String END_TURN_PROPERTY 			= "EndTurnProperty";
 	public static final String IDENTITY_DISK_PROPERTY		= "IdentityDisk";
+	public static final String CHARGED_DISK_PROPERTY		= "ChargedIdentityDisk";
 	public static final String TELEPORT_PROPERTY			= "Teleport";		
 	public static final String LIGHT_TRAILS_PROPERTY		= "LightTrails";
 	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
