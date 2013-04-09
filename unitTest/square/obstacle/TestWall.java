@@ -56,6 +56,7 @@ public class TestWall {
 		assertTrue(squareTwo.isObstructed());
 		assertTrue(wall.equals(squareOne.getObstacle()));
 		assertTrue(wall.equals(squareTwo.getObstacle()));
+		assertTrue(wall.squaresPointBack());
 	}
 	
 	/**
@@ -71,6 +72,8 @@ public class TestWall {
 		assertTrue(wall.contains(squareOne));
 		assertTrue(wall.contains(squareTwo));
 		assertFalse(wall.contains(new Square()));
+		assertTrue(wall.squaresPointBack());
+
 	}
 	
 	/**
@@ -89,6 +92,8 @@ public class TestWall {
 		wall.addSquare(squareThree);
 		
 		assertEquals(wall.getLength(), 3);
+		assertTrue(wall.squaresPointBack());
+
 	}
 	
 	/**
@@ -109,6 +114,8 @@ public class TestWall {
 		wall.addSquare(squareThree);
 		
 		assertTrue(wall.contains(squareThree));
+		assertTrue(wall.squaresPointBack());
+
 	}
 	
 	/**
@@ -129,6 +136,8 @@ public class TestWall {
 		wall.addSquare(squareThree);
 		
 		assertFalse(wall.isValidSquare(squareThree));
+		assertTrue(wall.squaresPointBack());
+
 	}
 	
 	/**
@@ -148,23 +157,25 @@ public class TestWall {
 		list.add(square3);
 		list.add(square4);
 		
-		Wall w = new Wall(list);
+		Wall wall = new Wall(list);
 		
-		assertTrue(w.contains(square1));
-		assertTrue(w.contains(square2));
-		assertTrue(w.contains(square3));
-		assertTrue(w.contains(square4));
-		assertFalse(w.contains(null));
-		assertFalse(w.contains(new Square()));
-		assertTrue(w.equals(square1.getObstacle()));
-		assertTrue(w.equals(square2.getObstacle()));
-		assertTrue(w.equals(square3.getObstacle()));
-		assertTrue(w.equals(square4.getObstacle()));
-		assertFalse(w.equals((new Square().getObstacle())));
+		assertTrue(wall.contains(square1));
+		assertTrue(wall.contains(square2));
+		assertTrue(wall.contains(square3));
+		assertTrue(wall.contains(square4));
+		assertFalse(wall.contains(null));
+		assertFalse(wall.contains(new Square()));
+		assertTrue(wall.equals(square1.getObstacle()));
+		assertTrue(wall.equals(square2.getObstacle()));
+		assertTrue(wall.equals(square3.getObstacle()));
+		assertTrue(wall.equals(square4.getObstacle()));
+		assertFalse(wall.equals((new Square().getObstacle())));
 		assertTrue(square1.isObstructed());
 		assertTrue(square2.isObstructed());
 		assertTrue(square3.isObstructed());
 		assertTrue(square4.isObstructed());
+		assertTrue(wall.squaresPointBack());
+
 	}
 	
 	

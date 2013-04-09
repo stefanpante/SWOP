@@ -37,8 +37,12 @@ public class TurnHandler extends Handler implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if(isEndOfTurn())
+		if(hasWon()){
+    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
+    		getGame().end();
+    	} else if(isEndOfTurn()) {
 			endTurn();
+    	}
 	}
 	
 	/**
@@ -59,12 +63,7 @@ public class TurnHandler extends Handler implements Observer {
 			getGame().end();
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
 					"and has no actions left and therefore lost the game");
-		}else{
-	    	if(hasWon()){
-	    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
-	    		getGame().end();
-	    	}
-			
+		}else{			
 	    	getGame().getCurrentPlayer().endTurn();
 	    	getGame().switchToNextPlayer();
 	    	
