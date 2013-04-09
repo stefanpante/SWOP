@@ -107,6 +107,7 @@ public class EndTurnHandlerTest {
 		
 		game.getCurrentPlayer().getPosition().getPower().fail();
 		endTurnHandler.confirm(true);
+		endTurnHandler.endTurn();
 		
 		assertEquals(2,player.getRemainingActions());
 	}

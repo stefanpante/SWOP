@@ -24,7 +24,6 @@ public class EndTurnEvent extends ActionEvent {
 	@Override
 	protected void duringGameEvent() {
 		getGame().getCurrentPlayer().endTurn();
-		getGame().switchToNextPlayer();
 		
 		for(Square square : getGame().getGrid().getAllSquares())
 			square.getPower().decreaseTurn();
@@ -37,6 +36,8 @@ public class EndTurnEvent extends ActionEvent {
 	@Override
 	protected void afterGameEvent() {
 		new LoseActionEvent(getGame(), 1).run();
+		
+		getGame().switchToNextPlayer();
 	}
 
 }
