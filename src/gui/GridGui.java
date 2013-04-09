@@ -261,6 +261,7 @@ public class GridGui extends GUIElement{
 			square.hover(mouseX, mouseY);
 		}
 		directionalPad.hover(mouseX, mouseY);
+		throwPad.hover(mouseX, mouseY);
 	}
 
 
@@ -329,7 +330,6 @@ public class GridGui extends GUIElement{
 	}
 
 	private void updateLightTrails(){
-		int i = 0;
 		lightTrails_Squares.clear();
 		for(Player player: lightTrails.keySet()){
 			ArrayList<Coordinate> playercoor = lightTrails.get(player);
@@ -356,7 +356,6 @@ public class GridGui extends GUIElement{
 				lightTrails_Squares.add(s);
 			}catch(Exception e){}
 
-			i++;
 		}
 	}
 
@@ -546,6 +545,12 @@ public class GridGui extends GUIElement{
 	
 	public DirectionalPad getDirectionalPad(){
 		return this.directionalPad;
+	}
+
+
+
+	public ThrowPad getThrowPad() {
+		return this.throwPad;
 	}
 
 
