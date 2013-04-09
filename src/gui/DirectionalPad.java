@@ -29,6 +29,10 @@ public class DirectionalPad extends GUIElement{
 	 */
 	private int width;
 	
+	
+	private float buttonWidth;
+	
+	private float buttonHeight;
 	/**
 	 * The buttons which compose this directionalPad
 	 */
@@ -46,6 +50,8 @@ public class DirectionalPad extends GUIElement{
 		this.position = new PVector();
 		this.height = 145;
 		this.width = 145;
+		this.buttonWidth = (width - OConstants.MARGIN*2)/3;
+		this.buttonHeight = (height - OConstants.MARGIN*2)/3;
 		initButtons();
 	}
 	
@@ -54,8 +60,10 @@ public class DirectionalPad extends GUIElement{
 	 * @param position	the position of the directionalPad
 	 * @param gui		the PApplet used to draw.
 	 */
-	public DirectionalPad(PVector position, PApplet gui){
+	public DirectionalPad(PVector position, float buttonWidth, float buttonHeight,PApplet gui){
 		this(gui);
+		this.buttonHeight = buttonHeight;
+		this.buttonWidth = buttonWidth;
 		super.setPosition(position);
 		initButtons();
 	}
@@ -65,8 +73,7 @@ public class DirectionalPad extends GUIElement{
 	 * initializes the button.
 	 */
 	private void initButtons() {
-		int buttonWidth = (width - OConstants.MARGIN*2)/3;
-		int buttonHeight = (height - OConstants.MARGIN*2)/3;
+
 		buttons = new HashMap<Direction,DirectionalButton>();
 		
 		

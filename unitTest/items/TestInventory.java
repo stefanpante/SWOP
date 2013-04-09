@@ -114,21 +114,7 @@ public class TestInventory {
 	}
 	
 	@Test
-	public void testCanHaveAsItemIndex(){
-		Inventory inventory = new SquareInventory();
-		Item item = null;
-		for(int i = 0; i < 10; i ++){
-			item = new IdentityDisc();
-			inventory.addItem(item);
-		}
-		
-		assertTrue(inventory.canHaveAsItemIndex(0));
-		assertTrue(inventory.canHaveAsItemIndex(inventory.getAllItems().size() - 1));
-		assertFalse(inventory.canHaveAsItemIndex(inventory.getAllItems().size()));
-		assertFalse(inventory.canHaveAsItemIndex(-2));
-	}
-	
-	@Test
+	//TODO:Refactor to hashCode instead of index.
 	public void testGetItem(){
 		Inventory inventory = new SquareInventory();
 		Item item = null;

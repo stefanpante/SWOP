@@ -1,10 +1,13 @@
 package item.inventory;
 
+import java.util.ArrayList;
+
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
+import item.launchable.LaunchableItem;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -14,7 +17,10 @@ import item.visitor.AddRemoveItemVisitor;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
+public class SquareInventory extends Inventory implements AddRemov께께께께께께께쾒ItemVisitor {
+	
+
+	private ArrayList<Integer> launchableHashes;
 	
 	/**
 	 * Holds the only possible Teleport in this SquareInventory.
@@ -24,16 +30,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * Holds the only possible LightGrenade in this SquareInventory.
 	 */
 	private LightGrenade lightGrenade;
-	
-	/**
-	 * Holds the collection of identityDiscs.
-	 */
-	private int identityDiscs = 0;
-	
-	/**
-	 * Holds the collection of identityDiscs.
-	 */
-	private int chargedDiscs = 0;
 
 	/**
 	 * Creates a square inventory with the given size. 
@@ -46,8 +42,9 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 */
 	public SquareInventory(int size) {
 		super(size);
-		teleport = null;	
-		lightGrenade = null;
+		this.teleport = null;	
+		this.lightGrenade = null;
+		this.launchableHashes = new ArrayList<Integer>();
 	}
 
 	/**
@@ -58,7 +55,10 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * @effect	super(size)
 	 */
 	public SquareInventory() {
-		super();	
+		super();
+		this.teleport = null;	
+		this.lightGrenade = null;
+		this.launchableHashes = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -81,7 +81,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 											+ " is not a valid item for this "
 											+ this);
 		item.acceptAddSquareInventory(this);
-		super.addItem(item);
 	}	
 	
 	/**
@@ -103,8 +102,9 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 											+ item
 											+ "can not be removed from this "
 											+ this);
-		item.acceptRemoveSquareInventory(this);
+		item.acceptRemoveSquareInventory(this);	
 		super.removeItem(item);
+
 	}
 	
 	/**
@@ -166,10 +166,24 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	}
 	
 	/**
-	 * Returns if there are identity discs in the inventory.
+	 * Returns all the Launchable items of this inventory.
+	 * 
+	 * @return An ArrayList with all the launchables.
 	 */
-	public boolean hasIdentityDisc(){
-		return (this.identityDiscs + this.chargedDiscs) > 0;
+	public ArrayList<LaunchableItem> getLaunchables(){
+		ArrayList<LaunchableItem> result = new ArrayList<LaunchableItem>();
+		for(Integer i : launchableHashes){
+			result.add((LaunchableItem)this.getItem(i));
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns whether or not this inventory has a launchable.
+	 * @return
+	 */
+	public boolean hasLaunchable(){
+		return launchableHashes.size()>0;
 	}
 	
 	/**
@@ -185,7 +199,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		if(hasLightGrenade())
 			throw new IllegalStateException("Can't add another LightGrenade to " + this);
-		
+		super.addItem(lightGrenade);
 		this.lightGrenade = lightGrenade;
 	}
 
@@ -193,7 +207,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		if(!this.lightGrenade.equals(lightGrenade))
 			throw new IllegalStateException("Could not remove the LightGrenade because it did not match the LightGrenade that is in place.");
-		
+		super.removeItem(lightGrenade);
 		this.lightGrenade = null;
 	}
 
@@ -201,6 +215,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		if(hasTeleport())
 			throw new IllegalStateException("Can't add another Teleport to " + this);
+		super.addItem(teleport);
 		this.teleport = teleport;
 	}
 
@@ -208,33 +223,41 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void removeTeleport(Teleport teleport) throws IllegalStateException {
 		if(!this.teleport.equals(teleport))
 			throw new IllegalStateException("The given teleport to be removed is not the same one as the square's teleport.");
-		
+		super.removeItem(teleport);
 		this.teleport = null;
 	}
 	
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
-		this.identityDiscs++;
+		super.addItem(identityDisc);
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
-		if(this.identityDiscs <= 0)
+		if(!hasLaunchable())
 			throw new IllegalStateException("There are no identity discs to be removed.");
-		
-		this.identityDiscs--;
+		super.removeItem(identityDisc);
 	}
 
 	@Override
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)	throws IllegalStateException {
-		this.chargedDiscs++;
+		super.addItem(chargedDisc);
 	} 
 	
 	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
-		if(this.chargedDiscs <= 0)
+		if(!hasLaunchable())
 			throw new IllegalStateException("There are no charged identity discs to be removed.");
-		
-		this.chargedDiscs--;
+		super.removeItem(chargedDisc);
+	}
+
+	@Override
+	public void addLaunchable(LaunchableItem launchable){
+		launchableHashes.add(launchable.hashCode());
+	}
+
+	@Override
+	public void removeLaunchable(LaunchableItem launchable){
+		launchableHashes.remove(new Integer(launchable.hashCode()));
 	}
 }

@@ -6,6 +6,7 @@ import item.LightGrenade;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import controller.GameHandler;
 import player.Player;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PFont;
 import processing.core.PVector;
 import square.Direction;
 import util.Coordinate;
@@ -85,13 +87,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private Label gridLabel;
 	private Label squareInventoryLabel;
 	private Label playerInventoryLabel;
+	private PFont standardFont;
 
 	/**
 	 * initializes the objectron gui
 	 */
 	@Override
 	public void setup(){
-
+		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
 		// Loads all the shapes used.
@@ -129,14 +132,15 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		widthGrid.setPosition(hSize/4 ,100) ;
 		widthGrid.setSize(hSize/2, 35);
 		widthGrid.setAutoClear(false);
-		widthGrid.setValue(10);
+		
 		widthGrid.setLabel("Width of the grid");
+		widthGrid.setValue("" + 10);
 		heightGrid = inputController.addTextfield("vcells");
 		heightGrid.setPosition(hSize/4,150);
 		heightGrid.setSize(hSize/2, 35);
 		heightGrid.setAutoClear(false);
-		heightGrid.setValue(10);
 		widthGrid.setLabel("Height of grid");
+		heightGrid.setValue("" + 10);
 		confirm = inputController.addButton("confirm");
 		confirm.setPosition(hSize/4,200);
 		confirm.setSize(hSize/2, 35);
@@ -213,9 +217,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		this.pickUpButton.setColor(OConstants.PLAYERBLUE);
 		this.useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
 		this.useItemButton.setColor(OConstants.PLAYERBLUE);
-		this.endTurnButton = new TextButton(145, 25, new PVector(535, 525), "end turn", this);
+		this.endTurnButton = new TextButton(145, 25, new PVector(535, 415), "end turn", this);
 		this.endTurnButton.setColor(OConstants.PLAYERBLUE);
-		this.startNewGameButton = new TextButton(145, 25, new PVector(535, 495), "start new game", this);
+		this.startNewGameButton = new TextButton(145, 25, new PVector(535, 445), "start new game", this);
 		this.startNewGameButton.setColor(OConstants.PLAYERBLUE);
 	}
 
@@ -241,22 +245,33 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 	
 	private void setUpGame(){
-		obj.startNewGame(hCells, vCells);
+		
 		int w = 50 * hCells;
-		int h  = 50 * vCells;
+		int h = 50 * vCells;
+		if(h >= displayHeight - 150){
+			float sw = (displayHeight - 150)/ vCells;
+			h = displayHeight - 150;
+			w = (int) (sw * hCells);
+			
+		}
+		
 		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
 		this.initialized = true;
+
 		size(w + 240, h + 50);
-		gridLabel.setWidth(grid.getWidth());
+		gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
 		squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
 		playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+		startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
 		pickUpButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
 		useItemButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
 		playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
 		squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
 		// update the positions of the inventories and buttons.
+		
+		textFont(standardFont);
+		obj.startNewGame(hCells, vCells);
 	}
 
 
