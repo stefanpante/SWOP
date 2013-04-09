@@ -5,10 +5,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import event.AbstractGameEvent;
 import game.Game;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
+import controller.TurnHandler;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import player.Player;
@@ -23,20 +26,33 @@ import square.Square;
  */
 public class EndTurnHandlerTest {
 	
+	private Game game;
+	
+	private TurnHandler turnHandler;
+	
+	private EndTurnHandler endTurnHandler;
+	
+	@Before
+	public void setUpBefore() {
+		game = new Game(10,10);
+		
+		endTurnHandler = new EndTurnHandler(game, null);
+		turnHandler = new TurnHandler(game, null);
+		
+		AbstractGameEvent.setObserver(turnHandler);
+	}
 	
 	/**
 	 * Tests the check to proceed
 	 */
 	@Test
 	public void checkToProceedTest(){
-		Game game = new Game(10,10);
-		EndTurnHandler eh = new EndTurnHandler(game, null);
-		assertTrue(eh.checkToProceed());
+		assertTrue(endTurnHandler.checkToProceed());
 		
 		for(int i = 0; i < Player.MAX_ALLOWED_ACTIONS; i++)
 			game.getCurrentPlayer().decrementActions();
 		
-		assertFalse(eh.checkToProceed());
+		assertFalse(endTurnHandler.checkToProceed());
 	}
 
 	/**
@@ -44,23 +60,22 @@ public class EndTurnHandlerTest {
 	 */
 	@Test 
 	public void hasMoveTest(){	
-		Game game = new Game(10,10);
 		game.clearPowerFailures();
-		EndTurnHandler eh = new EndTurnHandler(game, null);
-		assertFalse(eh.hasMoved());
-		MoveHandler mh = new MoveHandler(game, null);
 		
+		assertFalse(endTurnHandler.hasMoved());
 		
+		MoveHandler moveHandler = new MoveHandler(game, null);
 		Direction direction = getValidMoveDirection(game);
 		
 		//Move in a valid direction.
-		mh.move(direction);		
-		assertTrue(eh.hasMoved());		
+		moveHandler.move(direction);		
+		assertTrue(endTurnHandler.hasMoved());		
 	}
 
 
 	/**
 	 * Returns a valid move direction
+	 * 
 	 * @param game
 	 * @return
 	 */
@@ -68,6 +83,7 @@ public class EndTurnHandlerTest {
 		Direction direction = null;
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		Square next = null;
+		
 		while(next == null || next.isObstructed()){
 			try {
 				direction = Direction.getRandomDirection();
@@ -77,6 +93,7 @@ public class EndTurnHandlerTest {
 			}
 			
 		}
+		
 		return direction;
 	}
 	
@@ -85,12 +102,12 @@ public class EndTurnHandlerTest {
 	 */
 	@Test
 	public void EndTurnTestPowerFailure(){
-		Game game = new Game(10,10);
 		Player player = game.getCurrentPlayer();
-		EndTurnHandler eh = new EndTurnHandler(game, null);
-		assertTrue(eh.checkToProceed());
+		assertTrue(endTurnHandler.checkToProceed());
+		
 		game.getCurrentPlayer().getPosition().getPower().fail();
-		eh.confirm(true);
+		endTurnHandler.confirm(true);
+		
 		assertEquals(2,player.getRemainingActions());
 	}
 

@@ -2,12 +2,15 @@ package controller;
 
 import java.beans.PropertyChangeListener;
 
+import event.AbstractGameEvent;
+import event.action.EndTurnEvent;
+
 import game.Game;
 
 /**
  * The Controller/Handler to end the turn of a player
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class EndTurnHandler extends Handler{
 	
@@ -36,7 +39,6 @@ public class EndTurnHandler extends Handler{
 		return confirmed;
 	}
 	
-	
 	/**
 	 * 
 	 * Checks the precondition for the end turn use case
@@ -60,8 +62,6 @@ public class EndTurnHandler extends Handler{
 		return getGame().getCurrentPlayer().hasMoved();
 	}
 	
-	
-	
 	/**
 	 * Ends the turn of the current player and 
 	 * sets up the game for the turn of the next player
@@ -70,13 +70,17 @@ public class EndTurnHandler extends Handler{
 	 */
 	public void endTurn() throws IllegalStateException{
 		fireChanges();
-		if(!isConfirmed()){
+		
+		if(!isConfirmed())
 			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
-		}else{
-			getGame().getCurrentPlayer().endTurn();
+		else{
+			AbstractGameEvent endTurnEvent = new EndTurnEvent(getGame());
+			endTurnEvent.run();
+			
 	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			resetConfirm();
 		}
+		
 		fireChanges();
 	}
 
