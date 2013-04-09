@@ -494,10 +494,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			currentFrame = 0;
 		}else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
 			String player = (String)o;
-			JOptionPane.showMessageDialog(frame, player+ " has won the game!");
+			message =  player+ " has won the game!";
+			currentFrame = 0;
 		}else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
 			String player = (String)o;
-			JOptionPane.showMessageDialog(frame, player+ " has lost the game...");
+			message = player+ " has lost the game...";
+			currentFrame = 0;
 		}else if(evt.getPropertyName().equals(GameHandler.TELEPORT_PROPERTY)){
 			grid.setTeleport((ArrayList<Coordinate>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.IDENTITY_DISK_PROPERTY)){

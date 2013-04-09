@@ -145,7 +145,8 @@ public class IdentityDisc extends LaunchableItem {
 	@Override
 	public String toString() {
 		String result = super.toString() + " IdentityDisc";
-		result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
+		// Removed this, because it gives a weird message in the GUI
+		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
 		return result;
 	}
 

@@ -443,29 +443,6 @@
     </void>
    </object>
   </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode"/>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double12">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double12"/>
-      <double>234.0</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double12"/>
-      <double>493.0</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>234.0</double>
-     <double>493.0</double>
-    </void>
-   </object>
-  </void>
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
