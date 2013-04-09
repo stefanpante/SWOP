@@ -3,6 +3,8 @@ package item.inventory;
 import item.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -24,7 +26,7 @@ public abstract class Inventory{
 	 * A given size should imply the usage of an array,
 	 * But we use an ArrayList for the convenience of the contains and add method
 	 */
-	private  ArrayList<Item> items;
+	private  HashMap<Integer,Item> items;
 
 	/**
 	 * Creates a new instance of the Inventory class with given size.
@@ -36,7 +38,7 @@ public abstract class Inventory{
 	@Raw
 	public Inventory(int size) throws IllegalArgumentException {
 		this.setMaximumSize(size);
-		this.items = new ArrayList<Item>();
+		this.items = new HashMap<Integer,Item>();
 	}
 
 	/**
@@ -121,7 +123,7 @@ public abstract class Inventory{
 	 * Returns all the items.
 	 */
 	public ArrayList<Item> getAllItems(){
-		return new ArrayList<Item>(items);
+		return new ArrayList<Item>(items.values());
 	}
 
 	/**
@@ -134,11 +136,23 @@ public abstract class Inventory{
 	 * 		   	Thrown if the given index is not valid for this inventory.
 	 * 			| !canHaveAsItemIndex(index)
 	 */
-	public Item getItem(int index) throws IndexOutOfBoundsException{
-		if(!canHaveAsItemIndex(index)){
+	public Item getItem(Integer hashCode) throws NoSuchElementException{
+		if(!containsHash(hashCode)){
 			throw new IndexOutOfBoundsException();
 		}
-		return items.get(index);
+		return items.get(hashCode);
+	}
+
+	/**
+	 * Returns whether this inventory has the given hashCode as a key.
+	 * 
+	 * @param 	hashCode
+	 * 			The hashCode to check.
+	 * @return	True if and only if the given hash is found in this inventory.
+	 * 			False otherwise.
+	 */
+	public boolean containsHash(Integer hashCode) {
+		return items.containsKey(hashCode);
 	}
 
 	/**
@@ -149,7 +163,7 @@ public abstract class Inventory{
 	 * 				otherwise false
 	 */
 	public boolean hasItem(Item item){
-		return items.contains(item);
+		return items.containsValue(item);
 	}
 
 	/**
@@ -164,24 +178,8 @@ public abstract class Inventory{
 		if(!canHaveAsItem(item))
 			throw new IllegalStateException("The inventory is full or already contains the item.");
 		else
-			items.add(item);
+			items.put(item.hashCode(), item);
 	}
-
-	/**
-	 * Returns whether the given index is a possible index for this inventory.
-	 * 
-	 * @param 	index
-	 * 			The index to be checked.
-	 * @return	True if and only if the given index is larger than or equal to zero,
-	 * 			smaller than the maximum possible size and the amount of spaces used.
-	 * 			| index > 0 && 
-	 * 			| index <= this.getMaximumSize() && 
-	 * 			| index <= this.getsize() - 1
-	 */
-	public boolean canHaveAsItemIndex(int index){
-		return index >= 0  && index <= this.getSize() - 1;
-	}
-
 
 	/**
 	 * Returns whether the given item is a valid item for all Inventory objects.
@@ -222,7 +220,7 @@ public abstract class Inventory{
 		if(!this.hasItem(item)) 
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
-			items.remove(item);
+			items.remove(item.hashCode());
 	}
 
 	/**
@@ -237,14 +235,14 @@ public abstract class Inventory{
 		} else {
 			description += "Inventory ("+ getSize() +") containing: "; 
 			int i = 0;
-			while(i < items.size()){
+			ArrayList<Item> list= new ArrayList<Item>(items.values());
+			while(i < list.size()){
 				// the system.getProperty is used to get a system independent newline,
 				// is different on windows vs Unix systems.
-				description +=  i + ". " + items.get(i).toString() + System.getProperty("line.separator");
+				description +=  i + ". " + list.get(i).toString() + System.getProperty("line.separator");
 				i++;
 			}
 		}
 		return description;
 	}
-	
 }
