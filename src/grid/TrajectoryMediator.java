@@ -50,7 +50,8 @@ public class TrajectoryMediator {
 		Square currentSquare = startSquare;
 		HashSet<Teleport> passedDestinations = new HashSet<Teleport>();
 		Teleport teleport = null, destination = null;
-		Square destinationSquare = null; 
+		Square destinationSquare = null;
+		boolean prevWasTeleport = false;
 		int currentRange = 0;
 		do{
 			prevSquare = currentSquare;
@@ -60,7 +61,7 @@ public class TrajectoryMediator {
 			}
 			if(maximumRange > 0) {
 				try {
-					if(teleport!= null){
+					if(teleport!= null && !prevWasTeleport){
 						destination = teleport.getDestination();
 						if(passedDestinations.contains(destination)){
 							return prevSquare;
@@ -68,18 +69,20 @@ public class TrajectoryMediator {
 						destinationSquare = grid.findSquare(destination);
 						passedDestinations.add(destination);
 						currentSquare = destinationSquare;
+						prevWasTeleport = true;
 					} else {
 						currentSquare = grid.getNeighbor(prevSquare, direction);
+						prevWasTeleport = false;
 					}
 				} catch (NoSuchElementException e) {
 					return prevSquare;
 				} catch (IllegalArgumentException e){
 					return prevSquare;
-				}	
+				}
 				currentRange++;
 			}
 		} while(!currentSquare.isObstructed() && currentRange < maximumRange);
-		if(currentSquare.getObstacle().bouncesBack()){
+		if(currentSquare.isObstructed() && currentSquare.getObstacle().bouncesBack()){
 			return prevSquare;
 		}
 		return currentSquare;

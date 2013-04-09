@@ -2,6 +2,8 @@ package grid;
 
 import static org.junit.Assert.*;
 
+import item.Teleport;
+
 import java.util.ArrayList;
 
 import org.junit.BeforeClass;
@@ -17,6 +19,21 @@ public class TestTrajectoryMediator {
 	private static ArrayList<Coordinate> lightGrenades;
 	private static ArrayList<Coordinate> identityDiscs;
 	
+	/**
+	 * SITUATION:
+	 * 		__0___1___2___3___4___5___6___7___8___9__
+	 * 	0	|	| 	| W	|	|	|	|	|	|	|	|
+	 *	1 	| 	|	| W	| W	| W	|	|	|	|	|	|
+	 * 	2	|	|	|	|	|	|	|	|	|	|	|
+	 *	3 	|	|	|	|	|	|	|	|	|	|	|
+	 * 	4	|	|	| T	|	| T	|	|	|	|	|	|
+	 *	5 	|	|	|	|	| 	|	|	|	|	|	|
+	 * 	6	|	|	|	|	|	|	|	|	|	|	|
+	 *	7 	|	|	|	|	|	|	|	|	|	|	|
+	 * 	8	|	|	|	|	|	|	|	|	|	|	|
+	 *	9 	|	|	|	|	|	|	|	|	|	|	|
+	 *
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		walls = new ArrayList<ArrayList<Coordinate>>();
@@ -31,48 +48,147 @@ public class TestTrajectoryMediator {
 		
 		
 		lightGrenades = new ArrayList<Coordinate>();
-		lightGrenades.add(new Coordinate(8, 8));
+		lightGrenades.add(new Coordinate(7, 7));
+		lightGrenades.add(new Coordinate(0, 8));
+		lightGrenades.add(new Coordinate(8, 0));
+
 		
 		identityDiscs = new ArrayList<Coordinate>();
 		identityDiscs.add(new Coordinate(7, 7));
 		
 		
 		teleports = new ArrayList<Coordinate>();
-		teleports.add(new Coordinate(0, 1));
-		teleports.add(new Coordinate(5, 5));
+		teleports.add(new Coordinate(2, 4));
+		teleports.add(new Coordinate(4, 4));
 	}
 
+	//Normal case no walls no teleports, range 3, NORTH
 	@Test
 	public void testGetEndSquare() {		
 		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
-		Square startSquare = grid.getSquare(new Coordinate(0,0));
-		Square endSquare = tm.getEndSquare(startSquare, Direction.SOUTH, 3);
-		Square expectedSquare = grid.getSquare(new Coordinate(0,3));
+		Square startSquare = grid.getSquare(new Coordinate(0,9));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(0,6));
 		assertEquals(expectedSquare, endSquare);
 	}
 		
+	//Normal case no walls no teleports, range 3, EAST
 	@Test
-	public void testGetEndSquare2() {
-		//TODO: build grid like you want.
+	public void testGetEndSquare2() {		
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(0,9));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(3,9));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	
+	//Normal case no walls no teleports, range MAX, NORTH
+	@Test
+	public void testGetEndSquare3() {		
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(0,9));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, Integer.MAX_VALUE);
+		Square expectedSquare = grid.getSquare(new Coordinate(0,0));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	//Normal case no walls no teleports, range MAX, EAST
+	@Test
+	public void testGetEndSquare4() {		
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(0,9));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, Integer.MAX_VALUE);
+		Square expectedSquare = grid.getSquare(new Coordinate(9,9));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	
+	//Case with walls and no teleports, range 3, EAST
+	@Test
+	public void testGetEndSquare5() {
 		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,0));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(1,0));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	//Case with walls and no teleports, range 3, NORTH
+	@Test
+	public void testGetEndSquare6() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(3,4));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(3,2));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	//Case with walls and no teleports, range 3, WEST
+	@Test
+	public void testGetEndSquare7() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(5,0));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.WEST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(3,0));
-		assertEquals(expectedSquare, endSquare);	}
-	
-	@Test
-	public void testGetEndSquare3() {
-		fail("UNIMPLEMENTED");
+		assertEquals(expectedSquare, endSquare);
 	}
 	
+	//Case with walls and no teleports, range MAX, NORTH
 	@Test
-	public void testGetEndSquare4() {
-		fail("UNIMPLEMENTED");
+	public void testGetEndSquare8() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(3,9));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, Integer.MAX_VALUE);
+		Square expectedSquare = grid.getSquare(new Coordinate(3,2));
+		assertEquals(expectedSquare, endSquare);
 	}
+	
+	//Case with walls and no teleports, range MAX, WEST
+	@Test
+	public void testGetEndSquare9() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(5,0));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.WEST, Integer.MAX_VALUE);
+		Square expectedSquare = grid.getSquare(new Coordinate(3,0));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	//Case with walls and teleports, range 3, NORTH
+	@Test
+	public void testGetEndSquare10() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		//Assure the teleports have a proper destination set.
+		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
+		Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
+		assertTrue(t0.getDestination().equals(t1));
+		assertTrue(t1.getDestination().equals(t0));
 
-
+		
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(2,5));
+		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(4,3));
+		System.out.println(grid.getCoordinate(endSquare));
+		assertEquals(expectedSquare, endSquare);
+	}
 }

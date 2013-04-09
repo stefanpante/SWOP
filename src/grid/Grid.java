@@ -538,7 +538,7 @@ public class Grid {
 			throw new IllegalArgumentException("The given destination is not a valid destination");
 		}
 		for(Square square : getAllSquares()){
-			if(square.getInventory().getTeleport().equals(destination)){
+			if(square.getInventory().hasTeleport() && square.getInventory().getTeleport().equals(destination)){
 				if(square.isObstructed()){
 					throw new IllegalArgumentException("The destination is valid but the recieving teleport is obstructed. Try again later.");
 				}
