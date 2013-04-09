@@ -1,5 +1,7 @@
 package event.action;
 
+import square.Square;
+import controller.GameHandler;
 import event.effect.LoseActionEvent;
 import game.Game;
 
@@ -22,6 +24,10 @@ public class EndTurnEvent extends ActionEvent {
 	@Override
 	protected void duringGameEvent() {
 		getGame().getCurrentPlayer().endTurn();
+		getGame().switchToNextPlayer();
+		
+		for(Square square : getGame().getGrid().getAllSquares())
+			square.getPower().decreaseTurn();
 	}
 
 	/**
