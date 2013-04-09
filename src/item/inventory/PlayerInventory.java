@@ -120,13 +120,11 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 
 	@Override
 	public void addLaunchable(LaunchableItem launchable){
-		super.addItem(launchable);
 		launchableHashes.add(launchable.hashCode());
 	}
 
 	@Override
 	public void removeLaunchable(LaunchableItem launchable){
-		super.removeItem(launchable);
 		launchableHashes.remove(new Integer(launchable.hashCode()));
 	}
 }
