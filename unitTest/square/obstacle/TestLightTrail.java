@@ -28,6 +28,7 @@ public class TestLightTrail {
 		
 		lightTrail.addSquare(squareTwo);
 		assertEquals(lightTrail.getLength(), 2);
+		assertTrue(lightTrail.squaresPointBack());
 	}
 
 	/**
@@ -57,6 +58,7 @@ public class TestLightTrail {
 		assertEquals(lightTrail.getLength(), 3);
 		
 		assertFalse(lightTrail.getSquares().contains(squareOne));
+		assertTrue(lightTrail.squaresPointBack());
 	}
 	
 	/**
@@ -78,6 +80,7 @@ public class TestLightTrail {
 		Square squareOne = new Square();
 
 		lightTrail.addSquare(squareOne);
+		assertTrue(lightTrail.squaresPointBack());
 		lightTrail.addSquare(squareOne);
 	}
 	
@@ -100,6 +103,7 @@ public class TestLightTrail {
 		
 		lightTrail.addSquare(squareTwo);
 		assertTrue(squareTwo.isObstructed());
+		assertTrue(lightTrail.squaresPointBack());
 	}
 	
 	/**
@@ -120,6 +124,7 @@ public class TestLightTrail {
 		lightTrail.addSquare(new Square());
 		
 		assertFalse(firstSquare.isObstructed());
+		assertTrue(lightTrail.squaresPointBack());
 	}
 
 	/**
@@ -133,6 +138,7 @@ public class TestLightTrail {
 
 		lightTrail.addSquare(squareOne);
 		assertFalse(lightTrail.isValidSquare(squareOne));
+		assertTrue(lightTrail.squaresPointBack());
 	}
 
 	/**
@@ -159,6 +165,7 @@ public class TestLightTrail {
 
 		assertEquals(lightTrail.getSquares().size(), 1);
 		assertEquals(lightTrail.getSquares().size(), lightTrail.getLength());
+		assertTrue(lightTrail.squaresPointBack());
 	}
 
 
