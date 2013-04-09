@@ -31,8 +31,7 @@ public class UseItemEvent extends ActionEvent {
 	protected void beforeGameEvent() {
 		
 	}
-
-	//TODO: need to set the state of an lightgrenade to dropped if used.
+	
 	@Override
 	protected void duringGameEvent(){
 		getGame().getCurrentPlayer().useItem(getItem());

@@ -18,7 +18,7 @@ public class TestTeleport {
 	private Teleport teleportTwo;
 	
 	@Before
-	public void constructor() {
+	public void setUpBefore() {
 		teleport = new Teleport();
 		teleportTwo = new Teleport();
 	}
