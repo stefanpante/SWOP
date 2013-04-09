@@ -93,6 +93,7 @@ public class LightGrenade extends Item{
 		if(isWornOut())
 			throw new IllegalStateException("Cannot drop a LightGrenade which is worn out.");
 		
+		System.out.println("LightGrenade has been dropped.");
 		this.currentState = LightGrenadeState.DROPPED;
 	}
 	
@@ -107,6 +108,17 @@ public class LightGrenade extends Item{
 		if(!isActive())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
 		this.currentState = LightGrenadeState.INACTIVE;
+	}
+	
+	/**
+	 * If the item is used this means it has been dropped on a square.
+	 * 
+	 * @throws	IllegalStateException
+	 * 			When the item is in a condition in which it cannot be used.
+	 */
+	@Override
+	public void notifyUse() throws IllegalStateException {
+		this.drop();
 	}
 
 	

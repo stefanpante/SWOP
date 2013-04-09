@@ -10,10 +10,21 @@ import item.visitor.VisitableItem;
 public abstract class Item implements VisitableItem {
 	
 	/**
-	 * Constructs a new item with an inactive state
+	 * Notifies the item that it has been used.
+	 * No specific operation is needed at this level. Inheriting item may
+	 * determine if it needs to handle internal operations if it is beeing used.
 	 */
-	public Item(){
-
+	public void notifyUse() {
+		
+	}
+	
+	/**
+	 * Notifies the item that it has been picked up.
+	 * No specific operation is needed at this level. Inheriting item may
+	 * determine if it needs to handle internal operations if it is beeing picked up.
+	 */
+	public void notifyPickUp() {
+		
 	}
 	
 	/**

@@ -394,7 +394,9 @@ public class Player extends Observable implements Obstacle {
 	public void pickUp(Item item) throws IllegalArgumentException {
 		if(!isValidPickUp(item))
 			throw new IllegalArgumentException("The item cannot be added to the player inventory");
+		
 		inventory.addItem(item);
+		item.notifyPickUp();
 		
 		alertObservers();
 		decrementActions();
@@ -410,9 +412,11 @@ public class Player extends Observable implements Obstacle {
 	 * @throws	IllegalArgumentException
 	 * 			If the item cannot be used on the current square.
 	 */
-	public void useItem(Item itemToUse) throws IllegalStateException,IllegalArgumentException {
-		inventory.take(itemToUse);
-		getPosition().getInventory().addItem(itemToUse);
+	public void useItem(Item item) throws IllegalStateException,IllegalArgumentException {
+		inventory.take(item);
+		getPosition().getInventory().addItem(item);
+		
+		item.notifyUse();
 		
 		alertObservers();
 		decrementActions();
