@@ -15,6 +15,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import controlP5.Button;
+import controlP5.CColor;
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import controller.GameHandler;
@@ -128,22 +129,31 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private Textfield heightGrid;
 	private Button confirm;
 	public void initializeInput(){
+		inputController.setFont(standardFont);
+		CColor color = new CColor(OConstants.PLAYERBLUE, OConstants.WHITE,OConstants.PLAYERBLUE, OConstants.PLAYERBLUE, OConstants.PLAYERBLUE);
 		widthGrid = inputController.addTextfield("hcells");
 		widthGrid.setPosition(hSize/4 ,100) ;
 		widthGrid.setSize(hSize/2, 35);
 		widthGrid.setAutoClear(false);
+		widthGrid.setColor(color);
 		
 		widthGrid.setLabel("Width of the grid");
 		widthGrid.setValue("" + 10);
+		widthGrid.setColorCursor(OConstants.PLAYERBLUE);
 		heightGrid = inputController.addTextfield("vcells");
-		heightGrid.setPosition(hSize/4,150);
+		heightGrid.setPosition(hSize/4,170);
 		heightGrid.setSize(hSize/2, 35);
 		heightGrid.setAutoClear(false);
-		widthGrid.setLabel("Height of grid");
+		heightGrid.setColor(color);
+		heightGrid.setLabel("Height of grid");
 		heightGrid.setValue("" + 10);
+		heightGrid.setColorCursor(OConstants.PLAYERBLUE);
 		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,200);
+		confirm.setPosition(hSize/4,240);
 		confirm.setSize(hSize/2, 35);
+		confirm.setColor(color);
+		confirm.setColorLabel(OConstants.WHITE);
+		confirm.setColorBackground(OConstants.PLAYERBLUE);
 
 	}
 
