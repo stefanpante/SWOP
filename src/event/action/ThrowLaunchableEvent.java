@@ -43,7 +43,10 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	 */
 	@Override
 	protected void beforeGameEvent() {
-		
+		// Check all para,eters.
+		if(!getGame().getCurrentPlayer().getInventory().hasItem(launchableItem)){
+			throw new IllegalStateException("Player can't throw a Launchable that isn't in his inventory!");
+		}
 	}
 
 	/* (non-Javadoc)
@@ -70,6 +73,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		}
 	}
 
+	//TODO: don't know what to put in this method.
 	/* (non-Javadoc)
 	 * @see event.AbstractGameEvent#afterGameEvent()
 	 */
