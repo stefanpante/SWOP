@@ -16,12 +16,12 @@ import game.Game;
  * Controller/Handler which controls the player move use case
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class MoveHandler extends Handler {
 
 	/**
 	 * Creates a new MoveHandler with a given game and a given listener
+	 * 
 	 * @param game		the game which this MoveHandler will use
 	 * @param listener	the PropertyChangeListener which this MoveHandler will use.
 	 */

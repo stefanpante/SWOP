@@ -9,8 +9,10 @@ import item.Teleport;
 import square.Square;
 
 /**
+ * The event where a Player teleports from one square 
+ * to the other.
+ * 
  * @author jonas
- *
  */
 public class TeleportEvent extends EffectEvent {
 	

@@ -4,6 +4,7 @@
 package controller;
 
 import event.AbstractGameEvent;
+import event.action.EndTurnEvent;
 import event.effect.LoseActionEvent;
 import game.Game;
 
@@ -25,8 +26,10 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
+		
 		AbstractGameEvent.setObserver(this);
 		counter = new HashMap<Player,Integer>();
+		
 		for(Player player : getGame().getPlayers()){
 			counter.put(player, 0);
 		}
@@ -61,10 +64,10 @@ public class TurnHandler extends Handler implements Observer {
 	    		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
 	    		getGame().end();
 	    	}
-			getGame().getCurrentPlayer().endTurn();
-			getGame().switchToNextPlayer();
-			for(Square square : getGame().getGrid().getAllSquares())
-				square.getPower().decreaseTurn();
+			
+	    	EndTurnEvent endTurnEvent = new EndTurnEvent(getGame());
+	    	endTurnEvent.run();
+	    	
 			startTurn();
 		}
 	}
@@ -74,17 +77,19 @@ public class TurnHandler extends Handler implements Observer {
 	 */
 	public void startTurn(){
 		Player currentPlayer = getGame().getCurrentPlayer();
+		
 		if(getGame().currentPlayerIsStuck()){
 			getGame().end();
     		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
 		}
+		
 		increaseCurrentPlayerCount();
 		getGame().powerFailSquares();
-		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
+		
+		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()) {
 			LoseActionEvent lae = new LoseActionEvent(getGame(),1);
 			lae.run();
 		}
-
 	}
 	
 	/**
@@ -95,6 +100,5 @@ public class TurnHandler extends Handler implements Observer {
 		int currentCount = counter.remove(currentPlayer);
 		counter.put(currentPlayer, ++currentCount);
 	}
-	
 
 }
