@@ -17,11 +17,11 @@ public class ThrowPad extends DirectionalPad {
 		super(position, buttonWidth, buttonHeight, gui);
 
 	}
-	
+
 	public void setShape(PShape shape){
 		this.shape = shape;
 	}
-	
+
 	@Override
 	public void draw(){
 		if(shape != null){
@@ -31,14 +31,26 @@ public class ThrowPad extends DirectionalPad {
 	}
 	@Override
 	public void mousePressed(int mouseX, int mouseY){
-		for(DirectionalButton button: getButtons().values()){
-			if(button.mouseHit(mouseX, mouseY)){
-				ObjectronGUI gui2= (ObjectronGUI) gui;
-				gui2.throwLaunchableItem(launchable, button.getDirection());
-				break;
-				
+		if(visible){
+			for(DirectionalButton button: getButtons().values()){
+				if(button.mouseHit(mouseX, mouseY)){
+					ObjectronGUI gui2= (ObjectronGUI) gui;
+					gui2.throwLaunchableItem(launchable, button.getDirection());
+					break;
+
+				}
 			}
 		}
+	}
+
+
+	public void setLaunchableItem(LaunchableItem item) {
+		this.launchable = item;
+
+	}
+
+	public LaunchableItem getLaunchabelItem(){
+		return this.launchable;
 	}
 
 }
