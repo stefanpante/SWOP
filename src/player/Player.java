@@ -414,7 +414,8 @@ public class Player extends Observable implements Obstacle {
 	 */
 	public void useItem(Item item) throws IllegalStateException,IllegalArgumentException {
 		inventory.take(item);
-		getPosition().getInventory().addItem(item);
+		// Doesn't belong here
+		//getPosition().getInventory().addItem(item);
 		
 		item.notifyUse();
 		
