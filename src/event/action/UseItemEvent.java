@@ -36,7 +36,7 @@ public class UseItemEvent extends ActionEvent {
 	
 	@Override
 	protected void afterGameEvent() {
-		getGame().getCurrentPlayer().decrementActions();
+		
 	}
 
 	/* (non-Javadoc)
