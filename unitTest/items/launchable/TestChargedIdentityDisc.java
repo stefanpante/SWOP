@@ -22,15 +22,6 @@ public class TestChargedIdentityDisc {
 		chargedDisc = new ChargedIdentityDisc();
 	}
 	
-	@Test
-	public void isValidDistanceTraveled() {
-		assertFalse(chargedDisc.isValidDistanceTraveled(-1));
-		assertTrue(chargedDisc.isValidDistanceTraveled(0));
-		
-		assertTrue(chargedDisc.isValidDistanceTraveled(chargedDisc.getRange() - 1));
-		assertTrue(chargedDisc.isValidDistanceTraveled(chargedDisc.getRange()));
-		assertFalse(chargedDisc.isValidDistanceTraveled(chargedDisc.getRange() + 1));
-	}
 	
 	@Test
 	public void getRange() {
