@@ -91,6 +91,20 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private Label playerInventoryLabel;
 	private PFont standardFont;
 
+	private Button confirm;
+
+	private Textfield widthGrid;
+
+	private Textfield heightGrid;
+
+	private boolean initialized = false;
+
+	private int hCells;
+
+	private int vCells;
+
+	private int currentPlayerColor = OConstants.PLAYERBLUE;
+
 	/**
 	 * initializes the objectron gui
 	 */
@@ -126,9 +140,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	}
 
-	private Textfield widthGrid;
-	private Textfield heightGrid;
-	private Button confirm;
 	@SuppressWarnings("deprecation")
 	public void initializeInput(){
 		inputController.setFont(standardFont);
@@ -159,7 +170,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	}
 
-	private int hCells;
 	public void hcells(String value){
 		System.out.println(value);
 		try{
@@ -176,7 +186,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 
 	}
-	private int vCells;
 	public void vcells(String value){
 		try{
 			vCells = Integer.parseInt(value);
@@ -193,8 +202,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 
 	}
-
-	private boolean initialized = false;;
 
 	public void confirm(){
 		// needed to get the values of the
@@ -451,7 +458,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}
 	}
 
-	private int currentPlayerColor = OConstants.PLAYERBLUE;
 	public void changePlayer(){
 		try{
 			if(obj  == null){
@@ -532,7 +538,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	}
 
-	private boolean endTurn = true;
+	private boolean endTurn = false;
 	private void confirmEndTurn() {
 		if(endTurn){
 			yesButton.setVisibility(true);
