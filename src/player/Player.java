@@ -414,9 +414,11 @@ public class Player extends Observable implements Obstacle {
 	 * @param	item
 	 * 			The item to use.
 	 * @throws	IllegalStateException
-	 * 			when the item that is used is not inside the inventory.
+	 * 			when the item that is used is not inside the inventory or null.
 	 */
 	public void useItem(Item item) throws IllegalStateException {
+		if(item == null)
+			throw new IllegalStateException("Can't use a 'null' item");
 		inventory.removeItem(item);
 		item.notifyUse();
 		
