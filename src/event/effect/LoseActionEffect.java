@@ -3,11 +3,11 @@ package event.effect;
 import player.Player;
 import game.Game;
 
-public class LoseActionEvent extends EffectEvent {
+public class LoseActionEffect extends Effect {
 	
 	private int amount;
 
-	public LoseActionEvent(Game game, int amount) {
+	public LoseActionEffect(Game game, int amount) {
 		super(game);
 		this.amount = amount;
 	}

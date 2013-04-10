@@ -10,13 +10,13 @@ import game.Game;
  * @author Jonas Devlieghere
  *
  */
-public abstract class EffectEvent extends AbstractGameEvent {
+public abstract class Effect extends AbstractGameEvent {
 
 	
 	/**
 	 * @param game
 	 */
-	public EffectEvent(Game game) {
+	public Effect(Game game) {
 		super(game);
 	}
 	

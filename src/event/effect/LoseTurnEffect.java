@@ -4,7 +4,7 @@ package event.effect;
 import game.Game;
 import player.Player;
 
-public class LoseTurnEvent extends EffectEvent {
+public class LoseTurnEffect extends Effect {
 	
 	private int amount;
 	private boolean accumulating;
@@ -21,7 +21,7 @@ public class LoseTurnEvent extends EffectEvent {
 	 * @param	accumulating
 	 * 			True if remaining actions still need to be taken into account.
 	 */
-	public LoseTurnEvent(Game game, Player player, int amount, boolean accumulating) {
+	public LoseTurnEffect(Game game, Player player, int amount, boolean accumulating) {
 		super(game);
 		this.player = player;
 		this.amount = amount;

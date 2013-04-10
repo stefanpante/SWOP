@@ -3,9 +3,10 @@
  */
 package event.action;
 
-import event.effect.LoseActionEvent;
-import event.effect.LoseTurnEvent;
-import event.effect.TeleportEvent;
+import player.Player;
+import event.effect.LoseActionEffect;
+import event.effect.LoseTurnEffect;
+import event.effect.TeleportEffect;
 import game.Game;
 import item.LightGrenade;
 import item.Teleport;
@@ -69,7 +70,7 @@ public class MoveEvent extends ActionEvent {
 
 		if(newPosition.getInventory().hasTeleport()) {
 			Teleport teleport = newPosition.getInventory().getTeleport();
-			TeleportEvent teleportEvent = new TeleportEvent(getGame(), teleport);
+			TeleportEffect teleportEvent = new TeleportEffect(getGame(), teleport);
 			teleportEvent.run();
 		}
 	}
@@ -110,11 +111,13 @@ public class MoveEvent extends ActionEvent {
 		}
 		
 		if(hasActiveGrenade && hasNoPower) {
-			new LoseActionEvent(getGame(), 4).run();	
+			new LoseActionEffect(getGame(), 4).run();	
 		}else if(hasActiveGrenade)
-			new LoseActionEvent(getGame(), 3).run();
-		else if(hasNoPower)
-			new EndTurnEvent(getGame()).run();
+			new LoseActionEffect(getGame(), 3).run();
+		else if(hasNoPower) {
+			Player currentPlayer = getGame().getCurrentPlayer();
+			currentPlayer.loseActions(currentPlayer.getRemainingActions());
+		}
 		
 		if(hasActiveGrenade)
 			grenade.deactivate();

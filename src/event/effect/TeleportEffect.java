@@ -14,11 +14,11 @@ import square.Square;
  * 
  * @author jonas
  */
-public class TeleportEvent extends EffectEvent {
+public class TeleportEffect extends Effect {
 	
 	private Teleport teleport;
 	
-	public TeleportEvent(Game game, Teleport teleport) {
+	public TeleportEffect(Game game, Teleport teleport) {
 		super(game);
 		this.teleport = teleport;
 	}

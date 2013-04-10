@@ -10,14 +10,14 @@ import player.Player;
  * @author jonas
  *
  */
-public class LightGrenadeEvent extends EffectEvent {
+public class LightGrenadeEffect extends Effect {
 	
 	public static final int TURNS_LOST = 1;
 
 	/**
 	 * @param game
 	 */
-	public LightGrenadeEvent(Game game) {
+	public LightGrenadeEffect(Game game) {
 		super(game);
 	}
 
