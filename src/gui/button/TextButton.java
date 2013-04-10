@@ -15,8 +15,8 @@ public class TextButton extends GUIButton {
 	public TextButton(float width, float height, PVector position, String text,  PApplet gui) {
 		super(width, height, position, gui);
 		this.text = text;
-		this.setColor(OConstants.GREEN);
-		this.setRolloverColor(OConstants.DARKER_GREEN);
+		this.setColor(OConstants.LIGHTER_GREY);
+		this.setRolloverColor(OConstants.LIGHT_GREY);
 	}
 
 	@Override
