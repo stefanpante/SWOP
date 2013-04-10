@@ -1,5 +1,6 @@
 package event.action;
 
+import player.Player;
 import square.Square;
 import controller.GameHandler;
 import event.effect.LoseActionEvent;
@@ -23,21 +24,14 @@ public class EndTurnEvent extends ActionEvent {
 
 	@Override
 	protected void duringGameEvent() {
-		getGame().getCurrentPlayer().endTurn();
+		Player currentPlayer = getGame().getCurrentPlayer();
 		
-		for(Square square : getGame().getGrid().getAllSquares())
-			square.getPower().decreaseTurn();
+		currentPlayer.loseActions(currentPlayer.getRemainingActions());
 	}
-
-	/**
-	 * If a player ends his turn on a PowerFailed square he loses 1 action 
-	 * on the next turn.
-	 */
+	
 	@Override
 	protected void afterGameEvent() {
-		new LoseActionEvent(getGame(), 1).run();
 		
-		getGame().switchToNextPlayer();
 	}
 
 }

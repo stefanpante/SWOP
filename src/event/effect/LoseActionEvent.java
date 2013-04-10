@@ -25,7 +25,7 @@ public class LoseActionEvent extends EffectEvent {
 
 	@Override
 	protected void afterGameEvent() {
-		// TODO Auto-generated method stub
+		
 	}
 
 }
