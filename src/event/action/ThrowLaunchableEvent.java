@@ -38,11 +38,15 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		return this.direction;
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	protected void beforeGameEvent() {
 		// Check all parameters.
-		if(!getGame().getCurrentPlayer().getInventory().hasItem(launchableItem)){
+		if(!getGame().getCurrentPlayer().getInventory().hasItem(getLaunchableItem())){
 			throw new IllegalStateException("Player can't throw a Launchable that isn't in his inventory!");
+		}
+		if(getLaunchableItem().isValidTravelDirection(getDirection())){
+			throw new IllegalStateException("Player can't throw a Launchable in the direction: " + getDirection());
 		}
 	}
 	
