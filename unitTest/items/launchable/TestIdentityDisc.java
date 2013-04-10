@@ -28,4 +28,14 @@ public class TestIdentityDisc {
 	public void getRange() {
 		assertEquals(identityDisc.getRange(), IdentityDisc.MAX_TRAVEL_DISTANCE);
 	}
+	
+	@Test
+	public void isValidTravelDirection() {
+		assertTrue(IdentityDisc.isValidTravelDirection(Direction.NORTH));
+		assertTrue(IdentityDisc.isValidTravelDirection(Direction.SOUTH));
+		assertTrue(IdentityDisc.isValidTravelDirection(Direction.EAST));
+		assertFalse(IdentityDisc.isValidTravelDirection(Direction.SOUTHWEST));
+		assertFalse(IdentityDisc.isValidTravelDirection(Direction.NORTHEAST));
+		assertFalse(IdentityDisc.isValidTravelDirection(Direction.SOUTHEAST));
+	} 
 }

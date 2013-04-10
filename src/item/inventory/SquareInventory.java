@@ -238,6 +238,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		super.addItem(identityDisc);
+		launchableHashes.add(identityDisc.hashCode());
 	}
 
 	@Override
@@ -246,11 +247,13 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 			throw new IllegalStateException("There are no identity discs to be removed.");
 		
 		super.removeItem(identityDisc);
+		launchableHashes.remove(new Integer(identityDisc.hashCode()));
 	}
 
 	@Override
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)	throws IllegalStateException {
 		super.addItem(chargedDisc);
+		launchableHashes.add(chargedDisc.hashCode());
 	} 
 	
 	@Override
@@ -259,15 +262,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 			throw new IllegalStateException("There are no charged identity discs to be removed.");
 		
 		super.removeItem(chargedDisc);
-	}
-
-	@Override
-	public void addLaunchable(LaunchableItem launchable){
-		launchableHashes.add(launchable.hashCode());
-	}
-
-	@Override
-	public void removeLaunchable(LaunchableItem launchable){
-		launchableHashes.remove(new Integer(launchable.hashCode()));
+		launchableHashes.remove(new Integer(chargedDisc.hashCode()));
 	}
 }

@@ -7,7 +7,9 @@ import item.LightGrenadeState;
 import item.LightGrenade;
 import item.Teleport;
 import item.inventory.SquareInventory;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
+import item.launchable.LaunchableItem;
 
 import java.util.ArrayList;
 
@@ -120,5 +122,31 @@ public class TestSquareInventory {
 		assertTrue(sqinv.hasLightGrenade());
 		sqinv.removeItem(lg);
 		assertFalse(sqinv.hasLightGrenade());
+	}
+	
+	@Test
+	public void testAddLaunchable(){
+		SquareInventory sqinv = new SquareInventory();
+		Item it = new IdentityDisc();
+		sqinv.addItem(it);
+		assertTrue(sqinv.hasLaunchable());
+		Item it2 = new ChargedIdentityDisc();
+		sqinv.addItem(it2);
+		assertTrue(sqinv.hasLaunchable());
+		ArrayList<LaunchableItem> launchableList = sqinv.getLaunchables();
+		assertTrue(launchableList.contains(it));
+		assertTrue(launchableList.contains(it2));
+		assertEquals(2,launchableList.size());
+		sqinv.removeItem(it);
+		assertTrue(sqinv.hasLaunchable());
+		launchableList = sqinv.getLaunchables();
+		assertFalse(launchableList.contains(it));
+		assertTrue(launchableList.contains(it2));
+		assertEquals(1,launchableList.size());
+		sqinv.removeItem(it2);
+		launchableList = sqinv.getLaunchables();
+		assertFalse(launchableList.contains(it));
+		assertFalse(launchableList.contains(it2));
+		assertEquals(0,launchableList.size());
 	}
 }

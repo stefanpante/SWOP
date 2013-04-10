@@ -76,24 +76,28 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
 		super.addItem(chargedDisc);
+		launchableHashes.add(chargedDisc.hashCode());
 	}
 
 	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
 		super.removeItem(chargedDisc);
+		launchableHashes.remove(new Integer(chargedDisc.hashCode()));
 	}
 
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc)
 			throws IllegalStateException {
 		super.addItem(identityDisc);
+		launchableHashes.add(identityDisc.hashCode());
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc)
 			throws IllegalStateException {
 		super.removeItem(identityDisc);
+		launchableHashes.remove(new Integer(identityDisc.hashCode()));
 	}
 
 	@Override
@@ -116,15 +120,5 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void removeTeleport(Teleport teleport) throws IllegalStateException {
 		throw new IllegalStateException("A Teleport can not be in a players Inventory");
-	}
-
-	@Override
-	public void addLaunchable(LaunchableItem launchable){
-		launchableHashes.add(launchable.hashCode());
-	}
-
-	@Override
-	public void removeLaunchable(LaunchableItem launchable){
-		launchableHashes.remove(new Integer(launchable.hashCode()));
 	}
 }

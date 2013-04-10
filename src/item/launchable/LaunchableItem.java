@@ -1,5 +1,6 @@
 package item.launchable;
 
+import square.Direction;
 import item.Item;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
@@ -8,7 +9,7 @@ import item.inventory.SquareInventory;
  * This is a special type of items which can be launched by the player.
  * For example an IdentityDisc.
  * 
- * @author vincentreniers
+ * @author Dieter
  */
 public abstract class LaunchableItem extends Item {
 	
@@ -17,28 +18,26 @@ public abstract class LaunchableItem extends Item {
 	 * 
 	 * @return
 	 */
-	abstract public int getRange();
+	abstract public int getRange();	
 	
-	
-	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
-		plInv.addLaunchable(this);
-	}
-
-	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
-		plInv.removeLaunchable(this);
-	}
-	
-	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv)	throws IllegalStateException {
-		sqInv.addLaunchable(this);
-	}
-
-	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-		sqInv.removeLaunchable(this);
-	}
+	/**
+	 * Check whether the given travelDirection is a valid travelDirection 
+	 * 	for all the Launchable objects.
+	 * 
+	 * @param   travelDirection
+	 *      	The travelDirection to check.
+	 * @return  True if and only if the given value is not null 
+	 * 			and doesn't represent a diagonal direction
+	 */
+	public static boolean isValidTravelDirection(Direction travelDirection) {
+		if(travelDirection == null){
+			return false;
+		}
+		if (travelDirection.isDiagonal()) {
+			return false;
+		}
+		return true;
+	} 
 	
 	@Override
 	public String toString() {

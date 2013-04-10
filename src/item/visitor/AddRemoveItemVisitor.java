@@ -19,9 +19,6 @@ public interface AddRemoveItemVisitor {
 	 public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException;
 	 public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException;
 	 
-	 public void addLaunchable(LaunchableItem launchable);
-	 public void removeLaunchable(LaunchableItem launchable);
-	 
 	 public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException;
 	 public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException;
 	 
