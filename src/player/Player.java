@@ -491,6 +491,6 @@ public class Player extends Observable implements Obstacle {
 	
 	@Override
 	public String toString() {
-		return "Player " + this.getName();
+		return "Player " + this.getID();
 	}
 }
