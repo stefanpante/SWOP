@@ -37,21 +37,15 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	private Direction getDirection(){
 		return this.direction;
 	}
-
-	/* (non-Javadoc)
-	 * @see event.AbstractGameEvent#beforeGameEvent()
-	 */
+	
 	@Override
 	protected void beforeGameEvent() {
-		// Check all para,eters.
+		// Check all parameters.
 		if(!getGame().getCurrentPlayer().getInventory().hasItem(launchableItem)){
 			throw new IllegalStateException("Player can't throw a Launchable that isn't in his inventory!");
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see event.AbstractGameEvent#duringGameEvent()
-	 */
+	
 	@Override
 	protected void duringGameEvent() {
 		// get the start position of the launchable item
@@ -60,11 +54,11 @@ public class ThrowLaunchableEvent extends ActionEvent {
 		TrajectoryMediator trajectoryMediator = new TrajectoryMediator(getGame().getGrid());
 		// determine the end position of the launchable item
 		Square endSquare = trajectoryMediator.getEndSquare(currentPosition, getDirection(), getLaunchableItem().getRange());
+		
 		// remove the launchable from the players inventory
 		getGame().getCurrentPlayer().useItem(getLaunchableItem());
-		
-		// add the launchable to the endsquare's inventory.
-		endSquare.getInventory().addItem(launchableItem);
+		// add the launchable to the square's inventory.
+		endSquare.getInventory().addItem(launchableItem);		
 		
 		// Checks for a hit on another player.
 		for(Player player: getGame().getOtherPlayers()){

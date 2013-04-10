@@ -43,7 +43,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	}
 	
 	protected void afterActionEvent() {
-		if(getGame().currentPlayerIsStuck())
+		if(getGame().isCurrentPlayerStuck())
 			throw new IllegalStateException("The current player is stuck.");
 	}
 	

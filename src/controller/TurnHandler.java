@@ -80,7 +80,7 @@ public class TurnHandler extends Handler implements Observer {
 	public void startTurn(){
 		Player currentPlayer = getGame().getCurrentPlayer();
 		
-		if(getGame().currentPlayerIsStuck()){
+		if(hasLost()){
 			getGame().end();
     		firePropertyChange(GameHandler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
 		}

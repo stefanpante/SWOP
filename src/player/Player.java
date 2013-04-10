@@ -342,26 +342,32 @@ public class Player extends Observable implements Obstacle {
 
 	/**
 	 * Causes a player to lose turns.
-	 * @param turns		the number of turns a player loses.
+	 * 
+	 * @param	turns	
+	 * 			the number of turns a player loses.
+	 * @param	accumulating
+	 * 			True if the remaining actions don't need to be discarded.
 	 * @throws 	IllegalArgumentException
 	 * 			Thrown when the number of turns lost is not valid.
 	 */
 	public void loseTurns(int turns, boolean accumulating) throws IllegalArgumentException{
-		if(!isValidTurnsLost(turns)){
+		if(!isValidTurnsLost(turns))
 				throw new IllegalArgumentException("The given turns lost are not valid (Should be a positive value)");
-		}
+		
 		int remActions;
-		if(!accumulating){
+		
+		if(!accumulating)
 			remActions = 0;
-		}else{
+		else
 			remActions = remainingActions - Player.MAX_ALLOWED_ACTIONS * turns;
-		}
+		
 		this.setRemainingActions(remActions);
 	}
 	
 
 	/**
 	 * Causes a player to lose actions
+	 * 
 	 * @param actions	the number of actions a player loses.
 	 * @throws 	IllegalArgumentException
 	 * 			thrown when the number of actions lost is not valid.

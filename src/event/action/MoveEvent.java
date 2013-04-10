@@ -114,7 +114,7 @@ public class MoveEvent extends ActionEvent {
 		}else if(hasActiveGrenade)
 			new LoseActionEvent(getGame(), 3).run();
 		else if(hasNoPower)
-			new LoseTurnEvent(getGame(),getGame().getCurrentPlayer(),1,false).run();
+			new LoseTurnEvent(getGame(),getGame().getCurrentPlayer(),1,true).run();
 		
 		if(hasActiveGrenade)
 			grenade.deactivate();

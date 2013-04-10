@@ -357,8 +357,10 @@ public class Game {
 		}
 	}
 	
-	
-	public boolean currentPlayerIsStuck(){
+	/**
+	 * Checks if the current player is unable to make a move.
+	 */
+	public boolean isCurrentPlayerStuck(){
 		for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
 			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
 				return false;

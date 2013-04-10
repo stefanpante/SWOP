@@ -237,7 +237,7 @@ public abstract class Handler {
 	 * @return	a boolean which represents the loss of the game.
 	 */
 	public boolean hasLost(){
-		return getGame().currentPlayerIsStuck();
+		return getGame().isCurrentPlayerStuck();
 	}
 
 	
