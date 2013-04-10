@@ -10,6 +10,8 @@ import square.Square;
 
 public class AStar {
 	
+	private ArrayList<SquareContainer> source;
+	
 	private ArrayList<SquareContainer> closedSet;
 	private PriorityQueue<SquareContainer> openSet;
 	private Grid grid;
@@ -21,9 +23,24 @@ public class AStar {
 		boxAllSquares(grid);
 	}
 	
-	private void boxAllSquares(Grid grid2) {
+	private boxAllSquares(Grid grid2) {
 		// TODO: Morgen
 		// squareContainer.setHeuristicDistanceFromGoal(manhattan(grid.getCoordinate(square), grid.getCoordinate(square)));
+	}
+	
+	private void box(ArrayList<Square> squares){
+		for(Square square : squres){
+			
+		}
+	}
+	
+	private SquareContainer getSquareContainer(Square square){
+		for(SquareContainer sc : source){
+			if(sc.getSquare().equals(square)){
+				return sc;
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<Coordinate> shortestPath(SquareContainer start, SquareContainer goal){			
@@ -37,7 +54,7 @@ public class AStar {
 				return reconstructPath(current,start);
 			}
 
-			for(SquareContainer neighbour : current.getNeighbors()){
+			for(SquareContainer neighbour : box(grid.getNeighbors(current.getSquare()))){
 				boolean neighbourIsBetter;
 
 				if(closedSet.contains(neighbour))
@@ -79,4 +96,5 @@ public class AStar {
 	}
 
 
+	
 }

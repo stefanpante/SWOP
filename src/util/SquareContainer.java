@@ -7,7 +7,6 @@ import square.Square;
 public class SquareContainer {
 
 	private Square square;
-	private ArrayList<SquareContainer> neighbors;
 	private SquareContainer previous;
 	private int distanceFromStart;
 	private int distanceFromGoal;
@@ -44,11 +43,4 @@ public class SquareContainer {
 		return this.distanceFromGoal;
 	}
 	
-	public void addNeighbors(ArrayList<SquareContainer> neighbors){
-		this.neighbors = new ArrayList<SquareContainer>(neighbors);
-	}
-	
-	public ArrayList<SquareContainer> getNeighbors(){
-		return new ArrayList<SquareContainer>(this.neighbors);
-	}
 }
