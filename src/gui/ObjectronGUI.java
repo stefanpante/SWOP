@@ -388,11 +388,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			}
 		}else{
 			if(yesButton.mouseHit(mouseX, mouseY)){
+				this.obj.getEndTurnHandler().confirm(true);
 				this.endTurn();
 				this.endTurn = false;
 			}
 
 			if(noButton.mouseHit(mouseX, mouseY)){
+				this.obj.getEndTurnHandler().confirm(false);
 				this.endTurn = false;
 			}
 		}
