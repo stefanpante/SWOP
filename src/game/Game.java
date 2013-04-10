@@ -88,6 +88,31 @@ public class Game {
 		setCurrentPlayer(players.get(0));
 	}
 	
+	
+	/**
+	 *Constructs a new board-based game with a given grid.
+	 *
+	 * Protected for testing purposes. 
+	 * 
+	 * @param 	grid
+	 * 			The grid on which the game will be played.
+	 */
+	protected Game(Grid grid){
+		// Build the grid
+		this.setGrid(grid);
+		
+		// Add players
+		this.players = new ArrayList<Player>();
+		Square bottomLeft = grid.getSquare(new Coordinate(0, grid.getVSize()-1));
+		Square topRight = grid.getSquare(new Coordinate(grid.getHSize()-1, 0));
+		addPlayer(new Player(bottomLeft, 1));
+		addPlayer(new Player(topRight, 2));
+		
+		// Start the game
+		start();
+		setCurrentPlayer(players.get(0));
+	}
+	
 	/**
 	 * Sets the grid for the game.
 	 * 
