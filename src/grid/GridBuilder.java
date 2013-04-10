@@ -47,16 +47,19 @@ public class GridBuilder {
 	 * obstacles. No lightGrenades or any other object. This is mainly used
 	 * for testing purposes.
 	 */
-	public GridBuilder() {
+	protected GridBuilder() {
 		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();
-		setConstraints();
-		
+		setEmptyConstraints();
 	}
 	
 	/**
 	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 * 
+	 * This constructor will place random Walls, LightGrenades, 
+	 * identityDiscs and Teleports according to the constraints.
+	 * 
 	 * @param 	hSize		
 	 * 			The horizontal size of the grid this gridBuilder will build.
 	 * @param 	vSize		
@@ -93,14 +96,14 @@ public class GridBuilder {
 	 * @param	teleports
 	 * 			A list of coordinates that should contain a teleport.
 	 */
-	public GridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
+	protected GridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
 			ArrayList<Coordinate> lightGrenades, 
 			ArrayList<Coordinate> identityDisks, 
 			ArrayList<Coordinate> teleports){
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
-		setConstraints();
+		setEmptyConstraints();
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(walls, WALL_CONSTRAINT);
@@ -129,6 +132,12 @@ public class GridBuilder {
 		TELEPORT_CONSTRAINT = new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded);
 	}
 	
+	private void setEmptyConstraints(){		
+		WALL_CONSTRAINT = new GridConstraint();
+		LIGHT_GRENADE_CONSTRAINT = new GridConstraint();
+		IDENTITY_DISK_CONSTRAINT = new GridConstraint();
+		TELEPORT_CONSTRAINT = new GridConstraint();
+	}
 	
 	/**
 	 * Returns the grid.
