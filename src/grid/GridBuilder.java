@@ -79,7 +79,8 @@ public class GridBuilder {
 		placeWalls(randomWallLocations(WALL_CONSTRAINT), WALL_CONSTRAINT);
 		build(randomLocations(LIGHT_GRENADE_CONSTRAINT),
 				randomLocations(IDENTITY_DISK_CONSTRAINT),
-				randomLocations(TELEPORT_CONSTRAINT));
+				randomLocations(TELEPORT_CONSTRAINT), 
+				chargedIdentityDiskLocation());
 	}
 	
 	/**
@@ -103,7 +104,8 @@ public class GridBuilder {
 	protected GridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
 			ArrayList<Coordinate> lightGrenades, 
 			ArrayList<Coordinate> identityDisks, 
-			ArrayList<Coordinate> teleports){
+			ArrayList<Coordinate> teleports,
+			Coordinate chargedIdentityDisk){
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
@@ -111,13 +113,14 @@ public class GridBuilder {
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(walls, WALL_CONSTRAINT);
-		build(lightGrenades, identityDisks, teleports);
+		build(lightGrenades, identityDisks, teleports, chargedIdentityDisk);
 	}
 	
-	private void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports){
+	private void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk){
 		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
 		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
 		placeTeleports(teleports, TELEPORT_CONSTRAINT);
+		placeChargedIdentityDisk(chargedIdentityDisk);
 	}
 	
 
@@ -227,24 +230,35 @@ public class GridBuilder {
 		return coordinates;
 	}
 	
-	protected Coordinate ChargedIdentityDiskLocation(){
+	/**
+	 * Suggest a coordinate for the Charged Disk Location
+	 * 
+	 * @return A coordinate equally far away from each player
+	 */
+	protected Coordinate chargedIdentityDiskLocation(){
 		Square player1Square = getGrid().getSquare(getBottomLeft());
 		Square player2Square = getGrid().getSquare(getTopRight());
 		Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
 		for(Square square : getGrid().getAllSquares()){
 			if(!square.isObstructed()){
 				Coordinate thisCoordinate = getGrid().getCoordinate(square);
-				AStar aStar = new AStar(getGrid());
-				int player1Length = aStar.shortestPath(player1Square, square).size();
-				int player2Length = aStar.shortestPath(player2Square, square).size();
-				if(Math.abs(player2Length - player1Length) <= 2){
-					int longest = Math.max(player1Length, player2Length);
-					if(longest < shortest.getValue()){
-						shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
+				try{
+					AStar aStar = new AStar(getGrid());
+					int player1Length = aStar.shortestPath(player1Square, square).size();
+					AStar aStar2 = new AStar(getGrid());
+					int player2Length = aStar2.shortestPath(player2Square, square).size();
+					if(Math.abs(player2Length - player1Length) <= 2){
+						int longest = Math.max(player1Length, player2Length);
+						if(longest < shortest.getValue()){
+							shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
+						}
 					}
+				}catch(Exception e){
+					System.err.println(e.getMessage());
 				}
 			}
 		}
+		System.out.println(shortest);
 		return shortest.getKey();
 	}
 	
@@ -361,14 +375,9 @@ public class GridBuilder {
 	}
 	
 	protected void placeChargedIdentityDisk(Coordinate coordinate){
-		AStar aStar = new AStar(getGrid());
+		if(coordinate == null)
+			return;
 		Square diskSquare = getGrid().getSquare(coordinate);
-		Square player1Square = getGrid().getSquare(getBottomLeft());
-		Square player2Square = getGrid().getSquare(getTopRight());
-		int player1Length = aStar.shortestPath(player1Square, diskSquare).size();
-		int player2Length = aStar.shortestPath(player2Square, diskSquare).size();
-		if(Math.abs(player1Length - player2Length) > 2)
-			throw new IllegalArgumentException("Shortest paths to Charged Identity Disk differ more than two");
 		placeItem(diskSquare, new ChargedIdentityDisc());
 	}
 	

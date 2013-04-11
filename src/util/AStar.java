@@ -21,16 +21,16 @@ public class AStar {
 	
 	public AStar(Grid grid){
 		this.grid = grid;
-		this.source = new ArrayList<SquareContainer>();
 		closedSet = new ArrayList<SquareContainer>();
 		openSet = new PriorityQueue<SquareContainer>();
 	}
 	
 	private void boxAllSquares(Grid grid, Square start, Square goal) {
+		this.source = new ArrayList<SquareContainer>();
 		for(Square square : grid.getAllSquares()){
 			SquareContainer sq = new SquareContainer(square);
 			sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
-			source.add(sq);
+			this.source.add(sq);
 		}
 	}
 	
@@ -53,14 +53,12 @@ public class AStar {
 		return null;
 	}
 
-	public ArrayList<Coordinate> shortestPath(Square startSquare, Square goalSquare){			
+	public ArrayList<Coordinate> shortestPath(Square startSquare, Square goalSquare){	
 		boxAllSquares(grid, startSquare, goalSquare);
-		
 		SquareContainer start = getSquareContainer(startSquare);
 		SquareContainer goal = getSquareContainer(goalSquare);
 		
 		openSet.add(start);
-
 		while(!openSet.isEmpty()){
 			SquareContainer current = openSet.remove(); 
 			closedSet.add(current);
@@ -91,9 +89,8 @@ public class AStar {
 				}
 			}
 
-
 		}
-		throw new IllegalStateException();
+		throw new IllegalStateException("No path from " + grid.getCoordinate(startSquare) + " to " +grid.getCoordinate(goalSquare));
 	}
 	
 	private int manhattan(Square startSquare, Square goalSquare){
@@ -168,6 +165,53 @@ public class AStar {
 
 			return EQUAL;
 		}
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + getOuterType().hashCode();
+			result = prime * result
+					+ ((square == null) ? 0 : square.hashCode());
+			return result;
+		}
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			SquareContainer other = (SquareContainer) obj;
+			if (!getOuterType().equals(other.getOuterType())) {
+				return false;
+			}
+			if (square == null) {
+				if (other.square != null) {
+					return false;
+				}
+			} else if (!square.equals(other.square)) {
+				return false;
+			}
+			return true;
+		}
+
+		private AStar getOuterType() {
+			return AStar.this;
+		}
+		
+		
 
 		
 		
