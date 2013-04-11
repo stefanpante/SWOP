@@ -51,7 +51,7 @@ public class GridBuilder {
 	 * obstacles. No lightGrenades or any other object. This is mainly used
 	 * for testing purposes.
 	 */
-	protected GridBuilder() {
+	public GridBuilder() {
 		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();

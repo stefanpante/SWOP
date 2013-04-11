@@ -99,7 +99,7 @@ public class Game {
 	 * @param 	grid
 	 * 			The grid on which the game will be played.
 	 */
-	protected Game(Grid grid){
+	public Game(Grid grid){
 		// Build the grid
 		this.setGrid(grid);
 		

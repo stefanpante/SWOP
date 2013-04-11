@@ -29,14 +29,13 @@ import square.obstacle.Wall;
 import util.Coordinate;
 
 import game.Game;
+import grid.Grid;
 import grid.GridBuilder;
 
 /**
  * Scenario test for the Use Case "Move".
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- * 
- * TODO: Teleport Tests
  */
 public class MoveHandlerTest {
 
@@ -46,10 +45,12 @@ public class MoveHandlerTest {
 	
 	private TurnHandler turnHandler;
 	
-	// TODO: Create flat grid
 	@Before
 	public void setUpBefore(){
-		game = new Game(10,10);
+		GridBuilder gridBuilder = new GridBuilder();
+		Grid grid = gridBuilder.getGrid();
+		
+		game = new Game(grid);
 		
 		moveHandler = new MoveHandler(game,null);
 		turnHandler = new TurnHandler(game, null);
