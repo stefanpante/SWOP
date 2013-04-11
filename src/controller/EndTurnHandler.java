@@ -88,12 +88,10 @@ public class EndTurnHandler extends Handler{
 	 * sets the confirm.
 	 * @param 	bool 
 	 * 			A boolean which sets the confirm.
-	 * @effect	endTurn()
 	 * @post	bool = isConfirmed()
 	 */
 	public void confirm(boolean bool) {
 		this.confirmed = bool;
-		endTurn();
 	}
 
 }
