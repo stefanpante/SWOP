@@ -13,6 +13,7 @@ import player.Player;
 import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
+import util.AStar;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -76,6 +77,7 @@ public class Game {
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.setGrid(gridBuilder.getGrid());
 		
+
 		// Add players
 		this.players = new ArrayList<Player>();
 		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
@@ -118,7 +120,7 @@ public class Game {
 	 * 
 	 * @param grid
 	 */
-	public void setGrid(Grid grid) {
+	private void setGrid(Grid grid) {
 		this.grid = grid;		
 	}
 
@@ -386,9 +388,11 @@ public class Game {
 	 * Checks if the current player is unable to make a move.
 	 */
 	public boolean isCurrentPlayerStuck(){
-		for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
-			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
-				return false;
+		if(!getCurrentPlayer().hasMoved()){
+			for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+				if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
+					return false;
+				}
 			}
 		}
 		return true; 
