@@ -245,8 +245,8 @@ public class LaunchableScenarioTest {
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 
-		Square s1 = game.getGrid(new Coordinate(6,4));
-		square s2 = game.getGrid(new Coordinate(6,5));
+		Square s1 = game.getGrid().getSquare(new Coordinate(6,4));
+		Square s2 = game.getGrid().getSquare(new Coordinate(6,5));
 		Wall wall = new Wall(s1,s2);
 
 		IdentityDisc id = new IdentityDisc();
@@ -274,8 +274,8 @@ public class LaunchableScenarioTest {
 		Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
 
-		Square s1 = game.getGrid(new Coordinate(9,4));
-		square s2 = game.getGrid(new Coordinate(9,5));
+		Square s1 = game.getGrid().getSquare(new Coordinate(9,4));
+		Square s2 = game.getGrid().getSquare(new Coordinate(9,5));
 		Wall wall = new Wall(s1,s2);
 
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
@@ -295,7 +295,6 @@ public class LaunchableScenarioTest {
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
-		game.clearObstacles();
 
 		// Throw the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(2,4));
@@ -305,7 +304,7 @@ public class LaunchableScenarioTest {
 		
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
-		ih.throwLaunchable(id, Direction.EAST)
+		ih.throwLaunchable(id, Direction.EAST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,4)).getInventory().hasItem(id));
 		
 
@@ -339,7 +338,7 @@ public class LaunchableScenarioTest {
 		assertTrue(game.getNextPlayer().getPosition().getInventory().hasItem(id));
 		assertFalse(game.getCurrentPlayer().getInventory().hasItem(id));
 		// Player loses his turn
-		assertTrue();
+		//assertTrue();
 
 
 	}
@@ -386,12 +385,11 @@ public class LaunchableScenarioTest {
 		
 		// Make sure the grid is clear
 		game.clearPowerFailures();
-		game.clearObstacles();
 		
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
 		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleporter teleporter = new Teleporter(s1, s2);
+		Teleport teleporter = new Teleport(s1, s2);
 		
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
