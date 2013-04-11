@@ -31,6 +31,7 @@ import util.Coordinate;
 import game.Game;
 import grid.Grid;
 import grid.GridBuilder;
+import grid.GridProvider;
 
 /**
  * Scenario test for the Use Case "Move".
@@ -47,9 +48,7 @@ public class MoveHandlerTest {
 	
 	@Before
 	public void setUpBefore(){
-		GridBuilder gridBuilder = new GridBuilder();
-		Grid grid = gridBuilder.getGrid();
-		
+		Grid grid = GridProvider.getEmptyGrid();
 		game = new Game(grid);
 		
 		moveHandler = new MoveHandler(game,null);

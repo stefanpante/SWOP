@@ -17,7 +17,7 @@ public class IdentityDisc extends LaunchableItem {
 	/**
 	 * The maximum travel distance of an uncharged identity disc.
 	 */
-	public static int MAX_TRAVEL_DISTANCE = 4;
+	public static int MAX_TRAVEL_DISTANCE = 3;
 	
 	/**
 	 * Constructor that makes an Identity Disc.
@@ -57,5 +57,10 @@ public class IdentityDisc extends LaunchableItem {
 	@Override
 	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
 		plInv.removeIdentityDisc(this);
+	}
+
+	@Override
+	public boolean isCharged() {
+		return false;
 	}
 }

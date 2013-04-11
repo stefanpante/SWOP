@@ -2,6 +2,8 @@ package controller;
 
 import game.Game;
 import item.Item;
+import item.launchable.LaunchableItem;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -167,6 +169,7 @@ public abstract class Handler {
     	firePropertyChange(GameHandler.GRENADES_PROPERTY, properties.get(GameHandler.GRENADES_PROPERTY));
     	firePropertyChange(GameHandler.POWER_FAILS_PROPERTY,  properties.get(GameHandler.POWER_FAILS_PROPERTY));
     	firePropertyChange(GameHandler.IDENTITY_DISK_PROPERTY, properties.get(GameHandler.IDENTITY_DISK_PROPERTY));
+    	firePropertyChange(GameHandler.CHARGED_DISK_PROPERTY, properties.get(GameHandler.CHARGED_DISK_PROPERTY));
     	firePropertyChange(GameHandler.TELEPORT_PROPERTY, properties.get(GameHandler.TELEPORT_PROPERTY));
     	
     	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
@@ -185,6 +188,7 @@ public abstract class Handler {
 		ArrayList<Coordinate> identityDisks = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> chargedDisks  = new ArrayList<Coordinate>(); 
 	
  		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
 			Square square = getGame().getGrid().getSquare(coordinate);
@@ -199,11 +203,19 @@ public abstract class Handler {
 			
 
 			if(square.getInventory().hasLaunchable()){
-				identityDisks.add(coordinate);
+				for(LaunchableItem item: square.getInventory().getLaunchables())
+					if(item.isCharged()){
+						chargedDisks.add(coordinate);
+					}
+					else{
+						identityDisks.add(coordinate);
+					}
 			}
 			
 			if(square.isObstructed())
 				walls.add(coordinate);
+			
+			//if(square.getInventory().has)
 			
 		}
  		
@@ -212,6 +224,7 @@ public abstract class Handler {
 		properties.put(GameHandler.IDENTITY_DISK_PROPERTY, identityDisks);
 		properties.put(GameHandler.TELEPORT_PROPERTY, teleports);
 		properties.put(GameHandler.WALLS_PROPERTY, walls);
+		properties.put(GameHandler.CHARGED_DISK_PROPERTY, chargedDisks);
  		
 		return properties;
 	}
