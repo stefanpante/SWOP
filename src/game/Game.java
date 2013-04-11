@@ -389,12 +389,13 @@ public class Game {
 	 */
 	public boolean isCurrentPlayerStuck(){
 		if(!getCurrentPlayer().hasMoved()){
-			for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
-				if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
-					return false;
-				}
+			return false; 
+		}
+		for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
+				return false;
 			}
 		}
-		return true; 
+		return true;
 	}
 }
