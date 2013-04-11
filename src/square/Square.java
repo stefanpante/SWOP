@@ -16,6 +16,8 @@ import notnullcheckweaver.Nullable;
 @NotNull
 public class Square{
 	
+	private static long sId = 0;
+	
 	private final long id;
 		
 	/**
@@ -40,7 +42,7 @@ public class Square{
 	public Square (){
 		this.inventory = new SquareInventory();
 		this.power = new Power();
-		this.id = System.nanoTime();
+		this.id = sId++;;
 	}
 	
 	/**
