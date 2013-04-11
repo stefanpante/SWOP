@@ -45,7 +45,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	}
 	
 	protected void afterActionEvent() {
-
+		//Currently nothing is needed here.
 	}
 	
 

@@ -1,4 +1,4 @@
-package scenariotests;
+package game;
 
 import static org.junit.Assert.assertEquals;
 
@@ -131,6 +131,49 @@ public class EndTurnHandlerTest {
 		
 		endTurnHandler.confirm(true);
 		endTurnHandler.endTurn();
+	}
+	
+	/**
+	 * We move the player onto a new square which is different than the starting position.
+	 * We then end it's turn. We do the same for the second player.
+	 * 
+	 * When we switch back to the first player, we see if the power failed square
+	 * results in 1 less action.
+	 */
+	@Test
+	public void startOnPowerFailure() {
+		Player player = game.getCurrentPlayer();
+		Player otherPlayer = game.getNextPlayer();
+		
+		// 1) First Player: move, let position power fail and end Turn.
+		
+		Direction direction = getValidMoveDirection(game);
+		Square square = game.getGrid().getNeighbor(player.getPosition(), direction);
+		
+		MoveHandler moveHandler = new MoveHandler(game, null);
+		moveHandler.move(direction);
+		
+		square.getPower().fail();
+		assertTrue(square.getPower().isFailing());
+		
+		endTurnHandler.confirm(true);
+		endTurnHandler.endTurn();
+		
+		// 2) Move the second player and  then endTurn.
+		direction = getValidMoveDirection(game);
+		square = game.getGrid().getNeighbor(otherPlayer.getPosition(), direction);
+		
+		moveHandler.move(direction);
+		
+		endTurnHandler.confirm(true);
+		endTurnHandler.endTurn();
+		
+		// Test: Check if the first player is on a power failed square and starts with 1 less action.
+		assertTrue(player.getPosition().getPower().isFailing());
+		assertTrue(game.getCurrentPlayer().getPosition().getPower().isFailing());
+		
+		assertEquals(game.getCurrentPlayer(), player);
+		assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS - 1);
 	}
 
 }

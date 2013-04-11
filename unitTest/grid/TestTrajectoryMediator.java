@@ -268,7 +268,7 @@ public class TestTrajectoryMediator {
 		assertEquals(expectedSquare, endSquare);
 	}
 	
-	//Case with powerfails and no teleport, range 3, EAST.
+	//Case with powerfail between and no teleport, range 3, EAST.
 	@Test
 	public void testGetEndSquare15() {
 		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
@@ -289,4 +289,47 @@ public class TestTrajectoryMediator {
 		assertEquals(expectedSquare, endSquare);
 	}
 	
+	
+	//Case with powerfail on the starting square and no teleport, range 3, EAST.
+	@Test
+	public void testGetEndSquare16() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		//Assure the teleports have a proper destination set.
+		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
+		Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
+		assertTrue(t0.getDestination().equals(t1));
+		assertTrue(t1.getDestination().equals(t0));
+
+		
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(5,7));
+		startSquare.getPower().fail();
+		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(7,7));
+		System.out.println(grid.getCoordinate(endSquare));
+		assertEquals(expectedSquare, endSquare);
+	}
+	
+	//Case with powerfail on the starting square and no teleport, range 3, EAST.
+	@Test
+	public void testGetEndSquare17() {
+		GridBuilder gb = new GridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports);
+		Grid grid = gb.getGrid();
+		//Assure the teleports have a proper destination set.
+		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
+		Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
+		assertTrue(t0.getDestination().equals(t1));
+		assertTrue(t1.getDestination().equals(t0));
+
+		
+		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		Square startSquare = grid.getSquare(new Coordinate(5,7));
+		startSquare.getPower().fail();
+		grid.getSquare(new Coordinate(6,7)).getPower().fail();
+		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
+		Square expectedSquare = grid.getSquare(new Coordinate(6,7));
+		System.out.println(grid.getCoordinate(endSquare));
+		assertEquals(expectedSquare, endSquare);
+	}
 }

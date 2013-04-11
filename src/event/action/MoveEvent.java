@@ -19,7 +19,7 @@ import square.Square;
  * to the other. It takes into account all the possible constraints and effects.
  * Such as Teleports, LightGrenades and various other items.
  * 
- * @author jonas, Vincent
+ * @author Jonas, Vincent
  */
 public class MoveEvent extends ActionEvent {
 
@@ -58,7 +58,7 @@ public class MoveEvent extends ActionEvent {
 
 	@Override
 	protected void beforeGameEvent() {
-		/* Check wether it's possible to move in the given direction */
+		/* Check whether it's possible to move in the given direction */
 		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
 			throw new IllegalStateException("Cannot move to given direction.");
 		}
