@@ -46,7 +46,7 @@ public class TurnHandler extends Handler implements Observer {
 	}
 	
 	/**
-	 * Check wether this turn is finished by checking the current player
+	 * Check whether this turn is finished by checking the current player
 	 * has any actions left.
 	 * 
 	 * @return	True if and only if the player has remaining actions
