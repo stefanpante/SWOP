@@ -1,4 +1,4 @@
-package scenariotests;
+package game;
 
 import org.junit.Test;
 
