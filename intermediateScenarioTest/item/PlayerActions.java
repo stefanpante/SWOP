@@ -1,4 +1,5 @@
-package intermediatetests;
+package item;
+
 import static org.junit.Assert.*;
 import item.Item;
 import item.LightGrenade;

@@ -4,8 +4,11 @@ import grid.Grid;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
+import square.Direction;
 import square.Square;
 
 public class AStar {
@@ -18,20 +21,27 @@ public class AStar {
 	
 	public AStar(Grid grid){
 		this.grid = grid;
+		this.source = new ArrayList<SquareContainer>();
 		closedSet = new ArrayList<SquareContainer>();
 		openSet = new PriorityQueue<SquareContainer>();
-		boxAllSquares(grid);
 	}
 	
-	private void boxAllSquares(Grid grid2) {
-		// TODO: Morgen
-		// squareContainer.setHeuristicDistanceFromGoal(manhattan(grid.getCoordinate(square), grid.getCoordinate(square)));
-	}
-	
-	private void box(ArrayList<Square> squares){
-		for(Square square : squares){
-			
+	private void boxAllSquares(Grid grid, Square start, Square goal) {
+		for(Square square : grid.getAllSquares()){
+			SquareContainer sq = new SquareContainer(square);
+			sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
+			source.add(sq);
 		}
+	}
+	
+	private ArrayList<SquareContainer> getSquareContainers(HashMap<Direction,Square> squares){
+		ArrayList<SquareContainer> squareContainers = new ArrayList<SquareContainer>();
+		for(Entry<Direction,Square> entry : squares.entrySet()){
+			SquareContainer sq = getSquareContainer(entry.getValue());
+			if(sq != null)
+				squareContainers.add(sq);
+		}
+		return squareContainers;
 	}
 	
 	private SquareContainer getSquareContainer(Square square){
@@ -43,7 +53,12 @@ public class AStar {
 		return null;
 	}
 
-	public ArrayList<Coordinate> shortestPath(SquareContainer start, SquareContainer goal){			
+	public ArrayList<Coordinate> shortestPath(Square startSquare, Square goalSquare){			
+		boxAllSquares(grid, startSquare, goalSquare);
+		
+		SquareContainer start = getSquareContainer(startSquare);
+		SquareContainer goal = getSquareContainer(goalSquare);
+		
 		openSet.add(start);
 
 		while(!openSet.isEmpty()){
@@ -54,9 +69,10 @@ public class AStar {
 				return reconstructPath(current,start);
 			}
 
-			for(SquareContainer neighbour : box(grid.getNeighbors(current.getSquare()))){
+			for(SquareContainer neighbour : getSquareContainers(grid.getNeighbors(current.getSquare()))){
 				boolean neighbourIsBetter;
-
+				if(neighbour.getSquare().isObstructed())
+					continue;
 				if(closedSet.contains(neighbour))
 					continue;
 
@@ -80,8 +96,10 @@ public class AStar {
 		throw new IllegalStateException();
 	}
 	
-	private int manhattan(Coordinate start, Coordinate goal){
-		return 0;
+	private int manhattan(Square startSquare, Square goalSquare){
+		Coordinate start = grid.getCoordinate(startSquare);
+		Coordinate goal = grid.getCoordinate(goalSquare);
+		return Math.abs(start.getX() - goal.getX()) + Math.abs(start.getY() - (goal.getY()));
 	}
 
 	private ArrayList<Coordinate> reconstructPath(SquareContainer squareContainer, SquareContainer startSquareContainer){
@@ -95,6 +113,66 @@ public class AStar {
 		return path;
 	}
 
+	private class SquareContainer implements Comparable<SquareContainer> {
+
+		private Square square;
+		private SquareContainer previous;
+		private int distanceFromStart;
+		private int distanceFromGoal;
+		
+		public SquareContainer(Square square){
+			setSquare(square);
+		}
+		
+		public Square getSquare(){
+			return this.square;
+		}
+		
+		public void setSquare(Square square){
+			this.square = square;
+		}
+		
+		public SquareContainer getPreviousSquareContainer(){
+			return this.previous;
+		}
+		
+		public void setPreviousSquareContainer(SquareContainer squareContainer){
+			this.previous = squareContainer;
+		}
+		
+		public void setDistanceFromStart(int distance){
+			this.distanceFromStart = distance;
+		}
+		
+		public int getDistanceFromStart() {
+			return this.distanceFromStart;
+		}
+		
+		public void setHeuristicDistanceFromGoal(int distance){
+			this.distanceFromGoal = distance;
+		}
+		
+		public int getHeuristicDistanceFromGoal(){
+			return this.distanceFromGoal;
+		}
+		
+		public int compareTo(SquareContainer other) { 
+		    final int BEFORE = -1;
+		    final int EQUAL = 0;
+		    final int AFTER = 1;
+
+		    if(this.equals(other)) return EQUAL;
+		    if(this.getHeuristicDistanceFromGoal() < other.getHeuristicDistanceFromGoal()) return BEFORE;
+		    if(this.getHeuristicDistanceFromGoal() > other.getHeuristicDistanceFromGoal()) return AFTER;
+		    if(this.getHeuristicDistanceFromGoal() == other.getHeuristicDistanceFromGoal()) return EQUAL;
+
+			return EQUAL;
+		}
+
+		
+		
+	}
+	
 
 	
 }

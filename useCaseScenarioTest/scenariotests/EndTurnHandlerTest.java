@@ -19,10 +19,9 @@ import square.Direction;
 import square.Square;
 
 /**
- * 
  * Scenario test for the use case "End Turn"
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class EndTurnHandlerTest {
 	
@@ -97,19 +96,41 @@ public class EndTurnHandlerTest {
 		return direction;
 	}
 	
-	/**
-	 * Tests what happens if the player ends a turn on a powerfailure
-	 */
 	@Test
-	public void EndTurnTestPowerFailure(){
+	public void endTurn() {
 		Player player = game.getCurrentPlayer();
-		assertTrue(endTurnHandler.checkToProceed());
+		Player nextPlayer = game.getNextPlayer();
 		
-		game.getCurrentPlayer().getPosition().getPower().fail();
+		assertFalse(endTurnHandler.hasMoved());
+		
+		MoveHandler moveHandler = new MoveHandler(game, null);
+		Direction direction = getValidMoveDirection(game);
+		
+		//Move in a valid direction.
+		moveHandler.move(direction);		
+		
+		assertTrue(endTurnHandler.checkToProceed());
+		assertTrue(endTurnHandler.hasMoved());
+		
+		assertEquals(player, game.getCurrentPlayer());
+		
 		endTurnHandler.confirm(true);
 		endTurnHandler.endTurn();
 		
-		assertEquals(2,player.getRemainingActions());
+		assertEquals(nextPlayer, game.getCurrentPlayer());
+	}
+	
+	/**
+	 * Tests what happens if the player ends a turn without moving.
+	 * Should throw an exception to notify loss of player.
+	 */
+	@Test(expected=IllegalStateException.class)
+	public void endTurnWithoutMoving(){
+		Player player = game.getCurrentPlayer();
+		assertTrue(endTurnHandler.checkToProceed());
+		
+		endTurnHandler.confirm(true);
+		endTurnHandler.endTurn();
 	}
 
 }
