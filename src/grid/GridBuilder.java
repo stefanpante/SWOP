@@ -258,7 +258,6 @@ public class GridBuilder {
 				}
 			}
 		}
-		System.out.println(shortest);
 		return shortest.getKey();
 	}
 	
