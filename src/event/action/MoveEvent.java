@@ -74,8 +74,7 @@ public class MoveEvent extends ActionEvent {
 			teleportEvent.run();
 		}
 	}
-
-	//TODO: check if the player is in the startposition of the other player to see if he has won.
+	
 	@Override
 	protected void afterGameEvent(){
 		activateLightGrenade();
