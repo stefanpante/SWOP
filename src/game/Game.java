@@ -118,7 +118,7 @@ public class Game {
 	 * 
 	 * @param grid
 	 */
-	public void setGrid(Grid grid) {
+	private void setGrid(Grid grid) {
 		this.grid = grid;		
 	}
 
@@ -386,9 +386,11 @@ public class Game {
 	 * Checks if the current player is unable to make a move.
 	 */
 	public boolean isCurrentPlayerStuck(){
-		for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
-			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
-				return false;
+		if(!getCurrentPlayer().hasMoved()){
+			for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+				if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
+					return false;
+				}
 			}
 		}
 		return true; 
