@@ -37,8 +37,8 @@ public class ThrowPad extends DirectionalPad {
 	@Override
 	public void draw(){
 		if(shape != null){
-			gui.shape(shape , getPosition().x + OConstants.MARGIN,getPosition().y + OConstants.MARGIN, 
-					getButtonWidth() -  OConstants.MARGIN*2, getButtonHeight()-  OConstants.MARGIN*2);
+//			gui.shape(shape , getPosition().x + OConstants.MARGIN,getPosition().y + OConstants.MARGIN, 
+//					getButtonWidth() -  OConstants.MARGIN*2, getButtonHeight()-  OConstants.MARGIN*2);
 		}
 	}
 	@Override
