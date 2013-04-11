@@ -9,7 +9,9 @@ import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import square.Direction;
@@ -223,6 +225,27 @@ public class GridBuilder {
 		}
 		
 		return coordinates;
+	}
+	
+	protected Coordinate ChargedIdentityDiskLocation(){
+		Square player1Square = getGrid().getSquare(getBottomLeft());
+		Square player2Square = getGrid().getSquare(getTopRight());
+		Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
+		for(Square square : getGrid().getAllSquares()){
+			if(!square.isObstructed()){
+				Coordinate thisCoordinate = getGrid().getCoordinate(square);
+				AStar aStar = new AStar(getGrid());
+				int player1Length = aStar.shortestPath(player1Square, square).size();
+				int player2Length = aStar.shortestPath(player2Square, square).size();
+				if(Math.abs(player2Length - player1Length) <= 2){
+					int longest = Math.max(player1Length, player2Length);
+					if(longest < shortest.getValue()){
+						shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
+					}
+				}
+			}
+		}
+		return shortest.getKey();
 	}
 	
 	/**
