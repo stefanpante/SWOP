@@ -27,11 +27,9 @@ import square.obstacle.LightTrail;
 import square.obstacle.Wall;
 
 /**
- * 
  * Scenario test for the use case "use Item"
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  * 
- *
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class UseItemHandlerTest {
 	
