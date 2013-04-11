@@ -1,10 +1,10 @@
-package scenariotests;
-
-package scenariotests;
+package game;
 
 import static org.junit.Assert.*;
 
 import game.Game;
+import grid.Grid;
+import grid.GridProvider;
 
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
@@ -12,6 +12,7 @@ import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import player.Player;
@@ -20,24 +21,46 @@ import square.Square;
 import square.obstacle.Wall;
 import util.Coordinate;
 
+import controller.EndTurnHandler;
+import controller.GameHandler;
 import controller.MoveHandler;
 import controller.PickUpHandler;
 import controller.ThrowLaunchableHandler;
+import controller.TurnHandler;
+import controller.UseItemHandler;
 
 
 public class LaunchableScenarioTest {
 
 
+	private Game game;
+
+	private MoveHandler MoveHandler;
+	private PickUpHandler pickUpHandler;
+	private UseItemHandler useItemHandler;
+	private ThrowLaunchableHandler throwLaunchableHandler;
+	private EndTurnHandler endTurnHandler;
+	private TurnHandler turnHandler;
+	
 	/**
 	 * Move to a square where an identity disc is situated an try to pick it up
 	 */
+	
+	@Before
+	public void setUpGame(){
+		Grid grid = GridProvider.getEmptyGrid();
+		game = new Game(grid);
 
+		MoveHandler = new MoveHandler(game, null);
+		pickUpHandler = new PickUpHandler(game,null);
+		useItemHandler = new UseItemHandler(game, null);
+		throwLaunchableHandler = new ThrowLaunchableHandler(game, null);
+		endTurnHandler = new EndTurnHandler(game, null);
+		turnHandler = new TurnHandler(game,null);
+	}
+	
 	@Test
 	public void pickUpIdentityDiscTest(){
-		Game game = new Game(10,10);
-		MoveHandler mh = new MoveHandler(game, null);
-		PickUpHandler ph = new PickUpHandler(game, null);
-
 		Player currentPlayer = game.getCurrentPlayer();
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
@@ -60,10 +83,6 @@ public class LaunchableScenarioTest {
 
 	@Test
 	public void pickUpChargedDisk(){
-		Game game = new Game(10,10);
-		MoveHandler mh = new MoveHandler(game, null);
-		PickUpHandler ph = new PickUpHandler(game, null);
-
 		Player currentPlayer = game.getCurrentPlayer();
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
@@ -88,11 +107,6 @@ public class LaunchableScenarioTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void pickUpIdentityDiscEmpty(){
-		Game game = new Game(10,10);
-		// game 
-		MoveHandler mh = new MoveHandler(game, null);
-		PickUpHandler ph = new PickUpHandler(game, null);
-
 		Player currentPlayer = game.getCurrentPlayer();
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
@@ -110,10 +124,6 @@ public class LaunchableScenarioTest {
 
 	@Test(expected = IllegalStateException.class)
 	public void pickUpChargedDiskEmpty(){
-		Game game = new Game(10,10);
-		MoveHandler mh = new MoveHandler(game, null);
-		PickUpHandler ph = new PickUpHandler(game, null);
-
 		Player currentPlayer = game.getCurrentPlayer();
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
@@ -134,8 +144,6 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void testThrowIdentityDisc(){
-		Game game = new Game(10,10);
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
@@ -171,8 +179,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void throwDiskNotInPlayer(){
-		Game game = new Game(10,10);
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
+		
 		ih.throwLaunchable(new IdentityDisc(), Direction.NORTH);
 	}
 
@@ -182,8 +189,6 @@ public class LaunchableScenarioTest {
 	//TODO: replace hard coded coordinates with hSize -1 and vSize -1
 	@Test
 	public void throwChargedDisk(){
-		Game game = new Game(10,10);
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.clearPowerFailures();
@@ -199,7 +204,7 @@ public class LaunchableScenarioTest {
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id);
 		// throw the identitydisc in the given direction
-		ih.throwLaunchable(id,Direction.NORTH);
+		throwLaunchableHandler.throwLaunchable(id,Direction.NORTH);
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,0)).getInventory().hasItem(id));
 
 		// new identity disc
@@ -207,7 +212,7 @@ public class LaunchableScenarioTest {
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id2);
 		// throw the identitydisc in the given direction
-		ih.throwLaunchable(id2,Direction.SOUTH);
+		throwLaunchableHandler.throwLaunchable(id2,Direction.SOUTH);
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,9)).getInventory().hasItem(id2));
 
 
@@ -216,7 +221,7 @@ public class LaunchableScenarioTest {
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id3);
 		// throw the identitydisc in the given direction
-		ih.throwLaunchable(id3,Direction.WEST);
+		throwLaunchableHandler.throwLaunchable(id3,Direction.WEST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,9)).getInventory().hasItem(id3));
 
 		// new identity disc
@@ -224,7 +229,7 @@ public class LaunchableScenarioTest {
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id4);
 		// throw the identitydisc in the given direction
-		ih.throwLaunchable(id4,Direction.EAST);
+		throwLaunchableHandler.throwLaunchable(id4,Direction.EAST);
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,4)).getInventory().hasItem(id4));
 	}
 
@@ -233,7 +238,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void throwDiskWall(){
-		Game game = new Game(10,10);
+		
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
 
 		// make sure there are no powerfailures
@@ -262,7 +267,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void throwChargedDiskWall(){
-		Game game = new Game(10,10);
+
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
 
 		// make sure there are no powerfailures
@@ -290,7 +295,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void throwDiskBoundary(){
-		Game game = new Game(10,10);
+
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
 
 		// make sure there are no powerfailures
@@ -314,7 +319,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void hitOtherPlayer(){
-		Game game = new Game(10,10);
+
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 
 		// Make sure there aren't any obstacles and powerfailures in the way
@@ -348,7 +353,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void chargedDiskAtOtherPlayer(){
-		Game game = new Game(10,10);
+		
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 
 		// Make sure there aren't any obstacles and powerfailures in the way
@@ -380,7 +385,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test 
 	public void throwDiscTeleporter(){
-		Game game = new Game(10,10);
+		
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 		
 		// Make sure the grid is clear
@@ -389,7 +394,7 @@ public class LaunchableScenarioTest {
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
 		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleporter = new Teleport(s1, s2);
+		Teleport teleporter = new Teleport();
 		
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
@@ -404,7 +409,6 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void throwChargedDiskTeleporter(){
-		Game game = new Game(10,10);
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 		
 		// Make sure the grid is clear
@@ -413,7 +417,7 @@ public class LaunchableScenarioTest {
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
 		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleporter = new Teleport(s1, s2);
+		Teleport teleporter = new Teleport();
 		
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
@@ -428,7 +432,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test 
 	public void throwDiscPowerFailure(){
-		Game game = new Game(10,10);
+		
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 		
 		// Make sure the grid is clear
@@ -459,11 +463,6 @@ public class LaunchableScenarioTest {
 		}
 		return direction;
 	}
-
-	private void removeAllObstacles(Game game){
-		ArrayList<Square> squares = game.getGrid().getAllSquares();
-	}
-
 
 }
 
