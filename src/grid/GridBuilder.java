@@ -6,6 +6,7 @@ package grid;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Random;
 import square.Direction;
 import square.Square;
 import square.obstacle.Wall;
+import util.AStar;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 
@@ -333,6 +335,18 @@ public class GridBuilder {
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(Coordinate coordinate : coordinates)
 			placeItem(getGrid().getSquare(coordinate), new IdentityDisc());
+	}
+	
+	protected void placeChargedIdentityDisk(Coordinate coordinate){
+		AStar aStar = new AStar(getGrid());
+		Square diskSquare = getGrid().getSquare(coordinate);
+		Square player1Square = getGrid().getSquare(getBottomLeft());
+		Square player2Square = getGrid().getSquare(getTopRight());
+		int player1Length = aStar.shortestPath(player1Square, diskSquare).size();
+		int player2Length = aStar.shortestPath(player2Square, diskSquare).size();
+		if(Math.abs(player1Length - player2Length) > 2)
+			throw new IllegalArgumentException("Shortest paths to Charged Identity Disk differ more than two");
+		placeItem(diskSquare, new ChargedIdentityDisc());
 	}
 	
 	/**
