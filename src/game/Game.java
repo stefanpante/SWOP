@@ -13,6 +13,7 @@ import player.Player;
 import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
+import util.AStar;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
@@ -76,6 +77,7 @@ public class Game {
 		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
 		this.setGrid(gridBuilder.getGrid());
 		
+
 		// Add players
 		this.players = new ArrayList<Player>();
 		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
