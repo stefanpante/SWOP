@@ -440,6 +440,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 				grid.getThrowPad().setVisibility(true);
 				grid.getThrowPad().setShape(Shapes.getShape(item));
 				grid.getThrowPad().setLaunchableItem((LaunchableItem)item);
+				message = "Choose a throw direction.";
+				currentFrame = 0;
 			}
 			else{
 				try{

@@ -23,13 +23,13 @@ public class AStar {
 		boxAllSquares(grid);
 	}
 	
-	private boxAllSquares(Grid grid2) {
+	private void boxAllSquares(Grid grid2) {
 		// TODO: Morgen
 		// squareContainer.setHeuristicDistanceFromGoal(manhattan(grid.getCoordinate(square), grid.getCoordinate(square)));
 	}
 	
 	private void box(ArrayList<Square> squares){
-		for(Square square : squres){
+		for(Square square : squares){
 			
 		}
 	}
