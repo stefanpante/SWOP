@@ -35,7 +35,7 @@ public class LaunchableScenarioTest {
 
 	private Game game;
 
-	private MoveHandler MoveHandler;
+	private MoveHandler moveHandler;
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
 	private ThrowLaunchableHandler throwLaunchableHandler;
@@ -51,7 +51,7 @@ public class LaunchableScenarioTest {
 		Grid grid = GridProvider.getEmptyGrid();
 		game = new Game(grid);
 
-		MoveHandler = new MoveHandler(game, null);
+		moveHandler = new MoveHandler(game, null);
 		pickUpHandler = new PickUpHandler(game,null);
 		useItemHandler = new UseItemHandler(game, null);
 		throwLaunchableHandler = new ThrowLaunchableHandler(game, null);
@@ -73,10 +73,10 @@ public class LaunchableScenarioTest {
 		game.clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
-		mh.move(direction);
+		moveHandler.move(direction);
 
 		// Try to pick up the identity disc, should succeed
-		ph.pickUp(id);
+		pickUpHandler.pickUp(id);
 		assertTrue(currentPlayer.getInventory().hasItem(id));
 
 	}
@@ -95,10 +95,10 @@ public class LaunchableScenarioTest {
 		game.clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
-		mh.move(direction);
+		moveHandler.move(direction);
 
 		// Try to pick up the identity disc, should succeed
-		ph.pickUp(id);
+		pickUpHandler.pickUp(id);
 		assertTrue(currentPlayer.getInventory().hasItem(id));
 
 	}
@@ -115,10 +115,10 @@ public class LaunchableScenarioTest {
 		game.clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
-		mh.move(direction);
+		moveHandler.move(direction);
 
 		// Try to pick up the identity disc, should cause an exception
-		ph.pickUp(new IdentityDisc());
+		pickUpHandler.pickUp(new IdentityDisc());
 
 	}
 
@@ -131,10 +131,10 @@ public class LaunchableScenarioTest {
 		// Make sure that there are no powerfailures and obstacles
 		game.clearPowerFailures();
 		// move into the direction that the Identitydisc is situated
-		mh.move(direction);
+		moveHandler.move(direction);
 
 		// Try to pick up the identity disc, should cause an exception
-		ph.pickUp(new ChargedIdentityDisc());
+		pickUpHandler.pickUp(new ChargedIdentityDisc());
 
 	}
 
@@ -161,7 +161,7 @@ public class LaunchableScenarioTest {
 			// Player should have identitydisc in inventory
 			game.getCurrentPlayer().getInventory().addItem(id);
 			// throw the identitydisc in the given direction
-			ih.throwLaunchable(id,direction);
+			throwLaunchableHandler.throwLaunchable(id,direction);
 			Square position = game.getCurrentPlayer().getPosition();
 			position = game.getGrid().getNeighbor(position, direction);
 			position = game.getGrid().getNeighbor(position, direction);
@@ -180,7 +180,7 @@ public class LaunchableScenarioTest {
 	@Test(expected = IllegalStateException.class)
 	public void throwDiskNotInPlayer(){
 		
-		ih.throwLaunchable(new IdentityDisc(), Direction.NORTH);
+		throwLaunchableHandler.throwLaunchable(new IdentityDisc(), Direction.NORTH);
 	}
 
 	/**
