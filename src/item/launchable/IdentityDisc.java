@@ -58,4 +58,9 @@ public class IdentityDisc extends LaunchableItem {
 	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
 		plInv.removeIdentityDisc(this);
 	}
+
+	@Override
+	public boolean isCharged() {
+		return false;
+	}
 }

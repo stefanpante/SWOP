@@ -20,6 +20,9 @@ public abstract class LaunchableItem extends Item {
 	 */
 	abstract public int getRange();	
 	
+	abstract public boolean isCharged();	
+
+	
 	/**
 	 * Check whether the given travelDirection is a valid travelDirection 
 	 * 	for all the Launchable objects.
@@ -37,7 +40,8 @@ public abstract class LaunchableItem extends Item {
 			return false;
 		}
 		return true;
-	} 
+	}
+	
 	
 	@Override
 	public String toString() {

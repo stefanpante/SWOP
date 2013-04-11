@@ -36,6 +36,11 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	}
 	
 	@Override
+	public boolean isCharged() {
+		return true;
+	}
+	
+	@Override
 	public String toString() {
 		return super.toString() + "Charged Identity Disc";
 	}
