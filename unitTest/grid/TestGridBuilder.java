@@ -6,10 +6,13 @@ package grid;
 import static org.junit.Assert.*;
 
 
+import item.Teleport;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import square.Direction;
@@ -18,21 +21,34 @@ import square.obstacle.Wall;
 import util.Coordinate;
 
 /**
- * @author jonas
- *
+ * Unit test case for Grid Builder.
+ * 
+ * @author Jonas, Vincent
  */
 public class TestGridBuilder {
 	
+	private int hSize = 10;
+	
+	private int vSize = 10;
+	
+	private GridBuilder gridBuilder;
+	
+	private Grid grid;
+	
+	@Before
+	public void setUpBefore() {
+		gridBuilder = new GridBuilder(hSize, vSize);
+		grid = gridBuilder.getGrid();
+	}
+	
 	@Test
 	public void testWallsCoverage(){
-		int hSize = 10;
-		int vSize = 10;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
-		double amountOfSquares = hSize*vSize;
-		Grid grid = gb.getGrid();
-		ArrayList<Wall> walls = gb.getWalls();
-		ArrayList<Coordinate> wallsPos = gb.getCoordinatesOfWalls(walls);
+		ArrayList<Wall> walls = gridBuilder.getWalls();
+		ArrayList<Coordinate> wallsPos = gridBuilder.getCoordinatesOfWalls(walls);
 		Coordinate coor;
+		
+		double amountOfSquares = hSize*vSize;
+		
 		int coveredSquares = 0;
 		for(int x = 0; x < hSize; x++){
 			for(int y = 0; y < vSize; y++){
@@ -48,6 +64,7 @@ public class TestGridBuilder {
 				}
 			}
 		}
+		
 		double precentageCovered = coveredSquares/amountOfSquares;
 		assertTrue(precentageCovered >= Grid.SMALLEST_WALL_LENGTH/amountOfSquares);
 		assertTrue(precentageCovered <= Grid.PERCENTAGE_WALLS);
@@ -55,12 +72,7 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsNotOnStartPos(){
-		int hSize = 10;
-		int vSize = 10;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
-		double amountOfSquares = hSize*vSize;
-		Grid grid = gb.getGrid();
-		ArrayList<Coordinate> wallsPos = gb.getCoordinatesOfWalls(gb.getWalls());
+		ArrayList<Coordinate> wallsPos = gridBuilder.getCoordinatesOfWalls(gridBuilder.getWalls());
 		Coordinate lowerleft = new Coordinate(0, vSize -1);
 
 		assertFalse(grid.getSquare(lowerleft).isObstructed());
@@ -72,14 +84,10 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsNoIntersection(){
-		int hSize = 10;
-		int vSize = 10;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
-		Grid grid = gb.getGrid();
-		ArrayList<Wall> walls = gb.getWalls();
+		ArrayList<Wall> walls = gridBuilder.getWalls();
 		HashSet<Square> wallSquares = new HashSet<Square>();
 		HashSet<Square> wallNeighborSquares = new HashSet<Square>();
-		HashSet<Square> squareSet = new HashSet<Square>();
+		
 		for(Wall w :walls){
 			for(Square sq: w.getSquares()){
 				if(!wallSquares.contains(sq)){
@@ -109,11 +117,8 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsLength(){
-		int hSize = 10;
-		int vSize = 10;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
-		Grid grid = gb.getGrid();
-		ArrayList<Wall> walls = gb.getWalls();
+		ArrayList<Wall> walls = gridBuilder.getWalls();
+		
 		for(Wall w: walls){
 			assertTrue(Math.ceil(w.getLength()/hSize) <= Grid.LENGTH_PERCENTAGE_WALL);
 		}
@@ -122,10 +127,6 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testLGNearStart(){
-		int hSize = 10;
-		int vSize = 10;
-		GridBuilder gb = new GridBuilder(hSize, vSize);
-		Grid grid = gb.getGrid();
 		Coordinate lowerleft = new Coordinate(0, vSize-1);
 		for(Coordinate coor = lowerleft; coor.getY() >= vSize-3; coor = coor.getNeighbor(Direction.NORTH)){
 			for(Coordinate coor2 = coor; coor2.getX() <= 2  ; coor2 = coor2.getNeighbor(Direction.EAST)){
@@ -145,6 +146,28 @@ public class TestGridBuilder {
 					assert(true);
 					break;
 				}
+			}
+		}
+	}
+	
+	/**
+	 * Gets all the teleports on the grid and checks if there is a corresponding 
+	 * square for each destination.
+	 */
+	@Test
+	public void testTeleportsCoupling() {
+		ArrayList<Teleport> teleportItems = new ArrayList<Teleport>();
+		
+		for(Square square: grid.getAllSquares()) {
+			if(square.getInventory().hasTeleport())
+				teleportItems.add(square.getInventory().getTeleport());
+		}
+		
+		for(Teleport teleport: teleportItems) {
+			try{
+				grid.findSquare(teleport.getDestination());
+			}catch(Exception exc){
+				assert(false);
 			}
 		}
 	}

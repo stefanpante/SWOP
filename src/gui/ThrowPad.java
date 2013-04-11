@@ -1,10 +1,13 @@
 package gui;
 
+import java.util.HashMap;
+
 import gui.button.DirectionalButton;
 import item.launchable.LaunchableItem;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
+import square.Direction;
 import util.OConstants;
 
 public class ThrowPad extends DirectionalPad {
@@ -15,9 +18,18 @@ public class ThrowPad extends DirectionalPad {
 	public ThrowPad(PVector position, float buttonWidth, float buttonHeight,
 			PApplet gui) {
 		super(position, buttonWidth, buttonHeight, gui);
+		setUpDirections();
 
 	}
 
+	private void setUpDirections(){
+		HashMap<Direction, DirectionalButton> buttons = this.getButtons();
+		buttons.get(Direction.SOUTHEAST).setVisibility(false);
+		buttons.get(Direction.SOUTHWEST).setVisibility(false);
+		buttons.get(Direction.NORTHWEST).setVisibility(false);
+		buttons.get(Direction.NORTHEAST).setVisibility(false);
+		
+	}
 	public void setShape(PShape shape){
 		this.shape = shape;
 	}
