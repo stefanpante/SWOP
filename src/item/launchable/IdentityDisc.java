@@ -17,7 +17,7 @@ public class IdentityDisc extends LaunchableItem {
 	/**
 	 * The maximum travel distance of an uncharged identity disc.
 	 */
-	public static int MAX_TRAVEL_DISTANCE = 4;
+	public static int MAX_TRAVEL_DISTANCE = 3;
 	
 	/**
 	 * Constructor that makes an Identity Disc.
