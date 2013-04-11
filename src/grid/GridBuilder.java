@@ -6,14 +6,18 @@ package grid;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
+import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import square.Direction;
 import square.Square;
 import square.obstacle.Wall;
+import util.AStar;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 
@@ -223,6 +227,27 @@ public class GridBuilder {
 		return coordinates;
 	}
 	
+	protected Coordinate ChargedIdentityDiskLocation(){
+		Square player1Square = getGrid().getSquare(getBottomLeft());
+		Square player2Square = getGrid().getSquare(getTopRight());
+		Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
+		for(Square square : getGrid().getAllSquares()){
+			if(!square.isObstructed()){
+				Coordinate thisCoordinate = getGrid().getCoordinate(square);
+				AStar aStar = new AStar(getGrid());
+				int player1Length = aStar.shortestPath(player1Square, square).size();
+				int player2Length = aStar.shortestPath(player2Square, square).size();
+				if(Math.abs(player2Length - player1Length) <= 2){
+					int longest = Math.max(player1Length, player2Length);
+					if(longest < shortest.getValue()){
+						shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
+					}
+				}
+			}
+		}
+		return shortest.getKey();
+	}
+	
 	/**
 	 * Finds a random list of sequences of coordinates that follow the given constraint.
 	 * 
@@ -333,6 +358,18 @@ public class GridBuilder {
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(Coordinate coordinate : coordinates)
 			placeItem(getGrid().getSquare(coordinate), new IdentityDisc());
+	}
+	
+	protected void placeChargedIdentityDisk(Coordinate coordinate){
+		AStar aStar = new AStar(getGrid());
+		Square diskSquare = getGrid().getSquare(coordinate);
+		Square player1Square = getGrid().getSquare(getBottomLeft());
+		Square player2Square = getGrid().getSquare(getTopRight());
+		int player1Length = aStar.shortestPath(player1Square, diskSquare).size();
+		int player2Length = aStar.shortestPath(player2Square, diskSquare).size();
+		if(Math.abs(player1Length - player2Length) > 2)
+			throw new IllegalArgumentException("Shortest paths to Charged Identity Disk differ more than two");
+		placeItem(diskSquare, new ChargedIdentityDisc());
 	}
 	
 	/**
