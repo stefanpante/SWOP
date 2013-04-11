@@ -215,8 +215,6 @@ public abstract class Handler {
 			if(square.isObstructed())
 				walls.add(coordinate);
 			
-			//if(square.getInventory().has)
-			
 		}
  		
 		properties.put(GameHandler.POWER_FAILS_PROPERTY, powerFailures);

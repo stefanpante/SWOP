@@ -65,12 +65,14 @@ public class Shapes {
 	
 	public static PShape getShape(Item item){
 		if(item instanceof IdentityDisc){
+			if(item instanceof ChargedIdentityDisc){
+				return Shapes.chargedIdentityDisc;
+			}
+			
 			return Shapes.identityDisc;
 		}
 		
-		if(item instanceof ChargedIdentityDisc){
-			return Shapes.chargedIdentityDisc;
-		}
+		
 		
 		if(item instanceof LightGrenade){
 			return Shapes.lightgrenade;
