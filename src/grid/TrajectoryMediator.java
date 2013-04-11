@@ -59,7 +59,7 @@ public class TrajectoryMediator {
 			if(prevSquare.getPower().isFailing()){
 				maximumRange--;
 			}
-			if(maximumRange > 0) {
+			if(maximumRange > 0 && currentRange < maximumRange) {
 				try {
 					if(teleport!= null && !prevWasTeleport){
 						destination = teleport.getDestination();
