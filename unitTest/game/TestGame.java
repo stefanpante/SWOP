@@ -2,6 +2,7 @@ package game;
 
 import static org.junit.Assert.*;
 import grid.Grid;
+import grid.GridBuilder;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,6 +18,9 @@ public class TestGame {
 
 	static Square lowerLeft;
 	static Square upperRight;
+	
+	private Game game;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		lowerLeft = new Square();
@@ -30,10 +34,26 @@ public class TestGame {
 
 	@Before
 	public void setUp() throws Exception {
+		game = new Game(10,10);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testConstructorGrid() {
+		GridBuilder gridBuilder = new GridBuilder(20, 20);
+		Game game = new Game(gridBuilder.getGrid());
+		
+		game.start();
+		assertTrue(game.isActive());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorIllegalDimensions() {
+		Game game = new Game(5,5);
 	}
 
 	@Test 
@@ -58,8 +78,10 @@ public class TestGame {
 		assertFalse(game.getCurrentPlayer() == player1);
 	}
 	
+	@Test
 	public void testSetCurrentPlayer(){
 		Game game = new Game(10, 10);
+		
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		
@@ -68,10 +90,11 @@ public class TestGame {
 		
 		game.setCurrentPlayer(player2);
 		assertTrue(game.getCurrentPlayer() == player2);
-		Player player = new Player(null, 0);		
+		Player player = new Player(new Square(), 0);	
+		
 		try{
 			game.setCurrentPlayer(player);
-			fail("Player shouldn't be valid");
+			fail("Player shouldn't be valid, because it is not a player in the game.");
 		}
 		catch(Exception e){}
 		
@@ -82,6 +105,7 @@ public class TestGame {
 		catch(Exception e){}
 		
 	}
+	
 	@Test
 	public void testCanHaveAsPlayer(){
 		Game game = new Game(10, 10);
@@ -142,5 +166,22 @@ public class TestGame {
 		
 		game.clearPowerFailures();
 		assertFalse(square.getPower().isFailing());		
+	}
+	
+	@Test
+	public void testGetLightTrail() {
+		Player player = game.getCurrentPlayer();
+		game.getLightTrail(player);
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void testGetLightTrailNullPlayer() {
+		game.getLightTrail(null);
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void testGetLightTrailInvalidPlayer() {
+		Player player = new Player(new Square(), 3);
+		game.getLightTrail(player);
 	}
 }
