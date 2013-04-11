@@ -118,7 +118,7 @@ public class Game {
 	 * 
 	 * @param grid
 	 */
-	public void setGrid(Grid grid) {
+	private void setGrid(Grid grid) {
 		this.grid = grid;		
 	}
 
@@ -264,7 +264,7 @@ public class Game {
 	 * @return	The grid of this game
 	 * 			| Grid
 	 */
-	public Grid getGrid(){
+	private Grid getGrid(){
 		return this.grid;
 	}
 	
