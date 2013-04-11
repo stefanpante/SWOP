@@ -17,7 +17,8 @@ public class GridProvider {
 	public static Grid getGrid(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
 			ArrayList<Coordinate> lightGrenades, 
 			ArrayList<Coordinate> identityDisks, 
-			ArrayList<Coordinate> teleports){
-		return (new GridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports)).getGrid();
+			ArrayList<Coordinate> teleports, 
+			Coordinate chargedIdentityDisk){
+		return (new GridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports, chargedIdentityDisk)).getGrid();
 	}
 }
