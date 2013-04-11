@@ -41,7 +41,7 @@ public class TurnHandler extends Handler implements Observer {
     		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
     	} else if(isEndOfTurn()) {
-			endTurn();
+			endTurn(false);
     	}
 	}
 	
@@ -58,8 +58,8 @@ public class TurnHandler extends Handler implements Observer {
 	/**
 	 * End the current turn
 	 */
-	public void endTurn(){
-		if(!getGame().getCurrentPlayer().hasMoved()){
+	public void endTurn(boolean skip){
+		if(!skip && !getGame().getCurrentPlayer().hasMoved()){
 			getGame().end();
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
 					"and has no actions left and therefore lost the game");
@@ -92,6 +92,9 @@ public class TurnHandler extends Handler implements Observer {
 			LoseActionEffect lae = new LoseActionEffect(getGame(),1);
 			lae.run();
 		}
+		
+		if(!getGame().getCurrentPlayer().hasRemainingActions())
+			endTurn(true);
 	}
 	
 	/**
