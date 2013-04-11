@@ -34,6 +34,10 @@ public class TeleportScenarioTest {
 	private EndTurnHandler endTurnHandler;
 	private TurnHandler turnHandler;
 	
+	private Square squareOne, squareTwo;
+	
+	private Teleport teleport, teleportDestination;
+	
 	/**
 	 * Move to a square where an identity disc is situated an try to pick it up
 	 */
@@ -49,6 +53,17 @@ public class TeleportScenarioTest {
 		throwLaunchableHandler = new ThrowLaunchableHandler(game, null);
 		endTurnHandler = new EndTurnHandler(game, null);
 		turnHandler = new TurnHandler(game,null);
+		
+		squareOne = game.getGrid().getSquare(new Coordinate(0,8));
+		squareTwo = game.getGrid().getSquare(new Coordinate(3,4));
+		
+		teleport = new Teleport();
+		teleportDestination = new Teleport(teleport);
+		
+		teleport.setDestination(teleportDestination);
+		
+		squareOne.getInventory().addItem(teleport);
+		squareTwo.getInventory().addItem(teleportDestination);
 	}
 	/**
 	 * Move a player onto a teleporter. Assert that the player is moved to the other square that is part
@@ -56,21 +71,11 @@ public class TeleportScenarioTest {
 	 */
 	@Test
 	public void basicTeleporterTest(){
-	
 		// clear all powerfailures and obstacles
 		game.clearPowerFailures();
 		
-		
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,8));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleport1 = new Teleport();
-		Teleport teleport2 = new Teleport();
-		teleport1.setDestination(teleport2);
-		s1.getInventory().addItem(teleport1);
-		s2.getInventory().addItem(teleport2);
-		
 		moveHandler.move(Direction.NORTH);
-		assertEquals(game.getCurrentPlayer().getPosition(), s2);
+		assertEquals(game.getCurrentPlayer().getPosition(), squareTwo);
 		
 	}
 	
@@ -80,19 +85,11 @@ public class TeleportScenarioTest {
 	 */
 	@Test(expected = IllegalStateException.class)
 	public void pickupTeleporterFirstSquare(){
-		
 		// clear all powerfailures and obstacles
 		game.clearPowerFailures();
 		
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,8));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleport1 = new Teleport();
-		Teleport teleport2 = new Teleport();
-		teleport1.setDestination(teleport2);
-		s1.getInventory().addItem(teleport1);
-		s2.getInventory().addItem(teleport2);
 		Item item = new IdentityDisc();
-		s1.getInventory().addItem(item);
+		squareOne.getInventory().addItem(item);
 		
 		moveHandler.move(Direction.NORTH);
 		// should throw an exception
@@ -105,27 +102,18 @@ public class TeleportScenarioTest {
 	 * Move a player onto a teleporter. Assert that he can pick up an item fromt the destination square.
 	 */
 	@Test
-	public void pickupTeleporterSecSquare(){
-
+	public void pickupTeleporterSecSquare() {
 		// clear all powerfailures and obstacles
 		game.clearPowerFailures();
 		
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,8));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleport1 = new Teleport();
-		Teleport teleport2 = new Teleport();
-		teleport1.setDestination(teleport2);
-		s1.getInventory().addItem(teleport1);
-		s2.getInventory().addItem(teleport2);
 		Item item = new IdentityDisc();
-		s2.getInventory().addItem(item);
-		
+		squareTwo.getInventory().addItem(item);
 		
 		moveHandler.move(Direction.NORTH);
 		pickUpHandler.pickUp(item);
 		
 		assertTrue(game.getCurrentPlayer().getInventory().hasItem(item));
-		assertFalse(s2.getInventory().hasItem(item));
+		assertFalse(squareTwo.getInventory().hasItem(item));
 	}
 	
 	/** 
@@ -137,16 +125,7 @@ public class TeleportScenarioTest {
 		// clear all powerfailures and obstacles
 		game.clearPowerFailures();
 		
-		
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,8));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleport1 = new Teleport();
-		Teleport teleport2 = new Teleport();
-		teleport1.setDestination(teleport2);
-		s1.getInventory().addItem(teleport1);
-		s2.getInventory().addItem(teleport2);
-		
-		game.getNextPlayer().move(s2);
+		game.getNextPlayer().move(squareTwo);
 		moveHandler.move(Direction.NORTH);
 	}
 	
@@ -158,23 +137,14 @@ public class TeleportScenarioTest {
 	public void testSplitLightTrail(){
 		// clear all powerfailures and obstacles
 		game.clearPowerFailures();
-		
-		
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,8));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
-		Teleport teleport1 = new Teleport();
-		Teleport teleport2 = new Teleport();
-		teleport1.setDestination(teleport2);
-		s1.getInventory().addItem(teleport1);
-		s2.getInventory().addItem(teleport2);
-		
+				
 		moveHandler.move(Direction.NORTH);
-		assertEquals(game.getCurrentPlayer().getPosition(),s2);
+		assertEquals(game.getCurrentPlayer().getPosition(),squareTwo);
 		moveHandler.move(Direction.NORTH);
 		LightTrail lt = game.getLightTrail(game.getCurrentPlayer());
-		assertTrue(lt.contains(s1));
+		assertTrue(lt.contains(squareOne));
 		assertTrue(lt.contains(game.getCurrentPlayer().getStartPosition()));
-		assertTrue(lt.contains(s2));
+		assertTrue(lt.contains(squareOne));
 		
 	}
 
