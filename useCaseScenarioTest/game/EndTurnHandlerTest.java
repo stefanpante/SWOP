@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import event.AbstractGameEvent;
 import game.Game;
+import grid.GridProvider;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
 import controller.TurnHandler;
@@ -33,7 +34,7 @@ public class EndTurnHandlerTest {
 	
 	@Before
 	public void setUpBefore() {
-		game = new Game(10,10);
+		game = new Game(GridProvider.getEmptyGrid());
 		
 		endTurnHandler = new EndTurnHandler(game, null);
 		turnHandler = new TurnHandler(game, null);
@@ -160,13 +161,18 @@ public class EndTurnHandlerTest {
 		endTurnHandler.endTurn();
 		
 		// 2) Move the second player and  then endTurn.
+		assertEquals(game.getCurrentPlayer(), otherPlayer);
+		
 		direction = getValidMoveDirection(game);
 		square = game.getGrid().getNeighbor(otherPlayer.getPosition(), direction);
 		
 		moveHandler.move(direction);
 		
-		endTurnHandler.confirm(true);
-		endTurnHandler.endTurn();
+		// Sometimes player has already been switched because of move to PowerFailure.
+		if(game.getCurrentPlayer().equals(otherPlayer)) {
+			endTurnHandler.confirm(true);
+			endTurnHandler.endTurn();
+		}
 		
 		// Test: Check if the first player is on a power failed square and starts with 1 less action.
 		assertTrue(player.getPosition().getPower().isFailing());
