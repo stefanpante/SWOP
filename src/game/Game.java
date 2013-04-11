@@ -266,7 +266,7 @@ public class Game {
 	 * @return	The grid of this game
 	 * 			| Grid
 	 */
-	private Grid getGrid(){
+	public Grid getGrid(){
 		return this.grid;
 	}
 	
