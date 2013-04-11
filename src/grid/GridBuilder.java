@@ -51,7 +51,7 @@ public class GridBuilder {
 	 * obstacles. No lightGrenades or any other object. This is mainly used
 	 * for testing purposes.
 	 */
-	public GridBuilder() {
+	protected GridBuilder() {
 		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();
@@ -59,7 +59,7 @@ public class GridBuilder {
 	}
 	
 	/**
-	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 * Creates a new GridBuilder with parameters to create a new grid.
 	 * 
 	 * This constructor will place random Walls, LightGrenades, 
 	 * identityDiscs and Teleports according to the constraints.
@@ -83,7 +83,7 @@ public class GridBuilder {
 	}
 	
 	/**
-	 * Creates a new Gridbuilder with parameters to create a new grid.
+	 *  Creates a new GridBuilder with parameters to create a new grid.
 	 * 	Currently the given coordinates will be checked on the usual constraints!
 	 * 	Keep this in mind when building test grids.
 	 * 
