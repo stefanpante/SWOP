@@ -57,7 +57,7 @@ public class Shapes {
 		Shapes.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
 		
 		Shapes.items = gui.loadShape(getClass().getResource("/res/items.svg").getPath());
-		Shapes.powerFailureTeleportItem = gui.loadShape(getClass().getResource("/res//teleportpowerfailitems.svg").getPath());
+		Shapes.powerFailureTeleportItem = gui.loadShape(getClass().getResource("/res/teleportpowerfailitems.svg").getPath());
 		Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/teleportpowerfail.svg").getPath());
 		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/teleportitems.svg").getPath());
 		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());

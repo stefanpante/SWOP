@@ -2,7 +2,7 @@ package gui;
 
 import processing.core.PApplet;
 
-public class Application {
+public class App {
 
 	public static void main(String[] args) {
 		
