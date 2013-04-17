@@ -20,56 +20,66 @@
 \headcommand {\beamer@subsectionentry {0}{2}{1}{6}{MVC}}\headcommand {\beamer@subsectionpages {6}{5}}
 \headcommand {\slideentry {2}{1}{1}{6/6}{MVC}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\slideentry {2}{1}{2}{7/7}{MVC}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{7}{Handlers}}\headcommand {\beamer@subsectionpages {6}{6}}
+\headcommand {\slideentry {2}{2}{1}{7/7}{Handlers}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {2}{1}{3}{8/8}{MVC}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{8}{Events}}\headcommand {\beamer@subsectionpages {7}{7}}
+\headcommand {\slideentry {2}{3}{1}{8/8}{Events}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{9}{Grid}}\headcommand {\beamer@subsectionpages {6}{8}}
-\headcommand {\slideentry {2}{2}{1}{9/9}{Grid}{0}}
+\headcommand {\slideentry {2}{3}{2}{9/9}{Events}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{10}{Obstacles}}\headcommand {\beamer@subsectionpages {9}{9}}
-\headcommand {\slideentry {2}{3}{1}{10/10}{Obstacles}{0}}
+\headcommand {\slideentry {2}{3}{3}{10/10}{Events}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\slideentry {2}{3}{2}{11/11}{Obstacles}{0}}
+\headcommand {\slideentry {2}{3}{4}{11/11}{Events}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{2}{4}{12}{States and Penalty}}\headcommand {\beamer@subsectionpages {10}{11}}
-\headcommand {\slideentry {2}{4}{1}{12/12}{States and Penalty}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{12}{Grid}}\headcommand {\beamer@subsectionpages {8}{11}}
+\headcommand {\slideentry {2}{4}{1}{12/12}{Grid}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {2}{4}{2}{13/13}{States and Penalty}{0}}
+\headcommand {\slideentry {2}{4}{2}{13/13}{Grid}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\sectionentry {3}{System State Diagrams}{14}{System State Diagrams}{0}}
-\headcommand {\beamer@sectionpages {6}{13}}
-\headcommand {\beamer@subsectionpages {12}{13}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{14}{Start New Game}}\headcommand {\beamer@subsectionpages {14}{13}}
-\headcommand {\slideentry {3}{1}{1}{14/14}{Start New Game}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{5}{14}{Obstacles}}\headcommand {\beamer@subsectionpages {12}{13}}
+\headcommand {\slideentry {2}{5}{1}{14/14}{Obstacles}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{15}{Move}}\headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\slideentry {3}{2}{1}{15/15}{Move}{0}}
+\headcommand {\slideentry {2}{5}{2}{15/15}{Obstacles}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {3}{2}{2}{16/16}{Move}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{6}{16}{States and Penalty}}\headcommand {\beamer@subsectionpages {14}{15}}
+\headcommand {\slideentry {2}{6}{1}{16/16}{States and Penalty}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{17}{Pick Up Item}}\headcommand {\beamer@subsectionpages {15}{16}}
-\headcommand {\slideentry {3}{3}{1}{17/17}{Pick Up Item}{0}}
+\headcommand {\slideentry {2}{6}{2}{17/17}{States and Penalty}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\slideentry {3}{3}{2}{18/18}{Pick Up Item}{0}}
+\headcommand {\sectionentry {3}{System State Diagrams}{18}{System State Diagrams}{0}}
+\headcommand {\beamer@sectionpages {6}{17}}
+\headcommand {\beamer@subsectionpages {16}{17}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{18}{Start New Game}}\headcommand {\beamer@subsectionpages {18}{17}}
+\headcommand {\slideentry {3}{1}{1}{18/18}{Start New Game}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{19}{Use Item}}\headcommand {\beamer@subsectionpages {17}{18}}
-\headcommand {\slideentry {3}{4}{1}{19/19}{Use Item}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{19}{Move}}\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\slideentry {3}{2}{1}{19/19}{Move}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {3}{4}{2}{20/20}{Use Item}{0}}
+\headcommand {\slideentry {3}{2}{2}{20/20}{Move}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@subsectionentry {0}{3}{5}{21}{End Turn}}\headcommand {\beamer@subsectionpages {19}{20}}
-\headcommand {\slideentry {3}{5}{1}{21/21}{End Turn}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{21}{Pick Up Item}}\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\slideentry {3}{3}{1}{21/21}{Pick Up Item}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {3}{5}{2}{22/22}{End Turn}{0}}
+\headcommand {\slideentry {3}{3}{2}{22/22}{Pick Up Item}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\sectionentry {4}{Slot}{23}{Slot}{0}}
-\headcommand {\beamer@sectionpages {14}{22}}
-\headcommand {\beamer@subsectionpages {21}{22}}
-\headcommand {\slideentry {4}{0}{3}{23/23}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{23}{Use Item}}\headcommand {\beamer@subsectionpages {21}{22}}
+\headcommand {\slideentry {3}{4}{1}{23/23}{Use Item}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\beamer@partpages {1}{23}}
-\headcommand {\beamer@subsectionpages {23}{23}}
-\headcommand {\beamer@sectionpages {23}{23}}
-\headcommand {\beamer@documentpages {23}}
-\headcommand {\def \inserttotalframenumber {23}}
+\headcommand {\slideentry {3}{4}{2}{24/24}{Use Item}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{25}{End Turn}}\headcommand {\beamer@subsectionpages {23}{24}}
+\headcommand {\slideentry {3}{5}{1}{25/25}{End Turn}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\slideentry {3}{5}{2}{26/26}{End Turn}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\sectionentry {4}{Slot}{27}{Slot}{0}}
+\headcommand {\beamer@sectionpages {18}{26}}
+\headcommand {\beamer@subsectionpages {25}{26}}
+\headcommand {\slideentry {4}{0}{3}{27/27}{}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\beamer@partpages {1}{27}}
+\headcommand {\beamer@subsectionpages {27}{27}}
+\headcommand {\beamer@sectionpages {27}{27}}
+\headcommand {\beamer@documentpages {27}}
+\headcommand {\def \inserttotalframenumber {27}}
