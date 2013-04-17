@@ -23,6 +23,12 @@ import square.Square;
 import square.obstacle.LightTrail;
 import util.Coordinate;
 
+/**
+ * 
+ * Scenario tests involving a teleport.
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ */
 public class TeleportScenarioTest {
 
 	private Game game;

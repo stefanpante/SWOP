@@ -20,7 +20,6 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  * 
- * TODO: refactor to use static numberofactions in turn
  */
 public class PickUpHandlertTest {
 	

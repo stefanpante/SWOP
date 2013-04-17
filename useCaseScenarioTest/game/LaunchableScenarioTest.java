@@ -29,7 +29,11 @@ import controller.ThrowLaunchableHandler;
 import controller.TurnHandler;
 import controller.UseItemHandler;
 
-
+/**
+ * Scenario tests involving a launchable.
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ *
+ */
 public class LaunchableScenarioTest {
 
 
