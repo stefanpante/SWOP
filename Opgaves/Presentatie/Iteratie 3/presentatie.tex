@@ -66,7 +66,7 @@ Iteratie 3: 18/03/2013 - 12/04/2013
 \end{center}
 \end{frame}
 
-
+\subsection{Handlers}
 \begin{frame}{Handlers}
 \begin{center}
 %\includegraphics[width=\linewidth]{images/Handlers-View}
@@ -78,18 +78,59 @@ Iteratie 3: 18/03/2013 - 12/04/2013
 \end{itemize}
 \end{frame}
 
-
+\subsection{Events}
 \begin{frame}{Events}
+Gebeurtenis in het spel met vaste volgorde van uitvoering
+
+\begin{multicols}{2}
+\begin{center}
+\includegraphics[width=0.60\linewidth]{images/GameEvent}
+\end{center}
+Flow
+\begin{itemize}
+	\item \textbf{Voor:} Checks
+	\item \textbf{Tijdens:} Eigenlijke afhandeling
+	\item \textbf{Na:} Check, gevolgen
+\end{itemize}
+Twee soorten
+\begin{itemize}
+	\item ActionEvent
+	\item Effect
+\end{itemize}
+\end{multicols}
 
 \end{frame}
 
-\subsection{Grid}
-\begin{frame}{Grid}
+\begin{frame}{ActionEvent}
+\begin{itemize}
+	\item Gemeenschappelijke checks voor en na de uitvoer
+	\item Oberserveerbaar door de TurnHandler
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ActionEvent}
 \begin{center}
-%\includegraphics[width=\linewidth]{images/GridClass}
+\includegraphics[width=0.65\linewidth]{images/ActionEvents}
 \end{center}
 \end{frame}
 
+\begin{frame}{Effects}
+\begin{center}
+\includegraphics[width=0.75\linewidth]{images/Effects}
+\end{center}
+\end{frame}
+
+\subsection{Grid}
+\begin{frame}{Grid Builder}
+\end{frame}
+
+\begin{frame}{Grid Constraint}
+\begin{itemize}
+	\item \textbf{Percentage:} De limiet op het aantal squares in verhouding met de totale hoeveelheid squares in het grid.
+	\item \textbf{Excluded:} Een lijst van squares die niet gekozen mogen worden.
+	\item 
+\end{itemize}
+\end{frame}
 
 \subsection{Obstacles}
 \begin{frame}{Obstacle}
