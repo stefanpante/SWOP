@@ -38,7 +38,7 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>280.0</double>
+      <double>274.3431457505077</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
@@ -49,7 +49,7 @@
      </void>
     </void>
     <void method="setLocation">
-     <double>280.0</double>
+     <double>274.3431457505077</double>
      <double>39.0</double>
     </void>
    </object>

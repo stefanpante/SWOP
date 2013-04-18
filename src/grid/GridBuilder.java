@@ -27,6 +27,7 @@ import be.kuleuven.cs.som.annotate.Basic;
  */
 public class GridBuilder {
 	
+	// Waarom all caps? Zijn toch geen constanten? Waarom publiek?
 	public GridConstraint TELEPORT_CONSTRAINT;
 	public GridConstraint LIGHT_GRENADE_CONSTRAINT;
 	public GridConstraint IDENTITY_DISK_CONSTRAINT;
@@ -396,7 +397,7 @@ public class GridBuilder {
 		}
 		
 	}
-	
+	//TODO: waarom is deze private terwijl alle andere protected zijn?
 	/**
 	 * 
 	 * @param 	teleports
