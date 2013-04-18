@@ -9,7 +9,7 @@ import game.Game;
 /**
  * End Turn event
  * 
- * @author vincent
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class EndTurnEvent extends ActionEvent {
 

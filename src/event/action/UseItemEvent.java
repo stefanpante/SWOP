@@ -7,7 +7,7 @@ import game.Game;
 import item.Item;
 
 /**
- * @author jonas
+ *@author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class UseItemEvent extends ActionEvent {

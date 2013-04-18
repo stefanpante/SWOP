@@ -12,7 +12,7 @@ import grid.TrajectoryMediator;
 import item.launchable.LaunchableItem;
 
 /**
- * @author jonas
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class ThrowLaunchableEvent extends ActionEvent {

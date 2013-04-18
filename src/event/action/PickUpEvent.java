@@ -7,7 +7,7 @@ import item.Item;
 import game.Game;
 
 /**
- * @author jonas
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public class PickUpEvent extends ActionEvent {

@@ -7,7 +7,7 @@ import event.AbstractGameEvent;
 import game.Game;
 
 /**
- * @author jonas
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
 public abstract class ActionEvent extends AbstractGameEvent {
