@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_17" class="java.beans.XMLDecoder">
+ <object class="com.horstmann.violet.ClassDiagramGraph">
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
+    <void property="attributes">
+     <void property="text">
+      <string>- percentage: float
+-excluded: ArrayList&lt;Coordinate&gt;
+- included ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;
+</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+ GridConstraint()
++ GridConstraint(percentage:float)
++ GridConstraint(percentage:float, excluded:ArrayList&lt;Coordinate&gt;
++ GridConstraint(percentage:float, excluded: ArrayList&lt;Coordinate&gt;, included:ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;)
++ isValidPercentage(percentage:float): boolean
+- setPercentage(percentage:float)
+- setExcluded(excluded:ArrayList&lt;Coordinate&gt;)
+- setIncluded(included: ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;)
++ getPercentage():float
++ getExcluded(): ArrayList&lt;Coordinate&gt;
++ getIncluded(): ArrayList&lt;Coordinate&gt;
+</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>GridConstraint</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double0">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double0"/>
+      <double>280.0</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double0"/>
+      <double>39.0</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>280.0</double>
+     <double>39.0</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
+    <void property="attributes">
+     <void property="text">
+      <string>+ teleportConstraint: GridConstraint
++ lightGrenadeConstrant: GridConstraint
++ identityDiskConstraint: GridConstraint
++ wallConstraint: GridConstraint
+- grid: Grid
+- random: Random
+- walls: ArrayList&lt;Wall&gt;</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string># GridBuilder()
+# GridBuilder(hSize:int, vSize:int, walls: ArrayList&lt;ArrayList&lt;Coordinate&gt;,lightGrenades: ArrayList&lt;Coordinate&gt;, 
+identityDisks: ArrayList&lt;Coordinate&gt;, teleports: ArrayList&lt;Coordinate&gt;, chargedIdentityDisk: Coordinate)
++ GridBuilder(hSize:int, vSize:int)
+- build(ArrayList&lt;Coordinate&gt; lightGrenades, ArrayList&lt;Coordinate&gt; identityDisks, 
+ArrayList&lt;Coordinate&gt; teleports, Coordinate chargedIdentityDisk) 
+- setConstraints()
+-setEmptyConstraints()
+# randomLocations(constraint:GridConstraint)
+# randomWallLocations(constraint:GridConstraint)
+# randomChargedIdentityDiskLocation()
+# placeLightGrenade(coordinates: ArrayList&lt;Coordinate&gt;, constraint: GridConstraint)
+# placeIdentityDisk(coordinates: ArrayList&lt;Coordinate&gt;, constraint: GridConstraint)
+# placeChargedIdentityDisk(coordinate:Coordinate)
+# placeWalls(walls:ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt; , constraint: GridConstraint)
+# placeTeleports(coordinates: ArrayList&lt;Coordinate&gt;, constraint: GridConstraint)
+- linkTeleports(teleports: ArrayList&lt;Teleport&gt;, linkRandomly: boolean)
+</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>GridBuilder</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double1">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double1"/>
+      <double>271.52900397563417</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double1"/>
+      <double>376.18080759124325</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>271.52900397563417</double>
+     <double>376.18080759124325</double>
+    </void>
+   </object>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+   </object>
+   <object idref="ClassNode0"/>
+   <object idref="ClassNode1"/>
+  </void>
+ </object>
+</java>
