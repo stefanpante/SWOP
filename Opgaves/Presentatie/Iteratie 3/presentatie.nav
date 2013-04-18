@@ -61,21 +61,30 @@
 \headcommand {\beamer@subsubsectionentry {0}{3}{2}{7}{21}{Visitor Pattern}}
 \headcommand {\slideentry {3}{2}{11}{21/21}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\sectionentry {4}{System Sequence Diagrams}{22}{System Sequence Diagrams}{0}}
-\headcommand {\beamer@sectionpages {8}{21}}
-\headcommand {\beamer@subsectionpages {11}{21}}
-\headcommand {\slideentry {4}{0}{12}{22/22}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{22}{Update PowerFailures}}\headcommand {\beamer@subsectionpages {11}{21}}
+\headcommand {\slideentry {3}{3}{1}{22/22}{Update PowerFailures}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{23}{Throw IdentityDisk}}\headcommand {\beamer@subsectionpages {22}{22}}
-\headcommand {\slideentry {4}{1}{1}{23/23}{Throw IdentityDisk}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{23}{Teleports}}\headcommand {\beamer@subsectionpages {22}{22}}
+\headcommand {\slideentry {3}{4}{1}{23/23}{Teleports}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\sectionentry {5}{Slot}{24}{Slot}{0}}
-\headcommand {\beamer@sectionpages {22}{23}}
-\headcommand {\beamer@subsectionpages {23}{23}}
-\headcommand {\slideentry {5}{0}{2}{24/24}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{24}{IdentityDisc}}\headcommand {\beamer@subsectionpages {23}{23}}
+\headcommand {\slideentry {3}{5}{1}{24/24}{IdentityDisc}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\beamer@partpages {1}{24}}
+\headcommand {\sectionentry {4}{System Sequence Diagrams}{25}{System Sequence Diagrams}{0}}
+\headcommand {\beamer@sectionpages {8}{24}}
 \headcommand {\beamer@subsectionpages {24}{24}}
-\headcommand {\beamer@sectionpages {24}{24}}
-\headcommand {\beamer@documentpages {24}}
-\headcommand {\def \inserttotalframenumber {24}}
+\headcommand {\slideentry {4}{0}{2}{25/25}{}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{26}{Throw IdentityDisk}}\headcommand {\beamer@subsectionpages {25}{25}}
+\headcommand {\slideentry {4}{1}{1}{26/26}{Throw IdentityDisk}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\sectionentry {5}{Slot}{27}{Slot}{0}}
+\headcommand {\beamer@sectionpages {25}{26}}
+\headcommand {\beamer@subsectionpages {26}{26}}
+\headcommand {\slideentry {5}{0}{2}{27/27}{}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\beamer@partpages {1}{27}}
+\headcommand {\beamer@subsectionpages {27}{27}}
+\headcommand {\beamer@sectionpages {27}{27}}
+\headcommand {\beamer@documentpages {27}}
+\headcommand {\def \inserttotalframenumber {27}}

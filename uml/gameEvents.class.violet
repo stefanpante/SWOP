@@ -485,19 +485,19 @@ $ OBSERVER: Observer</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double11"/>
-      <double>1475.9758045327671</double>
+      <double>1455.9758045327671</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double11"/>
-      <double>623.3132235026945</double>
+      <double>633.3132235026945</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1475.9758045327671</double>
-     <double>623.3132235026945</double>
+     <double>1455.9758045327671</double>
+     <double>633.3132235026945</double>
     </void>
    </object>
   </void>

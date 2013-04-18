@@ -13,16 +13,51 @@ import item.inventory.SquareInventory;
  */
 public abstract class LaunchableItem extends Item {
 	
+	private int range;
+	
 	/**
-	 * The max imum range of the item when launched.
+	 * 
+	 */
+	
+	public LaunchableItem(int range){
+		this.range = range;
+	}
+	/**
+	 * The maximum range of the item when launched.
 	 * 
 	 * @return
 	 */
-	abstract public int getRange();	
+	public int getRange(){
+		return this.range;
+	}
 	
-	abstract public boolean isCharged();	
+	/**
+	 * Sets the range for this Launchable Item
+	 * @param range	the range
+	 * @throws IllegalArgumentException
+	 * 		   thrown when the range is smaller than zero.
+	 */
+	public void setRange(int range) throws IllegalArgumentException{
+		if(!isValidRange(range)){
+			throw new IllegalArgumentException("Range should never be negative");
+		}
+		
+		this.range = range;
+	}
+	
+	/**
+	 * Checks whether the range is larger than zero.
+	 * @param range
+	 * @return
+	 */
+	public boolean isValidRange(int range){
+		return (range >= 0);
+	}
+	
+	public abstract boolean isCharged();	
 
 	
+	//TODO: Moet dit niet abstract zijn? Als er nieuwe launchable items bijkomen
 	/**
 	 * Check whether the given travelDirection is a valid travelDirection 
 	 * 	for all the Launchable objects.

@@ -10,10 +10,11 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	 */
 	public static int MAX_TRAVEL_DISTANCE = Integer.MAX_VALUE;
 	
-	@Override
-	public int getRange() {
-		return MAX_TRAVEL_DISTANCE;
+	public ChargedIdentityDisc(){
+		super(MAX_TRAVEL_DISTANCE);
 	}
+	
+
 
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {

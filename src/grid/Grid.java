@@ -63,7 +63,7 @@ public class Grid {
 	 */
 	public static float PRECENTAGE_TELEPORTS = 0.03f;
 	
-	HashMap<Coordinate, Square> grid;
+	private HashMap<Coordinate, Square> grid;
 	
 	/**
 	 * The horizontal size of the grid.

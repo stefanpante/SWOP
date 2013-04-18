@@ -23,20 +23,18 @@ public class IdentityDisc extends LaunchableItem {
 	 * Constructor that makes an Identity Disc.
 	 */
 	public IdentityDisc() {
-		
+		super(MAX_TRAVEL_DISTANCE);
 	}
 	
+	protected IdentityDisc(int range){
+		super(range);
+	}
 	@Override
 	public String toString() {
 		String result = super.toString() + " IdentityDisc";
 		// Removed this, because it gives a weird message in the GUI
 		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
 		return result;
-	}
-
-	@Override
-	public int getRange() {
-		return MAX_TRAVEL_DISTANCE;
 	}
 
 	@Override
