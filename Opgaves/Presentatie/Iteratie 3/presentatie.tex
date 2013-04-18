@@ -157,7 +157,7 @@ Twee soorten
 Het traject van een IdentityDisk bepalen,vereist kennis over de Grid, Walls, Teleports, Range van Launchable. Hoge afhankelijkheid tussen klassen onderling.\\
 \textbf{Oplossing: Mediator Pattern}
 \begin{center}
-%\includegraphics[scale=1]{images/trajectorymediator}
+\includegraphics[width=1\linewidth]{images/TrajectoryMediator}
 \end{center}
 \end{frame}
 
@@ -175,70 +175,35 @@ Het traject van een IdentityDisk bepalen,vereist kennis over de Grid, Walls, Tel
 \end{center}
 \end{frame}
 \begin{frame}{Grid Constraint}
+\vspace{0.4in}
 \begin{itemize}
 	\item \textbf{Percentage:} De limiet op het aantal squares in verhouding met de totale hoeveelheid squares in het grid.
 	\item \textbf{Excluded:} Een lijst van squares die niet gekozen mogen worden.
-	\item 
 \end{itemize}
 \end{frame}
 
 \subsubsection{Visitor Pattern}
 \begin{frame}{Visitor Pattern}
-\begin{center}
-\includegraphics[width=1\linewidth]{images/VisitorUML}
-\end{center}
-\end{frame}
+\vspace{0.4in}
+%\begin{center}
+\includegraphics[width=1\linewidth]{images/Visitor2}
 
-
-\subsection{Obstacles}
-\begin{frame}{Obstacle}
-\begin{center}
-\begin{itemize}
-	\item Interface \textit{IObstacle}
-	\item  Abstracte klasse \textit{Obstacle} implementeert \textit{IObstacle}
-	\begin{itemize}
-		\item \textit{LightTrail} implementeert \textit{Obstacle}
-		\item \textit{Wall} implementeert \textit{Obstacle}
-	\end{itemize}
-	\item \textit{Player} implementeert \textit{IObstacle}
-	\item \textit{Square} kan \textit{Obstacle} bevatten
-\end{itemize}
-LightTrail implementeert de \textit{Observer} interface.
-\end{center}
-\end{frame}
-
-
-\begin{frame}{Obstacle}
-\begin{center}
-%\includegraphics[width=0.70\linewidth]{images/obstacleObserverClassDiagram}
-\end{center}
-\end{frame}
-
-\subsection{States and Penalty}
-
-\begin{frame}{States and Penalty}
-\begin{itemize}
-	\item State Pattern
-	\begin{itemize}
-		\item Square heeft meerdere toestanden: \textit{RegularState}, \textit{PowerFailureState}
-		\item Square zorgt voor overgang van staat
-	\end{itemize}
-	\item Chain of Responsibility (Command)
-	\begin{itemize}
-		\item State bepaalt eigen penalty
-		\item LightGrenade bepaalt eigen penalty
-		\item Square is eigenaar van concept penalty
-	\end{itemize}
-\end{itemize}
+%\end{center}
 \end{frame}
 
 
 \section{System State Diagrams}
 
 \subsection{Throw IdentityDisk}
-\begin{frame}
+\begin{frame}{Throw IdentityDisk 1}
 \begin{center}
+\includegraphics[scale=0.5]{images/ChooseDirectionSSD}
+\end{center}
+\end{frame}
 
+\begin{frame}{Throw IdentityDisk 2}
+\begin{center}
+\includegraphics[scale=0.5]{images/ChooseDirectionSSD}
 \end{center}
 \end{frame}
 

@@ -55,27 +55,19 @@
 \headcommand {\beamer@subsubsectionentry {0}{3}{2}{7}{18}{Visitor Pattern}}
 \headcommand {\slideentry {3}{2}{10}{18/18}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{19}{Obstacles}}\headcommand {\beamer@subsectionpages {9}{18}}
-\headcommand {\slideentry {3}{3}{1}{19/19}{Obstacles}{0}}
+\headcommand {\sectionentry {4}{System State Diagrams}{19}{System State Diagrams}{0}}
+\headcommand {\beamer@sectionpages {7}{18}}
+\headcommand {\beamer@subsectionpages {9}{18}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{19}{Throw IdentityDisk}}\headcommand {\beamer@subsectionpages {19}{18}}
+\headcommand {\slideentry {4}{1}{1}{19/19}{Throw IdentityDisk}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {3}{3}{2}{20/20}{Obstacles}{0}}
+\headcommand {\sectionentry {5}{Slot}{20}{Slot}{0}}
+\headcommand {\beamer@sectionpages {19}{19}}
+\headcommand {\beamer@subsectionpages {19}{19}}
+\headcommand {\slideentry {5}{0}{2}{20/20}{}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{21}{States and Penalty}}\headcommand {\beamer@subsectionpages {19}{20}}
-\headcommand {\slideentry {3}{4}{1}{21/21}{States and Penalty}{0}}
-\headcommand {\beamer@framepages {21}{21}}
-\headcommand {\sectionentry {4}{System State Diagrams}{22}{System State Diagrams}{0}}
-\headcommand {\beamer@sectionpages {7}{21}}
-\headcommand {\beamer@subsectionpages {21}{21}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{22}{Throw IdentityDisk}}\headcommand {\beamer@subsectionpages {22}{21}}
-\headcommand {\slideentry {4}{1}{1}{22/22}{Throw IdentityDisk}{0}}
-\headcommand {\beamer@framepages {22}{22}}
-\headcommand {\sectionentry {5}{Slot}{23}{Slot}{0}}
-\headcommand {\beamer@sectionpages {22}{22}}
-\headcommand {\beamer@subsectionpages {22}{22}}
-\headcommand {\slideentry {5}{0}{2}{23/23}{}{0}}
-\headcommand {\beamer@framepages {23}{23}}
-\headcommand {\beamer@partpages {1}{23}}
-\headcommand {\beamer@subsectionpages {23}{23}}
-\headcommand {\beamer@sectionpages {23}{23}}
-\headcommand {\beamer@documentpages {23}}
-\headcommand {\def \inserttotalframenumber {23}}
+\headcommand {\beamer@partpages {1}{20}}
+\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\beamer@sectionpages {20}{20}}
+\headcommand {\beamer@documentpages {20}}
+\headcommand {\def \inserttotalframenumber {20}}
