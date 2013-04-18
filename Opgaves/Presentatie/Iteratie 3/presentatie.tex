@@ -23,6 +23,7 @@
 \section{Inleiding} 
 
 \subsection{Rolverdeling}
+
 \begin{frame}{Rolverdeling}
 \begin{multicols}{2}
 \tableofcontents[currentsection]
@@ -49,7 +50,7 @@ Komende iteratie:
 \begin{frame}{Werkverdeling}
 \begin{center}
 Iteratie 3: 18/03/2013 - 12/04/2013
-\includegraphics[width= 0.90\linewidth]{images/workload}
+\includegraphics[width= 0.9\linewidth]{images/workload}
 \end{center}
 \begin{itemize}
 	\item Gedurende 8 dagen 6/7 uur per dag
@@ -57,16 +58,36 @@ Iteratie 3: 18/03/2013 - 12/04/2013
 \end{itemize}
 
 \end{frame}
-\section{Het ontwerp}
-\subsection{MVC}
 
-\begin{frame}{MVC}
+\section{Tests}
+\begin{frame}
 \begin{center}
-\includegraphics[width=0.9\linewidth]{images/overview}
+
 \end{center}
 \end{frame}
 
-\subsection{Handlers}
+\section{Het ontwerp}
+
+\subsection{Domain model}
+
+\begin{frame}
+\begin{center}
+%\includegraphics[scale=1]{images/domainmodel}
+\end{center}
+\end{frame}
+
+\subsection{Design Patterns}
+
+\subsubsection{MVC}
+
+\begin{frame}{MVC}
+\begin{center}
+\includegraphics[width=1\linewidth]{images/overview}
+\end{center}
+\end{frame}
+
+\subsubsection{Handlers}
+
 \begin{frame}{Handlers}
 \begin{center}
 %\includegraphics[width=\linewidth]{images/Handlers-View}
@@ -78,7 +99,8 @@ Iteratie 3: 18/03/2013 - 12/04/2013
 \end{itemize}
 \end{frame}
 
-\subsection{Events}
+\subsubsection{Events}
+
 \begin{frame}{Events}
 Gebeurtenis in het spel met vaste volgorde van uitvoering
 
@@ -120,10 +142,26 @@ Twee soorten
 \end{center}
 \end{frame}
 
-\subsection{Grid}
-\begin{frame}{Grid Builder}
+\subsubsection{Mediator Pattern}
+\begin{frame}{TrajectoryMediator}
+\begin{center}
+%\includegraphics[scale=1]{images/trajectorymediator}
+\end{center}
 \end{frame}
 
+\subsubsection{Observer Pattern}
+\begin{frame}
+\begin{center}
+
+\end{center}
+\end{frame}
+
+\subsubsection{Builder Pattern}
+\begin{frame}
+\begin{center}
+
+\end{center}
+\end{frame}
 \begin{frame}{Grid Constraint}
 \begin{itemize}
 	\item \textbf{Percentage:} De limiet op het aantal squares in verhouding met de totale hoeveelheid squares in het grid.
@@ -132,6 +170,12 @@ Twee soorten
 \end{itemize}
 \end{frame}
 
+\subsubsection{Visitor Pattern}
+\begin{frame}
+\begin{center}
+
+\end{center}
+\end{frame}
 \subsection{Obstacles}
 \begin{frame}{Obstacle}
 \begin{center}
@@ -182,63 +226,11 @@ LightTrail implementeert de \textit{Observer} interface.
 
 
 \section{System State Diagrams}
-\subsection{Start New Game}
-\begin{frame}{Start New Game}
-\begin{center}
-%\includegraphics[width=0.90\linewidth]{images/SSDStartNewGame}
-\end{center}
-\end{frame}
 
-\subsection{Move}
-\begin{frame}{Move deel 1}
+\subsection{Throw IdentityDisk}
+\begin{frame}
 \begin{center}
-%\includegraphics[scale=0.6]{images/SSDMove1}
-\end{center}
-\end{frame}
 
-\begin{frame}{Move deel 2}
-\begin{center}
-%\includegraphics[scale=0.7]{images/SSDMove2}
-\end{center}
-\end{frame}
-
-\subsection{Pick Up Item}
-\begin{frame}{Pick Up Item deel 1}
-\begin{center}
-%\includegraphics[scale=0.55]{images/SSDPickUpItem1}
-\end{center}
-\end{frame}
-
-\begin{frame}{Pick Up Item deel 2}
-\begin{center}
-%\includegraphics[scale=0.9]{images/SSDPickUpItem2}
-\end{center}
-\end{frame}
-
-
-\subsection{Use Item}
-\begin{frame}{Use Item deel 1}
-\begin{center}
-%\includegraphics[scale=0.5]{images/SSDUseItem1}
-\end{center}
-\end{frame}
-
-\begin{frame}{Use Item deel 2}
-\begin{center}
-%\includegraphics[scale=0.9]{images/SSDUseItem2}
-\end{center}
-\end{frame}
-
-\subsection{End Turn}
-\begin{frame}{End Turn deel 1}
-\begin{center}
-%\includegraphics[scale=0.8]{images/SSDEndTurn1}
-\end{center}
-\end{frame}
-
-\begin{frame}{End Turn deel 2}
-\begin{center}
-%\includegraphics[scale=0.7]{images/SSDEndTurn2}
 \end{center}
 \end{frame}
 
