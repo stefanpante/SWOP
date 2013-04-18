@@ -60,6 +60,13 @@ Iteratie 3: 18/03/2013 - 12/04/2013
 \end{frame}
 
 \section{Tests}
+
+\begin{frame}{Rolverdeling}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
+
 \begin{frame}{Test Coverage}
 Coverage geeft een vertekend beeld door verschillende source Trees.\\
 Unit tests en Scenario tests geven individueel goede resultaten.
@@ -69,6 +76,12 @@ Unit tests en Scenario tests geven individueel goede resultaten.
 \end{frame}
 
 \section{Het ontwerp}
+
+\begin{frame}{Rolverdeling}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
+\end{frame}
 
 \subsection{Domain model}
 
@@ -86,6 +99,8 @@ Unit tests en Scenario tests geven individueel goede resultaten.
 \end{frame}
 
 \subsection{Design Patterns}
+
+
 
 \subsubsection{MVC}
 
@@ -156,6 +171,7 @@ Twee soorten
 \begin{frame}{TrajectoryMediator}
 Het traject van een IdentityDisk bepalen,vereist kennis over de Grid, Walls, Teleports, Range van Launchable. Hoge afhankelijkheid tussen klassen onderling.\\
 \textbf{Oplossing: Mediator Pattern}
+\vspace{0.3in}
 \begin{center}
 \includegraphics[width=1\linewidth]{images/TrajectoryMediator}
 \end{center}
@@ -169,9 +185,10 @@ Het traject van een IdentityDisk bepalen,vereist kennis over de Grid, Walls, Tel
 \end{frame}
 
 \subsubsection{Builder Pattern}
-\begin{frame}
+\begin{frame}{Builder pattern}
 \begin{center}
-
+\vspace{0.3in}
+\includegraphics[width=1\linewidth]{images/GridBuilder}
 \end{center}
 \end{frame}
 \begin{frame}{Grid Constraint}
@@ -194,14 +211,13 @@ Het traject van een IdentityDisk bepalen,vereist kennis over de Grid, Walls, Tel
 
 \section{System State Diagrams}
 
-\subsection{Throw IdentityDisk}
-\begin{frame}{Throw IdentityDisk 1}
-\begin{center}
-\includegraphics[scale=0.5]{images/ChooseDirectionSSD}
-\end{center}
+\begin{frame}{Rolverdeling}
+\begin{multicols}{2}
+\tableofcontents[currentsection]
+\end{multicols}
 \end{frame}
-
-\begin{frame}{Throw IdentityDisk 2}
+\subsection{Throw IdentityDisk}
+\begin{frame}{Throw IdentityDisk}
 \begin{center}
 \includegraphics[scale=0.5]{images/ChooseDirectionSSD}
 \end{center}

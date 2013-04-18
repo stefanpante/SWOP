@@ -6,9 +6,8 @@
     <void property="attributes">
      <void property="text">
       <string>- percentage: float
--excluded: ArrayList&lt;Coordinate&gt;
-- included ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;
-</string>
+- excluded: ArrayList&lt;Coordinate&gt;
+- included: ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;</string>
      </void>
     </void>
     <void property="methods">
@@ -17,13 +16,6 @@
 + GridConstraint(percentage:float)
 + GridConstraint(percentage:float, excluded:ArrayList&lt;Coordinate&gt;
 + GridConstraint(percentage:float, excluded: ArrayList&lt;Coordinate&gt;, included:ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;)
-+ isValidPercentage(percentage:float): boolean
-- setPercentage(percentage:float)
-- setExcluded(excluded:ArrayList&lt;Coordinate&gt;)
-- setIncluded(included: ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt;)
-+ getPercentage():float
-+ getExcluded(): ArrayList&lt;Coordinate&gt;
-+ getIncluded(): ArrayList&lt;Coordinate&gt;
 </string>
      </void>
     </void>
@@ -38,54 +30,32 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>516.1736649163067</double>
+      <double>520.416305603426</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double0"/>
-      <double>54.55634918610406</double>
+      <double>229.91883092036787</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>516.1736649163067</double>
-     <double>54.55634918610406</double>
+     <double>520.416305603426</double>
+     <double>229.91883092036787</double>
     </void>
    </object>
   </void>
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
-    <void property="attributes">
-     <void property="text">
-      <string>+ teleportConstraint: GridConstraint
-+ lightGrenadeConstrant: GridConstraint
-+ identityDiskConstraint: GridConstraint
-+ wallConstraint: GridConstraint
-- grid: Grid
-- random: Random
-- walls: ArrayList&lt;Wall&gt;</string>
-     </void>
-    </void>
     <void property="methods">
      <void property="text">
-      <string># GridBuilder()
+      <string>+ GridBuilder(hSize:int, vSize:int)
+# GridBuilder()
 # GridBuilder(hSize:int, vSize:int, walls: ArrayList&lt;ArrayList&lt;Coordinate&gt;,lightGrenades: ArrayList&lt;Coordinate&gt;, 
 identityDisks: ArrayList&lt;Coordinate&gt;, teleports: ArrayList&lt;Coordinate&gt;, chargedIdentityDisk: Coordinate)
-+ GridBuilder(hSize:int, vSize:int)
 - build(ArrayList&lt;Coordinate&gt; lightGrenades, ArrayList&lt;Coordinate&gt; identityDisks, 
 ArrayList&lt;Coordinate&gt; teleports, Coordinate chargedIdentityDisk) 
-- setConstraints()
--setEmptyConstraints()
-# randomLocations(constraint:GridConstraint)
-# randomWallLocations(constraint:GridConstraint)
-# randomChargedIdentityDiskLocation()
-# placeLightGrenade(coordinates: ArrayList&lt;Coordinate&gt;, constraint: GridConstraint)
-# placeIdentityDisk(coordinates: ArrayList&lt;Coordinate&gt;, constraint: GridConstraint)
-# placeChargedIdentityDisk(coordinate:Coordinate)
-# placeWalls(walls:ArrayList&lt;ArrayList&lt;Coordinate&gt;&gt; , constraint: GridConstraint)
-# placeTeleports(coordinates: ArrayList&lt;Coordinate&gt;, constraint: GridConstraint)
-- linkTeleports(teleports: ArrayList&lt;Teleport&gt;, linkRandomly: boolean)
 </string>
      </void>
     </void>
@@ -100,19 +70,19 @@ ArrayList&lt;Coordinate&gt; teleports, Coordinate chargedIdentityDisk)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>521.844804515672</double>
+      <double>517.6021638285526</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double1"/>
-      <double>373.35238046649704</double>
+      <double>429.9209229614208</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>521.844804515672</double>
-     <double>373.35238046649704</double>
+     <double>517.6021638285526</double>
+     <double>429.9209229614208</double>
     </void>
    </object>
   </void>
@@ -129,19 +99,19 @@ ArrayList&lt;Coordinate&gt; teleports, Coordinate chargedIdentityDisk)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>169.70562748477136</double>
+      <double>193.74725804511397</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>545.8864350760148</double>
+      <double>472.34732983261387</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>169.70562748477136</double>
-     <double>545.8864350760148</double>
+     <double>193.74725804511397</double>
+     <double>472.34732983261387</double>
     </void>
    </object>
   </void>
@@ -158,19 +128,19 @@ ArrayList&lt;Coordinate&gt; teleports, Coordinate chargedIdentityDisk)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>1342.0886706920671</double>
+      <double>1296.8338366961282</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double3"/>
-      <double>554.3717164502532</double>
+      <double>465.2762620207482</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1342.0886706920671</double>
-     <double>554.3717164502532</double>
+     <double>1296.8338366961282</double>
+     <double>465.2762620207482</double>
     </void>
    </object>
   </void>
@@ -187,19 +157,19 @@ ArrayList&lt;Coordinate&gt; teleports, Coordinate chargedIdentityDisk)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>186.67619023324855</double>
+      <double>213.54624791833734</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double4"/>
-      <double>455.3767670841366</double>
+      <double>379.00923471598946</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>186.67619023324855</double>
-     <double>455.3767670841366</double>
+     <double>213.54624791833734</double>
+     <double>379.00923471598946</double>
     </void>
    </object>
   </void>
