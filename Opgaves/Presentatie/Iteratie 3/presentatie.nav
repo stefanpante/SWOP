@@ -41,43 +41,41 @@
 \headcommand {\beamer@framepages {12}{12}}
 \headcommand {\slideentry {3}{2}{5}{13/13}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{2}{4}{14}{Mediator Pattern}}
 \headcommand {\slideentry {3}{2}{6}{14/14}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@subsubsectionentry {0}{3}{2}{4}{15}{Mediator Pattern}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{2}{5}{15}{Observer Pattern}}
 \headcommand {\slideentry {3}{2}{7}{15/15}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@subsubsectionentry {0}{3}{2}{5}{16}{Observer Pattern}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{2}{6}{16}{Builder Pattern}}
 \headcommand {\slideentry {3}{2}{8}{16/16}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\beamer@subsubsectionentry {0}{3}{2}{6}{17}{Builder Pattern}}
 \headcommand {\slideentry {3}{2}{9}{17/17}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{2}{7}{18}{Visitor Pattern}}
 \headcommand {\slideentry {3}{2}{10}{18/18}{Design Patterns}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@subsubsectionentry {0}{3}{2}{7}{19}{Visitor Pattern}}
-\headcommand {\slideentry {3}{2}{11}{19/19}{Design Patterns}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{19}{Obstacles}}\headcommand {\beamer@subsectionpages {9}{18}}
+\headcommand {\slideentry {3}{3}{1}{19/19}{Obstacles}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{20}{Obstacles}}\headcommand {\beamer@subsectionpages {9}{19}}
-\headcommand {\slideentry {3}{3}{1}{20/20}{Obstacles}{0}}
+\headcommand {\slideentry {3}{3}{2}{20/20}{Obstacles}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\slideentry {3}{3}{2}{21/21}{Obstacles}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{21}{States and Penalty}}\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\slideentry {3}{4}{1}{21/21}{States and Penalty}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{22}{States and Penalty}}\headcommand {\beamer@subsectionpages {20}{21}}
-\headcommand {\slideentry {3}{4}{1}{22/22}{States and Penalty}{0}}
+\headcommand {\sectionentry {4}{System State Diagrams}{22}{System State Diagrams}{0}}
+\headcommand {\beamer@sectionpages {7}{21}}
+\headcommand {\beamer@subsectionpages {21}{21}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{22}{Throw IdentityDisk}}\headcommand {\beamer@subsectionpages {22}{21}}
+\headcommand {\slideentry {4}{1}{1}{22/22}{Throw IdentityDisk}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\sectionentry {4}{System State Diagrams}{23}{System State Diagrams}{0}}
-\headcommand {\beamer@sectionpages {7}{22}}
+\headcommand {\sectionentry {5}{Slot}{23}{Slot}{0}}
+\headcommand {\beamer@sectionpages {22}{22}}
 \headcommand {\beamer@subsectionpages {22}{22}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{23}{Throw IdentityDisk}}\headcommand {\beamer@subsectionpages {23}{22}}
-\headcommand {\slideentry {4}{1}{1}{23/23}{Throw IdentityDisk}{0}}
+\headcommand {\slideentry {5}{0}{2}{23/23}{}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\sectionentry {5}{Slot}{24}{Slot}{0}}
-\headcommand {\beamer@sectionpages {23}{23}}
+\headcommand {\beamer@partpages {1}{23}}
 \headcommand {\beamer@subsectionpages {23}{23}}
-\headcommand {\slideentry {5}{0}{2}{24/24}{}{0}}
-\headcommand {\beamer@framepages {24}{24}}
-\headcommand {\beamer@partpages {1}{24}}
-\headcommand {\beamer@subsectionpages {24}{24}}
-\headcommand {\beamer@sectionpages {24}{24}}
-\headcommand {\beamer@documentpages {24}}
-\headcommand {\def \inserttotalframenumber {24}}
+\headcommand {\beamer@sectionpages {23}{23}}
+\headcommand {\beamer@documentpages {23}}
+\headcommand {\def \inserttotalframenumber {23}}
