@@ -11,7 +11,8 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	public static int MAX_TRAVEL_DISTANCE = Integer.MAX_VALUE;
 	
 	public ChargedIdentityDisc(){
-		super(MAX_TRAVEL_DISTANCE);
+		super();
+		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
 	
 
