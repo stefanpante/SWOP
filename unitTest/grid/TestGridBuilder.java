@@ -31,13 +31,13 @@ public class TestGridBuilder {
 	
 	private int vSize = 10;
 	
-	private GridBuilder gridBuilder;
+	private RandomGridBuilder gridBuilder;
 	
 	private Grid grid;
 	
 	@Before
 	public void setUpBefore() {
-		gridBuilder = new GridBuilder(hSize, vSize);
+		gridBuilder = new RandomGridBuilder(hSize, vSize);
 		grid = gridBuilder.getGrid();
 	}
 	

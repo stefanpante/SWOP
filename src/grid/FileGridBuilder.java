@@ -33,7 +33,8 @@ public class FileGridBuilder{
 
 	private ArrayList<Coordinate> free_squares;
 	private ArrayList<Coordinate> not_squares;
-	private ArrayList<Coordinate> start_squares;
+	private Coordinate start_player1;
+	private Coordinate start_player2;
 	private ArrayList<Coordinate> wall_squares;
 
 	/**
@@ -44,6 +45,7 @@ public class FileGridBuilder{
 		this.filepath = filepath;
 		this.file = new File(filepath);
 	}
+	
 
 	/**
 	 * Opens the fileStream
@@ -78,7 +80,6 @@ public class FileGridBuilder{
 
 		this.free_squares = new ArrayList<Coordinate>();
 		this.not_squares = new ArrayList<Coordinate>();
-		this.start_squares = new ArrayList<Coordinate>();
 		this.wall_squares = new ArrayList<Coordinate>();
 		String line = "";
 		while((line = br.readLine()) != null){
@@ -92,6 +93,9 @@ public class FileGridBuilder{
 									break;
 					case  '#':		wall_squares.add(new Coordinate(x,y));
 									break;
+					case  '1':		start_player1 = new Coordinate(x,y);
+									break;
+					case '2':		start_player2 = new Coordinate(x,y);
 					default:		break;
 				}
 				x++;

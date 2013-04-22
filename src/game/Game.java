@@ -1,7 +1,7 @@
 package game;
 
 import grid.Grid;
-import grid.GridBuilder;
+import grid.RandomGridBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -74,7 +74,7 @@ public class Game {
 	 */
 	public Game(int hSize, int vSize){
 		// Build the grid
-		GridBuilder gridBuilder = new GridBuilder(hSize, vSize);
+		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize);
 		this.setGrid(gridBuilder.getGrid());
 		
 
