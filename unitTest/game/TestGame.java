@@ -2,7 +2,7 @@ package game;
 
 import static org.junit.Assert.*;
 import grid.Grid;
-import grid.GridBuilder;
+import grid.RandomGridBuilder;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,7 +44,7 @@ public class TestGame {
 	
 	@Test
 	public void testConstructorGrid() {
-		GridBuilder gridBuilder = new GridBuilder(20, 20);
+		RandomGridBuilder gridBuilder = new RandomGridBuilder(20, 20);
 		Game game = new Game(gridBuilder.getGrid());
 		
 		game.start();

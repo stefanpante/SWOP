@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 import java.util.ArrayList;
 
-import grid.GridBuilder;
+import grid.RandomGridBuilder;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;

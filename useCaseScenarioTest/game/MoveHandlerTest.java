@@ -30,7 +30,7 @@ import util.Coordinate;
 
 import game.Game;
 import grid.Grid;
-import grid.GridBuilder;
+import grid.RandomGridBuilder;
 import grid.GridProvider;
 
 /**

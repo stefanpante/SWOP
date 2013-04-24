@@ -26,9 +26,7 @@ public class IdentityDisc extends LaunchableItem {
 		super(MAX_TRAVEL_DISTANCE);
 	}
 	
-	protected IdentityDisc(int range){
-		super(range);
-	}
+	
 	@Override
 	public String toString() {
 		String result = super.toString() + " IdentityDisc";
