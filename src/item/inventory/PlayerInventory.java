@@ -20,7 +20,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	/**
 	 * The maximum size 
 	 */
-	public static int PLAYER_INVENTORY_SIZE = 6;
+	public static final double PLAYER_INVENTORY_SIZE = 6;
 
 	private ArrayList<Integer> launchableHashes;
 	
@@ -30,6 +30,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	 */
 	public PlayerInventory() {
 		super(PLAYER_INVENTORY_SIZE);
+		
 		launchableHashes = new ArrayList<Integer>();
 	}
 	
