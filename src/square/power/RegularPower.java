@@ -13,5 +13,9 @@ public class RegularPower extends Power{
 	public boolean isFailing() {
 		return false;
 	}
+	
+	public void resetCount() {
+		
+	}
 
 }

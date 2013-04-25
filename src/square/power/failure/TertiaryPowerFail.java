@@ -19,5 +19,9 @@ public class TertiaryPowerFail extends PowerFail {
 	public void decreaseAction() {
 		super.decreaseAction();
 	}
+	
+	public void resetCount() {
+		super.reset(TURNS, ACTIONS);
+	}
 
 }

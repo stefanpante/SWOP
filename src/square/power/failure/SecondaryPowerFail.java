@@ -1,6 +1,5 @@
 package square.power.failure;
 
-import square.power.Power;
 import util.Rotation;
 
 public class SecondaryPowerFail extends PowerFail {
@@ -8,16 +7,12 @@ public class SecondaryPowerFail extends PowerFail {
 	private final static int TURNS = 0;
 	
 	private final static int ACTIONS = 2;
-	
-	private final Rotation rotation;
-	
-	private Power tertiary;
 
 	public SecondaryPowerFail() {
 		super(TURNS, ACTIONS);
 		
-		this.tertiary = new TertiaryPowerFail();
-		this.rotation = Rotation.random();
+		this.setChild(new TertiaryPowerFail());
+		this.setRotation(Rotation.random());
 	}
 
 	@Override
@@ -30,8 +25,8 @@ public class SecondaryPowerFail extends PowerFail {
 		super.decreaseAction();
 	}
 	
-	public Power getTertiary() {
-		return this.tertiary;
+	public void resetCount() {
+		super.reset(TURNS, ACTIONS);
 	}
 
 }

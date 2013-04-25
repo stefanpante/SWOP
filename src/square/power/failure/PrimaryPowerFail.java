@@ -1,20 +1,15 @@
 package square.power.failure;
 
-import square.power.Power;
-
-
 public class PrimaryPowerFail extends PowerFail {
 	
 	private final static int TURNS = 3;
 	
 	private final static int ACTIONS = 0;
-	
-	private Power secondary;
 
 	public PrimaryPowerFail() {
 		super(TURNS, ACTIONS);
 		
-		this.secondary = new SecondaryPowerFail();
+		this.setChild(new SecondaryPowerFail());
 	}
 
 	@Override
@@ -27,8 +22,8 @@ public class PrimaryPowerFail extends PowerFail {
 		
 	}
 	
-	public Power getSecondary() {
-		return this.secondary;
+	public void resetCount() {
+		super.reset(TURNS, ACTIONS);
 	}
 
 }
