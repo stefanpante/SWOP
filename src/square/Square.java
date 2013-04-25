@@ -15,10 +15,6 @@ import notnullcheckweaver.Nullable;
  */
 @NotNull
 public class Square{
-	
-	private static long sId = 0;
-	
-	private final long id;
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -42,7 +38,6 @@ public class Square{
 	public Square (){
 		this.inventory = new SquareInventory();
 		this.power = new Power();
-		this.id = sId++;;
 	}
 	
 	/**
@@ -115,38 +110,4 @@ public class Square{
 	public boolean isObstructed(){
 			return obstacle != null;
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Square other = (Square) obj;
-		if (id != other.id) {
-			return false;
-		}
-		return true;
-	}
-
-
 }
