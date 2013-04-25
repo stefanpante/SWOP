@@ -1,5 +1,6 @@
 package item.launchable;
 
+import item.Item;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
@@ -45,5 +46,13 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	@Override
 	public String toString() {
 		return super.toString() + "Charged Identity Disc";
+	}
+	
+	public static boolean isChargedIdentityDisc(Object o){
+		return (o instanceof ChargedIdentityDisc);
+	}
+	
+	public boolean isSameType(Item o){
+		return (o instanceof ChargedIdentityDisc);
 	}
 }

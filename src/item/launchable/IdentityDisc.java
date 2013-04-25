@@ -1,5 +1,6 @@
 package item.launchable;
 
+import item.Item;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 import notnullcheckweaver.NotNull;
@@ -58,5 +59,14 @@ public class IdentityDisc extends LaunchableItem {
 	@Override
 	public boolean isCharged() {
 		return false;
+	}
+	
+	public static boolean isIdentityDisc(Object o){
+		return (o instanceof IdentityDisc);
+	}
+	
+	@Override
+	public boolean isSameType(Item o){
+		return (o instanceof IdentityDisc);
 	}
 }

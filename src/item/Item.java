@@ -34,4 +34,6 @@ public abstract class Item implements VisitableItem {
 	public String toString() {
 		return "Item";
 	}
+	
+	public abstract boolean isSameType(Item item);
 }

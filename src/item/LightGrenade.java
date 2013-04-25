@@ -152,4 +152,21 @@ public class LightGrenade extends Item{
 			throws IllegalStateException {
 		plInv.removeLightGrenade(this);
 	}
+	
+	/*
+	 * Returns whether the given object is a lightgrenade
+	 */
+	public static boolean isLightGrenade(Object o){
+		return (o instanceof LightGrenade);
+	}
+	
+	/**
+	 * returns whether the given object is of the same type.
+	 * @param o
+	 * @return
+	 */
+	@Override
+	public boolean isSameType(Item o){
+		return (o instanceof LightGrenade);
+	}
 }

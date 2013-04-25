@@ -44,26 +44,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 		item.acceptRemovePlayerInventory(this);
 	}
 	
-	/**
-	 * Returns all the Launchable items of this inventory.
-	 * 
-	 * @return An ArrayList with all the launchables.
-	 */
-	public ArrayList<LaunchableItem> getLaunchables(){
-		ArrayList<LaunchableItem> result = new ArrayList<LaunchableItem>();
-		for(Integer i : launchableHashes){
-			result.add((LaunchableItem)this.getItem(i));
-		}
-		return result;
-	}
-	
-	/**
-	 * Returns whether or not this inventory has a launchable.
-	 * @return
-	 */
-	public boolean hasLaunchable(){
-		return launchableHashes.size()>0;
-	}
 	
 	/**
 	 * Returns a string representation of this PlayerInventory.
@@ -77,28 +57,24 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
 		super.addItem(chargedDisc);
-		launchableHashes.add(chargedDisc.hashCode());
 	}
 
 	@Override
 	public void removeChargedDisc(ChargedIdentityDisc chargedDisc)
 			throws IllegalStateException {
 		super.removeItem(chargedDisc);
-		launchableHashes.remove(new Integer(chargedDisc.hashCode()));
 	}
 
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc)
 			throws IllegalStateException {
 		super.addItem(identityDisc);
-		launchableHashes.add(identityDisc.hashCode());
 	}
 
 	@Override
 	public void removeIdentityDisc(IdentityDisc identityDisc)
 			throws IllegalStateException {
 		super.removeItem(identityDisc);
-		launchableHashes.remove(new Integer(identityDisc.hashCode()));
 	}
 
 	@Override

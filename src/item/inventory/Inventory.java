@@ -22,11 +22,13 @@ public abstract class Inventory{
 	 */
 	private final double maximumSize;
 
+	
 	/**
 	 * A given size should imply the usage of an array,
 	 * But we use an ArrayList for the convenience of the contains and add method
 	 */
-	private  HashMap<Integer,Item> items;
+	private ArrayList<Item> items;
+	//private  HashMap<Integer,Item> items;
 
 	/**
 	 * Creates a new instance of the Inventory class with given size.
@@ -43,7 +45,7 @@ public abstract class Inventory{
 			throw new IllegalArgumentException("The given size is not valid!");
 		
 		this.maximumSize = size;
-		this.items = new HashMap<Integer,Item>();
+		this.items = new ArrayList<Item>();
 	}
 
 	/**
@@ -112,37 +114,9 @@ public abstract class Inventory{
 	 * Returns all the items.
 	 */
 	public ArrayList<Item> getAllItems(){
-		return new ArrayList<Item>(items.values());
+		return new ArrayList<Item>(items);
 	}
 
-	/**
-	 * Inspector that returns the item at the given index.
-	 * 
-	 * @param 	index 
-	 * 			The index of the item to return.
-	 * @return	The item of which the index is given.
-	 * @throws 	IndexOutOfBoundsException
-	 * 		   	Thrown if the given index is not valid for this inventory.
-	 * 			| !canHaveAsItemIndex(index)
-	 */
-	public Item getItem(Integer hashCode) throws NoSuchElementException{
-		if(!containsHash(hashCode)){
-			throw new IndexOutOfBoundsException();
-		}
-		return items.get(hashCode);
-	}
-
-	/**
-	 * Returns whether this inventory has the given hashCode as a key.
-	 * 
-	 * @param 	hashCode
-	 * 			The hashCode to check.
-	 * @return	True if and only if the given hash is found in this inventory.
-	 * 			False otherwise.
-	 */
-	public boolean containsHash(Integer hashCode) {
-		return items.containsKey(hashCode);
-	}
 
 	/**
 	 * checks if the given item is in the inventory
@@ -152,7 +126,7 @@ public abstract class Inventory{
 	 * 				otherwise false
 	 */
 	public boolean hasItem(Item item){
-		return items.containsValue(item);
+		return items.contains(item);
 	}
 
 	/**
@@ -161,13 +135,14 @@ public abstract class Inventory{
 	 * 			the item to be added to the inventory
 	 * @throws 	IllegalStateException
 	 * 			thrown when adding the item would exceed the size
-	 * 			of the inventory
+	 * 			of the inventory or the item is already in the
+	 * 			inventory
 	 */
 	public void addItem(Item item) throws IllegalStateException{
 		if(!canHaveAsItem(item))
 			throw new IllegalStateException("The inventory is full or already contains the item.");
 		else
-			items.put(item.hashCode(), item);
+			items.add(item);
 	}
 
 	/**
@@ -224,7 +199,7 @@ public abstract class Inventory{
 		} else {
 			description += "Inventory ("+ getSize() +") containing: "; 
 			int i = 0;
-			ArrayList<Item> list= new ArrayList<Item>(items.values());
+			ArrayList<Item> list= new ArrayList<Item>(items);
 			while(i < list.size()){
 				// the system.getProperty is used to get a system independent newline,
 				// is different on windows vs Unix systems.

@@ -106,4 +106,13 @@ public class Teleport extends Item {
 	public String toString() {
 		return super.toString() + "Teleport";
 	}
+	
+	public static boolean isTeleport(Object o){
+		return (o instanceof Teleport);
+	}
+	
+	@Override
+	public boolean isSameType(Item o){
+		return (o instanceof Teleport);
+	}
 }
