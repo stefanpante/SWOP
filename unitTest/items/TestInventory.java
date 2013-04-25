@@ -44,26 +44,11 @@ public class TestInventory {
 	}
 	
 	@Test
-	public void testMaximumSize() {
-		Inventory inventory = new SquareInventory(10);
-		
-		assertEquals(inventory.getMaximumSize(), 10);
-	}
-	
-	@Test
 	public void testAddingItem() {
 		Item item = new LightGrenade();
 		Inventory inventory = new PlayerInventory();
 		
 		inventory.addItem(item);
-	}
-	 
-	@Test(expected=IllegalStateException.class)
-	public void testAddingOverCapacity() {
-		Inventory inventory = new SquareInventory(1);
-		
-		inventory.addItem(new Teleport());
-		inventory.addItem(new LightGrenade());
 	}
 	
 	@Test(expected=IllegalStateException.class)
@@ -158,23 +143,4 @@ public class TestInventory {
 		assertTrue(Inventory.isValidMaximumSize(10));
 	}
 	
-	@Test
-	public void testSetMaximumSize(){
-		Inventory inventory = new SquareInventory(20);
-		try{
-			inventory.setMaximumSize(-1);
-			fail("Size should not be negative");
-		} catch(Exception e){}
-		
-		try{
-			inventory.setMaximumSize(25);
-		}catch(Exception e){
-			fail("Setting maximum size to a greater size should be allowed");
-		}
-		for(int i = 0; i < 24; i ++){
-			Item item = new IdentityDisc();
-			inventory.addItem(item);
-		} 
-		
-	}
 }

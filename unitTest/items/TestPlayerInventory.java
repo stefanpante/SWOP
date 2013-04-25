@@ -24,9 +24,11 @@ public class TestPlayerInventory {
 		PlayerInventory pi2 = new PlayerInventory();
 		PlayerInventory pi3 = new PlayerInventory();
 
-		assertEquals(6, pi1.getMaximumSize());
-		assertEquals(6, pi2.getMaximumSize());
-		assertEquals(6, pi3.getMaximumSize());
+		double size = 6;
+		
+		assertTrue(pi1.getMaximumSize() == size);
+		assertTrue(pi2.getMaximumSize() == size);
+		assertTrue(pi3.getMaximumSize() == size);
 	}
 	
 	@Test

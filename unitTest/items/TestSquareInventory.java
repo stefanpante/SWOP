@@ -36,28 +36,10 @@ public class TestSquareInventory {
 	@After
 	public void tearDown() throws Exception {
 	}
-
-	@Test 
-	public void testConstructor(){
-		SquareInventory sqinv1 = new SquareInventory(17);
-		assertEquals(17, sqinv1.getMaximumSize());
-		
-		SquareInventory sqinv2 = new SquareInventory(1615);
-		assertEquals(1615, sqinv2.getMaximumSize());
-	}
-	
-	@Test
-	public void testCanHaveAsItemFull(){
-		SquareInventory sqinv1 = new SquareInventory(1);
-		Item it1 = new Teleport();
-		Item it2 = new IdentityDisc();
-		sqinv1.addItem(it1);
-		assertFalse(sqinv1.canHaveAsItem(it2));
-	}
 	
 	@Test
 	public void testCanHaveAsItemTwice(){
-		SquareInventory sqinv1 = new SquareInventory(1);
+		SquareInventory sqinv1 = new SquareInventory();
 		Item it1 = new IdentityDisc();
 		sqinv1.addItem(it1);
 		assertFalse(sqinv1.canHaveAsItem(it1));

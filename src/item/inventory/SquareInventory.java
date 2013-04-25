@@ -30,23 +30,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * Holds the only possible LightGrenade in this SquareInventory.
 	 */
 	private LightGrenade lightGrenade;
-
-	/**
-	 * Creates a square inventory with the given size. 
-	 * 
-	 * @param 	size 
-	 * 			The size of this inventory.
-	 * @param	onlyInactiveItems
-	 * 			Boolean that states whether this inventory can only have inactive Items.
-	 * @effect	super(size)
-	 */
-	public SquareInventory(int size) {
-		super(size);
-		this.teleport = null;	
-		this.lightGrenade = null;
-		this.launchableHashes = new ArrayList<Integer>();
-	}
-
+	
 	/**
 	 * Creates a square inventory with unlimited size.
 	 * 

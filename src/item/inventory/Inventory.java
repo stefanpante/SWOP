@@ -20,7 +20,7 @@ public abstract class Inventory{
 	/**
 	 * The size of the inventory, should not be smaller than zero
 	 */
-	private int maximumSize;
+	private final double maximumSize;
 
 	/**
 	 * A given size should imply the usage of an array,
@@ -34,32 +34,37 @@ public abstract class Inventory{
 	 * @param	size	
 	 * 			The size of the new inventory.
 	 * @effect	setSize(size)
+	 * @throws	IllegalArgumentException
+	 * 			When the given size is invalid.
 	 */
 	@Raw
-	public Inventory(int size) throws IllegalArgumentException {
-		this.setMaximumSize(size);
+	public Inventory(double size) throws IllegalArgumentException {
+		if(!isValidMaximumSize(size)) 
+			throw new IllegalArgumentException("The given size is not valid!");
+		
+		this.maximumSize = size;
 		this.items = new HashMap<Integer,Item>();
 	}
 
 	/**
 	 * Creates a new instance of the Inventory class with unlimited size.
 	 * 
-	 * @effect 	Inventory(Integer.MAX_VALUE)
+	 * @effect 	Inventory(Double.POSITIVE_INFINITY)
 	 */	
 	public Inventory(){
-		this(Integer.MAX_VALUE);
+		this(Double.POSITIVE_INFINITY);
 	}
 
 	/**
 	 * Checks if the given size is valid for this inventory.
 	 * 
-	 * @param 	maximumSize 
+	 * @param 	size 
 	 * 			The size to check.
 	 * @return 	True 	if the size is larger or equal to zero.
 	 * 			False 	otherwise.
 	 */
-	public static boolean isValidMaximumSize(int maximumSize){
-		return maximumSize >= 0;
+	public static boolean isValidMaximumSize(double size){
+		return size >= 0;
 	}
 
 	/**
@@ -90,26 +95,10 @@ public abstract class Inventory{
 	 * @return	An integer representing the maximum size of this inventory.
 	 */
 	@Basic
-	public int getMaximumSize(){
+	public double getMaximumSize(){
 		return this.maximumSize;
 	}
-
-	/**
-	 * Sets the size of the inventory and inits a new arraylist
-	 * if a arraylist hasn't already been initialised.
-	 * 
-	 * @param 	maximumSize	
-	 * 			the size of this inventory
-	 * @throws 	IllegalArgumentException 
-	 * 			if the given size is not valid
-	 */
-	public void setMaximumSize(int maximumSize) throws IllegalArgumentException{		
-		if(!isValidMaximumSize(maximumSize) || maximumSize < 0) 
-			throw new IllegalArgumentException("The given size is not valid!");
-		else
-			this.maximumSize = maximumSize; 
-	}
-
+	
 	/**
 	 * Returns the size of already occupied spaces in the inventory.
 	 * 
