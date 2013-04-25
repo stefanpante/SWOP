@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Random;
 
 import square.Square;
+import square.power.RegularPower;
+import square.power.failure.PrimaryPowerFail;
 import util.Coordinate;
 import grid.Grid;
 
@@ -26,7 +28,7 @@ public class PowerManager {
 	/**
 	 * The possibility of a power failure in a square.
 	 */
-	private final float CHANCE_POWERFAILURE = 0.05f;
+	private final float CHANCE_POWERFAILURE = 0.01f;
 	
 	/**
 	 * Creates a power manager with a reference to the grid.
@@ -54,10 +56,10 @@ public class PowerManager {
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
 			if(random.nextFloat() <= CHANCE_POWERFAILURE){
-				square.getPower().fail();
+				square.setPower(new PrimaryPowerFail());
 				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
 				for(Square s: neighbors){
-					s.getPower().fail();
+					s.setPower(new PrimaryPowerFail());
 				}
 			}
 		}
@@ -65,8 +67,8 @@ public class PowerManager {
 		// Exclude starting positions
 		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
 		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
-		bottomLeft.getPower().regain();
-		topRight.getPower().regain();
+		bottomLeft.setPower(new RegularPower());
+		topRight.setPower(new RegularPower());
 	}
 	
 	/**
@@ -77,7 +79,7 @@ public class PowerManager {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.getPower().regain();
+			square.setPower(new RegularPower());
 		}
 	}
 	

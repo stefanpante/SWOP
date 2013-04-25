@@ -1,5 +1,6 @@
 package square.power.failure;
 
+import square.power.Power;
 import util.Rotation;
 
 public class SecondaryPowerFail extends PowerFail {
@@ -10,7 +11,7 @@ public class SecondaryPowerFail extends PowerFail {
 	
 	private final Rotation rotation;
 	
-	private PowerFail tertiary;
+	private Power tertiary;
 
 	public SecondaryPowerFail() {
 		super(TURNS, ACTIONS);
@@ -29,7 +30,7 @@ public class SecondaryPowerFail extends PowerFail {
 		super.decreaseAction();
 	}
 	
-	public PowerFail getTertiary() {
+	public Power getTertiary() {
 		return this.tertiary;
 	}
 

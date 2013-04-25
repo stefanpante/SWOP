@@ -5,6 +5,7 @@ import item.inventory.SquareInventory;
 
 import square.obstacle.Obstacle;
 import square.power.Power;
+import square.power.RegularPower;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -42,7 +43,7 @@ public class Square{
 	 */
 	public Square (){
 		this.inventory = new SquareInventory();
-		this.power = new Power();
+		this.setPower(new RegularPower());
 		this.id = sId++;;
 	}
 	
@@ -51,6 +52,14 @@ public class Square{
 	 */
 	public Power getPower() {
 		return this.power;
+	}
+	
+	/**
+	 * Sets the power of a square.
+	 * @param power
+	 */
+	public void setPower(Power power) {
+		this.power = power;
 	}
 	
 	/**
