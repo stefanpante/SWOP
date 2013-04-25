@@ -111,6 +111,8 @@ public class Game {
 		Square topRight = grid.getSquare(new Coordinate(grid.getHSize()-1, 0));
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
+
+		this.powerManager = new PowerManager(getGrid());
 		
 		// Start the game
 		start();

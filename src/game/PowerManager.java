@@ -95,8 +95,8 @@ public class PowerManager {
 	 * Decreases the action of a power failure.
 	 */
 	public void decreaseAction() {
-		//for(Square square : getGrid().getAllSquares())
-			//square.getPower().decreaseAction();
+		for(Square square : getGrid().getAllSquares())
+			square.getPower().decreaseAction();
 	}
 
 }
