@@ -17,7 +17,7 @@ public enum Rotation {
 	public static Rotation random() {
 		Random random = new Random();
 		
-		if(random.nextInt(2) <= 1)
+		if(random.nextInt(2) == 0)
 			return Rotation.CLOCKWISE;
 		else
 			return Rotation.COUNTERCLOCKWISE;
