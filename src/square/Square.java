@@ -4,6 +4,7 @@ package square;
 import item.inventory.SquareInventory;
 
 import square.obstacle.Obstacle;
+import square.power.Power;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;

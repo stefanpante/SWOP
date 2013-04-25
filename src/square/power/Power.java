@@ -1,4 +1,4 @@
-package square;
+package square.power;
 
 public class Power {
 	
@@ -24,7 +24,7 @@ public class Power {
 	/**
 	 * Get the amount of turns the power is failing
 	 * 
-	 * @return	The amount of turns the poweer is failing
+	 * @return	The amount of turns the power is failing
 	 */
 	public int getRemainingTurns(){
 		return this.remainingTurns;
