@@ -3,16 +3,16 @@
  */
 package event.action;
 
-import event.AbstractGameEvent;
+import event.AbstractGameCommand;
 import game.Game;
 
 /**
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public abstract class ActionEvent extends AbstractGameEvent {
+public abstract class ActionCommand extends AbstractGameCommand {
 		
-	public ActionEvent(Game game) {
+	public ActionCommand(Game game) {
 		super(game);
 		if(OBSERVER == null)
 			throw new IllegalStateException("ActionEvent cannot be created without it's observer set.");
@@ -20,13 +20,13 @@ public abstract class ActionEvent extends AbstractGameEvent {
 	}
 	
 	@Override
-	public void run() {
+	public void execute() {
 		try{
-			beforeActionEvent();
-			beforeGameEvent();
-			duringGameEvent();
-			afterGameEvent();	
-			afterActionEvent();
+			beforeActionCommand();
+			beforeGameCommand();
+			duringGameCommand();
+			afterGameCommand();	
+			afterActionCommand();
 		}catch(Exception e){
 			throw e;
 		}finally{
@@ -35,7 +35,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 		}
 	}
 	
-	protected void beforeActionEvent() {
+	protected void beforeActionCommand() {
 		if(!getGame().isActive())
 			throw new IllegalStateException("The game is over.");
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
@@ -44,7 +44,7 @@ public abstract class ActionEvent extends AbstractGameEvent {
 			throw new IllegalStateException("The current player is stuck.");
 	}
 	
-	protected void afterActionEvent() {
+	protected void afterActionCommand() {
 		//Currently nothing is needed here.
 	}
 	

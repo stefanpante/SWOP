@@ -3,14 +3,14 @@
  */
 package event.effect;
 
-import event.AbstractGameEvent;
+import event.AbstractGameCommand;
 import game.Game;
 
 /**
  * @author Jonas Devlieghere
  *
  */
-public abstract class Effect extends AbstractGameEvent {
+public abstract class Effect extends AbstractGameCommand {
 
 	
 	/**

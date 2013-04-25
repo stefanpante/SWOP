@@ -13,18 +13,18 @@ public class LoseActionEffect extends Effect {
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 
 	}
 
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		Player player = getGame().getCurrentPlayer();
 		player.loseActions(this.amount);
 	}
 
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		
 	}
 

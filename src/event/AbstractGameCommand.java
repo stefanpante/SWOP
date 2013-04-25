@@ -12,12 +12,12 @@ import game.Game;
  * @author Jonas Devlieghere
  *
  */
-public abstract class AbstractGameEvent extends Observable {
+public abstract class AbstractGameCommand extends Observable implements Command {
 
 	private Game game;
 	public static Observer OBSERVER;
 	
-	public AbstractGameEvent(Game game){
+	public AbstractGameCommand(Game game){
 		setGame(game);
 	}
 	
@@ -32,18 +32,18 @@ public abstract class AbstractGameEvent extends Observable {
 	/**
 	 * Run this Game Event
 	 */
-	public void run() {
-		beforeGameEvent();
-		duringGameEvent();
-		afterGameEvent();
+	public void execute() {
+		beforeGameCommand();
+		duringGameCommand();
+		afterGameCommand();
 	}
 	
 	public static void setObserver(Observer observer){
 		OBSERVER = observer;
 	}
-	protected abstract void beforeGameEvent();
-	protected abstract void duringGameEvent();
-	protected abstract void afterGameEvent();
+	protected abstract void beforeGameCommand();
+	protected abstract void duringGameCommand();
+	protected abstract void afterGameCommand();
 
 	
 }

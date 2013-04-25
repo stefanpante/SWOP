@@ -39,17 +39,17 @@ public class LoseTurnEffect extends Effect {
 		return this.player;
 	}
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		player.loseTurns(this.amount, this.accumulating);
 	}
 
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		// TODO Auto-generated method stub
 	}
 

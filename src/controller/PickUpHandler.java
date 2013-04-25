@@ -4,8 +4,8 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameEvent;
-import event.action.PickUpEvent;
+import event.AbstractGameCommand;
+import event.action.PickUpCommand;
 
 import game.Game;
 
@@ -34,8 +34,8 @@ public class PickUpHandler extends Handler {
 	 */
 	public void pickUp(Item item){
 		fireChanges();
-		AbstractGameEvent pickUpEvent = new PickUpEvent(getGame(), item);
-		pickUpEvent.run();
+		AbstractGameCommand pickUpEvent = new PickUpCommand(getGame(), item);
+		pickUpEvent.execute();
 		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
 		fireChanges();
 	}

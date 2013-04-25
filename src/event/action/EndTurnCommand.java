@@ -11,26 +11,26 @@ import game.Game;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class EndTurnEvent extends ActionEvent {
+public class EndTurnCommand extends ActionCommand {
 
-	public EndTurnEvent(Game game) {
+	public EndTurnCommand(Game game) {
 		super(game);
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		
 	}
 
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		Player currentPlayer = getGame().getCurrentPlayer();
 		
 		currentPlayer.loseActions(currentPlayer.getRemainingActions());
 	}
 	
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		
 	}
 

@@ -4,8 +4,8 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import event.AbstractGameEvent;
-import event.action.MoveEvent;
+import event.AbstractGameCommand;
+import event.action.MoveCommand;
 
 import player.Player;
 import square.Direction;
@@ -40,8 +40,8 @@ public class MoveHandler extends Handler {
 	 */
 	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
 		fireChanges();
-		AbstractGameEvent moveEvent = new MoveEvent(getGame(), direction);
-		moveEvent.run();
+		AbstractGameCommand moveEvent = new MoveCommand(getGame(), direction);
+		moveEvent.execute();
 		setPropertyChanges();
 		fireChanges();
 	}

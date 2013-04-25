@@ -3,8 +3,8 @@
  */
 package controller;
 
-import event.AbstractGameEvent;
-import event.action.EndTurnEvent;
+import event.AbstractGameCommand;
+import event.action.EndTurnCommand;
 import event.effect.LoseActionEffect;
 import game.Game;
 
@@ -27,7 +27,7 @@ public class TurnHandler extends Handler implements Observer {
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 		
-		AbstractGameEvent.setObserver(this);
+		AbstractGameCommand.setObserver(this);
 		counter = new HashMap<Player,Integer>();
 		
 		for(Player player : getGame().getPlayers()){
@@ -90,7 +90,7 @@ public class TurnHandler extends Handler implements Observer {
 		
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()) {
 			LoseActionEffect lae = new LoseActionEffect(getGame(),1);
-			lae.run();
+			lae.execute();
 		}
 		
 		if(!getGame().getCurrentPlayer().hasRemainingActions())

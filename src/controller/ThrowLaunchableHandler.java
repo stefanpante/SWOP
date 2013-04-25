@@ -1,7 +1,7 @@
 package controller;
 
-import event.AbstractGameEvent;
-import event.action.ThrowLaunchableEvent;
+import event.AbstractGameCommand;
+import event.action.ThrowLaunchableCommand;
 import game.Game;
 
 import item.launchable.LaunchableItem;
@@ -29,8 +29,8 @@ public class ThrowLaunchableHandler extends Handler {
 	
 	public void throwLaunchable(LaunchableItem launchableItem, Direction direction){
 		fireChanges();
-		AbstractGameEvent throwLaunchableEvent = new ThrowLaunchableEvent(getGame(), launchableItem, direction);
-		throwLaunchableEvent.run();
+		AbstractGameCommand throwLaunchableEvent = new ThrowLaunchableCommand(getGame(), launchableItem, direction);
+		throwLaunchableEvent.execute();
 		fireChanges();
 	}
 
