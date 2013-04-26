@@ -1,0 +1,32 @@
+Checking project in C:\Users\Jonas\git\SWOP\tools\..
+
+
+
+    1 Error: encapsulation: outgoing leak of internal state: public method getSquares in square.obstacle.MultiObstacle directly returns the collection stored in field squares
+
+    1 Error: encapsulation: non-final member variable LIGHT_GRENADE_CONSTRAINT in class grid.AbstractGridBuilder is public.
+    2 Error: encapsulation: non-final member variable TELEPORT_CONSTRAINT in class grid.AbstractGridBuilder is public.
+    3 Error: encapsulation: non-final member variable IDENTITY_DISK_CONSTRAINT in class grid.AbstractGridBuilder is public.
+    4 Error: encapsulation: non-final member variable WALL_CONSTRAINT in class grid.AbstractGridBuilder is public.
+
+1 Warning: encapsulation: unchecked assignment to internal state: parameter game of public method Handler in controller.Handler is assigned to field game without being referenced in the statements before the assignment.
+2 Warning: encapsulation: unchecked assignment to internal state: parameter objectronGUI of public method GameHandler in controller.GameHandler is assigned to field objectronGUI without being referenced in the statements before the assignment.
+3 Warning: encapsulation: unchecked assignment to internal state: parameter observer of public method setObserver in event.AbstractGameCommand is assigned to field OBSERVER without being referenced in the statements before the assignment.
+4 Warning: encapsulation: unchecked assignment to internal state: parameter dir of public method MoveCommand in event.action.MoveCommand is assigned to field direction without being referenced in the statements before the assignment.
+5 Warning: encapsulation: unchecked assignment to internal state: parameter item of public method PickUpCommand in event.action.PickUpCommand is assigned to field item without being referenced in the statements before the assignment.
+6 Warning: encapsulation: unchecked assignment to internal state: parameter launchableItem of public method ThrowLaunchableCommand in event.action.ThrowLaunchableCommand is assigned to field launchableItem without being referenced in the statements before the assignment.
+7 Warning: encapsulation: unchecked assignment to internal state: parameter direction of public method ThrowLaunchableCommand in event.action.ThrowLaunchableCommand is assigned to field direction without being referenced in the statements before the assignment.
+8 Warning: encapsulation: unchecked assignment to internal state: parameter item of public method UseItemCommand in event.action.UseItemCommand is assigned to field item without being referenced in the statements before the assignment.
+9 Warning: encapsulation: unchecked assignment to internal state: parameter amount of public method LoseActionEffect in event.effect.LoseActionEffect is assigned to field amount without being referenced in the statements before the assignment.
+10 Warning: encapsulation: unchecked assignment to internal state: parameter player of public method LoseTurnEffect in event.effect.LoseTurnEffect is assigned to field player without being referenced in the statements before the assignment.
+11 Warning: encapsulation: unchecked assignment to internal state: parameter amount of public method LoseTurnEffect in event.effect.LoseTurnEffect is assigned to field amount without being referenced in the statements before the assignment.
+12 Warning: encapsulation: unchecked assignment to internal state: parameter teleport of public method TeleportEffect in event.effect.TeleportEffect is assigned to field teleport without being referenced in the statements before the assignment.
+13 Warning: encapsulation: unchecked assignment to internal state: parameter filepath of public method FileGridBuilder in grid.FileGridBuilder is assigned to field filepath without being referenced in the statements before the assignment.
+14 Warning: encapsulation: unchecked assignment to internal state: parameter grid of public method TrajectoryMediator in grid.TrajectoryMediator is assigned to field grid without being referenced in the statements before the assignment.
+61 Warning: encapsulation: unchecked assignment to internal state: parameter range of public method LaunchableItem in item.launchable.LaunchableItem is assigned to field range without being referenced in the statements before the assignment.
+62 Warning: encapsulation: unchecked assignment to internal state: parameter obstacle of public method setObstacle in square.Square is assigned to field obstacle without being referenced in the statements before the assignment.
+63 Warning: encapsulation: unchecked assignment to internal state: parameter grid of public method AStar in util.AStar is assigned to field grid without being referenced in the statements before the assignment.
+64 Warning: encapsulation: unchecked assignment to internal state: parameter square of public method setSquare in util.AStar.SquareContainer is assigned to field square without being referenced in the statements before the assignment.
+65 Warning: encapsulation: unchecked assignment to internal state: parameter squareContainer of public method setPreviousSquareContainer in util.AStar.SquareContainer is assigned to field previous without being referenced in the statements before the assignment.
+66 Warning: encapsulation: unchecked assignment to internal state: parameter distance of public method setDistanceFromStart in util.AStar.SquareContainer is assigned to field distanceFromStart without being referenced in the statements before the assignment.
+67 Warning: encapsulation: unchecked assignment to internal state: parameter distance of public method setHeuristicDistanceFromGoal in util.AStar.SquareContainer is assigned to field distanceFromGoal without being referenced in the statements before the assignment.
