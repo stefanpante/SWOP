@@ -129,10 +129,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 		setupButtons();
 		setupLabels();
-		// Creates a new ProcessingHandler.
-		obj = new GameHandler(this);
-		obj.startNewGame(10,10);
-
+		
 		initializeInput();
 		//		initialized = true;
 
@@ -210,6 +207,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		System.out.println();
 		System.out.println("the Grid size" + hCells + " x " + vCells );
 		hideInput();
+		
 		setUpGame();
 	}
 
@@ -285,6 +283,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 	private void setUpGame(){
 
+		obj = new GameHandler(this);
+		
 		int w = 50 * hCells;
 		int h = 50 * vCells;
 		if(h >= displayHeight - 150){
