@@ -3,8 +3,8 @@
  */
 package event.effect;
 
-import player.Player;
 import game.Game;
+import game.Player;
 import item.Teleport;
 import square.Square;
 
@@ -28,14 +28,14 @@ public class TeleportEffect extends Effect {
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		Square destination = getGame().getGrid().getSquareWith(getTeleport().getDestination());
 		if(!canTeleportTo(destination))
 			throw new IllegalStateException("Cannot teleport to location containing another player.");
 	}
 	
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		Square destination = getGame().getGrid().getSquareWith(getTeleport().getDestination());
 		getGame().getCurrentPlayer().setPosition(destination);
 	}
@@ -49,7 +49,7 @@ public class TeleportEffect extends Effect {
 	}
 
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		// Nothing to do here
 	}
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import game.Player;
 import gui.button.TextButton;
 import item.Item;
 import item.launchable.LaunchableItem;
@@ -15,7 +16,6 @@ import controlP5.CColor;
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import controller.GameHandler;
-import player.Player;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;

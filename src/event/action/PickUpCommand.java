@@ -10,7 +10,7 @@ import game.Game;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class PickUpEvent extends ActionEvent {
+public class PickUpCommand extends ActionCommand {
 	
 	private Item item;
 
@@ -18,7 +18,7 @@ public class PickUpEvent extends ActionEvent {
 	 * @param game
 	 * @param args
 	 */
-	public PickUpEvent(Game game, Item item) {
+	public PickUpCommand(Game game, Item item) {
 		super(game);
 		this.item = item;
 	}
@@ -28,18 +28,18 @@ public class PickUpEvent extends ActionEvent {
 	}
 	
 	@Override
-	public void duringGameEvent(){
+	public void duringGameCommand(){
 		getGame().getCurrentPlayer().pickUp(getItem());
 		getGame().getCurrentPlayer().getPosition().getInventory().removeItem(getItem());
 	}
 	
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		// TODO Auto-generated method stub
 		
 	}

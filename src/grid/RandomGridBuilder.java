@@ -64,10 +64,10 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setConstraints();
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(randomWallLocations(WALL_CONSTRAINT), WALL_CONSTRAINT);
-		build(randomLocations(LIGHT_GRENADE_CONSTRAINT),
-				randomLocations(IDENTITY_DISK_CONSTRAINT),
-				randomLocations(TELEPORT_CONSTRAINT), 
+		placeWalls(randomWallLocations(getConstraintWall()), getConstraintWall());
+		build(randomLocations(getConstraingtLightGrenade()),
+				randomLocations(getConstraintIdentityDisk()),
+				randomLocations(getConstraintTeleport()), 
 				chargedIdentityDiskLocation());
 	}
 	
@@ -100,14 +100,14 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setEmptyConstraints();
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(walls, WALL_CONSTRAINT);
+		placeWalls(walls, getConstraintWall());
 		build(lightGrenades, identityDisks, teleports, chargedIdentityDisk);
 	}
 	
 	private void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk){
-		placeLightGrenade(lightGrenades, LIGHT_GRENADE_CONSTRAINT);
-		placeIdentityDisk(identityDisks, IDENTITY_DISK_CONSTRAINT);
-		placeTeleports(teleports, TELEPORT_CONSTRAINT);
+		placeLightGrenade(lightGrenades, getConstraingtLightGrenade());
+		placeIdentityDisk(identityDisks, getConstraintIdentityDisk());
+		placeTeleports(teleports, getConstraintTeleport());
 		placeChargedIdentityDisk(chargedIdentityDisk);
 	}
 	
@@ -121,17 +121,17 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		grenadesIncluded.add(getSquaredLocation(getPlayerOneStart(), Direction.NORTH, 3));
 		grenadesIncluded.add(getSquaredLocation(getPlayerTwoStart(), Direction.EAST, 3));
 		
-		WALL_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_WALLS, excluded);
-		LIGHT_GRENADE_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded);
-		IDENTITY_DISK_CONSTRAINT = new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded);
-		TELEPORT_CONSTRAINT = new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded);
+		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
+		setConstraingtLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
+		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
+		setConstraintTeleport(new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded));
 	}
 	
 	private void setEmptyConstraints(){		
-		WALL_CONSTRAINT = new GridConstraint();
-		LIGHT_GRENADE_CONSTRAINT = new GridConstraint();
-		IDENTITY_DISK_CONSTRAINT = new GridConstraint();
-		TELEPORT_CONSTRAINT = new GridConstraint();
+		setConstraintWall(new GridConstraint());
+		setConstraingtLightGrenade(new GridConstraint());
+		setConstraintIdentityDisk(new GridConstraint());
+		setConstraintTeleport(new GridConstraint());
 	}
 	
 	protected ArrayList<Coordinate> randomLocations(GridConstraint constraint){

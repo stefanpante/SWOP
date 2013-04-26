@@ -4,7 +4,7 @@
 package event.effect;
 
 import game.Game;
-import player.Player;
+import game.Player;
 
 /**
  * @author jonas
@@ -22,20 +22,19 @@ public class LightGrenadeEffect extends Effect {
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		// TODO Auto-generated method stub
 
 	}
 
-
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		Player currentPlayer = getGame().getCurrentPlayer();
 		currentPlayer.loseTurns(TURNS_LOST, false);
 	}
 
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		// TODO Auto-generated method stub
 
 	}

@@ -4,10 +4,10 @@
 package event.action;
 
 import event.effect.LoseTurnEffect;
-import player.Player;
 import square.Direction;
 import square.Square;
 import game.Game;
+import game.Player;
 import grid.TrajectoryMediator;
 import item.launchable.LaunchableItem;
 
@@ -15,7 +15,7 @@ import item.launchable.LaunchableItem;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class ThrowLaunchableEvent extends ActionEvent {
+public class ThrowLaunchableCommand extends ActionCommand {
 
 	private LaunchableItem launchableItem;
 	private Direction direction;
@@ -24,7 +24,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	 * @param game
 	 * @param args
 	 */
-	public ThrowLaunchableEvent(Game game, LaunchableItem launchableItem, Direction direction) {
+	public ThrowLaunchableCommand(Game game, LaunchableItem launchableItem, Direction direction) {
 		super(game);
 		this.launchableItem = launchableItem;
 		this.direction = direction;
@@ -40,7 +40,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	
 	@SuppressWarnings("static-access")
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		// Check all parameters.
 		if(!getGame().getCurrentPlayer().getInventory().hasItem(getLaunchableItem())){
 			throw new IllegalStateException("Player can't throw a Launchable that isn't in his inventory!");
@@ -51,7 +51,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	}
 	
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		// get the start position of the launchable item
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		// Construct a new trajectory mediator.
@@ -69,7 +69,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 			if(player.getPosition() == endSquare){
 				//FIXME: Check if the values are correct.
 				LoseTurnEffect lte = new LoseTurnEffect(getGame(),player,1,true);
-				lte.run();
+				lte.execute();
 				break;
 			}
 		}
@@ -79,7 +79,7 @@ public class ThrowLaunchableEvent extends ActionEvent {
 	 * @see event.AbstractGameEvent#afterGameEvent()
 	 */
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		// TODO Auto-generated method stub
 		
 	}

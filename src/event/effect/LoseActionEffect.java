@@ -1,7 +1,7 @@
 package event.effect;
 
-import player.Player;
 import game.Game;
+import game.Player;
 
 public class LoseActionEffect extends Effect {
 	
@@ -13,18 +13,18 @@ public class LoseActionEffect extends Effect {
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 
 	}
 
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		Player player = getGame().getCurrentPlayer();
 		player.loseActions(this.amount);
 	}
 
 	@Override
-	protected void afterGameEvent() {
+	protected void afterGameCommand() {
 		
 	}
 

@@ -3,11 +3,11 @@
  */
 package event.action;
 
-import player.Player;
 import event.effect.LoseActionEffect;
 import event.effect.LoseTurnEffect;
 import event.effect.TeleportEffect;
 import game.Game;
+import game.Player;
 import item.LightGrenade;
 import item.Teleport;
 
@@ -21,7 +21,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class MoveEvent extends ActionEvent {
+public class MoveCommand extends ActionCommand {
 
 	/**
 	 * The direction moving to.
@@ -41,7 +41,7 @@ public class MoveEvent extends ActionEvent {
 	/**
 	 * Moves the player into a certain direction. 
 	 */
-	public MoveEvent(Game game, Direction dir) {
+	public MoveCommand(Game game, Direction dir) {
 		super(game);
 		this.direction = dir;
 		
@@ -57,7 +57,7 @@ public class MoveEvent extends ActionEvent {
 	}
 
 	@Override
-	protected void beforeGameEvent() {
+	protected void beforeGameCommand() {
 		/* Check whether it's possible to move in the given direction */
 		if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
 			throw new IllegalStateException("Cannot move to given direction.");
@@ -65,18 +65,18 @@ public class MoveEvent extends ActionEvent {
 	}
 
 	@Override
-	protected void duringGameEvent() {
+	protected void duringGameCommand() {
 		getGame().getCurrentPlayer().move(newPosition);	
 
 		if(newPosition.getInventory().hasTeleport()) {
 			Teleport teleport = newPosition.getInventory().getTeleport();
 			TeleportEffect teleportEvent = new TeleportEffect(getGame(), teleport);
-			teleportEvent.run();
+			teleportEvent.execute();
 		}
 	}
 	
 	@Override
-	protected void afterGameEvent(){
+	protected void afterGameCommand(){
 		activateLightGrenade();
 		
 		executeEffects();		
@@ -110,9 +110,9 @@ public class MoveEvent extends ActionEvent {
 		}
 		
 		if(hasActiveGrenade && hasNoPower) {
-			new LoseActionEffect(getGame(), 4).run();	
+			new LoseActionEffect(getGame(), 4).execute();	
 		}else if(hasActiveGrenade)
-			new LoseActionEffect(getGame(), 3).run();
+			new LoseActionEffect(getGame(), 3).execute();
 		else if(hasNoPower) {
 			Player currentPlayer = getGame().getCurrentPlayer();
 			currentPlayer.loseActions(currentPlayer.getRemainingActions());

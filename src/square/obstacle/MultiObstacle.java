@@ -29,7 +29,7 @@ public abstract class MultiObstacle implements Obstacle {
 	 * Returns a list of squares which the obstacle covers.
 	 */
 	public ArrayList<Square> getSquares() {
-		return this.squares;
+		return new ArrayList<Square>(this.squares);
 	}
 	
 	/**
@@ -53,12 +53,10 @@ public abstract class MultiObstacle implements Obstacle {
 	 */
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
-		if(isValidSquare(square)){
-			getSquares().add(square);
-			square.setObstacle(this);
-		}else{
-			throw new IllegalArgumentException("The square is invalid.");
-		}
+		if(!isValidSquare(square))
+			throw new IllegalArgumentException("Cannot add square to this MultiObstacle: the square is invalid.");
+		getSquares().add(square);
+		square.setObstacle(this);
 	}
 	
 	/**
