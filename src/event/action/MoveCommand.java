@@ -3,11 +3,11 @@
  */
 package event.action;
 
-import player.Player;
 import event.effect.LoseActionEffect;
 import event.effect.LoseTurnEffect;
 import event.effect.TeleportEffect;
 import game.Game;
+import game.Player;
 import item.LightGrenade;
 import item.Teleport;
 

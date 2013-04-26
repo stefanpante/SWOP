@@ -9,7 +9,6 @@ import java.util.Random;
 import java.util.Map.Entry;
 
 import notnullcheckweaver.NotNull;
-import player.Player;
 import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;

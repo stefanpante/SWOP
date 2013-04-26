@@ -1,6 +1,7 @@
 package controller;
 
 import game.Game;
+import game.Player;
 import item.Item;
 import item.launchable.LaunchableItem;
 
@@ -9,7 +10,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import player.Player;
 import square.Square;
 import square.obstacle.LightTrail;
 import util.Coordinate;
@@ -34,7 +34,7 @@ public abstract class Handler {
      */
     public Handler()
     {
-        propertyChangeSupport = new PropertyChangeSupport(this);
+    	this(null);
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class Handler {
 	 * @param game the game that will be used by this handler.
 	 */
 	public Handler(Game game) {
-		this();
+        propertyChangeSupport = new PropertyChangeSupport(this);
 		this.game = game;
 	}
 

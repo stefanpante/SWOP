@@ -1,11 +1,11 @@
 package gui;
 
+import game.Player;
 import gui.button.DirectionalButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import player.Player;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;

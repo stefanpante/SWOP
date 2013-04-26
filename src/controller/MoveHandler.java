@@ -7,10 +7,10 @@ import java.util.NoSuchElementException;
 import event.AbstractGameCommand;
 import event.action.MoveCommand;
 
-import player.Player;
 import square.Direction;
 import util.Coordinate;
 import game.Game;
+import game.Player;
 
 /**
  * Controller/Handler which controls the player move use case

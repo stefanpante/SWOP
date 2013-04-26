@@ -7,13 +7,13 @@ import event.AbstractGameCommand;
 import event.action.EndTurnCommand;
 import event.effect.LoseActionEffect;
 import game.Game;
+import game.Player;
 
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import player.Player;
 import square.Square;
 
 /**
@@ -26,7 +26,6 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
-		
 		AbstractGameCommand.setObserver(this);
 		counter = new HashMap<Player,Integer>();
 		

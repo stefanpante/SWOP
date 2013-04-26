@@ -1,10 +1,10 @@
 package event.action;
 
-import player.Player;
 import square.Square;
 import controller.GameHandler;
 import event.effect.LoseActionEffect;
 import game.Game;
+import game.Player;
 
 /**
  * End Turn event

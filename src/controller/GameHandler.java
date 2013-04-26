@@ -39,13 +39,6 @@ public class GameHandler extends Handler {
 	public GameHandler(ObjectronGUI objectronGUI){
 		this.objectronGUI = objectronGUI;
 	}
-	/**
-	 *  Initializes the game handler
-	 * 
-	 */
-	public GameHandler() {
-		super(null);
-	}
 
 	/* Handlers */
 	private EndTurnHandler endTurnHandler;

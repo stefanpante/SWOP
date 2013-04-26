@@ -4,10 +4,10 @@
 package event.action;
 
 import event.effect.LoseTurnEffect;
-import player.Player;
 import square.Direction;
 import square.Square;
 import game.Game;
+import game.Player;
 import grid.TrajectoryMediator;
 import item.launchable.LaunchableItem;
 

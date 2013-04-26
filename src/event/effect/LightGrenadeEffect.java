@@ -4,7 +4,7 @@
 package event.effect;
 
 import game.Game;
-import player.Player;
+import game.Player;
 
 /**
  * @author jonas
@@ -26,7 +26,6 @@ public class LightGrenadeEffect extends Effect {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	@Override
 	protected void duringGameCommand() {

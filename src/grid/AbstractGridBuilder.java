@@ -12,10 +12,10 @@ import be.kuleuven.cs.som.annotate.Basic;
 
 public abstract class AbstractGridBuilder {
 
-	public GridConstraint TELEPORT_CONSTRAINT;
-	public GridConstraint LIGHT_GRENADE_CONSTRAINT;
-	public GridConstraint IDENTITY_DISK_CONSTRAINT;
-	public GridConstraint WALL_CONSTRAINT;
+	private GridConstraint constraintTeleport;
+	private GridConstraint constraingtLightGrenade;
+	private GridConstraint constraintIdentityDisk;
+	private GridConstraint constraintWall;
 	
 	private Grid grid;
 	
@@ -133,6 +133,38 @@ public abstract class AbstractGridBuilder {
 	
 	public abstract Coordinate getPlayerOneStart();
 	public abstract Coordinate getPlayerTwoStart();
+
+	public GridConstraint getConstraintTeleport() {
+		return constraintTeleport;
+	}
+
+	public void setConstraintTeleport(GridConstraint constraintTeleport) {
+		this.constraintTeleport = constraintTeleport;
+	}
+
+	public GridConstraint getConstraingtLightGrenade() {
+		return constraingtLightGrenade;
+	}
+
+	public void setConstraingtLightGrenade(GridConstraint constraingtLightGrenade) {
+		this.constraingtLightGrenade = constraingtLightGrenade;
+	}
+
+	public GridConstraint getConstraintIdentityDisk() {
+		return constraintIdentityDisk;
+	}
+
+	public void setConstraintIdentityDisk(GridConstraint constraintIdentityDisk) {
+		this.constraintIdentityDisk = constraintIdentityDisk;
+	}
+
+	public GridConstraint getConstraintWall() {
+		return constraintWall;
+	}
+
+	public void setConstraintWall(GridConstraint constraintWall) {
+		this.constraintWall = constraintWall;
+	}
 
 	
 }

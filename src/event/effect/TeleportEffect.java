@@ -3,8 +3,8 @@
  */
 package event.effect;
 
-import player.Player;
 import game.Game;
+import game.Player;
 import item.Teleport;
 import square.Square;
 

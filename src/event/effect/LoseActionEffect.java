@@ -1,7 +1,7 @@
 package event.effect;
 
-import player.Player;
 import game.Game;
+import game.Player;
 
 public class LoseActionEffect extends Effect {
 	

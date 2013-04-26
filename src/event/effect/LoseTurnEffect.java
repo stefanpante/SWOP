@@ -2,7 +2,7 @@
 package event.effect;
 
 import game.Game;
-import player.Player;
+import game.Player;
 
 public class LoseTurnEffect extends Effect {
 	

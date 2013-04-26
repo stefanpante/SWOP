@@ -29,7 +29,7 @@ public abstract class MultiObstacle implements Obstacle {
 	 * Returns a list of squares which the obstacle covers.
 	 */
 	public ArrayList<Square> getSquares() {
-		return this.squares;
+		return new ArrayList<Square>(this.squares);
 	}
 	
 	/**
