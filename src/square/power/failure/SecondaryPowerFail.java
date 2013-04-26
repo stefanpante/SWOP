@@ -2,6 +2,12 @@ package square.power.failure;
 
 import util.Rotation;
 
+/**
+ * Secondary power failure lasts for 2 actions.
+ * The secondary power failure has one child.
+ * 
+ * @author vincentreniers
+ */
 public class SecondaryPowerFail extends PowerFail {
 	
 	private final static int TURNS = 0;

@@ -1,5 +1,11 @@
 package square.power.failure;
 
+/**
+ * Tertiary power failure lasts for  1 action
+ * and doesn't have any children.
+ * 
+ * @author vincentreniers
+ */
 public class TertiaryPowerFail extends PowerFail {
 	
 	private final static int TURNS = 0;
