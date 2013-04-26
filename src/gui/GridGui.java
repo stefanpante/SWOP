@@ -147,7 +147,7 @@ public class GridGui extends GUIElement{
 		this.adjustPad(directionalPad);
 		this.adjustPad(throwPad);
 	}
-
+	
 
 
 	/**
@@ -180,6 +180,19 @@ public class GridGui extends GUIElement{
 
 		squareWidth = swidth;
 		squareHeight = sHeight;
+	}
+	
+	/**
+	 * Accepts a list of coordinates which represents the included squares in the grid.
+	 * Non-included squares are removed from the grid.
+	 * @param includedSquares	the Squares which are part of the grid.
+	 */
+	public void adjustGrid(ArrayList<Coordinate> includedSquares){
+		for(Coordinate coordinate: squares.keySet()){
+			if(!includedSquares.contains(coordinate)){
+				squares.remove(coordinate);
+			}
+		}
 	}
 
 
@@ -529,7 +542,7 @@ public class GridGui extends GUIElement{
 		this.discs_coors = o;
 	}
 	
-	public void setChargedDiscs(ArrayList<Coordinate> o){
+	public void setChargedDiscs(ArrayList<Coordinate> o){                                                                                                            
 		this.chargedDiscs_coors = o;
 	}
 

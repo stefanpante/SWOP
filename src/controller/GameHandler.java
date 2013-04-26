@@ -32,7 +32,7 @@ public class GameHandler extends Handler {
 	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
 	public static final String WIN_PROPERTY 				= "Win";
 	public static final String LOSE_PROPERTY				= "Lose";
-	
+	public static final String SQUARES_PROPERTY				= "squares";
 	private ObjectronGUI objectronGUI;
 	
 	

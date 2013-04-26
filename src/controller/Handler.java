@@ -189,6 +189,7 @@ public abstract class Handler {
 		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> chargedDisks  = new ArrayList<Coordinate>(); 
+		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
 	
  		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
 			Square square = getGame().getGrid().getSquare(coordinate);
@@ -202,18 +203,21 @@ public abstract class Handler {
 				lightGrenades.add(coordinate);
 			
 
-			if(square.getInventory().hasLaunchable()){
-				for(LaunchableItem item: square.getInventory().getLaunchables())
-					if(item.isCharged()){
-						chargedDisks.add(coordinate);
-					}
-					else{
-						identityDisks.add(coordinate);
-					}
-			}
+			//TODO: Fix this shit
+//			if(square.getInventory().hasLaunchable()){
+//				for(LaunchableItem item: square.getInventory().getLaunchables())
+//					if(item.isCharged()){
+//						chargedDisks.add(coordinate);
+//					}
+//					else{
+//						identityDisks.add(coordinate);
+//					}
+//			}
 			
 			if(square.isObstructed())
 				walls.add(coordinate);
+			
+			squares.add(coordinate);
 			
 		}
  		
@@ -223,6 +227,7 @@ public abstract class Handler {
 		properties.put(GameHandler.TELEPORT_PROPERTY, teleports);
 		properties.put(GameHandler.WALLS_PROPERTY, walls);
 		properties.put(GameHandler.CHARGED_DISK_PROPERTY, chargedDisks);
+		properties.put(GameHandler.SQUARES_PROPERTY, squares);
  		
 		return properties;
 	}

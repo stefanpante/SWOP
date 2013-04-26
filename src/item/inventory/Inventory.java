@@ -28,7 +28,6 @@ public abstract class Inventory{
 	 * But we use an ArrayList for the convenience of the contains and add method
 	 */
 	private ArrayList<Item> items;
-	//private  HashMap<Integer,Item> items;
 
 	/**
 	 * Creates a new instance of the Inventory class with given size.
