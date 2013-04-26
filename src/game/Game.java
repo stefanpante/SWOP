@@ -51,15 +51,14 @@ public class Game {
 	private Player currentPlayer;
 	
 	/**
-	 * The possibility of a power failure in a square.
-	 */
-	private final float CHANCE_POWERFAILURE = 0.05f;
-	
-	
-	/**
 	 * Boolean indicating the game is over
 	 */
 	private boolean active;
+	
+	/**
+	 * Manages the power failures in the game.
+	 */
+	private PowerManager powerManager;
 
 	/**
 	 *Constructs a new board-based game.
@@ -81,6 +80,8 @@ public class Game {
 		Square topRight = grid.getSquare(new Coordinate(hSize-1, 0));
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
+		
+		this.powerManager = new PowerManager(getGrid());
 		
 		// Start the game
 		start();
@@ -106,6 +107,8 @@ public class Game {
 		Square topRight = grid.getSquare(new Coordinate(grid.getHSize()-1, 0));
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
+
+		this.powerManager = new PowerManager(getGrid());
 		
 		// Start the game
 		start();
@@ -279,30 +282,11 @@ public class Game {
 	}
 	
 	/**
-	 * Sets the state of any square to a PowerFailure state with a 5% chance.
+	 * Returns the power manager.
 	 */
-	public void powerFailSquares() {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		Random random = new Random();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			if(random.nextFloat() <= CHANCE_POWERFAILURE){
-				square.getPower().fail();
-				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
-				for(Square s: neighbors){
-					s.getPower().fail();
-				}
-			}
-		}
-		
-		// Exclude starting positions
-		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
-		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
-		bottomLeft.getPower().regain();
-		topRight.getPower().regain();
+	public PowerManager getPowerManager() {
+		return this.powerManager;
 	}
-	
 	
 	/**
 	 * Return if the current game is end
@@ -322,18 +306,6 @@ public class Game {
 	 */
 	public void end() {
 		this.active = false;
-	}
-	
-	/**
-	 * Clears all powerFailures, for testing purposes.
-	 */
-	public void clearPowerFailures(){
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			square.getPower().regain();
-		}
 	}
 	
 	/**

@@ -3,7 +3,7 @@ package controller;
 public class CheatHandler extends Handler {
 	
 	public void clearPowerFailures(){
-		getGame().clearPowerFailures();
+		getGame().getPowerManager().clearPowerFailures();
 		fireChanges();
 	}
 	

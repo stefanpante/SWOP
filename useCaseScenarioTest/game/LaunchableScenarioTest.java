@@ -74,7 +74,7 @@ public class LaunchableScenarioTest {
 		next.getInventory().addItem(id);
 
 		// Make sure that there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
 		moveHandler.move(direction);
@@ -96,7 +96,7 @@ public class LaunchableScenarioTest {
 		next.getInventory().addItem(id);
 
 		// Make sure that there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
 		moveHandler.move(direction);
@@ -116,7 +116,7 @@ public class LaunchableScenarioTest {
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
 
 		// Make sure that there are no powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
 		moveHandler.move(direction);
@@ -133,7 +133,7 @@ public class LaunchableScenarioTest {
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
 
 		// Make sure that there are no powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		// move into the direction that the Identitydisc is situated
 		moveHandler.move(direction);
 
@@ -150,7 +150,7 @@ public class LaunchableScenarioTest {
 	public void testThrowIdentityDisc(){
 
 		// make sure there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(0,0));
@@ -181,7 +181,7 @@ public class LaunchableScenarioTest {
 		// All possible throw directions
 		directions = new Direction[]{Direction.NORTH, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		// Place the player in the middle of the grid
 		for(Direction direction: directions){
 			// new identity disc
@@ -219,7 +219,7 @@ public class LaunchableScenarioTest {
 	public void throwChargedDisk(){
 
 		// make sure there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
@@ -272,7 +272,7 @@ public class LaunchableScenarioTest {
 	public void throwDiskWall(){
 		
 		// make sure there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
@@ -300,7 +300,7 @@ public class LaunchableScenarioTest {
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
 
 		// make sure there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
@@ -325,7 +325,7 @@ public class LaunchableScenarioTest {
 	public void throwDiskBoundary(){
 
 		// make sure there are no powerfailures
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
 		Square currentPosition = game.getGrid().getSquare(new Coordinate(2,4));
@@ -351,7 +351,7 @@ public class LaunchableScenarioTest {
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 
 		// Make sure there aren't any obstacles and powerfailures in the way
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Place the players so they can hit each other
 		game.getCurrentPlayer().move(game.getGrid().getSquare(new Coordinate(4,4)));
@@ -380,7 +380,7 @@ public class LaunchableScenarioTest {
 	public void chargedDiskAtOtherPlayer(){
 
 		// Make sure there aren't any obstacles and powerfailures in the way
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 
 		// Place the players so they can hit each other
 		game.getCurrentPlayer().move(game.getGrid().getSquare(new Coordinate(4,4)));
@@ -410,7 +410,7 @@ public class LaunchableScenarioTest {
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 		
 		// Make sure the grid is clear
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
@@ -437,7 +437,7 @@ public class LaunchableScenarioTest {
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 		
 		// Make sure the grid is clear
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
@@ -465,7 +465,7 @@ public class LaunchableScenarioTest {
 		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
 		
 		// Make sure the grid is clear
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));

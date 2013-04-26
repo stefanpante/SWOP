@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import square.Square;
+import square.power.failure.PrimaryPowerFail;
 
 public class TestPower {
 
@@ -24,7 +25,7 @@ public class TestPower {
 	@Test
 	public void testPowerFailure() {
 		Square square = new Square();
-		square.getPower().fail();
+		square.setPower(new PrimaryPowerFail());
 		assertTrue(square.getPower().isFailing());
 		square.getPower().decreaseTurn();
 		
