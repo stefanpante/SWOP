@@ -19,6 +19,15 @@ import grid.Grid;
  * This includes randomly activating primary power failures.
  * Making sure that secondary and tertiary power failures rotate.
  * 
+ * 1) DecreaseTurn:
+ * 		Only primary failures will throw exceptions here.
+ * 		If an exception is catched, we know the power failure is at end of life.
+ * 		We remove itself and its children.
+ * 2) DecreaseAction:
+ * 		Only secondary and tertiary powerfailures are afflicted by decrease in actions.
+ * 		If an exception is catched, the distinction can be made if the power has a child.
+ * 		Secondaries will rotate in a direction, and the tertiaries will move with them.
+ * 
  * @author vincent
  */
 public class PowerManager {
@@ -105,7 +114,7 @@ public class PowerManager {
 		
 		// Set tertiary
 		try{
-			Square tertiary = getNeighborTertiary(square, neighbor);
+			Square tertiary = getCandidateTertiary(square, neighbor);
 			tertiary.setPower(tertiaryFail);
 		} catch(NoSuchElementException exc) {
 			// Square off-grid
@@ -123,7 +132,7 @@ public class PowerManager {
 	 * @param neighbor
 	 * @return
 	 */
-	private Square getNeighborTertiary(Square square, Square neighbor) throws IllegalArgumentException, NoSuchElementException {
+	private Square getCandidateTertiary(Square square, Square neighbor) throws IllegalArgumentException, NoSuchElementException {
 		Direction directionNeighbor = null;
 		
 		for (Direction direction: getGrid().getNeighbors(square).keySet()) {
@@ -173,6 +182,13 @@ public class PowerManager {
 		}
 	}
 	
+	/**
+	 * Gets the square associated with the power.
+	 * 
+	 * @param	power
+	 * @return	Square	If the power can be found on a square.
+	 * 			Null	If there is no square with the power.
+	 */
 	private Square getSquare(Power power) {
 		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
 		
@@ -213,6 +229,11 @@ public class PowerManager {
 
 	/**
 	 * Decreases the action of a power failure.
+	 * 
+	 * Actions only affect on secondary and tertiary.
+	 * Primary will only throw exceptions on a decrease in turn.
+	 * 
+	 * We can make the distinction based on wether the power has a child or not.
 	 */
 	public void decreaseAction() {
 		for(Power power: primaryPowerFailures) {
@@ -300,7 +321,7 @@ public class PowerManager {
 			Square secondary = getSquare(power.getParent());
 			
 			if(secondary != null) {	
-				Square tertiary = getNeighborTertiary(primary, secondary);
+				Square tertiary = getCandidateTertiary(primary, secondary);
 				
 				if(tertiary.getPower().isFailing() && power.isLifeSpanLonger(tertiary.getPower()) || !tertiary.getPower().isFailing())
 					tertiary.setPower(power);
