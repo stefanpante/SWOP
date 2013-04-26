@@ -1,14 +1,13 @@
 package game;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.Random;
 
 import square.Direction;
 import square.Square;
 import square.power.Power;
-import square.power.RegularPower;
-import square.power.failure.PrimaryPowerFail;
 import util.Coordinate;
 import grid.Grid;
 
@@ -25,7 +24,7 @@ public class PowerManager {
 	/**
 	 * The grid the power manager is working on.
 	 */
-	private Grid grid;
+	private final Grid grid;
 	
 	/**
 	 * The possibility of a power failure in a square.
@@ -66,8 +65,8 @@ public class PowerManager {
 		// Exclude starting positions
 		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
 		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
-		bottomLeft.setPower(new RegularPower());
-		topRight.setPower(new RegularPower());
+		bottomLeft.setPower(Power.getRegularPower());
+		topRight.setPower(Power.getRegularPower());
 	}
 
 	/**
@@ -79,9 +78,9 @@ public class PowerManager {
 	private void powerFailSquare(Square square) {
 		Random random = new Random();
 		
-		Power primaryFail = new PrimaryPowerFail();
-		Power secondaryFail = primaryFail.getChild();
-		Power tertiaryFail = secondaryFail.getChild();
+		final Power primaryFail = Power.getPowerFailure();
+		final Power secondaryFail = primaryFail.getChild();
+		final Power tertiaryFail = secondaryFail.getChild();
 		
 		// Set primary
 		square.setPower(primaryFail);
@@ -124,7 +123,7 @@ public class PowerManager {
 		Random random = new Random();
 		Direction direction = directions.get(random.nextInt(directions.size()));
 		
-		Square tertiary = getGrid().getNeighbor(neighbor, direction);
+		final Square tertiary = getGrid().getNeighbor(neighbor, direction);
 		
 		return tertiary;
 	}
@@ -137,7 +136,7 @@ public class PowerManager {
 		
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
-			square.setPower(new RegularPower());
+			square.setPower(Power.getRegularPower());
 		}
 	}
 	
@@ -153,7 +152,59 @@ public class PowerManager {
 			Square square = iterator.next();
 			
 			if(powers.contains(square.getPower()));
-				square.setPower(new RegularPower());
+				square.setPower(Power.getRegularPower());
+		}
+	}
+	
+	private Square getSquare(Power power) {
+		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
+		
+		while(iterator.hasNext()) {
+			Square square = iterator.next();
+			
+			if(square.getPower() == power)
+				return square;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Updates the power failures with the end of a turn.
+	 * 
+	 * If an exception is catched, it is because a primary power failure has
+	 * ended. Thus itself and its children will be removed from the grid.
+	 */
+	public void decreaseTurn() {
+		for(Square square : getGrid().getAllSquares()) {
+			Power power = square.getPower();
+			
+			try {
+				power.decreaseTurn();
+			} catch (IllegalStateException exc) {
+				ArrayList<Power> powers = power.getChildren();
+				powers.add(power);
+				
+				clearPowers(powers);
+			}
+		}
+	}
+
+	/**
+	 * Decreases the action of a power failure.
+	 */
+	public void decreaseAction() {
+		for(Square square : getGrid().getAllSquares()) {
+			Power power = square.getPower();
+			
+			try{
+				power.decreaseAction();
+			} catch (IllegalStateException exc) {
+				ArrayList<Power> powers = power.getChildren();
+				powers.add(power);
+				
+				resetPowers(powers);
+			}
 		}
 	}
 	
@@ -177,42 +228,38 @@ public class PowerManager {
 		return null;
 	}
 	
-	private Square getSquare(Power power) {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
+	/**
+	 * Resets the power and his children, if they have a rotation
+	 * we move them in the direction.
+	 * 
+	 * If there is a child it must be in line in a certain manner (tertiary).
+	 * 
+	 * @param powers
+	 */
+	private void resetPowers(ArrayList<Power> powers) {
+		for(Power power: powers) {
+			power.resetCount();
 			
-			if(square.getPower() == power)
-				return square;
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Updates the power failures with the end of a turn.
-	 */
-	public void decreaseTurn() {
-		for(Square square : getGrid().getAllSquares())
-			square.getPower().decreaseTurn();
-	}
-
-	/**
-	 * Decreases the action of a power failure.
-	 */
-	public void decreaseAction() {
-		for(Square square : getGrid().getAllSquares()) {
-			Power power = square.getPower();
-			try{
-				power.decreaseAction();
-			} catch (IllegalStateException exc) {
-				// Secondary
-				if(power.hasChild()) {
-					
-				} else {
-					
+			Square square = getSquare(power);
+			Square center = getParentPower(power);
+			
+			if(power.hasChild()) {
+				Direction directionNeighbor = null;
+				
+				for (Direction direction: getGrid().getNeighbors(center).keySet()) {
+					if(getGrid().getNeighbor(center, direction) == square)
+						directionNeighbor = direction;
 				}
+				
+				Direction direction = power.getRotation().rotate(directionNeighbor);
+				
+				square.setPower(Power.getRegularPower());
+				getGrid().getNeighbor(center, direction).setPower(power);
+			} else {
+				Square primary = getParentPower(center.getPower());
+				
+				square.setPower(Power.getRegularPower());
+				getNeighborTertiary(primary, center).setPower(power);
 			}
 		}
 	}

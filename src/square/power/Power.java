@@ -2,6 +2,7 @@ package square.power;
 
 import java.util.ArrayList;
 
+import square.power.failure.PrimaryPowerFail;
 import util.Rotation;
 
 /**
@@ -29,7 +30,7 @@ public abstract class Power {
 	/**
 	 * The power may rotate in a certain direction.
 	 */
-	private Rotation rotation = null;
+	private Rotation rotation;
 	
 	/**
 	 * Constructs a power.
@@ -72,6 +73,49 @@ public abstract class Power {
 	 */
 	public static boolean isValidActions(int actions) {
 		return actions >= 0;
+	}
+	
+	/**
+	 * Returns a new power failure. This failure has two children with
+	 * different lifespans.
+	 * 
+	 * @return	Power	A primary power failure.
+	 */
+	public static Power getPowerFailure() {
+		return new PrimaryPowerFail();
+	}
+	
+	/**
+	 * Returns a new regular power which lasts infinite life span.
+	 * 
+	 * @return
+	 */
+	public static Power getRegularPower() {
+		return new RegularPower();
+	}
+	
+	/**
+	 * Returns the remaining turns.
+	 */
+	public int getRemainingTurns() {
+		return this.remainingTurns;
+	}
+	
+	/**
+	 * Returns the remaining actions.
+	 */
+	public int getRemainingActions() {
+		return this.remainingActions;
+	}
+	
+	/**
+	 * Checks if the power is still active.
+	 * 
+	 * @return	True	If the remaining actions or turns are > 0
+	 * 			False	If the remaining actions and turns are <= 0	
+	 */
+	public boolean isActive() {
+		return this.remainingActions > 0 || this.remainingTurns > 0;
 	}
 	
 	/**
@@ -133,6 +177,11 @@ public abstract class Power {
 		this.rotation = rotation;
 	}
 	
+	/**
+	 * Sets the child of a power.
+	 * 
+	 * @param power
+	 */
 	protected void setChild(Power power) {
 		this.child = power;
 	}
