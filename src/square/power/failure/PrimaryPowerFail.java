@@ -14,6 +14,8 @@ public class PrimaryPowerFail extends PowerFail {
 
 	public PrimaryPowerFail() {
 		super(TURNS, ACTIONS);
+		
+		this.setChild(new SecondaryPowerFail(this));
 	}
 
 	@Override

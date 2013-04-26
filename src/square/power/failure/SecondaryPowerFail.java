@@ -19,6 +19,8 @@ public class SecondaryPowerFail extends PowerFail {
 		
 		this.setParent(parent);
 		this.setChild(new TertiaryPowerFail(this));
+		
+		System.out.println(this.hasChild());
 	}
 	
 	@Override

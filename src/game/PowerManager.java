@@ -56,6 +56,7 @@ public class PowerManager {
 	/**
 	 * Sets the state of any square to a PowerFailure state with a 1% chance.
 	 */
+	//TODO: Check if power fail twice on a square in row.
 	public void powerFailSquares() {
 		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
 		Random random = new Random();
@@ -99,8 +100,12 @@ public class PowerManager {
 		neighbor.setPower(secondaryFail);
 		
 		// Set tertiary
-		Square tertiary = getNeighborTertiary(square, neighbor);
-		tertiary.setPower(tertiaryFail);
+		try{
+			Square tertiary = getNeighborTertiary(square, neighbor);
+			tertiary.setPower(tertiaryFail);
+		} catch(NoSuchElementException exc) {
+			// Square off-grid
+		}
 	}
 	
 	/**
