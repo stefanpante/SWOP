@@ -8,7 +8,7 @@ import manager.ActionManager;
 
 import square.Square;
 
-public class ForceField extends MultiObstacle {
+public class ForceField extends MultiObstacle implements Observer {
 	
 	/**
 	 * Maximum length of a Force Field.

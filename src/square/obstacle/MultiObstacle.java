@@ -17,7 +17,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public abstract class MultiObstacle implements Obstacle, Observer {
+public abstract class MultiObstacle implements Obstacle {
 	
 	/**
 	 * An obstacle may cover a set of squares.

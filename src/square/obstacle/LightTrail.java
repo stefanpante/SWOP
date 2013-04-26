@@ -90,22 +90,11 @@ public class LightTrail extends MultiObstacle {
 			return null;
 	}
 
-	/**
-	 * Method that gets called when the observable object changes.
-	 * 
-	 * If the square given is the same as the last square we know
-	 * this does not need to be added. But because of an action that
-	 * we are notified of, the last square must be removed.
-	 */
-	@Override
-	public void update(Observable o, Object arg) {
-		if(arg !=null){
-			Square square = (Square) arg;
-			if(getNewestSquare() == square)
-				this.removeSquare(getLastSquare());
-			else
-				this.addSquare(square);
-		}
+	public void setHead(Square square) {
+		if(getNewestSquare() == square)
+			this.removeSquare(getLastSquare());
+		else
+			this.addSquare(square);
 	}
 
 	/**

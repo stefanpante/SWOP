@@ -55,10 +55,6 @@ public class Game {
 	 */
 	private final float CHANCE_POWERFAILURE = 0.05f;
 	
-	/**
-	 * Collection of LightTrails associated with every player.
-	 */
-	private HashMap<Player, LightTrail> lightTrails = new HashMap<Player, LightTrail>();
 	
 	/**
 	 * Boolean indicating the game is over
@@ -138,24 +134,10 @@ public class Game {
 		if(players.contains(player))
 			throw new IllegalStateException("Two players should never be the same object");
 		
-		addLightTrail(player);
 		players.add(player);
 	}
 	
-	/**
-	 * Adds a LightTrail for a given player.
-	 * 
-	 * @param	player	The player which needs a LightTrail.
-	 * @throws	IllegalStateException	If there already exists a LightTrail for the player.
-	 */
-	private void addLightTrail(Player player) throws IllegalStateException {
-		if(lightTrails.containsKey(player))
-			throw new IllegalStateException("Cannot set a LightTrail twice for the same player " + player);
-		
-		LightTrail lightTrail = new LightTrail();
-		lightTrails.put(player,  lightTrail);
-		player.addObserver(lightTrail);
-	}
+
 
 	/**
 	 * Check whether the given player is a valid player for all the objects of Game.
@@ -228,36 +210,6 @@ public class Game {
 	@Basic @Raw
 	public Player getCurrentPlayer() {
 		return currentPlayer;
-	};
-	
-	/**
-	 * Returns the LightTrail associated with the Player.
-	 * 
-	 * @param	player
-	 * @return	LightTrail	If the player has an associated LightTrail.
-	 * @throws	IllegalStateException	If the player does not have a LightTrail.
-	 * 									Or if the player given is null.
-	 */
-	public LightTrail getLightTrail(Player player) throws IllegalStateException {
-		if(player == null) 
-			throw new IllegalStateException("The given player is null.");
-		
-		if(!lightTrails.containsKey(player)) 
-			throw new IllegalStateException("The player " + player +  " does not have a LightTrail.");
-		
-		return lightTrails.get(player);
-	}
-	
-	/**
-	 * Returns all the LightTrails that are in the game.
-	 * 
-	 * @return	ArrayList<Player,LightTrail>	All LightTrails associated with every player.
-	 */
-	public HashMap<Player, LightTrail> getLightTrails() {
-		HashMap<Player, LightTrail> hashMap = new HashMap<Player, LightTrail>();
-		hashMap.putAll(this.lightTrails);
-		
-		return hashMap;
 	}
 	
 	/**

@@ -102,7 +102,10 @@ public abstract class Handler {
 	 * @return	ArrayList<Player, ArrayList<Coordinate>> List of coordinates which have a LightTrail.
 	 */
 	public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
-		HashMap<Player, LightTrail> map = getGame().getLightTrails();
+		HashMap<Player, LightTrail> map = new HashMap<Player, LightTrail>();
+		for(Player player : getGame().getPlayers()){
+			map.put(player, player.getLightTrail());
+		}
 		Iterator<Player> iterator = map.keySet().iterator();
 		ArrayList<Coordinate> players = getPlayerLocations();
 		

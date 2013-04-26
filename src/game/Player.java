@@ -9,6 +9,7 @@ import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
 import square.Square;
+import square.obstacle.LightTrail;
 import square.obstacle.Obstacle;
 
 import item.Item;
@@ -20,7 +21,7 @@ import item.inventory.PlayerInventory;
  *
  */
 @NotNull
-public class Player extends Observable implements Obstacle {
+public class Player implements Obstacle {
 
 	/**
 	 * The start position of this player
@@ -42,6 +43,11 @@ public class Player extends Observable implements Obstacle {
 	 * The player's ID.
 	 */
 	private final int ID;
+	
+	/**
+	 * The player's Light Trail
+	 */
+	private LightTrail lightTrail;
 	
 	/**
 	 * The number of remaining actions the player has left
@@ -80,6 +86,7 @@ public class Player extends Observable implements Obstacle {
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
 		this.ID = id;
+		this.lightTrail = new LightTrail();
 	}
 	
 	/**
@@ -249,7 +256,7 @@ public class Player extends Observable implements Obstacle {
 	public void setPosition(Square position){
 		if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
-		alertObservers();
+		lightTrail.setHead(position);
 		removeSquare(this.getPosition());
 		addSquare(position);
 	}
@@ -381,13 +388,7 @@ public class Player extends Observable implements Obstacle {
 		this.setRemainingActions(remActions);
 	}
 	
-	/**
-	 * This notifies the observers.
-	 */
-	public void alertObservers() {
-		this.setChanged();
-		this.notifyObservers(currentPosition);
-	}
+
 	
 
 	/**
@@ -403,8 +404,7 @@ public class Player extends Observable implements Obstacle {
 		
 		inventory.addItem(item);
 		item.notifyPickUp();
-		
-		alertObservers();
+		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 
@@ -421,8 +421,7 @@ public class Player extends Observable implements Obstacle {
 			throw new IllegalStateException("Can't use a 'null' item");
 		inventory.removeItem(item);
 		item.notifyUse();
-		
-		alertObservers();
+		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 	
@@ -434,7 +433,7 @@ public class Player extends Observable implements Obstacle {
 		// should perform empty action for every action left
 		while (remainingActions > 0){
 			this.setRemainingActions(remainingActions- 1);
-			alertObservers();
+			lightTrail.setHead(getPosition());
 		}
 		remainingActions += Player.MAX_ALLOWED_ACTIONS;
 		moved = false;
@@ -486,6 +485,9 @@ public class Player extends Observable implements Obstacle {
 		currentPosition = null;
 	}
 	
+	public LightTrail getLightTrail(){
+		return this.lightTrail;
+	}
 	
 
 	

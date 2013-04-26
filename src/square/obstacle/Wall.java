@@ -56,8 +56,4 @@ public class Wall extends MultiObstacle{
 		return true;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// Walls do not support this
-	}
 }
