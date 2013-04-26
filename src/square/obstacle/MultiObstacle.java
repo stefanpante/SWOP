@@ -2,6 +2,7 @@ package square.obstacle;
 
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import square.Square;
 
@@ -14,7 +15,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public abstract class MultiObstacle implements Obstacle {
+public abstract class MultiObstacle implements Obstacle, Observer {
 	
 	/**
 	 * An obstacle may cover a set of squares.
