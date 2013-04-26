@@ -6,7 +6,7 @@ import java.util.Observer;
 
 import square.Square;
 
-public class ForceField extends MultiObstacle implements Observer {
+public class ForceField extends MultiObstacle {
 	
 	/**
 	 * Maximum length of a Force Field.

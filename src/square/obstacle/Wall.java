@@ -1,6 +1,7 @@
 package square.obstacle;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import square.Square;
 
@@ -17,6 +18,7 @@ import square.Square;
 public class Wall extends MultiObstacle{
 	
 	public static int MIN_SIZE = 2;
+	
 	/**
 	 * Initialises the wall. Two squares must at least be given for a wall to be possible.
 	 * 
@@ -51,5 +53,10 @@ public class Wall extends MultiObstacle{
 	@Override
 	public boolean bouncesBack() {
 		return true;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// Walls do not support this
 	}
 }
