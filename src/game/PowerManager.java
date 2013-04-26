@@ -128,20 +128,16 @@ public class PowerManager {
 	 * 1) The square may not be adjacent to F1
 	 * 2) The square must be adjacent to F2
 	 * 
-	 * @param square
-	 * @param neighbor
+	 * @param	square
+	 * @param	neighbor
+	 * @throws	IllegalArgumentException
+	 * 			If the given squares are no neighbors.
+	 * @throws	NoSuchElementException
+	 * 			If no suitable candidate can be found, only off-grid.
 	 * @return
 	 */
 	private Square getCandidateTertiary(Square square, Square neighbor) throws IllegalArgumentException, NoSuchElementException {
-		Direction directionNeighbor = null;
-		
-		for (Direction direction: getGrid().getNeighbors(square).keySet()) {
-			if(getGrid().getNeighbor(square, direction) == neighbor)
-				directionNeighbor = direction;
-		}
-		
-		if(directionNeighbor == null)
-			throw new IllegalArgumentException("Invalid arguments given, these are not neighbors.");
+		Direction directionNeighbor = getGrid().getNeighborDirection(square, neighbor);
 		
 		ArrayList<Direction> directions = directionNeighbor.neighborDirections();
 		directions.add(directionNeighbor);
