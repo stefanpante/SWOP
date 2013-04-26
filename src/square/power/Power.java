@@ -256,6 +256,8 @@ public abstract class Power {
 			lastChild = lastChild.getChild();
 		}
 		
+		System.out.println("Children size:" + children.size());
+		
 		return children;
 	}
 	

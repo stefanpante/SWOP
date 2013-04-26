@@ -12,6 +12,7 @@ import square.power.Power;
 import util.Coordinate;
 import grid.Grid;
 
+
 /**
  * Manages all the power failures in the game.
  * 
@@ -105,7 +106,7 @@ public class PowerManager {
 		// Set tertiary
 		try{
 			Square tertiary = getNeighborTertiary(square, neighbor);
-			tertiary.setPower(tertiaryFail);
+			//tertiary.setPower(tertiaryFail);
 		} catch(NoSuchElementException exc) {
 			// Square off-grid
 		}
@@ -167,7 +168,7 @@ public class PowerManager {
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
 			
-			if(powers.contains(square.getPower()));
+			if(powers.contains(square.getPower()))
 				square.setPower(Power.getRegularPower());
 		}
 	}
@@ -192,24 +193,31 @@ public class PowerManager {
 	 * ended. Thus itself and its children will be removed from the grid.
 	 */	
 	public void decreaseTurn() {
+		ArrayList<Power> usedFailures = new ArrayList<Power>();
+		
 		for(Power power: primaryPowerFailures) {
 			try {
-				power.decreaseTurn();
+				power.decreaseTurn();		
+				
 			} catch (IllegalStateException exc) {
 				ArrayList<Power> powers = power.getChildren();
 				powers.add(power);
 				
 				clearPowers(powers);
+				usedFailures.add(power);
 			}
 		}
+		
+		primaryPowerFailures.removeAll(usedFailures);
 	}
 
 	/**
 	 * Decreases the action of a power failure.
 	 */
 	public void decreaseAction() {
+		System.out.println("--------");
 		for(Power power: primaryPowerFailures) {
-
+			System.out.println(power.getRemainingTurns());
 			while(power.hasChild()) {
 				power = power.getChild();
 				
@@ -251,9 +259,15 @@ public class PowerManager {
 	 */
 	private void resetSecondary(Power power) {
 		power.resetCount();
-		power.getRotation().rotate(power.getDirection());
+		
+		Direction newDirection = power.getRotation().rotate(power.getDirection());
+		power.setDirection(newDirection);
 		
 		Square primary = getSquare(power.getParent());
+		Square oldSquare = getSquare(power);
+		
+		if(oldSquare != null)
+			oldSquare.setPower(Power.getRegularPower());
 		
 		try {
 			Square secondary = getGrid().getNeighbor(primary, power.getDirection());
@@ -278,37 +292,24 @@ public class PowerManager {
 		power.resetCount();
 		
 		Square primary = getSquare(power.getParent().getParent());
+		Square oldSquare = getSquare(power);
 		
-		try{
+		if(oldSquare != null)
+			oldSquare.setPower(Power.getRegularPower());
+		
+		try{			
 			Square secondary = getSquare(power.getParent());
-			Square tertiary = getNeighborTertiary(primary, secondary);
 			
-			if(tertiary.getPower().isFailing() && power.isLifeSpanLonger(tertiary.getPower()) || !tertiary.getPower().isFailing())
-				tertiary.setPower(power);			
+			if(secondary != null) {	
+				Square tertiary = getNeighborTertiary(primary, secondary);
+				
+				if(tertiary.getPower().isFailing() && power.isLifeSpanLonger(tertiary.getPower()) || !tertiary.getPower().isFailing())
+					tertiary.setPower(power);
+			}
 		} catch (NoSuchElementException exc) {
 			// Secondary does not have a square.
 			// or off-grid for tertiary.
 		}
-	}
-	
-	
-	/**
-	 * Finds the parent square for a given power.
-	 * 
-	 * @param power
-	 * @return
-	 */
-	private Square getParentPower(Power power) {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			
-			if(square.getPower() == power.getParent())
-				return square;
-		}
-		
-		return null;
 	}
 	
 
