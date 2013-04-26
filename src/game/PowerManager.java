@@ -106,7 +106,7 @@ public class PowerManager {
 		// Set tertiary
 		try{
 			Square tertiary = getNeighborTertiary(square, neighbor);
-			//tertiary.setPower(tertiaryFail);
+			tertiary.setPower(tertiaryFail);
 		} catch(NoSuchElementException exc) {
 			// Square off-grid
 		}
@@ -215,9 +215,8 @@ public class PowerManager {
 	 * Decreases the action of a power failure.
 	 */
 	public void decreaseAction() {
-		System.out.println("--------");
 		for(Power power: primaryPowerFailures) {
-			System.out.println(power.getRemainingTurns());
+			
 			while(power.hasChild()) {
 				power = power.getChild();
 				
