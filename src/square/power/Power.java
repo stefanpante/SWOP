@@ -92,6 +92,25 @@ public abstract class Power {
 		this.rotation = rotation;
 	}
 	
+	/**
+	 * Compares another power and checks if its lifespan is longer.
+	 * 
+	 * @param	power
+	 * @return	True if the given power has longer lifespan.
+	 * 			False if the given power has a shorter lifespan.
+	 */
+	public boolean isLifeSpanLonger(Power power) {
+		if(power.getRemainingTurns() > this.remainingTurns)
+			return true;
+		
+		if(power.getRemainingTurns() < this.remainingTurns)
+			return false;
+			
+		if(power.getRemainingActions() > this.remainingActions)
+			return true;
+		
+		return false;
+	}
 	
 	/**
 	 * Checks if the given turns are valid.
