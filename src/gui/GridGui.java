@@ -188,10 +188,15 @@ public class GridGui extends GUIElement{
 	 * @param includedSquares	the Squares which are part of the grid.
 	 */
 	public void adjustGrid(ArrayList<Coordinate> includedSquares){
+		ArrayList<Coordinate> toRemove = new ArrayList<Coordinate>();
 		for(Coordinate coordinate: squares.keySet()){
 			if(!includedSquares.contains(coordinate)){
-				squares.remove(coordinate);
+				toRemove.add(coordinate);
 			}
+		}
+		
+		for(Coordinate coordinate: toRemove){
+			squares.remove(coordinate);
 		}
 	}
 

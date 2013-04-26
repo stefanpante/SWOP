@@ -56,7 +56,7 @@ public class Player extends Observable implements Obstacle {
 	/**
 	 * The amount of action a player has during one move
 	 */
-	public static final int MAX_ALLOWED_ACTIONS = 3;
+	public static final int MAX_ALLOWED_ACTIONS = 4;
 		
 	/**
 	 * creates a new player with a given name and start position

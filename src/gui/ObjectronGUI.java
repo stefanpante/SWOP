@@ -536,6 +536,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			grid.setDiscs((ArrayList<Coordinate>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.CHARGED_DISK_PROPERTY)){
 			grid.setChargedDiscs((ArrayList<Coordinate>) o);
+		}else if(evt.getPropertyName().equals(GameHandler.SQUARES_PROPERTY)){
+			grid.adjustGrid((ArrayList<Coordinate>) o);
 		}
 		grid.resetGrid();
 
