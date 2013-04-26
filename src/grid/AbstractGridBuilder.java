@@ -12,11 +12,27 @@ import be.kuleuven.cs.som.annotate.Basic;
 
 public abstract class AbstractGridBuilder {
 
+	/**
+	 * the constraints for the grid.
+	 */
 	private GridConstraint constraintTeleport;
-	private GridConstraint constraingtLightGrenade;
+	private GridConstraint constraintLightGrenade;
 	private GridConstraint constraintIdentityDisk;
 	private GridConstraint constraintWall;
 	
+	/**
+	 * The start position of the first player.
+	 */
+	private Coordinate startPlayer1;
+	
+	/**
+	 * The start position of the second player.
+	 */
+	private Coordinate startPlayer2;
+	
+	/*
+	 * The grid which has been built.
+	 */
 	private Grid grid;
 	
 	/**
@@ -130,9 +146,23 @@ public abstract class AbstractGridBuilder {
 		square.getInventory().addItem(item);
 	}
 	
+	protected void setPlayerOneStart(Coordinate coordinate){
+		this.startPlayer1 = coordinate;
+	}
 	
-	public abstract Coordinate getPlayerOneStart();
-	public abstract Coordinate getPlayerTwoStart();
+	protected void setPlayerTwoStart(Coordinate coordinate){
+		this.startPlayer2 = coordinate;
+	}
+	
+	public Coordinate getPlayerOneStart(){
+		return this.startPlayer1;
+	}
+	
+	public Coordinate getPlayerTwoStart(){
+		return this.startPlayer2;
+	}
+	
+	public abstract void checkGridConsistency();
 
 	public GridConstraint getConstraintTeleport() {
 		return constraintTeleport;
@@ -143,11 +173,11 @@ public abstract class AbstractGridBuilder {
 	}
 
 	public GridConstraint getConstraingtLightGrenade() {
-		return constraingtLightGrenade;
+		return constraintLightGrenade;
 	}
 
 	public void setConstraingtLightGrenade(GridConstraint constraingtLightGrenade) {
-		this.constraingtLightGrenade = constraingtLightGrenade;
+		this.constraintLightGrenade = constraingtLightGrenade;
 	}
 
 	public GridConstraint getConstraintIdentityDisk() {

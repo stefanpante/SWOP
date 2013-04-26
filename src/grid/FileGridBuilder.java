@@ -14,7 +14,7 @@ import util.Coordinate;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class FileGridBuilder{
+public class FileGridBuilder extends AbstractGridBuilder{
 
 	/**
 	 * Contains the path to the file.
@@ -33,8 +33,6 @@ public class FileGridBuilder{
 
 	private ArrayList<Coordinate> free_squares;
 	private ArrayList<Coordinate> not_squares;
-	private Coordinate start_player1;
-	private Coordinate start_player2;
 	private ArrayList<Coordinate> wall_squares;
 
 	/**
@@ -93,9 +91,9 @@ public class FileGridBuilder{
 									break;
 					case  '#':		wall_squares.add(new Coordinate(x,y));
 									break;
-					case  '1':		start_player1 = new Coordinate(x,y);
+					case  '1':		setPlayerOneStart(new Coordinate(x,y));
 									break;
-					case '2':		start_player2 = new Coordinate(x,y);
+					case '2':		setPlayerTwoStart(new Coordinate(x,y));
 					default:		break;
 				}
 				x++;
@@ -104,5 +102,12 @@ public class FileGridBuilder{
 		}
 
 
+	}
+
+
+	@Override
+	public void checkGridConsistency() {
+		// TODO Auto-generated method stub
+		
 	}
 }

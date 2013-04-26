@@ -29,6 +29,19 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		
 	
 	
+	/**
+	 * the number of horizontal squares in the grid.
+	 */
+	private int hSize;
+	
+	/**
+	 * the number of vertical squares in the grid
+	 */
+	private int vSize;
+	
+	public static int MIN_HSIZE = 10;
+	
+	public static int MIN_VSIZE = 10;
 	
 	
 	private ArrayList<Wall> walls;
