@@ -41,4 +41,10 @@ public class ForceFieldGenerator extends Item {
 
 	}
 
+	@Override
+	public boolean isSameType(Item item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

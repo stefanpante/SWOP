@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import manager.ActionManager;
+
 import square.Square;
 
 public class ForceField extends MultiObstacle {
@@ -15,6 +17,9 @@ public class ForceField extends MultiObstacle {
 	
 	private int counter;
 	
+	public ForceField(){
+		ActionManager.getInstance().addObserver(this);
+	}
 	
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {

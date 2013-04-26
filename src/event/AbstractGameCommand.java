@@ -15,7 +15,6 @@ import game.Game;
 public abstract class AbstractGameCommand extends Observable implements Command {
 
 	private Game game;
-	public static Observer OBSERVER;
 	
 	public AbstractGameCommand(Game game){
 		setGame(game);
@@ -38,9 +37,6 @@ public abstract class AbstractGameCommand extends Observable implements Command 
 		afterGameCommand();
 	}
 	
-	public static void setObserver(Observer observer){
-		OBSERVER = observer;
-	}
 	protected abstract void beforeGameCommand();
 	protected abstract void duringGameCommand();
 	protected abstract void afterGameCommand();

@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import manager.ActionManager;
+
 import square.Square;
 
 /**
@@ -26,7 +28,7 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
-		AbstractGameCommand.setObserver(this);
+		ActionManager.getInstance().addObserver(this);
 		counter = new HashMap<Player,Integer>();
 		
 		for(Player player : getGame().getPlayers()){

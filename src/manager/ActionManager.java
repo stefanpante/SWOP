@@ -35,17 +35,21 @@ public class ActionManager {
     }
 	
 	public void addObserver(Observer observer){
-		observers.add(observer);
+		if(observers.contains(observer))
+			throw new IllegalArgumentException("The given observer is already registered.");
 		for(Observable observable : observables){
 			observable.addObserver(observer);
 		}
+		observers.add(observer);
 	}
 	
 	public void addObservable(Observable observable){
-		observables.add(observable);
+		if(observables.contains(observable))
+			throw new IllegalArgumentException("The given observable is already registered.");
 		for(Observer observer : observers){
 			observable.addObserver(observer);
 		}
+		observables.add(observable);
 	}
 	
 	public void deleteObserver(Observer observer){

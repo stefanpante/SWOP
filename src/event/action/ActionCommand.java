@@ -3,6 +3,7 @@
  */
 package event.action;
 
+import manager.ActionManager;
 import event.AbstractGameCommand;
 import game.Game;
 
@@ -14,9 +15,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
 		
 	public ActionCommand(Game game) {
 		super(game);
-		if(OBSERVER == null)
-			throw new IllegalStateException("ActionEvent cannot be created without it's observer set.");
-		addObserver(OBSERVER);
+		ActionManager.getInstance().addObservable(this);
 	}
 	
 	@Override

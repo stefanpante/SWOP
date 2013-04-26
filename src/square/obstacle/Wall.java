@@ -28,6 +28,7 @@ public class Wall extends MultiObstacle{
 	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
 	 */
 	public Wall(Square square, Square otherSquare) throws IllegalArgumentException {
+		super();
 		this.addSquare(square);
 		this.addSquare(otherSquare);
 	}
