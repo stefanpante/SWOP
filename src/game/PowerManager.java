@@ -3,6 +3,7 @@ package game;
 import java.util.ArrayList;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import square.Direction;
@@ -30,6 +31,11 @@ public class PowerManager {
 	 * The possibility of a power failure in a square.
 	 */
 	private final float CHANCE_POWERFAILURE = 0.01f;
+	
+	/**
+	 * Primary power failures.
+	 */
+	private final ArrayList<Power> primaryPowerFailures = new ArrayList<Power>();
 	
 	/**
 	 * Creates a power manager with a reference to the grid.
@@ -82,6 +88,8 @@ public class PowerManager {
 		final Power secondaryFail = primaryFail.getChild();
 		final Power tertiaryFail = secondaryFail.getChild();
 		
+		primaryPowerFailures.add(primaryFail);
+		
 		// Set primary
 		square.setPower(primaryFail);
 		ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
@@ -106,7 +114,7 @@ public class PowerManager {
 	 * @param neighbor
 	 * @return
 	 */
-	private Square getNeighborTertiary(Square square, Square neighbor) throws IllegalArgumentException {
+	private Square getNeighborTertiary(Square square, Square neighbor) throws IllegalArgumentException, NoSuchElementException {
 		Direction directionNeighbor = null;
 		
 		for (Direction direction: getGrid().getNeighbors(square).keySet()) {
@@ -174,11 +182,9 @@ public class PowerManager {
 	 * 
 	 * If an exception is catched, it is because a primary power failure has
 	 * ended. Thus itself and its children will be removed from the grid.
-	 */
+	 */	
 	public void decreaseTurn() {
-		for(Square square : getGrid().getAllSquares()) {
-			Power power = square.getPower();
-			
+		for(Power power: primaryPowerFailures) {
 			try {
 				power.decreaseTurn();
 			} catch (IllegalStateException exc) {
@@ -194,17 +200,22 @@ public class PowerManager {
 	 * Decreases the action of a power failure.
 	 */
 	public void decreaseAction() {
-		for(Square square : getGrid().getAllSquares()) {
-			Power power = square.getPower();
-			
-			try{
-				power.decreaseAction();
-			} catch (IllegalStateException exc) {
-				ArrayList<Power> powers = power.getChildren();
-				powers.add(power);
+		for(Power power: primaryPowerFailures) {
+
+			while(power.hasChild()) {
+				power = power.getChild();
 				
-				resetPowers(powers);
-			}
+				try{
+					power.decreaseAction();
+				} catch (IllegalStateException exc) {
+					ArrayList<Power> powers = power.getChildren();
+					powers.add(power);
+					
+					resetPowers(powers);
+					
+					break;
+				}
+			}			
 		}
 	}
 	
@@ -220,9 +231,8 @@ public class PowerManager {
 		while(iterator.hasNext()) {
 			Square square = iterator.next();
 			
-			if(square.getPower().hasChild())
-				if(square.getPower().getChild() == power)
-					return square;
+			if(square.getPower() == power.getParent())
+				return square;
 		}
 		
 		return null;
@@ -244,22 +254,28 @@ public class PowerManager {
 			Square center = getParentPower(power);
 			
 			if(power.hasChild()) {
-				Direction directionNeighbor = null;
-				
-				for (Direction direction: getGrid().getNeighbors(center).keySet()) {
-					if(getGrid().getNeighbor(center, direction) == square)
-						directionNeighbor = direction;
-				}
-				
+				Direction directionNeighbor = getGrid().getNeighborDirection(center, square);
 				Direction direction = power.getRotation().rotate(directionNeighbor);
 				
+				power.setDirection(direction);
+				
 				square.setPower(Power.getRegularPower());
-				getGrid().getNeighbor(center, direction).setPower(power);
+				
+				try{
+					getGrid().getNeighbor(center, direction).setPower(power);
+				} catch(NoSuchElementException exc) {
+					// If there is no square in that direction (off-grid).
+				}
 			} else {
 				Square primary = getParentPower(center.getPower());
 				
 				square.setPower(Power.getRegularPower());
-				getNeighborTertiary(primary, center).setPower(power);
+				
+				try{
+					getNeighborTertiary(primary, center).setPower(power);
+				} catch(NoSuchElementException exc) {
+					// If there is no square in that direction (off-grid).
+				}
 			}
 		}
 	}

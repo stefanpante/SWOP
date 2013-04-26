@@ -14,13 +14,13 @@ public class SecondaryPowerFail extends PowerFail {
 	
 	private final static int ACTIONS = 2;
 
-	public SecondaryPowerFail() {
-		super(TURNS, ACTIONS);
+	public SecondaryPowerFail(PowerFail parent) {
+		super(TURNS, ACTIONS, Rotation.random());
 		
-		this.setChild(new TertiaryPowerFail());
-		this.setRotation(Rotation.random());
+		this.setParent(parent);
+		this.setChild(new TertiaryPowerFail(this));
 	}
-
+	
 	@Override
 	public void decreaseTurn() {
 		

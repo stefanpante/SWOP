@@ -12,8 +12,10 @@ public class TertiaryPowerFail extends PowerFail {
 	
 	private final static int ACTIONS = 1;
 
-	public TertiaryPowerFail() {
+	public TertiaryPowerFail(PowerFail parent) {
 		super(TURNS, ACTIONS);
+		
+		this.setParent(parent);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package square.power;
 
 import java.util.ArrayList;
 
+import square.Direction;
 import square.power.failure.PrimaryPowerFail;
 import util.Rotation;
 
@@ -25,12 +26,22 @@ public abstract class Power {
 	/**
 	 * A power may have a child power, they are in some way related.
 	 */
-	private Power child = null;
+	private Power child;
+	
+	/**
+	 * Parent power.
+	 */
+	private Power parent;
 	
 	/**
 	 * The power may rotate in a certain direction.
 	 */
-	private Rotation rotation;
+	private final Rotation rotation;
+	
+	/**
+	 * The direction from the parent in which the child is facing.
+	 */
+	private Direction direction;
 	
 	/**
 	 * Constructs a power.
@@ -51,7 +62,36 @@ public abstract class Power {
 		
 		this.remainingTurns = turns;
 		this.remainingActions = actions;
+		
+		this.child = null;
+		this.parent = null;
+		this.rotation = null;
 	}
+	
+	/**
+	 * Constructs a power.
+	 * 
+	 * @param	rotation	Rotation of the power.
+	 * @param	turns		Amount of turns the power will last.
+	 * @param	actions		Amount of acitons the power will last.
+	 * @throws	IllegalArgumentException
+	 * 			Thrown when given turns are invalid.
+	 * @throws	IllegalArgumentException
+	 * 			Thrown when given actions are invalid.
+	 */
+	public Power(int turns, int actions, Rotation rotation) throws IllegalArgumentException {
+		if(!isValidTurns(turns))
+			throw new IllegalArgumentException("Given turns are invalid.");
+		
+		if(!isValidActions(actions))
+			throw new IllegalArgumentException("Given actions are invalid.");
+		
+		this.remainingTurns = turns;
+		this.remainingActions = actions;
+		
+		this.rotation = rotation;
+	}
+	
 	
 	/**
 	 * Checks if the given turns are valid.
@@ -169,21 +209,19 @@ public abstract class Power {
 	}
 	
 	/**
-	 * Sets the rotation of the power.
-	 * 
-	 * @param rotation
-	 */
-	protected void setRotation(Rotation rotation) {
-		this.rotation = rotation;
-	}
-	
-	/**
 	 * Sets the child of a power.
 	 * 
 	 * @param power
 	 */
 	protected void setChild(Power power) {
 		this.child = power;
+	}
+	
+	/**
+	 * Sets the parent of the power.
+	 */
+	protected void setParent(Power power) {
+		this.parent = power;
 	}
 	
 	/**
@@ -209,8 +247,18 @@ public abstract class Power {
 	 * @return	True	If there is a child.
 	 * 			False	If there is no child.
 	 */
-	public boolean hasChild () {
+	public boolean hasChild() {
 		return this.child != null; 
+	}
+	
+	/**
+	 * Checks if the power has a parent power.
+	 * 
+	 * @return	True	If there is a parent.
+	 * 			False	If there is no parent.
+	 */
+	public boolean hasParent() {
+		return this.parent != null;
 	}
 	
 	/**
@@ -224,6 +272,16 @@ public abstract class Power {
 	}
 	
 	/**
+	 * Returns the power's parent.
+	 * 
+	 * @return	Null	If the power has no parent.
+	 * 			Power	If the power has a parent.
+	 */
+	public Power getParent() {
+		return this.parent;
+	}
+	
+	/**
 	 * Returns the rotation in which the power is rotating.
 	 * Not all powers rotate so this may be null.
 	 * 
@@ -232,6 +290,30 @@ public abstract class Power {
 	 */
 	public Rotation getRotation() {
 		return this.rotation;
+	}
+	
+	/**
+	 * Sets the direction the power is facing from the parent.
+	 * 
+	 * @param	direction
+	 * @throws	IllegalStateException
+	 * 			If the direction is not appropriate for this power. (no parent)
+	 */
+	public void setDirection(Direction direction) throws IllegalStateException {
+		if(!hasParent()) 
+			throw new IllegalStateException("The power should not have a direction since it has no parent.");
+		
+		this.direction = direction;
+	}
+	
+	/**
+	 * Returns the direction the power is facing from the parent.
+	 * 
+	 * @return	Null	If the power has no parent.
+	 * 			Direction
+	 */
+	public Direction getDirection() {
+		return this.direction;
 	}
 	
 	/**
