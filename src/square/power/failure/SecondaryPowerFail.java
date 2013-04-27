@@ -10,9 +10,9 @@ import util.Rotation;
  */
 public class SecondaryPowerFail extends PowerFail {
 	
-	private final static int TURNS = 0;
+	public final static int TURNS = 0;
 	
-	private final static int ACTIONS = 2;
+	public final static int ACTIONS = 2;
 
 	public SecondaryPowerFail(PowerFail parent) {
 		super(TURNS, ACTIONS, Rotation.random());

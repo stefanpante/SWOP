@@ -92,7 +92,7 @@ public class PowerManager {
 	 * 
 	 * @param square
 	 */
-	private void powerFailSquare(Square square) {
+	protected void powerFailSquare(Square square) {
 		Random random = new Random();
 		
 		final Power primaryFail = Power.getPowerFailure();

@@ -62,9 +62,6 @@ public abstract class Power {
 		
 		this.remainingTurns = turns;
 		this.remainingActions = actions;
-		
-		this.child = null;
-		this.parent = null;
 		this.rotation = null;
 	}
 	

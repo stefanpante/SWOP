@@ -8,9 +8,9 @@ package square.power.failure;
  */
 public class TertiaryPowerFail extends PowerFail {
 	
-	private final static int TURNS = 0;
+	public final static int TURNS = 0;
 	
-	private final static int ACTIONS = 1;
+	public final static int ACTIONS = 1;
 
 	public TertiaryPowerFail(PowerFail parent) {
 		super(TURNS, ACTIONS);
