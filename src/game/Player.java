@@ -16,7 +16,9 @@ import item.Item;
 import item.inventory.PlayerInventory;
 
 /**
- * Player class
+ * A Player is a Single Obstacle with an Inventory containing items and 
+ * a Multi Obstacle Light Trail.
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
@@ -42,7 +44,7 @@ public class Player implements Obstacle {
 	/**
 	 * The player's ID.
 	 */
-	private final int ID;
+	private final int id;
 	
 	/**
 	 * The player's Light Trail
@@ -85,7 +87,7 @@ public class Player implements Obstacle {
 		
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
-		this.ID = id;
+		this.id = id;
 		this.lightTrail = new LightTrail();
 	}
 	
@@ -256,7 +258,6 @@ public class Player implements Obstacle {
 	public void setPosition(Square position){
 		if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
-		lightTrail.setHead(position);
 		removeSquare(this.getPosition());
 		addSquare(position);
 	}
@@ -289,7 +290,7 @@ public class Player implements Obstacle {
 	 * Returns the player's id.
 	 */
 	public int getID() {
-		return this.ID;
+		return this.id;
 	}
 
 	/**
@@ -337,13 +338,12 @@ public class Player implements Obstacle {
 	}
 	
 	/**
-	 * @Pre	This must be called before making an action.
-	 * 		Otherwise the currentPosition is the new one.
-	 * 
 	 * Decrements the remaining actions by one and notifies the observers of this player.
+	 * 
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+		lightTrail.setHead(getPosition());
 	}
 	
 
@@ -404,7 +404,6 @@ public class Player implements Obstacle {
 		
 		inventory.addItem(item);
 		item.notifyPickUp();
-		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 
@@ -421,7 +420,6 @@ public class Player implements Obstacle {
 			throw new IllegalStateException("Can't use a 'null' item");
 		inventory.removeItem(item);
 		item.notifyUse();
-		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 	
@@ -432,8 +430,7 @@ public class Player implements Obstacle {
 	public void endTurn(){
 		// should perform empty action for every action left
 		while (remainingActions > 0){
-			this.setRemainingActions(remainingActions- 1);
-			lightTrail.setHead(getPosition());
+			decrementActions();
 		}
 		remainingActions += Player.MAX_ALLOWED_ACTIONS;
 		moved = false;
@@ -485,10 +482,14 @@ public class Player implements Obstacle {
 		currentPosition = null;
 	}
 	
+	/**
+	 * Returns the light trail of this player
+	 * 
+	 * @return	This player's light trail
+	 */
 	public LightTrail getLightTrail(){
 		return this.lightTrail;
 	}
-	
 
 	
 	@Override
