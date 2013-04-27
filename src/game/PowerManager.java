@@ -185,7 +185,7 @@ public class PowerManager {
 	 * @return	Square	If the power can be found on a square.
 	 * 			Null	If there is no square with the power.
 	 */
-	private Square getSquare(Power power) {
+	protected Square getSquare(Power power) {
 		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
 		
 		while(iterator.hasNext()) {
