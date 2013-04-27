@@ -18,6 +18,7 @@ import org.junit.Test;
 import player.Player;
 import square.Direction;
 import square.Square;
+import square.power.failure.PrimaryPowerFail;
 
 /**
  * Scenario test for the use case "End Turn"
@@ -60,7 +61,7 @@ public class EndTurnHandlerTest {
 	 */
 	@Test 
 	public void hasMoveTest(){	
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		assertFalse(endTurnHandler.hasMoved());
 		
@@ -154,7 +155,7 @@ public class EndTurnHandlerTest {
 		MoveHandler moveHandler = new MoveHandler(game, null);
 		moveHandler.move(direction);
 		
-		square.getPower().fail();
+		square.setPower(new PrimaryPowerFail());
 		assertTrue(square.getPower().isFailing());
 		
 		endTurnHandler.confirm(true);

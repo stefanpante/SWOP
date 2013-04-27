@@ -286,6 +286,28 @@ public class Grid {
 					+" at coordinate " + coordinate+".");
 		}
 	}
+	
+	/**
+	 * Given a square and its neighbors, we return the direction the neighbor is in.
+	 * 
+	 * @param	square
+	 * 			The square which has the neighboring square.
+	 * @param	neighbor
+	 * 			The neighbor square you want the direction it is facing from the square.
+	 * @return	The direction the neighbor is in from the square.
+	 * @throws	IllegalArgumentException
+	 * 			If the given squares are no neighbors.
+	 */
+	public Direction getNeighborDirection(Square square, Square neighbor) throws IllegalArgumentException {
+		HashMap<Direction, Square> neighbors = getNeighbors(square);
+		
+		for(Direction direction: neighbors.keySet()) {
+			if(neighbors.get(direction) == neighbor)
+				return direction;
+		}
+		
+		throw new IllegalArgumentException("The given square is no neighbor.");
+	}
 		
 	/**
 	 * Returns the square at the given coordinate.
