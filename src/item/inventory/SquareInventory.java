@@ -1,13 +1,10 @@
 package item.inventory;
 
-import java.util.ArrayList;
-
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
-import item.launchable.LaunchableItem;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -15,11 +12,9 @@ import item.visitor.AddRemoveItemVisitor;
  * 	With the constructor you have to state if this inventory can only have inactive Items.
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
-
-
+	
 	/**
 	 * Creates a square inventory with unlimited size.
 	 */

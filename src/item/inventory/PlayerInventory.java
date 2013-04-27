@@ -1,13 +1,10 @@
 package item.inventory;
 
-import java.util.ArrayList;
-
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
-import item.launchable.LaunchableItem;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -21,8 +18,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	 * The maximum size 
 	 */
 	public static final double PLAYER_INVENTORY_SIZE = 6;
-
-	private ArrayList<Integer> launchableHashes;
 	
 	/**
 	 * Creates a new Player Inventory. Same as a regular inventory, 
@@ -30,8 +25,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	 */
 	public PlayerInventory() {
 		super(PLAYER_INVENTORY_SIZE);
-		
-		launchableHashes = new ArrayList<Integer>();
 	}
 	
 	@Override
