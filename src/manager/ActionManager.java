@@ -14,6 +14,7 @@ public class ActionManager {
 
 	private ArrayList<Observable> observables;
 	private ArrayList<Observer> observers;
+	private static final ActionManager INSTANCE = new ActionManager();
 	
 	/**
 	 * Private constructor prevents initialization from outside this class
@@ -22,17 +23,9 @@ public class ActionManager {
     	this.observables = new ArrayList<Observable>();
     	this.observers = new ArrayList<Observer>();
     }
-    
-    /**
-    * SingletonHolder is loaded on the first execution of Singleton.getInstance() 
-    * or the first access to SingletonHolder.INSTANCE, not before.
-    */
-    private static class ActionManagerHolder { 
-            public static final ActionManager INSTANCE = new ActionManager();
-    }
 
     public static ActionManager getInstance() {
-            return ActionManagerHolder.INSTANCE;
+            return INSTANCE;
     }
 	
 	public void addObserver(Observer observer){
