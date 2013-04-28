@@ -499,7 +499,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
 			this.grid.setGrenades((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
-			ArrayList<Coordinate> players = (ArrayList<Coordinate>)o;
+			HashMap<Player,Coordinate> players = (HashMap<Player,Coordinate>) o;
 			this.grid.setPlayers(players);
 		}else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
 			HashMap<Power,Coordinate> pfs = (HashMap<Power, Coordinate>) o;

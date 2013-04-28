@@ -1,6 +1,7 @@
 package controller;
 
 import game.Game;
+import game.Player;
 import gui.ObjectronGUI;
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class GameHandler extends Handler {
 	 */
 	private void populateGui() {
 		HashMap<String, Object> properties = getProperties();
-		ArrayList<Coordinate> players = getPlayerLocations();
+		HashMap<Player,Coordinate> players = getPlayerLocations();
 		
 		firePropertyChange(SQUARES_PROPERTY, properties.get(SQUARES_PROPERTY));
     	firePropertyChange(WALLS_PROPERTY, properties.get(WALLS_PROPERTY));

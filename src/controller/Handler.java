@@ -90,10 +90,10 @@ public abstract class Handler {
 	 * 
 	 * @return	ArrayList<Coordinate>	List of all coordinates which contain a player.
 	 */
-	public ArrayList<Coordinate> getPlayerLocations() {
-		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
+	public HashMap<Player,Coordinate> getPlayerLocations() {
+		HashMap<Player,Coordinate> players = new HashMap<Player,Coordinate>();
 		for(Player player : getGame().getPlayers()){
-			players.add(getGame().getGrid().getCoordinate(player.getPosition()));
+			players.put(player,getGame().getGrid().getCoordinate(player.getPosition()));
 		}	
 		return players;
 	}
@@ -110,7 +110,7 @@ public abstract class Handler {
 			map.put(player, player.getLightTrail());
 		}
 		Iterator<Player> iterator = map.keySet().iterator();
-		ArrayList<Coordinate> players = getPlayerLocations();
+		HashMap<Player, Coordinate> players = getPlayerLocations();
 
 		HashMap<Player, ArrayList<Coordinate>> hashMap = new HashMap<Player, ArrayList<Coordinate>>();
 
@@ -121,7 +121,7 @@ public abstract class Handler {
 			ArrayList<Square> squares = map.get(player).getSquares();
 
 			for(Coordinate coordinate : getGame().getGrid().getAllCoordinates())
-				if(squares.contains(getGame().getGrid().getSquare(coordinate)) && !players.contains(coordinate))
+				if(squares.contains(getGame().getGrid().getSquare(coordinate)) && !players.containsValue(coordinate))
 					coords.add(coordinate);
 
 			hashMap.put(player, coords);
@@ -198,7 +198,7 @@ public abstract class Handler {
 		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> chargedDisks  = new ArrayList<Coordinate>(); 
 		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
-		ArrayList<Coordinate> players		= new ArrayList<Coordinate>();
+		HashMap<Player, Coordinate> players = new HashMap<Player, Coordinate>();
 
 		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
 			Square square = getGame().getGrid().getSquare(coordinate);
@@ -236,7 +236,7 @@ public abstract class Handler {
 			squares.add(coordinate);
 			for(Player player: getGame().getPlayers()){
 				if(player.getPosition() == square){
-					players.add(coordinate);
+					players.put(player, coordinate);
 				}
 			}
 
