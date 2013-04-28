@@ -96,8 +96,6 @@ public class LightTrail extends MultiObstacle {
 			this.removeSquare(getLastSquare());
 		else
 			this.addSquare(square);
-		System.out.println(trailqueue);
-		System.out.println(this.getSquares());
 	}
 
 	/**

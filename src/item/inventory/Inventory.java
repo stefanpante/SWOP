@@ -178,7 +178,7 @@ public abstract class Inventory{
 		if(!this.hasItem(item)) 
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
-			items.remove(item.hashCode());
+			items.remove(item);
 	}
 
 	/**
