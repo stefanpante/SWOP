@@ -34,6 +34,7 @@ public class GameHandler extends Handler {
 	public static final String WIN_PROPERTY 				= "Win";
 	public static final String LOSE_PROPERTY				= "Lose";
 	public static final String SQUARES_PROPERTY				= "squares";
+	public static final String FORCEFIELD_PROPERTY			= "forcefield";
 	private ObjectronGUI objectronGUI;
 	
 	
