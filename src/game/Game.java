@@ -60,6 +60,8 @@ public class Game {
 	 */
 	private PowerManager powerManager;
 
+	
+	//T
 	/**
 	 *Constructs a new board-based game.
 	 * 
@@ -89,6 +91,7 @@ public class Game {
 	}
 	
 	
+	//TODO: get start position from grid instead of with coordinate
 	/**
 	 *Constructs a new board-based game with a given grid.
 	 *
@@ -97,7 +100,7 @@ public class Game {
 	 * @param 	grid
 	 * 			The grid on which the game will be played.
 	 */
-	protected Game(Grid grid){
+	public Game(Grid grid){
 		// Build the grid
 		this.setGrid(grid);
 		

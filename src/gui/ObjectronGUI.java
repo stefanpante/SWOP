@@ -5,6 +5,7 @@ import gui.button.TextButton;
 import item.Item;
 import item.launchable.LaunchableItem;
 
+import java.awt.FileDialog;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private PFont standardFont;
 
 	private Button confirm;
+	private Button filepick;
 
 	private Textfield widthGrid;
 
@@ -160,13 +162,31 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		heightGrid.setValue("" + 10);
 		heightGrid.setColorCursor(OConstants.PLAYERBLUE);
 		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,240);
+		confirm.setPosition(hSize/4,280);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.WHITE);
 		confirm.setColorBackground(OConstants.PLAYERBLUE);
+		
+		filepick = inputController.addButton("pick");
+		filepick.setLabel("Pick file from grid");
+		filepick.setPosition(hSize/4,240);
+		filepick.setSize(hSize/2, 35);
+		filepick.setColor(color);
+		filepick.setColorLabel(OConstants.WHITE);
+		filepick.setColorBackground(OConstants.PLAYERBLUE);
+		
+		 
 
 	}
+	
+	
+	public void pick(){
+		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
+		 fd.setVisible(true);
+		 System.out.println(fd.getDirectory() + fd.getFile());
+	}
+		
 
 	public void hcells(String value){
 		System.out.println(value);
@@ -282,6 +302,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		textAlign(LEFT,LEFT);
 		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
+	
 	private void setUpGame(){
 
 		obj = new GameHandler(this);
@@ -623,9 +644,5 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		grid.getThrowPad().setVisibility(false);
 
 	}
-
-
-
-
 
 }

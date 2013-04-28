@@ -75,6 +75,13 @@ public class Grid {
 	 */
 	private int vSize;
 	
+	private Square startPlayer1;
+	
+	/**
+	 * The start position of the second player.
+	 */
+	private Square startPlayer2;
+	
 	/**
 	 * Creates a new grid with given height and length.
 	 * 
@@ -568,6 +575,51 @@ public class Grid {
 			}
 		}
 		throw new NoSuchElementException("The given destination could not be found in this grid");
+	}
+	
+	/**
+	 * Sets the start position of the first player
+	 * @param playerone
+	 */
+	public void setStartPlayerOne(Square playerone){
+		if(!isValidStartPosition(playerone)){
+			throw new IllegalArgumentException("The given square is not a valid startposition of the player");
+		}
+		this.startPlayer1 = playerone;
+	}
+	
+	/**
+	 * Sets the start position of the second player
+	 * @param playerTwo
+	 */
+	public void setStartPlayerTwo(Square playerTwo){
+		if(!isValidStartPosition(playerTwo)){
+			throw new IllegalArgumentException("The given square is not a valid startposition of the player");
+		}
+		this.startPlayer2 = playerTwo;
+	}
+	
+	/**
+	 * Checks if the given square is a valid start position for the player
+	 * @param player
+	 * @return
+	 */
+	public boolean isValidStartPosition(Square player){
+		return (grid.containsValue(player) && !player.isObstructed());
+	}
+	
+	/**
+	 * Returns the start square of the first player
+	 */
+	public Square getStartPlayerOne(){
+		return startPlayer1;
+	}
+	
+	/**
+	 * Returns the start square of the second player
+	 */
+	public Square getStartPlayerTwo(){
+		return startPlayer2;
 	}
 	
 	/**

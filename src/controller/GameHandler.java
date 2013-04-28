@@ -2,8 +2,11 @@ package controller;
 
 import game.Game;
 import game.Player;
+import grid.FileGridBuilder;
+import grid.RandomGridBuilder;
 import gui.ObjectronGUI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,20 +59,34 @@ public class GameHandler extends Handler {
     public void startNewGame(int hCells, int vCells){
 		try {
 			createGame(hCells,vCells);
-			addPropertyChangeListener(objectronGUI);
-	    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
-	    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
-	    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
-	    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
-	    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
-	    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
-	    	turnHandler.startTurn();
-	    	this.populateGui();
+			initHandlers();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 
+    }
+    
+    public void startNewGame(String filename){
+    	try{
+    		createGame(filename);
+    		initHandlers();
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
+    }
+    
+    private void initHandlers(){
+    	addPropertyChangeListener(objectronGUI);
+    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
+    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
+    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
+    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
+    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
+    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
+    	turnHandler.startTurn();
+    	this.populateGui();
     }
     
     /**
@@ -138,7 +155,19 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		setGame(new Game(hSize, vSize));
+		RandomGridBuilder builder = new RandomGridBuilder(hSize, vSize);
+		setGame(new Game(builder.getGrid()));
+	}
+	
+	public void createGame(String filename){
+		FileGridBuilder builder;
+		try {
+			builder = new FileGridBuilder(filename);
+			setGame(new Game(builder.getGrid()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
