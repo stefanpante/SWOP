@@ -410,7 +410,7 @@ public class Grid {
 	/**
 	 * Checks if there is a neighbor in the given direction for the given square.
 	 * 
-	 * @param	square
+	 * @param	square	
 	 * 			The square from which the check will be executed.
 	 * @param 	direction 	
 	 * 			The direction in which the check will be executed.

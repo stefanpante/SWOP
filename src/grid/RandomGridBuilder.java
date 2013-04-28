@@ -470,5 +470,11 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return this.walls;
 	}
 
+	@Override
+	public void checkGridConsistency() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
