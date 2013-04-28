@@ -332,6 +332,7 @@ public class Player implements Obstacle {
 	 * 		  	thrown if the player is unable to make this move 
 	 */
 	public void move(Square position) throws IllegalStateException{
+		lightTrail.setHead(getPosition());
 		setPosition(position);
 		moved = true;
 		decrementActions();
@@ -343,7 +344,7 @@ public class Player implements Obstacle {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
-		lightTrail.setHead(getPosition());
+		
 	}
 	
 
@@ -404,6 +405,7 @@ public class Player implements Obstacle {
 		
 		inventory.addItem(item);
 		item.notifyPickUp();
+		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 
@@ -420,6 +422,7 @@ public class Player implements Obstacle {
 			throw new IllegalStateException("Can't use a 'null' item");
 		inventory.removeItem(item);
 		item.notifyUse();
+		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 	
@@ -431,6 +434,7 @@ public class Player implements Obstacle {
 		// should perform empty action for every action left
 		while (remainingActions > 0){
 			decrementActions();
+			lightTrail.setHead(getPosition());
 		}
 		remainingActions += Player.MAX_ALLOWED_ACTIONS;
 		moved = false;

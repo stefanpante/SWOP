@@ -75,11 +75,11 @@ public class GameHandler extends Handler {
 	 * This is information that the GUI can use.
 	 */
 	private void populateGui() {
-		HashMap<String, ArrayList<Coordinate>> properties = getProperties();
-		ArrayList<Coordinate> walls = properties.get(WALLS_PROPERTY);
+		HashMap<String, Object> properties = getProperties();
 		ArrayList<Coordinate> players = getPlayerLocations();
-    	walls.removeAll(players);
-    	firePropertyChange(WALLS_PROPERTY, walls);
+		
+		firePropertyChange(SQUARES_PROPERTY, properties.get(SQUARES_PROPERTY));
+    	firePropertyChange(WALLS_PROPERTY, properties.get(WALLS_PROPERTY));
     	firePropertyChange(PLAYERS_PROPERTY, players);
     	fireChanges();
 	}

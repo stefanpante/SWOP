@@ -21,6 +21,7 @@ import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
 import square.Direction;
+import square.power.Power;
 import util.Coordinate;
 import util.OConstants;
 
@@ -501,15 +502,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			ArrayList<Coordinate> players = (ArrayList<Coordinate>)o;
 			this.grid.setPlayers(players);
 		}else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
-			this.grid.setPowerFails((ArrayList<Coordinate>)o);
+			HashMap<Power,Coordinate> pfs = (HashMap<Power, Coordinate>) o;
+			this.grid.setPowerFails(new ArrayList<Coordinate>(pfs.values()));
 		}else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
 			this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-			//        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-			//        	String playerName = (String)o;
-			//        	if(!this.currentPlayerName.equals(playerName)){
-			//        		this.currentPlayerName = playerName;
-			//        		showMessage("It's now "+playerName+ "'s turn.");
-			//        	}
 		}else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
 			this.grid.setCurrentPlayer((Coordinate)o);
 			this.changePlayer();

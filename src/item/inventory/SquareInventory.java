@@ -198,5 +198,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
 		return null;
 	}
+	
 }
 
