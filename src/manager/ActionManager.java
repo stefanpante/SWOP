@@ -7,7 +7,7 @@ import java.util.Observer;
  * The Action Manager is an instance of the Mediator and Singleton pattern. There is
  * only one Action Manager and it is known globally. Action observers and observees 
  * can register with each other trough this manager.
- * n                                                                                     
+ *                                                                                      
  * @author Dieter Castel, Jonas Devlieghere
  */
 public class ActionManager {

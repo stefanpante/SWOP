@@ -156,19 +156,6 @@ public class TestGame {
 	}
 	
 	@Test
-	public void testClearPowerFailures() {
-		Game game = new Game(10,10);
-		Grid grid = game.getGrid();
-		Square square = grid.getAllSquares().get(0);
-		
-		square.getPower().fail();
-		assertTrue(square.getPower().isFailing());
-		
-		game.clearPowerFailures();
-		assertFalse(square.getPower().isFailing());		
-	}
-	
-	@Test
 	public void testGetLightTrail() {
 		Player player = game.getCurrentPlayer();
 		game.getLightTrail(player);

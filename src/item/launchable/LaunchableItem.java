@@ -1,9 +1,8 @@
 package item.launchable;
 
 import square.Direction;
+
 import item.Item;
-import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
 
 /**
  * This is a special type of items which can be launched by the player.
@@ -14,10 +13,6 @@ import item.inventory.SquareInventory;
 public abstract class LaunchableItem extends Item {
 	
 	private int range;
-	
-	/**
-	 * 
-	 */
 	
 	public LaunchableItem(int range){
 		this.range = range;
@@ -75,8 +70,7 @@ public abstract class LaunchableItem extends Item {
 			return false;
 		}
 		return true;
-	}
-	
+	}	
 	
 	@Override
 	public String toString() {

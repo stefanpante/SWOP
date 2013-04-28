@@ -1,10 +1,10 @@
 package item.launchable;
 
 import item.Item;
+
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 import notnullcheckweaver.NotNull;
-import square.Direction;
 
 /**
  * Implementation of the item IdentityDisc
@@ -25,15 +25,6 @@ public class IdentityDisc extends LaunchableItem {
 	 */
 	public IdentityDisc() {
 		super(MAX_TRAVEL_DISTANCE);
-	}
-	
-	
-	@Override
-	public String toString() {
-		String result = super.toString() + " IdentityDisc";
-		// Removed this, because it gives a weird message in the GUI
-		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
-		return result;
 	}
 
 	@Override
@@ -68,5 +59,13 @@ public class IdentityDisc extends LaunchableItem {
 	@Override
 	public boolean isSameType(Item o){
 		return (o instanceof IdentityDisc);
+	}
+	
+	@Override
+	public String toString() {
+		String result = super.toString() + " IdentityDisc";
+		// Removed this, because it gives a weird message in the GUI
+		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
+		return result;
 	}
 }

@@ -1,10 +1,10 @@
 package item.visitor;
 
 import item.LightGrenade;
+
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
-import item.launchable.LaunchableItem;
 
 /**
  * Visitor implementation for adding or removing specific items from an inventory.

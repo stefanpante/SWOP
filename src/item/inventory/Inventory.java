@@ -3,12 +3,9 @@ package item.inventory;
 import item.Item;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
-
 
 /**
  * Inventory class is used to contain items 
@@ -21,7 +18,6 @@ public abstract class Inventory{
 	 * The size of the inventory, should not be smaller than zero
 	 */
 	private final double maximumSize;
-
 	
 	/**
 	 * A given size should imply the usage of an array,
@@ -77,7 +73,6 @@ public abstract class Inventory{
 	public boolean isFull() {
 		return this.getSize() >= this.getMaximumSize();
 	}
-
 	
 	/**
 	 * Checks if the inventory is empty.
@@ -115,7 +110,6 @@ public abstract class Inventory{
 	public ArrayList<Item> getAllItems(){
 		return new ArrayList<Item>(items);
 	}
-
 
 	/**
 	 * checks if the given item is in the inventory

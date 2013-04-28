@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import square.Direction;
 import square.Square;
+import square.power.failure.PrimaryPowerFail;
 import util.Coordinate;
 
 public class TestTrajectoryMediator {
@@ -261,7 +262,7 @@ public class TestTrajectoryMediator {
 		
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(2,5));
-		grid.getSquare(new Coordinate(2,4)).getPower().fail();
+		grid.getSquare(new Coordinate(2,4)).setPower(new PrimaryPowerFail());
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(4,4));
 		System.out.println(grid.getCoordinate(endSquare));
@@ -282,7 +283,7 @@ public class TestTrajectoryMediator {
 		
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,7));
-		grid.getSquare(new Coordinate(6,7)).getPower().fail();
+		grid.getSquare(new Coordinate(6,7)).setPower(new PrimaryPowerFail());
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(7,7));
 		System.out.println(grid.getCoordinate(endSquare));
@@ -304,7 +305,7 @@ public class TestTrajectoryMediator {
 		
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,7));
-		startSquare.getPower().fail();
+		startSquare.setPower(new PrimaryPowerFail());
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(7,7));
 		System.out.println(grid.getCoordinate(endSquare));
@@ -325,8 +326,8 @@ public class TestTrajectoryMediator {
 		
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,7));
-		startSquare.getPower().fail();
-		grid.getSquare(new Coordinate(6,7)).getPower().fail();
+		startSquare.setPower(new PrimaryPowerFail());
+		grid.getSquare(new Coordinate(6,7)).setPower(new PrimaryPowerFail());
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(6,7));
 		System.out.println(grid.getCoordinate(endSquare));
