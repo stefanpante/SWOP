@@ -5,6 +5,7 @@ import item.inventory.SquareInventory;
 
 public class ForceFieldGenerator extends Item {
 
+	private boolean on;
 	@Override
 	public void acceptAddPlayerInventory(PlayerInventory plInv)
 			throws IllegalStateException {
@@ -33,17 +34,14 @@ public class ForceFieldGenerator extends Item {
 
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public boolean isOn(){
+		return on;
 	}
 
 	@Override
 	public boolean isSameType(Item item) {
-		// TODO Auto-generated method stub
+		if(item instanceof ForceFieldGenerator)
+			return true;
 		return false;
 	}
 
