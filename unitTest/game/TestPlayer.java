@@ -1,7 +1,8 @@
-package player;
+package game;
 
 import static org.junit.Assert.*;
 
+import game.Player;
 import item.Item;
 import item.LightGrenade;
 import item.inventory.PlayerInventory;

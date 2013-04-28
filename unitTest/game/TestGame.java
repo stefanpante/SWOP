@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import player.Player;
+import game.Player;
 
 import square.Square;
 

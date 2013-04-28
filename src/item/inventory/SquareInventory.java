@@ -198,6 +198,16 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
 		return null;
 	}
+
+	public boolean hasIdentityDisc() {
+		for(Item item: getAllItems()){
+			if(IdentityDisc.isIdentityDisc(item)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 }
 

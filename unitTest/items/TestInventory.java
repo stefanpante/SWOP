@@ -98,33 +98,33 @@ public class TestInventory {
 		
 		inventory.removeItem(item);
 	}
-	
-	@Test
-	public void testGetItem(){
-		Inventory inventory = new SquareInventory();
-		Item item1 = new IdentityDisc();
-		Integer hash1 = item1.hashCode();
-		Item item2 = new IdentityDisc();
-		Integer hash2 = item1.hashCode();
-		Item item3 = new LightGrenade();
-		Integer hash3 = item1.hashCode();
-		Item item4 = new ChargedIdentityDisc();
-		Integer hash4 = item1.hashCode();
-		Item item5 = new Teleport();
-		Integer hash5 = item1.hashCode();
-		
-		inventory.addItem(item1);
-		inventory.addItem(item2);
-		inventory.addItem(item3);
-		inventory.addItem(item4);
-		inventory.addItem(item5);
-		
-		assertEquals(item1, inventory.getItem(hash1));
-		assertEquals(item1, inventory.getItem(hash2));
-		assertEquals(item1, inventory.getItem(hash3));
-		assertEquals(item1, inventory.getItem(hash4));
-		assertEquals(item1, inventory.getItem(hash5));		
-	}
+//	
+//	@Test
+//	public void testGetItem(){
+//		Inventory inventory = new SquareInventory();
+//		Item item1 = new IdentityDisc();
+//		Integer hash1 = item1.hashCode();
+//		Item item2 = new IdentityDisc();
+//		Integer hash2 = item1.hashCode();
+//		Item item3 = new LightGrenade();
+//		Integer hash3 = item1.hashCode();
+//		Item item4 = new ChargedIdentityDisc();
+//		Integer hash4 = item1.hashCode();
+//		Item item5 = new Teleport();
+//		Integer hash5 = item1.hashCode();
+//		
+//		inventory.addItem(item1);
+//		inventory.addItem(item2);
+//		inventory.addItem(item3);
+//		inventory.addItem(item4);
+//		inventory.addItem(item5);
+//		
+//		assertEquals(item1, inventory.getItem(item1));
+//		assertEquals(item1, inventory.getItem(hash2));
+//		assertEquals(item1, inventory.getItem(hash3));
+//		assertEquals(item1, inventory.getItem(hash4));
+//		assertEquals(item1, inventory.getItem(hash5));		
+//	}
 	
 	@Test 
 	public void testIsValidItem(){
