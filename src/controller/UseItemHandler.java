@@ -4,8 +4,9 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameCommand;
-import event.action.UseItemCommand;
+import command.AbstractGameCommand;
+import command.action.UseItemCommand;
+
 import game.Game;
 
 /**

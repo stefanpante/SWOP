@@ -1,12 +1,13 @@
 package controller;
 
-import event.AbstractGameCommand;
-import event.action.ThrowLaunchableCommand;
 import game.Game;
 
 import item.launchable.LaunchableItem;
 
 import java.beans.PropertyChangeListener;
+
+import command.AbstractGameCommand;
+import command.action.ThrowLaunchableCommand;
 
 import square.Direction;
 

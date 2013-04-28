@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import event.AbstractGameEvent;
 import game.Game;
 import grid.GridProvider;
 import controller.EndTurnHandler;
@@ -14,6 +13,8 @@ import controller.TurnHandler;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import command.AbstractGameEvent;
 
 import player.Player;
 import square.Direction;

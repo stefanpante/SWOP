@@ -3,9 +3,6 @@
  */
 package controller;
 
-import event.AbstractGameCommand;
-import event.action.EndTurnCommand;
-import event.effect.LoseActionEffect;
 import game.Game;
 import game.Player;
 
@@ -13,6 +10,10 @@ import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+
+import command.AbstractGameCommand;
+import command.action.EndTurnCommand;
+import command.effect.LoseActionEffect;
 
 import manager.ActionManager;
 

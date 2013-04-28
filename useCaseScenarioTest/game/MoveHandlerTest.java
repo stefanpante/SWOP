@@ -18,7 +18,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import event.AbstractGameEvent;
+import command.AbstractGameEvent;
+
 
 import player.Player;
 

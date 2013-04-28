@@ -4,8 +4,9 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import event.AbstractGameCommand;
-import event.action.MoveCommand;
+import command.AbstractGameCommand;
+import command.action.MoveCommand;
+
 
 import square.Direction;
 import util.Coordinate;

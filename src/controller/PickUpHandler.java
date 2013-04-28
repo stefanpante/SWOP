@@ -4,8 +4,9 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameCommand;
-import event.action.PickUpCommand;
+import command.AbstractGameCommand;
+import command.action.PickUpCommand;
+
 
 import game.Game;
 

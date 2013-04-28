@@ -2,8 +2,9 @@ package controller;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameCommand;
-import event.action.EndTurnCommand;
+import command.AbstractGameCommand;
+import command.action.EndTurnCommand;
+
 
 import game.Game;
 

@@ -154,21 +154,4 @@ public class TestGame {
 		catch(Exception e){}
 		
 	}
-	
-	@Test
-	public void testGetLightTrail() {
-		Player player = game.getCurrentPlayer();
-		game.getLightTrail(player);
-	}
-	
-	@Test(expected=IllegalStateException.class)
-	public void testGetLightTrailNullPlayer() {
-		game.getLightTrail(null);
-	}
-	
-	@Test(expected=IllegalStateException.class)
-	public void testGetLightTrailInvalidPlayer() {
-		Player player = new Player(new Square(), 3);
-		game.getLightTrail(player);
-	}
 }

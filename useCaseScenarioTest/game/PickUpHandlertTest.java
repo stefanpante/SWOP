@@ -11,7 +11,8 @@ import game.Game;
 import org.junit.Before;
 import org.junit.Test;
 
-import event.AbstractGameEvent;
+import command.AbstractGameCommand;
+
 
 import square.Square;
 
@@ -39,7 +40,7 @@ public class PickUpHandlertTest {
 		this.turnHandler = new TurnHandler(game, null);
 		this.pickUpHandler = new PickUpHandler(game,null);
 		
-		AbstractGameEvent.setObserver(this.turnHandler);
+		AbstractGameCommand.addObserver(this.turnHandler);
 	}
 	
 	/**
