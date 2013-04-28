@@ -1,6 +1,7 @@
 package item.inventory;
 
 import item.Item;
+import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 
@@ -201,5 +202,16 @@ public abstract class Inventory{
 			}
 		}
 		return description;
+	}
+	
+	public ArrayList<IdentityDisc> getIdentityDiscs(){
+		ArrayList<IdentityDisc> discs = new ArrayList<IdentityDisc>();
+		for(Item item: getAllItems()){
+			if(IdentityDisc.isIdentityDisc(item)){
+				discs.add((IdentityDisc) item);
+			}
+		}
+		
+		return discs;
 	}
 }

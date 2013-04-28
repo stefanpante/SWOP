@@ -3,6 +3,7 @@ package controller;
 import game.Game;
 import game.Player;
 import item.Item;
+import item.launchable.IdentityDisc;
 import item.launchable.LaunchableItem;
 
 import java.beans.PropertyChangeListener;
@@ -206,17 +207,14 @@ public abstract class Handler {
 			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
 				lightGrenades.add(coordinate);
 			
-
-			//TODO: Fix this shit
-//			if(square.getInventory().hasLaunchable()){
-//				for(LaunchableItem item: square.getInventory().getLaunchables())
-//					if(item.isCharged()){
-//						chargedDisks.add(coordinate);
-//					}
-//					else{
-//						identityDisks.add(coordinate);
-//					}
-//			}
+			for(IdentityDisc id : square.getInventory().getIdentityDiscs()){
+				if(id.isCharged()){
+					chargedDisks.add(coordinate);
+				}
+				else{
+					identityDisks.add(coordinate);
+				}
+			}
 			
 			if(square.isObstructed())
 				walls.add(coordinate);
