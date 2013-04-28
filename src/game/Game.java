@@ -61,7 +61,7 @@ public class Game {
 	private PowerManager powerManager;
 
 	
-	//T
+	//TODO: to be removed, need to refactor the tests.
 	/**
 	 *Constructs a new board-based game.
 	 * 
@@ -70,7 +70,7 @@ public class Game {
 	 * @param 	vSize	
 	 * 			the vertical size of the board
 	 */
-	public Game(int hSize, int vSize){
+	protected Game(int hSize, int vSize){
 		// Build the grid
 		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize);
 		this.setGrid(gridBuilder.getGrid());
