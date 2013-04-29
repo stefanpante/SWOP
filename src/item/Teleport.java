@@ -11,7 +11,7 @@ import square.Square;
  * @author jonas, Dieter
  *
  */
-public class Teleport extends Item implements PlayerEffect {
+public class Teleport extends Item {
 	
 	/**
 	 * The destination of this teleport.
@@ -24,13 +24,6 @@ public class Teleport extends Item implements PlayerEffect {
 	 */
 	public Teleport(){
 		
-	}
-	
-	/**
-	 * Constructor that gets an initial destination as argument.
-	 */
-	public Teleport (Square destination) throws IllegalArgumentException {
-		setDestination(destination);
 	}
 
 	/**
@@ -86,6 +79,20 @@ public class Teleport extends Item implements PlayerEffect {
 		return destination != null;
 	}
 
+    /**
+     * Check whether this teleport can be used
+     *
+     * @return  True if and only if thos teleport's location
+     *          is set and not obstructed.
+     */
+    public boolean canTeleport(){
+        if(getDestination() == null)
+            return false;
+        if(getDestination().isObstructed())
+            return false;
+        return true;
+    }
+
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.addTeleport(this);		
@@ -121,17 +128,10 @@ public class Teleport extends Item implements PlayerEffect {
 	}
 
     @Override
-    public void affect(Player player) {
+    public void affect(Player player){
         if(canTeleport()){
             player.setPosition(getDestination());
         }
     }
 
-    public boolean canTeleport(){
-        if(getDestination() == null)
-            return false;
-        if(getDestination().isObstructed())
-            return false;
-        return true;
-    }
 }

@@ -11,7 +11,7 @@ import item.inventory.SquareInventory;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class LightGrenade extends Item implements PlayerEffect{
+public class LightGrenade extends Item {
 	
 	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	

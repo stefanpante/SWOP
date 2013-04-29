@@ -491,7 +491,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 	}
 	
-	@SuppressWarnings("rawtypes") int getRandomIndex(ArrayList a){
+	int getRandomIndex(ArrayList a){
 		return getRandom().nextInt(a.size());
 	}
 
