@@ -1,6 +1,5 @@
 package item;
 
-import effect.player.PlayerEffect;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
@@ -176,4 +175,14 @@ public class LightGrenade extends Item {
         if(isActive())
             player.loseActions(2);
     }
+    
+    /**
+	 * The state of the LightGrenade.
+	 */
+	private enum LightGrenadeState {
+		ACTIVE,
+		INACTIVE,
+		DROPPED,
+		WORN;
+	}
 }

@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -9,7 +10,6 @@ import java.util.Random;
 import square.Direction;
 import square.Square;
 import square.power.Power;
-import util.Coordinate;
 import grid.Grid;
 
 /**

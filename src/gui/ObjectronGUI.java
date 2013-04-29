@@ -185,6 +185,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		 fd.setVisible(true);
 		 setUpGame(fd.getDirectory() + fd.getFile());
+        hideInput();
 	}
 		
 
