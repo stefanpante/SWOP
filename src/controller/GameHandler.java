@@ -160,7 +160,7 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		AbstractGridBuilder builder = new RandomGridBuilder(hSize, vSize);
+		RandomGridBuilder builder = new RandomGridBuilder(hSize, vSize);
 		setGame(new Game(builder.getGrid()));
 	}
 	
@@ -172,6 +172,8 @@ public class GameHandler extends Handler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 
