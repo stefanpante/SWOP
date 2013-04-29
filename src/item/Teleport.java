@@ -1,5 +1,7 @@
 package item;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
@@ -8,7 +10,7 @@ import item.inventory.SquareInventory;
  * @author jonas, Dieter
  *
  */
-public class Teleport extends Item {
+public class Teleport extends Item implements PlayerEffect {
 	
 	/**
 	 * The destination of this teleport.
@@ -115,4 +117,9 @@ public class Teleport extends Item {
 	public boolean isSameType(Item o){
 		return (o instanceof Teleport);
 	}
+
+    @Override
+    public void affect(Player player) {
+        // TODO: Hoe gaan we dit doen? Er is kennis nodig van de grid?
+    }
 }
