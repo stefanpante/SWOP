@@ -4,7 +4,6 @@
 package command.action;
 
 import command.effect.LoseActionEffect;
-import command.effect.LoseTurnEffect;
 import command.effect.TeleportEffect;
 
 import game.Game;

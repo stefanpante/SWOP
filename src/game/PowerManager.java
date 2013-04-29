@@ -12,7 +12,6 @@ import square.power.Power;
 import util.Coordinate;
 import grid.Grid;
 
-
 /**
  * Manages all the power failures in the game.
  * 
@@ -66,7 +65,6 @@ public class PowerManager {
 	/**
 	 * Sets the state of any square to a PowerFailure state with a 1% chance.
 	 */
-	//TODO: Check if power fail twice on a square in row.
 	public void powerFailSquares() {
 		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
 		Random random = new Random();
@@ -327,6 +325,5 @@ public class PowerManager {
 			// or off-grid for tertiary.
 		}
 	}
-	
 
 }

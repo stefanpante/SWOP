@@ -1,9 +1,5 @@
 package command.action;
 
-import command.effect.LoseActionEffect;
-
-import square.Square;
-import controller.GameHandler;
 import game.Game;
 import game.Player;
 

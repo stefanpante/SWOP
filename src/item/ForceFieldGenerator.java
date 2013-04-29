@@ -7,7 +7,8 @@ import item.inventory.SquareInventory;
 
 public class ForceFieldGenerator extends Item implements PlayerEffect {
 
-	private boolean on;
+	private boolean active;
+	
 	@Override
 	public void acceptAddPlayerInventory(PlayerInventory plInv)
 			throws IllegalStateException {
@@ -36,8 +37,8 @@ public class ForceFieldGenerator extends Item implements PlayerEffect {
 
 	}
 
-	public boolean isOn(){
-		return on;
+	public boolean isActive(){
+		return this.active;
 	}
 
 	@Override
