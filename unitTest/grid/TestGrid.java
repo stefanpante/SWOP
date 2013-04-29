@@ -34,7 +34,7 @@ public class TestGrid {
 	 */
 	@Test 
 	public void testCanMoveToCorners1(){
-			RandomGridBuilder gb = new RandomGridBuilder();
+			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
 			Square bl = grid.getSquare(new Coordinate(0,9));
@@ -71,7 +71,7 @@ public class TestGrid {
 		 */
 		@Test 
 		public void testCanMoveTo2(){
-			RandomGridBuilder gb = new RandomGridBuilder();
+			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
 			Square bl = grid.getSquare(new Coordinate(0,9));
@@ -114,7 +114,7 @@ public class TestGrid {
 		 */
 		@Test
 		public void testCanMoveTo3(){
-			RandomGridBuilder gb = new RandomGridBuilder();
+			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
 			Square bl = grid.getSquare(new Coordinate(0,9));
@@ -165,7 +165,7 @@ public class TestGrid {
 		 */
 		@Test
 		public void testGetSquares(){
-			RandomGridBuilder gb = new RandomGridBuilder();
+			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
 			Coordinate co11 = new Coordinate(1, 1);
@@ -191,7 +191,7 @@ public class TestGrid {
 		
 		@Test
 		public void testNeighbors(){
-			RandomGridBuilder gb = new RandomGridBuilder();
+			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
 			Coordinate coord = new Coordinate(0,0);

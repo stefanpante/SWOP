@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import square.Direction;
 import square.Square;
+import square.obstacle.Wall;
 import util.Coordinate;
 
 /**
@@ -44,25 +45,27 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * Constructs the grid, reads input from file.
 	 * @return a grid built from a file.
+	 * @throws Exception 
 	 */
-	public Grid constructGrid(){
-		readInput();
-		constructSquares();
-		return null;
+	protected void build() throws IllegalStateException{
+		try{
+			readInput();
+			constructSquares();
+			placeWalls();
+		}
+		
+		catch(Exception e){
+			throw new IllegalStateException("The file isn't valid or the grid specified in the file is invalid");
+		}
 	}
 
 	/**
 	 * Reads the input of the given file.
 	 */
-	private void readInput(){
-		try {
-			openFileStream();
-			parseFile();
-			closeFileStream();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void readInput() throws IOException{
+		openFileStream();
+		parseFile();
+		closeFileStream();
 	}
 	/**
 	 * Opens the fileStream
@@ -143,47 +146,70 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	}
 
 	/**
-	 * places all the walls in the Grid, checks if the given walls are consistent.
+	 * places all the walls in the Grid,
+	 * The walls are checked for consistency after the building process.
 	 */
 	private void placeWalls(){
 		// make a copy of the initial walls array, so that it can be saved for later.
 		ArrayList<Coordinate> walls = new ArrayList<Coordinate>(wall_squares);
-		// we remove all the formed walls from the walls array
-		while(!walls.isEmpty()){
+		// we remove all the formed walls from the wall_squares array
+		while(!wall_squares.isEmpty()){
 			// A sequence of squares is used to construct a wall.
 			ArrayList<Square> sequence = new ArrayList<Square>();
-			// all the Coordinates to remove, needed because of concurrent modification
-			ArrayList<Coordinate> toRemove = new ArrayList<Coordinate>();
 			// Get the first coordinate in the walls array
-			Coordinate coordinate = walls.get(0);
-			// Get the corresponding square
-			Square s = getGrid().getSquare(coordinate);
-			sequence.add(s);
-			toRemove.add(coordinate);
-			// Find the orientation of the  wall
-			Direction[] directions = Direction.values();
-			Direction direction = null;
-			// Iterates over all possible orientations of the wall.
-			for(int i = 0; i < directions.length; i++){
-				direction = directions[i];
-				Square s2 = getGrid().getNeighbor(s, direction);
-				Coordinate coor2 = getGrid().getCoordinate(s2);
-				if(walls.contains(coor2)){
-					sequence.add(s2);
-					toRemove.add(coor2);
+			Coordinate coordinate = wall_squares.get(0);
+			for(Direction direction: Direction.values()){
+				ArrayList<Square> seq = getWallSequence(coordinate, direction);
+				sequence.addAll(seq);
+			}
+
+			@SuppressWarnings("unused")
+			Wall wall = new Wall(sequence);
+		}
+
+		wall_squares = walls;
+	}
+
+
+	/**
+	 * Gets the wall sequence in the given direction. Should return an empty ArrayList
+	 * if the wall doesn't extend in the given direction.
+	 * 
+	 * @param coordinate the coordinate of the first block of the wall
+	 * @param direction	 the direction in which we look for wall squares
+	 * @return
+	 */
+	public ArrayList<Square> getWallSequence(Coordinate coordinate, Direction direction){
+		ArrayList<Square> sequence = new ArrayList<Square>();
+		Square s = getGrid().getSquare(coordinate);
+		wall_squares.remove(coordinate);
+		sequence.add(s);
+		while(true){
+			s = getGrid().getNeighbor(s, direction);
+			if(s != null){
+				Coordinate coor = getGrid().getCoordinate(s);
+				if(wall_squares.contains(coor)){
+					sequence.add(s);
+					wall_squares.remove(coor);
+				}
+				else{
 					break;
 				}
 			}
-			
-			Square s2 = getGrid().getNeighbor(s, direction);
+			else{
+				break;
+			}
 		}
-	}
 
+		return sequence;
+	}
 
 
 	@Override
-	public void checkGridConsistency() {
+	public boolean isConsistent() {
 		// TODO Auto-generated method stub
+		return false;
 
 	}
+
 }

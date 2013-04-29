@@ -1,11 +1,19 @@
 package grid;
 
 import item.Item;
+import item.LightGrenade;
+import item.Teleport;
+import item.launchable.ChargedIdentityDisc;
+import item.launchable.IdentityDisc;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import square.Square;
+import square.obstacle.Wall;
+import util.AStar;
 import util.Coordinate;
 
 import be.kuleuven.cs.som.annotate.Basic;
@@ -42,6 +50,15 @@ public abstract class AbstractGridBuilder {
 	 * a random generator used in various creation methods
 	 */
 	private Random random;
+	
+	/**
+	 * The walls which are placed on the grid.
+	 */
+	protected ArrayList<Wall> walls;
+	
+	public AbstractGridBuilder(){
+		this.walls = new ArrayList<Wall>();
+	}
 	
 	/**
 	 * Returns the grid.
@@ -165,7 +182,7 @@ public abstract class AbstractGridBuilder {
 		return this.startPlayer2;
 	}
 	
-	public abstract void checkGridConsistency();
+	public abstract boolean isConsistent();
 
 	public GridConstraint getConstraintTeleport() {
 		return constraintTeleport;
@@ -199,7 +216,7 @@ public abstract class AbstractGridBuilder {
 		this.constraintWall = constraintWall;
 	}
 	
-	public abstract Grid constructGrid();
+	protected abstract void build() throws IllegalStateException;
 
 	public void setHSize(int hSize){
 		if(!isValidHSize(hSize)){
@@ -230,6 +247,13 @@ public abstract class AbstractGridBuilder {
 	
 	public int getVSize(){
 		return this.vSize;
+	}
+
+
+	
+
+	protected ArrayList<Wall> getWalls() {
+		return this.walls;
 	}
 	
 }

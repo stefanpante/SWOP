@@ -66,7 +66,7 @@ public class TestTrajectoryMediator {
 	//Normal case no walls no teleports, range 3, NORTH
 	@Test
 	public void testGetEndSquare() {		
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
@@ -78,7 +78,7 @@ public class TestTrajectoryMediator {
 	//Normal case no walls no teleports, range 3, EAST
 	@Test
 	public void testGetEndSquare2() {		
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
@@ -91,7 +91,7 @@ public class TestTrajectoryMediator {
 	//Normal case no walls no teleports, range MAX, NORTH
 	@Test
 	public void testGetEndSquare3() {		
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
@@ -103,7 +103,7 @@ public class TestTrajectoryMediator {
 	//Normal case no walls no teleports, range MAX, EAST
 	@Test
 	public void testGetEndSquare4() {		
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
@@ -116,7 +116,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and no teleports, range 3, EAST
 	@Test
 	public void testGetEndSquare5() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,0));
@@ -128,7 +128,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and no teleports, range 3, NORTH
 	@Test
 	public void testGetEndSquare6() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(3,4));
@@ -140,7 +140,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and no teleports, range 3, WEST
 	@Test
 	public void testGetEndSquare7() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,0));
@@ -152,7 +152,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and no teleports, range MAX, NORTH
 	@Test
 	public void testGetEndSquare8() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(3,9));
@@ -164,7 +164,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and no teleports, range MAX, WEST
 	@Test
 	public void testGetEndSquare9() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,0));
@@ -176,7 +176,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and teleports, range 3, NORTH
 	@Test
 	public void testGetEndSquare10() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
@@ -196,7 +196,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and teleports, range 3, NORTH
 	@Test
 	public void testGetEndSquare11() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
@@ -216,7 +216,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and teleports, range MAX, NORTH
 	@Test
 	public void testGetEndSquare12() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
@@ -236,7 +236,7 @@ public class TestTrajectoryMediator {
 	//Case with walls and teleports, range MAX, NORTH
 	@Test
 	public void testGetEndSquare13() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
@@ -257,7 +257,7 @@ public class TestTrajectoryMediator {
 	//Case with powerfails and teleports, range 3, NORTH
 	@Test
 	public void testGetEndSquare14() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		
 		TrajectoryMediator tm = new TrajectoryMediator(grid);
@@ -272,7 +272,7 @@ public class TestTrajectoryMediator {
 	//Case with powerfail between and no teleport, range 3, EAST.
 	@Test
 	public void testGetEndSquare15() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
@@ -294,7 +294,7 @@ public class TestTrajectoryMediator {
 	//Case with powerfail on the starting square and no teleport, range 3, EAST.
 	@Test
 	public void testGetEndSquare16() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
@@ -315,7 +315,7 @@ public class TestTrajectoryMediator {
 	//Case with powerfail on the starting square and no teleport, range 3, EAST.
 	@Test
 	public void testGetEndSquare17() {
-		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
+		AbstractGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		//Assure the teleports have a proper destination set.
 		Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
