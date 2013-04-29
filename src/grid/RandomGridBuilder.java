@@ -124,11 +124,15 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		build(lightGrenades, identityDisks, teleports, chargedIdentityDisk);
 	}
 	
-	private void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk){
+	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk)
+	throws IllegalStateException{
 		placeLightGrenade(lightGrenades, getConstraingtLightGrenade());
 		placeIdentityDisk(identityDisks, getConstraintIdentityDisk());
 		placeTeleports(teleports, getConstraintTeleport());
 		placeChargedIdentityDisk(chargedIdentityDisk);
+		if(!isConsistent()){
+			throw new IllegalStateException("The built grid is not valid");
+		}
 	}
 	
 
@@ -352,10 +356,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(ArrayList<Coordinate> sequence : walls){
 			this.walls.add(new Wall(getGrid().getSquares(sequence)));
-		}
-		
+		}	
 	}
-	//TODO: waarom is deze private terwijl alle andere protected zijn?
+	
 	/**
 	 * 
 	 * @param 	teleports
@@ -478,15 +481,16 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	}
 
 	@Override
-	public void checkGridConsistency() {
+	public boolean isConsistent() {
 		// TODO Auto-generated method stub
+		return false;
 		
 	}
 
 	@Override
-	public Grid constructGrid() {
+	protected void build() throws IllegalStateException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	

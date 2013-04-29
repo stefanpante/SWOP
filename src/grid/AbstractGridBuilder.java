@@ -165,7 +165,7 @@ public abstract class AbstractGridBuilder {
 		return this.startPlayer2;
 	}
 	
-	public abstract void checkGridConsistency();
+	public abstract boolean isConsistent();
 
 	public GridConstraint getConstraintTeleport() {
 		return constraintTeleport;
@@ -199,7 +199,7 @@ public abstract class AbstractGridBuilder {
 		this.constraintWall = constraintWall;
 	}
 	
-	public abstract Grid constructGrid();
+	protected abstract void build() throws IllegalStateException;
 
 	public void setHSize(int hSize){
 		if(!isValidHSize(hSize)){
