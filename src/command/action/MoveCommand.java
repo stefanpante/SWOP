@@ -3,13 +3,8 @@
  */
 package command.action;
 
-import command.effect.LoseActionEffect;
-import command.effect.TeleportEffect;
-
 import game.Game;
-import game.Player;
 import item.LightGrenade;
-import item.Teleport;
 
 import square.Direction;
 import square.Square;
@@ -66,13 +61,7 @@ public class MoveCommand extends ActionCommand {
 
 	@Override
 	protected void duringGameCommand() throws Exception {
-		getGame().getCurrentPlayer().move(newPosition);	
-
-		if(newPosition.getInventory().hasTeleport()) {
-			Teleport teleport = newPosition.getInventory().getTeleport();
-			TeleportEffect teleportEvent = new TeleportEffect(getGame(), teleport);
-			teleportEvent.execute();
-		}
+		getGame().getCurrentPlayer().move(newPosition);
 	}
 	
 	@Override
@@ -108,15 +97,7 @@ public class MoveCommand extends ActionCommand {
 			grenade = newPosition.getInventory().getLightGrenade();
 			hasActiveGrenade = grenade.isActive();
 		}
-		
-		if(hasActiveGrenade && hasNoPower) {
-			new LoseActionEffect(getGame(), 4).execute();	
-		}else if(hasActiveGrenade)
-			new LoseActionEffect(getGame(), 3).execute();
-		else if(hasNoPower) {
-			Player currentPlayer = getGame().getCurrentPlayer();
-			currentPlayer.loseActions(currentPlayer.getRemainingActions());
-		}
+
 		
 		if(hasActiveGrenade)
 			grenade.deactivate();

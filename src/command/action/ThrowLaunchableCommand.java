@@ -3,8 +3,6 @@
  */
 package command.action;
 
-import command.effect.LoseTurnEffect;
-
 import square.Direction;
 import square.Square;
 import game.Game;
@@ -67,9 +65,8 @@ public class ThrowLaunchableCommand extends ActionCommand {
 		// Checks for a hit on another player.
 		for(Player player: getGame().getOtherPlayers()){
 			if(player.getPosition() == endSquare){
-				//FIXME: Check if the values are correct.
-				LoseTurnEffect lte = new LoseTurnEffect(getGame(),player,1,true);
-				lte.execute();
+				//FIXME: Add effect to player
+
 				break;
 			}
 		}

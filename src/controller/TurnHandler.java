@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import command.effect.LoseActionEffect;
-
 
 /**
  * @author Jonas Devlieghere
@@ -88,11 +86,7 @@ public class TurnHandler extends Handler implements Observer {
 		
 		increaseCurrentPlayerCount();
 		getGame().getPowerManager().powerFailSquares();
-		
-		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()) {
-			LoseActionEffect lae = new LoseActionEffect(getGame(),1);
-			lae.execute();
-		}
+
 		
 		if(!getGame().getCurrentPlayer().hasRemainingActions())
 			endTurn(true);
