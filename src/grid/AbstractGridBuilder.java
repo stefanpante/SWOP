@@ -338,5 +338,68 @@ public abstract class AbstractGridBuilder {
 	protected ArrayList<Wall> getWalls() {
 		return this.walls;
 	}
+
+
+    protected int getRandomIndex(ArrayList a){
+        return getRandom().nextInt(a.size());
+    }
+
+    protected ArrayList<Coordinate> randomLocations(GridConstraint constraint){
+        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
+        int max = (int) (constraint.getPercentage() * getAmountOfSquares());
+        // Removed excluded squares from candidates
+        candidates.removeAll(constraint.getExcluded());
+        // Removed obstructed squares from candidates
+        ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
+        for(Coordinate coordinate : candidates){
+            if(getGrid().getSquare(coordinate).isObstructed())
+                toBeRemoved.add(coordinate);
+        }
+        candidates.removeAll(toBeRemoved);
+
+        // Add one square from evey list of included coordinates
+        for(ArrayList<Coordinate> includes : constraint.getIncluded()){
+            Coordinate candidate = includes.get(getRandomIndex(includes));
+            while(!candidates.contains(candidate)){
+                candidate = includes.get(getRandomIndex(includes));
+            }
+            coordinates.add(candidate);
+            candidates.remove(candidate);
+        }
+
+        // Keep adding coordinates from candidates until max is reached
+        while(coordinates.size() < max){
+            Coordinate candidate = candidates.get(getRandomIndex(candidates));
+            coordinates.add(candidate);
+            candidates.remove(candidate);
+        }
+
+        return coordinates;
+    }
+
+    /**
+     * Place walls on the given coordinates
+     *
+     * @param 	walls
+     * 			The coordinates where to place the walls
+     * @param 	constraint
+     * 			The constraint for placing walls;
+     */
+    protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls, GridConstraint constraint) {
+        if(!satisfiesConstraint(flatten(walls), constraint))
+            throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
+        for(ArrayList<Coordinate> sequence : walls){
+            this.walls.add(new Wall(getGrid().getSquares(sequence)));
+        }
+    }
+
+    private ArrayList<Coordinate> flatten(ArrayList<ArrayList<Coordinate>> list) {
+        ArrayList<Coordinate> result = new ArrayList<Coordinate>();
+        for(ArrayList<Coordinate> L : list){
+            result.addAll(L);
+        }
+        return result;
+    }
 	
 }
