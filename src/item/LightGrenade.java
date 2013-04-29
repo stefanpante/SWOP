@@ -173,6 +173,7 @@ public class LightGrenade extends Item {
 
     @Override
     public void affect(Player player) {
-        player.loseActions(2);
+        if(isActive())
+            player.loseActions(2);
     }
 }

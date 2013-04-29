@@ -73,6 +73,7 @@ public class IdentityDisc extends LaunchableItem {
 
     @Override
     public void affect(Player player) {
-        player.loseTurns(1,false);
+        // TODO: The player is only affected if the IdentityDisk hits him.
+        // player.loseTurns(1,false);
     }
 }
