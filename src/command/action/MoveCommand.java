@@ -66,7 +66,7 @@ public class MoveCommand extends ActionCommand {
 	}
 
 	@Override
-	protected void duringGameCommand() {
+	protected void duringGameCommand() throws Exception {
 		getGame().getCurrentPlayer().move(newPosition);	
 
 		if(newPosition.getInventory().hasTeleport()) {
@@ -77,7 +77,7 @@ public class MoveCommand extends ActionCommand {
 	}
 	
 	@Override
-	protected void afterGameCommand(){
+	protected void afterGameCommand() throws Exception {
 		activateLightGrenade();
 		
 		executeEffects();		
@@ -99,7 +99,7 @@ public class MoveCommand extends ActionCommand {
 	 * @post
 	 * If there was a lightGrenade it is deactivated.
 	 */
-	private void executeEffects() {
+	private void executeEffects() throws Exception {
 		boolean hasNoPower = newPosition.getPower().isFailing();
 		boolean hasActiveGrenade = false;
 		

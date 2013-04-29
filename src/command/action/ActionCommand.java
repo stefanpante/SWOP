@@ -20,7 +20,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
 	}
 	
 	@Override
-	public void execute() {
+	public void execute() throws Exception {
 		try{
 			beforeActionCommand();
 			beforeGameCommand();

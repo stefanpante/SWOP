@@ -86,8 +86,12 @@ public class GameHandler extends Handler {
     	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
     	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
     	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
-    	turnHandler.startTurn();
-    	this.populateGui();
+        try {
+            turnHandler.startTurn();
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        this.populateGui();
     }
     
     /**

@@ -1,9 +1,11 @@
 package item;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
-public class ForceFieldGenerator extends Item {
+public class ForceFieldGenerator extends Item implements PlayerEffect {
 
 	private boolean on;
 	@Override
@@ -45,4 +47,8 @@ public class ForceFieldGenerator extends Item {
 		return false;
 	}
 
+    @Override
+    public void affect(Player player) {
+        // TODO: Implement the effect of a player entering this force field
+    }
 }

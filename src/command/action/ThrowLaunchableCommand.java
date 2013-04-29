@@ -23,7 +23,6 @@ public class ThrowLaunchableCommand extends ActionCommand {
 	
 	/**
 	 * @param game
-	 * @param args
 	 */
 	public ThrowLaunchableCommand(Game game, LaunchableItem launchableItem, Direction direction) {
 		super(game);
@@ -52,7 +51,7 @@ public class ThrowLaunchableCommand extends ActionCommand {
 	}
 	
 	@Override
-	protected void duringGameCommand() {
+	protected void duringGameCommand() throws Exception {
 		// get the start position of the launchable item
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		// Construct a new trajectory mediator.

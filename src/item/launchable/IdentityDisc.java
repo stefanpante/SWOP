@@ -1,5 +1,7 @@
 package item.launchable;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.Item;
 
 import item.inventory.PlayerInventory;
@@ -13,7 +15,7 @@ import notnullcheckweaver.NotNull;
  *
  */
 @NotNull
-public class IdentityDisc extends LaunchableItem {
+public class IdentityDisc extends LaunchableItem implements PlayerEffect {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.
@@ -68,4 +70,9 @@ public class IdentityDisc extends LaunchableItem {
 		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
 		return result;
 	}
+
+    @Override
+    public void affect(Player player) {
+        player.loseTurns(1,false);
+    }
 }
