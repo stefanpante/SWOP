@@ -1,6 +1,6 @@
 package game;
 
-import java.util.Observable;
+
 
 
 import be.kuleuven.cs.som.annotate.Basic;
@@ -100,8 +100,9 @@ public class Player implements Obstacle {
 	 * 			False	If the square is null or obstructed.
 	 */
 	public static boolean isValidStartPosition(Square square) {
-		if(square == null)
+		if(square == null){
 			return false;
+        }
 		
 		if(square.isObstructed())
 			return false;

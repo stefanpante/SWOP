@@ -1,28 +1,36 @@
 package grid;
 
 import item.Item;
-import item.LightGrenade;
-import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import square.Square;
 import square.obstacle.Wall;
-import util.AStar;
 import util.Coordinate;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
+/**
+ * Super class for implementations of grid builder.
+ * Grid builder is responsible for constructing all the
+ * squares of which the grid is composed. It also places walls,
+ * teleports and all items.
+ *
+ */
 public abstract class AbstractGridBuilder {
 
-	
+
+    /**
+     * The widest point of the grid ( in squares )
+     */
 	private int hSize;
+
+    /**
+     * The maximum height of the grid ( in squares )
+     */
 	private int vSize;
+
 	/**
 	 * the constraints for the grid.
 	 */
@@ -34,15 +42,15 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * The start position of the first player.
 	 */
-	private Coordinate startPlayer1;
+	private Square startPlayer1;
 	
 	/**
 	 * The start position of the second player.
 	 */
-	private Coordinate startPlayer2;
+	private Square startPlayer2;
 	
-	/*
-	 * The grid which has been built.
+	/**
+	 * The grid which has been/will be  built.
 	 */
 	private Grid grid;
 	
@@ -55,7 +63,10 @@ public abstract class AbstractGridBuilder {
 	 * The walls which are placed on the grid.
 	 */
 	protected ArrayList<Wall> walls;
-	
+
+    /**
+     * Initializes objects needed by the grid builder.
+     */
 	public AbstractGridBuilder(){
 		this.walls = new ArrayList<Wall>();
 	}
@@ -154,7 +165,7 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * Place an item on the given coordinate
 	 * 
-	 * @param 	coordinate
+	 * @param 	square
 	 * 			The coordinate to place the given item on
 	 * @param 	item
 	 * 			The item to be placed on the given coordinate
@@ -165,93 +176,165 @@ public abstract class AbstractGridBuilder {
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
 		square.getInventory().addItem(item);
 	}
-	
-	protected void setPlayerOneStart(Coordinate coordinate){
-		this.startPlayer1 = coordinate;
+
+    /**
+     * Sets the start position of the first player
+     * @param square
+     */
+	protected void setPlayerOneStart(Square square){
+		this.startPlayer1 = square;
 	}
-	
-	protected void setPlayerTwoStart(Coordinate coordinate){
-		this.startPlayer2 = coordinate;
+
+    /**
+     * Sets the start position of the second player
+     * @param square
+     */
+	protected void setPlayerTwoStart(Square square){
+		this.startPlayer2 = square;
 	}
-	
-	public Coordinate getPlayerOneStart(){
+
+    /**
+     * returns the start position of the first player
+     */
+	public Square getPlayerOneStart(){
 		return this.startPlayer1;
 	}
-	
-	public Coordinate getPlayerTwoStart(){
+
+    /**
+     * returns the start position of the second player
+     */
+	public Square getPlayerTwoStart(){
 		return this.startPlayer2;
 	}
-	
+
+    /**
+     * Checks whether the built grid is valid
+     * @return
+     */
 	public abstract boolean isConsistent();
 
+    /**
+     * Returns the constraint for the teleports.
+     * @return
+     */
 	public GridConstraint getConstraintTeleport() {
 		return constraintTeleport;
 	}
 
+    /**
+     * sets the constraints for the teleport
+     * @param constraintTeleport
+     */
 	public void setConstraintTeleport(GridConstraint constraintTeleport) {
 		this.constraintTeleport = constraintTeleport;
 	}
 
-	public GridConstraint getConstraingtLightGrenade() {
+    /**
+     * Returns the constraint for the lightgrenades
+     * @return
+     */
+	public GridConstraint getConstraintLightGrenade() {
 		return constraintLightGrenade;
 	}
 
-	public void setConstraingtLightGrenade(GridConstraint constraingtLightGrenade) {
-		this.constraintLightGrenade = constraingtLightGrenade;
+    /**
+     * Sets the constraints for the lightgrenades
+     */
+	public void setConstraintLightGrenade(GridConstraint constraintLightGrenade) {
+		this.constraintLightGrenade = constraintLightGrenade;
 	}
 
+    /**
+     * Returns the constraints for the identity discs
+     */
 	public GridConstraint getConstraintIdentityDisk() {
 		return constraintIdentityDisk;
 	}
 
+    /**
+     * sets the constraints for the identity discs
+     */
 	public void setConstraintIdentityDisk(GridConstraint constraintIdentityDisk) {
 		this.constraintIdentityDisk = constraintIdentityDisk;
 	}
 
+    /**
+     * Returns the constraints for the walls
+     */
 	public GridConstraint getConstraintWall() {
 		return constraintWall;
 	}
 
+    /**
+     * Returns the constraints for the walls
+     */
 	public void setConstraintWall(GridConstraint constraintWall) {
 		this.constraintWall = constraintWall;
 	}
-	
+
+    /**
+     * Builds the grids
+     * @throws IllegalStateException
+     */
 	protected abstract void build() throws IllegalStateException;
 
+    /**
+     * Sets the maximum horizontal size of the grid ( in squares)
+     * @param hSize
+     */
 	public void setHSize(int hSize){
 		if(!isValidHSize(hSize)){
 			throw new IllegalArgumentException("The specified hSize is not valid");
 		}
 		this.hSize = hSize;
 	}
-	
+
+    /**
+     * sets the maximum vertical size of the grid ( in squares)
+     * @param vSize
+     */
 	public void setVSize(int vSize){
-		if(!isValidVsize(vSize)){
+		if(!isValidVSize(vSize)){
 			throw new IllegalArgumentException("The specified vSize is not valid");
 		}
 		
 		this.vSize = vSize;
 	}
-	
-	public boolean isValidVsize(int vSize2) {
+
+    /**
+     * Checks  whether the vertical size of the grid is valid
+     * @param vSize2
+     */
+	public boolean isValidVSize(int vSize2) {
 		return (vSize2 >= 0);
 	}
-	
+
+    /**
+     * Checks whether the horizontal size of the grid is valid
+     * @param hSize
+     */
 	public boolean isValidHSize(int hSize){
 		return (hSize >= 0);
 	}
 
+    /**
+     * Returns the maximum horizontal size of the grid ( in squares)
+     */
 	public int getHSize(){
 		return this.hSize;
 	}
-	
+
+    /**
+     * returns the maximum vertical size of the grid ( in squares)
+     */
 	public int getVSize(){
 		return this.vSize;
 	}
 
 
-	
-
+    /**
+     * Returns the walls which have been constructed.
+     */
 	protected ArrayList<Wall> getWalls() {
 		return this.walls;
 	}
