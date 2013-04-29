@@ -53,6 +53,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * for testing purposes.
 	 */
 	protected RandomGridBuilder() {
+		this.hSize = 10;
+		this.vSize = 10;
 		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();
@@ -71,6 +73,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The vertical size of the grid this gridBuilder will build.
 	 */
 	public RandomGridBuilder(int hSize, int vSize) {
+		this.hSize = hSize;
+		this.vSize = vSize;
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
@@ -107,6 +111,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			ArrayList<Coordinate> identityDisks, 
 			ArrayList<Coordinate> teleports,
 			Coordinate chargedIdentityDisk){
+		this.hSize = hSize;
+		this.vSize = vSize;
+		
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
@@ -474,6 +481,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	public void checkGridConsistency() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Grid constructGrid() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

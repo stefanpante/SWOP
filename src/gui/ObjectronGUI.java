@@ -184,7 +184,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		 fd.setVisible(true);
-		 System.out.println(fd.getDirectory() + fd.getFile());
+		 String filepath = fd.getDirectory() + fd.getFile();
+		 setUpGame(filepath);
 	}
 		
 
@@ -303,10 +304,20 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
 	
-	private void setUpGame(){
-
-		obj = new GameHandler(this);
-		
+	private void setUpGame(String filepath){
+		try{
+			obj = new GameHandler(this);
+			obj.startNewGame(filepath);
+			this.hCells = obj.getGame().getGrid().getHSize();
+			this.vCells = obj.getGame().getGrid().getVSize();
+			initInterface();
+		}
+		catch(Exception e){
+			message = "Please specify a correct file";
+			currentFrame = 0;
+		}
+	}
+	private void initInterface() {
 		int w = 50 * hCells;
 		int h = 50 * vCells;
 		if(h >= displayHeight - 150){
@@ -332,7 +343,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		// update the positions of the inventories and buttons.
 
 		textFont(standardFont);
+		
+	}
+
+	private void setUpGame(){
+
+		obj = new GameHandler(this);
 		obj.startNewGame(hCells, vCells);
+		initInterface();
 	}
 
 

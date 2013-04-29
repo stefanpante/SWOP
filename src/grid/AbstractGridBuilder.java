@@ -12,6 +12,9 @@ import be.kuleuven.cs.som.annotate.Basic;
 
 public abstract class AbstractGridBuilder {
 
+	
+	private int hSize;
+	private int vSize;
 	/**
 	 * the constraints for the grid.
 	 */
@@ -195,6 +198,38 @@ public abstract class AbstractGridBuilder {
 	public void setConstraintWall(GridConstraint constraintWall) {
 		this.constraintWall = constraintWall;
 	}
+	
+	public abstract Grid constructGrid();
 
+	public void setHSize(int hSize){
+		if(!isValidHSize(hSize)){
+			throw new IllegalArgumentException("The specified hSize is not valid");
+		}
+		this.hSize = hSize;
+	}
+	
+	public void setVSize(int vSize){
+		if(!isValidVsize(vSize)){
+			throw new IllegalArgumentException("The specified vSize is not valid");
+		}
+		
+		this.vSize = vSize;
+	}
+	
+	public boolean isValidVsize(int vSize2) {
+		return (vSize2 >= 0);
+	}
+	
+	public boolean isValidHSize(int hSize){
+		return (hSize >= 0);
+	}
+
+	public int getHSize(){
+		return this.hSize;
+	}
+	
+	public int getVSize(){
+		return this.vSize;
+	}
 	
 }
