@@ -137,7 +137,7 @@ public class Grid {
 	 * 			| size >= Grid.MIN_HSIZE
 	 */
 	public boolean isValidHSize(int size){
-		return size >= Grid.MIN_HSIZE;
+		return size >= 0;
 	} 
 	
 	/**
@@ -151,7 +151,7 @@ public class Grid {
 	 * 			| size >= Grid.MIN_VSIZE
 	 */
 	public boolean isValidVSize(int size){
-		return size >= Grid.MIN_VSIZE;
+		return size >= 0;
 	}
 	
 	/**

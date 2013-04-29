@@ -178,6 +178,7 @@ public abstract class Handler {
 		firePropertyChange(GameHandler.CHARGED_DISK_PROPERTY, properties.get(GameHandler.CHARGED_DISK_PROPERTY));
 		firePropertyChange(GameHandler.TELEPORT_PROPERTY, properties.get(GameHandler.TELEPORT_PROPERTY));
 		firePropertyChange(GameHandler.SQUARES_PROPERTY, properties.get(GameHandler.SQUARES_PROPERTY));
+        firePropertyChange(GameHandler.WALLS_PROPERTY, properties.get(GameHandler.WALLS_PROPERTY));
 
 		firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());

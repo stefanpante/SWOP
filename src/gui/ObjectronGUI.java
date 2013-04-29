@@ -184,7 +184,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		 fd.setVisible(true);
-		 System.out.println(fd.getDirectory() + fd.getFile());
+		 setUpGame(fd.getDirectory() + fd.getFile());
 	}
 		
 
@@ -302,38 +302,53 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		textAlign(LEFT,LEFT);
 		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
-	
+
+    private void setUpGame(String filePath){
+        obj = new GameHandler(this);
+        obj.startNewGame(filePath);
+        hCells = obj.getGame().getGrid().getHSize();
+        vCells = obj.getGame().getGrid().getVSize();
+        initInterface();
+        obj.fireChanges();
+
+    }
 	private void setUpGame(){
 
 		obj = new GameHandler(this);
-		
-		int w = 50 * hCells;
-		int h = 50 * vCells;
-		if(h >= displayHeight - 150){
-			float sw = (displayHeight - 150)/ vCells;
-			h = displayHeight - 150;
-			w = (int) (sw * hCells);
-
-		}
-
-		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
-		this.initialized = true;
-
-		size(w + 215, h + 50);
-		gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
-		squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		pickUpButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		useItemButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		// update the positions of the inventories and buttons.
-
-		textFont(standardFont);
 		obj.startNewGame(hCells, vCells);
+        initInterface();
+        obj.fireChanges();
 	}
+
+    private void initInterface(){
+        int w = 50 * hCells;
+        int h = 50 * vCells;
+        if(h >= displayHeight - 150){
+            float sw = (displayHeight - 150)/ vCells;
+            h = displayHeight - 150;
+            w = (int) (sw * hCells);
+
+        }
+
+        this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
+        this.initialized = true;
+
+        size(w + 215, h + 50);
+        gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
+        squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        pickUpButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        useItemButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        // update the positions of the inventories and buttons.
+
+        textFont(standardFont);
+    }
+
+
 
 
 	/**

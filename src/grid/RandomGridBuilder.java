@@ -3,7 +3,6 @@
  */
 package grid;
 
-import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
@@ -19,25 +18,12 @@ import square.Square;
 import square.obstacle.Wall;
 import util.AStar;
 import util.Coordinate;
-import be.kuleuven.cs.som.annotate.Basic;
 
 /**
  * @author Jonas Devlieghere, Dieter Castel
  *
  */
 public class RandomGridBuilder extends AbstractGridBuilder{
-		
-	
-	
-	/**
-	 * the number of horizontal squares in the grid.
-	 */
-	private int hSize;
-	
-	/**
-	 * the number of vertical squares in the grid
-	 */
-	private int vSize;
 	
 	public static int MIN_HSIZE = 10;
 	
@@ -53,8 +39,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * for testing purposes.
 	 */
 	protected RandomGridBuilder() {
-		this.hSize = 10;
-		this.vSize = 10;
+		setHSize(10);
+        setVSize(10);
 		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();
@@ -73,8 +59,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The vertical size of the grid this gridBuilder will build.
 	 */
 	public RandomGridBuilder(int hSize, int vSize) {
-		this.hSize = hSize;
-		this.vSize = vSize;
+		setHSize(hSize);
+        setVSize(vSize);
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
@@ -82,11 +68,21 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(randomWallLocations(getConstraintWall()), getConstraintWall());
-		build(randomLocations(getConstraingtLightGrenade()),
+		build(randomLocations(getConstraintLightGrenade()),
 				randomLocations(getConstraintIdentityDisk()),
 				randomLocations(getConstraintTeleport()), 
 				chargedIdentityDiskLocation());
 	}
+
+    @Override
+    public boolean isValidHSize(int hSize){
+        return ( hSize >= MIN_HSIZE);
+    }
+
+    @Override
+    public boolean isValidVSize(int vSize){
+        return (vSize >= MIN_VSIZE);
+    }
 	
 	/**
 	 *  Creates a new GridBuilder with parameters to create a new grid.
@@ -111,8 +107,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			ArrayList<Coordinate> identityDisks, 
 			ArrayList<Coordinate> teleports,
 			Coordinate chargedIdentityDisk){
-		this.hSize = hSize;
-		this.vSize = vSize;
+		setHSize(hSize);
+        setVSize(vSize);
 		
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
@@ -126,34 +122,37 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
-		placeLightGrenade(lightGrenades, getConstraingtLightGrenade());
+		placeLightGrenade(lightGrenades, getConstraintLightGrenade());
 		placeIdentityDisk(identityDisks, getConstraintIdentityDisk());
 		placeTeleports(teleports, getConstraintTeleport());
 		placeChargedIdentityDisk(chargedIdentityDisk);
 		if(!isConsistent()){
 			throw new IllegalStateException("The built grid is not valid");
 		}
+
+        getGrid().setStartPlayerOne(this.getPlayerOneStart());
+        getGrid().setStartPlayerTwo(this.getPlayerTwoStart());
 	}
 	
 
 	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		excluded.add(getPlayerOneStart());
-		excluded.add(getPlayerTwoStart());	
+		excluded.add(getPlayerOneCoordinate());
+		excluded.add(getPlayerTwoCoordinate());
 		
 		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
-		grenadesIncluded.add(getSquaredLocation(getPlayerOneStart(), Direction.NORTH, 3));
-		grenadesIncluded.add(getSquaredLocation(getPlayerTwoStart(), Direction.EAST, 3));
+		grenadesIncluded.add(getSquaredLocation(getPlayerOneCoordinate(), Direction.NORTH, 3));
+		grenadesIncluded.add(getSquaredLocation(getPlayerTwoCoordinate(), Direction.EAST, 3));
 		
 		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
-		setConstraingtLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
+		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
 		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
 		setConstraintTeleport(new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded));
 	}
 	
 	private void setEmptyConstraints(){		
 		setConstraintWall(new GridConstraint());
-		setConstraingtLightGrenade(new GridConstraint());
+		setConstraintLightGrenade(new GridConstraint());
 		setConstraintIdentityDisk(new GridConstraint());
 		setConstraintTeleport(new GridConstraint());
 	}
@@ -228,8 +227,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	/**
 	 * Removes all squares around a wall of a list of candidates
 	 * 
-	 * @param 	wall	
-	 * 			the wall of which the perimeter will be removed.
+	 * @param 	coordinates
+	 * 			The coordinates of which the perimeter should be removed
 	 * @param 	candidates 
 	 * 			the list of squares of which the perimeter of the wall will be removed.
 	 */
@@ -259,13 +258,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 		return coordinates;
 	}
-	
-	
-	
-	
-	
-	
-	// TODO: voor wat dient dit?
+
 	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, Direction direction, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		switch (direction) {
@@ -292,13 +285,21 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	}
 
 	@Override
-	public Coordinate getPlayerOneStart(){
-		return new Coordinate(0, getGrid().getVSize()-1);
+	public Square getPlayerOneStart(){
+		return getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
 	}
+
+    public Coordinate getPlayerOneCoordinate(){
+        return new Coordinate(0, getGrid().getVSize() -1);
+    }
+
+    public Coordinate getPlayerTwoCoordinate(){
+        return new Coordinate(getGrid().getHSize()-1, 0);
+    }
 	
 	@Override
-	public Coordinate getPlayerTwoStart(){
-		return new Coordinate(getGrid().getHSize()-1, 0);
+	public Square getPlayerTwoStart(){
+		return getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
 	}
 	
 	@Override
@@ -321,9 +322,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		
 		// Removed excluded squares from candidates
 		candidates.removeAll(constraint.getExcluded());
-		
-		int totalWallLength = Math.round(constraint.getPercentage() * candidates.size());
-		int remainingWallLength = totalWallLength;
+
+		int remainingWallLength = Math.round(constraint.getPercentage() * candidates.size());
 		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
 			ArrayList<Coordinate> wallSequence = getWall(candidates, remainingWallLength);
 			if(wallSequence.size() >= 2){
@@ -338,7 +338,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	/**
 	 * Place walls on the given coordinates
 	 * 
-	 * @param 	coordinates
+	 * @param 	walls
 	 * 			The coordinates where to place the walls
 	 * @param 	constraint
 	 * 			The constraint for placing walls;
@@ -355,7 +355,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * Utility method that flattens a two dimensional Arraylist. 
 	 * 
 	 * @param 	list
-	 * @return
+     *          the two dimensional arraylist which need to be flattened
+	 * @return  a flattened version of the list
 	 */
 	private ArrayList<Coordinate> flatten(ArrayList<ArrayList<Coordinate>> list) {
 		ArrayList<Coordinate> result = new ArrayList<Coordinate>();
@@ -378,8 +379,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @return A coordinate equally far away from each player
 	 */
 	protected Coordinate chargedIdentityDiskLocation() {
-		Square player1Square = getGrid().getSquare(getPlayerOneStart());
-		Square player2Square = getGrid().getSquare(getPlayerTwoStart());
+		Square player1Square = getGrid().getSquare(getPlayerOneCoordinate());
+		Square player2Square = getGrid().getSquare(getPlayerTwoCoordinate());
 		Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
 		for(Square square : getGrid().getAllSquares()){
 			if(!square.isObstructed()){
@@ -450,8 +451,10 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 
 	/**
 	 * 
-	 * @param 	teleports
+	 * @param 	coordinates
 	 * 			The coordinates of the locations to place.
+     * @param   constraint
+     *          The constraint which needs to be satisfied for the teleports
 	 */
 	protected void placeTeleports(ArrayList<Coordinate> coordinates, GridConstraint constraint) {
 		if(!satisfiesConstraint(coordinates, constraint))
