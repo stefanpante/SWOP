@@ -49,7 +49,7 @@ public class TrajectoryMediator {
 		Square prevSquare = null;
 		Square currentSquare = startSquare;
 		HashSet<Square> passedDestinationsSquares = new HashSet<Square>();
-		Teleport teleport = null, destination = null;
+		Teleport teleport = null;
 		Square destinationSquare = null;
 		boolean prevWasTeleport = false;
 		int currentRange = 0;
