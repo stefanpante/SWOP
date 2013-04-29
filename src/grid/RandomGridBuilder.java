@@ -460,13 +460,15 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		if(!satisfiesConstraint(coordinates, constraint))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		ArrayList<Teleport> teleports = new ArrayList<Teleport>();
+        ArrayList<Square> destinations = new ArrayList<Square>();
 		Teleport teleport;
 		for(Coordinate coordinate : coordinates){
 			teleport = new Teleport();
+            destinations.add(getGrid().getSquare(coordinate));
 			placeItem(getGrid().getSquare(coordinate), teleport);
 			teleports.add(teleport);
 		}
-		linkTeleports(teleports, true);		
+		linkTeleports(teleports, destinations, true);
 	}
 
 	/**
@@ -478,18 +480,18 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			Boolean that hould be true if the linking should happen randomly.
 	 * 			Otherwise each teleport will be linked to its next neighbor in the list.
 	 */
-	private void linkTeleports(ArrayList<Teleport> teleports, boolean linkRandomly) {
+	private void linkTeleports(ArrayList<Teleport> teleports, ArrayList<Square> destinations, boolean linkRandomly) {
 		if(linkRandomly){
 			for(Teleport tele : teleports){
-				Teleport candidateDestination = teleports.get(getRandomIndex(teleports));
-				while(candidateDestination.equals(tele)){
-					candidateDestination = teleports.get(getRandomIndex(teleports));
+				Square candidateDestination = destinations.get(getRandomIndex(destinations));
+				while(candidateDestination.getInventory().hasItem(tele)){
+					candidateDestination = destinations.get(getRandomIndex(destinations));
 				}
 				tele.setDestination(candidateDestination);
 			}
 		} else {
 			for(int i=0; i<teleports.size(); i++){
-				teleports.get(i).setDestination(teleports.get(i%teleports.size()));
+				teleports.get(i).setDestination(destinations.get(i%destinations.size()));
 			}
 		}
 	}
