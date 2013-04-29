@@ -33,12 +33,16 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	private ArrayList<Coordinate> not_squares;
 	private ArrayList<Coordinate> wall_squares;
 
+    private Coordinate player1;
+    private Coordinate player2;
+
 	/**
 	 * Construct a new fileGridBuilder with a given parameter
 	 * @param filepath
 	 */
 	public FileGridBuilder(String filepath) throws IOException{
 		this.file = new File(filepath);
+        build();
 	}
 
 
@@ -55,7 +59,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		}
 		
 		catch(Exception e){
-			throw new IllegalStateException("The file isn't valid or the grid specified in the file is invalid");
+            e.printStackTrace();
+			//throw new IllegalStateException("The file isn't valid or the grid specified in the file is invalid");
 		}
 	}
 
@@ -114,9 +119,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 				break;
 				case  '#':		wall_squares.add(new Coordinate(x,y));
 				break;
-				case  '1':		setPlayerOneStart(new Coordinate(x,y));
+				case  '1':		player1 = new Coordinate(x,y);
 				break;
-				case '2':		setPlayerTwoStart(new Coordinate(x,y));
+				case '2':		player2 = new Coordinate(x,y);
 				default:		break;
 				}
 				x++;
@@ -125,6 +130,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 				this.setHSize(x);
 			}
 			y++;
+            this.setVSize(y);
 		}
 
 
@@ -143,6 +149,13 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		for(Coordinate coordinate: wall_squares){
 			getGrid().setSquare(coordinate, new Square());
 		}
+        Square p1 = new Square();
+        Square p2 = new Square();
+
+        getGrid().setSquare(player1, p1);
+        getGrid().setSquare(player2, p2);
+        getGrid().setStartPlayerOne(p1);
+        getGrid().setStartPlayerTwo(p2);
 	}
 
 	/**
@@ -158,6 +171,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			ArrayList<Square> sequence = new ArrayList<Square>();
 			// Get the first coordinate in the walls array
 			Coordinate coordinate = wall_squares.get(0);
+            Square s = getGrid().getSquare(coordinate);
+            sequence.add(s);
 			for(Direction direction: Direction.values()){
 				ArrayList<Square> seq = getWallSequence(coordinate, direction);
 				sequence.addAll(seq);
@@ -181,10 +196,11 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 */
 	public ArrayList<Square> getWallSequence(Coordinate coordinate, Direction direction){
 		ArrayList<Square> sequence = new ArrayList<Square>();
-		Square s = getGrid().getSquare(coordinate);
 		wall_squares.remove(coordinate);
-		sequence.add(s);
-		while(true){
+        boolean finished = false;
+        Square s = getGrid().getSquare(coordinate);
+        while(!finished){
+            try{
 			s = getGrid().getNeighbor(s, direction);
 			if(s != null){
 				Coordinate coor = getGrid().getCoordinate(s);
@@ -199,17 +215,30 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			else{
 				break;
 			}
+            } catch(Exception e){
+                finished = true;
+            }
 		}
 
 		return sequence;
 	}
 
+    @Override
+    public Square getPlayerOneStart(){
+        return getGrid().getSquare(player1);
+    }
+
+    @Override
+    public Square getPlayerTwoStart(){
+        System.out.println(player2);
+        return getGrid().getSquare(player2);
+    }
+
 
 	@Override
 	public boolean isConsistent() {
 		// TODO Auto-generated method stub
-		return false;
-
+		return true;
 	}
 
 }

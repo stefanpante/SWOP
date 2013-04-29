@@ -107,8 +107,8 @@ public class Game {
 		
 		// Add players
 		this.players = new ArrayList<Player>();
-		Square bottomLeft = grid.getSquare(new Coordinate(0, grid.getVSize()-1));
-		Square topRight = grid.getSquare(new Coordinate(grid.getHSize()-1, 0));
+		Square bottomLeft = grid.getStartPlayerOne();
+		Square topRight = grid.getStartPlayerTwo();
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
 
