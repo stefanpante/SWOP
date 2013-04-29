@@ -154,8 +154,8 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * Place an item on the given coordinate
 	 * 
-	 * @param 	coordinate
-	 * 			The coordinate to place the given item on
+	 * @param 	Square
+	 * 			The square to place the given item on
 	 * @param 	item
 	 * 			The item to be placed on the given coordinate
 	 */
