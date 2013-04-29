@@ -15,7 +15,7 @@ import notnullcheckweaver.NotNull;
  *
  */
 @NotNull
-public class IdentityDisc extends LaunchableItem implements PlayerEffect {
+public class IdentityDisc extends LaunchableItem {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.

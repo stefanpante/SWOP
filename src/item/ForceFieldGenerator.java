@@ -5,7 +5,7 @@ import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
-public class ForceFieldGenerator extends Item implements PlayerEffect {
+public class ForceFieldGenerator extends Item {
 
 	private boolean active;
 	

@@ -1,5 +1,6 @@
 package square.power.failure;
 
+import game.Player;
 import square.power.Power;
 import util.Rotation;
 
@@ -8,7 +9,7 @@ import util.Rotation;
  * 
  * @author vincentreniers
  */
-abstract class PowerFail extends Power{
+abstract class PowerFail extends Power {
 
 	public PowerFail(int turns, int actions) {
 		super(turns, actions);
@@ -21,5 +22,9 @@ abstract class PowerFail extends Power{
 	public boolean isFailing() {
 		return true;
 	}
-	
+
+    @Override
+    public void affect(Player player) {
+        player.decrementActions();
+    }
 }

@@ -1,5 +1,7 @@
 package item.inventory;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.Item;
 import item.launchable.IdentityDisc;
 
@@ -13,7 +15,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public abstract class Inventory{
+public abstract class Inventory implements PlayerEffect {
 
 	/**
 	 * The size of the inventory, should not be smaller than zero
@@ -26,7 +28,9 @@ public abstract class Inventory{
 	 */
 	private ArrayList<Item> items;
 
-	/**
+
+
+    /**
 	 * Creates a new instance of the Inventory class with given size.
 	 * 
 	 * @param	size	
@@ -214,4 +218,13 @@ public abstract class Inventory{
 		
 		return discs;
 	}
+
+
+    @Override
+    public void affect(Player player) {
+        for(Item item : getAllItems()){
+            item.affect(player);
+        }
+    }
+
 }

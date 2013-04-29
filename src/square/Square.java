@@ -1,6 +1,8 @@
 package square;
 
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.inventory.SquareInventory;
 
 import square.obstacle.Obstacle;
@@ -16,7 +18,7 @@ import notnullcheckweaver.Nullable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 @NotNull
-public class Square{
+public class Square implements PlayerEffect {
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -120,4 +122,10 @@ public class Square{
 	public boolean isObstructed(){
 			return obstacle != null;
 	}
+
+    @Override
+    public void affect(Player player) {
+        getInventory().affect(player);
+        getPower().affect(player);
+    }
 }
