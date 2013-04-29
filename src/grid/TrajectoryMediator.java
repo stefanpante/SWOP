@@ -48,7 +48,7 @@ public class TrajectoryMediator {
 	public Square getEndSquare(Square startSquare, Direction direction, int maximumRange){
 		Square prevSquare = null;
 		Square currentSquare = startSquare;
-		HashSet<Teleport> passedDestinations = new HashSet<Teleport>();
+		HashSet<Square> passedDestinationsSquares = new HashSet<Square>();
 		Teleport teleport = null, destination = null;
 		Square destinationSquare = null;
 		boolean prevWasTeleport = false;
@@ -62,12 +62,11 @@ public class TrajectoryMediator {
 			if(maximumRange > 0 && currentRange < maximumRange) {
 				try {
 					if(teleport!= null && !prevWasTeleport){
-						destination = teleport.getDestination();
-						if(passedDestinations.contains(destination)){
+                        destinationSquare = teleport.getDestination();
+						if(passedDestinationsSquares.contains(destinationSquare)){
 							return prevSquare;
 						}
-						destinationSquare = grid.findSquare(destination);
-						passedDestinations.add(destination);
+						passedDestinationsSquares.add(destinationSquare);
 						currentSquare = destinationSquare;
 						prevWasTeleport = true;
 					} else {
