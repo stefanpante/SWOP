@@ -11,13 +11,8 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import command.AbstractGameCommand;
-import command.action.EndTurnCommand;
 import command.effect.LoseActionEffect;
 
-import manager.ActionManager;
-
-import square.Square;
 
 /**
  * @author Jonas Devlieghere
@@ -29,7 +24,6 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
-		ActionManager.getInstance().addObserver(this);
 		counter = new HashMap<Player,Integer>();
 		
 		for(Player player : getGame().getPlayers()){

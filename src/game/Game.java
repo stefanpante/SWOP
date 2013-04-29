@@ -10,7 +10,6 @@ import java.util.Observer;
 import java.util.Random;
 import java.util.Map.Entry;
 
-import manager.ActionManager;
 import notnullcheckweaver.NotNull;
 import square.Direction;
 import square.Square;

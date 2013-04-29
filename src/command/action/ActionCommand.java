@@ -5,7 +5,6 @@ package command.action;
 
 import command.AbstractGameCommand;
 
-import manager.ActionManager;
 import game.Game;
 
 /**
@@ -16,7 +15,6 @@ public abstract class ActionCommand extends AbstractGameCommand {
 		
 	public ActionCommand(Game game) {
 		super(game);
-		ActionManager.getInstance().addObservable(this);
 	}
 	
 	@Override

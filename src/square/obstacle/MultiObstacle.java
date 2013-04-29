@@ -3,9 +3,6 @@ package square.obstacle;
 
 import java.util.ArrayList;
 import java.util.Observer;
-
-import manager.ActionManager;
-
 import square.Square;
 
 /**
