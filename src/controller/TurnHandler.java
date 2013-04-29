@@ -45,8 +45,12 @@ public class TurnHandler extends Handler implements Observer {
     		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
     	} else if(isEndOfTurn()) {
-			endTurn(false);
-    	}
+            try {
+                endTurn(false);
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
 	}
 	
 	/**
@@ -62,7 +66,7 @@ public class TurnHandler extends Handler implements Observer {
 	/**
 	 * End the current turn
 	 */
-	public void endTurn(boolean skip){
+	public void endTurn(boolean skip) throws Exception {
 		if(!skip && !getGame().getCurrentPlayer().hasMoved()){
 			getGame().end();
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
@@ -80,7 +84,7 @@ public class TurnHandler extends Handler implements Observer {
 	/**
 	 * Start a new turn
 	 */
-	public void startTurn(){
+	public void startTurn() throws Exception {
 		Player currentPlayer = getGame().getCurrentPlayer();
 		
 		if(hasLost()){

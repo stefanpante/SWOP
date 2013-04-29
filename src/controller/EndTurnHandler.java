@@ -69,7 +69,7 @@ public class EndTurnHandler extends Handler{
 	 * 
 	 * @throws	IllegalStateException
 	 */
-	public void endTurn() throws IllegalStateException{
+	public void endTurn() throws Exception {
 		fireChanges();
 		
 		if(!isConfirmed())

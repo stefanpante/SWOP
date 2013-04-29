@@ -38,7 +38,7 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction){
+	public void move(Direction direction) throws Exception {
 		fireChanges();
 		AbstractGameCommand moveEvent = new MoveCommand(getGame(), direction);
 		moveEvent.execute();
