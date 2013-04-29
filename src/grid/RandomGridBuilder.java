@@ -4,20 +4,13 @@
 package grid;
 
 import item.Item;
-import item.LightGrenade;
-import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import square.Direction;
 import square.Square;
 import square.obstacle.Wall;
-import util.AStar;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 
@@ -44,7 +37,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	public static int MIN_VSIZE = 10;
 	
 	
-	private ArrayList<Wall> walls;
+	ArrayList<Wall> walls;
 
 	
 	/**
@@ -194,64 +187,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	
 	
 	/**
-	 * Suggest a coordinate for the Charged Disk Location
-	 * 
-	 * @return A coordinate equally far away from each player
-	 */
-	protected Coordinate chargedIdentityDiskLocation(){
-		Square player1Square = getGrid().getSquare(getPlayerOneStart());
-		Square player2Square = getGrid().getSquare(getPlayerTwoStart());
-		Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
-		for(Square square : getGrid().getAllSquares()){
-			if(!square.isObstructed()){
-				Coordinate thisCoordinate = getGrid().getCoordinate(square);
-				try{
-					AStar aStar = new AStar(getGrid());
-					int player1Length = aStar.shortestPath(player1Square, square).size();
-					AStar aStar2 = new AStar(getGrid());
-					int player2Length = aStar2.shortestPath(player2Square, square).size();
-					if(Math.abs(player2Length - player1Length) <= 2){
-						int longest = Math.max(player1Length, player2Length);
-						if(longest < shortest.getValue()){
-							shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
-						}
-					}
-				}catch(Exception e){
-					System.err.println(e.getMessage());
-				}
-			}
-		}
-		return shortest.getKey();
-	}
-	
-	/**
-	 * Finds a random list of sequences of coordinates that follow the given constraint.
-	 * 
-	 * @param 	constraint
-	 * 			The constraint which is taken into account.
-	 * @return	A list of sequences of coordinates.
-	 */
-	protected ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint){
-		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
-		ArrayList<ArrayList<Coordinate>> result = new ArrayList<ArrayList<Coordinate>>();
-		
-		// Removed excluded squares from candidates
-		candidates.removeAll(constraint.getExcluded());
-		
-		int totalWallLength = Math.round(constraint.getPercentage() * candidates.size());
-		int remainingWallLength = totalWallLength;
-		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
-			ArrayList<Coordinate> wallSequence = getWall(candidates, remainingWallLength);
-			if(wallSequence.size() >= 2){
-				result.add(wallSequence);
-				removePerimeter(wallSequence, candidates);
-				remainingWallLength = remainingWallLength - wallSequence.size();
-			}
-		}
-		return result;
-	}
-	
-	/**
 	 * Returns a list of coordinates representing a wall.
 	 * 
 	 * @param 	candidates
@@ -260,7 +195,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The maximum amount of squares a single wall can cover.
 	 * @return	A list of coordinates that now have a wall placed on it.
 	 */
-	private ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
+	ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
 		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
 		Direction direction = Direction.getRandomOrientation();
 		int maxPercentageLength;
@@ -291,7 +226,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @param 	candidates 
 	 * 			the list of squares of which the perimeter of the wall will be removed.
 	 */
-	private void removePerimeter(ArrayList<Coordinate> coordinates, ArrayList<Coordinate> candidates) {
+	void removePerimeter(ArrayList<Coordinate> coordinates, ArrayList<Coordinate> candidates) {
 		for(Coordinate coordinate : coordinates){
 			for(Direction direction : Direction.values()){
 				Coordinate neighbor = coordinate.getNeighbor(direction);
@@ -301,121 +236,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 	}
 	
-	protected Coordinate randomChargedIdentityDiskLocation(){
-		return null;
-	}
-	
-	
-	/**
-	 * Place light grenades at the the given coordinates, in respect with the given constraint.
-	 * 
-	 * @param 	coordinates
-	 * 			The coordinates where to place the light grenades
-	 * @param 	constraint
-	 * 			The constraint for placing light grenades
-	 */
-	protected void placeLightGrenade(ArrayList<Coordinate> coordinates, GridConstraint constraint){
-		if(!satisfiesConstraint(coordinates, constraint))
-			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-		for(Coordinate coordinate : coordinates)
-			placeItem(getGrid().getSquare(coordinate), new LightGrenade());
-	}
-	
-	/**
-	 * Place identity disks on the given coordinates, in respect with the given constraint
-	 * 
-	 * @param 	coordinates
-	 * 			The coordinates where to place the identity disks
-	 * @param 	constraint
-	 * 			The constraint for placing identity disks
-	 */
-	protected void placeIdentityDisk(ArrayList<Coordinate> coordinates, GridConstraint constraint){
-		if(!satisfiesConstraint(coordinates, constraint))
-			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-		for(Coordinate coordinate : coordinates)
-			placeItem(getGrid().getSquare(coordinate), new IdentityDisc());
-	}
-	
-	protected void placeChargedIdentityDisk(Coordinate coordinate){
-		if(coordinate == null)
-			return;
-		Square diskSquare = getGrid().getSquare(coordinate);
-		placeItem(diskSquare, new ChargedIdentityDisc());
-	}
-	
-	/**
-	 * Place walls on the given coordinates
-	 * 
-	 * @param 	coordinates
-	 * 			The coordinates where to place the walls
-	 * @param 	constraint
-	 * 			The constraint for placing walls;
-	 */
-	protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls, GridConstraint constraint){
-		if(!satisfiesConstraint(flatten(walls), constraint))
-			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-		for(ArrayList<Coordinate> sequence : walls){
-			this.walls.add(new Wall(getGrid().getSquares(sequence)));
-		}	
-	}
-	
-	/**
-	 * 
-	 * @param 	teleports
-	 * 			The coordinates of the locations to place.
-	 */
-	private void placeTeleports(ArrayList<Coordinate> coordinates, GridConstraint constraint) {
-		if(!satisfiesConstraint(coordinates, constraint))
-			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-		ArrayList<Teleport> teleports = new ArrayList<Teleport>();
-		Teleport teleport;
-		for(Coordinate coordinate : coordinates){
-			teleport = new Teleport();
-			placeItem(getGrid().getSquare(coordinate), teleport);
-			teleports.add(teleport);
-		}
-		linkTeleports(teleports, true);		
-	}
-
-	/**
-	 * Links a list of teleports according to the given boolean value.
-	 * 
-	 * @param 	teleports
-	 * 			The list of teleports to link.
-	 * @param 	linkRandomly
-	 * 			Boolean that hould be true if the linking should happen randomly.
-	 * 			Otherwise each teleport will be linked to its next neighbor in the list.
-	 */
-	private void linkTeleports(ArrayList<Teleport> teleports, boolean linkRandomly) {
-		if(linkRandomly){
-			for(Teleport tele : teleports){
-				Teleport candidateDestination = teleports.get(getRandomIndex(teleports));
-				while(candidateDestination.equals(tele)){
-					candidateDestination = teleports.get(getRandomIndex(teleports));
-				}
-				tele.setDestination(candidateDestination);
-			}
-		} else {
-			for(int i=0; i<teleports.size(); i++){
-				teleports.get(i).setDestination(teleports.get(i%teleports.size()));
-			}
-		}
-	}
-
-	/**
-	 * Utility method that flattens a two dimensional Arraylist. 
-	 * 
-	 * @param 	list
-	 * @return
-	 */
-	private ArrayList<Coordinate> flatten(ArrayList<ArrayList<Coordinate>> list) {
-		ArrayList<Coordinate> result = new ArrayList<Coordinate>();
-		for(ArrayList<Coordinate> L : list){
-			result.addAll(L);
-		}
-		return result;
-	}
-
 	/**
 	 * Returns the coordinates of the given walls on the grid of this GridBuilder.
 	 * 
@@ -436,11 +256,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	
 	
 	
-	@SuppressWarnings("rawtypes")
-	private int getRandomIndex(ArrayList a){
-		return getRandom().nextInt(a.size());
-	}
 	
+	
+	// TODO: voor wat dient dit?
 	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, Direction direction, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		switch (direction) {
@@ -476,15 +294,38 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return new Coordinate(getGrid().getHSize()-1, 0);
 	}
 	
-	protected ArrayList<Wall> getWalls(){
-		return this.walls;
-	}
-
 	@Override
 	public boolean isConsistent() {
 		// TODO Auto-generated method stub
 		return false;
 		
+	}
+	
+	/**
+	 * Finds a random list of sequences of coordinates that follow the given constraint.
+	 * 
+	 * @param 	constraint
+	 * 			The constraint which is taken into account.
+	 * @return	A list of sequences of coordinates.
+	 */
+	protected ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint) {
+		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
+		ArrayList<ArrayList<Coordinate>> result = new ArrayList<ArrayList<Coordinate>>();
+		
+		// Removed excluded squares from candidates
+		candidates.removeAll(constraint.getExcluded());
+		
+		int totalWallLength = Math.round(constraint.getPercentage() * candidates.size());
+		int remainingWallLength = totalWallLength;
+		while(remainingWallLength  >= Grid.SMALLEST_WALL_LENGTH){
+			ArrayList<Coordinate> wallSequence = getWall(candidates, remainingWallLength);
+			if(wallSequence.size() >= 2){
+				result.add(wallSequence);
+				removePerimeter(wallSequence, candidates);
+				remainingWallLength = remainingWallLength - wallSequence.size();
+			}
+		}
+		return result;
 	}
 
 	@Override

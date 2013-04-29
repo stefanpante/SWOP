@@ -2,6 +2,7 @@ package controller;
 
 import game.Game;
 import game.Player;
+import grid.AbstractGridBuilder;
 import grid.FileGridBuilder;
 import grid.RandomGridBuilder;
 import gui.ObjectronGUI;
@@ -155,7 +156,7 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		RandomGridBuilder builder = new RandomGridBuilder(hSize, vSize);
+		AbstractGridBuilder builder = new RandomGridBuilder(hSize, vSize);
 		setGame(new Game(builder.getGrid()));
 	}
 	

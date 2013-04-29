@@ -1,5 +1,6 @@
 package game;
 
+import grid.AbstractGridBuilder;
 import grid.Grid;
 import grid.RandomGridBuilder;
 import java.util.ArrayList;
@@ -72,7 +73,7 @@ public class Game {
 	 */
 	protected Game(int hSize, int vSize){
 		// Build the grid
-		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize);
+		AbstractGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize);
 		this.setGrid(gridBuilder.getGrid());
 		
 
