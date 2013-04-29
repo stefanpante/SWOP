@@ -78,8 +78,8 @@ public class PowerManager {
 		}
 		
 		// Exclude starting positions
-		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
-		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
+		Square bottomLeft = getGrid().getStartPlayerOne();
+		Square topRight = getGrid().getStartPlayerTwo();
 		bottomLeft.setPower(Power.getRegularPower());
 		topRight.setPower(Power.getRegularPower());
 	}
