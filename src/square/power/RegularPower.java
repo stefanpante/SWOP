@@ -1,5 +1,7 @@
 package square.power;
 
+import game.Player;
+
 /**
  * This power lasts infinite amount of turns and actions.
  * Untill it may experience a power failure.
@@ -24,4 +26,8 @@ public class RegularPower extends Power{
 		
 	}
 
+    @Override
+    public void affect(Player player) {
+        // No effect
+    }
 }
