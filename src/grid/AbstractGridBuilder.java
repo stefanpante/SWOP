@@ -386,8 +386,8 @@ public abstract class AbstractGridBuilder {
      * @param 	constraint
      * 			The constraint for placing walls;
      */
-    protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls, GridConstraint constraint) {
-        if(!satisfiesConstraint(flatten(walls), constraint))
+    protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
+        if(!satisfiesConstraint(flatten(walls), getConstraintWall()))
             throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
         for(ArrayList<Coordinate> sequence : walls){
             this.walls.add(new Wall(getGrid().getSquares(sequence)));

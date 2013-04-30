@@ -333,8 +333,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
         this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
         this.initialized = true;
-
+        if( h < 550){
+            h = 550;
+        }
         size(w + 215, h + 50);
+        if(this.frame != null){
+            this.frame.setSize(w+215, h+ 50);
+        }
         gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
         squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
         playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);

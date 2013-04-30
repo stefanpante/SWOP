@@ -1,6 +1,3 @@
-/**
- * 
- */
 package grid;
 
 import item.LightGrenade;
@@ -67,7 +64,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setConstraints();
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(randomWallLocations(getConstraintWall()), getConstraintWall());
+		placeWalls(randomWallLocations(getConstraintWall()));
 		build(randomLocations(getConstraintLightGrenade()),
 				randomLocations(getConstraintIdentityDisk()),
 				randomLocations(getConstraintTeleport()), 
@@ -116,7 +113,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setEmptyConstraints();
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(walls, getConstraintWall());
+		placeWalls(walls);
 		build(lightGrenades, identityDisks, teleports, chargedIdentityDisk);
 	}
 	
@@ -308,8 +305,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	/**
 	 * Utility method that flattens a two dimensional Arraylist. 
 	 * 
-	 * @param 	list
-     *          the two dimensional arraylist which need to be flattened
 	 * @return  a flattened version of the list
 	 */
 
