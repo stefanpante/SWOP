@@ -98,7 +98,7 @@ public class GameHandler extends Handler {
 	 * Creates a list of coordinates where grenades, walls and players are located.
 	 * This is information that the GUI can use.
 	 */
-	private void populateGui() {
+	public void populateGui() {
 		HashMap<String, Object> properties = getProperties();
 		HashMap<Player,Coordinate> players = getPlayerLocations();
 		

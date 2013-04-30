@@ -352,6 +352,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         // update the positions of the inventories and buttons.
 
         textFont(standardFont);
+        obj.populateGui();
     }
 
 
