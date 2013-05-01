@@ -567,6 +567,7 @@ public class Grid {
 	 * @throws	NoSuchElementException
 	 * 			The given destination is no finable in this grid.
 	 */
+	@Deprecated
 	public Square findSquare(Teleport destination) throws IllegalArgumentException, NoSuchElementException{
 		if(destination == null){
 			throw new IllegalArgumentException("The given destination is not a valid destination");

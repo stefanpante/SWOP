@@ -92,7 +92,14 @@ public class Game {
 	 * @param grid
 	 */
 	private void setGrid(Grid grid) {
+		if(!isValidGrid(grid)){
+			throw new IllegalStateException("The given grid is not valid");
+		}
 		this.grid = grid;		
+	}
+	
+	public boolean isValidGrid(Grid grid){
+		return grid != null;
 	}
 
 	/**

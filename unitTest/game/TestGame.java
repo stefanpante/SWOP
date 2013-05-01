@@ -35,7 +35,9 @@ public class TestGame {
 
 	@Before
 	public void setUp() throws Exception {
-		game = new Game(10,10);
+		RandomGridBuilder builder = new RandomGridBuilder(10,10);
+		
+		game = new Game(builder.getGrid());
 	}
 
 	@After
@@ -52,14 +54,10 @@ public class TestGame {
 		assertTrue(game.isActive());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConstructorIllegalDimensions() {
-		Game game = new Game(5,5);
-	}
+
 
 	@Test 
 	public void switchPlayer(){
-		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		
@@ -81,7 +79,6 @@ public class TestGame {
 	
 	@Test
 	public void testSetCurrentPlayer(){
-		Game game = new Game(10, 10);
 		
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
@@ -109,7 +106,6 @@ public class TestGame {
 	
 	@Test
 	public void testCanHaveAsPlayer(){
-		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		
@@ -119,7 +115,6 @@ public class TestGame {
 	
 	@Test
 	public void testIsValidCurrentPlayer(){
-		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		Player player3 = new Player(new Square(), 0);
@@ -131,7 +126,6 @@ public class TestGame {
 	
 	@Test
 	public void testSetPlayer(){
-		Game game = new Game(10, 10);
 		Player playa = null;
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();

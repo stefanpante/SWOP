@@ -6,15 +6,16 @@ import item.Teleport;
 import org.junit.Before;
 import org.junit.Test;
 
+import square.Square;
+
 /**
  * Unit test case for Teleport.
  * 
- * @author vincent
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class TestTeleport {
 	
 	private Teleport teleport;
-	
 	private Teleport teleportTwo;
 	
 	@Before
@@ -31,19 +32,30 @@ public class TestTeleport {
 	@Test
 	public void canHaveAsDestination() {
 		assertFalse(teleport.canHaveAsDestination(null));
-		assertFalse(teleport.canHaveAsDestination(teleport));
-		assertTrue(teleport.canHaveAsDestination(teleportTwo));
+		Square square = new Square();
+		square.getInventory().addItem(teleport);
+		assertFalse(teleport.canHaveAsDestination(square));
+		
+		Square sq2 = new Square();
+		sq2.getInventory().addItem(teleportTwo);
+		assertTrue(teleport.canHaveAsDestination(sq2));
 	}
 	
 	@Test
 	public void setDestination() {
-		teleport.setDestination(teleportTwo);
-		assertEquals(teleport.getDestination(), teleportTwo);
+		Square square = new Square();
+		Square square2 = new Square();
+		square.getInventory().addItem(teleport);
+		square2.getInventory().addItem(teleportTwo);
+		teleport.setDestination(square2);
+		assertEquals(teleport.getDestination(), square2);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void setDestinationSelf() {
-		teleport.setDestination(teleport);
+		Square sq = new Square();
+		sq.getInventory().addItem(teleport);
+		teleport.setDestination(sq);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
