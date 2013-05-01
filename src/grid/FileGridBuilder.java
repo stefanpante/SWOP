@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import square.Direction;
 import square.Square;
@@ -42,12 +43,20 @@ public class FileGridBuilder extends AbstractGridBuilder{
      */
     public FileGridBuilder(String filepath) throws IOException{
         this.file = new File(filepath);
+        setRandom(new Random());
         setConstraints();
         build();
     }
 
     protected void setConstraints(){
+        ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
+        excluded.add(player1);
+        excluded.add(player2);
         setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
+        // Do we still need the squared location for the light grenade.
+        setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded));
+        setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
+        setConstraintTeleport(new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded));
 
     }
 
@@ -61,7 +70,12 @@ public class FileGridBuilder extends AbstractGridBuilder{
         try{
             readInput();
             setSquares();
+            setConstraints();
             placeWalls(this.getWallsLocation());
+            placeLightGrenade(randomLocations(getConstraintLightGrenade()));
+            placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
+            placeTeleports(randomLocations(getConstraintTeleport()));
+            placeChargedIdentityDisk(chargedIdentityDiskLocation());
         }
 
         catch(Exception e){
