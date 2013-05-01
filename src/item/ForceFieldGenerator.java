@@ -12,28 +12,27 @@ public class ForceFieldGenerator extends Item {
 	@Override
 	public void acceptAddPlayerInventory(PlayerInventory plInv)
 			throws IllegalStateException {
-		// TODO Auto-generated method stub
+		plInv.addForceFieldGenerator(this);
 
 	}
 
 	@Override
 	public void acceptRemovePlayerInventory(PlayerInventory plInv)
 			throws IllegalStateException {
-		// TODO Auto-generated method stub
+		plInv.removeForceFieldGenerator(this);
 
 	}
 
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
-		// TODO Auto-generated method stub
-
+		sqInv.addForceFieldGenerator(this);
 	}
 
 	@Override
 	public void acceptRemoveSquareInventory(SquareInventory sqInv)
 			throws IllegalStateException {
-		// TODO Auto-generated method stub
+		sqInv.removeForceFieldGenerator(this);
 
 	}
 

@@ -1,5 +1,6 @@
 package item.inventory;
 
+import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -82,6 +83,17 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 		super.removeItem(lightGrenade);
 	}
 
+    @Override
+    public void addForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
+        super.addItem(forceFieldGenerator);
+    }
+    @Override
+    public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
+        if(!getAllItems().contains(forceFieldGenerator))
+            throw new IllegalStateException("Cannot remove a forcefieldgenerator that isn't in the inventory");
+
+        super.removeItem(forceFieldGenerator);
+    }
 	@Override
 	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		throw new IllegalStateException("A Teleport can not be added to a players Inventory");
