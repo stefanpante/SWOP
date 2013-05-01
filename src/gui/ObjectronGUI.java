@@ -169,7 +169,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		confirm.setColorBackground(OConstants.PLAYERBLUE);
 		
 		filepick = inputController.addButton("pick");
-		filepick.setLabel("Pick file from grid");
+		filepick.setLabel("Pick grid from file");
 		filepick.setPosition(hSize/4,240);
 		filepick.setSize(hSize/2, 35);
 		filepick.setColor(color);
