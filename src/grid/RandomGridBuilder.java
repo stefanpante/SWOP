@@ -119,9 +119,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
-		placeLightGrenade(lightGrenades, getConstraintLightGrenade());
-		placeIdentityDisk(identityDisks, getConstraintIdentityDisk());
-		placeTeleports(teleports, getConstraintTeleport());
+		placeLightGrenade(lightGrenades);
+		placeIdentityDisk(identityDisks);
+		placeTeleports(teleports);
 		placeChargedIdentityDisk(chargedIdentityDisk);
 		if(!isConsistent()){
 			throw new IllegalStateException("The built grid is not valid");
@@ -358,11 +358,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 
 	 * @param 	coordinates
 	 * 			The coordinates where to place the light grenades
-	 * @param 	constraint
-	 * 			The constraint for placing light grenades
 	 */
-	protected void placeLightGrenade(ArrayList<Coordinate> coordinates, GridConstraint constraint) {
-		if(!satisfiesConstraint(coordinates, constraint))
+	protected void placeLightGrenade(ArrayList<Coordinate> coordinates) {
+		if(!getConstraintLightGrenade().satisfiesConstraint(coordinates, getGrid()))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(Coordinate coordinate : coordinates)
 			placeItem(getGrid().getSquare(coordinate), new LightGrenade());
@@ -373,11 +371,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 
 	 * @param 	coordinates
 	 * 			The coordinates where to place the identity disks
-	 * @param 	constraint
-	 * 			The constraint for placing identity disks
 	 */
-	protected void placeIdentityDisk(ArrayList<Coordinate> coordinates, GridConstraint constraint) {
-		if(!satisfiesConstraint(coordinates, constraint))
+	protected void placeIdentityDisk(ArrayList<Coordinate> coordinates) {
+		if(!getConstraintIdentityDisk().satisfiesConstraint(coordinates, getGrid()))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		for(Coordinate coordinate : coordinates)
 			placeItem(getGrid().getSquare(coordinate), new IdentityDisc());
@@ -396,11 +392,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 
 	 * @param 	coordinates
 	 * 			The coordinates of the locations to place.
-     * @param   constraint
-     *          The constraint which needs to be satisfied for the teleports
 	 */
-	protected void placeTeleports(ArrayList<Coordinate> coordinates, GridConstraint constraint) {
-		if(!satisfiesConstraint(coordinates, constraint))
+	protected void placeTeleports(ArrayList<Coordinate> coordinates) {
+		if(!getConstraintTeleport().satisfiesConstraint(coordinates, getGrid()))
 			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
 		ArrayList<Teleport> teleports = new ArrayList<Teleport>();
         ArrayList<Square> destinations = new ArrayList<Square>();
@@ -413,6 +407,20 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 		linkTeleports(teleports, destinations, true);
 	}
+
+    /**
+     * Adds squares to the grid
+     */
+    @Override
+    protected void setSquares() {
+        Coordinate coordinate;
+        for(int x = 0; x < getGrid().getHSize(); x++){
+            for(int y = 0; y < getGrid().getVSize(); y++){
+                coordinate = new Coordinate(x, y);
+                getGrid().setSquare(coordinate, new Square());
+            }
+        }
+    }
 
 	/**
 	 * Links a list of teleports according to the given boolean value.

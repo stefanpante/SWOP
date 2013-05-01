@@ -118,6 +118,36 @@ public class GridConstraint {
 	public ArrayList<ArrayList<Coordinate>> getIncluded(){
 		return new ArrayList<ArrayList<Coordinate>>(this.included);
 	}
+
+    protected boolean satisfiesConstraint(ArrayList<Coordinate> coordinates, Grid grid){
+        if(coordinates == null)
+            return false;
+
+        float percentage = (float) coordinates.size() / grid.getAllSquares().size();
+        if(percentage > getPercentage())
+            return false;
+
+        boolean[] includes = new boolean[getIncluded().size()];
+        for(Coordinate coordinate : coordinates){
+            if(grid.getSquare(coordinate).isObstructed())
+                return false;
+            if(getExcluded().contains(coordinate))
+                return false;
+
+
+            int i = 0;
+            for(ArrayList<Coordinate> include : getIncluded()){
+                if(include.contains(coordinate))
+                    includes[i] = true;
+                i++;
+            }
+        }
+        for(boolean b : includes){
+            if(!b)
+                return false;
+        }
+        return true;
+    }
 	
 	
 }
