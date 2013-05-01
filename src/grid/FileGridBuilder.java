@@ -9,7 +9,6 @@ import java.util.Random;
 
 import square.Direction;
 import square.Square;
-import square.obstacle.Wall;
 import util.Coordinate;
 
 /**
@@ -56,7 +55,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
         // Do we still need the squared location for the light grenade.
         setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded));
         setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
-        setConstraintTeleport(new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded));
+        setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
 
     }
 

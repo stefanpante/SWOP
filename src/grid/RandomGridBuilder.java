@@ -135,7 +135,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
 		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
 		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
-		setConstraintTeleport(new GridConstraint(Grid.PRECENTAGE_TELEPORTS, excluded));
+		setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
 	}
 	
 	private void setEmptyConstraints(){		

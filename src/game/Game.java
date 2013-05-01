@@ -60,38 +60,6 @@ public class Game {
 	 */
 	private PowerManager powerManager;
 
-	
-	//TODO: to be removed, need to refactor the tests.
-	/**
-	 *Constructs a new board-based game.
-	 * 
-	 * @param 	hSize		
-	 * 			the horizontal size of the board
-	 * @param 	vSize	
-	 * 			the vertical size of the board
-	 */
-	protected Game(int hSize, int vSize){
-		// Build the grid
-		AbstractGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize);
-		this.setGrid(gridBuilder.getGrid());
-		
-
-		// Add players
-		this.players = new ArrayList<Player>();
-		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
-		Square topRight = grid.getSquare(new Coordinate(hSize-1, 0));
-		addPlayer(new Player(bottomLeft, 1));
-		addPlayer(new Player(topRight, 2));
-		
-		this.powerManager = new PowerManager(getGrid());
-		
-		// Start the game
-		start();
-		setCurrentPlayer(players.get(0));
-	}
-	
-	
-	//TODO: get start position from grid instead of with coordinate
 	/**
 	 *Constructs a new board-based game with a given grid.
 	 *

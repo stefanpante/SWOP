@@ -61,7 +61,12 @@ public class Grid {
 	/**
 	 * Percentage of squares with a teleport.
 	 */
-	public static float PRECENTAGE_TELEPORTS = 0.03f;
+	public static float PERCENTAGE_TELEPORTS = 0.03f;
+
+    /**
+     * Percentage of squares with a ForceFieldGenerator
+     */
+    public static float PERCENTAGE_FORCEFIELDGENERATORS = 0.07f;
 	
 	private HashMap<Coordinate, Square> grid;
 	
