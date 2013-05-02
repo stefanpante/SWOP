@@ -33,17 +33,14 @@ public class ForceField extends Field {
      * Current actions remaining.
      */
     private int remainingActions = ACTIONS_ON;
-    
-    /**
-     * Current state of the ForceField.
-     */
-    private boolean active = true;
+
 
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException("Cannot add square to this ForceField: the square is invalid.");
 		getSquares().add(square);
+        square.addField(this);
 	}
 	
 	/**
@@ -56,36 +53,23 @@ public class ForceField extends Field {
 		
 		return true;
 	}
-	
-	/**
-	 * Checks if the ForceField is active.
-	 * 
-	 * @return	True	If active
-	 * 			False	If inactive
-	 */
-	public boolean isActive() {
-		return this.active;
-	}
-	
+
 	
 	/**
 	 * Turns the force field off.
 	 */
 	private void turnOff(){
-		this.active = false;
+        setActive(false);
 		this.remainingActions = ACTIONS_ON;
-		
-		for (Square square: getSquares())
-			square.removeField(this);
 	}
 	
 	/**
 	 * Turns the force field on.
 	 */
 	private void turnOn(){
-		this.active = true;
+		setActive(true);
 		this.remainingActions = ACTIONS_OFF;
-		
+
 		for (Square square: getSquares())
 			square.addField(this);
 	}

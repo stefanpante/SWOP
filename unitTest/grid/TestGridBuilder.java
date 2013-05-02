@@ -180,6 +180,7 @@ public class TestGridBuilder {
 	@Test
 	public void testEmptyGrid() {
 		this.gridBuilder = new RandomGridBuilder();
+		this.grid = this.gridBuilder.getGrid();
 		
 		Iterator<Square> iterator = grid.getAllSquares().iterator();
 		
