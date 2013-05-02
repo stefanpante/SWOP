@@ -111,10 +111,4 @@ public abstract class MultiSquare {
         return squares.hashCode();
     }
 
-    @Override
-    public String toString() {
-        return "MultiSquare{" +
-                "squares=" + squares +
-                '}';
-    }
 }
