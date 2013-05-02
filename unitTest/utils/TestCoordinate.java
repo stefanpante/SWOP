@@ -119,5 +119,41 @@ public class TestCoordinate {
 		assertTrue(allNeighbors.contains(neighborEast));
 		assertEquals(8, allNeighbors.size());
 	}
+	
+	 @Test
+	    public void coordinateTest(){
+	        Coordinate c1 = new Coordinate(2,6);
+	        Coordinate c2 = new Coordinate(4,8);
+	        assertEquals(c1.directionTo(c2), Direction.SOUTHEAST);
+	    }
+
+	    @Test
+	    public void coordinate2Test(){
+	        Coordinate c1 = new Coordinate(2,6);
+	        Coordinate c2 = new Coordinate(4,8);
+	        assertEquals(c2.directionTo(c1), Direction.NORTHWEST);
+	    }
+
+	    @Test
+	    public void coordinate3Test(){
+	        Coordinate c1 = new Coordinate(1,6);
+	        Coordinate c2 = new Coordinate(2,6);
+	        assertEquals(c1.directionTo(c2), Direction.EAST);
+	    }
+
+	    @Test
+	    public void coordinate4Test(){
+	        Coordinate c1 = new Coordinate(1,6);
+	        Coordinate c2 = new Coordinate(2,6);
+	        assertEquals(c2.directionTo(c1), Direction.WEST);
+	    }
+
+
+	    @Test
+	    public void coordinate5Test(){
+	        Coordinate c1 = new Coordinate(1,1);
+	        Coordinate c2 = new Coordinate(4,4);
+	        System.out.println(c1.getCoordinatesTo(c2));
+	    }
 
 }
