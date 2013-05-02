@@ -1,5 +1,6 @@
 package item;
 
+import effect.MovableEffect;
 import effect.player.PlayerEffect;
 import item.visitor.VisitableItem;
 
@@ -8,7 +9,7 @@ import item.visitor.VisitableItem;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  **/
-public abstract class Item implements VisitableItem, PlayerEffect {
+public abstract class Item implements VisitableItem, MovableEffect {
 	
 	/**
 	 * Notifies the item that it has been used.

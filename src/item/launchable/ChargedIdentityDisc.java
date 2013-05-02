@@ -15,8 +15,6 @@ public class ChargedIdentityDisc extends IdentityDisc {
 		super();
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
-	
-
 
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {

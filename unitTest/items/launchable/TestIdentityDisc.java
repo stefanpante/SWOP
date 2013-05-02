@@ -1,9 +1,8 @@
 package items.launchable;
 
 import static org.junit.Assert.*;
-import item.Item;
+
 import item.launchable.IdentityDisc;
-import item.launchable.LaunchableItem;
 
 import org.junit.Before;
 import org.junit.Test;

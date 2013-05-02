@@ -2,6 +2,7 @@ package square.power;
 
 import java.util.ArrayList;
 
+import effect.MovableEffect;
 import effect.player.PlayerEffect;
 import square.Direction;
 import square.power.failure.PrimaryPowerFail;
@@ -12,7 +13,7 @@ import util.Rotation;
  * 
  * @author vincent
  */
-public abstract class Power implements PlayerEffect {
+public abstract class Power implements MovableEffect {
 
 	/**
 	 * Remaining turns the power will last.

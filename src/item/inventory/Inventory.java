@@ -1,5 +1,6 @@
 package item.inventory;
 
+import effect.MovableEffect;
 import effect.player.PlayerEffect;
 import game.Player;
 import item.Item;
@@ -15,7 +16,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public abstract class Inventory implements PlayerEffect {
+public abstract class Inventory implements MovableEffect {
 
 	/**
 	 * The size of the inventory, should not be smaller than zero

@@ -3,12 +3,10 @@ package gui;
 import java.util.HashMap;
 
 import gui.button.DirectionalButton;
-import item.launchable.LaunchableItem;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
 import square.Direction;
-import util.OConstants;
 
 public class ThrowPad extends DirectionalPad {
 

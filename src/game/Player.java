@@ -5,6 +5,7 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
+import effect.MovableEffect;
 import move.Movable;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -259,8 +260,8 @@ public class Player implements Obstacle, Movable {
 	}
 
     @Override
-    public void getsAffectedBy(Square square) {
-        square.affect(this);
+    public void getsAffectedBy(MovableEffect effect) {
+        effect.affect(this);
     }
 
     public void setPosition(Square position) throws IllegalStateException {

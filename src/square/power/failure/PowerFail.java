@@ -1,6 +1,8 @@
 package square.power.failure;
 
 import game.Player;
+import item.launchable.IdentityDisc;
+import move.Movable;
 import square.power.Power;
 import util.Rotation;
 
@@ -24,7 +26,17 @@ abstract class PowerFail extends Power {
 	}
 
     @Override
+    public void affect(Movable movable){
+        movable.getsAffectedBy(this);
+    }
+
+    @Override
     public void affect(Player player) {
         player.decrementActions();
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc){
+        identityDisc.decreaseRange();
     }
 }
