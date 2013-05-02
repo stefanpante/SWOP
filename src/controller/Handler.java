@@ -187,7 +187,7 @@ public abstract class Handler {
 	protected HashMap<String, Object> getProperties(){
 		HashMap<String, Object> properties = new HashMap<String, Object>();
 		
-		HashMap<Power, Coordinate> powerFailures   = new HashMap<Power, Coordinate>();
+		ArrayList<Coordinate> powerFailures   = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
 		HashMap<Coordinate, ArrayList<Item>> items = new HashMap<Coordinate, ArrayList<Item>>();
@@ -201,7 +201,7 @@ public abstract class Handler {
 			Square square = getGame().getGrid().getSquare(coordinate);
 			
 			if(square.getPower().isFailing())
-				powerFailures.put(square.getPower(), coordinate);
+				powerFailures.add(coordinate);
 
 			boolean player_position = false;
 			

@@ -115,6 +115,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	@Override
 	public void setup(){
 		standardFont = new PFont(this.getFont(), true);
+		System.out.println(color(51,51,51));
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
 		// Loads all the shapes used.
@@ -333,8 +334,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
     private void initInterface(){
-        int w = 50 * hCells;
-        int h = 50 * vCells;
+        int w = 60 * hCells;
+        int h = 60 * vCells;
         if(h >= displayHeight - 150){
             float sw = (displayHeight - 150)/ vCells;
             h = displayHeight - 150;
@@ -555,8 +556,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			HashMap<Player,Coordinate> players = (HashMap<Player,Coordinate>) o;
 			this.grid.setPlayers(players);
 		}else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
-			HashMap<Power,Coordinate> pfs = (HashMap<Power, Coordinate>) o;
-			this.grid.setPowerFails(new ArrayList<Coordinate>(pfs.values()));
+			this.grid.setPowerFails((ArrayList<Coordinate>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
 			this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
@@ -585,7 +585,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
 			grid.setItems(items);
 		}
-		grid.resetGrid();
+		grid.updateItems();
 
 
 	}

@@ -28,6 +28,10 @@ public class OConstants {
 	public static int LIGHT_GREY = -3355444;
 	
 	/**
+	 * 
+	 */
+	public static int POWERFAIL_COLOR = -13421773;
+	/**
 	 * The color of the red player.
 	 */
 	public static int PLAYERRED = -48060;

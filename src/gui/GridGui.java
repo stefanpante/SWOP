@@ -4,6 +4,7 @@ import game.Player;
 import gui.button.DirectionalButton;
 
 import item.Item;
+import item.Teleport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -264,12 +265,26 @@ public class GridGui extends GUIElement{
 	}
 
 	/**
-	 * sets the position of powerfailures
+	 * sets the position of powerFailures
 	 * @param o
 	 */
 	public void setPowerFails(ArrayList<Coordinate> o) {
+		resetPowerFailures();
 		this.powerfail_coors = o;
+		updatePowerFailures();
 
+	}
+	
+	private void resetPowerFailures(){
+		for(SquareGUI s: squares.values()){
+			s.setColor(OConstants.LIGHTER_GREY);
+		}
+	}
+	
+	private void updatePowerFailures(){
+		for(Coordinate coor: powerfail_coors){
+			squares.get(coor).setColor(OConstants.POWERFAIL_COLOR);
+		}
 	}
 
 
@@ -355,9 +370,10 @@ public class GridGui extends GUIElement{
 	
 	public void setItems(HashMap<Coordinate,ArrayList<Item>> items){
 		this.items_ = items;
+		this.updateItems();
 	}
 	
-	public void resetGrid(){
+	public void updateItems(){
 		items.clear();
 		for(Coordinate coor: items_.keySet()){
 			ArrayList<Item> it = items_.get(coor);
@@ -372,24 +388,25 @@ public class GridGui extends GUIElement{
 			
 			if(it.size() >= 2){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setShape(Shapes.items);
+				if(containsTeleport(it)){
+					s.setShape(Shapes.teleportItem);
+				}
+				else{
+					s.setShape(Shapes.items);
+				}
 				items.put(coor, s);
+			}
+		}
+	}
+	
+	private boolean containsTeleport(ArrayList<Item> items){
+		for(Item item: items){
+			if(item instanceof Teleport){
+				return true;
 			}
 		}
 		
-		for(Coordinate coor: powerfail_coors){
-			if(items.containsKey(coor)){
-				SquareGUI s = items.get(coor);
-				s.setShape(Shapes.powerFailureItem);
-			}
-			
-			else{
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setShape(Shapes.powerFail);
-				items.put(coor, s);
-			}
-			
-		}
+		return false;
 	}
 	
 	public DirectionalPad getDirectionalPad(){
