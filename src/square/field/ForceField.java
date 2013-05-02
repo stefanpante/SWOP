@@ -3,6 +3,7 @@ package square.field;
 import java.util.Observable;
 import java.util.Observer;
 
+import item.ForceFieldGenerator;
 import square.Square;
 
 /**
@@ -11,7 +12,7 @@ import square.Square;
  * 
  * @author Vincent
  */
-public class ForceField extends Field implements Observer{
+public class ForceField extends Field {
 	
 	/**
 	 * Maximum length of a Force Field.
@@ -89,8 +90,7 @@ public class ForceField extends Field implements Observer{
 			square.addField(this);
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
+	public void increaseActions() {
 		this.remainingActions--;
 		
 		if(isActive() && this.remainingActions <= 0) 
@@ -99,4 +99,6 @@ public class ForceField extends Field implements Observer{
 		if(!isActive() && this.remainingActions <= 0)
 			this.turnOff();
 	}
+
+
 }

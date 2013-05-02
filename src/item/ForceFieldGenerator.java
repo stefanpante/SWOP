@@ -4,7 +4,6 @@ import game.Player;
 
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
-import item.launchable.IdentityDisc;
 import move.Movable;
 
 import java.util.Observable;

@@ -1,6 +1,5 @@
-package item.launchable;
+package item;
 
-import item.Item;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 

@@ -1,7 +1,7 @@
 package square.field;
 
 import game.Player;
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
 import move.Movable;
 import move.MovableEffect;
 import square.MultiSquare;

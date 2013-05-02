@@ -93,4 +93,21 @@ public abstract class MultiSquare {
     public int getLength() {
         return getSquares().size();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MultiSquare that = (MultiSquare) o;
+
+        if (!squares.equals(that.squares)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return squares.hashCode();
+    }
 }

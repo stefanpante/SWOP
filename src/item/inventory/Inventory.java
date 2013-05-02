@@ -3,8 +3,8 @@ package item.inventory;
 import move.Movable;
 import move.MovableEffect;
 import game.Player;
+import item.IdentityDisc;
 import item.Item;
-import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 

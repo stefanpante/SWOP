@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import game.Game;
 import grid.GridProvider;
@@ -67,8 +68,14 @@ public class EndTurnHandlerTest {
 		Direction direction = getValidMoveDirection(game);
 		
 		//Move in a valid direction.
-		moveHandler.move(direction);		
-		assertTrue(endTurnHandler.hasMoved());		
+		try{
+			moveHandler.move(direction);		
+			assertTrue(endTurnHandler.hasMoved());	
+		}
+		catch(Exception e){
+			fail("Shouldn't have thrown an exception");
+		}
+			
 	}
 
 
@@ -107,6 +114,7 @@ public class EndTurnHandlerTest {
 		Direction direction = getValidMoveDirection(game);
 		
 		//Move in a valid direction.
+		try{
 		moveHandler.move(direction);		
 		
 		assertTrue(endTurnHandler.checkToProceed());
@@ -118,19 +126,26 @@ public class EndTurnHandlerTest {
 		endTurnHandler.endTurn();
 		
 		assertEquals(nextPlayer, game.getCurrentPlayer());
+		}
+		catch(Exception e){
+			fail("MoveHandler shouldn't throw an exception");
+		}
 	}
 	
 	/**
 	 * Tests what happens if the player ends a turn without moving.
 	 * Should throw an exception to notify loss of player.
 	 */
-	@Test(expected=IllegalStateException.class)
+	// cannot expect a general exception
 	public void endTurnWithoutMoving(){
 		Player player = game.getCurrentPlayer();
 		assertTrue(endTurnHandler.checkToProceed());
 		
 		endTurnHandler.confirm(true);
-		endTurnHandler.endTurn();
+		try {
+			endTurnHandler.endTurn();
+			fail("Should throw an exception");
+		} catch (Exception e) {	}
 	}
 	
 	/**
@@ -151,13 +166,24 @@ public class EndTurnHandlerTest {
 		Square square = game.getGrid().getNeighbor(player.getPosition(), direction);
 		
 		MoveHandler moveHandler = new MoveHandler(game, null);
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("Shouldn't throw an exception");
+		}
 		
 		square.setPower(new PrimaryPowerFail());
 		assertTrue(square.getPower().isFailing());
 		
 		endTurnHandler.confirm(true);
-		endTurnHandler.endTurn();
+		
+		try {
+			endTurnHandler.endTurn();
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail("EndTurnHandler shouldn't throw an exception");
+		}
 		
 		// 2) Move the second player and  then endTurn.
 		assertEquals(game.getCurrentPlayer(), otherPlayer);
@@ -165,12 +191,22 @@ public class EndTurnHandlerTest {
 		direction = getValidMoveDirection(game);
 		square = game.getGrid().getNeighbor(otherPlayer.getPosition(), direction);
 		
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e1) {
+			fail("MoveHandler Shouldn't throw an exception");
+			e1.printStackTrace();
+		}
 		
 		// Sometimes player has already been switched because of move to PowerFailure.
 		if(game.getCurrentPlayer().equals(otherPlayer)) {
 			endTurnHandler.confirm(true);
-			endTurnHandler.endTurn();
+			try {
+				endTurnHandler.endTurn();
+			} catch (Exception e) {
+				e.printStackTrace();
+				fail("EndTurnHandler shouldn't throw an exception");
+			}
 		}
 		
 		// Test: Check if the first player is on a power failed square and starts with 1 less action.

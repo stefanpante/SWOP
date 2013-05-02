@@ -2,8 +2,8 @@ package controller;
 
 import game.Game;
 import game.Player;
+import item.IdentityDisc;
 import item.Item;
-import item.launchable.IdentityDisc;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

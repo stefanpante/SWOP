@@ -7,9 +7,9 @@ import game.Game;
 import grid.Grid;
 import grid.GridProvider;
 
+import item.ChargedIdentityDisc;
+import item.IdentityDisc;
 import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 
@@ -78,10 +78,20 @@ public class LaunchableScenarioTest {
 		game.getPowerManager().clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e) {
+			fail("MoveHandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 
 		// Try to pick up the identity disc, should succeed
-		pickUpHandler.pickUp(id);
+		try {
+			pickUpHandler.pickUp(id);
+		} catch (Exception e) {
+			fail("MoveHandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(currentPlayer.getInventory().hasItem(id));
 
 	}
@@ -100,18 +110,29 @@ public class LaunchableScenarioTest {
 		game.getPowerManager().clearPowerFailures();
 
 		// move into the direction that the Identitydisc is situated
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e) {
+			fail("MoveHandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 
 		// Try to pick up the identity disc, should succeed
-		pickUpHandler.pickUp(id);
+		try {
+			pickUpHandler.pickUp(id);
+		} catch (Exception e) {
+			fail("PickUpHandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(currentPlayer.getInventory().hasItem(id));
 
 	}
 	/**
 	 * Move to a square without an identity disc and try to pick it up, should cause an exception
+	 * @throws Exception 
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void pickUpIdentityDiscEmpty(){
+	@Test(expected = Exception.class)
+	public void pickUpIdentityDiscEmpty() throws Exception{
 		Player currentPlayer = game.getCurrentPlayer();
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
@@ -127,8 +148,8 @@ public class LaunchableScenarioTest {
 
 	}
 
-	@Test(expected = IllegalStateException.class)
-	public void pickUpChargedDiskEmpty(){
+	@Test(expected = Exception.class)
+	public void pickUpChargedDiskEmpty() throws Exception{
 		Player currentPlayer = game.getCurrentPlayer();
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
@@ -168,7 +189,12 @@ public class LaunchableScenarioTest {
 			// throw the identitydisc in the given direction
 			
 			Square position = game.getCurrentPlayer().getPosition();
-			throwLaunchableHandler.throwLaunchable(id,direction);
+			try {
+				throwLaunchableHandler.throwLaunchable(id,direction);
+			} catch (Exception e) {
+				fail("ThrowLaunchableHander shouldn't throw an exception");
+				e.printStackTrace();
+			}
 			position = game.getGrid().getNeighbor(position, direction);
 			position = game.getGrid().getNeighbor(position, direction);
 			position = game.getGrid().getNeighbor(position, direction);
@@ -192,7 +218,12 @@ public class LaunchableScenarioTest {
 			// throw the identitydisc in the given direction
 			
 			Square position = game.getCurrentPlayer().getPosition();
-			throwLaunchableHandler.throwLaunchable(id,direction);
+			try {
+				throwLaunchableHandler.throwLaunchable(id,direction);
+			} catch (Exception e) {
+				fail("ThrowLaunchableHander shouldn't throw an exception");
+				e.printStackTrace();
+			}
 			position = game.getGrid().getNeighbor(position, direction);
 			position = game.getGrid().getNeighbor(position, direction);
 			position = game.getGrid().getNeighbor(position, direction);
@@ -206,9 +237,10 @@ public class LaunchableScenarioTest {
 	
 	/**
 	 * Try to throw a identitydisc which isn't in the players inventory.
+	 * @throws Exception 
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void throwDiskNotInPlayer(){
+	@Test(expected = Exception.class)
+	public void throwDiskNotInPlayer() throws Exception{
 		
 		throwLaunchableHandler.throwLaunchable(new IdentityDisc(), Direction.NORTH);
 	}
@@ -231,7 +263,12 @@ public class LaunchableScenarioTest {
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id);
 		// throw the identitydisc in the given direction
-		throwLaunchableHandler.throwLaunchable(id,Direction.NORTH);
+		try {
+			throwLaunchableHandler.throwLaunchable(id,Direction.NORTH);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,0)).getInventory().hasItem(id));
 
 		// new identity disc
@@ -239,7 +276,12 @@ public class LaunchableScenarioTest {
 		// Player should have identitydisc in inventory
 		game.getCurrentPlayer().getInventory().addItem(id2);
 		// throw the identitydisc in the given direction
-		throwLaunchableHandler.throwLaunchable(id2,Direction.SOUTH);
+		try {
+			throwLaunchableHandler.throwLaunchable(id2,Direction.SOUTH);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(game.getGrid().getSquare(new Coordinate(4,9)).getInventory().hasItem(id2));
 
 
@@ -261,7 +303,12 @@ public class LaunchableScenarioTest {
 		Player player = game.getCurrentPlayer();
 		game.getCurrentPlayer().getInventory().addItem(id3);
 		// throw the identitydisc in the given direction
-		throwLaunchableHandler.throwLaunchable(id3,Direction.WEST);
+		try {
+			throwLaunchableHandler.throwLaunchable(id3,Direction.WEST);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,0)).getInventory().hasItem(id3));
 
 	}
@@ -287,7 +334,12 @@ public class LaunchableScenarioTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 
-		throwLaunchableHandler.throwLaunchable(id, Direction.EAST);
+		try {
+			throwLaunchableHandler.throwLaunchable(id, Direction.EAST);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(game.getGrid().getSquare(new Coordinate(5,4)).getInventory().hasItem(id));
 
 	}
@@ -315,7 +367,12 @@ public class LaunchableScenarioTest {
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 
-		ih.throwLaunchable(id, Direction.EAST);
+		try {
+			ih.throwLaunchable(id, Direction.EAST);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(game.getGrid().getSquare(new Coordinate(8,4)).getInventory().hasItem(id));
 	}
 
@@ -338,7 +395,12 @@ public class LaunchableScenarioTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		throwLaunchableHandler.throwLaunchable(id, Direction.WEST);
+		try {
+			throwLaunchableHandler.throwLaunchable(id, Direction.WEST);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,4)).getInventory().hasItem(id));
 		
 
@@ -363,7 +425,12 @@ public class LaunchableScenarioTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		// throw the identity disc at the other player
-		ih.throwLaunchable(id, Direction.NORTH);
+		try {
+			ih.throwLaunchable(id, Direction.NORTH);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 
 		// Assert the effect of the identityDisc
 		assertTrue(game.getNextPlayer().getPosition().getInventory().hasItem(id));
@@ -392,7 +459,12 @@ public class LaunchableScenarioTest {
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		// throw the identity disc at the other player
-		throwLaunchableHandler.throwLaunchable(id, Direction.WEST);
+		try {
+			throwLaunchableHandler.throwLaunchable(id, Direction.WEST);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 
 		// Assert the effect of the identityDisc
 		assertTrue(game.getNextPlayer().getPosition().getInventory().hasItem(id));
@@ -420,12 +492,17 @@ public class LaunchableScenarioTest {
 		Teleport teleport2 = new Teleport();
 		s1.getInventory().addItem(teleport);
 		s2.getInventory().addItem(teleport2);
-		teleport.setDestination(teleport2);
+		teleport.setDestination(s2);
 		
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		ih.throwLaunchable(id, Direction.NORTH);
+		try {
+			ih.throwLaunchable(id, Direction.NORTH);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		// Get the square were the disc should land.
 		assertTrue(game.getGrid().getSquare(new Coordinate(3,4)).getInventory().hasItem(id));
 	}
@@ -443,16 +520,26 @@ public class LaunchableScenarioTest {
 		// add a teleporter 
 		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
 		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
+		
 		Teleport teleport = new Teleport();
 		Teleport teleport2 = new Teleport();
-		teleport.setDestination(teleport2);
+		
 		s1.getInventory().addItem(teleport);
 		s2.getInventory().addItem(teleport2);
+		
+		
+		teleport.setDestination(s2);
+		
 		
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		ih.throwLaunchable(id, Direction.NORTH);
+		try {
+			ih.throwLaunchable(id, Direction.NORTH);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		// Get the square were the disc should land.
 		assertTrue(game.getGrid().getSquare(new Coordinate(3,0)).getInventory().hasItem(id));
 	}
@@ -476,7 +563,12 @@ public class LaunchableScenarioTest {
 		IdentityDisc id = new IdentityDisc();
 		game.getCurrentPlayer().getInventory().addItem(id);
 		
-		ih.throwLaunchable(id, Direction.NORTH);
+		try {
+			ih.throwLaunchable(id, Direction.NORTH);
+		} catch (Exception e) {
+			fail("ThrowLaunchableHander shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		// Get the square were the disc should land.
 		assertTrue(game.getGrid().getSquare(new Coordinate(0,6)).getInventory().hasItem(id));
 	}

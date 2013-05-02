@@ -17,10 +17,11 @@ public class GridProvider {
 	public static Grid getGrid(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
 			ArrayList<Coordinate> lightGrenades, 
 			ArrayList<Coordinate> identityDisks, 
-			ArrayList<Coordinate> teleports, 
-			Coordinate chargedIdentityDisk) {
+			ArrayList<Coordinate> teleports,
+            ArrayList<Coordinate> forceFieldGen,
+            Coordinate chargedIdentityDisk) {
 		
-		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports, null, chargedIdentityDisk);
+		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports, forceFieldGen, chargedIdentityDisk);
 		
 		return gridBuilder.getGrid();
 	}

@@ -60,8 +60,8 @@ public class MoveHandlerTest {
 	 * Move to the west, northwest, south west, south and south east should cause an IllegalStateException for player 1
 	 * Move to the east, northeast, south east, north and north west should cause an IllegalStateException for player 2
 	 */
-	@Test(expected = NoSuchElementException.class) 
-	public void testIllegalMove(){
+	@Test(expected = Exception.class) 
+	public void testIllegalMove() throws Exception{
 		
 		// For the first player, all these moves should throw an NoSuchElementException
 		moveHandler.move(Direction.WEST);
@@ -135,7 +135,12 @@ public class MoveHandlerTest {
 		lg.activate();
 		
 		// move to the square containing the active LightGrenade
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e) {
+			fail("Movehandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		
 		if(!(currentPlayer.getPosition().getPower().isFailing()))
@@ -165,7 +170,12 @@ public class MoveHandlerTest {
 		lg.activate();
 		
 		// Move to the next square
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e) {
+			fail("Movehandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		// Test the effect of the LightGrenade
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		System.out.println(currentPlayer.getRemainingActions());
@@ -175,8 +185,8 @@ public class MoveHandlerTest {
 	/**
 	 * Tests a move to a square were a wall is positioned
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void testMoveToWall(){
+	@Test(expected = Exception.class)
+	public void testMoveToWall() throws Exception{
 		Square position  = game.getCurrentPlayer().getPosition();
 		Square eastNeighbor = game.getGrid().getNeighbor(position, Direction.EAST);
 		Square neighborOfEastNeighbor = game.getGrid().getNeighbor(eastNeighbor, Direction.EAST);
@@ -193,8 +203,8 @@ public class MoveHandlerTest {
 	/**
 	 * Tests a move to a square were the lightTrial of another player is positioned
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void testMoveToLightTrail(){
+	@Test(expected = Exception.class)
+	public void testMoveToLightTrail() throws Exception{
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		
 		// Search for a square that isn't obstructed
@@ -211,9 +221,10 @@ public class MoveHandlerTest {
 	
 	/**
 	 * Tests a move to a square were another player is situated
+	 * @throws Exception 
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void testMoveToOtherPlayer() {
+	@Test(expected = Exception.class)
+	public void testMoveToOtherPlayer() throws Exception {
 		Player otherPlayer =  game.getNextPlayer();
 		
 		/* 	Search a neighboring square of the other player position where the current player
@@ -250,7 +261,12 @@ public class MoveHandlerTest {
 		next.setPower(new PrimaryPowerFail());
 		
 		// Move to the square with the PowerFailure
-		moveHandler.move(direction);
+		try {
+			moveHandler.move(direction);
+		} catch (Exception e) {
+			fail("Movehandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		
 		// Test the effect of the PowerFailure
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
@@ -271,11 +287,12 @@ public class MoveHandlerTest {
 		
 		game.getNextPlayer().move(next);
 		
+		Square square = game.getNextPlayer().getPosition();
 		// to remove the lighttrail 
-		game.getNextPlayer().alertObservers();
-		game.getNextPlayer().alertObservers();
-		game.getNextPlayer().alertObservers();
-		game.getNextPlayer().alertObservers();
+		game.getNextPlayer().getLightTrail().setHead(square);
+		game.getNextPlayer().getLightTrail().setHead(square);
+		game.getNextPlayer().getLightTrail().setHead(square);
+		game.getNextPlayer().getLightTrail().setHead(square);
 	
 		game.getCurrentPlayer().move(game.getNextPlayer().getStartPosition());
 		
@@ -296,14 +313,21 @@ public class MoveHandlerTest {
 		Teleport teleport = new Teleport();
 		Teleport teleportDestination = new Teleport();
 		
-		teleport.setDestination(teleportDestination);
-		teleportDestination.setDestination(teleport);
-		
-		// We have 2 squares. Now we place the teleport items.
 		squareOne.getInventory().addItem(teleport);
 		squareTwo.getInventory().addItem(teleportDestination);
 		
-		moveHandler.move(directionOne);
+		teleport.setDestination(squareTwo);
+		teleportDestination.setDestination(squareOne);
+		
+		// We have 2 squares. Now we place the teleport items.
+		
+		
+		try {
+			moveHandler.move(directionOne);
+		} catch (Exception e) {
+			fail("MoveHandler shouldn't throw an exception");
+			e.printStackTrace();
+		}
 		
 		// Player should now be on SquareTwo
 		assertEquals(game.getCurrentPlayer().getPosition(), squareTwo);
