@@ -33,7 +33,7 @@ public class TestLightGrenade {
 		LightGrenade it = new LightGrenade();
 		it.drop();
 		it.activate();
-		assertTrue(it.getState().equals(LightGrenade.LightGrenadeState.ACTIVE));
+		assertTrue(it.isActive());
 	}
 	
 	@Test(expected = IllegalStateException.class)
@@ -53,17 +53,16 @@ public class TestLightGrenade {
 		LightGrenade it = new LightGrenade();
 		it.drop();
 		it.activate();
-		assertTrue(it.getState().equals(LightGrenade.LightGrenadeState.ACTIVE));
 		assertTrue(it.isActive());
 		it.deactivate();
-		assertTrue(it.getState().equals(LightGrenade.LightGrenadeState.INACTIVE));
+		assertFalse(it.isActive());
 	}
 	
 	@Test(expected = IllegalStateException.class)
 	public void testStateChangeActive2() {
 		LightGrenade it = new LightGrenade();
 		it.activate();
-		assertTrue(it.getState().equals(LightGrenade.LightGrenadeState.ACTIVE));
+		assertTrue(it.isActive());
 		it.activate();
 	}
 	
@@ -72,8 +71,8 @@ public class TestLightGrenade {
 		LightGrenade it = new LightGrenade();
 		it.drop();
 		it.activate();
-		assertTrue(it.getState().equals(LightGrenade.LightGrenadeState.ACTIVE));
+		assertTrue(it.isActive());
 		it.wearOut();
-		assertTrue(it.getState().equals(LightGrenade.LightGrenadeState.WORN));
+		assertTrue(it.isWornOut());
 	}
 }

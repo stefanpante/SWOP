@@ -37,12 +37,12 @@ public class PlayerActions {
 		player.pickUp(lightGrenade);
 		
 		assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS - 1);
-		assertTrue(lightGrenade.getState().equals(LightGrenadeState.INACTIVE));
+		assertFalse(lightGrenade.isActive());
 		
 		player.useItem(lightGrenade);
 		
 		assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS - 2);
-		assertTrue(lightGrenade.getState().equals(LightGrenadeState.DROPPED));
+		assertTrue(lightGrenade.isDropped());
 	}
 
 }

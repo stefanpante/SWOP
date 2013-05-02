@@ -179,7 +179,7 @@ public class LightGrenade extends Item {
     /**
 	 * The state of the LightGrenade.
 	 */
-	public enum LightGrenadeState {
+	private enum LightGrenadeState {
 		ACTIVE,
 		INACTIVE,
 		DROPPED,
