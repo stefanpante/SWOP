@@ -145,6 +145,10 @@ public class Square implements MovableEffect {
 			return obstacle != null;
 	}
 
+    public boolean isCoveredByField(){
+        return getAllFields().size() > 0;
+    }
+
     @Override
     public void affect(Movable movable) {
         getInventory().affect(movable);
