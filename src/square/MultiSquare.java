@@ -3,9 +3,8 @@ package square;
 import java.util.ArrayList;
 
 /**
- * User: jonas
- * Date: 02/05/13
- * Time: 16:47
+ * Abstract class that functions as a container for multiple squares.
+ * This is used for MultiObstacle and Field.
  */
 public abstract class MultiSquare {
 

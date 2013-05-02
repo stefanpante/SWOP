@@ -10,9 +10,8 @@ import square.Square;
 import java.util.ArrayList;
 
 /**
- * User: jonas
- * Date: 02/05/13
- * Time: 16:27
+ * A field is a collection of several squares,
+ * with an effect on moveables.
  */
 public abstract class Field extends MultiSquare implements MovableEffect {
 

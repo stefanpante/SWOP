@@ -157,9 +157,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setConstraintForceFieldGenerator(new GridConstraint());
 	}
 	
-
-	
-	
 	/**
 	 * Returns a list of coordinates representing a wall.
 	 * 
