@@ -281,6 +281,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			}
 		}
 		AStar aStar = new AStar(getGrid());
+		if(getGrid().getStartPlayerOne() == null || getGrid().getStartPlayerTwo() == null){
+			throw new IllegalStateException(" There should be a startposition for both players");
+		}
 		aStar.shortestPath(getGrid().getStartPlayerOne(), getGrid().getStartPlayerTwo());
 	}
 
