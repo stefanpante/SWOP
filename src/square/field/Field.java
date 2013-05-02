@@ -16,6 +16,35 @@ import java.util.ArrayList;
  */
 public abstract class Field extends MultiSquare implements MovableEffect {
 
+
+    /**
+     * Current state of the ForceField.
+     */
+    private boolean active = true;
+
+    /**
+     * Checks if the ForceField is active.
+     *
+     * @return	True	If active
+     * 			False	If inactive
+     */
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active){
+        for (Square square: getSquares()){
+            if(active){
+                square.addField(this);
+            }else{
+                square.removeField(this);
+            }
+        }
+        this.active = active;
+
+
+    }
+
     @Override
     public void affect(Movable movable) {
         movable.getsAffectedBy(this);
