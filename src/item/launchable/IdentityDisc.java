@@ -17,7 +17,7 @@ import square.Direction;
  *
  */
 @NotNull
-public class IdentityDisc extends Item implements MovableEffect {
+public class IdentityDisc extends Item implements MovableEffect, Movable {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.

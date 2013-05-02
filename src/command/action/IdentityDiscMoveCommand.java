@@ -1,5 +1,6 @@
 package command.action;
 
+import item.launchable.IdentityDisc;
 import game.Game;
 import move.Movable;
 import square.Direction;
@@ -14,11 +15,13 @@ import square.Square;
  */
 public class IdentityDiscMoveCommand extends MoveCommand {
 
+	private IdentityDisc id ;
     /**
      * Moves the player into a certain direction.
      */
-    public IdentityDiscMoveCommand(Game game, Movable movable, Square startSquare, Direction dir) {
-        super(game, movable, startSquare, dir);
+    public IdentityDiscMoveCommand(Game game, IdentityDisc id, Square startSquare, Direction dir) {
+        super(game, id, startSquare, dir);
+        this.id = id;
     }
 
     @Override
@@ -33,6 +36,6 @@ public class IdentityDiscMoveCommand extends MoveCommand {
     @Override
     protected void afterGameCommand() throws Exception {
         //See for solution
-        getCurrentPosition().getInventory().remove(getMovable());
+        getCurrentPosition().getInventory().removeItem(id);
     }
     }
