@@ -32,9 +32,8 @@ public class ForceFieldManager implements Observer {
     }
 
     private void addForceField(ForceField forceField){
-        if(!canHaveAsForceField(forceField))
-            throw  new IllegalArgumentException("The given ForceField already ejava.lang.Objectxists!");
-        this.forceFields.add(forceField);
+        if(canHaveAsForceField(forceField))
+            this.forceFields.add(forceField);
     }
 
     private boolean canHaveAsForceField(ForceField forceField) {
@@ -49,11 +48,12 @@ public class ForceFieldManager implements Observer {
         return forceFields.contains(forceField);
     }
 
-
-
     @Override
     public void update(Observable o, Object arg) {
-
+        for(ForceField forceField : forceFields){
+            forceField.increaseActions();
+        }
+        detectForceFields();
     }
 
     private void detectForceFields(){
