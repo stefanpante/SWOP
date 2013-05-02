@@ -57,6 +57,12 @@ public class ForceFieldGenerator extends Item implements Observer{
 			return true;
 		return false;
 	}
+	
+	public boolean isForceFieldGenerator(Item item){
+		if(item instanceof ForceFieldGenerator)
+			return true;
+		return false;
+	}
 
     @Override
     public void affect(Player player) {

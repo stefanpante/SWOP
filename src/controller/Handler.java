@@ -211,6 +211,8 @@ public abstract class Handler {
 
 			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
 				lightGrenades.add(coordinate);
+			
+			if(square.getInventory().hasForceFieldGenerator()){
 
 			for(IdentityDisc id : square.getInventory().getIdentityDiscs()){
 				if(id.isCharged()){
