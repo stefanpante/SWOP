@@ -228,8 +228,9 @@ public class Coordinate {
         coordinates.add(this);
         Coordinate neighbor = getNeighbor(direction);
         while(!neighbor.equals(coordinate)){
+            System.out.println(neighbor);
             coordinates.add(neighbor);
-            neighbor = getNeighbor(direction);
+            neighbor = neighbor.getNeighbor(direction);
         }
         coordinates.add(coordinate);
         return coordinates;
@@ -241,8 +242,8 @@ public class Coordinate {
         if(equals(coordinate))
             throw  new IllegalArgumentException("The given squares are the same.");
 
-        int xDiff = getX() - coordinate.getX();
-        int yDiff = getY() - coordinate.getY();
+        int xDiff = coordinate.getX() - getX();
+        int yDiff = coordinate.getY() - getY();
         boolean straight = (xDiff == 0 || yDiff == 0);
         boolean diagonal = (xDiff == yDiff || xDiff == -yDiff);
 
