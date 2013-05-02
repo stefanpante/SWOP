@@ -3,6 +3,7 @@
  */
 package command.action;
 
+import item.launchable.IdentityDisc;
 import square.Direction;
 import square.Square;
 import game.Game;
@@ -15,20 +16,21 @@ import grid.TrajectoryMediator;
  */
 public class ThrowLaunchableCommand extends ActionCommand {
 
-	private LaunchableItem launchableItem;
+	private IdentityDisc disc;
 	private Direction direction;
 	
 	/**
 	 * @param game
 	 */
-	public ThrowLaunchableCommand(Game game, LaunchableItem launchableItem, Direction direction) {
+	public ThrowLaunchableCommand(Game game, IdentityDisc disc, Direction direction) {
 		super(game);
-		this.launchableItem = launchableItem;
+		
+		this.disc = disc;
 		this.direction = direction;
 	}
 	
-	private LaunchableItem getLaunchableItem(){
-		return this.launchableItem;
+	private IdentityDisc getDisc(){
+		return this.disc;
 	}
 	
 	private Direction getDirection(){
@@ -39,10 +41,10 @@ public class ThrowLaunchableCommand extends ActionCommand {
 	@Override
 	protected void beforeGameCommand() {
 		// Check all parameters.
-		if(!getGame().getCurrentPlayer().getInventory().hasItem(getLaunchableItem())){
+		if(!getGame().getCurrentPlayer().getInventory().hasItem(getDisc())){
 			throw new IllegalStateException("Player can't throw a Launchable that isn't in his inventory!");
 		}
-		if(!getLaunchableItem().isValidTravelDirection(getDirection())){
+		if(!getDisc().isValidTravelDirection(getDirection())){
 			throw new IllegalStateException("Player can't throw a Launchable in the direction: " + getDirection());
 		}
 	}
@@ -54,12 +56,12 @@ public class ThrowLaunchableCommand extends ActionCommand {
 		// Construct a new trajectory mediator.
 		TrajectoryMediator trajectoryMediator = new TrajectoryMediator(getGame().getGrid());
 		// determine the end position of the launchable item
-		Square endSquare = trajectoryMediator.getEndSquare(currentPosition, getDirection(), getLaunchableItem().getRange());
+		Square endSquare = trajectoryMediator.getEndSquare(currentPosition, getDirection(), getDisc().getRange());
 		
 		// remove the launchable from the players inventory
-		getGame().getCurrentPlayer().useItem(getLaunchableItem());
+		getGame().getCurrentPlayer().useItem(getDisc());
 		// add the launchable to the square's inventory.
-		endSquare.getInventory().addItem(launchableItem);		
+		endSquare.getInventory().addItem(disc);		
 		
 		// Checks for a hit on another player.
 		for(Player player: getGame().getOtherPlayers()){

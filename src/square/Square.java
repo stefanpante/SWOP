@@ -1,7 +1,7 @@
 package square;
 
 
-import effect.MovableEffect;
+import move.MovableEffect;
 import effect.player.PlayerEffect;
 import game.Player;
 import item.inventory.SquareInventory;

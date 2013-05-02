@@ -1,7 +1,6 @@
 package item.launchable;
 
-import effect.MovableEffect;
-import effect.player.PlayerEffect;
+import move.MovableEffect;
 import game.Player;
 import item.Item;
 
@@ -18,7 +17,7 @@ import square.Direction;
  *
  */
 @NotNull
-public class IdentityDisc implements MovableEffect {
+public class IdentityDisc extends Item implements MovableEffect {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.

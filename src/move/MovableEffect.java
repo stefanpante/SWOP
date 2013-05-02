@@ -1,4 +1,4 @@
-package effect;
+package move;
 
 import game.Player;
 import item.launchable.IdentityDisc;

@@ -1,7 +1,6 @@
 package item;
 
-import effect.MovableEffect;
-import effect.player.PlayerEffect;
+import move.MovableEffect;
 import item.visitor.VisitableItem;
 
 /**
