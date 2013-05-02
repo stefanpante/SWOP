@@ -28,6 +28,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setRandom(new Random());
 		setSquares();
 		setEmptyConstraints();
+		getGrid().setStartPlayerOne(getGrid().getSquare(getPlayerOneCoordinate()));
+		getGrid().setStartPlayerTwo(getGrid().getSquare(getPlayerTwoCoordinate()));
 	}
 	
 	/**
