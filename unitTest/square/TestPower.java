@@ -22,7 +22,7 @@ public class TestPower {
 	 * After a square receives a powerfailure state.
 	 * The state must become regular after 3 turns.
 	 */
-	@Test
+	@Test(expected=IllegalStateException.class)
 	public void testPowerFailure() {
 		Square square = new Square();
 		square.setPower(new PrimaryPowerFail());
