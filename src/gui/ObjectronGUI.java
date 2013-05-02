@@ -15,6 +15,7 @@ import java.util.HashMap;
 import controlP5.Button;
 import controlP5.CColor;
 import controlP5.ControlP5;
+import controlP5.Textarea;
 import controlP5.Textfield;
 import controller.GameHandler;
 import processing.core.PApplet;
@@ -175,6 +176,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		filepick.setColor(color);
 		filepick.setColorLabel(OConstants.WHITE);
 		filepick.setColorBackground(OConstants.PLAYERBLUE);
+		
+		Textarea area = inputController.addTextarea("Warning", "Please make sure your Gridfile is valid!", hSize/4, 220, hSize/2, 100);
+		
 		
 		 
 
