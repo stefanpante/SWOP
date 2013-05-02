@@ -82,7 +82,14 @@ public class TeleportScenarioTest {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
+		Square nextToTeleport = game.getGrid().getSquare(new Coordinate(0,7));
+		game.getCurrentPlayer().setPosition(nextToTeleport);
+		
 		moveHandler.move(Direction.NORTH);
+		
+		Coordinate coord = game.getGrid().getCoordinate(game.getCurrentPlayer().getPosition());
+		System.out.println(coord);
+		
 		assertEquals(game.getCurrentPlayer().getPosition(), squareTwo);
 	}
 	
@@ -112,7 +119,7 @@ public class TeleportScenarioTest {
 		game.getPowerManager().clearPowerFailures();
 		
 		Item item = new IdentityDisc();
-		squareTwo.getInventory().addItem(item);
+		game.getGrid().getStartPlayerOne().getInventory().addItem(item);
 		
 		moveHandler.move(Direction.NORTH);
 		pickUpHandler.pickUp(item);
