@@ -47,16 +47,6 @@ public abstract class AbstractGridBuilder {
 	private GridConstraint constraintWall;
 	
 	/**
-	 * The start position of the first player.
-	 */
-	private Square startPlayer1;
-	
-	/**
-	 * The start position of the second player.
-	 */
-	private Square startPlayer2;
-	
-	/**
 	 * The grid which has been/will be  built.
 	 */
 	private Grid grid;
@@ -115,52 +105,7 @@ public abstract class AbstractGridBuilder {
 		this.random = random;
 	}
 
-    /**
-     * Adds the squares to the grid.
-     */
-    protected abstract void setSquares();
-	
-	/**
-	 * Check whether the given list of coordinates satisfies the given constraint
-	 * 
-	 * @param 	coordinates
-	 * 			The list of coordinates to be checked
-	 * @param 	constraint
-	 * 			The constraint to be satisfied
-	 * @return	True if and only if the given list satisfies the given constraint
-	 */
-    @Deprecated
-	protected boolean satisfiesConstraint(ArrayList<Coordinate> coordinates, GridConstraint constraint){
-		if(coordinates == null || constraint == null)
-			return false;
-		float percentage = (float) coordinates.size() / (float) getAmountOfSquares();
-		boolean[] includes = new boolean[constraint.getIncluded().size()];
-		if(percentage > constraint.getPercentage())
-			return false;
-		for(Coordinate coordinate : coordinates){
-			if(getGrid().getSquare(coordinate).isObstructed())
-				return false;
-			if(constraint.getExcluded().contains(coordinate))
-				return false;
-			int i = 0;
-			for(ArrayList<Coordinate> include : constraint.getIncluded()){
-				if(include.contains(coordinate))
-					includes[i] = true;
-				i++;
-			}
-		}
-		for(boolean b : includes){
-			if(!b)
-				return false;
-		}
-		return true;
-	}
-	
-	@Deprecated
-    protected int getAmountOfSquares(){
-		return getGrid().getHSize()*getGrid().getVSize();
-	}
-
+    
 	/**
 	 * Place an item on the given coordinate
 	 * 
@@ -175,53 +120,7 @@ public abstract class AbstractGridBuilder {
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
 		square.getInventory().addItem(item);
 	}
-
-    /**
-     * Sets the start position of the first player
-     * @param square
-     */
-	protected void setPlayerOneStart(Square square){
-		this.startPlayer1 = square;
-	}
-
-    /**
-     * Sets the start position of the second player
-     * @param square
-     */
-	protected void setPlayerTwoStart(Square square){
-		this.startPlayer2 = square;
-	}
-
-    /**
-     * returns the start position of the first player
-     */
-	public Square getPlayerOneStart(){
-		return this.startPlayer1;
-	}
-
-    /**
-     * returns the start position of the second player
-     */
-	public Square getPlayerTwoStart(){
-		return this.startPlayer2;
-	}
-
-    public Coordinate getPlayerOneCoordinate(){
-        return this.getGrid().getCoordinate(startPlayer1);
-    }
-
-
-
-    public Coordinate getPlayerTwoCoordinate(){
-        return this.getGrid().getCoordinate(startPlayer1);
-    }
-
-    /**
-     * Checks whether the built grid is valid
-     * @return
-     */
-	public abstract boolean isConsistent();
-
+	
     /**
      * Returns the constraint for the teleports.
      * @return
@@ -281,12 +180,8 @@ public abstract class AbstractGridBuilder {
 		this.constraintWall = constraintWall;
 	}
 
-    /**
-     * Builds the grids
-     * @throws IllegalStateException
-     */
-	protected abstract void build() throws IllegalStateException;
-
+	
+	
     /**
      * Sets the maximum horizontal size of the grid ( in squares)
      * @param hSize
@@ -349,7 +244,7 @@ public abstract class AbstractGridBuilder {
 	}
 
 
-    protected int getRandomIndex(ArrayList a){
+    protected int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
         return getRandom().nextInt(a.size());
     }
 
@@ -379,8 +274,6 @@ public abstract class AbstractGridBuilder {
 
         // Keep adding coordinates from candidates until max is reached
         while(coordinates.size() < max){
-            // null in candidates?
-            System.out.println(candidates.size());
             Coordinate candidate = candidates.get(getRandomIndex(candidates));
             coordinates.add(candidate);
             candidates.remove(candidate);
@@ -396,7 +289,6 @@ public abstract class AbstractGridBuilder {
      * 			The coordinates where to place the walls
      */
     protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
-        System.out.println(walls == null);
         if(!getConstraintWall().satisfiesConstraint(flatten(walls), getGrid()))
             throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
         for(ArrayList<Coordinate> sequence : walls){
@@ -502,7 +394,7 @@ public abstract class AbstractGridBuilder {
      *
      * @return A coordinate equally far away from each player
      */
-    protected Coordinate chargedIdentityDiskLocation() {
+    protected Coordinate getChargedIdentityDiskLocation() {
         Square player1Square = getGrid().getSquare(getPlayerOneCoordinate());
         Square player2Square = getGrid().getSquare(getPlayerTwoCoordinate());
         Map.Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
@@ -527,5 +419,22 @@ public abstract class AbstractGridBuilder {
         }
         return shortest.getKey();
     }
+    
+    /**
+     * Adds the squares to the grid.
+     */
+    protected abstract void setSquares();
+
+    /**
+     * Builds the grids
+     * @throws IllegalStateException
+     */
+	protected abstract void build() throws IllegalStateException;
+	
+
+    public abstract Coordinate getPlayerOneCoordinate();
+    public abstract Coordinate getPlayerTwoCoordinate();
+
+
 	
 }

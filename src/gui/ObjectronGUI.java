@@ -290,10 +290,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			drawInventories();
 			drawButtons(); 
 			showRemainingActions();
-			showMessage();
+			
 			confirmEndTurn();
 
 		}
+		showMessage();
 	}
 
 
@@ -305,12 +306,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
     private void setUpGame(String filePath){
+    	try {
         obj = new GameHandler(this);
         obj.startNewGame(filePath);
         hCells = obj.getGame().getGrid().getHSize();
         vCells = obj.getGame().getGrid().getVSize();
         initInterface();
         obj.fireChanges();
+    	}
+    	catch(Exception e){
+    		//initializeInput();
+    		inputController.show();
+    	}
 
     }
 	private void setUpGame(){

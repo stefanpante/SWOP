@@ -24,16 +24,6 @@ import be.kuleuven.cs.som.annotate.Raw;
 public class Grid {
 	
 	/**
-	 * The minimum vertical size is 10 squares.
-	 */
-	public static final int MIN_VSIZE = 10;
-	
-	/**
-	 * The minimum horizontal size is 10 squares.
-	 */
-	public static final int MIN_HSIZE = 10;
-	
-	/**
 	 * Minimal length of a wall
 	 */
 	public static final int SMALLEST_WALL_LENGTH = 2;

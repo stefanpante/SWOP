@@ -104,9 +104,13 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		placeLightGrenade(randomLocations(getConstraintLightGrenade()));
 		placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
 		placeTeleports(randomLocations(getConstraintTeleport()));
-		placeChargedIdentityDisk(chargedIdentityDiskLocation());
-		getGrid().setStartPlayerOne(this.getPlayerOneStart());
-        getGrid().setStartPlayerTwo(this.getPlayerTwoStart());
+		placeChargedIdentityDisk(getChargedIdentityDiskLocation());
+		
+		Square sq = getGrid().getSquare(this.getPlayerOneCoordinate());
+		Square sq2 = getGrid().getSquare(this.getPlayerTwoCoordinate());
+		
+		getGrid().setStartPlayerOne(sq);
+        getGrid().setStartPlayerTwo(sq2);
 		
 	}
 
@@ -116,12 +120,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		placeIdentityDisk(identityDisks);
 		placeTeleports(teleports);
 		placeChargedIdentityDisk(chargedIdentityDisk);
-		if(!isConsistent()){
-			throw new IllegalStateException("The built grid is not valid");
-		}
-
-        getGrid().setStartPlayerOne(this.getPlayerOneStart());
-        getGrid().setStartPlayerTwo(this.getPlayerTwoStart());
+		
+		Square sq = getGrid().getSquare(getPlayerOneCoordinate());
+		Square sq2 = getGrid().getSquare(getPlayerTwoCoordinate());
+		
+        getGrid().setStartPlayerOne(sq);
+        getGrid().setStartPlayerTwo(sq2);
 	}
 	
 
@@ -242,11 +246,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return coordinates;
 	}
 
-	@Override
-	public Square getPlayerOneStart(){
-		return getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
-	}
-
     public Coordinate getPlayerOneCoordinate(){
         return new Coordinate(0, getGrid().getVSize() -1);
     }
@@ -254,19 +253,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     public Coordinate getPlayerTwoCoordinate(){
         return new Coordinate(getGrid().getHSize()-1, 0);
     }
-	
-	@Override
-	public Square getPlayerTwoStart(){
-		return getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
-	}
-	
-	@Override
-	public boolean isConsistent() {
-		// TODO Auto-generated method stub
-		return true;
-		
-	}
-	
+
 	/**
 	 * Finds a random list of sequences of coordinates that follow the given constraint.
 	 * 
@@ -306,7 +293,5 @@ public class RandomGridBuilder extends AbstractGridBuilder{
             }
         }
     }
-
-
 
 }
