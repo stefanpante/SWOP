@@ -1,14 +1,12 @@
 package item;
 
 import static org.junit.Assert.*;
-import item.Item;
-import item.LightGrenade;
-import item.LightGrenadeState;
 
+import item.LightGrenade;
 import org.junit.Before;
 import org.junit.Test;
 
-import player.Player;
+import game.Player;
 import square.Square;
 
 /**
@@ -37,12 +35,12 @@ public class PlayerActions {
 		player.pickUp(lightGrenade);
 		
 		assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS - 1);
-		assertTrue(lightGrenade.getState().equals(LightGrenadeState.INACTIVE));
+		assertFalse(lightGrenade.isActive());
 		
 		player.useItem(lightGrenade);
 		
 		assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS - 2);
-		assertTrue(lightGrenade.getState().equals(LightGrenadeState.DROPPED));
+		assertTrue(lightGrenade.isDropped());
 	}
 
 }

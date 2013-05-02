@@ -2,6 +2,7 @@ package game;
 
 import static org.junit.Assert.assertEquals;
 
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -14,9 +15,7 @@ import controller.TurnHandler;
 import org.junit.Before;
 import org.junit.Test;
 
-import command.AbstractGameEvent;
-
-import player.Player;
+import game.Player;
 import square.Direction;
 import square.Square;
 import square.power.failure.PrimaryPowerFail;
@@ -40,8 +39,6 @@ public class EndTurnHandlerTest {
 		
 		endTurnHandler = new EndTurnHandler(game, null);
 		turnHandler = new TurnHandler(game, null);
-		
-		AbstractGameEvent.setObserver(turnHandler);
 	}
 	
 	/**

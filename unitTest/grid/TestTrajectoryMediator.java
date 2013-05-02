@@ -6,8 +6,6 @@ import item.Teleport;
 
 import java.util.ArrayList;
 
-import move.MoveMediator;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 

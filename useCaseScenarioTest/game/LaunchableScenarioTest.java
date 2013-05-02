@@ -2,6 +2,7 @@ package game;
 
 import static org.junit.Assert.*;
 
+
 import game.Game;
 import grid.Grid;
 import grid.GridProvider;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import player.Player;
+import game.Player;
 import square.Direction;
 import square.Square;
 import square.obstacle.Wall;
