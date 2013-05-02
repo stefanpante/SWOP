@@ -221,7 +221,7 @@ public class MoveCommandTest {
         Coordinate co5_0 = new Coordinate(5,0);
         Square startSquare = grid.getSquare(co5_0);
         startSquare.getInventory().addItem(id);
-        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.NORTH);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.WEST);
         try {
             m.execute();
         } catch (Exception e) {
