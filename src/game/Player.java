@@ -6,11 +6,9 @@ package game;
 import be.kuleuven.cs.som.annotate.Basic;
 
 import move.Movable;
-import move.MoveMediator;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
-import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Obstacle;
@@ -68,9 +66,6 @@ public class Player implements Obstacle, Movable {
 	 * The amount of action a player has during one move
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 4;
-	
-
-	private MoveMediator moveMediator;
 	
 		
 	/**
@@ -262,15 +257,25 @@ public class Player implements Obstacle, Movable {
 		this.startPosition = pos;
 		addSquare(startPosition);
 	}
-	
-	public void setPosition(Square position){
-		if(!isValidPosition(position))
+
+    @Override
+    public void getsAffectedBy(Square square) {
+        square.affect(this);
+    }
+
+    public void setPosition(Square position) throws IllegalStateException {
+        if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
 		removeSquare(this.getPosition());
 		addSquare(position);
 	}
 
-	/**
+    @Override
+    public int getRange() {
+        return 1;
+    }
+
+    /**
 	 * Sets an inventory for the player
 	 * @param 	inventory 
 	 * 			The new inventory for the player.
@@ -507,20 +512,5 @@ public class Player implements Obstacle, Movable {
 	@Override
 	public String toString() {
 		return "Player " + this.getID();
-	}
-
-	@Override
-	public void doMove(Square currentSquare, Direction direction) {
-		getMoveMediator().getEndSquare(currentSquare, direction, 1);
-	}
-
-	@Override
-	public void setMoveMediator(MoveMediator moveMediator) {
-		this.moveMediator = moveMediator;
-	}
-
-	@Override
-	public MoveMediator getMoveMediator() {
-		return moveMediator;
 	}
 }
