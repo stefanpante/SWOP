@@ -60,7 +60,7 @@ public class ForceFieldGenerator extends Item implements Observer{
 		return false;
 	}
 	
-	public boolean isForceFieldGenerator(Item item){
+	public static boolean isForceFieldGenerator(Item item){
 		if(item instanceof ForceFieldGenerator)
 			return true;
 		return false;

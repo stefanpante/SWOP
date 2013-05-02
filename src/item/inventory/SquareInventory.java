@@ -96,6 +96,15 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 			}
 		return null;
 	}
+	
+	public boolean hasForceFieldGenerator(){
+		for(Item item: getAllItems()){
+			if(ForceFieldGenerator.isForceFieldGenerator(item)){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Returns the string representation
