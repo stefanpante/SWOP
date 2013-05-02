@@ -1,8 +1,6 @@
 package game;
 
-import grid.AbstractGridBuilder;
 import grid.Grid;
-import grid.RandomGridBuilder;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -10,9 +8,6 @@ import java.util.Map.Entry;
 import notnullcheckweaver.NotNull;
 import square.Direction;
 import square.Square;
-import square.obstacle.LightTrail;
-import util.AStar;
-import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
 
@@ -299,7 +294,7 @@ public class Game extends Observable {
 	}
 
     public void notifyAction(){
-        hasChanged();
+        setChanged();
         notifyObservers();
     }
 }

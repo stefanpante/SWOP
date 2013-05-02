@@ -67,7 +67,7 @@ public class Player implements Obstacle, Movable {
 	/**
 	 * The amount of action a player has during one move
 	 */
-	public static final int MAX_ALLOWED_ACTIONS = 14;
+	public static final int MAX_ALLOWED_ACTIONS = 4;
 	
 		
 	/**
@@ -356,7 +356,6 @@ public class Player implements Obstacle, Movable {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
-		
 	}
 	
 
