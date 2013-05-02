@@ -115,6 +115,13 @@ public class MoveCommandTest {
         Square startSquare = grid.getSquare(co0_9);
         startSquare.getInventory().addItem(id);
         MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.EAST);
+        try {
+    		m.execute();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		fail("Move Command shouldn't throw an exception");
+    		
+    	}
         Square expectedSquare = grid.getSquare(new Coordinate(3,9));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
     }
@@ -129,6 +136,13 @@ public class MoveCommandTest {
         Square startSquare = grid.getSquare(co0_9);
         startSquare.getInventory().addItem(cd);
         MoveCommand m = new IdentityDiscMoveCommand(g,cd,startSquare, Direction.NORTH);
+        try {
+    		m.execute();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		fail("Move Command shouldn't throw an exception");
+    		
+    	}
         Square expectedSquare = grid.getSquare(new Coordinate(0,0));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(cd));
     }
@@ -144,6 +158,13 @@ public class MoveCommandTest {
         Square startSquare = grid.getSquare(co0_9);
         Player player = g.getCurrentPlayer();
         MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.NORTH);
+        try {
+    		m.execute();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		fail("Move Command shouldn't throw an exception");
+    		
+    	}
         assertEquals(player, grid.getSquare(new Coordinate(0, 8)).getObstacle());
     }
 
@@ -156,6 +177,13 @@ public class MoveCommandTest {
         Square startSquare = grid.getSquare(co0_9);
         Player player = g.getCurrentPlayer();
         MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.NORTHEAST);
+        try {
+    		m.execute();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		fail("Move Command shouldn't throw an exception");
+    		
+    	}
         assertEquals(player,grid.getSquare(new Coordinate(1,8)).getObstacle());
     }
 
@@ -168,6 +196,13 @@ public class MoveCommandTest {
         Square startSquare = grid.getSquare(co0_9);
         Player player = g.getCurrentPlayer();
         MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.EAST);
+        try {
+    		m.execute();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		fail("Move Command shouldn't throw an exception");
+    		
+    	}
         assertEquals(player,grid.getSquare(new Coordinate(1,9)).getObstacle());
     }
 }

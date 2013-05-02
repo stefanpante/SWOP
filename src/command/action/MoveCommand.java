@@ -112,7 +112,6 @@ public class MoveCommand extends ActionCommand {
 		//NOOP
 	}
 	public void move(){
-		System.out.println("Move");
 		setCurrentPosition(getStartPosition());
 		int currentRange = 0;
 		Square currentSquare;
@@ -120,7 +119,6 @@ public class MoveCommand extends ActionCommand {
 		do{
 			try {
 				currentSquare = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
-				System.out.println(getGame().getGrid().getCoordinate(currentSquare));
 				movable.setPosition(currentSquare);
 				setPrevPosition(getCurrentPosition());
 				setCurrentPosition(currentSquare);
