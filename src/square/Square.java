@@ -7,12 +7,15 @@ import item.inventory.SquareInventory;
 
 import item.launchable.IdentityDisc;
 import move.Movable;
+import square.field.Field;
 import square.obstacle.Obstacle;
 import square.power.Power;
 import square.power.RegularPower;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
+
+import java.util.ArrayList;
 
 /**
  * Square class
@@ -37,6 +40,11 @@ public class Square implements MovableEffect {
 	 */
 	@Nullable
 	private Obstacle obstacle;
+
+    /**
+     * The fields of this Square.
+     */
+    ArrayList<Field> fields = new ArrayList<Field>();
 	
 	/**
 	 * Zero argument constructor for a square.
@@ -105,6 +113,18 @@ public class Square implements MovableEffect {
 	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
 		this.obstacle = obstacle;
 	};
+
+    public void addField(Field field){
+        fields.add(field);
+    }
+
+    public void removeField(Field field){
+        fields.remove(field);
+    }
+
+    public ArrayList<Field> getAllFields(Field field){
+        return new ArrayList<Field>(this.fields);
+    }
 	
 	@Override
 	public String toString() {
@@ -140,4 +160,6 @@ public class Square implements MovableEffect {
     public void affect(IdentityDisc identityDisc) {
         // Double dispatch is called on the lower level
     }
+
+
 }
