@@ -72,6 +72,11 @@ public class TeleportScenarioTest {
 		
 		teleport.setDestination(squareTwo);
 		teleportDestination.setDestination(squareOne);
+		
+		// Place players
+		Square nextToTeleport = game.getGrid().getSquare(new Coordinate(0,7));
+		game.getCurrentPlayer().setPosition(nextToTeleport);
+		
 	}
 	/**
 	 * Move a player onto a teleporter. Assert that the player is moved to the other square that is part
@@ -81,9 +86,6 @@ public class TeleportScenarioTest {
 	public void basicTeleporterTest() throws Exception {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
-		
-		Square nextToTeleport = game.getGrid().getSquare(new Coordinate(0,7));
-		game.getCurrentPlayer().setPosition(nextToTeleport);
 		
 		moveHandler.move(Direction.NORTH);
 		
@@ -119,7 +121,7 @@ public class TeleportScenarioTest {
 		game.getPowerManager().clearPowerFailures();
 		
 		Item item = new IdentityDisc();
-		game.getGrid().getStartPlayerOne().getInventory().addItem(item);
+		squareTwo.getInventory().addItem(item);
 		
 		moveHandler.move(Direction.NORTH);
 		pickUpHandler.pickUp(item);
@@ -137,7 +139,7 @@ public class TeleportScenarioTest {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
-		game.getNextPlayer().move(squareTwo);
+		game.getNextPlayer().setPosition(squareTwo);
 		moveHandler.move(Direction.NORTH);
 	}
 	
@@ -156,7 +158,7 @@ public class TeleportScenarioTest {
 		
 		assertTrue(lt.contains(squareOne));
 		assertTrue(lt.contains(game.getCurrentPlayer().getStartPosition()));
-		assertTrue(lt.contains(squareOne));
+		assertTrue(lt.contains(squareTwo));
 	}
 
 }
