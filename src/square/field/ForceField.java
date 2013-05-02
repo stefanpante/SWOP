@@ -12,7 +12,7 @@ import square.Square;
  * 
  * @author Vincent
  */
-public class ForceField extends Field implements Observer{
+public class ForceField extends Field {
 	
 	/**
 	 * Maximum length of a Force Field.
@@ -90,8 +90,7 @@ public class ForceField extends Field implements Observer{
 			square.addField(this);
 	}
 	
-	@Override
-	public void update(Observable o, Object arg) {
+	public void increaseActions() {
 		this.remainingActions--;
 		
 		if(isActive() && this.remainingActions <= 0) 
