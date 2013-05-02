@@ -1,6 +1,5 @@
 package move;
 
-import effect.MovableEffect;
 import square.Square;
 
 public interface Movable {

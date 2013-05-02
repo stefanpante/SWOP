@@ -2,8 +2,7 @@ package square.power;
 
 import java.util.ArrayList;
 
-import effect.MovableEffect;
-import effect.player.PlayerEffect;
+import move.MovableEffect;
 import square.Direction;
 import square.power.failure.PrimaryPowerFail;
 import util.Rotation;
