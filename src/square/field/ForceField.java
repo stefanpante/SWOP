@@ -1,6 +1,4 @@
-package square.obstacle;
-
-import item.ForceFieldGenerator;
+package square.field;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -78,7 +76,7 @@ public class ForceField extends Field implements Observer{
 		this.remainingActions = ACTIONS_ON;
 		
 		for (Square square: getSquares())
-			square.setObstacle(null);
+			square.removeField(this);
 	}
 	
 	/**
@@ -89,7 +87,7 @@ public class ForceField extends Field implements Observer{
 		this.remainingActions = ACTIONS_OFF;
 		
 		for (Square square: getSquares())
-			square.setObstacle(this);
+			square.addField(this);
 	}
 	
 	@Override
