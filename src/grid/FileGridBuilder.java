@@ -73,6 +73,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded));
 		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
 		setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
+		setConstraintForceFieldGenerator(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS,excluded));
 
 	}
 
@@ -93,6 +94,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
 			placeTeleports(randomLocations(getConstraintTeleport()));
 			placeChargedIdentityDisk(getChargedIdentityDiskLocation());
+			placeForceFieldGenerators(randomLocations(getConstraintForceFieldGenerator()));
 			checkConsistency();
 		}
 
