@@ -6,6 +6,8 @@ import item.Teleport;
 
 import java.util.ArrayList;
 
+import move.MoveMediator;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -67,7 +69,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare() {		
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(0,6));
@@ -79,7 +81,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare2() {		
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(3,9));
@@ -92,7 +94,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare3() {		
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, Integer.MAX_VALUE);
 		Square expectedSquare = grid.getSquare(new Coordinate(0,0));
@@ -104,7 +106,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare4() {		
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,9));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, Integer.MAX_VALUE);
 		Square expectedSquare = grid.getSquare(new Coordinate(9,9));
@@ -117,7 +119,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare5() {
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(0,0));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(1,0));
@@ -129,7 +131,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare6() {
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(3,4));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(3,2));
@@ -141,7 +143,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare7() {
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,0));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.WEST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(3,0));
@@ -153,7 +155,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare8() {
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(3,9));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, Integer.MAX_VALUE);
 		Square expectedSquare = grid.getSquare(new Coordinate(3,2));
@@ -165,7 +167,7 @@ public class TestTrajectoryMediator {
 	public void testGetEndSquare9() {
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,0));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.WEST, Integer.MAX_VALUE);
 		Square expectedSquare = grid.getSquare(new Coordinate(3,0));
@@ -184,7 +186,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(2,5));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(4,3));
@@ -204,7 +206,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(1,4));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
 		Square expectedSquare = grid.getSquare(new Coordinate(5,4));
@@ -224,7 +226,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(2,7));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, Integer.MAX_VALUE);
 		Square expectedSquare = grid.getSquare(new Coordinate(4,2));
@@ -244,7 +246,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(1,4));
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, Integer.MAX_VALUE);
 		Square expectedSquare = grid.getSquare(new Coordinate(9,4));
@@ -259,7 +261,7 @@ public class TestTrajectoryMediator {
 		RandomGridBuilder gb = new RandomGridBuilder(10, 10, walls, lightGrenades, identityDiscs, teleports, null);
 		Grid grid = gb.getGrid();
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(2,5));
 		grid.getSquare(new Coordinate(2,4)).getPower().fail();
 		Square endSquare = tm.getEndSquare(startSquare, Direction.NORTH, 3);
@@ -280,7 +282,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,7));
 		grid.getSquare(new Coordinate(6,7)).getPower().fail();
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
@@ -302,7 +304,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,7));
 		startSquare.getPower().fail();
 		Square endSquare = tm.getEndSquare(startSquare, Direction.EAST, 3);
@@ -323,7 +325,7 @@ public class TestTrajectoryMediator {
 		assertTrue(t1.getDestination().equals(t0));
 
 		
-		TrajectoryMediator tm = new TrajectoryMediator(grid);
+		MoveMediator tm = new MoveMediator(grid);
 		Square startSquare = grid.getSquare(new Coordinate(5,7));
 		startSquare.getPower().fail();
 		grid.getSquare(new Coordinate(6,7)).getPower().fail();

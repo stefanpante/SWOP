@@ -5,9 +5,12 @@ import java.util.Observable;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
+import move.Movable;
+import move.MoveMediator;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
+import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Obstacle;
@@ -21,7 +24,7 @@ import item.inventory.PlayerInventory;
  *
  */
 @NotNull
-public class Player implements Obstacle {
+public class Player implements Obstacle, Movable {
 
 	/**
 	 * The start position of this player
@@ -63,6 +66,10 @@ public class Player implements Obstacle {
 	 * The amount of action a player has during one move
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 4;
+	
+
+	private MoveMediator moveMediator;
+	
 		
 	/**
 	 * creates a new player with a given name and start position
@@ -494,5 +501,20 @@ public class Player implements Obstacle {
 	@Override
 	public String toString() {
 		return "Player " + this.getID();
+	}
+
+	@Override
+	public void doMove(Square currentSquare, Direction direction) {
+		getMoveMediator().getEndSquare(currentSquare, direction, 1);
+	}
+
+	@Override
+	public void setMoveMediator(MoveMediator moveMediator) {
+		this.moveMediator = moveMediator;
+	}
+
+	@Override
+	public MoveMediator getMoveMediator() {
+		return moveMediator;
 	}
 }
