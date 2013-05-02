@@ -1,13 +1,11 @@
 package item.inventory;
 
-import java.util.ArrayList;
-
+import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
-import item.launchable.LaunchableItem;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -21,8 +19,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	 * The maximum size 
 	 */
 	public static final double PLAYER_INVENTORY_SIZE = 6;
-
-	private ArrayList<Integer> launchableHashes;
 	
 	/**
 	 * Creates a new Player Inventory. Same as a regular inventory, 
@@ -30,8 +26,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	 */
 	public PlayerInventory() {
 		super(PLAYER_INVENTORY_SIZE);
-		
-		launchableHashes = new ArrayList<Integer>();
 	}
 	
 	@Override
@@ -89,6 +83,17 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 		super.removeItem(lightGrenade);
 	}
 
+    @Override
+    public void addForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
+        super.addItem(forceFieldGenerator);
+    }
+    @Override
+    public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
+        if(!getAllItems().contains(forceFieldGenerator))
+            throw new IllegalStateException("Cannot remove a forcefieldgenerator that isn't in the inventory");
+
+        super.removeItem(forceFieldGenerator);
+    }
 	@Override
 	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		throw new IllegalStateException("A Teleport can not be added to a players Inventory");

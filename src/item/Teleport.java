@@ -1,7 +1,10 @@
 package item;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import square.Square;
 
 /**
  * Implements a teleport with a certain destination.
@@ -14,7 +17,7 @@ public class Teleport extends Item {
 	 * The destination of this teleport.
 	 */
 	//TODO: Consideration final
-	private Teleport destination;
+	private Square destination;
 	
 	/**
 	 * Zero argument constructor that makes a new Teleport with no destination.
@@ -22,20 +25,13 @@ public class Teleport extends Item {
 	public Teleport(){
 		
 	}
-	
-	/**
-	 * Constructor that gets an initial destination as argument.
-	 */
-	public Teleport (Teleport destination) throws IllegalArgumentException {
-		setDestination(destination);
-	}
 
 	/**
 	 * The destination of this teleport.
 	 * 
 	 * @return the destination
 	 */
-	public Teleport getDestination() {
+	public Square getDestination() {
 		return destination;
 	}
 
@@ -49,8 +45,8 @@ public class Teleport extends Item {
 	 * 			If the given destination is not valid.
 	 * 			| !isValidDestination(destination) || !canHaveAsDestination(destination)
 	 */
-	public void setDestination(Teleport destination) throws IllegalArgumentException {
-		if(!isValidDestination(destination) || !canHaveAsDestination(destination))
+	public void setDestination(Square destination) throws IllegalArgumentException {
+		if(!canHaveAsDestination(destination))
 			throw new IllegalArgumentException("The given destination is not a valid one for this Teleport");
 		this.destination = destination;
 	}
@@ -64,10 +60,11 @@ public class Teleport extends Item {
 	 * @return	True if and only if the destination is not this teleport.
 	 * 			And if the given destination is not null.
 	 */
-	public boolean canHaveAsDestination(Teleport destination) {
-		if(destination == null)
+	public boolean canHaveAsDestination(Square destination) {
+		if(!isValidDestination(destination))
 			return false;
-		
+        if(!destination.getInventory().hasTeleport())
+		    return false;
 		return !destination.equals(this);
 	}
 	
@@ -78,9 +75,23 @@ public class Teleport extends Item {
 	 * 			The destination to check
 	 * @return	True if and only if the destination is not null.
 	 */
-	public static boolean isValidDestination(Teleport destination){
+	public static boolean isValidDestination(Square destination){
 		return destination != null;
 	}
+
+    /**
+     * Check whether this teleport can be used
+     *
+     * @return  True if and only if thos teleport's location
+     *          is set and not obstructed.
+     */
+    public boolean canTeleport(){
+        if(getDestination() == null)
+            return false;
+        if(getDestination().isObstructed())
+            return false;
+        return true;
+    }
 
 	@Override
 	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
@@ -115,4 +126,12 @@ public class Teleport extends Item {
 	public boolean isSameType(Item o){
 		return (o instanceof Teleport);
 	}
+
+    @Override
+    public void affect(Player player){
+        if(canTeleport()){
+            player.setPosition(getDestination());
+        }
+    }
+
 }

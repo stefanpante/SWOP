@@ -1,8 +1,13 @@
 package controller;
 
 import game.Game;
+import game.Player;
+import grid.AbstractGridBuilder;
+import grid.FileGridBuilder;
+import grid.RandomGridBuilder;
 import gui.ObjectronGUI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,6 +38,7 @@ public class GameHandler extends Handler {
 	public static final String WIN_PROPERTY 				= "Win";
 	public static final String LOSE_PROPERTY				= "Lose";
 	public static final String SQUARES_PROPERTY				= "squares";
+	public static final String FORCEFIELD_PROPERTY			= "forcefield";
 	private ObjectronGUI objectronGUI;
 	
 	
@@ -54,15 +60,7 @@ public class GameHandler extends Handler {
     public void startNewGame(int hCells, int vCells){
 		try {
 			createGame(hCells,vCells);
-			addPropertyChangeListener(objectronGUI);
-	    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
-	    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
-	    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
-	    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
-	    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
-	    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
-	    	turnHandler.startTurn();
-	    	this.populateGui();
+			initHandlers();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -70,16 +68,42 @@ public class GameHandler extends Handler {
 
     }
     
+    public void startNewGame(String filename){
+    	try{
+    		createGame(filename);
+    		initHandlers();
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
+    }
+    
+    private void initHandlers(){
+    	addPropertyChangeListener(objectronGUI);
+    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
+    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
+    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
+    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
+    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
+    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
+        try {
+            turnHandler.startTurn();
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        this.populateGui();
+    }
+    
     /**
 	 * Creates a list of coordinates where grenades, walls and players are located.
 	 * This is information that the GUI can use.
 	 */
-	private void populateGui() {
-		HashMap<String, ArrayList<Coordinate>> properties = getProperties();
-		ArrayList<Coordinate> walls = properties.get(WALLS_PROPERTY);
-		ArrayList<Coordinate> players = getPlayerLocations();
-    	walls.removeAll(players);
-    	firePropertyChange(WALLS_PROPERTY, walls);
+	public void populateGui() {
+		HashMap<String, Object> properties = getProperties();
+		HashMap<Player,Coordinate> players = getPlayerLocations();
+		
+		firePropertyChange(SQUARES_PROPERTY, properties.get(SQUARES_PROPERTY));
+    	firePropertyChange(WALLS_PROPERTY, properties.get(WALLS_PROPERTY));
     	firePropertyChange(PLAYERS_PROPERTY, players);
     	fireChanges();
 	}
@@ -136,7 +160,21 @@ public class GameHandler extends Handler {
 	 * @param vSize
 	 */
 	public void createGame(int hSize, int vSize) {
-		setGame(new Game(hSize, vSize));
+		RandomGridBuilder builder = new RandomGridBuilder(hSize, vSize);
+		setGame(new Game(builder.getGrid()));
+	}
+	
+	public void createGame(String filename){
+		FileGridBuilder builder;
+		try {
+			builder = new FileGridBuilder(filename);
+			setGame(new Game(builder.getGrid()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 }

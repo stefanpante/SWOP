@@ -165,7 +165,7 @@ public class TestGridBuilder {
 		
 		for(Teleport teleport: teleportItems) {
 			try{
-				grid.findSquare(teleport.getDestination());
+				grid.contains(teleport.getDestination());
 			}catch(Exception exc){
 				assert(false);
 			}

@@ -2,8 +2,9 @@ package controller;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameCommand;
-import event.action.EndTurnCommand;
+import command.AbstractGameCommand;
+import command.action.EndTurnCommand;
+
 
 import game.Game;
 
@@ -68,7 +69,7 @@ public class EndTurnHandler extends Handler{
 	 * 
 	 * @throws	IllegalStateException
 	 */
-	public void endTurn() throws IllegalStateException{
+	public void endTurn() throws Exception {
 		fireChanges();
 		
 		if(!isConfirmed())

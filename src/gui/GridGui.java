@@ -317,10 +317,20 @@ public class GridGui extends GUIElement{
 	 * Changes the player positions.
 	 * @param o
 	 */
-	public void setPlayers(ArrayList<Coordinate> o) {
-		players.get(0).setPosition(getPixels(o.get(0)));
-		players.get(0).setColor(OConstants.PLAYERBLUE);
-		players.get(1).setPosition(getPixels(o.get(1)));
+	public void setPlayers(HashMap<Player,Coordinate> players) {
+		this.players.clear();
+		for(Player player : players.keySet() ){
+			if(player.getID() == 1){
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(players.get(player)), gui);
+				s.setColor(OConstants.PLAYERBLUE);
+				this.players.add(s);
+			}
+			if(player.getID() == 2){
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(players.get(player)), gui);
+				s.setColor(OConstants.PLAYERRED);
+				this.players.add(s);
+			}
+		}
 
 
 

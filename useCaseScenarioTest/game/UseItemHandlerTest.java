@@ -18,9 +18,10 @@ import grid.Grid;
 import org.junit.Before;
 import org.junit.Test;
 
-import event.AbstractGameEvent;
+import command.AbstractGameCommand;
 
-import player.Player;
+
+import game.Player;
 import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
@@ -46,7 +47,7 @@ public class UseItemHandlerTest {
 		useItemHandler = new UseItemHandler(game,null);
 		turnHandler = new TurnHandler(game, null);
 		
-		AbstractGameEvent.setObserver(turnHandler);
+		AbstractGameCommand.setObserver(turnHandler);
 	}
 
 	/**

@@ -4,8 +4,9 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameCommand;
-import event.action.UseItemCommand;
+import command.AbstractGameCommand;
+import command.action.UseItemCommand;
+
 import game.Game;
 
 /**
@@ -31,7 +32,7 @@ public class UseItemHandler extends Handler {
 	 * the player uses an item that isn't in his inventory. (IllegalArgument)
 	 * Or when the player cannot use the item on the square.
 	 */
-	public void useItem(Item item) {
+	public void useItem(Item item) throws Exception {
 		fireChanges();
 		AbstractGameCommand useItemEvent = new UseItemCommand(getGame(), item);
 		useItemEvent.execute();

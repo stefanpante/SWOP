@@ -4,8 +4,9 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import event.AbstractGameCommand;
-import event.action.MoveCommand;
+import command.AbstractGameCommand;
+import command.action.MoveCommand;
+
 
 import square.Direction;
 import util.Coordinate;
@@ -29,7 +30,6 @@ public class MoveHandler extends Handler {
 		super(game, listener);
 	}
 
-
 	/**
 	 * Moves in the given direction if it's possible, if it isn't
 	 * possible, the player doesn't move but does lose an action
@@ -38,26 +38,11 @@ public class MoveHandler extends Handler {
 	 * 			The direction in which the player wants to move.
 	 * 
 	 */
-	public void move(Direction direction) throws IllegalStateException, IllegalArgumentException, NoSuchElementException {
+	public void move(Direction direction) throws Exception {
 		fireChanges();
 		AbstractGameCommand moveEvent = new MoveCommand(getGame(), direction);
 		moveEvent.execute();
-		setPropertyChanges();
 		fireChanges();
 	}
-	
-	/**
-	 * firesPropertyChanges for the GUI
-	 */
-	private void setPropertyChanges(){
-		ArrayList<Coordinate> players = new ArrayList<Coordinate>();
 
-		for(Player player : getGame().getPlayers()){
-			players.add(getGame().getGrid().getCoordinate(player.getPosition()));
-		}
-
-		firePropertyChange(GameHandler.PLAYERS_PROPERTY, players);
-		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
-		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
-	}
 }

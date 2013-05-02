@@ -61,7 +61,12 @@ public class Grid {
 	/**
 	 * Percentage of squares with a teleport.
 	 */
-	public static float PRECENTAGE_TELEPORTS = 0.03f;
+	public static float PERCENTAGE_TELEPORTS = 0.03f;
+
+    /**
+     * Percentage of squares with a ForceFieldGenerator
+     */
+    public static float PERCENTAGE_FORCEFIELDGENERATORS = 0.07f;
 	
 	private HashMap<Coordinate, Square> grid;
 	
@@ -74,6 +79,13 @@ public class Grid {
 	 * The vertical size of the grid.
 	 */
 	private int vSize;
+	
+	private Square startPlayer1;
+	
+	/**
+	 * The start position of the second player.
+	 */
+	private Square startPlayer2;
 	
 	/**
 	 * Creates a new grid with given height and length.
@@ -130,7 +142,7 @@ public class Grid {
 	 * 			| size >= Grid.MIN_HSIZE
 	 */
 	public boolean isValidHSize(int size){
-		return size >= Grid.MIN_HSIZE;
+		return size >= 0;
 	} 
 	
 	/**
@@ -144,7 +156,7 @@ public class Grid {
 	 * 			| size >= Grid.MIN_VSIZE
 	 */
 	public boolean isValidVSize(int size){
-		return size >= Grid.MIN_VSIZE;
+		return size >= 0;
 	}
 	
 	/**
@@ -286,6 +298,28 @@ public class Grid {
 					+" at coordinate " + coordinate+".");
 		}
 	}
+	
+	/**
+	 * Given a square and its neighbors, we return the direction the neighbor is in.
+	 * 
+	 * @param	square
+	 * 			The square which has the neighboring square.
+	 * @param	neighbor
+	 * 			The neighbor square you want the direction it is facing from the square.
+	 * @return	The direction the neighbor is in from the square.
+	 * @throws	IllegalArgumentException
+	 * 			If the given squares are no neighbors.
+	 */
+	public Direction getNeighborDirection(Square square, Square neighbor) throws IllegalArgumentException {
+		HashMap<Direction, Square> neighbors = getNeighbors(square);
+		
+		for(Direction direction: neighbors.keySet()) {
+			if(neighbors.get(direction) == neighbor)
+				return direction;
+		}
+		
+		throw new IllegalArgumentException("The given square is no neighbor.");
+	}
 		
 	/**
 	 * Returns the square at the given coordinate.
@@ -410,7 +444,7 @@ public class Grid {
 	/**
 	 * Checks if there is a neighbor in the given direction for the given square.
 	 * 
-	 * @param	square
+	 * @param	square	
 	 * 			The square from which the check will be executed.
 	 * @param 	direction 	
 	 * 			The direction in which the check will be executed.
@@ -533,6 +567,7 @@ public class Grid {
 	 * @throws	NoSuchElementException
 	 * 			The given destination is no finable in this grid.
 	 */
+	@Deprecated
 	public Square findSquare(Teleport destination) throws IllegalArgumentException, NoSuchElementException{
 		if(destination == null){
 			throw new IllegalArgumentException("The given destination is not a valid destination");
@@ -549,10 +584,56 @@ public class Grid {
 	}
 	
 	/**
+	 * Sets the start position of the first player
+	 * @param playerone
+	 */
+	public void setStartPlayerOne(Square playerone){
+		if(!isValidStartPosition(playerone)){
+			throw new IllegalArgumentException("The given square is not a valid startposition of the player");
+		}
+		this.startPlayer1 = playerone;
+	}
+	
+	/**
+	 * Sets the start position of the second player
+	 * @param playerTwo
+	 */
+	public void setStartPlayerTwo(Square playerTwo){
+		if(!isValidStartPosition(playerTwo)){
+			throw new IllegalArgumentException("The given square is not a valid startposition of the player");
+		}
+		this.startPlayer2 = playerTwo;
+	}
+	
+	/**
+	 * Checks if the given square is a valid start position for the player
+	 * @param player
+	 * @return
+	 */
+	public boolean isValidStartPosition(Square player){
+		return (grid.containsValue(player) && !player.isObstructed());
+	}
+	
+	/**
+	 * Returns the start square of the first player
+	 */
+	public Square getStartPlayerOne(){
+		return startPlayer1;
+	}
+	
+	/**
+	 * Returns the start square of the second player
+	 */
+	public Square getStartPlayerTwo(){
+		return startPlayer2;
+	}
+	
+	/**
 	 * Returns a string representation of the grid.
 	 */
 	@Override
 	public String toString() {
 		return "Grid (hSize="+getHSize()+", vSize" + getVSize()+")";
 	}
+
 }

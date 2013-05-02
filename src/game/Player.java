@@ -1,6 +1,6 @@
 package game;
 
-import java.util.Observable;
+
 
 
 import be.kuleuven.cs.som.annotate.Basic;
@@ -19,7 +19,9 @@ import item.Item;
 import item.inventory.PlayerInventory;
 
 /**
- * Player class
+ * A Player is a Single Obstacle with an Inventory containing items and 
+ * a Multi Obstacle Light Trail.
+ * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  *
  */
@@ -45,7 +47,7 @@ public class Player implements Obstacle, Movable {
 	/**
 	 * The player's ID.
 	 */
-	private final int ID;
+	private final int id;
 	
 	/**
 	 * The player's Light Trail
@@ -92,7 +94,7 @@ public class Player implements Obstacle, Movable {
 		
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
-		this.ID = id;
+		this.id = id;
 		this.lightTrail = new LightTrail();
 	}
 	
@@ -105,8 +107,9 @@ public class Player implements Obstacle, Movable {
 	 * 			False	If the square is null or obstructed.
 	 */
 	public static boolean isValidStartPosition(Square square) {
-		if(square == null)
+		if(square == null){
 			return false;
+        }
 		
 		if(square.isObstructed())
 			return false;
@@ -263,7 +266,6 @@ public class Player implements Obstacle, Movable {
 	public void setPosition(Square position){
 		if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
-		lightTrail.setHead(position);
 		removeSquare(this.getPosition());
 		addSquare(position);
 	}
@@ -296,7 +298,7 @@ public class Player implements Obstacle, Movable {
 	 * Returns the player's id.
 	 */
 	public int getID() {
-		return this.ID;
+		return this.id;
 	}
 
 	/**
@@ -338,19 +340,19 @@ public class Player implements Obstacle, Movable {
 	 * 		  	thrown if the player is unable to make this move 
 	 */
 	public void move(Square position) throws IllegalStateException{
+		lightTrail.setHead(getPosition());
 		setPosition(position);
 		moved = true;
 		decrementActions();
 	}
 	
 	/**
-	 * @Pre	This must be called before making an action.
-	 * 		Otherwise the currentPosition is the new one.
-	 * 
 	 * Decrements the remaining actions by one and notifies the observers of this player.
+	 * 
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+		
 	}
 	
 
@@ -439,7 +441,7 @@ public class Player implements Obstacle, Movable {
 	public void endTurn(){
 		// should perform empty action for every action left
 		while (remainingActions > 0){
-			this.setRemainingActions(remainingActions- 1);
+			decrementActions();
 			lightTrail.setHead(getPosition());
 		}
 		remainingActions += Player.MAX_ALLOWED_ACTIONS;
@@ -492,10 +494,14 @@ public class Player implements Obstacle, Movable {
 		currentPosition = null;
 	}
 	
+	/**
+	 * Returns the light trail of this player
+	 * 
+	 * @return	This player's light trail
+	 */
 	public LightTrail getLightTrail(){
 		return this.lightTrail;
 	}
-	
 
 	
 	@Override

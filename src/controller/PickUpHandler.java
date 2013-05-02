@@ -4,8 +4,9 @@ import item.Item;
 
 import java.beans.PropertyChangeListener;
 
-import event.AbstractGameCommand;
-import event.action.PickUpCommand;
+import command.AbstractGameCommand;
+import command.action.PickUpCommand;
+
 
 import game.Game;
 
@@ -32,7 +33,7 @@ public class PickUpHandler extends Handler {
 	 * otherwise he will not receive the item and will lose an action.
 	 * @param item	the item which will be picked up.
 	 */
-	public void pickUp(Item item){
+	public void pickUp(Item item) throws Exception {
 		fireChanges();
 		AbstractGameCommand pickUpEvent = new PickUpCommand(getGame(), item);
 		pickUpEvent.execute();

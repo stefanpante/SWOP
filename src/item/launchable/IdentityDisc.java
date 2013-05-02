@@ -1,10 +1,12 @@
 package item.launchable;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.Item;
+
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 import notnullcheckweaver.NotNull;
-import square.Direction;
 
 /**
  * Implementation of the item IdentityDisc
@@ -25,15 +27,6 @@ public class IdentityDisc extends LaunchableItem {
 	 */
 	public IdentityDisc() {
 		super(MAX_TRAVEL_DISTANCE);
-	}
-	
-	
-	@Override
-	public String toString() {
-		String result = super.toString() + " IdentityDisc";
-		// Removed this, because it gives a weird message in the GUI
-		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
-		return result;
 	}
 
 	@Override
@@ -69,4 +62,18 @@ public class IdentityDisc extends LaunchableItem {
 	public boolean isSameType(Item o){
 		return (o instanceof IdentityDisc);
 	}
+	
+	@Override
+	public String toString() {
+		String result = super.toString() + " IdentityDisc";
+		// Removed this, because it gives a weird message in the GUI
+		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
+		return result;
+	}
+
+    @Override
+    public void affect(Player player) {
+        // TODO: The player is only affected if the IdentityDisk hits him.
+        // player.loseTurns(1,false);
+    }
 }

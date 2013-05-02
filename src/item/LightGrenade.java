@@ -1,6 +1,6 @@
 package item;
 
-import item.LightGrenadeState;
+import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 
@@ -10,7 +10,7 @@ import item.inventory.SquareInventory;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class LightGrenade extends Item{
+public class LightGrenade extends Item {
 	
 	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	
@@ -168,5 +168,21 @@ public class LightGrenade extends Item{
 	@Override
 	public boolean isSameType(Item o){
 		return (o instanceof LightGrenade);
+	}
+
+    @Override
+    public void affect(Player player) {
+        if(isActive())
+            player.loseActions(2);
+    }
+    
+    /**
+	 * The state of the LightGrenade.
+	 */
+	public enum LightGrenadeState {
+		ACTIVE,
+		INACTIVE,
+		DROPPED,
+		WORN;
 	}
 }

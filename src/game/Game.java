@@ -1,5 +1,6 @@
 package game;
 
+import grid.AbstractGridBuilder;
 import grid.Grid;
 import grid.RandomGridBuilder;
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.Observer;
 import java.util.Random;
 import java.util.Map.Entry;
 
-import manager.ActionManager;
 import notnullcheckweaver.NotNull;
 import square.Direction;
 import square.Square;
@@ -51,43 +51,15 @@ public class Game {
 	private Player currentPlayer;
 	
 	/**
-	 * The possibility of a power failure in a square.
-	 */
-	private final float CHANCE_POWERFAILURE = 0.05f;
-	
-	
-	/**
 	 * Boolean indicating the game is over
 	 */
 	private boolean active;
-
+	
 	/**
-	 *Constructs a new board-based game.
-	 * 
-	 * @param 	hSize		
-	 * 			the horizontal size of the board
-	 * @param 	vSize	
-	 * 			the vertical size of the board
+	 * Manages the power failures in the game.
 	 */
-	public Game(int hSize, int vSize){
-		// Build the grid
-		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize);
-		this.setGrid(gridBuilder.getGrid());
-		
+	private PowerManager powerManager;
 
-		// Add players
-		this.players = new ArrayList<Player>();
-		Square bottomLeft = grid.getSquare(new Coordinate(0, vSize-1));
-		Square topRight = grid.getSquare(new Coordinate(hSize-1, 0));
-		addPlayer(new Player(bottomLeft, 1));
-		addPlayer(new Player(topRight, 2));
-		
-		// Start the game
-		start();
-		setCurrentPlayer(players.get(0));
-	}
-	
-	
 	/**
 	 *Constructs a new board-based game with a given grid.
 	 *
@@ -96,16 +68,18 @@ public class Game {
 	 * @param 	grid
 	 * 			The grid on which the game will be played.
 	 */
-	protected Game(Grid grid){
+	public Game(Grid grid){
 		// Build the grid
 		this.setGrid(grid);
 		
 		// Add players
 		this.players = new ArrayList<Player>();
-		Square bottomLeft = grid.getSquare(new Coordinate(0, grid.getVSize()-1));
-		Square topRight = grid.getSquare(new Coordinate(grid.getHSize()-1, 0));
+		Square bottomLeft = grid.getStartPlayerOne();
+		Square topRight = grid.getStartPlayerTwo();
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
+
+		this.powerManager = new PowerManager(getGrid());
 		
 		// Start the game
 		start();
@@ -118,7 +92,14 @@ public class Game {
 	 * @param grid
 	 */
 	private void setGrid(Grid grid) {
+		if(!isValidGrid(grid)){
+			throw new IllegalStateException("The given grid is not valid");
+		}
 		this.grid = grid;		
+	}
+	
+	public boolean isValidGrid(Grid grid){
+		return grid != null;
 	}
 
 	/**
@@ -279,30 +260,11 @@ public class Game {
 	}
 	
 	/**
-	 * Sets the state of any square to a PowerFailure state with a 5% chance.
+	 * Returns the power manager.
 	 */
-	public void powerFailSquares() {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		Random random = new Random();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			if(random.nextFloat() <= CHANCE_POWERFAILURE){
-				square.getPower().fail();
-				ArrayList<Square> neighbors = getGrid().getNeighborsAsList(square);
-				for(Square s: neighbors){
-					s.getPower().fail();
-				}
-			}
-		}
-		
-		// Exclude starting positions
-		Square bottomLeft = getGrid().getSquare(new Coordinate(0, getGrid().getVSize()-1));
-		Square topRight = getGrid().getSquare(new Coordinate(getGrid().getHSize()-1, 0));
-		bottomLeft.getPower().regain();
-		topRight.getPower().regain();
+	public PowerManager getPowerManager() {
+		return this.powerManager;
 	}
-	
 	
 	/**
 	 * Return if the current game is end
@@ -322,18 +284,6 @@ public class Game {
 	 */
 	public void end() {
 		this.active = false;
-	}
-	
-	/**
-	 * Clears all powerFailures, for testing purposes.
-	 */
-	public void clearPowerFailures(){
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			square.getPower().regain();
-		}
 	}
 	
 	/**

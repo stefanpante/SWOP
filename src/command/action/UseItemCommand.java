@@ -1,7 +1,7 @@
 /**
  * 
  */
-package event.action;
+package command.action;
 
 import game.Game;
 import item.Item;

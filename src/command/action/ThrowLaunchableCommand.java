@@ -1,9 +1,8 @@
 /**
  * 
  */
-package event.action;
+package command.action;
 
-import event.effect.LoseTurnEffect;
 import square.Direction;
 import square.Square;
 import game.Game;
@@ -22,7 +21,6 @@ public class ThrowLaunchableCommand extends ActionCommand {
 	
 	/**
 	 * @param game
-	 * @param args
 	 */
 	public ThrowLaunchableCommand(Game game, LaunchableItem launchableItem, Direction direction) {
 		super(game);
@@ -51,7 +49,7 @@ public class ThrowLaunchableCommand extends ActionCommand {
 	}
 	
 	@Override
-	protected void duringGameCommand() {
+	protected void duringGameCommand() throws Exception {
 		// get the start position of the launchable item
 		Square currentPosition = getGame().getCurrentPlayer().getPosition();
 		// Construct a new trajectory mediator.
@@ -67,9 +65,8 @@ public class ThrowLaunchableCommand extends ActionCommand {
 		// Checks for a hit on another player.
 		for(Player player: getGame().getOtherPlayers()){
 			if(player.getPosition() == endSquare){
-				//FIXME: Check if the values are correct.
-				LoseTurnEffect lte = new LoseTurnEffect(getGame(),player,1,true);
-				lte.execute();
+				//FIXME: Add effect to player
+
 				break;
 			}
 		}

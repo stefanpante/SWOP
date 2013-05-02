@@ -1,8 +1,5 @@
-package event.action;
+package command.action;
 
-import square.Square;
-import controller.GameHandler;
-import event.effect.LoseActionEffect;
 import game.Game;
 import game.Player;
 

@@ -1,5 +1,6 @@
 package gui;
 
+import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.launchable.ChargedIdentityDisc;
@@ -32,6 +33,8 @@ public class Shapes {
 	public static PShape powerFailureTeleportItem;
 	public static PShape teleportItem;
 	public static PShape teleport;
+	public static PShape forcefieldgenerator_off;
+	public static PShape forcefieldgGenerator_on;
 	
 
 	public Shapes(PApplet gui) {
@@ -61,6 +64,8 @@ public class Shapes {
 		Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/teleportpowerfail.svg").getPath());
 		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/teleportitems.svg").getPath());
 		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());
+		Shapes.forcefieldgenerator_off = gui.loadShape(getClass().getResource("/res/forcefield_off.svg").getPath());
+		Shapes.forcefieldgGenerator_on = gui.loadShape(getClass().getResource("/res/forcefield_on.svg").getPath());
 	}
 	
 	public static PShape getShape(Item item){
@@ -77,6 +82,16 @@ public class Shapes {
 		if(item instanceof LightGrenade){
 			return Shapes.lightgrenade;
 		}		
+		
+		
+		if(item instanceof ForceFieldGenerator){
+			ForceFieldGenerator gen = (ForceFieldGenerator) item;
+			if(gen.isActive())
+				return Shapes.forcefieldgGenerator_on;
+			else return Shapes.forcefieldgenerator_off;
+			
+		}
+		
 		return null;
 	}
 

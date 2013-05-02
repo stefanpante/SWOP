@@ -1,27 +1,26 @@
 package item.inventory;
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.Item;
+import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
-
 
 /**
  * Inventory class is used to contain items 
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
-public abstract class Inventory{
+public abstract class Inventory implements PlayerEffect {
 
 	/**
 	 * The size of the inventory, should not be smaller than zero
 	 */
 	private final double maximumSize;
-
 	
 	/**
 	 * A given size should imply the usage of an array,
@@ -29,7 +28,9 @@ public abstract class Inventory{
 	 */
 	private ArrayList<Item> items;
 
-	/**
+
+
+    /**
 	 * Creates a new instance of the Inventory class with given size.
 	 * 
 	 * @param	size	
@@ -77,7 +78,6 @@ public abstract class Inventory{
 	public boolean isFull() {
 		return this.getSize() >= this.getMaximumSize();
 	}
-
 	
 	/**
 	 * Checks if the inventory is empty.
@@ -115,7 +115,6 @@ public abstract class Inventory{
 	public ArrayList<Item> getAllItems(){
 		return new ArrayList<Item>(items);
 	}
-
 
 	/**
 	 * checks if the given item is in the inventory
@@ -183,7 +182,7 @@ public abstract class Inventory{
 		if(!this.hasItem(item)) 
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
-			items.remove(item.hashCode());
+			items.remove(item);
 	}
 
 	/**
@@ -208,4 +207,24 @@ public abstract class Inventory{
 		}
 		return description;
 	}
+	
+	public ArrayList<IdentityDisc> getIdentityDiscs(){
+		ArrayList<IdentityDisc> discs = new ArrayList<IdentityDisc>();
+		for(Item item: getAllItems()){
+			if(IdentityDisc.isIdentityDisc(item)){
+				discs.add((IdentityDisc) item);
+			}
+		}
+		
+		return discs;
+	}
+
+
+    @Override
+    public void affect(Player player) {
+        for(Item item : getAllItems()){
+            item.affect(player);
+        }
+    }
+
 }

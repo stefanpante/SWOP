@@ -1,12 +1,13 @@
 package controller;
 
-import event.AbstractGameCommand;
-import event.action.ThrowLaunchableCommand;
 import game.Game;
 
 import item.launchable.LaunchableItem;
 
 import java.beans.PropertyChangeListener;
+
+import command.AbstractGameCommand;
+import command.action.ThrowLaunchableCommand;
 
 import square.Direction;
 
@@ -27,7 +28,7 @@ public class ThrowLaunchableHandler extends Handler {
 		super(game, listener);
 	}
 	
-	public void throwLaunchable(LaunchableItem launchableItem, Direction direction){
+	public void throwLaunchable(LaunchableItem launchableItem, Direction direction) throws Exception {
 		fireChanges();
 		AbstractGameCommand throwLaunchableEvent = new ThrowLaunchableCommand(getGame(), launchableItem, direction);
 		throwLaunchableEvent.execute();

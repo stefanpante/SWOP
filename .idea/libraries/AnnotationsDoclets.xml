@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="AnnotationsDoclets">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/AnnotationsDoclets.JAR!/" />
+      <root url="jar://$PROJECT_DIR$/lib/cofoja-1.0-r139.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/controlP5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/notnullcheckweaver-weaver.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/notnullcheckweaver.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

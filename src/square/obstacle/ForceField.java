@@ -1,10 +1,7 @@
 package square.obstacle;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
-import manager.ActionManager;
 
 import square.Square;
 
@@ -18,7 +15,7 @@ public class ForceField extends MultiObstacle implements Observer {
 	private int counter;
 	
 	public ForceField(){
-		ActionManager.getInstance().addObserver(this);
+		// TODO: Observer should listen to
 	}
 	
 	@Override

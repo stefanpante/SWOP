@@ -1,7 +1,7 @@
 /**
  * 
  */
-package event;
+package command;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -31,15 +31,15 @@ public abstract class AbstractGameCommand extends Observable implements Command 
 	/**
 	 * Run this Game Event
 	 */
-	public void execute() {
+	public void execute() throws Exception {
 		beforeGameCommand();
 		duringGameCommand();
 		afterGameCommand();
 	}
 	
 	protected abstract void beforeGameCommand();
-	protected abstract void duringGameCommand();
-	protected abstract void afterGameCommand();
+	protected abstract void duringGameCommand() throws Exception;
+	protected abstract void afterGameCommand() throws Exception;
 
 	
 }

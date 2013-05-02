@@ -78,7 +78,7 @@ public class TeleportScenarioTest {
 	@Test
 	public void basicTeleporterTest(){
 		// clear all powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		moveHandler.move(Direction.NORTH);
 		assertEquals(game.getCurrentPlayer().getPosition(), squareTwo);
@@ -92,7 +92,7 @@ public class TeleportScenarioTest {
 	@Test(expected = IllegalStateException.class)
 	public void pickupTeleporterFirstSquare(){
 		// clear all powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		Item item = new IdentityDisc();
 		squareOne.getInventory().addItem(item);
@@ -110,7 +110,7 @@ public class TeleportScenarioTest {
 	@Test
 	public void pickupTeleporterSecSquare() {
 		// clear all powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		Item item = new IdentityDisc();
 		squareTwo.getInventory().addItem(item);
@@ -129,7 +129,7 @@ public class TeleportScenarioTest {
 	@Test(expected = IllegalStateException.class)
 	public void testOtherPlayerDestination(){
 		// clear all powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 		
 		game.getNextPlayer().move(squareTwo);
 		moveHandler.move(Direction.NORTH);
@@ -142,7 +142,7 @@ public class TeleportScenarioTest {
 	@Test
 	public void testSplitLightTrail(){
 		// clear all powerfailures and obstacles
-		game.clearPowerFailures();
+		game.getPowerManager().clearPowerFailures();
 				
 		moveHandler.move(Direction.NORTH);
 		assertEquals(game.getCurrentPlayer().getPosition(),squareTwo);

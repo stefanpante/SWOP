@@ -5,6 +5,7 @@ import gui.button.TextButton;
 import item.Item;
 import item.launchable.LaunchableItem;
 
+import java.awt.FileDialog;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
 import square.Direction;
+import square.power.Power;
 import util.Coordinate;
 import util.OConstants;
 
@@ -92,6 +94,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	private PFont standardFont;
 
 	private Button confirm;
+	private Button filepick;
 
 	private Textfield widthGrid;
 
@@ -159,13 +162,32 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		heightGrid.setValue("" + 10);
 		heightGrid.setColorCursor(OConstants.PLAYERBLUE);
 		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,240);
+		confirm.setPosition(hSize/4,280);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.WHITE);
 		confirm.setColorBackground(OConstants.PLAYERBLUE);
+		
+		filepick = inputController.addButton("pick");
+		filepick.setLabel("Pick grid from file");
+		filepick.setPosition(hSize/4,240);
+		filepick.setSize(hSize/2, 35);
+		filepick.setColor(color);
+		filepick.setColorLabel(OConstants.WHITE);
+		filepick.setColorBackground(OConstants.PLAYERBLUE);
+		
+		 
 
 	}
+	
+	
+	public void pick(){
+		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
+		 fd.setVisible(true);
+		 setUpGame(fd.getDirectory() + fd.getFile());
+        hideInput();
+	}
+		
 
 	public void hcells(String value){
 		System.out.println(value);
@@ -281,37 +303,59 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		textAlign(LEFT,LEFT);
 		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
+
+    private void setUpGame(String filePath){
+        obj = new GameHandler(this);
+        obj.startNewGame(filePath);
+        hCells = obj.getGame().getGrid().getHSize();
+        vCells = obj.getGame().getGrid().getVSize();
+        initInterface();
+        obj.fireChanges();
+
+    }
 	private void setUpGame(){
 
 		obj = new GameHandler(this);
-		
-		int w = 50 * hCells;
-		int h = 50 * vCells;
-		if(h >= displayHeight - 150){
-			float sw = (displayHeight - 150)/ vCells;
-			h = displayHeight - 150;
-			w = (int) (sw * hCells);
-
-		}
-
-		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
-		this.initialized = true;
-
-		size(w + 215, h + 50);
-		gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
-		squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		pickUpButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		useItemButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		// update the positions of the inventories and buttons.
-
-		textFont(standardFont);
 		obj.startNewGame(hCells, vCells);
+        initInterface();
+        obj.fireChanges();
 	}
+
+    private void initInterface(){
+        int w = 50 * hCells;
+        int h = 50 * vCells;
+        if(h >= displayHeight - 150){
+            float sw = (displayHeight - 150)/ vCells;
+            h = displayHeight - 150;
+            w = (int) (sw * hCells);
+
+        }
+
+        this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
+        this.initialized = true;
+        if( h < 550){
+            h = 550;
+        }
+        size(w + 215, h + 50);
+        if(this.frame != null){
+            this.frame.setSize(w+215, h+ 50);
+        }
+        gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
+        squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        endTurnButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        startNewGameButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        pickUpButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        useItemButton.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+        playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+        // update the positions of the inventories and buttons.
+
+        textFont(standardFont);
+        obj.populateGui();
+    }
+
+
 
 
 	/**
@@ -498,18 +542,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
 			this.grid.setGrenades((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
-			ArrayList<Coordinate> players = (ArrayList<Coordinate>)o;
+			HashMap<Player,Coordinate> players = (HashMap<Player,Coordinate>) o;
 			this.grid.setPlayers(players);
 		}else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
-			this.grid.setPowerFails((ArrayList<Coordinate>)o);
+			HashMap<Power,Coordinate> pfs = (HashMap<Power, Coordinate>) o;
+			this.grid.setPowerFails(new ArrayList<Coordinate>(pfs.values()));
 		}else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
 			this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-			//        }else if(evt.getPropertyName().equals(GameHandler.CURRENT_PLAYER_PROPERTY)){
-			//        	String playerName = (String)o;
-			//        	if(!this.currentPlayerName.equals(playerName)){
-			//        		this.currentPlayerName = playerName;
-			//        		showMessage("It's now "+playerName+ "'s turn.");
-			//        	}
 		}else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
 			this.grid.setCurrentPlayer((Coordinate)o);
 			this.changePlayer();
@@ -627,9 +666,5 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		grid.getThrowPad().setVisibility(false);
 
 	}
-
-
-
-
 
 }

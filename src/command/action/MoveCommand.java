@@ -1,15 +1,10 @@
 /**
  * 
  */
-package event.action;
+package command.action;
 
-import event.effect.LoseActionEffect;
-import event.effect.LoseTurnEffect;
-import event.effect.TeleportEffect;
 import game.Game;
-import game.Player;
 import item.LightGrenade;
-import item.Teleport;
 
 import square.Direction;
 import square.Square;
@@ -65,18 +60,12 @@ public class MoveCommand extends ActionCommand {
 	}
 
 	@Override
-	protected void duringGameCommand() {
-		getGame().getCurrentPlayer().move(newPosition);	
-
-		if(newPosition.getInventory().hasTeleport()) {
-			Teleport teleport = newPosition.getInventory().getTeleport();
-			TeleportEffect teleportEvent = new TeleportEffect(getGame(), teleport);
-			teleportEvent.execute();
-		}
+	protected void duringGameCommand() throws Exception {
+		getGame().getCurrentPlayer().move(newPosition);
 	}
 	
 	@Override
-	protected void afterGameCommand(){
+	protected void afterGameCommand() throws Exception {
 		activateLightGrenade();
 		
 		executeEffects();		
@@ -98,7 +87,7 @@ public class MoveCommand extends ActionCommand {
 	 * @post
 	 * If there was a lightGrenade it is deactivated.
 	 */
-	private void executeEffects() {
+	private void executeEffects() throws Exception {
 		boolean hasNoPower = newPosition.getPower().isFailing();
 		boolean hasActiveGrenade = false;
 		
@@ -108,15 +97,7 @@ public class MoveCommand extends ActionCommand {
 			grenade = newPosition.getInventory().getLightGrenade();
 			hasActiveGrenade = grenade.isActive();
 		}
-		
-		if(hasActiveGrenade && hasNoPower) {
-			new LoseActionEffect(getGame(), 4).execute();	
-		}else if(hasActiveGrenade)
-			new LoseActionEffect(getGame(), 3).execute();
-		else if(hasNoPower) {
-			Player currentPlayer = getGame().getCurrentPlayer();
-			currentPlayer.loseActions(currentPlayer.getRemainingActions());
-		}
+
 		
 		if(hasActiveGrenade)
 			grenade.deactivate();

@@ -18,7 +18,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import event.AbstractGameEvent;
+import command.AbstractGameEvent;
+
 
 import player.Player;
 
@@ -26,6 +27,7 @@ import square.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Wall;
+import square.power.failure.PrimaryPowerFail;
 import util.Coordinate;
 
 import game.Game;
@@ -160,7 +162,7 @@ public class MoveHandlerTest {
 		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
 		// Set the state of the square to PowerFailure
-		next.getPower().fail();
+		next.setPower(new PrimaryPowerFail());
 		LightGrenade lg = new LightGrenade();
 		next.getInventory().addItem(lg);
 		lg.drop();
@@ -249,7 +251,7 @@ public class MoveHandlerTest {
 		Square next = game.getGrid().getNeighbor(currentPosition, direction);
 		
 		// Set a PowerFailure on the square
-		next.getPower().fail();
+		next.setPower(new PrimaryPowerFail());
 		
 		// Move to the square with the PowerFailure
 		moveHandler.move(direction);

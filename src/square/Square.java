@@ -1,9 +1,13 @@
 package square;
 
 
+import effect.player.PlayerEffect;
+import game.Player;
 import item.inventory.SquareInventory;
 
 import square.obstacle.Obstacle;
+import square.power.Power;
+import square.power.RegularPower;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -14,7 +18,7 @@ import notnullcheckweaver.Nullable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 @NotNull
-public class Square{
+public class Square implements PlayerEffect {
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -37,7 +41,7 @@ public class Square{
 	 */
 	public Square (){
 		this.inventory = new SquareInventory();
-		this.power = new Power();
+		this.setPower(new RegularPower());
 	}
 	
 	/**
@@ -45,6 +49,14 @@ public class Square{
 	 */
 	public Power getPower() {
 		return this.power;
+	}
+	
+	/**
+	 * Sets the power of a square.
+	 * @param power
+	 */
+	public void setPower(Power power) {
+		this.power = power;
 	}
 	
 	/**
@@ -110,4 +122,10 @@ public class Square{
 	public boolean isObstructed(){
 			return obstacle != null;
 	}
+
+    @Override
+    public void affect(Player player) {
+        getInventory().affect(player);
+        getPower().affect(player);
+    }
 }

@@ -1,13 +1,11 @@
 package item.inventory;
 
-import java.util.ArrayList;
-
+import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
 import item.launchable.IdentityDisc;
-import item.launchable.LaunchableItem;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -15,11 +13,9 @@ import item.visitor.AddRemoveItemVisitor;
  * 	With the constructor you have to state if this inventory can only have inactive Items.
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
- *
  */
 public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
-
-
+	
 	/**
 	 * Creates a square inventory with unlimited size.
 	 */
@@ -73,27 +69,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	}
 
 	/**
-	 * Returns whether the given item can be used as an item of this UsedItemInventory.
-	 * 
-	 * @param 	item
-	 * 			The item to check.
-	 * @return	True if and only if the conditions of superclass Inventory still hold and 
-	 * 			this inventory doesn't already have a LightGrenade.
-	 * 			| super.canHaveAsItem(item) &&
-	 * 			| ! hasLightGrenade()
-	 */
-	@Override
-	public boolean canHaveAsItem(Item item){
-		if(!super.canHaveAsItem(item)){
-			return false;
-		}
-		return true;
-	}
-
-	/**
 	 * Returns whether this SquareInventory has a LightGrenade.
-	 * 
-	 * @param 	item
 	 * 			The item to check.
 	 * @return	True if and only if there is already a LightGrenade in this inventory
 	 */
@@ -168,6 +144,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		throw new IllegalStateException("A teleporter cannot be removed from the Square inventory");
 	}
 
+
 	@Override
 	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		super.addItem(identityDisc);
@@ -187,13 +164,28 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	} 
 
 	@Override
-	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) {
+	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException{
 		if(!getAllItems().contains(chargedDisc))
 			throw new IllegalStateException("There are no charged identity discs to be removed.");
 
 		super.removeItem(chargedDisc);
 	}
 
+    @Override
+    public void addForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
+        if(containsSameType(forceFieldGenerator)){
+            throw new IllegalStateException("Cannot add another ForcefieldGenerator to the inventory");
+        }
+
+        super.addItem(forceFieldGenerator);
+    }
+
+    public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
+        if(!getAllItems().contains(forceFieldGenerator)){
+            throw new IllegalStateException("Cannot remove a ForceFieldGenerator that is not in the inventory");
+        }
+        super.removeItem(forceFieldGenerator);
+    }
 	public LightGrenade getLightGrenade() {
 		for(Item i: getAllItems()){
 			if(LightGrenade.isLightGrenade(i)){
@@ -203,5 +195,16 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
 		return null;
 	}
+
+	public boolean hasIdentityDisc() {
+		for(Item item: getAllItems()){
+			if(IdentityDisc.isIdentityDisc(item)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 }
 

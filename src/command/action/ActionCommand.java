@@ -1,10 +1,10 @@
 /**
  * 
  */
-package event.action;
+package command.action;
 
-import manager.ActionManager;
-import event.AbstractGameCommand;
+import command.AbstractGameCommand;
+
 import game.Game;
 
 /**
@@ -15,11 +15,10 @@ public abstract class ActionCommand extends AbstractGameCommand {
 		
 	public ActionCommand(Game game) {
 		super(game);
-		ActionManager.getInstance().addObservable(this);
 	}
 	
 	@Override
-	public void execute() {
+	public void execute() throws Exception {
 		try{
 			beforeActionCommand();
 			beforeGameCommand();

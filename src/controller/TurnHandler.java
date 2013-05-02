@@ -3,9 +3,6 @@
  */
 package controller;
 
-import event.AbstractGameCommand;
-import event.action.EndTurnCommand;
-import event.effect.LoseActionEffect;
 import game.Game;
 import game.Player;
 
@@ -14,9 +11,6 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import manager.ActionManager;
-
-import square.Square;
 
 /**
  * @author Jonas Devlieghere
@@ -28,7 +22,6 @@ public class TurnHandler extends Handler implements Observer {
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
-		ActionManager.getInstance().addObserver(this);
 		counter = new HashMap<Player,Integer>();
 		
 		for(Player player : getGame().getPlayers()){
@@ -38,12 +31,18 @@ public class TurnHandler extends Handler implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		getGame().getPowerManager().decreaseAction();
+		
 		if(hasWon()){
     		firePropertyChange(GameHandler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
     	} else if(isEndOfTurn()) {
-			endTurn(false);
-    	}
+            try {
+                endTurn(false);
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
 	}
 	
 	/**
@@ -59,7 +58,7 @@ public class TurnHandler extends Handler implements Observer {
 	/**
 	 * End the current turn
 	 */
-	public void endTurn(boolean skip){
+	public void endTurn(boolean skip) throws Exception {
 		if(!skip && !getGame().getCurrentPlayer().hasMoved()){
 			getGame().end();
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
@@ -68,8 +67,7 @@ public class TurnHandler extends Handler implements Observer {
 	    	getGame().getCurrentPlayer().endTurn();
 	    	getGame().switchToNextPlayer();
 	    	
-	    	for(Square square : getGame().getGrid().getAllSquares())
-	    		square.getPower().decreaseTurn();
+	    	getGame().getPowerManager().decreaseTurn();
 	    	
 			startTurn();
 		}
@@ -78,7 +76,7 @@ public class TurnHandler extends Handler implements Observer {
 	/**
 	 * Start a new turn
 	 */
-	public void startTurn(){
+	public void startTurn() throws Exception {
 		Player currentPlayer = getGame().getCurrentPlayer();
 		
 		if(hasLost()){
@@ -87,12 +85,8 @@ public class TurnHandler extends Handler implements Observer {
 		}
 		
 		increaseCurrentPlayerCount();
-		getGame().powerFailSquares();
-		
-		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()) {
-			LoseActionEffect lae = new LoseActionEffect(getGame(),1);
-			lae.execute();
-		}
+		getGame().getPowerManager().powerFailSquares();
+
 		
 		if(!getGame().getCurrentPlayer().hasRemainingActions())
 			endTurn(true);

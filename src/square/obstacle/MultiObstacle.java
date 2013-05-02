@@ -3,9 +3,6 @@ package square.obstacle;
 
 import java.util.ArrayList;
 import java.util.Observer;
-
-import manager.ActionManager;
-
 import square.Square;
 
 /**
@@ -58,7 +55,8 @@ public abstract class MultiObstacle implements Obstacle {
 	public void addSquare(Square square) throws IllegalArgumentException {
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException("Cannot add square to this MultiObstacle: the square is invalid.");
-		getSquares().add(square);
+		// Do not call on getSquares()! returns copy
+		squares.add(square);
 		square.setObstacle(this);
 	}
 	
@@ -76,7 +74,8 @@ public abstract class MultiObstacle implements Obstacle {
 			throw new IllegalArgumentException("A square that is not added can not part of the obstacle cannot be removed.");
 		}else{
 			square.setObstacle(null);
-			getSquares().remove(square);
+			// Do not call on getSquares()! returns copy
+			squares.remove(square);
 		}
 	}
 	

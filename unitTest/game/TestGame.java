@@ -1,6 +1,7 @@
 package game;
 
 import static org.junit.Assert.*;
+import grid.AbstractGridBuilder;
 import grid.Grid;
 import grid.RandomGridBuilder;
 
@@ -10,7 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import player.Player;
+import game.Player;
 
 import square.Square;
 
@@ -34,7 +35,9 @@ public class TestGame {
 
 	@Before
 	public void setUp() throws Exception {
-		game = new Game(10,10);
+		RandomGridBuilder builder = new RandomGridBuilder(10,10);
+		
+		game = new Game(builder.getGrid());
 	}
 
 	@After
@@ -44,21 +47,17 @@ public class TestGame {
 	
 	@Test
 	public void testConstructorGrid() {
-		RandomGridBuilder gridBuilder = new RandomGridBuilder(20, 20);
+		AbstractGridBuilder gridBuilder = new RandomGridBuilder(20, 20);
 		Game game = new Game(gridBuilder.getGrid());
 		
 		game.start();
 		assertTrue(game.isActive());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConstructorIllegalDimensions() {
-		Game game = new Game(5,5);
-	}
+
 
 	@Test 
 	public void switchPlayer(){
-		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		
@@ -80,7 +79,6 @@ public class TestGame {
 	
 	@Test
 	public void testSetCurrentPlayer(){
-		Game game = new Game(10, 10);
 		
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
@@ -108,7 +106,6 @@ public class TestGame {
 	
 	@Test
 	public void testCanHaveAsPlayer(){
-		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		
@@ -118,7 +115,6 @@ public class TestGame {
 	
 	@Test
 	public void testIsValidCurrentPlayer(){
-		Game game = new Game(10, 10);
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
 		Player player3 = new Player(new Square(), 0);
@@ -130,7 +126,6 @@ public class TestGame {
 	
 	@Test
 	public void testSetPlayer(){
-		Game game = new Game(10, 10);
 		Player playa = null;
 		Player player1 = game.getCurrentPlayer();
 		Player player2 = game.getNextPlayer();
@@ -153,35 +148,5 @@ public class TestGame {
 		}
 		catch(Exception e){}
 		
-	}
-	
-	@Test
-	public void testClearPowerFailures() {
-		Game game = new Game(10,10);
-		Grid grid = game.getGrid();
-		Square square = grid.getAllSquares().get(0);
-		
-		square.getPower().fail();
-		assertTrue(square.getPower().isFailing());
-		
-		game.clearPowerFailures();
-		assertFalse(square.getPower().isFailing());		
-	}
-	
-	@Test
-	public void testGetLightTrail() {
-		Player player = game.getCurrentPlayer();
-		game.getLightTrail(player);
-	}
-	
-	@Test(expected=IllegalStateException.class)
-	public void testGetLightTrailNullPlayer() {
-		game.getLightTrail(null);
-	}
-	
-	@Test(expected=IllegalStateException.class)
-	public void testGetLightTrailInvalidPlayer() {
-		Player player = new Player(new Square(), 3);
-		game.getLightTrail(player);
 	}
 }

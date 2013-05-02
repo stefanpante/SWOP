@@ -1,7 +1,7 @@
 /**
  * 
  */
-package event.action;
+package command.action;
 
 import item.Item;
 import game.Game;
@@ -28,7 +28,7 @@ public class PickUpCommand extends ActionCommand {
 	}
 	
 	@Override
-	public void duringGameCommand(){
+	protected void duringGameCommand(){
 		getGame().getCurrentPlayer().pickUp(getItem());
 		getGame().getCurrentPlayer().getPosition().getInventory().removeItem(getItem());
 	}

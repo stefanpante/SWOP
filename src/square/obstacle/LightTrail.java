@@ -15,7 +15,7 @@ import square.Square;
  */
 public class LightTrail extends MultiObstacle {
 
-	private Queue<Square> trail;
+	private LinkedList<Square> trailqueue;
 	
 	/**
 	 * Maximum length of a LightTrail.
@@ -27,7 +27,7 @@ public class LightTrail extends MultiObstacle {
 	 */
 	public LightTrail() {
 		super();
-		trail  = new LinkedList<Square>();
+		trailqueue  = new LinkedList<Square>();
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class LightTrail extends MultiObstacle {
 			this.removeSquare(getLastSquare());
 		
 		super.addSquare(square);
-		this.trail.add(square);
+		this.trailqueue.add(square);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class LightTrail extends MultiObstacle {
 	@Override
 	public void removeSquare(Square square) throws IllegalArgumentException {
 		super.removeSquare(square);
-		trail.remove(square);
+		trailqueue.remove(square);
 	}
 	
 	/**
@@ -91,6 +91,7 @@ public class LightTrail extends MultiObstacle {
 	}
 
 	public void setHead(Square square) {
+		
 		if(getNewestSquare() == square)
 			this.removeSquare(getLastSquare());
 		else
@@ -106,5 +107,6 @@ public class LightTrail extends MultiObstacle {
 	public boolean bouncesBack() {
 		return true;
 	}
+	
 	
 }
