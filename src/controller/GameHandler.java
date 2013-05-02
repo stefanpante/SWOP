@@ -64,7 +64,7 @@ public class GameHandler extends Handler {
     	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
     	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
     	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
-    	//this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
+    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
         try {
             turnHandler.startTurn();
         } catch (Exception e) {

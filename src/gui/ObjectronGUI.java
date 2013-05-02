@@ -666,7 +666,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void throwLaunchableItem(IdentityDisc identityDisc,
 			Direction direction) {
 		try{
-			//obj.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
+			System.out.println(identityDisc == null);
+			obj.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
 		}
 		catch(Exception e){
 			showException(e);

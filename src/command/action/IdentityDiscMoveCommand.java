@@ -31,7 +31,7 @@ public class IdentityDiscMoveCommand extends MoveCommand {
             throw new IllegalStateException("Cannot throw into given direction.");
             
         }
-        getStartPosition().getInventory().removeItem(id);
+        //getGame().getCurrentPlayer().getInventory().removeItem(id);
         
     }
 

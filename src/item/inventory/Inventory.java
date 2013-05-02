@@ -186,7 +186,6 @@ public abstract class Inventory implements MovableEffect {
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
 			items.remove(item);
-		item.setInventory(null);
 	}
 
 	/**
