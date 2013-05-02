@@ -3,6 +3,7 @@ package square.field;
 import java.util.Observable;
 import java.util.Observer;
 
+import item.ForceFieldGenerator;
 import square.Square;
 
 /**
@@ -99,4 +100,6 @@ public class ForceField extends Field implements Observer{
 		if(!isActive() && this.remainingActions <= 0)
 			this.turnOff();
 	}
+
+
 }
