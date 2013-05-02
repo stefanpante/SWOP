@@ -144,7 +144,7 @@ public class Teleport extends Item {
     @Override
     public void affect(Player player){
         if(canTeleport()){
-            player.setPosition(getDestination());
+            player.move(getDestination());
         }
     }
 
