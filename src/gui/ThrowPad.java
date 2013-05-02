@@ -1,5 +1,7 @@
 package gui;
 
+import item.launchable.IdentityDisc;
+
 import java.util.HashMap;
 
 import gui.button.DirectionalButton;
@@ -10,7 +12,7 @@ import square.Direction;
 
 public class ThrowPad extends DirectionalPad {
 
-	private LaunchableItem launchable;
+	private IdentityDisc identityDisc;
 	private PShape shape;
 
 	public ThrowPad(PVector position, float buttonWidth, float buttonHeight,
@@ -45,7 +47,7 @@ public class ThrowPad extends DirectionalPad {
 			for(DirectionalButton button: getButtons().values()){
 				if(button.mouseHit(mouseX, mouseY)){
 					ObjectronGUI gui2= (ObjectronGUI) gui;
-					gui2.throwLaunchableItem(launchable, button.getDirection());
+					gui2.throwLaunchableItem(identityDisc, button.getDirection());
 					break;
 
 				}
@@ -54,13 +56,13 @@ public class ThrowPad extends DirectionalPad {
 	}
 
 
-	public void setLaunchableItem(LaunchableItem item) {
-		this.launchable = item;
+	public void setIdentityDisc(IdentityDisc item) {
+		this.identityDisc = item;
 
 	}
 
-	public LaunchableItem getLaunchabelItem(){
-		return this.launchable;
+	public IdentityDisc getLaunchabelItem(){
+		return this.identityDisc;
 	}
 
 }
