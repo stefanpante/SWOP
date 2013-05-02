@@ -550,8 +550,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		Object o = evt.getNewValue();
 		if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
 			this.grid.setWalls((ArrayList<Coordinate>)o);
-		}else if(evt.getPropertyName().equals(GameHandler.GRENADES_PROPERTY)){
-			this.grid.setGrenades((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
 			HashMap<Player,Coordinate> players = (HashMap<Player,Coordinate>) o;
 			this.grid.setPlayers(players);
@@ -580,18 +578,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			String player = (String)o;
 			message = player+ " has lost the game...";
 			currentFrame = 0;
-		}else if(evt.getPropertyName().equals(GameHandler.TELEPORT_PROPERTY)){
-			grid.setTeleport((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.IDENTITY_DISK_PROPERTY)){
-			grid.setDiscs((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.CHARGED_DISK_PROPERTY)){
-			grid.setChargedDiscs((ArrayList<Coordinate>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.SQUARES_PROPERTY)){
 			grid.adjustGrid((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.FORCEFIELD_PROPERTY)){
-			grid.setForceFieldGenerators((ArrayList<Coordinate>) o); 
+		}else if(evt.getPropertyName().equals(GameHandler.ITEMS_PROPERTY)){
+		HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
+			grid.setItems(items);
 		}
-		grid.resetGrid();
+		grid.it();
 
 
 	}
