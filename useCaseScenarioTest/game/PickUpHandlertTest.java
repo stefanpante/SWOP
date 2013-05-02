@@ -7,6 +7,7 @@ import controller.TurnHandler;
 import item.LightGrenade;
 import item.inventory.PlayerInventory;
 import game.Game;
+import grid.RandomGridBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +37,8 @@ public class PickUpHandlertTest {
 	
 	@Before
 	public void setUpBefore() {
-		this.game = new Game(10,10);
+		RandomGridBuilder gridBuilder = new RandomGridBuilder(10, 10);
+		this.game = new Game(gridBuilder.getGrid());
 		this.turnHandler = new TurnHandler(game, null);
 		this.pickUpHandler = new PickUpHandler(game,null);
 	}
@@ -44,8 +46,8 @@ public class PickUpHandlertTest {
 	/**
 	 * Test if the square does not contain item
 	 */
-	@Test(expected = IllegalStateException.class)
-	public void EmptyPickUpTest(){
+	@Test(expected=IllegalStateException.class)
+	public void EmptyPickUpTest() throws Exception {
 		assertTrue(game.getCurrentPlayer().getPosition().getInventory().isEmpty());
 		
 		pickUpHandler.pickUp(new LightGrenade());
@@ -56,7 +58,7 @@ public class PickUpHandlertTest {
 	 * and the player's inventory is not full
 	 */
 	@Test
-	public void pickUpTest(){
+	public void pickUpTest() throws Exception{
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 		
@@ -70,8 +72,8 @@ public class PickUpHandlertTest {
 	 * Test the pick up when there is an item on the square,
 	 * but the inventory of the player is full.
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void pickUpFullInventoryTest(){
+	@Test(expected=IllegalArgumentException.class)
+	public void pickUpFullInventoryTest() throws Exception{
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 		currentPosition.getInventory().addItem(lg);
@@ -87,7 +89,7 @@ public class PickUpHandlertTest {
 		
 		LightGrenade lg2 = new LightGrenade();
 		
-		pickUpHandler.pickUp(lg2);		
+		pickUpHandler.pickUp(lg2);	
 	}
 	
 	/**

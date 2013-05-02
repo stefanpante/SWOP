@@ -65,25 +65,25 @@ public class TeleportScenarioTest {
 		squareTwo = game.getGrid().getSquare(new Coordinate(3,4));
 		
 		teleport = new Teleport();
-		teleportDestination = new Teleport(teleport);
-		
-		teleport.setDestination(teleportDestination);
+		teleportDestination = new Teleport();
 		
 		squareOne.getInventory().addItem(teleport);
 		squareTwo.getInventory().addItem(teleportDestination);
+		
+		teleport.setDestination(squareTwo);
+		teleportDestination.setDestination(squareOne);
 	}
 	/**
 	 * Move a player onto a teleporter. Assert that the player is moved to the other square that is part
 	 * of the teleporter
 	 */
 	@Test
-	public void basicTeleporterTest(){
+	public void basicTeleporterTest() throws Exception {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
 		moveHandler.move(Direction.NORTH);
 		assertEquals(game.getCurrentPlayer().getPosition(), squareTwo);
-		
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public class TeleportScenarioTest {
 	 *
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void pickupTeleporterFirstSquare(){
+	public void pickupTeleporterFirstSquare() throws Exception {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
@@ -101,15 +101,13 @@ public class TeleportScenarioTest {
 		moveHandler.move(Direction.NORTH);
 		// should throw an exception
 		pickUpHandler.pickUp(item);
-		
 	}
-	
 
 	/**
 	 * Move a player onto a teleporter. Assert that he can pick up an item fromt the destination square.
 	 */
 	@Test
-	public void pickupTeleporterSecSquare() {
+	public void pickupTeleporterSecSquare() throws Exception{
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
@@ -128,7 +126,7 @@ public class TeleportScenarioTest {
 	 * Assert that he is not transported.
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testOtherPlayerDestination(){
+	public void testOtherPlayerDestination() throws Exception {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
@@ -139,16 +137,15 @@ public class TeleportScenarioTest {
 	/**
 	 * Teleport a player through a teleporter. Assert that his lighttrail is split.
 	 */
-	
 	@Test
-	public void testSplitLightTrail(){
+	public void testSplitLightTrail() throws Exception{
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 				
 		moveHandler.move(Direction.NORTH);
 		assertEquals(game.getCurrentPlayer().getPosition(),squareTwo);
 		moveHandler.move(Direction.NORTH);
-		LightTrail lt = game.getLightTrail(game.getCurrentPlayer());
+		LightTrail lt = game.getCurrentPlayer().getLightTrail();
 		assertTrue(lt.contains(squareOne));
 		assertTrue(lt.contains(game.getCurrentPlayer().getStartPosition()));
 		assertTrue(lt.contains(squareOne));
