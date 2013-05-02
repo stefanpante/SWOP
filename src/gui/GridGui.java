@@ -148,8 +148,8 @@ public class GridGui extends GUIElement{
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), swidth, sHeight, gui);
 		this.throwPad = new ThrowPad(new PVector(25,55), swidth, sHeight, gui);
 		throwPad.setVisibility(false);
-		this.adjustPad(directionalPad);
-		this.adjustPad(throwPad);
+		this.adjustPad2(directionalPad);
+		this.adjustPad2(throwPad);
 	}
 	
 
@@ -392,67 +392,25 @@ public class GridGui extends GUIElement{
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
 
-		adjustPad(directionalPad);
-		adjustPad(throwPad);
+		adjustPad2(directionalPad);
+		adjustPad2(throwPad);
 
 	}
 
-	/**
-	 * Sets directions that are not applicable to false.
-	 */
-	private void adjustPad(DirectionalPad pad){
+	private void adjustPad2(DirectionalPad pad){
 		pad.setPosition(getPixels(currentPlayer));
 		HashMap<Direction, DirectionalButton> buttons = pad.getButtons();
-
-		Coordinate coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY());
-		DirectionalButton b = buttons.get(Direction.WEST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY());
-		b = buttons.get(Direction.EAST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX(), currentPlayer.getY()-1);
-		b = buttons.get(Direction.NORTH);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX(), currentPlayer.getY()+1);
-		b = buttons.get(Direction.SOUTH);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY()-1);
-		b = buttons.get(Direction.NORTHWEST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY() +1);
-		b = buttons.get(Direction.SOUTHWEST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY()-1);
-		b = buttons.get(Direction.NORTHEAST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY() +1);
-		b = buttons.get(Direction.SOUTHEAST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
+		
+		for(Direction direction: buttons.keySet()){
+			Coordinate coor = currentPlayer.getNeighbor(direction);
+			DirectionalButton b = buttons.get(direction);
+			b.setPosition(getPixels(coor));
+			if(!squares.containsKey(coor))
+				b.setVisibility(false);
+		}
 	}
-
+	
+	
 	private PVector getPixels(Coordinate coor) {
 		if(squares.containsKey(coor)){
 			return squares.get(coor).getPosition();
@@ -478,7 +436,7 @@ public class GridGui extends GUIElement{
 		this.items_ = items;
 	}
 	
-	public void it(){
+	public void resetGrid(){
 		items.clear();
 		for(Coordinate coor: items_.keySet()){
 			ArrayList<Item> it = items_.get(coor);
@@ -512,26 +470,6 @@ public class GridGui extends GUIElement{
 			}
 			
 		}
-	}
-	
-	public void setDiscs(ArrayList<Coordinate> o){
-		this.discs_coors = o;
-	}
-
-	public void setForceFieldGenerators(ArrayList<Coordinate> o) {
-		this.ff_coors = o;
-		
-	}
-	
-	public void setChargedDiscs(ArrayList<Coordinate> o){                                                                                                            
-		this.chargedDiscs_coors = o;
-	}
-
-
-
-	public void setTeleport(ArrayList<Coordinate> o) {
-		this.teleport_coors = o;
-		
 	}
 	
 	public DirectionalPad getDirectionalPad(){

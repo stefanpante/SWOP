@@ -548,6 +548,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void propertyChange(PropertyChangeEvent evt) {
 
 		Object o = evt.getNewValue();
+		
 		if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
 			this.grid.setWalls((ArrayList<Coordinate>)o);
 		}else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
@@ -584,7 +585,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
 			grid.setItems(items);
 		}
-		grid.it();
+		grid.resetGrid();
 
 
 	}
