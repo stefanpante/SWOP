@@ -68,11 +68,7 @@ public class ForceField extends Field implements Observer{
 	public boolean isActive() {
 		return this.active;
 	}
-	
-	@Override
-	public boolean bouncesBack() {
-		return false;
-	}
+
 	
 	/**
 	 * Turns the force field off.
@@ -82,7 +78,7 @@ public class ForceField extends Field implements Observer{
 		this.remainingActions = ACTIONS_ON;
 		
 		for (Square square: getSquares())
-			square.setObstacle(null);
+			square.removeField(null);
 	}
 	
 	/**
@@ -93,7 +89,7 @@ public class ForceField extends Field implements Observer{
 		this.remainingActions = ACTIONS_OFF;
 		
 		for (Square square: getSquares())
-			square.setObstacle(this);
+			square.addField(this);
 	}
 	
 	@Override
