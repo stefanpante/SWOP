@@ -42,7 +42,7 @@ Desktop.ini
 ######################
 # Eclipse
 ######################
- 
+*.iml 
 *.pydevproject
 .project
 .metadata
