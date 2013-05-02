@@ -2,7 +2,7 @@ package item;
 
 import move.MovableEffect;
 import game.Player;
-
+import item.inventory.*;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
 import move.Movable;
@@ -158,8 +158,8 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 
 	@Override
 	public void setPosition(Square square) throws IllegalStateException {
+		System.out.println(getInventory() == null);
 		square.getInventory().addItem(this);
-		
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package item;
 
-import gui.Inventory;
+import item.inventory.*;
 import move.MovableEffect;
 import item.visitor.VisitableItem;
 
@@ -13,10 +13,12 @@ public abstract class Item implements VisitableItem, MovableEffect {
 
     private Inventory inventory;
 
-    public void setInventory(Inventory inventory){
-        if(!isValidInventory(inventory))
-            throw new IllegalArgumentException("The given Inventory is not valid for this item.");
-        this.inventory = inventory;
+    public void setInventory(Inventory inventory2){
+        this.inventory = inventory2;
+    }
+    
+    public Inventory getInventory(){
+    	return this.inventory;
     }
 
     public void destroy(){
@@ -24,9 +26,6 @@ public abstract class Item implements VisitableItem, MovableEffect {
         this.inventory = null;
     }
 
-    private boolean isValidInventory(Inventory inventory) {
-        return inventory != null;
-    }
 
 
     /**
@@ -56,4 +55,5 @@ public abstract class Item implements VisitableItem, MovableEffect {
 	}
 	
 	public abstract boolean isSameType(Item item);
+
 }

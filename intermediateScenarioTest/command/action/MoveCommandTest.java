@@ -89,8 +89,19 @@ public class MoveCommandTest {
       Coordinate co0_9 = new Coordinate(0,9);
       Square startSquare = grid.getSquare(co0_9);
       startSquare.getInventory().addItem(id);
+      id.setInventory(startSquare.getInventory());
+      
       MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.NORTH);
+      try {
+		m.execute();
+	} catch (Exception e) {
+		e.printStackTrace();
+		fail("Move Command shouldn't throw an exception");
+		
+	}
       Square expectedSquare = grid.getSquare(new Coordinate(0,6));
+      assertFalse(m.getCurrentPosition() == startSquare);
+      assertFalse(startSquare.getInventory().getIdentityDiscs().contains(id));
       assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
     }
 
