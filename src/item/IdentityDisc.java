@@ -157,8 +157,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	}
 
 	@Override
-	public void setPosition(Square square) throws IllegalStateException {
-		System.out.println(getInventory() == null);
+	public void move(Square square) throws IllegalStateException {
 		square.getInventory().addItem(this);
 	}
 
