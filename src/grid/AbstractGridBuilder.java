@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import item.ForceFieldGenerator;
 import item.LightGrenade;
 import item.Teleport;
 import item.launchable.ChargedIdentityDisc;
@@ -45,6 +46,7 @@ public abstract class AbstractGridBuilder {
 	private GridConstraint constraintLightGrenade;
 	private GridConstraint constraintIdentityDisk;
 	private GridConstraint constraintWall;
+	private GridConstraint constraintForceFieldGenerator;
 	
 	/**
 	 * The grid which has been/will be  built.
@@ -164,6 +166,14 @@ public abstract class AbstractGridBuilder {
      */
 	public void setConstraintIdentityDisk(GridConstraint constraintIdentityDisk) {
 		this.constraintIdentityDisk = constraintIdentityDisk;
+	}
+	
+	public GridConstraint getConstraintForceFieldGenerator(){
+		return this.constraintForceFieldGenerator;
+	}
+	
+	public void setConstraintForceFieldGenerator(GridConstraint constraintForceFieldGenerator){
+		this.constraintForceFieldGenerator = constraintForceFieldGenerator;
 	}
 
     /**
@@ -388,6 +398,18 @@ public abstract class AbstractGridBuilder {
             }
         }
     }
+    
+    /**
+    *
+    * @param 	coordinates
+    * 			The coordinates of the locations to place.
+    */
+   protected void placeForceFieldGenerators(ArrayList<Coordinate> coordinates) {
+       if(!getConstraintForceFieldGenerator().satisfiesConstraint(coordinates, getGrid()))
+           throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
+       for(Coordinate coordinate : coordinates)
+           placeItem(getGrid().getSquare(coordinate), new ForceFieldGenerator());
+   }
 
     /**
      * Suggest a coordinate for the Charged Disk Location

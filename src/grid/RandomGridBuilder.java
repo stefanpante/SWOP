@@ -72,6 +72,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			ArrayList<Coordinate> lightGrenades, 
 			ArrayList<Coordinate> identityDisks, 
 			ArrayList<Coordinate> teleports,
+			ArrayList<Coordinate> forceFieldGenerators,
 			Coordinate chargedIdentityDisk){
 		setHSize(hSize);
 	    setVSize(vSize);
@@ -83,7 +84,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		placeWalls(walls);
-		build(lightGrenades, identityDisks, teleports, chargedIdentityDisk);
+		build(lightGrenades, identityDisks, teleports,forceFieldGenerators, chargedIdentityDisk);
 	}
 
 	@Override
@@ -104,6 +105,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		placeLightGrenade(randomLocations(getConstraintLightGrenade()));
 		placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
 		placeTeleports(randomLocations(getConstraintTeleport()));
+		placeForceFieldGenerators(randomLocations(getConstraintForceFieldGenerator()));
 		placeChargedIdentityDisk(getChargedIdentityDiskLocation());
 		
 		Square sq = getGrid().getSquare(this.getPlayerOneCoordinate());
@@ -114,11 +116,13 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		
 	}
 
-	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk)
+	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
+			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
 		placeLightGrenade(lightGrenades);
 		placeIdentityDisk(identityDisks);
 		placeTeleports(teleports);
+		placeForceFieldGenerators(fFgen);
 		placeChargedIdentityDisk(chargedIdentityDisk);
 		
 		Square sq = getGrid().getSquare(getPlayerOneCoordinate());
@@ -142,6 +146,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
 		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
 		setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
+		setConstraintForceFieldGenerator(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS,excluded));
 	}
 	
 	private void setEmptyConstraints(){		
@@ -149,6 +154,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setConstraintLightGrenade(new GridConstraint());
 		setConstraintIdentityDisk(new GridConstraint());
 		setConstraintTeleport(new GridConstraint());
+		setConstraintForceFieldGenerator(new GridConstraint());
 	}
 	
 
