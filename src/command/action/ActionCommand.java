@@ -28,8 +28,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
 		}catch(Exception e){
 			throw e;
 		}finally{
-			setChanged();
-			notifyObservers();
+            getGame().notifyAction();
 		}
 	}
 	

@@ -3,11 +3,8 @@ package game;
 import grid.AbstractGridBuilder;
 import grid.Grid;
 import grid.RandomGridBuilder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Observer;
-import java.util.Random;
+
+import java.util.*;
 import java.util.Map.Entry;
 
 import notnullcheckweaver.NotNull;
@@ -33,7 +30,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 			| isValidCurrentPlayer(getCurrentPlayer())
  */
 @NotNull
-public class Game {
+public class Game extends Observable {
 	
 	/**
 	 * The Grid.
@@ -300,4 +297,9 @@ public class Game {
 		}
 		return true;
 	}
+
+    public void notifyAction(){
+        hasChanged();
+        notifyObservers();
+    }
 }
