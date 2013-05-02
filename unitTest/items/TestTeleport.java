@@ -32,8 +32,10 @@ public class TestTeleport {
 	@Test
 	public void canHaveAsDestination() {
 		assertFalse(teleport.canHaveAsDestination(null));
+		
 		Square square = new Square();
 		square.getInventory().addItem(teleport);
+		
 		assertFalse(teleport.canHaveAsDestination(square));
 		
 		Square sq2 = new Square();
