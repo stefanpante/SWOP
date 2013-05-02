@@ -34,7 +34,6 @@ public class TurnHandler extends Handler implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		getGame().getPowerManager().decreaseAction();
-		this.notifyAll();
 		
 		if(hasWon()){
     		firePropertyChange(Handler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
@@ -80,6 +79,8 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn() throws Exception {
+		Player currentPlayer = getGame().getCurrentPlayer();
+		
 		if(hasLost()){
 			getGame().end();
     		firePropertyChange(Handler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
