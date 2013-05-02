@@ -589,7 +589,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(GameHandler.SQUARES_PROPERTY)){
 			grid.adjustGrid((ArrayList<Coordinate>) o);
 		}else if(evt.getPropertyName().equals(GameHandler.FORCEFIELD_PROPERTY)){
-			//TODO
+			grid.setForceFieldGenerators((ArrayList<Coordinate>) o); 
 		}
 		grid.resetGrid();
 

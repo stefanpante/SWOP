@@ -56,6 +56,7 @@ public class GridGui extends GUIElement{
 	private ArrayList<Coordinate> grenades_coors;
 	private ArrayList<Coordinate> discs_coors;
 	private ArrayList<Coordinate> chargedDiscs_coors;
+	private ArrayList<Coordinate> ff_coors;
 
 	/**
 	 * Coordinates of the powerfailures
@@ -135,6 +136,7 @@ public class GridGui extends GUIElement{
 		this.currentPlayer = new Coordinate(0,0);
 		this.grenades_coors = new ArrayList<Coordinate>();
 		this.discs_coors = new ArrayList<Coordinate>();
+		this.ff_coors = new ArrayList<Coordinate>();
 		this.chargedDiscs_coors = new ArrayList<Coordinate>();
 		this.powerfail_coors = new ArrayList<Coordinate>();
 		this.teleport_coors = new ArrayList<Coordinate>();
@@ -499,6 +501,17 @@ public class GridGui extends GUIElement{
 			}
 		}
 		
+		for(Coordinate coor: ff_coors){
+			if(items.containsKey(coor)){
+				items.get(coor).setShape(Shapes.items);
+			}
+			else{
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				s.setShape(Shapes.forcefieldgenerator_off);
+				items.put(coor,s);
+			}
+		}
+		
 		powerfailItems.clear();
 		powerfails.clear();
 		for(Coordinate coor: powerfail_coors){
@@ -557,6 +570,14 @@ public class GridGui extends GUIElement{
 		this.discs_coors = o;
 	}
 	
+
+
+	
+	public void setForceFieldGenerators(ArrayList<Coordinate> o) {
+		this.ff_coors = o;
+		
+	}
+	
 	public void setChargedDiscs(ArrayList<Coordinate> o){                                                                                                            
 		this.chargedDiscs_coors = o;
 	}
@@ -577,6 +598,8 @@ public class GridGui extends GUIElement{
 	public ThrowPad getThrowPad() {
 		return this.throwPad;
 	}
+
+
 
 
 }
