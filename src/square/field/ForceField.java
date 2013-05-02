@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import square.Square;
-import square.field.Field;
 
 /**
  * Force field is a obstacle which covers multiple squares

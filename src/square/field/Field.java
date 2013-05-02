@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Date: 02/05/13
  * Time: 16:27
  */
-public class Field extends MultiSquare implements MovableEffect {
+public abstract class Field extends MultiSquare implements MovableEffect {
 
     @Override
     public void affect(Movable movable) {
