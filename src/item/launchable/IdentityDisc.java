@@ -9,6 +9,7 @@ import item.inventory.SquareInventory;
 import move.Movable;
 import notnullcheckweaver.NotNull;
 import square.Direction;
+import square.Square;
 
 /**
  * Implementation of the item IdentityDisc
@@ -149,4 +150,22 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 
     public void affect(IdentityDisc identityDisc) {
     }
+
+	@Override
+	public void getsAffectedBy(MovableEffect effect) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPosition(Square square) throws IllegalStateException {
+		square.getInventory().addItem(this);
+		
+	}
+
+	@Override
+	public void resetRange() {
+		this.range = MAX_TRAVEL_DISTANCE;
+		
+	}
 }
