@@ -356,7 +356,6 @@ public class Player implements Obstacle, Movable {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
-		
 	}
 	
 

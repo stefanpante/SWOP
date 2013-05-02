@@ -34,7 +34,6 @@ public class TurnHandler extends Handler implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		getGame().getPowerManager().decreaseAction();
-		
 		if(hasWon()){
     		firePropertyChange(Handler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
@@ -42,7 +41,7 @@ public class TurnHandler extends Handler implements Observer {
             try {
                 endTurn(false);
             } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
 	}
