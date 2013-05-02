@@ -1,6 +1,6 @@
 package square.power;
 
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
 import move.Movable;
 import game.Player;
 

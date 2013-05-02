@@ -5,7 +5,8 @@ import grid.GridProvider;
 import grid.action.IdentityDiscMoveCommand;
 import grid.action.MoveCommand;
 import game.Game;
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import square.Direction;

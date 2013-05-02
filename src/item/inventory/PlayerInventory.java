@@ -1,11 +1,11 @@
 package item.inventory;
 
+import item.ChargedIdentityDisc;
 import item.ForceFieldGenerator;
+import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 import item.visitor.AddRemoveItemVisitor;
 
 /**

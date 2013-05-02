@@ -1,6 +1,6 @@
 package command.action;
 
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
 import game.Game;
 import move.Movable;
 import square.Direction;

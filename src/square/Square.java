@@ -3,9 +3,9 @@ package square;
 
 import move.MovableEffect;
 import game.Player;
+import item.IdentityDisc;
 import item.inventory.SquareInventory;
 
-import item.launchable.IdentityDisc;
 import move.Movable;
 import square.field.Field;
 import square.obstacle.Obstacle;

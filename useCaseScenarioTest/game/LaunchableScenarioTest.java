@@ -7,9 +7,9 @@ import game.Game;
 import grid.Grid;
 import grid.GridProvider;
 
+import item.ChargedIdentityDisc;
+import item.IdentityDisc;
 import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 

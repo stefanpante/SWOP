@@ -2,11 +2,11 @@ package items;
 
 import static org.junit.Assert.*;
 
+import item.ChargedIdentityDisc;
+import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
 import item.inventory.SquareInventory;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 

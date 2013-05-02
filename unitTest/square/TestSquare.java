@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 import grid.RandomGridBuilder;
+import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.inventory.Inventory;
-import item.launchable.IdentityDisc;
 
 import org.junit.After;
 import org.junit.AfterClass;

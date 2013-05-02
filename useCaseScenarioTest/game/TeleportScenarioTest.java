@@ -2,9 +2,9 @@ package game;
 
 import static org.junit.Assert.*;
 
+import item.IdentityDisc;
 import item.Item;
 import item.Teleport;
-import item.launchable.IdentityDisc;
 
 
 import org.junit.Before;

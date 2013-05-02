@@ -2,8 +2,8 @@ package gui;
 
 import game.Player;
 import gui.button.TextButton;
+import item.IdentityDisc;
 import item.Item;
-import item.launchable.IdentityDisc;
 
 import java.awt.FileDialog;
 import java.beans.PropertyChangeEvent;

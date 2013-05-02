@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import item.ChargedIdentityDisc;
 import item.ForceFieldGenerator;
+import item.IdentityDisc;
 import item.LightGrenade;
 import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 import square.Square;
 import square.obstacle.Wall;
 import util.AStar;
