@@ -39,8 +39,6 @@ public class PickUpHandlertTest {
 		this.game = new Game(10,10);
 		this.turnHandler = new TurnHandler(game, null);
 		this.pickUpHandler = new PickUpHandler(game,null);
-		
-		AbstractGameCommand.addObserver(this.turnHandler);
 	}
 	
 	/**

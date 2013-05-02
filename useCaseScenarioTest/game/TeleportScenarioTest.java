@@ -1,6 +1,7 @@
 package game;
 
 import static org.junit.Assert.*;
+
 import item.Item;
 import item.Teleport;
 import item.launchable.IdentityDisc;

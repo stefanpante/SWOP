@@ -1,14 +1,12 @@
 package item;
 
 import static org.junit.Assert.*;
-import item.Item;
-import item.LightGrenade;
-import item.LightGrenadeState;
 
+import item.LightGrenade;
 import org.junit.Before;
 import org.junit.Test;
 
-import player.Player;
+import game.Player;
 import square.Square;
 
 /**

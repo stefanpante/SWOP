@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 
 
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -18,10 +19,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import command.AbstractGameEvent;
-
-
-import player.Player;
+import game.Player;
 
 import square.Direction;
 import square.Square;
@@ -55,8 +53,6 @@ public class MoveHandlerTest {
 		
 		moveHandler = new MoveHandler(game,null);
 		turnHandler = new TurnHandler(game, null);
-		
-		AbstractGameEvent.setObserver(turnHandler);
 	}
 	
 	/**
