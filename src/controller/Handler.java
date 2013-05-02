@@ -176,11 +176,11 @@ public abstract class Handler {
 		firePropertyChange(GameHandler.CHARGED_DISK_PROPERTY, properties.get(GameHandler.CHARGED_DISK_PROPERTY));
 		firePropertyChange(GameHandler.TELEPORT_PROPERTY, properties.get(GameHandler.TELEPORT_PROPERTY));
 		firePropertyChange(GameHandler.SQUARES_PROPERTY, properties.get(GameHandler.SQUARES_PROPERTY));
-        //firePropertyChange(GameHandler.WALLS_PROPERTY, properties.get(GameHandler.WALLS_PROPERTY));
-
+		
 		firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
-		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   	
+		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   
+		firePropertyChange(GameHandler.ITEMS_PROPERTY, properties.get(GameHandler.ITEMS_PROPERTY));
 		firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
 		firePropertyChange(GameHandler.PLAYERS_PROPERTY, properties.get(GameHandler.PLAYERS_PROPERTY));
 		firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
@@ -195,12 +195,18 @@ public abstract class Handler {
 		ArrayList<Coordinate> lightGrenades = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> identityDisks = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> forceFieldGenerators = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> chargedDisks  = new ArrayList<Coordinate>(); 
 		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
+		HashMap<Coordinate, ArrayList<Item>> items = new HashMap<Coordinate, ArrayList<Item>>();
 		HashMap<Player, Coordinate> players = new HashMap<Player, Coordinate>();
 
-		for (Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+
+		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+			
+			items.put(coordinate, getSquareItems());
+
 			Square square = getGame().getGrid().getSquare(coordinate);
 			
 			if(square.getPower().isFailing())
@@ -212,7 +218,10 @@ public abstract class Handler {
 			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
 				lightGrenades.add(coordinate);
 			
-			if(square.getInventory().hasForceFieldGenerator()) { }
+
+			if(square.getInventory().hasForceFieldGenerator()){
+				forceFieldGenerators.add(coordinate);
+			}
 
 			for(IdentityDisc id : square.getInventory().getIdentityDiscs()){
 				if(id.isCharged()){
@@ -247,6 +256,7 @@ public abstract class Handler {
 
 		properties.put(GameHandler.POWER_FAILS_PROPERTY, powerFailures);
 		properties.put(GameHandler.GRENADES_PROPERTY, lightGrenades);
+		properties.put(GameHandler.ITEMS_PROPERTY, items);
 		properties.put(GameHandler.IDENTITY_DISK_PROPERTY, identityDisks);
 		properties.put(GameHandler.TELEPORT_PROPERTY, teleports);
 		properties.put(GameHandler.WALLS_PROPERTY, walls);

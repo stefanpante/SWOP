@@ -29,6 +29,7 @@ public class GameHandler extends Handler {
 	public static final String MESSAGE_PROPERTY 			= "Message";
 	public static final String SQUARE_INVENTORY_PROPERTY	= "SquareInventory";
 	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
+	public static final String ITEMS_PROPERTY				= "items";
 	public static final String END_TURN_PROPERTY 			= "EndTurnProperty";
 	public static final String IDENTITY_DISK_PROPERTY		= "IdentityDisk";
 	public static final String CHARGED_DISK_PROPERTY		= "ChargedIdentityDisk";
@@ -39,6 +40,7 @@ public class GameHandler extends Handler {
 	public static final String LOSE_PROPERTY				= "Lose";
 	public static final String SQUARES_PROPERTY				= "squares";
 	public static final String FORCEFIELD_PROPERTY			= "forcefield";
+	
 	private ObjectronGUI objectronGUI;
 	
 	
@@ -85,7 +87,7 @@ public class GameHandler extends Handler {
     	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
     	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
     	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
-    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
+    	//this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
         try {
             turnHandler.startTurn();
         } catch (Exception e) {
