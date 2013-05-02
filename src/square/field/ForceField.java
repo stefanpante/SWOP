@@ -1,4 +1,4 @@
-package square.obstacle;
+package square.field;
 
 import item.ForceFieldGenerator;
 
@@ -69,7 +69,6 @@ public class ForceField extends Field implements Observer{
 		return this.active;
 	}
 	
-	@Override
 	public boolean bouncesBack() {
 		return false;
 	}

@@ -122,7 +122,7 @@ public class Square implements MovableEffect {
         fields.remove(field);
     }
 
-    public ArrayList<Field> getAllFields(Field field){
+    public ArrayList<Field> getAllFields(){
         return new ArrayList<Field>(this.fields);
     }
 	
