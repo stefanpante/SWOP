@@ -54,7 +54,10 @@ public class Teleport extends Item {
 
 	/**
 	 * Checks whether the given destination is a valid destination for this
-	 * Teleport.
+	 * Teleport. First the destination must not be null, secondly
+	 * the inventory of the destination must hold a teleport.
+	 * 
+	 * The destination square may not hold the teleport itself as a teleport. 
 	 * 
 	 * @param 	destination
 	 * 			The destination to check
@@ -66,7 +69,13 @@ public class Teleport extends Item {
 			return false;
         if(!destination.getInventory().hasTeleport())
 		    return false;
-		return !destination.equals(this);
+		
+        Teleport destinationTeleport = destination.getInventory().getTeleport();
+        
+        if(destinationTeleport.equals(this))
+        	return false;
+        else
+        	return true;
 	}
 	
 	/**
