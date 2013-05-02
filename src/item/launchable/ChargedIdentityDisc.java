@@ -53,4 +53,9 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	public boolean isSameType(Item o){
 		return (o instanceof ChargedIdentityDisc);
 	}
+	
+	@Override
+	public void resetRange(){
+		super.setRange(MAX_TRAVEL_DISTANCE);
+	}
 }

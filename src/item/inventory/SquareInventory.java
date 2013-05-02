@@ -73,7 +73,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * 			The item to check.
 	 * @return	True if and only if there is already a LightGrenade in this inventory
 	 */
-	public boolean hasLightGrenade(){
+	public boolean hasLightGrenade() {
 		if(getLightGrenade() == null)
 			return false;
 		return true;
@@ -88,21 +88,26 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 			return false;
 		return true;
 	}
-
+	
+	/**
+	 * Returns the teleport if there is one, otherwise null.
+	 * @return
+	 */
 	public Teleport getTeleport() {
-		for(Item i: getAllItems())
-			if(Teleport.isTeleport(i)){
+		for (Item i: getAllItems()) {
+			if (Teleport.isTeleport(i))
 				return (Teleport) i;
-			}
+		}
+	
 		return null;
 	}
 	
-	public boolean hasForceFieldGenerator(){
+	public boolean hasForceFieldGenerator() {
 		for(Item item: getAllItems()){
-			if(ForceFieldGenerator.isForceFieldGenerator(item)){
+			if (ForceFieldGenerator.isForceFieldGenerator(item))
 				return true;
-			}
 		}
+		
 		return false;
 	}
 
@@ -112,11 +117,12 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	@Override
 	public String toString() {
 		String result = "Square ";
+		
 		return result + super.toString();
 	}
 
 	public boolean containsSameType(Item item){
-		for(Item i: getAllItems()){
+		for (Item i: getAllItems()) {
 			if(item.isSameType(i))
 				return true;
 		}
@@ -145,6 +151,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		if(hasTeleport())
 			throw new IllegalStateException("Can't add another Teleport to " + this);
+		
 		super.addItem(teleport);
 	}
 
@@ -182,34 +189,33 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
     @Override
     public void addForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
-        if(containsSameType(forceFieldGenerator)){
+        if (containsSameType(forceFieldGenerator))
             throw new IllegalStateException("Cannot add another ForcefieldGenerator to the inventory");
-        }
 
         super.addItem(forceFieldGenerator);
     }
-
+    
+    @Override
     public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
-        if(!getAllItems().contains(forceFieldGenerator)){
+        if (!getAllItems().contains(forceFieldGenerator))
             throw new IllegalStateException("Cannot remove a ForceFieldGenerator that is not in the inventory");
-        }
+        
         super.removeItem(forceFieldGenerator);
     }
+    
 	public LightGrenade getLightGrenade() {
-		for(Item i: getAllItems()){
-			if(LightGrenade.isLightGrenade(i)){
+		for (Item i: getAllItems()) {
+			if (LightGrenade.isLightGrenade(i))
 				return (LightGrenade) i;
-			}
 		}
 
 		return null;
 	}
 
 	public boolean hasIdentityDisc() {
-		for(Item item: getAllItems()){
-			if(IdentityDisc.isIdentityDisc(item)){
+		for (Item item: getAllItems()) {
+			if (IdentityDisc.isIdentityDisc(item))
 				return true;
-			}
 		}
 		
 		return false;

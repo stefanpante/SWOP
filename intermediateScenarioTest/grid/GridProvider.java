@@ -18,7 +18,10 @@ public class GridProvider {
 			ArrayList<Coordinate> lightGrenades, 
 			ArrayList<Coordinate> identityDisks, 
 			ArrayList<Coordinate> teleports, 
-			Coordinate chargedIdentityDisk){
-		return (new RandomGridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports, chargedIdentityDisk)).getGrid();
+			Coordinate chargedIdentityDisk) {
+		
+		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports, null, chargedIdentityDisk);
+		
+		return gridBuilder.getGrid();
 	}
 }

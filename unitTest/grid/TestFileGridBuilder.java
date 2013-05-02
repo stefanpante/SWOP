@@ -58,7 +58,7 @@ public class TestFileGridBuilder {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testSucceededGrid(){
 		String filepath = getClass().getResource("/res/grids/one.txt").getPath();
@@ -69,7 +69,7 @@ public class TestFileGridBuilder {
 			assertEquals(33,grid.getAllSquares().size());
 			assertEquals(countWalls(grid), 5);
 			assertEquals(new Coordinate(7,0), grid.getCoordinate(grid.getStartPlayerOne()));
-			assertEquals(new Coordinate(0,3), grid.getCoordinate(grid.getStartPlayerOne()));
+			assertEquals(new Coordinate(0,3), grid.getCoordinate(grid.getStartPlayerTwo()));
 			
 		} catch (IOException e) {
 			fail("IOException, test failed");
@@ -79,7 +79,7 @@ public class TestFileGridBuilder {
 	}
 	
 	
-	public int countWalls(Grid grid){
+	private int countWalls(Grid grid){
 		int i = 0;
 		for(Square sq: grid.getAllSquares()){
 			if(sq.isObstructed()){
@@ -90,9 +90,6 @@ public class TestFileGridBuilder {
 		return i;
 		
 	}
-	@Test
-	public void playerPositions(){
-		
-	}
+
 	
 }

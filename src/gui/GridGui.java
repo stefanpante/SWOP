@@ -90,6 +90,7 @@ public class GridGui extends GUIElement{
 	 */
 	private ArrayList<SquareGUI> lightTrails_Squares;
 
+	private ArrayList<Coordinate> forcefield_coors;
 	/**
 	 * Constructs a new grid representation for the gui
 	 * @param position
@@ -105,7 +106,7 @@ public class GridGui extends GUIElement{
 
 		this.hCells = hCells;
 		this.vCells = vCells;
-		
+		this.forcefield_coors = new ArrayList<Coordinate>();
 		this.squares = new HashMap<Coordinate, SquareGUI>();
 		this.players = new ArrayList<SquareGUI>();
 		this.items = new HashMap<Coordinate, SquareGUI>();
@@ -269,16 +270,11 @@ public class GridGui extends GUIElement{
 	 * @param o
 	 */
 	public void setPowerFails(ArrayList<Coordinate> o) {
-		resetPowerFailures();
+		resetColor();
 		this.powerfail_coors = o;
 		updatePowerFailures();
+		updateForceFields();
 
-	}
-	
-	private void resetPowerFailures(){
-		for(SquareGUI s: squares.values()){
-			s.setColor(OConstants.LIGHTER_GREY);
-		}
 	}
 	
 	private void updatePowerFailures(){
@@ -286,6 +282,33 @@ public class GridGui extends GUIElement{
 			squares.get(coor).setColor(OConstants.POWERFAIL_COLOR);
 		}
 	}
+	
+	public void setForceFields(ArrayList<Coordinate> o){
+		resetColor();
+		this.forcefield_coors = o;
+		updatePowerFailures();
+		updateForceFields();
+	}
+	
+	public void updateForceFields(){
+		for(Coordinate coor: forcefield_coors){
+			if(powerfail_coors.contains(coor)){
+				squares.get(coor).setColor(OConstants.POWERFAIL_FORCEFIELD_COLOR);
+			}
+			else{
+				squares.get(coor).setColor(OConstants.FORCEFIELD_COLOR);
+			}
+		}
+	}
+	
+	
+	private void resetColor(){
+		for(SquareGUI s: squares.values()){
+			s.setColor(OConstants.LIGHTER_GREY);
+		}
+	}
+	
+	
 
 
 

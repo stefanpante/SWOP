@@ -4,11 +4,14 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import move.Movable;
+
 import command.AbstractGameCommand;
 import command.action.MoveCommand;
 
 
 import square.Direction;
+import square.Square;
 import util.Coordinate;
 import game.Game;
 import game.Player;
@@ -40,7 +43,12 @@ public class MoveHandler extends Handler {
 	 */
 	public void move(Direction direction) throws Exception {
 		fireChanges();
-		AbstractGameCommand moveEvent = new MoveCommand(getGame(), direction);
+		
+		Game game = getGame();
+		Player currentPlayer = game.getCurrentPlayer();
+		Square startSquare = currentPlayer.getPosition();
+
+		AbstractGameCommand moveEvent = new MoveCommand(game, currentPlayer, startSquare, direction);
 		moveEvent.execute();
 		fireChanges();
 	}

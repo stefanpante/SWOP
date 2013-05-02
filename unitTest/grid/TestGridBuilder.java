@@ -10,6 +10,7 @@ import item.Teleport;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Before;
@@ -170,5 +171,19 @@ public class TestGridBuilder {
 				assert(false);
 			}
 		}
+	}
+	
+	/**
+	 * Checks if the default random grid builder returns an
+	 * empty grid.
+	 */
+	@Test
+	public void testEmptyGrid() {
+		this.gridBuilder = new RandomGridBuilder();
+		
+		Iterator<Square> iterator = grid.getAllSquares().iterator();
+		
+		while(iterator.hasNext())
+			assertFalse(iterator.next().isObstructed());
 	}
 }

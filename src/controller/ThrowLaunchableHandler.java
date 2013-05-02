@@ -7,9 +7,10 @@ import item.launchable.IdentityDisc;
 import java.beans.PropertyChangeListener;
 
 import command.AbstractGameCommand;
-import command.action.ThrowLaunchableCommand;
+import command.action.IdentityDiscMoveCommand;
 
 import square.Direction;
+import square.Square;
 
 /**
  * Handler for the throwing a launchable.
@@ -30,7 +31,8 @@ public class ThrowLaunchableHandler extends Handler {
 	
 	public void throwLaunchable(IdentityDisc disc, Direction direction) throws Exception {
 		fireChanges();
-		AbstractGameCommand throwLaunchableEvent = new ThrowLaunchableCommand(getGame(), disc, direction);
+		Square startSquare = getGame().getCurrentPlayer().getPosition();
+		AbstractGameCommand throwLaunchableEvent = new IdentityDiscMoveCommand(getGame(), disc, startSquare, direction);
 		throwLaunchableEvent.execute();
 		fireChanges();
 	}
