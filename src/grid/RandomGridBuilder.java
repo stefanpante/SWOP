@@ -21,7 +21,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * obstacles. No lightGrenades or any other object. This is mainly used
 	 * for testing purposes.
 	 */
-	protected RandomGridBuilder() {
+	public RandomGridBuilder() {
 		setHSize(10);
         setVSize(10);
 		setGrid(new Grid(10, 10));
@@ -46,7 +46,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
         setVSize(vSize);
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
-		this.walls = new ArrayList<Wall>();		
+		this.walls = new ArrayList<Wall>();	
+		
 		build();
 	}
 

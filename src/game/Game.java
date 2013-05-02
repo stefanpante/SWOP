@@ -73,6 +73,7 @@ public class Game extends Observable {
 		this.players = new ArrayList<Player>();
 		Square bottomLeft = grid.getStartPlayerOne();
 		Square topRight = grid.getStartPlayerTwo();
+		System.out.println(bottomLeft.isObstructed());
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
 
