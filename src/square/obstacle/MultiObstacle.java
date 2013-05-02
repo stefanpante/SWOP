@@ -38,6 +38,8 @@ public abstract class MultiObstacle extends MultiSquare implements Obstacle {
 		}
 		return true;
 	}
+
+
 	
 	
 }

@@ -126,28 +126,7 @@ public class Coordinate {
 	 * @return 	the closest neighbor in the given direction
 	 */
 	public Coordinate getNeighbor(Direction direction){
-		int x = getX();
-		int y = getY();
-		switch (direction) {
-		case NORTH:
-			return new Coordinate(x, y-1);
-		case NORTHEAST:
-			return new Coordinate(x+1, y-1);
-		case EAST:
-			return new Coordinate(x+1, y);
-		case SOUTHEAST:
-			return new Coordinate(x+1, y+1);
-		case SOUTH:
-			return new Coordinate(x, y+1);
-		case SOUTHWEST:
-			return new Coordinate(x-1, y+1);
-		case WEST:
-			return new Coordinate(x-1, y);
-		case NORTHWEST:
-			return new Coordinate(x-1, y-1);
-		default:
-			throw new IllegalArgumentException("The given direction is not valid" + direction ); 
-		}
+		return getCoordinate(direction,1);
 	}
 	
 	/**
@@ -211,4 +190,88 @@ public class Coordinate {
 		}
 		return true;
 	}
+
+    /**
+     * Returns a new Coordinate in the given Direction at the given Distance.
+     *
+     * @param   direction
+     *          The direction in which the coordinate is returned
+     * @param   distance
+     *          The distance at which the coordinate is returned
+     * @return  The coordinate in the given directin at the given distance
+     */
+    public Coordinate getCoordinate(Direction direction, int distance){
+        switch (direction){
+            case NORTH:
+                return new Coordinate(getX(), getY() - distance);
+            case SOUTH:
+                return new Coordinate(getX(), getY() + distance);
+            case EAST:
+                return new Coordinate(getX() + distance, getY());
+            case WEST:
+                return new Coordinate(getX() - distance, getY());
+            case NORTHEAST:
+                return new Coordinate(getX() + distance, getY() - distance);
+            case NORTHWEST:
+                return new Coordinate(getX() - distance, getY() - distance);
+            case SOUTHEAST:
+                return new Coordinate(getX() + distance, getY() + distance);
+            case SOUTHWEST:
+                return new Coordinate(getX() - distance, getY() + distance);
+        }
+        return null;
+    }
+
+    public ArrayList<Coordinate> getCoordinatesTo(Coordinate coordinate){
+        Direction direction = directionTo(coordinate);
+        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        coordinates.add(this);
+        Coordinate neighbor = getNeighbor(direction);
+        while(!neighbor.equals(coordinate)){
+            coordinates.add(neighbor);
+            neighbor = getNeighbor(direction);
+        }
+        coordinates.add(coordinate);
+        return coordinates;
+    }
+
+
+
+    public Direction directionTo(Coordinate coordinate){
+        if(equals(coordinate))
+            throw  new IllegalArgumentException("The given squares are the same.");
+
+        int xDiff = getX() - coordinate.getX();
+        int yDiff = getY() - coordinate.getY();
+        boolean straight = (xDiff == 0 || yDiff == 0);
+        boolean diagonal = (xDiff == yDiff || xDiff == -yDiff);
+
+        if(straight){
+            if(xDiff > 0){
+                return Direction.EAST;
+            }else if(xDiff < 0){
+                return Direction.WEST;
+            }
+
+            if(yDiff > 0){
+                return  Direction.NORTH;
+            }else if(yDiff < 0){
+                return Direction.SOUTH;
+            }
+        }else if(diagonal){
+            if(xDiff > 0 && yDiff > 0){
+                return  Direction.SOUTHEAST;
+            }else if(xDiff > 0 && yDiff < 0){
+                return Direction.NORTHEAST;
+            }else if(xDiff < 0 && yDiff > 0){
+                return Direction.SOUTHWEST;
+            }else if(xDiff < 0 && yDiff < 0){
+                return Direction.NORTHWEST;
+            }
+        }
+        throw new IllegalArgumentException("The given squares do not lie on a main direction");
+
+    }
+
+
 }
