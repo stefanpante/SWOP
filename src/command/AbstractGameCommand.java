@@ -12,7 +12,7 @@ import game.Game;
  * @author Jonas Devlieghere
  *
  */
-public abstract class AbstractGameCommand extends Observable implements Command {
+public abstract class AbstractGameCommand implements Command {
 
 	private Game game;
 	
