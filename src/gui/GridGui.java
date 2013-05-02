@@ -43,32 +43,15 @@ public class GridGui extends GUIElement{
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
 	private HashMap<Coordinate, SquareGUI> items;
-	private HashMap<Coordinate, SquareGUI> powerfailItems;
-	private HashMap<Coordinate, SquareGUI> powerfails;
-	private HashMap<Coordinate, SquareGUI> teleports;
-	private HashMap<Coordinate, SquareGUI> teleportsItem;
 	private HashMap<Coordinate, SquareGUI> teleportPowerfail;
 	private HashMap<Coordinate, SquareGUI> teleportsItemPowerfails;
-
-
-
-	/**
-	 * Coordinates of the items
-	 */
-	private ArrayList<Coordinate> grenades_coors;
-	private ArrayList<Coordinate> discs_coors;
-	private ArrayList<Coordinate> chargedDiscs_coors;
-	private ArrayList<Coordinate> ff_coors;
+	private HashMap<Coordinate, ArrayList<Item>> items_ = new HashMap<Coordinate, ArrayList<Item>>();
 
 	/**
-	 * Coordinates of the powerfailures
+	 * Coordinates of the powerFailures
 	 */
 	private ArrayList<Coordinate> powerfail_coors;
 
-	/**
-	 * Coordinates of teleports
-	 */
-	private ArrayList<Coordinate> teleport_coors;
 	/**
 	 * Coordinates of the walls
 	 */
@@ -123,33 +106,25 @@ public class GridGui extends GUIElement{
 
 		this.hCells = hCells;
 		this.vCells = vCells;
+		
 		this.squares = new HashMap<Coordinate, SquareGUI>();
-
+		
 		this.players = new ArrayList<SquareGUI>();
 		this.items = new HashMap<Coordinate, SquareGUI>();
-		this.powerfailItems = new HashMap<Coordinate, SquareGUI>();
-		this.powerfails = new HashMap<Coordinate, SquareGUI>();
-		this.teleports  = new HashMap<Coordinate, SquareGUI>();
-		this.teleportsItem  = new HashMap<Coordinate, SquareGUI>();
 		this.teleportPowerfail = new HashMap<Coordinate, SquareGUI>();
 		this.teleportsItemPowerfails = new HashMap<Coordinate, SquareGUI>();
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
-		this.grenades_coors = new ArrayList<Coordinate>();
-		this.discs_coors = new ArrayList<Coordinate>();
-		this.ff_coors = new ArrayList<Coordinate>();
-		this.chargedDiscs_coors = new ArrayList<Coordinate>();
 		this.powerfail_coors = new ArrayList<Coordinate>();
-		this.teleport_coors = new ArrayList<Coordinate>();
 		this.initGrid();
 		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
 		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), swidth, sHeight, gui);
 		this.throwPad = new ThrowPad(new PVector(25,55), swidth, sHeight, gui);
 		throwPad.setVisibility(false);
-		this.adjustPad2(directionalPad);
-		this.adjustPad2(throwPad);
+		this.adjustPad(directionalPad);
+		this.adjustPad(throwPad);
 	}
 	
 
@@ -198,7 +173,7 @@ public class GridGui extends GUIElement{
 				toRemove.add(coordinate);
 			}
 		}
-		
+
 		for(Coordinate coordinate: toRemove){
 			squares.remove(coordinate);
 		}
@@ -212,31 +187,10 @@ public class GridGui extends GUIElement{
 	public void draw() {
 		for(SquareGUI square : squares.values()){
 			square.draw();
-			directionalPad.draw();
-			throwPad.draw();
 		}
-
-		
-
 		
 		for(SquareGUI item: items.values()){
 			item.draw();
-		}
-		
-		for(SquareGUI item: powerfailItems.values()){
-			item.draw();
-		}
-		
-		for(SquareGUI powerfail: powerfails.values()){
-			powerfail.draw();
-		}
-		
-		for(SquareGUI teleport: teleports.values()){
-			teleport.draw();
-		}
-		
-		for(SquareGUI teleport: teleportsItem.values()){
-			teleport.draw();
 		}
 		
 		for(SquareGUI teleport: teleportPowerfail.values()){
@@ -272,7 +226,6 @@ public class GridGui extends GUIElement{
 
 	}
 
-
 	/**
 	 * Hovers over the grid.
 	 * @param mouseX	the x coordinate of the mouse
@@ -286,7 +239,6 @@ public class GridGui extends GUIElement{
 		throwPad.hover(mouseX, mouseY);
 	}
 
-
 	/**
 	 * Sets the coordinates of the walls.
 	 * @param o
@@ -297,7 +249,6 @@ public class GridGui extends GUIElement{
 
 	}
 
-
 	private void updateWalls(){
 		walls_squares.clear();
 		for(Coordinate wall: walls){
@@ -306,15 +257,6 @@ public class GridGui extends GUIElement{
 			s.setShape(Shapes.wall);
 			walls_squares.add(s);
 		}
-	}
-
-
-	/**
-	 * Sets the positions of the grenades.
-	 * @param o
-	 */
-	public void setGrenades(ArrayList<Coordinate> o) {
-		this.grenades_coors = o;
 	}
 
 	/**
@@ -335,11 +277,7 @@ public class GridGui extends GUIElement{
 				this.players.add(s);
 			}
 		}
-
-
-
 	}
-
 
 	/**
 	 * sets the position of powerfailures
@@ -392,12 +330,12 @@ public class GridGui extends GUIElement{
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
 
-		adjustPad2(directionalPad);
-		adjustPad2(throwPad);
+		adjustPad(directionalPad);
+		adjustPad(throwPad);
 
 	}
 
-	private void adjustPad2(DirectionalPad pad){
+	private void adjustPad(DirectionalPad pad){
 		pad.setPosition(getPixels(currentPlayer));
 		HashMap<Direction, DirectionalButton> buttons = pad.getButtons();
 		
@@ -427,10 +365,9 @@ public class GridGui extends GUIElement{
 	public void mousePressed(int mouseX, int mouseY) {
 		directionalPad.mousePressed(mouseX, mouseY);
 		throwPad.mousePressed(mouseX, mouseY);
-
 	}
 
-	private HashMap<Coordinate, ArrayList<Item>> items_ = new HashMap<Coordinate, ArrayList<Item>>();
+	
 	
 	public void setItems(HashMap<Coordinate,ArrayList<Item>> items){
 		this.items_ = items;
@@ -459,14 +396,13 @@ public class GridGui extends GUIElement{
 		for(Coordinate coor: powerfail_coors){
 			if(items.containsKey(coor)){
 				SquareGUI s = items.get(coor);
-				items.remove(coor);
 				s.setShape(Shapes.powerFailureItem);
 			}
 			
 			else{
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.powerFail);
-				powerfails.put(coor, s);
+				items.put(coor, s);
 			}
 			
 		}
@@ -475,8 +411,6 @@ public class GridGui extends GUIElement{
 	public DirectionalPad getDirectionalPad(){
 		return this.directionalPad;
 	}
-
-
 
 	public ThrowPad getThrowPad() {
 		return this.throwPad;
