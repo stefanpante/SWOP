@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * Date: 02/05/13
  * Time: 22:17
  */
-public class ForceFieldManagerTest {
+public class TestForceFieldManager {
 
     public static final Coordinate co7_7 = new Coordinate(7, 7);
     public static final Coordinate co3_3 = new Coordinate(3, 3);
@@ -82,42 +82,6 @@ public class ForceFieldManagerTest {
         ForceFieldManager ffm = new ForceFieldManager(grid);
         ffm.update(null,null);
         System.out.println(ffm.getAllForceFields());
-    }
-
-    @Test
-    public void coordinateTest(){
-        Coordinate c1 = new Coordinate(2,6);
-        Coordinate c2 = new Coordinate(4,8);
-        assertEquals(c1.directionTo(c2), Direction.SOUTHEAST);
-    }
-
-    @Test
-    public void coordinate2Test(){
-        Coordinate c1 = new Coordinate(2,6);
-        Coordinate c2 = new Coordinate(4,8);
-        assertEquals(c2.directionTo(c1), Direction.NORTHWEST);
-    }
-
-    @Test
-    public void coordinate3Test(){
-        Coordinate c1 = new Coordinate(1,6);
-        Coordinate c2 = new Coordinate(2,6);
-        assertEquals(c1.directionTo(c2), Direction.EAST);
-    }
-
-    @Test
-    public void coordinate4Test(){
-        Coordinate c1 = new Coordinate(1,6);
-        Coordinate c2 = new Coordinate(2,6);
-        assertEquals(c2.directionTo(c1), Direction.WEST);
-    }
-
-
-    @Test
-    public void coordinate5Test(){
-        Coordinate c1 = new Coordinate(1,1);
-        Coordinate c2 = new Coordinate(4,4);
-        System.out.println(c1.getCoordinatesTo(c2));
     }
 
 }

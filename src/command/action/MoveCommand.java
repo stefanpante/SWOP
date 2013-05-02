@@ -119,9 +119,15 @@ public class MoveCommand extends ActionCommand {
 		do{
 			try {
 				currentSquare = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
-				movable.move(currentSquare);
-				setPrevPosition(getCurrentPosition());
-				setCurrentPosition(currentSquare);
+				if(!currentSquare.isObstructed()){
+					movable.move(currentSquare);
+					setPrevPosition(getCurrentPosition());
+					setCurrentPosition(currentSquare);
+				}
+				else{
+					return;
+				}
+				
 			} catch (NoSuchElementException e) {
 				return;
 			}  catch (IllegalArgumentException e){
