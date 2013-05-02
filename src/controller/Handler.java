@@ -191,6 +191,7 @@ public abstract class Handler {
 	protected HashMap<String, Object> getProperties(){
 		HashMap<String, Object> properties = new HashMap<String, Object>();
 		HashMap<Power, Coordinate> powerFailures   = new HashMap<Power, Coordinate>();
+		
 		ArrayList<Coordinate> lightGrenades = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> identityDisks = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
@@ -199,8 +200,9 @@ public abstract class Handler {
 		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
 		HashMap<Player, Coordinate> players = new HashMap<Player, Coordinate>();
 
-		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
+		for (Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
 			Square square = getGame().getGrid().getSquare(coordinate);
+			
 			if(square.getPower().isFailing())
 				powerFailures.put(square.getPower(), coordinate);
 
@@ -210,7 +212,7 @@ public abstract class Handler {
 			if(square.getInventory().hasLightGrenade() && !square.getInventory().getLightGrenade().isActive())
 				lightGrenades.add(coordinate);
 			
-			if(square.getInventory().hasForceFieldGenerator()){
+			if(square.getInventory().hasForceFieldGenerator()) { }
 
 			for(IdentityDisc id : square.getInventory().getIdentityDiscs()){
 				if(id.isCharged()){
@@ -222,25 +224,25 @@ public abstract class Handler {
 			}
 
 			boolean player_position = false;
-			if(square.isObstructed()){
+			
+			if (square.isObstructed()) {
 				player_position = false;
-				for(Player player: getGame().getPlayers()){
-					if(player.getPosition() == square){
+				
+				for (Player player: getGame().getPlayers()) {
+					if (player.getPosition() == square)
 						player_position = true;
-					}
 				}
 
-				if(!player_position){
+				if(!player_position)
 					walls.add(coordinate);
-				}
 			}
+			
 			squares.add(coordinate);
-			for(Player player: getGame().getPlayers()){
-				if(player.getPosition() == square){
+			
+			for (Player player: getGame().getPlayers()){
+				if (player.getPosition() == square)
 					players.put(player, coordinate);
-				}
 			}
-
 		}
 
 		properties.put(GameHandler.POWER_FAILS_PROPERTY, powerFailures);

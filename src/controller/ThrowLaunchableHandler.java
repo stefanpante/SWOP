@@ -2,6 +2,8 @@ package controller;
 
 import game.Game;
 
+import item.launchable.IdentityDisc;
+
 import java.beans.PropertyChangeListener;
 
 import command.AbstractGameCommand;
@@ -26,9 +28,9 @@ public class ThrowLaunchableHandler extends Handler {
 		super(game, listener);
 	}
 	
-	public void throwLaunchable(LaunchableItem launchableItem, Direction direction) throws Exception {
+	public void throwLaunchable(IdentityDisc disc, Direction direction) throws Exception {
 		fireChanges();
-		AbstractGameCommand throwLaunchableEvent = new ThrowLaunchableCommand(getGame(), launchableItem, direction);
+		AbstractGameCommand throwLaunchableEvent = new ThrowLaunchableCommand(getGame(), disc, direction);
 		throwLaunchableEvent.execute();
 		fireChanges();
 	}

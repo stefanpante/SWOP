@@ -1,5 +1,7 @@
 package square.power;
 
+import item.launchable.IdentityDisc;
+import move.Movable;
 import game.Player;
 
 /**
@@ -30,4 +32,16 @@ public class RegularPower extends Power{
     public void affect(Player player) {
         // No effect
     }
+
+	@Override
+	public void affect(Movable movable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void affect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
 }
