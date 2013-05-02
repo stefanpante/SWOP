@@ -5,7 +5,10 @@ import grid.GridProvider;
 import grid.RandomGridBuilder;
 import org.junit.*;
 import square.Direction;
+import square.Square;
 import util.Coordinate;
+
+import item.ForceFieldGenerator;
 
 import java.util.ArrayList;
 
@@ -13,9 +16,7 @@ import static org.junit.Assert.*;
 
 
 /**
- * User: jonas
- * Date: 02/05/13
- * Time: 22:17
+ * Tests the Force Field Manager.
  */
 public class TestForceFieldManager {
 
@@ -26,7 +27,12 @@ public class TestForceFieldManager {
     private static ArrayList<Coordinate> lightGrenades;
     private static ArrayList<Coordinate> identityDiscs;
     private static ArrayList<Coordinate> forceFieldGen;
-
+    
+    private Grid grid;
+    
+    private ForceFieldManager manager;
+    
+    private ForceFieldGenerator generator;
 
     /**
      * SITUATION:
@@ -43,9 +49,16 @@ public class TestForceFieldManager {
      *	9 	|	|	|	|	|	|	|	|	|	|	|
      *
      */
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        walls = new ArrayList<ArrayList<Coordinate>>();
+    @Before
+    public void setUpBefore() throws Exception {
+        createGrid();
+        manager = new ForceFieldManager(grid);
+        
+        generator = grid.getSquare(new Coordinate(2,6)).getInventory().getForceFieldGenerator();
+    }
+
+	private void createGrid() {
+		walls = new ArrayList<ArrayList<Coordinate>>();
         ArrayList<Coordinate> wall1 = new ArrayList<Coordinate>();
         wall1.add(new Coordinate(2, 0));
         wall1.add(new Coordinate(2, 1));
@@ -54,17 +67,14 @@ public class TestForceFieldManager {
         wall2.add(new Coordinate(3, 1));
         wall2.add(new Coordinate(4, 1));
         walls.add(wall2);
-
-
+        
         lightGrenades = new ArrayList<Coordinate>();
         lightGrenades.add(new Coordinate(7, 7));
         lightGrenades.add(new Coordinate(0, 8));
         lightGrenades.add(new Coordinate(8, 0));
 
-
         identityDiscs = new ArrayList<Coordinate>();
         identityDiscs.add(new Coordinate(7, 7));
-
 
         teleports = new ArrayList<Coordinate>();
         teleports.add(new Coordinate(2, 4));
@@ -73,15 +83,71 @@ public class TestForceFieldManager {
         forceFieldGen = new ArrayList<Coordinate>();
         forceFieldGen.add(new Coordinate(2,6));
         forceFieldGen.add(new Coordinate(4,8));
-    }
-
+        
+        grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
+	}
+    
     @Test
-    public void detectionTest(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-
-        ForceFieldManager ffm = new ForceFieldManager(grid);
-        ffm.update(null,null);
-        System.out.println(ffm.getAllForceFields());
+    public void testConstructing() {
+    	new ForceFieldManager(GridProvider.getEmptyGrid());
     }
+    
+    /**
+     * Two generators are within range.
+     */
+    @Test
+    public void detectionTest() {
+    	assertEquals(manager.getAllForceFields().size(), 0);
+    	
+        manager.update(null,null);
+        
+        assertEquals(manager.getAllForceFields().size(), 1);
+    }
+    
+    @Test
+    public void canHaveForceField() {
+    	assertFalse(manager.canHaveAsForceField(null));
+    }
+    
+    
+    @Test
+    public void placeGeneratorOutRange() {
+    	ForceFieldGenerator generator = new ForceFieldGenerator();
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    	
+    	Square square = grid.getSquare(new Coordinate(2,2));
+    	square.getInventory().addForceFieldGenerator(generator);
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    }
+    
+    @Test
+    public void placeNewGeneratorsInRange() {
+    	ForceFieldGenerator generator = new ForceFieldGenerator();
+    	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    	
+    	Square square = grid.getSquare(new Coordinate(2,2));
+    	square.getInventory().addForceFieldGenerator(generator);
+    	
+    	Square squareTwo = grid.getSquare(new Coordinate(2,3));
+    	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
+    	
+    	System.out.println(grid.getAllCoordinates().size());
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 2);
+    }
+    
+    @Test
+    public void placeGeneratorNearExistingField() {
+    	
+    }
+    
 
 }

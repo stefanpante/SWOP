@@ -65,7 +65,7 @@ public class ForceFieldManager implements Observer {
      * @return	False	If the force field is null or already contained.
      * 			True	Otherwise
      */
-    private boolean canHaveAsForceField(ForceField forceField) {
+    protected boolean canHaveAsForceField(ForceField forceField) {
         if(forceField == null)
             return false;
         if(contains(forceField))
@@ -144,7 +144,11 @@ public class ForceFieldManager implements Observer {
             forceField.addSquare(square);
         }
         
-        addForceField(forceField);
+        try {
+        	addForceField(forceField);
+        } catch (IllegalArgumentException exc) {
+        	// Already contained
+        }
     }
 
 }
