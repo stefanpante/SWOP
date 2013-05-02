@@ -14,12 +14,7 @@ import util.Coordinate;
 public class RandomGridBuilder extends AbstractGridBuilder{
 	
 	public static int MIN_HSIZE = 10;
-	
 	public static int MIN_VSIZE = 10;
-	
-	
-	ArrayList<Wall> walls;
-
 	
 	/**
 	 * This creates a flat grid, with dimensions 10x10 and no
@@ -51,28 +46,11 @@ public class RandomGridBuilder extends AbstractGridBuilder{
         setVSize(vSize);
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
-		setSquares();
-		setConstraints();
-		this.walls = new ArrayList<Wall>();
-		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(randomWallLocations(getConstraintWall()));
-		build(randomLocations(getConstraintLightGrenade()),
-				randomLocations(getConstraintIdentityDisk()),
-				randomLocations(getConstraintTeleport()), 
-				chargedIdentityDiskLocation());
+		this.walls = new ArrayList<Wall>();		
+		build();
 	}
 
-    @Override
-    public boolean isValidHSize(int hSize){
-        return ( hSize >= MIN_HSIZE);
-    }
-
-    @Override
-    public boolean isValidVSize(int vSize){
-        return (vSize >= MIN_VSIZE);
-    }
-	
-	/**
+    /**
 	 *  Creates a new GridBuilder with parameters to create a new grid.
 	 * 	Currently the given coordinates will be checked on the usual constraints!
 	 * 	Keep this in mind when building test grids.
@@ -96,7 +74,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			ArrayList<Coordinate> teleports,
 			Coordinate chargedIdentityDisk){
 		setHSize(hSize);
-        setVSize(vSize);
+	    setVSize(vSize);
 		
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
@@ -107,7 +85,31 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		placeWalls(walls);
 		build(lightGrenades, identityDisks, teleports, chargedIdentityDisk);
 	}
+
+	@Override
+    public boolean isValidHSize(int hSize){
+        return ( hSize >= MIN_HSIZE);
+    }
+
+    @Override
+    public boolean isValidVSize(int vSize){
+        return (vSize >= MIN_VSIZE);
+    }
 	
+	@Override
+	protected void build() throws IllegalStateException {
+		setSquares();
+		setConstraints();
+		placeWalls(randomWallLocations(getConstraintWall()));
+		placeLightGrenade(randomLocations(getConstraintLightGrenade()));
+		placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
+		placeTeleports(randomLocations(getConstraintTeleport()));
+		placeChargedIdentityDisk(chargedIdentityDiskLocation());
+		getGrid().setStartPlayerOne(this.getPlayerOneStart());
+        getGrid().setStartPlayerTwo(this.getPlayerTwoStart());
+		
+	}
+
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
 		placeLightGrenade(lightGrenades);
@@ -291,35 +293,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return result;
 	}
 	
-
-	
 	/**
-	 * Utility method that flattens a two dimensional Arraylist. 
-	 * 
-	 * @return  a flattened version of the list
-	 */
-
-
-	@Override
-	protected void build() throws IllegalStateException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
-
-
-	
-
-	protected Coordinate randomChargedIdentityDiskLocation() {
-		return null;
-	}
-
-
-
-
-
-    /**
      * Adds squares to the grid
      */
     @Override

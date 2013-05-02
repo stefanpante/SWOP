@@ -404,6 +404,11 @@ public abstract class AbstractGridBuilder {
         }
     }
 
+	/**
+	 * Utility method that flattens a two dimensional Arraylist. 
+	 * 
+	 * @return  a flattened version of the list
+	 */
     private ArrayList<Coordinate> flatten(ArrayList<ArrayList<Coordinate>> list) {
         ArrayList<Coordinate> result = new ArrayList<Coordinate>();
         for(ArrayList<Coordinate> L : list){

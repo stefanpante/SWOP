@@ -140,6 +140,9 @@ public class GridConstraint {
                 if(include.contains(coordinate))
                     includes[i] = true;
                 i++;
+//                if(!include.contains(coordinate)){
+//                	return false;
+//                }
             }
         }
         for(boolean b : includes){
