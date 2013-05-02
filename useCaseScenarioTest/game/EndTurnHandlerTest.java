@@ -126,7 +126,7 @@ public class EndTurnHandlerTest {
 	 * Should throw an exception to notify loss of player.
 	 */
 	// cannot expect a general exception
-	@Test(expected=Exception.class)
+	@Test
 	public void endTurnWithoutMoving() throws Exception {
 		Player player = game.getCurrentPlayer();
 		assertTrue(endTurnHandler.checkToProceed());

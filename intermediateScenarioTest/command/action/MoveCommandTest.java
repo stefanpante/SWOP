@@ -6,6 +6,7 @@ import game.Game;
 import game.Player;
 import item.ChargedIdentityDisc;
 import item.IdentityDisc;
+import item.Teleport;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import square.Direction;
@@ -13,6 +14,7 @@ import square.Square;
 import util.Coordinate;
 
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 
 import static org.junit.Assert.*;
 
@@ -141,13 +143,160 @@ public class MoveCommandTest {
     	} catch (Exception e) {
     		e.printStackTrace();
     		fail("Move Command shouldn't throw an exception");
-    		
+
     	}
         Square expectedSquare = grid.getSquare(new Coordinate(0,0));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(cd));
     }
 
+    //Normal case no walls no teleports, range MAX, NORTH
+    @Test
+    public void testID4() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        ChargedIdentityDisc cd = new ChargedIdentityDisc();
+        Coordinate co0_9 = new Coordinate(0,9);
+        Square startSquare = grid.getSquare(co0_9);
+        startSquare.getInventory().addItem(cd);
+        MoveCommand m = new IdentityDiscMoveCommand(g,cd,startSquare, Direction.EAST);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
 
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(9,9));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(cd));
+    }
+
+    //Case with walls and no teleports, range 3, EAST
+    @Test
+    public void testID5() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        IdentityDisc id = new IdentityDisc();
+        Coordinate co0_0 = new Coordinate(0,0);
+        Square startSquare = grid.getSquare(co0_0);
+        startSquare.getInventory().addItem(id);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.EAST);
+        try {
+            m.execute();
+            System.out.println(grid.getCoordinate(m.getCurrentPosition()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(1,0));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
+
+    //Case with walls and no teleports, range 3, NORTH
+    @Test
+    public void testID6() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        IdentityDisc id = new IdentityDisc();
+        Coordinate co3_4 = new Coordinate(3,4);
+        Square startSquare = grid.getSquare(co3_4);
+        startSquare.getInventory().addItem(id);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.NORTH);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(3,2));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
+
+
+    //Case with walls and no teleports, range 3, NORTH
+    @Test
+    public void testID7() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        IdentityDisc id = new IdentityDisc();
+        Coordinate co5_0 = new Coordinate(5,0);
+        Square startSquare = grid.getSquare(co5_0);
+        startSquare.getInventory().addItem(id);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.NORTH);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(3,0));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
+    //Case with walls and no teleports, range MAX, NORTH
+    @Test
+    public void testID8() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        ChargedIdentityDisc cd = new ChargedIdentityDisc();
+        Coordinate co3_9 = new Coordinate(3,9);
+        Square startSquare = grid.getSquare(co3_9);
+        startSquare.getInventory().addItem(cd);
+        MoveCommand m = new IdentityDiscMoveCommand(g,cd,startSquare, Direction.WEST);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(3,2));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(cd));
+    }
+
+    //Case with walls and no teleports, range MAX, WEST
+    @Test
+    public void testID9() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        ChargedIdentityDisc cd = new ChargedIdentityDisc();
+        Coordinate co5_0 = new Coordinate(5,0);
+        Square startSquare = grid.getSquare(co5_0);
+        startSquare.getInventory().addItem(cd);
+        MoveCommand m = new IdentityDiscMoveCommand(g,cd,startSquare, Direction.WEST);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(3,0));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(cd));
+    }
+
+
+    //Case with walls and teleports, range 3, NORTH
+    @Test
+    public void testID10() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        //Assure the teleports have a proper destination set.
+        Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
+        Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
+        assertTrue(t0.getDestination().equals(t1));
+        assertTrue(t1.getDestination().equals(t0));
+
+        IdentityDisc id = new IdentityDisc();
+        Coordinate co2_5 = new Coordinate(2,5);
+        Square startSquare = grid.getSquare(co2_5);
+        startSquare.getInventory().addItem(id);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.WEST);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(4,3));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
 
     //Normal case no walls no teleports, player move NORTH
     @Test
