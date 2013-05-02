@@ -1,12 +1,15 @@
 package item.launchable;
 
+import effect.MovableEffect;
 import effect.player.PlayerEffect;
 import game.Player;
 import item.Item;
 
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import move.Movable;
 import notnullcheckweaver.NotNull;
+import square.Direction;
 
 /**
  * Implementation of the item IdentityDisc
@@ -15,7 +18,7 @@ import notnullcheckweaver.NotNull;
  *
  */
 @NotNull
-public class IdentityDisc extends LaunchableItem {
+public class IdentityDisc implements MovableEffect {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.
@@ -25,31 +28,88 @@ public class IdentityDisc extends LaunchableItem {
 	/**
 	 * Constructor that makes an Identity Disc.
 	 */
-	public IdentityDisc() {
-		super(MAX_TRAVEL_DISTANCE);
-	}
 
-	@Override
+    private int range;
+
+    public IdentityDisc() {
+        this(MAX_TRAVEL_DISTANCE);
+    }
+
+    public IdentityDisc(int range){
+        this.range = range;
+    }
+
+
+    /**
+     * The maximum range of the item when launched.
+     *
+     * @return
+     */
+    public int getRange(){
+        return this.range;
+    }
+
+    /**
+     * Sets the range for this Launchable Item
+     * @param range	the range
+     * @throws IllegalArgumentException
+     * 		   thrown when the range is smaller than zero.
+     */
+    public void setRange(int range) throws IllegalArgumentException{
+        if(!isValidRange(range)){
+            throw new IllegalArgumentException("Range should never be negative");
+        }
+
+        this.range = range;
+    }
+
+    /**
+     * Checks whether the range is larger than zero.
+     * @param range
+     * @return
+     */
+    public boolean isValidRange(int range){
+        return (range >= 0);
+    }
+
+
+
+    //TODO: Moet dit niet abstract zijn? Als er nieuwe launchable items bijkomen
+    /**
+     * Check whether the given travelDirection is a valid travelDirection
+     * 	for all the Launchable objects.
+     *
+     * @param   travelDirection
+     *      	The travelDirection to check.
+     * @return  True if and only if the given value is not null
+     * 			and doesn't represent a diagonal direction
+     */
+    public static boolean isValidTravelDirection(Direction travelDirection) {
+        if(travelDirection == null){
+            return false;
+        }
+        if (travelDirection.isDiagonal()) {
+            return false;
+        }
+        return true;
+    }
+
 	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.addIdentityDisc(this);
 	}
 
-	@Override
 	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
 		sqInv.removeIdentityDisc(this);
 	}
 
-	@Override
 	public void acceptAddPlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
 		plInv.addIdentityDisc(this);
 	}
 
-	@Override
 	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
 		plInv.removeIdentityDisc(this);
 	}
 
-	@Override
 	public boolean isCharged() {
 		return false;
 	}
@@ -57,7 +117,14 @@ public class IdentityDisc extends LaunchableItem {
 	public static boolean isIdentityDisc(Object o){
 		return (o instanceof IdentityDisc);
 	}
-	
+
+    /**
+     * Decrease the range by one.
+     */
+    public void decreaseRange(){
+        setRange(getRange()-1);
+    }
+
 	@Override
 	public boolean isSameType(Item o){
 		return (o instanceof IdentityDisc);
@@ -72,8 +139,15 @@ public class IdentityDisc extends LaunchableItem {
 	}
 
     @Override
+    public void affect(Movable movable) {
+        movable.getsAffectedBy(this);
+    }
+
     public void affect(Player player) {
         // TODO: The player is only affected if the IdentityDisk hits him.
         // player.loseTurns(1,false);
+    }
+
+    public void affect(IdentityDisc identityDisc) {
     }
 }

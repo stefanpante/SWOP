@@ -3,6 +3,8 @@ package item;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import item.launchable.IdentityDisc;
+import move.Movable;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -59,8 +61,17 @@ public class ForceFieldGenerator extends Item implements Observer{
 	}
 
     @Override
+    public void affect(Movable movable) {
+        movable.getsAffectedBy(this);
+    }
+
+    @Override
     public void affect(Player player) {
         // TODO: Implement the effect of a player entering this force field
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) {
     }
 
     @Override

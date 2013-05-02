@@ -1,10 +1,13 @@
 package square;
 
 
+import effect.MovableEffect;
 import effect.player.PlayerEffect;
 import game.Player;
 import item.inventory.SquareInventory;
 
+import item.launchable.IdentityDisc;
+import move.Movable;
 import square.obstacle.Obstacle;
 import square.power.Power;
 import square.power.RegularPower;
@@ -18,7 +21,7 @@ import notnullcheckweaver.Nullable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
  */
 @NotNull
-public class Square implements PlayerEffect {
+public class Square implements MovableEffect {
 		
 	/**
 	 *  Contains all items which were used on this square.
@@ -124,8 +127,18 @@ public class Square implements PlayerEffect {
 	}
 
     @Override
+    public void affect(Movable movable) {
+        getInventory().affect(movable);
+        getPower().affect(movable);
+    }
+
+    @Override
     public void affect(Player player) {
-        getInventory().affect(player);
-        getPower().affect(player);
+        // Double dispatch is called on the lower level
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) {
+        // Double dispatch is called on the lower level
     }
 }

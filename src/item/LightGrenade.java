@@ -3,6 +3,8 @@ package item;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import item.launchable.IdentityDisc;
+import move.Movable;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -171,11 +173,20 @@ public class LightGrenade extends Item {
 	}
 
     @Override
+    public void affect(Movable movable) {
+        movable.getsAffectedBy(this);
+    }
+
+    @Override
     public void affect(Player player) {
         if(isActive())
             player.loseActions(2);
     }
-    
+
+    @Override
+    public void affect(IdentityDisc identityDisc) {
+    }
+
     /**
 	 * The state of the LightGrenade.
 	 */

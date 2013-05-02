@@ -4,6 +4,8 @@ import effect.player.PlayerEffect;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
+import item.launchable.IdentityDisc;
+import move.Movable;
 import square.Square;
 
 /**
@@ -128,10 +130,19 @@ public class Teleport extends Item {
 	}
 
     @Override
+    public void affect(Movable movable) {
+        movable.getsAffectedBy(this);
+    }
+
+    @Override
     public void affect(Player player){
         if(canTeleport()){
             player.setPosition(getDestination());
         }
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) {
     }
 
 }

@@ -8,7 +8,6 @@ import square.Square;
 import game.Game;
 import game.Player;
 import grid.TrajectoryMediator;
-import item.launchable.LaunchableItem;
 
 /**
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
