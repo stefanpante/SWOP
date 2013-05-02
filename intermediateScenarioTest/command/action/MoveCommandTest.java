@@ -2,13 +2,10 @@ package command.action;
 
 import grid.Grid;
 import grid.GridProvider;
-import grid.action.IdentityDiscMoveCommand;
-import grid.action.MoveCommand;
 import game.Game;
 import game.Player;
-import grid.action.PlayerMoveCommand;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
+import item.ChargedIdentityDisc;
+import item.IdentityDisc;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import square.Direction;
@@ -34,6 +31,8 @@ public class MoveCommandTest {
     private static ArrayList<Coordinate> teleports;
     private static ArrayList<Coordinate> lightGrenades;
     private static ArrayList<Coordinate> identityDiscs;
+    private static ArrayList<Coordinate> forceFieldGen;
+
 
     /**
      * SITUATION:
@@ -76,12 +75,15 @@ public class MoveCommandTest {
         teleports = new ArrayList<Coordinate>();
         teleports.add(new Coordinate(2, 4));
         teleports.add(new Coordinate(4, 4));
+
+        forceFieldGen = new ArrayList<Coordinate>();
+        forceFieldGen.add(new Coordinate(8,8));
     }
 
     //Normal case no walls no teleports, range 3, NORTH
     @Test
     public void testID1(){
-      Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, null, new Coordinate(3, 3));
+      Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
       Game g = new Game(grid);
       IdentityDisc id = new IdentityDisc();
       Coordinate co0_9 = new Coordinate(0,9);
@@ -95,7 +97,7 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, range 3, EAST
     @Test
     public void testID2() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, null, new Coordinate(3,3));
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
         Game g = new Game(grid);
         IdentityDisc id = new IdentityDisc();
         Coordinate co0_9 = new Coordinate(0,9);
@@ -109,7 +111,7 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, range MAX, NORTH
     @Test
     public void testID3() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, null, new Coordinate(3,3));
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
         Game g = new Game(grid);
         ChargedIdentityDisc cd = new ChargedIdentityDisc();
         Coordinate co0_9 = new Coordinate(0,9);
@@ -125,19 +127,19 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, player move NORTH
     @Test
     public void testPlayer1(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, null, new Coordinate(3, 3));
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
         Game g = new Game(grid);
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = grid.getSquare(co0_9);
         Player player = g.getCurrentPlayer();
         MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.NORTH);
-        assertEquals(player,grid.getSquare(new Coordinate(0,8)).getObstacle());
+        assertEquals(player, grid.getSquare(new Coordinate(0, 8)).getObstacle());
     }
 
     //Normal case no walls no teleports, player move NORTHEAST
     @Test
     public void testPlayer2(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, null, new Coordinate(3, 3));
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
         Game g = new Game(grid);
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = grid.getSquare(co0_9);
@@ -149,7 +151,7 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, player move NORTHEAST
     @Test
     public void testPlayer3(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, null, new Coordinate(3, 3));
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
         Game g = new Game(grid);
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = grid.getSquare(co0_9);
