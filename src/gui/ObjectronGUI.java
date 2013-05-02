@@ -177,13 +177,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		filepick.setColorLabel(OConstants.WHITE);
 		filepick.setColorBackground(OConstants.PLAYERBLUE);
 		
-		Textarea area = inputController.addTextarea("Warning", "Please make sure your Gridfile is valid!", hSize/4, 220, hSize/2, 100);
+		area = inputController.addTextarea("Warning", "Please make sure your Gridfile is valid!", hSize/4, 320, hSize/2, 100);
 		
-		
+		area.setColor(OConstants.PLAYERBLUE);
+		area.setColorLabel(OConstants.PLAYERBLUE);
+		area.setColorBackground(OConstants.WHITE);
+		area.setBorderColor(OConstants.PLAYERBLUE);
+		area.hide();
 		 
 
 	}
 	
+	Textarea area;
 	
 	public void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
@@ -310,18 +315,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
     private void setUpGame(String filePath){
-    	try {
+    	area.show();
         obj = new GameHandler(this);
         obj.startNewGame(filePath);
         hCells = obj.getGame().getGrid().getHSize();
         vCells = obj.getGame().getGrid().getVSize();
         initInterface();
-        obj.fireChanges();
-    	}
-    	catch(Exception e){
-    		//initializeInput();
-    		inputController.show();
-    	}
+        obj.fireChanges();   
 
     }
 	private void setUpGame(){

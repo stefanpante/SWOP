@@ -5,9 +5,12 @@ package command.action;
 
 import game.Game;
 import item.LightGrenade;
-
+import move.Movable;
 import square.Direction;
 import square.Square;
+
+import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 /**
  * The Move event handles all the logic for a player to move from one square
@@ -36,11 +39,11 @@ public class MoveCommand extends ActionCommand {
 	/**
 	 * Moves the player into a certain direction. 
 	 */
-	public MoveCommand(Game game, Direction dir) {
+	public MoveCommand(Game game, Movable movable, Direction dir) {
 		super(game);
 		this.direction = dir;
-		
-		currentPosition = getGame().getCurrentPlayer().getPosition();
+        this.movable = movable;
+        currentPosition = getGame().getCurrentPlayer().getPosition();
 		newPosition = getGame().getGrid().getNeighbor(currentPosition, getDirection()); 
 	}
 
@@ -121,4 +124,60 @@ public class MoveCommand extends ActionCommand {
 		}
 	}
 
+
+    /**
+     * Returns the last possible square an object can
+     * 	move to in the given direction with the given maximum range.
+     * 	The method takes obstacles into account.
+     * 	A MultiObstacle makes the result end just before the obstacle.
+     * 	Another obstacle makes the result end on the obstacle.
+     *
+     * @param 	startSquare
+     * 			The square on which the trajectory starts.
+     * @param 	direction
+     * 			The direction of the trajectory.
+     * @param 	maximumRange
+     * 			The maximum range of this trajectory.
+     * @return
+     */
+    public Square getEndSquare(Square startSquare, Direction direction, int maximumRange){
+        Square prevSquare;
+        Square currentSquare = startSquare;
+        HashSet<Square> passedDestinations = new HashSet<Square>();
+        Square destination;
+        int currentRange = 0;
+        do{
+            prevSquare = currentSquare;
+            if(prevSquare.getPower().isFailing()){//Afterwards a check because and ID can always move
+                maximumRange--;
+            }
+            teleport = prevSquare.getInventory().getTeleport();
+            if(maximumRange > 0 && currentRange < maximumRange) {
+                try {
+                    if(teleport!= null && !prevWasTeleport){
+                        destination = teleport.getDestination();
+                        if(passedDestinations.contains(destination)){
+                            return prevSquare;
+                        }
+                        passedDestinations.add(destination);
+                        currentSquare = destination;
+                        prevWasTeleport = true;
+                    } else {
+                        currentSquare = getGame().getGrid().getNeighbor(prevSquare, direction);
+                        prevWasTeleport = false;
+                    }
+                } catch (NoSuchElementException e) {
+                    return prevSquare;
+                } catch (IllegalArgumentException e){
+                    return prevSquare;
+                }
+                currentRange++;
+            }
+
+        } while(!currentSquare.isObstructed() && currentRange < maximumRange);
+        if(currentSquare.isObstructed() && currentSquare.getObstacle().bouncesBack()){
+            return prevSquare;
+        }
+        return currentSquare;
+    }
 }
