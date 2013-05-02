@@ -240,7 +240,7 @@ public class MoveCommandTest {
         Coordinate co3_9 = new Coordinate(3,9);
         Square startSquare = grid.getSquare(co3_9);
         startSquare.getInventory().addItem(cd);
-        MoveCommand m = new IdentityDiscMoveCommand(g,cd,startSquare, Direction.WEST);
+        MoveCommand m = new IdentityDiscMoveCommand(g,cd,startSquare, Direction.NORTH);
         try {
             m.execute();
         } catch (Exception e) {
