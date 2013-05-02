@@ -1,8 +1,7 @@
-package item.launchable;
+package item;
 
 import move.MovableEffect;
 import game.Player;
-import item.Item;
 
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;

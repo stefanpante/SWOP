@@ -1,6 +1,6 @@
 package gui;
 
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
 
 import java.util.HashMap;
 

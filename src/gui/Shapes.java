@@ -1,10 +1,10 @@
 package gui;
 
+import item.ChargedIdentityDisc;
 import item.ForceFieldGenerator;
+import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 import processing.core.PApplet;
 import processing.core.PShape;
 

@@ -1,7 +1,7 @@
 package move;
 
 import game.Player;
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
 import move.Movable;
 
 /**

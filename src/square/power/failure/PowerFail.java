@@ -1,7 +1,7 @@
 package square.power.failure;
 
 import game.Player;
-import item.launchable.IdentityDisc;
+import item.IdentityDisc;
 import move.Movable;
 import square.power.Power;
 import util.Rotation;

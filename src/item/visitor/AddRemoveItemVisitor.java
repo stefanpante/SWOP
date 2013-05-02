@@ -1,11 +1,11 @@
 package item.visitor;
 
+import item.ChargedIdentityDisc;
 import item.ForceFieldGenerator;
+import item.IdentityDisc;
 import item.LightGrenade;
 
 import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
 /**
  * Visitor implementation for adding or removing specific items from an inventory.

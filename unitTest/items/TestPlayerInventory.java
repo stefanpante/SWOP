@@ -2,12 +2,12 @@ package items;
 
 import static org.junit.Assert.*;
 
+import item.ChargedIdentityDisc;
+import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
 import item.inventory.PlayerInventory;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
 import org.junit.AfterClass;
 import org.junit.Test;

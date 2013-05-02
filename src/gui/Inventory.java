@@ -1,11 +1,11 @@
 package gui;
 
 import gui.button.ItemButton;
+import item.ChargedIdentityDisc;
+import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import item.launchable.ChargedIdentityDisc;
-import item.launchable.IdentityDisc;
 
 import java.util.ArrayList;
 
