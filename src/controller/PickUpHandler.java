@@ -37,7 +37,7 @@ public class PickUpHandler extends Handler {
 		fireChanges();
 		AbstractGameCommand pickUpEvent = new PickUpCommand(getGame(), item);
 		pickUpEvent.execute();
-		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Picked up a "+ item);
+		firePropertyChange(Handler.MESSAGE_PROPERTY, "Picked up a "+ item);
 		fireChanges();
 	}
 }

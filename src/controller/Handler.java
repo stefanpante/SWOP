@@ -21,6 +21,25 @@ import util.Coordinate;
 public abstract class Handler {
 
 	/**
+	 * Property constants
+	 */
+	public static final String WALLS_PROPERTY = "Walls";
+	public static final String PLAYERS_PROPERTY = "Players";
+	public static final String CURRENT_PLAYER_PROPERTY = "CurrentPlayer";
+	public static final String CURRENT_POSITION_PROPERTY = "CurrentPosition";
+	public static final String MESSAGE_PROPERTY = "Message";
+	public static final String SQUARE_INVENTORY_PROPERTY = "SquareInventory";
+	public static final String PLAYER_INVENTORY_PROPERTY = "PlayerInventory";
+	public static final String ITEMS_PROPERTY = "items";
+	public static final String END_TURN_PROPERTY = "EndTurnProperty";
+	public static final String LIGHT_TRAILS_PROPERTY = "LightTrails";
+	public static final String POWER_FAILS_PROPERTY = "PowerFails";
+	public static final String WIN_PROPERTY = "Win";
+	public static final String LOSE_PROPERTY = "Lose";
+	public static final String SQUARES_PROPERTY = "squares";
+	public static final String FORCEFIELD_PROPERTY = "forcefields";
+
+	/**
 	 * The game which this handler uses.
 	 */
 	private Game game;
@@ -170,28 +189,30 @@ public abstract class Handler {
 	public void fireChanges(){
 		HashMap<String, Object> properties = getProperties();
 
-		firePropertyChange(GameHandler.POWER_FAILS_PROPERTY,  properties.get(GameHandler.POWER_FAILS_PROPERTY));
-		firePropertyChange(GameHandler.SQUARES_PROPERTY, properties.get(GameHandler.SQUARES_PROPERTY));
+		firePropertyChange(Handler.POWER_FAILS_PROPERTY,  properties.get(Handler.POWER_FAILS_PROPERTY));
+		firePropertyChange(Handler.SQUARES_PROPERTY, properties.get(Handler.SQUARES_PROPERTY));
 		
-		firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
-		firePropertyChange(GameHandler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
-		firePropertyChange(GameHandler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   
-		firePropertyChange(GameHandler.ITEMS_PROPERTY, properties.get(GameHandler.ITEMS_PROPERTY));
-		firePropertyChange(GameHandler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
-		firePropertyChange(GameHandler.PLAYERS_PROPERTY, properties.get(GameHandler.PLAYERS_PROPERTY));
-		firePropertyChange(GameHandler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
+		firePropertyChange(Handler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
+		firePropertyChange(Handler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
+		firePropertyChange(Handler.SQUARE_INVENTORY_PROPERTY, getSquareItems());   
+		firePropertyChange(Handler.ITEMS_PROPERTY, properties.get(Handler.ITEMS_PROPERTY));
+		firePropertyChange(Handler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
+		firePropertyChange(Handler.PLAYERS_PROPERTY, properties.get(Handler.PLAYERS_PROPERTY));
+		firePropertyChange(Handler.FORCEFIELD_PROPERTY, properties.get(Handler.FORCEFIELD_PROPERTY));
+		firePropertyChange(Handler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
 	}
 
 
 
 	protected HashMap<String, Object> getProperties(){
-		HashMap<String, Object> properties = new HashMap<String, Object>();
 		
-		ArrayList<Coordinate> powerFailures   = new ArrayList<Coordinate>();
-		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
-		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
-		HashMap<Coordinate, ArrayList<Item>> items = new HashMap<Coordinate, ArrayList<Item>>();
-		HashMap<Player, Coordinate> players = new HashMap<Player, Coordinate>();
+		HashMap<String, Object> properties 			= new HashMap<String, Object>();
+		ArrayList<Coordinate> forcefields 			= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> powerFailures   		= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> walls					= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> squares				= new ArrayList<Coordinate>();
+		HashMap<Coordinate, ArrayList<Item>> items 	= new HashMap<Coordinate, ArrayList<Item>>();
+		HashMap<Player, Coordinate> players 		= new HashMap<Player, Coordinate>();
 
 
 		for(Coordinate coordinate : getGame().getGrid().getAllCoordinates()){
@@ -225,11 +246,12 @@ public abstract class Handler {
 			}
 		}
 
-		properties.put(GameHandler.POWER_FAILS_PROPERTY, powerFailures);
-		properties.put(GameHandler.ITEMS_PROPERTY, items);
-		properties.put(GameHandler.WALLS_PROPERTY, walls);
-		properties.put(GameHandler.SQUARES_PROPERTY, squares);
-		properties.put(GameHandler.PLAYERS_PROPERTY, players);
+		properties.put(Handler.POWER_FAILS_PROPERTY, powerFailures);
+		properties.put(Handler.FORCEFIELD_PROPERTY,forcefields);
+		properties.put(Handler.ITEMS_PROPERTY, items);
+		properties.put(Handler.WALLS_PROPERTY, walls);
+		properties.put(Handler.SQUARES_PROPERTY, squares);
+		properties.put(Handler.PLAYERS_PROPERTY, players);
 
 		return properties;
 	}

@@ -73,12 +73,12 @@ public class EndTurnHandler extends Handler {
 		fireChanges();
 		
 		if(!isConfirmed())
-			firePropertyChange(GameHandler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
+			firePropertyChange(Handler.END_TURN_PROPERTY, "Do you want to confirm ending your turn?");
 		else{
 			AbstractGameCommand endTurnEvent = new EndTurnCommand(getGame());
 			endTurnEvent.execute();
 			
-	    	firePropertyChange(GameHandler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
+	    	firePropertyChange(Handler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
 			resetConfirm();
 		}
 		

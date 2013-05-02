@@ -18,6 +18,7 @@ import controlP5.ControlP5;
 import controlP5.Textarea;
 import controlP5.Textfield;
 import controller.GameHandler;
+import controller.Handler;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
@@ -115,7 +116,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	@Override
 	public void setup(){
 		standardFont = new PFont(this.getFont(), true);
-		System.out.println(color(51,51,51));
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
 		// Loads all the shapes used.
@@ -550,38 +550,38 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 		Object o = evt.getNewValue();
 		
-		if (evt.getPropertyName().equals(GameHandler.WALLS_PROPERTY)) {
+		if (evt.getPropertyName().equals(Handler.WALLS_PROPERTY)) {
 			this.grid.setWalls((ArrayList<Coordinate>)o);
-		}else if(evt.getPropertyName().equals(GameHandler.PLAYERS_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.PLAYERS_PROPERTY)){
 			HashMap<Player,Coordinate> players = (HashMap<Player,Coordinate>) o;
 			this.grid.setPlayers(players);
-		}else if(evt.getPropertyName().equals(GameHandler.POWER_FAILS_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.POWER_FAILS_PROPERTY)){
 			this.grid.setPowerFails((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.LIGHT_TRAILS_PROPERTY)) {
+		}else if(evt.getPropertyName().equals(Handler.LIGHT_TRAILS_PROPERTY)) {
 			this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.CURRENT_POSITION_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.CURRENT_POSITION_PROPERTY)){
 			this.grid.setCurrentPlayer((Coordinate)o);
 			this.changePlayer();
-		}else if(evt.getPropertyName().equals(GameHandler.SQUARE_INVENTORY_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.SQUARE_INVENTORY_PROPERTY)){
 			this.squareInventory.setItems((ArrayList<Item>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.PLAYER_INVENTORY_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.PLAYER_INVENTORY_PROPERTY)){
 			this.playerInventory.setItems((ArrayList<Item>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.END_TURN_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.END_TURN_PROPERTY)){
 			endTurn = true;
-		}else if(evt.getPropertyName().equals(GameHandler.MESSAGE_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.MESSAGE_PROPERTY)){
 			message = (String) o;
 			currentFrame = 0;
-		}else if(evt.getPropertyName().equals(GameHandler.WIN_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.WIN_PROPERTY)){
 			String player = (String)o;
 			message =  player+ " has won the game!";
 			currentFrame = 0;
-		}else if(evt.getPropertyName().equals(GameHandler.LOSE_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.LOSE_PROPERTY)){
 			String player = (String)o;
 			message = player+ " has lost the game...";
 			currentFrame = 0;
-		}else if(evt.getPropertyName().equals(GameHandler.SQUARES_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.SQUARES_PROPERTY)){
 			grid.adjustGrid((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(GameHandler.ITEMS_PROPERTY)){
+		}else if(evt.getPropertyName().equals(Handler.ITEMS_PROPERTY)){
 		HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
 			grid.setItems(items);
 		}

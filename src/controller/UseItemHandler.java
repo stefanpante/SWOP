@@ -36,7 +36,7 @@ public class UseItemHandler extends Handler {
 		fireChanges();
 		AbstractGameCommand useItemEvent = new UseItemCommand(getGame(), item);
 		useItemEvent.execute();
-		firePropertyChange(GameHandler.MESSAGE_PROPERTY, "Used a "+ item);
+		firePropertyChange(Handler.MESSAGE_PROPERTY, "Used a "+ item);
 		fireChanges();
 	}
 }

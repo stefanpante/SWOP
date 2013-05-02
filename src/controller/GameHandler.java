@@ -18,24 +18,6 @@ import util.Coordinate;
 
 public class GameHandler extends Handler {
 	
-	/**
-	 * Property constants
-	 */
-	public static final String WALLS_PROPERTY 				= "Walls";
-	public static final String PLAYERS_PROPERTY 			= "Players";	
-	public static final String CURRENT_PLAYER_PROPERTY 		= "CurrentPlayer";
-	public static final String CURRENT_POSITION_PROPERTY 	= "CurrentPosition";
-	public static final String MESSAGE_PROPERTY 			= "Message";
-	public static final String SQUARE_INVENTORY_PROPERTY	= "SquareInventory";
-	public static final String PLAYER_INVENTORY_PROPERTY	= "PlayerInventory";
-	public static final String ITEMS_PROPERTY				= "items";
-	public static final String END_TURN_PROPERTY 			= "EndTurnProperty";	
-	public static final String LIGHT_TRAILS_PROPERTY		= "LightTrails";
-	public static final String POWER_FAILS_PROPERTY			= "PowerFails";
-	public static final String WIN_PROPERTY 				= "Win";
-	public static final String LOSE_PROPERTY				= "Lose";
-	public static final String SQUARES_PROPERTY				= "squares";
-	
 	private ObjectronGUI objectronGUI;
 	
 	
