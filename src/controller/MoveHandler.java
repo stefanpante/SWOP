@@ -46,7 +46,7 @@ public class MoveHandler extends Handler {
 		
 		Game game = getGame();
 		Player currentPlayer = game.getCurrentPlayer();
-		Square startSquare = currentPlayer.getStartPosition();
+		Square startSquare = currentPlayer.getPosition();
 
 		AbstractGameCommand moveEvent = new MoveCommand(game, currentPlayer, startSquare, direction);
 		moveEvent.execute();
