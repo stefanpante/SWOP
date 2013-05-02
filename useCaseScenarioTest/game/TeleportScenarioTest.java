@@ -146,10 +146,10 @@ public class TeleportScenarioTest {
 		assertEquals(game.getCurrentPlayer().getPosition(),squareTwo);
 		moveHandler.move(Direction.NORTH);
 		LightTrail lt = game.getCurrentPlayer().getLightTrail();
+		
 		assertTrue(lt.contains(squareOne));
 		assertTrue(lt.contains(game.getCurrentPlayer().getStartPosition()));
 		assertTrue(lt.contains(squareOne));
-		
 	}
 
 }
