@@ -13,7 +13,7 @@ import game.Game;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class EndTurnHandler extends Handler{
+public class EndTurnHandler extends Handler {
 	
 	boolean confirmed = false;
 	
