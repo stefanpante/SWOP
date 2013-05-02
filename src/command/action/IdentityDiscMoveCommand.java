@@ -29,13 +29,18 @@ public class IdentityDiscMoveCommand extends MoveCommand {
 		/* Check whether it's possible to move in the given direction */
         if(getDirection().isDiagonal()){
             throw new IllegalStateException("Cannot throw into given direction.");
+            
         }
+        getStartPosition().getInventory().removeItem(id);
+        
     }
 
 
     @Override
     protected void afterGameCommand() throws Exception {
         //See for solution
-        getCurrentPosition().getInventory().removeItem(id);
+    	//getCurrentPosition().getInventory().addItem(id);
+        
+        
     }
     }

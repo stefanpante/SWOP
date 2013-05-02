@@ -14,6 +14,7 @@ import controller.UseItemHandler;
 import item.LightGrenade;
 import game.Game;
 import grid.Grid;
+import grid.RandomGridBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,12 +43,11 @@ public class UseItemHandlerTest {
 	
 	@Before
 	public void setUpBefore() {
-		game = new Game(10,10);
+		RandomGridBuilder gridBuilder = new RandomGridBuilder(10, 10);
+		game = new Game(gridBuilder.getGrid());
 		
 		useItemHandler = new UseItemHandler(game,null);
 		turnHandler = new TurnHandler(game, null);
-		
-		AbstractGameCommand.setObserver(turnHandler);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class UseItemHandlerTest {
 	 * no other grenade placed on the square or used on the square
 	 */
 	@Test
-	public void testPlaceGrenade(){		
+	public void testPlaceGrenade() throws Exception {		
 		LightGrenade lg = new LightGrenade();
 		game.getCurrentPlayer().getInventory().addItem(lg);
 		
@@ -93,7 +93,7 @@ public class UseItemHandlerTest {
 	 * light grenade on the square
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testPlaceGrenade2(){		
+	public void testPlaceGrenade2() throws Exception {		
 		LightGrenade lg2 = new LightGrenade();
 		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
 		lg2.activate();
@@ -112,7 +112,7 @@ public class UseItemHandlerTest {
 	 * grenade on the Square.
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testPlaceGrenade3(){
+	public void testPlaceGrenade3() throws Exception {
 		LightGrenade lg2 = new LightGrenade();
 		game.getCurrentPlayer().getPosition().getInventory().addItem(lg2);
 		lg2.wearOut();
@@ -130,7 +130,7 @@ public class UseItemHandlerTest {
 	 * Try to place an item on a wall object
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testPlaceOnWall(){
+	public void testPlaceOnWall() throws Exception {
 		LightGrenade lg = new LightGrenade();
 		Grid grid = game.getGrid();
 		
@@ -153,7 +153,7 @@ public class UseItemHandlerTest {
 	 * Try to place an item on a LightTrail object 
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testPlaceOnLightTrail(){
+	public void testPlaceOnLightTrail() throws Exception {
 		LightGrenade lg = new LightGrenade();
 		Grid grid = game.getGrid();
 		

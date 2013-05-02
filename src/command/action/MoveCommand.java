@@ -22,30 +22,30 @@ import java.util.NoSuchElementException;
 public class MoveCommand extends ActionCommand {
 
 	/**
-     * The direction moving to.
-     */
-    private Direction direction;
+	 * The direction moving to.
+	 */
+	private Direction direction;
 
 
-    /**
-     * The movable of this MoveCommand.
-     */
-    private Movable movable;
-	
+	/**
+	 * The movable of this MoveCommand.
+	 */
+	private Movable movable;
+
 	/**
 	 * Position the player is moving from.
 	 */
 	private Square startPosition;
 
-    /**
-     * Position the Movable was on before the currentPosition.
-     */
-    private Square prevPosition;
+	/**
+	 * Position the Movable was on before the currentPosition.
+	 */
+	private Square prevPosition;
 
-    /**
-     * Position the Movable will end on.
-     */
-    private Square currentPosition;
+	/**
+	 * Position the Movable will end on.
+	 */
+	private Square currentPosition;
 
 	/**
 	 * Moves the player into a certain direction. 
@@ -53,25 +53,25 @@ public class MoveCommand extends ActionCommand {
 	public MoveCommand(Game game, Movable movable, Square startSquare, Direction dir) {
 		super(game);
 		this.direction = dir;
-        this.movable = movable;
-        startPosition = startSquare;
-    }
+		this.movable = movable;
+		startPosition = startSquare;
+	}
 
 
-    /**
-     * Returns the direction of the move.
-     */
-    protected Movable getMovable(){
-        return this.movable;
-    }
+	/**
+	 * Returns the direction of the move.
+	 */
+	protected Movable getMovable(){
+		return this.movable;
+	}
 
 
-    /**
-     * Returns the direction of the move.
-     */
-    protected Square getStartPosition(){
-        return this.startPosition;
-    }
+	/**
+	 * Returns the direction of the move.
+	 */
+	protected Square getStartPosition(){
+		return this.startPosition;
+	}
 
 
 	/**
@@ -81,54 +81,56 @@ public class MoveCommand extends ActionCommand {
 		return this.direction;
 	}
 
-    private void setPrevPosition(Square prevPosition){
-        this.prevPosition = prevPosition;
-    }
+	private void setPrevPosition(Square prevPosition){
+		this.prevPosition = prevPosition;
+	}
 
-    protected Square getPrevPosition(){
-        return prevPosition;
-    }
+	protected Square getPrevPosition(){
+		return prevPosition;
+	}
 
-    private void setCurrentPosition(Square currentPosition){
-        this.currentPosition = currentPosition;
-    }
+	private void setCurrentPosition(Square currentPosition){
+		this.currentPosition = currentPosition;
+	}
 
-    protected Square getCurrentPosition(){
-        return currentPosition;
-    }
+	protected Square getCurrentPosition(){
+		return currentPosition;
+	}
 
 	@Override
 	protected void beforeGameCommand() {
-        //NOOP
+		//NOOP
 	}
 
 	@Override
 	protected void duringGameCommand() throws Exception {
-        move();
-   	}
-	
+		move();
+	}
+
 	@Override
 	protected void afterGameCommand() throws Exception {
-        //NOOP
-    }
-    public void move(){
-        setCurrentPosition(getStartPosition());
-        int currentRange = 0;
-        Square currentSquare;
-        while(!getCurrentPosition().isObstructed()
-                && currentRange < getMovable().getRange()
-                && getMovable().getRange() > 0)  {
-            try {
-                currentSquare = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
-                movable.setPosition(currentSquare);
-                setPrevPosition(getCurrentPosition());
-                setCurrentPosition(currentSquare);
-            } catch (NoSuchElementException e) {
-                return;
-            }  catch (IllegalArgumentException e){
-                return;
-            }
-            currentRange++;
-    };
-    }
+		//NOOP
+	}
+	public void move(){
+		setCurrentPosition(getStartPosition());
+		int currentRange = 0;
+		Square currentSquare;
+
+		do{
+			try {
+				currentSquare = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
+				movable.setPosition(currentSquare);
+				setPrevPosition(getCurrentPosition());
+				setCurrentPosition(currentSquare);
+			} catch (NoSuchElementException e) {
+				return;
+			}  catch (IllegalArgumentException e){
+				return;
+			}
+			currentRange++;
+		} while(!getCurrentPosition().isObstructed()
+				&& currentRange < getMovable().getRange()
+				&& getMovable().getRange() > 0);
+
+	}
 }

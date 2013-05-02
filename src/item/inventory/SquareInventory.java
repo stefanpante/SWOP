@@ -43,6 +43,7 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 					+ " is not a valid item for this "
 					+ this);
 		item.acceptAddSquareInventory(this);
+		item.setInventory(this);
 	}	
 
 	/**

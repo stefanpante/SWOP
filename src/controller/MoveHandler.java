@@ -8,6 +8,7 @@ import move.Movable;
 
 import command.AbstractGameCommand;
 import command.action.MoveCommand;
+import command.action.PlayerMoveCommand;
 
 
 import square.Direction;
@@ -48,7 +49,7 @@ public class MoveHandler extends Handler {
 		Player currentPlayer = game.getCurrentPlayer();
 		Square startSquare = currentPlayer.getPosition();
 
-		AbstractGameCommand moveEvent = new MoveCommand(game, currentPlayer, startSquare, direction);
+		AbstractGameCommand moveEvent = new PlayerMoveCommand(game, currentPlayer, startSquare, direction);
 		moveEvent.execute();
 		fireChanges();
 	}
