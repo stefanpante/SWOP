@@ -84,7 +84,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * @throws Exception
 	 */
 	@Override
-	protected void build() throws IllegalStateException{
+	protected void build() throws IllegalStateException, IllegalArgumentException{
 		try{
 			readInput();
 			setSquares();

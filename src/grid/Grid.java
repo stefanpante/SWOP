@@ -204,6 +204,9 @@ public class Grid {
 	 * 			| coordinate.getY() < this.getVSize()
 	 */
 	private boolean canHaveAsCoordinate(Coordinate coordinate) {
+		if(coordinate == null){
+			return false;
+		}
 		if(coordinate.getX() >= this.getHSize()){
 			return false;
 		}
@@ -257,6 +260,10 @@ public class Grid {
 	 * 			|	coordinate.getY() >= 0
 	 */
 	public boolean isValidCoordinate(Coordinate coordinate) {
+		if(coordinate == null){
+			return false;
+		}
+		
 		if(coordinate.getX() < 0){
 			return false;
 		}
