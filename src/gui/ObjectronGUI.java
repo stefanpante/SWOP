@@ -117,6 +117,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void setup(){
 		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
+		System.out.println("Yellow: " + color(203, 212, 76));
 		size(hSize, vSize);
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
@@ -584,6 +585,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		}else if(evt.getPropertyName().equals(Handler.ITEMS_PROPERTY)){
 		HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
 			grid.setItems(items);
+		}else if(evt.getPropertyName().equals(Handler.FORCEFIELD_PROPERTY)){
+			grid.setForceFields((ArrayList<Coordinate>) o);
 		}
 		grid.updateItems();
 
