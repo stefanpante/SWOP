@@ -34,7 +34,7 @@ public class MoveCommandTest {
     private static ArrayList<Coordinate> forceFieldGen;
 
 
-    /**
+        /**
      * SITUATION:
      * 		__0___1___2___3___4___5___6___7___8___9__
      * 	0	|	| 	| W	|	|	|	|	|	|	|	|

@@ -29,6 +29,7 @@ public class ForceFieldManager implements Observer {
 
     public ForceFieldManager(Grid grid){
         this.grid = grid;
+        this.forceFields = new ArrayList<ForceField>();
     }
 
     private void addForceField(ForceField forceField){
@@ -48,6 +49,10 @@ public class ForceFieldManager implements Observer {
         return forceFields.contains(forceField);
     }
 
+    protected ArrayList<ForceField> getAllForceFields(){
+        return new ArrayList<ForceField>(this.forceFields);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         for(ForceField forceField : forceFields){
@@ -56,7 +61,7 @@ public class ForceFieldManager implements Observer {
         detectForceFields();
     }
 
-    private void detectForceFields(){
+    protected void detectForceFields(){
         /*
          * Find the locations of force fields
          */
@@ -72,7 +77,7 @@ public class ForceFieldManager implements Observer {
             for(Direction direction : Direction.values()){
                 for(int distance = 0;  distance < MAX_DISTANCE; distance++){
                     Coordinate coordinateToCheck = coordinate.getCoordinate(direction, distance);
-                    if(forceFieldCoordinates.contains(coordinateToCheck))
+                    if(forceFieldCoordinates.contains(coordinateToCheck) && !coordinate.equals(coordinateToCheck))
                         createForceFieldBetween(coordinate, coordinateToCheck);
                 }
             }
@@ -80,7 +85,7 @@ public class ForceFieldManager implements Observer {
 
     }
 
-    private void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
+    protected void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         for(Coordinate c : coordinates){
