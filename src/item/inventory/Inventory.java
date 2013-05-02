@@ -1,5 +1,6 @@
 package item.inventory;
 
+import move.Movable;
 import move.MovableEffect;
 import game.Player;
 import item.Item;
@@ -221,10 +222,20 @@ public abstract class Inventory implements MovableEffect {
 
 
     @Override
-    public void affect(Player player) {
+    public void affect(Movable movable) {
         for(Item item : getAllItems()){
-            item.affect(player);
+            item.affect(movable);
         }
+    }
+
+    @Override
+    public void affect(Player player) {
+        // Nothing to do here
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) {
+        // Nothing to do here
     }
 
 }

@@ -3,6 +3,8 @@ package gui;
 import game.Player;
 import gui.button.DirectionalButton;
 
+import item.Item;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,6 +58,7 @@ public class GridGui extends GUIElement{
 	private ArrayList<Coordinate> grenades_coors;
 	private ArrayList<Coordinate> discs_coors;
 	private ArrayList<Coordinate> chargedDiscs_coors;
+	private ArrayList<Coordinate> ff_coors;
 
 	/**
 	 * Coordinates of the powerfailures
@@ -135,6 +138,7 @@ public class GridGui extends GUIElement{
 		this.currentPlayer = new Coordinate(0,0);
 		this.grenades_coors = new ArrayList<Coordinate>();
 		this.discs_coors = new ArrayList<Coordinate>();
+		this.ff_coors = new ArrayList<Coordinate>();
 		this.chargedDiscs_coors = new ArrayList<Coordinate>();
 		this.powerfail_coors = new ArrayList<Coordinate>();
 		this.teleport_coors = new ArrayList<Coordinate>();
@@ -144,8 +148,8 @@ public class GridGui extends GUIElement{
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), swidth, sHeight, gui);
 		this.throwPad = new ThrowPad(new PVector(25,55), swidth, sHeight, gui);
 		throwPad.setVisibility(false);
-		this.adjustPad(directionalPad);
-		this.adjustPad(throwPad);
+		this.adjustPad2(directionalPad);
+		this.adjustPad2(throwPad);
 	}
 	
 
@@ -388,67 +392,25 @@ public class GridGui extends GUIElement{
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;
 
-		adjustPad(directionalPad);
-		adjustPad(throwPad);
+		adjustPad2(directionalPad);
+		adjustPad2(throwPad);
 
 	}
 
-	/**
-	 * Sets directions that are not applicable to false.
-	 */
-	private void adjustPad(DirectionalPad pad){
+	private void adjustPad2(DirectionalPad pad){
 		pad.setPosition(getPixels(currentPlayer));
 		HashMap<Direction, DirectionalButton> buttons = pad.getButtons();
-
-		Coordinate coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY());
-		DirectionalButton b = buttons.get(Direction.WEST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY());
-		b = buttons.get(Direction.EAST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX(), currentPlayer.getY()-1);
-		b = buttons.get(Direction.NORTH);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX(), currentPlayer.getY()+1);
-		b = buttons.get(Direction.SOUTH);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY()-1);
-		b = buttons.get(Direction.NORTHWEST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()-1, currentPlayer.getY() +1);
-		b = buttons.get(Direction.SOUTHWEST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY()-1);
-		b = buttons.get(Direction.NORTHEAST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
-
-		coor = new Coordinate(currentPlayer.getX()+1, currentPlayer.getY() +1);
-		b = buttons.get(Direction.SOUTHEAST);
-		b.setPosition(getPixels(coor));
-		if(!squares.containsKey(coor))
-			b.setVisibility(false);
+		
+		for(Direction direction: buttons.keySet()){
+			Coordinate coor = currentPlayer.getNeighbor(direction);
+			DirectionalButton b = buttons.get(direction);
+			b.setPosition(getPixels(coor));
+			if(!squares.containsKey(coor))
+				b.setVisibility(false);
+		}
 	}
-
+	
+	
 	private PVector getPixels(Coordinate coor) {
 		if(squares.containsKey(coor)){
 			return squares.get(coor).getPosition();
@@ -468,46 +430,39 @@ public class GridGui extends GUIElement{
 
 	}
 
+	private HashMap<Coordinate, ArrayList<Item>> items_ = new HashMap<Coordinate, ArrayList<Item>>();
+	
+	public void setItems(HashMap<Coordinate,ArrayList<Item>> items){
+		this.items_ = items;
+	}
+	
 	public void resetGrid(){
 		items.clear();
-		for(Coordinate coor : grenades_coors){
-			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-			s.setShape(Shapes.lightgrenade);
-			items.put(coor, s);
-		}
-		
-		
-		for(Coordinate coor: discs_coors){
-			if(items.containsKey(coor)){
-				items.get(coor).setShape(Shapes.items);
+		for(Coordinate coor: items_.keySet()){
+			ArrayList<Item> it = items_.get(coor);
+			if(it.size() == 0){
+				continue;
 			}
-			else{
+			if(it.size() == 1){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setShape(Shapes.identityDisc);
+				s.setShape(Shapes.getShape(it.get(0)));
+				items.put(coor, s);
+			}
+			
+			if(it.size() >= 2){
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				s.setShape(Shapes.items);
 				items.put(coor, s);
 			}
 		}
 		
-		for(Coordinate coor: chargedDiscs_coors){
-			if(items.containsKey(coor)){
-				items.get(coor).setShape(Shapes.items);
-			}
-			else{
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setShape(Shapes.chargedIdentityDisc);
-				items.put(coor, s);
-			}
-		}
-		
-		powerfailItems.clear();
-		powerfails.clear();
 		for(Coordinate coor: powerfail_coors){
 			if(items.containsKey(coor)){
 				SquareGUI s = items.get(coor);
 				items.remove(coor);
 				s.setShape(Shapes.powerFailureItem);
-				powerfailItems.put(coor, s);
 			}
+			
 			else{
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.powerFail);
@@ -515,57 +470,6 @@ public class GridGui extends GUIElement{
 			}
 			
 		}
-		
-		teleports.clear();
-		teleportsItem.clear();
-		teleportsItemPowerfails.clear();
-		for(Coordinate coor: teleport_coors){
-			if(items.containsKey(coor)){
-				SquareGUI s = items.get(coor);
-				items.remove(coor);
-				s.setShape(Shapes.teleportItem);
-				teleports.put(coor, s);
-			}
-			
-			if(powerfails.containsKey(coor)){
-				SquareGUI s = powerfails.get(coor);
-				powerfails.remove(coor);
-				s.setShape(Shapes.powerFailureTeleport);
-				teleportPowerfail.put(coor,s);
-			}
-			
-			if(powerfailItems.containsKey(coor)){
-				SquareGUI s = powerfailItems.get(coor);
-				powerfailItems.remove(coor);
-				s.setShape(Shapes.powerFailureTeleportItem);
-				teleportsItemPowerfails.put(coor, s);
-			}
-			else{
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setShape(Shapes.teleport);
-				teleports.put(coor, s);
-			}
-		}
-
-
-
-
-
-	}
-	
-	public void setDiscs(ArrayList<Coordinate> o){
-		this.discs_coors = o;
-	}
-	
-	public void setChargedDiscs(ArrayList<Coordinate> o){                                                                                                            
-		this.chargedDiscs_coors = o;
-	}
-
-
-
-	public void setTeleport(ArrayList<Coordinate> o) {
-		this.teleport_coors = o;
-		
 	}
 	
 	public DirectionalPad getDirectionalPad(){
@@ -577,6 +481,5 @@ public class GridGui extends GUIElement{
 	public ThrowPad getThrowPad() {
 		return this.throwPad;
 	}
-
 
 }
