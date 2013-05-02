@@ -43,8 +43,6 @@ public class GridGui extends GUIElement{
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
 	private HashMap<Coordinate, SquareGUI> items;
-	private HashMap<Coordinate, SquareGUI> teleportPowerfail;
-	private HashMap<Coordinate, SquareGUI> teleportsItemPowerfails;
 	private HashMap<Coordinate, ArrayList<Item>> items_ = new HashMap<Coordinate, ArrayList<Item>>();
 
 	/**
@@ -108,20 +106,17 @@ public class GridGui extends GUIElement{
 		this.vCells = vCells;
 		
 		this.squares = new HashMap<Coordinate, SquareGUI>();
-		
 		this.players = new ArrayList<SquareGUI>();
 		this.items = new HashMap<Coordinate, SquareGUI>();
-		this.teleportPowerfail = new HashMap<Coordinate, SquareGUI>();
-		this.teleportsItemPowerfails = new HashMap<Coordinate, SquareGUI>();
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
 		this.powerfail_coors = new ArrayList<Coordinate>();
 		this.initGrid();
-		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
-		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
-		this.directionalPad = new DirectionalPad(new PVector(25, 55), swidth, sHeight, gui);
-		this.throwPad = new ThrowPad(new PVector(25,55), swidth, sHeight, gui);
+		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
+		this.squareHeight = (height- vCells * OConstants.MARGIN) / vCells;
+		this.directionalPad = new DirectionalPad(new PVector(25, 55), squareWidth, squareHeight, gui);
+		this.throwPad = new ThrowPad(new PVector(25,55), squareWidth, squareHeight, gui);
 		throwPad.setVisibility(false);
 		this.adjustPad(directionalPad);
 		this.adjustPad(throwPad);
@@ -141,7 +136,6 @@ public class GridGui extends GUIElement{
 		for(int i = 0; i < vCells; i++){
 			for(int j = 0; j < hCells; j++){
 				PVector pos = new PVector(x,y);
-				// PVector position, float width, float height, PApplet gui
 				SquareGUI s = new SquareGUI( swidth, sHeight,pos, gui);
 				squares.put(new Coordinate(j,i),s);
 				x += swidth + OConstants.MARGIN;
@@ -156,9 +150,6 @@ public class GridGui extends GUIElement{
 		SquareGUI player2 = new SquareGUI(swidth, sHeight, new PVector(), gui);
 		player2.setColor(OConstants.PLAYERRED);
 		players.add(player2);
-
-		squareWidth = swidth;
-		squareHeight = sHeight;
 	}
 	
 	/**
@@ -168,6 +159,7 @@ public class GridGui extends GUIElement{
 	 */
 	public void adjustGrid(ArrayList<Coordinate> includedSquares){
 		ArrayList<Coordinate> toRemove = new ArrayList<Coordinate>();
+		
 		for(Coordinate coordinate: squares.keySet()){
 			if(!includedSquares.contains(coordinate)){
 				toRemove.add(coordinate);
@@ -191,14 +183,6 @@ public class GridGui extends GUIElement{
 		
 		for(SquareGUI item: items.values()){
 			item.draw();
-		}
-		
-		for(SquareGUI teleport: teleportPowerfail.values()){
-			teleport.draw();
-		}
-		
-		for(SquareGUI teleport: teleportsItemPowerfails.values()){
-			teleport.draw();
 		}
 		
 		for(SquareGUI player: players){
