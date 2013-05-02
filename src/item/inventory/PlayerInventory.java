@@ -38,7 +38,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 		item.acceptRemovePlayerInventory(this);
 	}
 	
-	
 	/**
 	 * Returns a string representation of this PlayerInventory.
 	 */
@@ -48,38 +47,32 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	}
 	
 	@Override
-	public void addChargedDisc(ChargedIdentityDisc chargedDisc)
-			throws IllegalStateException {
+	public void addChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException {
 		super.addItem(chargedDisc);
 	}
 
 	@Override
-	public void removeChargedDisc(ChargedIdentityDisc chargedDisc)
-			throws IllegalStateException {
+	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException {
 		super.removeItem(chargedDisc);
 	}
 
 	@Override
-	public void addIdentityDisc(IdentityDisc identityDisc)
-			throws IllegalStateException {
+	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		super.addItem(identityDisc);
 	}
 
 	@Override
-	public void removeIdentityDisc(IdentityDisc identityDisc)
-			throws IllegalStateException {
+	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
 		super.removeItem(identityDisc);
 	}
 
 	@Override
-	public void addLightGrenade(LightGrenade lightGrenade)
-			throws IllegalStateException {
+	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		super.addItem(lightGrenade);
 	}
 
 	@Override
-	public void removeLightGrenade(LightGrenade lightGrenade)
-			throws IllegalStateException {
+	public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
 		super.removeItem(lightGrenade);
 	}
 
@@ -87,6 +80,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
     public void addForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
         super.addItem(forceFieldGenerator);
     }
+    
     @Override
     public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
         if(!getAllItems().contains(forceFieldGenerator))
@@ -94,6 +88,7 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 
         super.removeItem(forceFieldGenerator);
     }
+    
 	@Override
 	public void addTeleport(Teleport teleport) throws IllegalStateException {
 		throw new IllegalStateException("A Teleport can not be added to a players Inventory");
