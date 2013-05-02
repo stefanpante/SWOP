@@ -48,6 +48,7 @@ public class Player implements Obstacle, Movable {
 	 */
 	private final int id;
 	
+	private int range;
 	/**
 	 * The player's Light Trail
 	 */
@@ -85,7 +86,7 @@ public class Player implements Obstacle, Movable {
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
 		this.setInventory(new PlayerInventory());
-		
+		this.range = 1;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
 		this.id = id;
@@ -510,5 +511,12 @@ public class Player implements Obstacle, Movable {
 	@Override
 	public String toString() {
 		return "Player " + this.getID();
+	}
+
+	
+	@Override
+	public void resetRange() {
+		this.range = 1;
+		
 	}
 }
