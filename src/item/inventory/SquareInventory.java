@@ -103,6 +103,23 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return null;
 	}
 	
+	/**
+	 * Returns the force field generator if there is one.
+	 * 
+	 * @return
+	 */
+	public ForceFieldGenerator getForceFieldGenerator() {
+		for (Item i: getAllItems()) {
+			if(ForceFieldGenerator.isForceFieldGenerator(i))
+				return (ForceFieldGenerator) i;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Checks if the inventory has a force field generator.
+	 */
 	public boolean hasForceFieldGenerator() {
 		for(Item item: getAllItems()){
 			if (ForceFieldGenerator.isForceFieldGenerator(item))

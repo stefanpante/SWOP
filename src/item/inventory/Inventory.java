@@ -226,6 +226,7 @@ public abstract class Inventory implements MovableEffect {
     @Override
     public void affect(Movable movable) {
         for(Item item : getAllItems()){
+        	System.out.println("Affect movable");
             item.affect(movable);
         }
     }
