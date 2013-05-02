@@ -194,6 +194,7 @@ public abstract class Handler {
 		ArrayList<Coordinate> lightGrenades = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> identityDisks = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> teleports		= new ArrayList<Coordinate>();
+		ArrayList<Coordinate> forceFieldGenerators = new ArrayList<Coordinate>();
 		ArrayList<Coordinate> walls			= new ArrayList<Coordinate>();
 		ArrayList<Coordinate> chargedDisks  = new ArrayList<Coordinate>(); 
 		ArrayList<Coordinate> squares		= new ArrayList<Coordinate>();
@@ -211,6 +212,8 @@ public abstract class Handler {
 				lightGrenades.add(coordinate);
 			
 			if(square.getInventory().hasForceFieldGenerator()){
+				forceFieldGenerators.add(coordinate);
+			}
 
 			for(IdentityDisc id : square.getInventory().getIdentityDiscs()){
 				if(id.isCharged()){
