@@ -211,6 +211,26 @@ public class MoveCommandTest {
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
     }
 
+
+    //Case with walls and no teleports, range 3, NORTH
+    @Test
+    public void testID7() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        IdentityDisc id = new IdentityDisc();
+        Coordinate co5_0 = new Coordinate(5,0);
+        Square startSquare = grid.getSquare(co5_0);
+        startSquare.getInventory().addItem(id);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.NORTH);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(3,0));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
     //Case with walls and no teleports, range MAX, NORTH
     @Test
     public void testID8() {
