@@ -39,38 +39,6 @@ public class ForceField extends MultiObstacle implements Observer{
      * Current state of the ForceField.
      */
     private boolean active = true;
-    
-    /**
-     * A force field must be constructed when it is located between two generators.
-     */
-    public final ForceFieldGenerator endPointOne, endPointTwo;
-	
-    /**
-     * If instantiated the force field is active and
-     * has its remaining actions set to 2.
-     */
-	public ForceField(ForceFieldGenerator generatorOne, ForceFieldGenerator generatorTwo) {
-		super();
-		
-		if(!isValidGenerators(generatorOne, generatorTwo))
-			throw new IllegalArgumentException("The given generators are invalid.");
-		
-		this.endPointOne = generatorOne;
-		this.endPointTwo = generatorTwo;
-	}
-	
-	/**
-	 * Checks if the given generators are valid.
-	 * 
-	 * @param generatorOne
-	 * @param generatorTwo
-	 * 
-	 * @return	False	If the generators are equal.
-	 * 			True	Otherwise
-	 */
-	public static boolean isValidGenerators(ForceFieldGenerator generatorOne,	ForceFieldGenerator generatorTwo) {
-		return generatorOne != generatorTwo;
-	}
 
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {

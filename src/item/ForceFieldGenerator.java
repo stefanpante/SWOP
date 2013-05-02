@@ -7,11 +7,8 @@ import item.inventory.SquareInventory;
 import item.launchable.IdentityDisc;
 import move.Movable;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
-import square.obstacle.ForceField;
 
 /**
  * The ForceFieldGenerator generates a line segment between
