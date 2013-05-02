@@ -5,7 +5,7 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
-import effect.MovableEffect;
+import move.MovableEffect;
 import move.Movable;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -74,8 +74,6 @@ public class Player implements Obstacle, Movable {
 	 * 
 	 * @param	startPosition	
 	 * 			The startposition for the player.
-	 * @param	name			
-	 *			The name for the player.
 	 * @effect	setStartPosition(startPosition)
 	 * @effect	setName(name)
 	 * @throws	IllegalArgumentException	
@@ -341,7 +339,6 @@ public class Player implements Obstacle, Movable {
 	/**
 	 * Moves the player to another square
 	 * 
-	 * @param	newPosition	The new Position of the player
 	 * @throws	IllegalStateException
 	 * 		  	thrown if the player is unable to make this move 
 	 */

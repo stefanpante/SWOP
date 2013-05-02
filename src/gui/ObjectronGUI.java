@@ -3,6 +3,7 @@ package gui;
 import game.Player;
 import gui.button.TextButton;
 import item.Item;
+import item.launchable.IdentityDisc;
 
 import java.awt.FileDialog;
 import java.beans.PropertyChangeEvent;
@@ -489,11 +490,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 			currentFrame = 0;
 		}
 		else{
-			if(item instanceof LaunchableItem){
+			if(item instanceof IdentityDisc){
 				grid.getDirectionalPad().setVisibility(false);
 				grid.getThrowPad().setVisibility(true);
 				grid.getThrowPad().setShape(Shapes.getShape(item));
-				grid.getThrowPad().setLaunchableItem((LaunchableItem)item);
+				grid.getThrowPad().setIdentityDisc((IdentityDisc) item);
 				message = "Choose a throw direction.";
 				currentFrame = 0;
 			}
@@ -665,10 +666,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		message = exc.getMessage();
 	}
 
-	public void throwLaunchableItem(LaunchableItem launchable,
+	public void throwLaunchableItem(IdentityDisc identityDisc,
 			Direction direction) {
 		try{
-			obj.getThrowLaunchableHandler().throwLaunchable(launchable, direction);
+			obj.getThrowLaunchableHandler().throwLaunchable(IdentityDisc, direction);
 		}
 		catch(Exception e){
 			showException(e);

@@ -1,7 +1,6 @@
 package item.inventory;
 
-import effect.MovableEffect;
-import effect.player.PlayerEffect;
+import move.MovableEffect;
 import game.Player;
 import item.Item;
 import item.launchable.IdentityDisc;
