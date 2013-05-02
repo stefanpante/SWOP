@@ -1,4 +1,4 @@
-package items.launchable;
+package items;
 
 import static org.junit.Assert.*;
 

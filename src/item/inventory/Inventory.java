@@ -141,7 +141,9 @@ public abstract class Inventory implements MovableEffect {
 		if(!canHaveAsItem(item))
 			throw new IllegalStateException("The inventory is full or already contains the item.");
 		else
+			item.setInventory(this);
 			items.add(item);
+			
 	}
 
 	/**
@@ -184,6 +186,7 @@ public abstract class Inventory implements MovableEffect {
 			throw new IllegalStateException("Item cannot be removed, because it is not in this inventory");
 		else 
 			items.remove(item);
+		item.setInventory(null);
 	}
 
 	/**
