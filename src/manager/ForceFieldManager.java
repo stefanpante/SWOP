@@ -39,7 +39,7 @@ public class ForceFieldManager implements Observer {
     /**
      * Instantiates the Force Field manager with a reference to the grid.
      * 
-     * @param grid  the grid on which the forcefields occur.
+     * @param grid
      */
     public ForceFieldManager(Grid grid){
         this.grid = grid;
@@ -58,23 +58,29 @@ public class ForceFieldManager implements Observer {
         	throw new IllegalArgumentException("This force field cannot be added.");
         
         this.forceFields.add(forceField);
+        forceField.bind();
     }
     
     /**
      * Checks if the force field can be added to the collection.
      * 
-     * @param	forceField the forcefield to be checked
+     * @param	forceField
      * @return	False	If the force field is null or already contained.
      * 			True	Otherwise
      */
     protected boolean canHaveAsForceField(ForceField forceField) {
-        return forceField != null && !contains(forceField);
+        if(forceField == null)
+            return false;
+        if(contains(forceField))
+            return false;
+        return true;
     }
     
     /**
      * Checks if the forcefield is contained.
      * 
-     * @param forceField the forcefield to be checked
+     * @param forceField
+     * @return
      */
     private boolean contains(ForceField forceField){
         return forceFields.contains(forceField);
@@ -82,6 +88,8 @@ public class ForceFieldManager implements Observer {
     
     /**
      * Returns a new arrayList with the references to the force fields.
+     * 
+     * @return
      */
     protected ArrayList<ForceField> getAllForceFields(){
         return new ArrayList<ForceField>(this.forceFields);
@@ -127,8 +135,8 @@ public class ForceFieldManager implements Observer {
     /**
      * Creats a forceField between two given coordinates.
      * 
-     * @param coordinate            the first coordinate.
-     * @param coordinateToCheck     the second coordinate.
+     * @param coordinate
+     * @param coordinateToCheck
      */
     protected void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
