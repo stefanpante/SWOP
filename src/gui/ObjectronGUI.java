@@ -348,6 +348,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         size(w + 215, h + 125);
         if(this.frame != null){
             this.frame.setSize(w+215, h + 125);
+            this.frame.setLocation(frame.getLocation().x, 0);
         }
         gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
         squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
