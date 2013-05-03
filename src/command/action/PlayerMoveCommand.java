@@ -44,6 +44,7 @@ public class PlayerMoveCommand extends MoveCommand{
     protected void afterGameCommand() throws Exception {
         activateLightGrenade();
         activateForceFieldGenerator();
+        getMovable().resetRange();
     }
 
     /**
