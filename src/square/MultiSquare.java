@@ -101,8 +101,12 @@ public abstract class MultiSquare {
 
         MultiSquare that = (MultiSquare) o;
 
-        if (!squares.equals(that.squares)) return false;
-
+        if(!(squares.size() == that.squares.size()))
+            return false;
+        for(Square square : squares){
+            if(!that.squares.contains(square))
+                return false;
+        }
         return true;
     }
 
