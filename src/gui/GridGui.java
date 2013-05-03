@@ -4,6 +4,7 @@ import game.Player;
 import gui.button.DirectionalButton;
 
 import item.Item;
+import item.LightGrenade;
 import item.Teleport;
 
 import java.util.ArrayList;
@@ -403,6 +404,12 @@ public class GridGui extends GUIElement{
 				continue;
 			}
 			if(it.size() == 1){
+				if(it.get(0) instanceof LightGrenade){
+					LightGrenade lg = (LightGrenade) it.get(0);
+					if(lg.isActive()|| lg.isDropped() || lg.isWornOut()){
+						continue;
+					}
+				}
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.getShape(it.get(0)));
                 s.setColor(gui.color(255,0));

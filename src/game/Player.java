@@ -401,6 +401,18 @@ public class Player implements Obstacle, Movable {
 		this.setRemainingActions(remActions);
 	}
 	
+	/**
+	 * Performs empty actions on the player until the player has no actions left.
+	 * Decrements the length of the lightTrail
+	 */
+	public void performEmptyActions(){
+		while(remainingActions > 0){
+			lightTrail.setHead(currentPosition);
+			this.decrementActions();
+			
+		}
+	}
+	
 
 	
 

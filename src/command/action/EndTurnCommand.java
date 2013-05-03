@@ -28,7 +28,7 @@ public class EndTurnCommand extends ActionCommand {
 	@Override
 	protected void duringGameCommand() {
 		Player currentPlayer = getGame().getCurrentPlayer();
-		
+		currentPlayer.performEmptyActions();
 		currentPlayer.loseActions(currentPlayer.getRemainingActions());
 	}
 	

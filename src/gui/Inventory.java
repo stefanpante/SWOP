@@ -69,7 +69,13 @@ public class Inventory extends GUIElement{
 
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
 		for(int i = 0; i < items.size(); i++){
-			Item item = items.get(i);			
+			Item item = items.get(i);
+			if(item instanceof LightGrenade){
+				LightGrenade lg = (LightGrenade) item;
+				if(lg.isActive() || lg.isDropped() || lg.isWornOut()){
+					continue;
+				}
+			}
 			// Add the button to the inventory.
 			ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, Shapes.getShape(item), pos, gui);
 			button.setItem(item);
