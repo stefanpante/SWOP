@@ -280,8 +280,8 @@ public class MoveCommandTest {
         //Assure the teleports have a proper destination set.
         Teleport t0 = grid.getSquare(teleports.get(0)).getInventory().getTeleport();
         Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
-        assertTrue(t0.getDestination().equals(t1));
-        assertTrue(t1.getDestination().equals(t0));
+        assertTrue(t0.getDestination().equals(grid.getSquare(teleports.get(1))));
+        assertTrue(t1.getDestination().equals(grid.getSquare(teleports.get(0))));
 
         IdentityDisc id = new IdentityDisc();
         Coordinate co2_5 = new Coordinate(2,5);
