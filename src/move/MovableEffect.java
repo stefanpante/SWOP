@@ -13,8 +13,8 @@ public interface MovableEffect {
 
     public void affect(Movable movable);
 
-    public void affect(Player player);
+    public void affect(Player player) throws IllegalStateException;
 
-    public void affect(IdentityDisc identityDisc);
+    public void affect(IdentityDisc identityDisc) throws IllegalStateException;
 
 }
