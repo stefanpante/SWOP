@@ -242,7 +242,8 @@ public abstract class Handler {
 			for(Field field: square.getAllFields()){
 				if(field.isActive()){
 					for(Square sq: field.getSquares()){
-						forcefields.add(getGame().getGrid().getCoordinate(sq));
+						if(!forcefields.contains(getGame().getGrid().getCoordinate(sq)))
+							forcefields.add(getGame().getGrid().getCoordinate(sq));
 					}
 				}
 			}
