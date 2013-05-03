@@ -162,7 +162,8 @@ public class Square implements MovableEffect {
 
 	@Override
 	public void affect(Player player) {
-		// Double dispatch is called on the lower level
+		getInventory().affect(player);
+        getPower().affect(player);
 	}
 
 	@Override
