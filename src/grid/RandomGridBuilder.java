@@ -90,16 +90,25 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		build(lightGrenades, identityDisks, teleports,forceFieldGenerators, chargedIdentityDisk);
 	}
 
+	/**
+	 * Checks if the number of horizontal Squares is valid to create a grid with.
+	 */
 	@Override
     public boolean isValidHSize(int hSize){
         return ( hSize >= MIN_HSIZE);
     }
 
+	/**
+	 * Checks if the number of vertical Squares is valid to create a grid with.
+	 */
     @Override
     public boolean isValidVSize(int vSize){
         return (vSize >= MIN_VSIZE);
     }
 	
+    /**
+     * Builds the actual grid.
+     */
 	@Override
 	protected void build() throws IllegalStateException {
 		setSquares();
@@ -119,6 +128,15 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		
 	}
 
+	/**
+	 * Utility build method used for testing purposes.
+	 * @param lightGrenades
+	 * @param identityDisks
+	 * @param teleports
+	 * @param fFgen
+	 * @param chargedIdentityDisk
+	 * @throws IllegalStateException
+	 */
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
 			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{

@@ -70,6 +70,9 @@ public class Grid {
 	 */
 	private int vSize;
 	
+	/**
+	 * the start position of the second player.
+	 */
 	private Square startPlayer1;
 	
 	/**

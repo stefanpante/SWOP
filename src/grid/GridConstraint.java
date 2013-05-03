@@ -12,8 +12,19 @@ import util.Coordinate;
  */
 public class GridConstraint {
 	
+	/**
+	 * A percentage to be respected.
+	 */
 	private float percentage;
+	
+	/**
+	 * A list of coordinates which need to be excluded
+	 */
 	private ArrayList<Coordinate> excluded;
+	
+	/**
+	 * A list of coordinates which need to be included.
+	 */
 	private ArrayList<ArrayList<Coordinate>> included;
 
 	/**
@@ -140,9 +151,6 @@ public class GridConstraint {
                 if(include.contains(coordinate))
                     includes[i] = true;
                 i++;
-//                if(!include.contains(coordinate)){
-//                	return false;
-//                }
             }
         }
         for(boolean b : includes){
