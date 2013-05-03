@@ -107,6 +107,11 @@ public class LightTrail extends MultiObstacle {
 	public boolean bouncesBack() {
 		return true;
 	}
-	
-	
+
+    @Override
+    public boolean preventsField() {
+        return false;
+    }
+
+
 }

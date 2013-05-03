@@ -58,4 +58,9 @@ public class Wall extends MultiObstacle{
 		return true;
 	}
 
+    @Override
+    public boolean preventsField() {
+        return true;
+    }
+
 }

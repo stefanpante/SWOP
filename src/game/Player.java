@@ -221,7 +221,12 @@ public class Player implements Obstacle, Movable {
 		return false;
 	}
 
-	/**
+    @Override
+    public boolean preventsField() {
+        return false;
+    }
+
+    /**
 	 * Returns whether this player still has remaning actions.
 	 * 
 	 * @return	True	If this player has more then 0 remaining actions.
@@ -344,6 +349,8 @@ public class Player implements Obstacle, Movable {
 	 * 		  	thrown if the player is unable to make this move 
 	 */
 	public void move(Square position) throws IllegalStateException{
+        if(currentPosition.isCoveredByField())
+            throw new IllegalStateException("Cannot move while in a field!");
 		lightTrail.setHead(getPosition());
 		setPosition(position);
 		position.affect(this);

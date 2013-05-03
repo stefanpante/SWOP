@@ -58,4 +58,6 @@ public interface Obstacle {
 	 * @return	True if the obstacle bounces the item back.
 	 */
 	public boolean bouncesBack();
+
+    public boolean preventsField();
 }
