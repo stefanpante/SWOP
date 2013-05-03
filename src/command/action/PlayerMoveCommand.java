@@ -11,7 +11,6 @@ import square.Square;
  * User: Dieter
  * Date: 2/05/13
  * Time: 15:07
- * To change this template use File | Settings | File Templates.
  */
 public class PlayerMoveCommand extends MoveCommand{
 
@@ -25,7 +24,7 @@ public class PlayerMoveCommand extends MoveCommand{
     @Override
     protected void beforeGameCommand() {
 		/* Check whether it's possible to move in the given direction */
-        if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
+        if(!getGame().getGrid().canMoveTo(getStartPosition(), getDirection())){
             throw new IllegalStateException("Cannot move to given direction.");
         }
     }
@@ -34,7 +33,6 @@ public class PlayerMoveCommand extends MoveCommand{
     protected void afterGameCommand() throws Exception {
         activateLightGrenade();
     }
-
 
     /**
      * If the player just dropped a LightGrenade on the square he's moving from it has

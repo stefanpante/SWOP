@@ -375,12 +375,32 @@ public class MoveCommandTest {
         MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.NORTH);
         try {
             m.execute();
-            System.out.println(grid.getCoordinate(m.getCurrentPosition()));
         } catch (Exception e) {
             e.printStackTrace();
             fail("Move Command shouldn't throw an exception");
 
         }
         assertEquals(player,grid.getSquare(new Coordinate(4,4)).getObstacle());
+    }
+
+
+    // teleports, player move WEST
+    @Test
+    public void testPlayer5(){
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
+        Game g = new Game(grid);
+        Coordinate co5_4 = new Coordinate(5,4);
+        Square startSquare = grid.getSquare(co5_4);
+        Player player = g.getCurrentPlayer();
+        MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.WEST);
+        try {
+            m.execute();
+            System.out.println(grid.getCoordinate(m.getCurrentPosition()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+
+        }
+        assertEquals(player,grid.getSquare(new Coordinate(2,4)).getObstacle());
     }
 }

@@ -10,6 +10,12 @@ import game.Player;
  */
 public class EndTurnCommand extends ActionCommand {
 
+    /**
+     * Create a new EndTurnCommand
+     *
+     * @param   game
+     *          The game
+     */
 	public EndTurnCommand(Game game) {
 		super(game);
 	}
