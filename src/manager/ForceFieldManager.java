@@ -39,7 +39,7 @@ public class ForceFieldManager implements Observer {
     /**
      * Instantiates the Force Field manager with a reference to the grid.
      * 
-     * @param grid
+     * @param grid  the grid on which the forcefields occur.
      */
     public ForceFieldManager(Grid grid){
         this.grid = grid;
@@ -63,23 +63,18 @@ public class ForceFieldManager implements Observer {
     /**
      * Checks if the force field can be added to the collection.
      * 
-     * @param	forceField
+     * @param	forceField the forcefield to be checked
      * @return	False	If the force field is null or already contained.
      * 			True	Otherwise
      */
     protected boolean canHaveAsForceField(ForceField forceField) {
-        if(forceField == null)
-            return false;
-        if(contains(forceField))
-            return false;
-        return true;
+        return forceField != null && !contains(forceField);
     }
     
     /**
      * Checks if the forcefield is contained.
      * 
-     * @param forceField
-     * @return
+     * @param forceField the forcefield to be checked
      */
     private boolean contains(ForceField forceField){
         return forceFields.contains(forceField);
@@ -87,8 +82,6 @@ public class ForceFieldManager implements Observer {
     
     /**
      * Returns a new arrayList with the references to the force fields.
-     * 
-     * @return
      */
     protected ArrayList<ForceField> getAllForceFields(){
         return new ArrayList<ForceField>(this.forceFields);
@@ -134,8 +127,8 @@ public class ForceFieldManager implements Observer {
     /**
      * Creats a forceField between two given coordinates.
      * 
-     * @param coordinate
-     * @param coordinateToCheck
+     * @param coordinate            the first coordinate.
+     * @param coordinateToCheck     the second coordinate.
      */
     protected void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
