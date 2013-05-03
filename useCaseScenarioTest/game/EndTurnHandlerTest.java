@@ -180,7 +180,7 @@ public class EndTurnHandlerTest {
 		assertTrue(game.getCurrentPlayer().getPosition().getPower().isFailing());
 		
 		assertEquals(game.getCurrentPlayer(), player);
-		assertEquals(player.getRemainingActions(), Player.MAX_ALLOWED_ACTIONS - 1);
+		assertEquals(Player.MAX_ALLOWED_ACTIONS - 1, player.getRemainingActions());
 	}
 
 }
