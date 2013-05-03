@@ -119,7 +119,7 @@ public class Square implements MovableEffect {
 	}
 
 	public void removeField(Field field){
-		fields.remove(field);
+        fields.remove(field);
 	}
 
 	public ArrayList<Field> getAllFields(){

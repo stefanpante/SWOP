@@ -40,7 +40,6 @@ public abstract class Field extends MultiSquare implements MovableEffect {
             else
                 square.removeField(this);
         }
-        
         this.active = active;
     }
 
