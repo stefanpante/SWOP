@@ -159,6 +159,7 @@ public class LightGrenade extends Item implements Activatable {
 
     @Override
     public void affect(Player player) {
+    	System.out.println("LightGrenade affects player");
         if(isActive())
             player.loseActions(2);
     }

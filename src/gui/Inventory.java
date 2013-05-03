@@ -118,7 +118,6 @@ public class Inventory extends GUIElement{
 		gui.rect(position.x, position.y, width, height);
 		for(ItemButton button: buttons){
 			if(button == null){
-				System.out.println("The button is null");
 			}
 			button.draw();
 		}
@@ -147,7 +146,6 @@ public class Inventory extends GUIElement{
 				if(selectedButton != null)
 					selectedButton.setSelected(false);
 				selectedButton = button;
-				System.out.println("Button selected!");
 				button.setSelected(true);
 				break;
 			}

@@ -55,7 +55,7 @@ public class TestForceFieldManager {
         createGrid();
         manager = new ForceFieldManager(grid);
         
-        generator = grid.getSquare(new Coordinate(2,6)).getInventory().getForceFieldGenerator();
+        //generator = grid.getSquare(new Coordinate(2,6)).getInventory().getForceFieldGenerator();
     }
 
 	private void createGrid() {
@@ -87,31 +87,22 @@ public class TestForceFieldManager {
         
         grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
 	}
-    
-    @Test
-    public void testConstructing() {
-    	new ForceFieldManager(GridProvider.getEmptyGrid());
-    }
-    
+
     /**
      * Two generators are within range.
      */
     @Test
     public void detectionTest() {
-    	assertEquals(manager.getAllForceFields().size(), 0);
+    	assertEquals(0,  manager.getAllForceFields().size());
     	
         manager.update(null,null);
         
-        assertEquals(manager.getAllForceFields().size(), 1);
+        assertEquals(1,manager.getAllForceFields().size());
     }
-    
-    @Test
-    public void canHaveForceField() {
-    	assertFalse(manager.canHaveAsForceField(null));
-    }
-    
+
     @Test
     public void addForceField() {
+    	
     	ForceFieldGenerator generator = new ForceFieldGenerator();
     	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
     	
@@ -119,13 +110,15 @@ public class TestForceFieldManager {
     	Coordinate coordTwo = new Coordinate(2,4);
     	
     	manager.update(null, null);
-    	assertEquals(manager.getAllForceFields().size(), 1);
+    	assertEquals(0, manager.getAllForceFields().size());
     	
     	Square square = grid.getSquare(coordOne);
     	square.getInventory().addForceFieldGenerator(generator);
+    	generator.activate();
     	
     	Square squareTwo = grid.getSquare(coordTwo);
     	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
+    	generatorTwo.activate();
     	
     	ArrayList<Coordinate> coordinates = coordOne.getCoordinatesTo(coordTwo);
     	assertEquals(coordinates.size(), 3);
@@ -142,9 +135,10 @@ public class TestForceFieldManager {
     @Test
     public void placeGeneratorOutRange() {
     	ForceFieldGenerator generator = new ForceFieldGenerator();
+    	generator.activate();
     	
     	manager.update(null, null);
-    	assertEquals(manager.getAllForceFields().size(), 1);
+    	assertEquals(1, manager.getAllForceFields().size());
     	
     	Square square = grid.getSquare(new Coordinate(2,2));
     	square.getInventory().addForceFieldGenerator(generator);
@@ -204,7 +198,7 @@ public class TestForceFieldManager {
     	Coordinate coordTwo = new Coordinate(2,0);
     	
     	manager.update(null, null);
-    	assertEquals(manager.getAllForceFields().size(), 1);
+    	assertEquals( 1, manager.getAllForceFields().size());
     	
     	Square square = grid.getSquare(coordOne);
     	square.getInventory().addForceFieldGenerator(generator);
@@ -219,7 +213,7 @@ public class TestForceFieldManager {
     @Test
     public void decreaseAction() {
     	manager.update(null, null);
-    	assertEquals(manager.getAllForceFields().size(), 1);
+    	assertEquals(1, manager.getAllForceFields().size());
     	
     	ForceField forceField = manager.getAllForceFields().get(0);
     	

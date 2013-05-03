@@ -345,7 +345,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
         if( h < 550){
             h = 550;
         }
-        size(w + 215, h + 50);
+        size(w + 215, h + 125);
         if(this.frame != null){
             this.frame.setSize(w+215, h + 125);
         }
