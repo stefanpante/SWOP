@@ -47,7 +47,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
     /**
      * The maximum range of the item when launched.
      *
-     * @return
+     * @return the range of the identitydisc
      */
     public int getRange(){
         return this.range;
@@ -69,8 +69,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 
     /**
      * Checks whether the range is larger than zero.
-     * @param range
-     * @return
+     * @param range  the range for the identity disc.
      */
     public boolean isValidRange(int range){
         return (range >= 0);
@@ -86,13 +85,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
      * 			and doesn't represent a diagonal direction
      */
     public static boolean isValidTravelDirection(Direction travelDirection) {
-        if(travelDirection == null){
-            return false;
-        }
-        if (travelDirection.isDiagonal()) {
-            return false;
-        }
-        return true;
+        return travelDirection != null && !travelDirection.isDiagonal();
     }
 
 	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
@@ -133,10 +126,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	
 	@Override
 	public String toString() {
-		String result = super.toString() + " IdentityDisc";
-		// Removed this, because it gives a weird message in the GUI
-		//result = "going " + getTravelDirection() + "(" + getDistanceTraveled()+")";
-		return result;
+		return super.toString() + " IdentityDisc";
 	}
 
     @Override

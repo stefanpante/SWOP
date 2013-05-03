@@ -154,25 +154,19 @@ public abstract class Inventory implements MovableEffect {
 	 * @return	Returns true if and only if the item is not null.
 	 */
 	public static boolean isValidItem(Item item){
-		if(item == null)
-			return false;
-		return true;
-	}
+        return item != null;
+    }
 
 	/**
 	 * Checks if a certain item can be added.
 	 * 
-	 * @param item
+	 * @param item      the item to be checked.
 	 * @return	True	If the item is not already contained and inventory is not full.
 	 * 			False	If the item is already contained or the inventory is full.
 	 */
 	public boolean canHaveAsItem(Item item) {
-		if(isFull())
-			return false;
-		if(hasItem(item))
-			return false;
-		return true;
-	}
+        return !isFull() && !hasItem(item);
+    }
 
 	/**
 	 * Removes a given item from the inventory

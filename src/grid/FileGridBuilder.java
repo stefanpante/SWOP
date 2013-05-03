@@ -81,7 +81,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * Constructs the grid, reads input from file.
 	 * @return a grid built from a file.
-	 * @throws Exception
+	 * @throws Exception  when the build process fails.
 	 */
 	@Override
 	protected void build() throws IllegalStateException, IllegalArgumentException{
@@ -248,7 +248,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 *
 	 * @param coordinate the coordinate of the first block of the wall
 	 * @param direction	 the direction in which we look for wall coordinates
-	 * @return
+	 * @return  the sequence of coordinates which make up a part of the wall.
 	 */
 	private ArrayList<Coordinate> getWallSequence(Coordinate coordinate, Direction direction){
 		ArrayList<Coordinate> sequence = new ArrayList<Coordinate>();

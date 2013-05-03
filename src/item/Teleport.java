@@ -71,10 +71,7 @@ public class Teleport extends Item {
 
         Teleport destinationTeleport = destination.getInventory().getTeleport();
 
-        if(destinationTeleport.equals(this))
-            return false;
-        else
-            return true;
+        return !destinationTeleport.equals(this);
     }
 
     /**
@@ -95,11 +92,7 @@ public class Teleport extends Item {
      *          is set and not obstructed.
      */
     public boolean canTeleport(){
-        if(getDestination() == null)
-            return false;
-        if(getDestination().isObstructed())
-            return false;
-        return true;
+        return getDestination() != null && !getDestination().isObstructed();
     }
 
     @Override
@@ -145,6 +138,8 @@ public class Teleport extends Item {
     public void affect(Player player){
         if(canTeleport()){
             player.move(getDestination());
+        } else {
+        	throw new IllegalStateException("Cant move to to te teleport destination.");
         }
     }
 

@@ -75,20 +75,16 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	 * @return	True if and only if there is already a LightGrenade in this inventory
 	 */
 	public boolean hasLightGrenade() {
-		if(getLightGrenade() == null)
-			return false;
-		return true;
-	}
+        return getLightGrenade() != null;
+    }
 
 	/**
 	 * Returns whether this SquareInventory
 	 * @return
 	 */
 	public boolean hasTeleport(){
-		if(getTeleport() == null)
-			return false;
-		return true;
-	}
+        return getTeleport() != null;
+    }
 	
 	/**
 	 * Returns the teleport if there is one, otherwise null.

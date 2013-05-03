@@ -54,10 +54,6 @@ public class Game extends Observable {
 	 */
 	private PowerManager powerManager;
 
-    /**
-     * Manages the force fields in the game
-     */
-    private ForceFieldManager forceFieldManager;
 
 	/**
 	 *Constructs a new board-based game with a given grid.
@@ -79,7 +75,7 @@ public class Game extends Observable {
 		addPlayer(new Player(topRight, 2));
 
 		this.powerManager = new PowerManager(getGrid());
-        this.forceFieldManager = new ForceFieldManager(getGrid());
+        ForceFieldManager forceFieldManager = new ForceFieldManager(getGrid());
         this.addObserver(forceFieldManager);
 		
 		// Start the game
