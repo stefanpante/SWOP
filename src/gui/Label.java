@@ -66,7 +66,6 @@ public class Label extends GUIElement{
 	
 	/**
 	 * Returns the textColor
-	 * @return
 	 */
 	public int getTextColor(){
 		return textColor;

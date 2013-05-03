@@ -19,10 +19,10 @@ public class SquareGUI extends GUIElement{
 
 	/**
 	 * Constructs a new SquareGUi.
-	 * @param Position
+	 * @param position
 	 * @param width
 	 * @param height
-	 * @param objectronGUI
+	 * @param gui
 	 */
 	public SquareGUI( float width, float height, PVector position, PApplet gui) {
 		super(width, height, position, gui);

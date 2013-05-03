@@ -48,7 +48,6 @@ public abstract class GUIButton extends GUIElement {
 	
 	/**
 	 * Returns the rollover color for the button.
-	 * @return
 	 */
 	public int getRolloverColor(){
 		return this.rolloverColor;
@@ -56,7 +55,7 @@ public abstract class GUIButton extends GUIElement {
 	
 	/**
 	 * Sets the rollover color for the button.
-	 * @param color
+	 * @param color   the rollover color
 	 */
 	public void setRolloverColor(int color){
 		this.rolloverColor = color;

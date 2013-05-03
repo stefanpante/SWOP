@@ -1,17 +1,12 @@
 package gui;
 
 import gui.button.ItemButton;
-import item.ChargedIdentityDisc;
 import item.ForceFieldGenerator;
-import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-
 import java.util.ArrayList;
-
 import processing.core.PApplet;
-import processing.core.PShape;
 import processing.core.PVector;
 import util.OConstants;
 
@@ -69,36 +64,35 @@ public class Inventory extends GUIElement{
 		selectedButton = null;
 
 		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
-		for(int i = 0; i < items.size(); i++){
-			Item item = items.get(i);
-			if(item instanceof LightGrenade){
-				LightGrenade lg = (LightGrenade) item;
-				if(lg.isActive() || lg.isDropped() || lg.isWornOut()){
-					continue;
-				}
-			}
-			
-			if(item instanceof ForceFieldGenerator){
-				ForceFieldGenerator ff = (ForceFieldGenerator) item;
-				if(ff.isDropped() || ff.isActive()){
-					continue;
-				}
-			}
-			// Add the button to the inventory.
-			ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, Shapes.getShape(item), pos, gui);
-			button.setItem(item);
-			if(!(item instanceof Teleport)){
-				buttons.add(button);
-			}
+        for (Item item : items) {
+            if (item instanceof LightGrenade) {
+                LightGrenade lg = (LightGrenade) item;
+                if (lg.isActive() || lg.isDropped() || lg.isWornOut()) {
+                    continue;
+                }
+            }
 
-			//next line when line is full.
-			pos = new PVector(pos.x + OConstants.MARGIN + OConstants.SQUARE_WIDTH, 
-					pos.y);
-			if(pos.x >= (position.x + width)){
-				pos = new PVector(position.x + OConstants.MARGIN, pos.y + OConstants.MARGIN + OConstants.SQUARE_WIDTH );
+            if (item instanceof ForceFieldGenerator) {
+                ForceFieldGenerator ff = (ForceFieldGenerator) item;
+                if (ff.isDropped() || ff.isActive()) {
+                    continue;
+                }
+            }
+            // Add the button to the inventory.
+            ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, Shapes.getShape(item), pos, gui);
+            button.setItem(item);
+            if (!(item instanceof Teleport)) {
+                buttons.add(button);
+            }
 
-			}
-		}
+            //next line when line is full.
+            pos = new PVector(pos.x + OConstants.MARGIN + OConstants.SQUARE_WIDTH,
+                    pos.y);
+            if (pos.x >= (position.x + width)) {
+                pos = new PVector(position.x + OConstants.MARGIN, pos.y + OConstants.MARGIN + OConstants.SQUARE_WIDTH);
+
+            }
+        }
 
 	}
 
@@ -117,8 +111,6 @@ public class Inventory extends GUIElement{
 		gui.fill(color);
 		gui.rect(position.x, position.y, width, height);
 		for(ItemButton button: buttons){
-			if(button == null){
-			}
 			button.draw();
 		}
 
@@ -137,8 +129,8 @@ public class Inventory extends GUIElement{
 	/**
 	 * Checks whether the mouse was pressed on the inventory.
 	 * 
-	 * @param mouseX
-	 * @param mouseY
+	 * @param mouseX  the x position of the mouse
+	 * @param mouseY  the y position of the mouse
 	 */
 	public void mousePressed(int mouseX, int mouseY){
 		for(ItemButton button: buttons){
@@ -157,19 +149,16 @@ public class Inventory extends GUIElement{
 	 */
 	@Override
 	public boolean mouseHit(int mouseX, int mouseY) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	/**
 	 * Sets the items of this inventory
-	 * @param o
+	 * @param items the items in the inventory
 	 */
 	public void setItems(ArrayList<Item> items) {
 
-		// Sets the items in the inventory
 		this.items = items;
-		// inits the buttons.
 		initialize();
 
 	}

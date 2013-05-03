@@ -19,13 +19,11 @@ public interface Drawable {
 	
 	/**
 	 * Returns the color of the Drawable.
-	 * @return
 	 */
 	public int getColor();
 	
 	/**
 	 * Sets the color of the Drawable.
-	 * @param color
 	 */
 	public void setColor(int color);
 	
@@ -38,13 +36,11 @@ public interface Drawable {
 	
 	/**
 	 * Sets the position of the Drawable.
-	 * @param position
 	 */
 	public void setPosition(PVector position);
 	
 	/**
 	 * Returns the position of the Drawable
-	 * @return
 	 */
 	public PVector getPosition();
 }
