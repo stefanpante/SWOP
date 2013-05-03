@@ -136,7 +136,6 @@ public class ForceFieldManager implements Observer {
      * @param coordinateToCheck
      */
     protected void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
-        System.out.println(coordinate +" -> "+ coordinateToCheck);
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         
@@ -148,7 +147,7 @@ public class ForceFieldManager implements Observer {
         try {
         	addForceField(forceField);
         } catch (IllegalArgumentException exc) {
-        	// Already contained
+            // Already exists
         }
     }
 

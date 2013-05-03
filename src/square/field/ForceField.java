@@ -37,9 +37,7 @@ public class ForceField extends Field {
 
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidSquare(square))
-			throw new IllegalArgumentException("Cannot add square to this ForceField: the square is invalid.");
-		getSquares().add(square);
+        super.addSquare(square);
         square.addField(this);
 	}
 	
