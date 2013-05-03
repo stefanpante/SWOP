@@ -22,10 +22,12 @@ public class Wall extends MultiObstacle{
 	/**
 	 * Initialises the wall. Two squares must at least be given for a wall to be possible.
 	 * 
-	 * @param	square First square.
-	 * @param	otherSquare Second square.
-	 * 
-	 * @throws IllegalSquareException If a duplicate square is given an exception is thrown.
+	 * @param	square
+     *          First square.
+	 * @param	otherSquare
+     *          Second square.
+	 * @throws  IllegalArgumentException
+     *          If a duplicate square is given an exception is thrown.
 	 */
 	public Wall(Square square, Square otherSquare) throws IllegalArgumentException {
 		super();
@@ -47,7 +49,7 @@ public class Wall extends MultiObstacle{
 	}
 	
 	/**
-	 * The Wall bounces a launchable item back onto the previous square it passed.
+	 * The Wall bounces a Launchable item back onto the previous square it passed.
 	 * 
 	 * @return	True always.
 	 */

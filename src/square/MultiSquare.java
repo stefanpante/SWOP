@@ -9,27 +9,29 @@ import java.util.ArrayList;
 public abstract class MultiSquare {
 
     /**
-     * An obstacle may cover a set of squares.
+     * An MultiSquare covers a set of squares.
      */
     private ArrayList<Square> squares;
 
+    /**
+     * Create a new MutliSquare
+     */
     public MultiSquare(){
         squares = new ArrayList<Square>();
     }
 
     /**
-     * Returns a list of squares which the obstacle covers.
+     * Returns a list of squares which this MultiSquare covers.
      */
     public ArrayList<Square> getSquares() {
         return new ArrayList<Square>(this.squares);
     }
 
     /**
-     * Checks if a square is contained in the obstacle.
+     * Checks if a square is part of this MutliSquare.
      *
-     * @param	square	Square to check if it is contained.
-     * @return	True	If square is contained.
-     * 			False	If square is not contained.
+     * @param	square	Square to be checked
+     * @return	True if and only if the square is part of this MutliObstacle
      */
     public boolean contains(Square square){
         return this.squares.contains(square);
@@ -37,11 +39,12 @@ public abstract class MultiSquare {
 
 
     /**
-     * Adds a square to the obstacle.
+     * Adds a square to this MultiSquare
      *
-     * @param square
-     *
-     * @throws IllegalArgumentException If a duplicate square is given an exception is thrown.
+     * @param   square
+     *          The square to be added
+     * @throws  IllegalArgumentException
+     *          If a duplicate square is given an exception is thrown.
      */
     public void addSquare(Square square) throws IllegalArgumentException{
         if(!isValidSquare(square))
@@ -51,10 +54,10 @@ public abstract class MultiSquare {
     }
 
     /**
-     * Removes a square of the obstacle.
+     * Removes a square of this MultiSquare.
      *
      * @param 	square
-     *
+     *          The square to be removed from this MultiSquare
      * @throws 	IllegalArgumentException
      * 			If the square is not
      */
@@ -69,15 +72,11 @@ public abstract class MultiSquare {
     }
 
     /**
-     * Check whether the given square can be added to this obstacle.
-     * The added square may not already be contained in the existing obstacle.
-     * No duplicates may be added.
+     * Check whether the given square can be added to this MutliSquare.
      *
      * @param 	square
      * 			The square to be checked
-     * @return	True	if and only if the square is connected to one of the squares.
-     * 			False	If the square is a duplicate or it is not connected to any other
-     * 					square.
+     * @return	True if and only the square is not not null and not yet part of the MutliSquare
      */
     public boolean isValidSquare(Square square){
         if(square == null)
