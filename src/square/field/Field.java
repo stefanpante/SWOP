@@ -14,13 +14,12 @@ import java.util.ArrayList;
  * with an effect on moveables.
  */
 public abstract class Field extends MultiSquare implements MovableEffect {
-
-
-    /**
+	
+	/**
      * Current state of the ForceField.
      */
     private boolean active = true;
-
+    
     /**
      * Checks if the ForceField is active.
      *

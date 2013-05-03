@@ -95,7 +95,7 @@ public class ForceFieldManager implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         for(ForceField forceField : forceFields){
-            forceField.increaseActions();
+            forceField.decreaseActions();
         }
         detectForceFields();
     }

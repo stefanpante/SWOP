@@ -59,6 +59,9 @@ public class ForceField extends Field {
 	private void turnOff(){
         setActive(false);
 		this.remainingActions = ACTIONS_ON;
+		
+		for(Square square: getSquares())
+			square.getAllFields().remove(square);
 	}
 	
 	/**
@@ -72,14 +75,14 @@ public class ForceField extends Field {
 			square.addField(this);
 	}
 	
-	public void increaseActions() {
+	public void decreaseActions() {
 		this.remainingActions--;
 		
 		if(isActive() && this.remainingActions <= 0) 
-			this.turnOn();	
+			this.turnOff();	
 		
 		if(!isActive() && this.remainingActions <= 0)
-			this.turnOff();
+			this.turnOn();
 	}
 
 

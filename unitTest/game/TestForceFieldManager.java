@@ -170,8 +170,6 @@ public class TestForceFieldManager {
     	Square square = grid.getSquare(new Coordinate(2,2));
     	square.getInventory().addForceFieldGenerator(generator);
     	
-    	System.out.println(grid.getAllCoordinates().size());
-    	
     	manager.update(null, null);
     	assertEquals(3, manager.getAllForceFields().size());
     }
@@ -182,7 +180,7 @@ public class TestForceFieldManager {
     	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
     	
     	Coordinate coordOne = new Coordinate(2,2);
-    	Coordinate coordTwo = new Coordinate(2,1);
+    	Coordinate coordTwo = new Coordinate(2,3);
     	
     	manager.update(null, null);
     	assertEquals(manager.getAllForceFields().size(), 1);
@@ -198,7 +196,43 @@ public class TestForceFieldManager {
     }
     
     @Test
-    public void placeGeneratorNearExistingField() {
+    public void placeForceFieldThroughWall() {
+    	ForceFieldGenerator generator = new ForceFieldGenerator();
+    	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
+    	
+    	Coordinate coordOne = new Coordinate(2,2);
+    	Coordinate coordTwo = new Coordinate(2,0);
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    	
+    	Square square = grid.getSquare(coordOne);
+    	square.getInventory().addForceFieldGenerator(generator);
+    	
+    	Square squareTwo = grid.getSquare(coordTwo);
+    	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    }
+    
+    @Test
+    public void decreaseAction() {
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    	
+    	ForceField forceField = manager.getAllForceFields().get(0);
+    	
+    	assertTrue(forceField.isActive());
+    	
+    	manager.update(null, null);
+    	assertTrue(forceField.isActive());
+    	
+    	manager.update(null, null);
+    	assertTrue(forceField.isActive());
+    	
+    	manager.update(null, null);
+    	assertFalse(forceField.isActive());
     	
     }
     
