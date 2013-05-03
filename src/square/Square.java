@@ -63,7 +63,7 @@ public class Square implements MovableEffect {
 
 	/**
 	 * Sets the power of a square.
-	 * @param power
+	 * @param power   the power
 	 */
 	public void setPower(Power power) {
 		this.power = power;
@@ -72,15 +72,12 @@ public class Square implements MovableEffect {
 	/**
 	 * In order for a state to be valid it must not be null.
 	 * 
-	 * @param	state
+	 * @param	state   the state of the power
 	 * @return	True	If state is not null.
 	 * 			False	If state is null.
 	 */
 	public boolean isValidState(Power state) {
-		if(state == null)
-			return false;
-		else
-			return true;
+        return state != null;
 	}
 
 
@@ -100,9 +97,9 @@ public class Square implements MovableEffect {
 	 */
 	public Obstacle getObstacle() {
 		return obstacle;
-	};
+	}
 
-	/**
+    /**
 	 * Sets the value of the obstacle of Square if the given value is valid. 
 	 * 
 	 * @param 	obstacle
@@ -112,9 +109,9 @@ public class Square implements MovableEffect {
 	@Nullable
 	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
 		this.obstacle = obstacle;
-	};
+	}
 
-	public void addField(Field field){
+    public void addField(Field field){
 		fields.add(field);
 	}
 

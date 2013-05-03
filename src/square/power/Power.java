@@ -50,9 +50,7 @@ public abstract class Power implements MovableEffect {
 	 * @param	turns	Amount of turns the power will last.
 	 * @param	actions	Amount of acitons the power will last.
 	 * @throws	IllegalArgumentException
-	 * 			Thrown when given turns are invalid.
-	 * @throws	IllegalArgumentException
-	 * 			Thrown when given actions are invalid.
+	 * 			Thrown when given turns,actions are invalid.
 	 */
 	public Power(int turns, int actions) throws IllegalArgumentException {
 		if(!isValidTurns(turns))
@@ -73,9 +71,7 @@ public abstract class Power implements MovableEffect {
 	 * @param	turns		Amount of turns the power will last.
 	 * @param	actions		Amount of acitons the power will last.
 	 * @throws	IllegalArgumentException
-	 * 			Thrown when given turns are invalid.
-	 * @throws	IllegalArgumentException
-	 * 			Thrown when given actions are invalid.
+	 * 			Thrown when given turns,actions are invalid.
 	 */
 	public Power(int turns, int actions, Rotation rotation) throws IllegalArgumentException {
 		if(!isValidTurns(turns))
@@ -125,7 +121,7 @@ public abstract class Power implements MovableEffect {
 	 * Checks if the given actions are valid.
 	 * 
 	 * @param	actions
-	 * @return	True	If the given acitons are >= 0
+	 * @return	True	If the given actions are >= 0
 	 * 			False	If the actions are < 0.
 	 */
 	public static boolean isValidActions(int actions) {
@@ -144,8 +140,6 @@ public abstract class Power implements MovableEffect {
 	
 	/**
 	 * Returns a new regular power which lasts infinite life span.
-	 * 
-	 * @return
 	 */
 	public static Power getRegularPower() {
 		return new RegularPower();
@@ -207,12 +201,11 @@ public abstract class Power implements MovableEffect {
 	 * Resets the power's remaining actions and turns.
 	 * This is used when the power has ended and must be renewed.
 	 * 
-	 * @param	turns
-	 * @param	actions
+	 * @param	turns the number of turns
+	 * @param	actions the number of actions
 	 * @throws	IllegalArgumentException
-	 * 			Thrown when given turns are invalid.
-	 * @throws	IllegalArgumentException
-	 * 			Thrown when given actions are invalid.
+	 * 			Thrown when given turns,actions are invalid.
+
 	 */
 	protected void reset(int turns, int actions) throws IllegalArgumentException {
 		if(!isValidTurns(turns))
@@ -228,7 +221,7 @@ public abstract class Power implements MovableEffect {
 	/**
 	 * Sets the child of a power.
 	 * 
-	 * @param power
+	 * @param power  the power
 	 */
 	protected void setChild(Power power) {
 		this.child = power;
@@ -312,7 +305,7 @@ public abstract class Power implements MovableEffect {
 	/**
 	 * Sets the direction the power is facing from the parent.
 	 * 
-	 * @param	direction
+	 * @param	direction     the direction of the power
 	 * @throws	IllegalStateException
 	 * 			If the direction is not appropriate for this power. (no parent)
 	 */

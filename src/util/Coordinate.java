@@ -70,7 +70,7 @@ public class Coordinate {
 	/**
 	 * Sets the x-coordinate of this coordinate if the given x is valid.
 	 * 
-	 * @param x
+	 * @param x  the x coordinate
 	 * 		
 	 */
 	public void setX(int x) throws IllegalArgumentException{
@@ -115,8 +115,7 @@ public class Coordinate {
 	 */
 	@Override
 	public String toString() {
-		String result = "(" + getX()+","+ getY() +")";
-		return result;
+        return "(" + getX()+","+ getY() +")";
 	}
 
 	/**
@@ -131,7 +130,6 @@ public class Coordinate {
 	
 	/**
 	 * Returns a list of all eight neighbors of this coordinate.
-	 * @return
 	 */
 	public ArrayList<Coordinate> getAllNeighbors(){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
@@ -182,14 +180,8 @@ public class Coordinate {
 			return false;
 		}
 		Coordinate other = (Coordinate) obj;
-		if (x != other.x) {
-			return false;
-		}
-		if (y != other.y) {
-			return false;
-		}
-		return true;
-	}
+        return x == other.x && y == other.y;
+    }
 
     /**
      * Returns a new Coordinate in the given Direction at the given Distance.

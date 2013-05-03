@@ -79,11 +79,7 @@ public abstract class MultiSquare {
      * @return	True if and only the square is not not null and not yet part of the MutliSquare
      */
     public boolean isValidSquare(Square square){
-        if(square == null)
-            return false;
-        if(getSquares().contains(square))
-            return false;
-        return true;
+        return square != null && !getSquares().contains(square);
     }
 
     /**
