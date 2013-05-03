@@ -130,11 +130,11 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 
 	/**
 	 * Utility build method used for testing purposes.
-	 * @param lightGrenades
-	 * @param identityDisks
-	 * @param teleports
-	 * @param fFgen
-	 * @param chargedIdentityDisk
+	 * @param lightGrenades  The lightGrenades to set on the grid.
+	 * @param identityDisks  The lightGrenades to set on the grid.
+	 * @param teleports      The lightGrenades to set on the grid.
+	 * @param fFgen            The lightGrenades to set on the grid.
+	 * @param chargedIdentityDisk  the location of the chargedIdentityDisk
 	 * @throws IllegalStateException
 	 */
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 

@@ -74,7 +74,6 @@ public class PlayerMoveCommand extends MoveCommand{
 
             try{
                 if(forceFieldGenerator.isDropped()){
-                    System.out.println("Activate!");
                     forceFieldGenerator.activate();
                 }
             } catch (Exception exc) {

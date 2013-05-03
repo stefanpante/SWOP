@@ -33,19 +33,15 @@ public class ForceFieldGenerator extends Item implements Activatable, Observer{
 
 	@Override
 	public boolean isSameType(Item item) {
-		if(item instanceof ForceFieldGenerator)
-			return true;
-		return false;
-	}
+        return item instanceof ForceFieldGenerator;
+    }
 	
 	/**
 	 * Checks if the item given is a force field generator.
 	 */
 	public static boolean isForceFieldGenerator(Item item){
-		if(item instanceof ForceFieldGenerator)
-			return true;
-		return false;
-	}
+        return item instanceof ForceFieldGenerator;
+    }
 
 	@Override
 	public void acceptAddPlayerInventory(PlayerInventory plInv) throws IllegalStateException {

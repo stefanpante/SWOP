@@ -144,8 +144,7 @@ public class LightGrenade extends Item implements Activatable {
 	
 	/**
 	 * returns whether the given object is of the same type.
-	 * @param o
-	 * @return
+	 * @param o the item to be checked
 	 */
 	@Override
 	public boolean isSameType(Item o){
