@@ -91,6 +91,7 @@ public class Player implements Obstacle, Movable {
 		this.range = 1;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
+        this.setJustTeleported(false);
 		this.id = id;
 		this.lightTrail = new LightTrail();
 	}
@@ -542,6 +543,6 @@ public class Player implements Obstacle, Movable {
 	}
 
 	public void setJustTeleported(boolean b) {
-		justTeleported = true;
+		justTeleported = b;
 	}
 }

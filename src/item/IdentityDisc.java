@@ -43,6 +43,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 
     public IdentityDisc(int range){
         this.range = range;
+        this.setJustTeleported(false);
     }
 
 

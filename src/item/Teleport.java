@@ -136,8 +136,11 @@ public class Teleport extends Item {
 
     @Override
     public void affect(Player player){
-    	if(!player.justTeleported()){
-    		if(canTeleport()){
+        System.out.println("affect2");
+
+        if(!player.justTeleported()){
+            System.out.println("affect3");
+            if(canTeleport()){
             	player.setJustTeleported(true);
                 player.move(getDestination());
 	        } else {

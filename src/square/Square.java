@@ -159,6 +159,7 @@ public class Square implements MovableEffect {
 
 	@Override
 	public void affect(Player player) {
+        System.out.println("affect");
 		getInventory().affect(player);
         getPower().affect(player);
 	}
