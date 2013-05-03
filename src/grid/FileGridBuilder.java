@@ -69,7 +69,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		excluded.add(player1);
 		excluded.add(player2);
 		setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
-		// Do we still need the squared location for the light grenade.
+		// TODO: Do we still need the squared location for the light grenade.
 		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded));
 		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
 		setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
