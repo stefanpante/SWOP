@@ -51,7 +51,7 @@ public class ForceFieldManager implements Observer {
      * @throws	IllegalArgumentException
      * 			Throws an exception if the force field is already contained.
      */
-    private void addForceField(ForceField forceField) throws IllegalArgumentException {
+    protected void addForceField(ForceField forceField) throws IllegalArgumentException {
         if(!canHaveAsForceField(forceField))
         	throw new IllegalArgumentException("This force field cannot be added.");
         

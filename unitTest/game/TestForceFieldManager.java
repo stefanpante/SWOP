@@ -6,6 +6,7 @@ import grid.RandomGridBuilder;
 import org.junit.*;
 import square.Direction;
 import square.Square;
+import square.field.ForceField;
 import util.Coordinate;
 
 import item.ForceFieldGenerator;
@@ -109,6 +110,35 @@ public class TestForceFieldManager {
     	assertFalse(manager.canHaveAsForceField(null));
     }
     
+    @Test
+    public void addForceField() {
+    	ForceFieldGenerator generator = new ForceFieldGenerator();
+    	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
+    	
+    	Coordinate coordOne = new Coordinate(2,2);
+    	Coordinate coordTwo = new Coordinate(2,4);
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    	
+    	Square square = grid.getSquare(coordOne);
+    	square.getInventory().addForceFieldGenerator(generator);
+    	
+    	Square squareTwo = grid.getSquare(coordTwo);
+    	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
+    	
+    	ArrayList<Coordinate> coordinates = coordOne.getCoordinatesTo(coordTwo);
+    	assertEquals(coordinates.size(), 3);
+    	
+    	ForceField forceField = new ForceField();
+    	forceField.addSquare(squareTwo);
+    	
+    	for(Coordinate coord: coordinates)
+    		forceField.addSquare(grid.getSquare(coord));
+    	
+    	assertEquals(forceField.getLength(), 3);
+    	
+    }
     
     @Test
     public void placeGeneratorOutRange() {
