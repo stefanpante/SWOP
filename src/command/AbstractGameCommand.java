@@ -56,9 +56,9 @@ public abstract class AbstractGameCommand implements Command {
 		afterGameCommand();
 	}
 
-    /**
-     * Operations and checks to be executed before the actual command
-     */
+	/**
+	 * Checks if preconditions are met.
+	 */
 	protected abstract void beforeGameCommand() throws  Exception;
 
     /**

@@ -48,7 +48,11 @@ public class MoveCommand extends ActionCommand {
 	private Square currentPosition;
 
 	/**
-	 * Moves the player into a certain direction. 
+	 * Moves the movable( Player and IdentityDisc for now)  into a certain direction.
+	 * @param game			the Game.
+     * @param movable		the movable which moves across the grid.
+     * @param startSquare	the Square on which the move initiates.
+     * @param dir			the direction in which the identityDisc moves. 
 	 */
 	public MoveCommand(Game game, Movable movable, Square startSquare, Direction dir) {
 		super(game);
@@ -114,6 +118,10 @@ public class MoveCommand extends ActionCommand {
 		//NOOP
 	}
 
+	/**
+	 * Checks if the action would cause an invalidation of the model.
+	 * Checks all the precondition for the move action.
+	 */
 	@Override
 	protected void beforeActionCommand(){
 		if(!getGame().isActive())
@@ -125,7 +133,10 @@ public class MoveCommand extends ActionCommand {
 	}
 
 
-	public void move(){
+	/**
+	 * performs the actual move of the movable
+	 */
+	protected void move(){
 		setCurrentPosition(getStartPosition());
 		int currentRange = 0;
 		Square currentSquare;
