@@ -15,15 +15,21 @@ import square.Square;
  */
 public class IdentityDiscMoveCommand extends MoveCommand {
 
-	private IdentityDisc id ;
+	
     /**
      * Moves the player into a certain direction.
+     * @param game			the Game.
+     * @param id			the IdentityDisc which moves across the grid.
+     * @param startSquare	the Square on which the move initiates.
+     * @param dir			the direction in which the identityDisc moves.
      */
     public IdentityDiscMoveCommand(Game game, IdentityDisc id, Square startSquare, Direction dir) {
         super(game, id, startSquare, dir);
-        this.id = id;
     }
 
+    /**
+     * Checks whether the given direction is valid for an IdentityDisc ( which is a precondition)
+     */
     @Override
     protected void beforeGameCommand() {
 		/* Check whether it's possible to move in the given direction */
@@ -31,16 +37,7 @@ public class IdentityDiscMoveCommand extends MoveCommand {
             throw new IllegalStateException("Cannot throw into given direction.");
             
         }
-        //getGame().getCurrentPlayer().getInventory().removeItem(id);
         
     }
 
-
-    @Override
-    protected void afterGameCommand() throws Exception {
-        //See for solution
-    	//getCurrentPosition().getInventory().addItem(id);
-        
-        
-    }
     }

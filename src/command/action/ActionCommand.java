@@ -13,10 +13,17 @@ import game.Game;
  */
 public abstract class ActionCommand extends AbstractGameCommand {
 		
+	/**
+	 * Constructs a new ActionCommand
+	 * @param game	the game on which the ActionCommand uses.
+	 */
 	public ActionCommand(Game game) {
 		super(game);
 	}
 	
+	/**
+	 * Executes the actual action.
+	 */
 	@Override
 	public void execute() throws Exception {
 		try{
@@ -32,6 +39,9 @@ public abstract class ActionCommand extends AbstractGameCommand {
 		}
 	}
 	
+	/**
+	 * Checks if preconditions are met for the action.
+	 */
 	protected void beforeActionCommand() {
 		if(!getGame().isActive())
 			throw new IllegalStateException("The game is over.");
@@ -39,6 +49,9 @@ public abstract class ActionCommand extends AbstractGameCommand {
 			throw new IllegalStateException("The current player has no remaining action left.");
 	}
 	
+	/**
+	 * Checks if the post conditions are met for this action.
+	 */
 	protected void afterActionCommand() {
 		//Currently nothing is needed here.
 	}

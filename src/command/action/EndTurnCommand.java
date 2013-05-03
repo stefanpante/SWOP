@@ -20,11 +20,15 @@ public class EndTurnCommand extends ActionCommand {
 		super(game);
 	}
 
+
 	@Override
 	protected void beforeGameCommand() {
 		
 	}
 
+	/**
+	 * Ensures consistency for the player, lets the player perform empty actions.
+	 */
 	@Override
 	protected void duringGameCommand() {
 		Player currentPlayer = getGame().getCurrentPlayer();

@@ -15,8 +15,9 @@ public class PickUpCommand extends ActionCommand {
 	private Item item;
 
 	/**
-	 * @param game
-	 * @param args
+	 * Command to pick up an item
+	 * @param game	the game.
+	 * @param item	the Item which will be picked up
 	 */
 	public PickUpCommand(Game game, Item item) {
 		super(game);
@@ -27,6 +28,9 @@ public class PickUpCommand extends ActionCommand {
 		return this.item;
 	}
 	
+	/**
+	 * Performs the actual pickup of the item.
+	 */
 	@Override
 	protected void duringGameCommand(){
 		getGame().getCurrentPlayer().pickUp(getItem());
@@ -38,9 +42,14 @@ public class PickUpCommand extends ActionCommand {
 		
 	}
 
+	/**
+	 * Checks if preconditions are met.
+	 */
 	@Override
 	protected void beforeGameCommand() {
-		// TODO Auto-generated method stub
+		if(getGame().getCurrentPlayer().getPosition().getInventory().hasItem(item)){
+			throw new IllegalStateException("Cannot remove an item that isn't in SquareInventory");
+		}
 		
 	}
 
