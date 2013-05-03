@@ -30,6 +30,8 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 
     private int range;
     
+    private boolean justTeleported;
+    
     /**
      * The position of the movable.
      */
@@ -164,7 +166,7 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 		square.getInventory().addItem(this);
 		this.position = square;
 		square.affect(this);
-		
+    	this.setJustTeleported(false);
 	}
 	
 	public void setPosition(Square square){
@@ -182,5 +184,15 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	@Override
 	public Square getPosition() {
 		return position;
+	}
+
+	@Override
+	public boolean justTeleported() {
+		return justTeleported;
+	}
+
+	@Override
+	public void setJustTeleported(boolean b) {
+		justTeleported = b;
 	}
 }
