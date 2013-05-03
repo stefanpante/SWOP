@@ -145,6 +145,8 @@ public class Teleport extends Item {
     public void affect(Player player){
         if(canTeleport()){
             player.move(getDestination());
+        } else {
+        	throw new IllegalStateException("Cant move to to te teleport destination.");
         }
     }
 
