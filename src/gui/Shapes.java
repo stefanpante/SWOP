@@ -5,6 +5,7 @@ import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
+import item.Teleport;
 import processing.core.PApplet;
 import processing.core.PShape;
 
@@ -75,6 +76,9 @@ public class Shapes {
 			return Shapes.identityDisc;
 		}
 		
+		if(item instanceof Teleport){
+			return Shapes.teleport;
+		}
 		
 		
 		if(item instanceof LightGrenade){
