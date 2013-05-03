@@ -141,7 +141,7 @@ public class TestForceFieldManager {
     	System.out.println(grid.getAllCoordinates().size());
     	
     	manager.update(null, null);
-    	assertEquals(manager.getAllForceFields().size(), 2);
+    	assertEquals(2, manager.getAllForceFields().size());
     }
     
     @Test

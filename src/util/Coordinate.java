@@ -255,9 +255,9 @@ public class Coordinate {
             }
 
             if(yDiff > 0){
-                return  Direction.NORTH;
+                return  Direction.SOUTH;
             }else if(yDiff < 0){
-                return Direction.SOUTH;
+                return Direction.NORTH;
             }
         }else if(diagonal){
             if(xDiff > 0 && yDiff > 0){
