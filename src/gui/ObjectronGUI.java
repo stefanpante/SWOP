@@ -117,7 +117,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void setup(){
 		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
-		System.out.println("Yellow: " + color(203, 212, 76));
+		System.out.println("Green: " + color(255, 187, 51, 128));
 		size(hSize, vSize);
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")

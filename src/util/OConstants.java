@@ -30,14 +30,14 @@ public class OConstants {
 	/**
 	 * 
 	 */
-	public static int POWERFAIL_COLOR = -17613;
-	
-	public static int POWERFAIL_FORCEFIELD_COLOR = -3419060;
+	public static int POWERFAIL_COLOR = -2130724045;
+
 	
 	/**
 	 * 
 	 */
-	public static int FORCEFIELD_COLOR = -6763520;
+	public static int FORCEFIELD_COLOR = -2137469952;
+	
 	/**
 	 * The color of the red player.
 	 */
