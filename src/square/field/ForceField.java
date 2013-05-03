@@ -49,7 +49,7 @@ public class ForceField extends Field {
 		if(getLength() >= MAX_LENGTH)
 			return false;
 		
-		return true;
+		return super.isValidSquare(square);
 	}
 
 	

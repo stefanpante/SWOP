@@ -131,7 +131,6 @@ public class TestForceFieldManager {
     	assertEquals(coordinates.size(), 3);
     	
     	ForceField forceField = new ForceField();
-    	forceField.addSquare(squareTwo);
     	
     	for(Coordinate coord: coordinates)
     		forceField.addSquare(grid.getSquare(coord));
@@ -162,16 +161,19 @@ public class TestForceFieldManager {
     	manager.update(null, null);
     	assertEquals(manager.getAllForceFields().size(), 1);
     	
-    	Square square = grid.getSquare(new Coordinate(2,2));
-    	square.getInventory().addForceFieldGenerator(generator);
-    	
     	Square squareTwo = grid.getSquare(new Coordinate(2,4));
     	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
+    	
+    	manager.update(null, null);
+    	assertEquals(2, manager.getAllForceFields().size());
+    	
+    	Square square = grid.getSquare(new Coordinate(2,2));
+    	square.getInventory().addForceFieldGenerator(generator);
     	
     	System.out.println(grid.getAllCoordinates().size());
     	
     	manager.update(null, null);
-    	assertEquals(2, manager.getAllForceFields().size());
+    	assertEquals(3, manager.getAllForceFields().size());
     }
     
     @Test
@@ -180,7 +182,7 @@ public class TestForceFieldManager {
     	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
     	
     	Coordinate coordOne = new Coordinate(2,2);
-    	Coordinate coordTwo = new Coordinate(2,4);
+    	Coordinate coordTwo = new Coordinate(2,1);
     	
     	manager.update(null, null);
     	assertEquals(manager.getAllForceFields().size(), 1);
