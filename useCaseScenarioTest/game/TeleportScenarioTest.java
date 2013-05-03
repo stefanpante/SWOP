@@ -87,6 +87,7 @@ public class TeleportScenarioTest {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
+		assertFalse(teleport.getDestination().isObstructed());
 		moveHandler.move(Direction.SOUTH);
 		
 		Coordinate coord = game.getGrid().getCoordinate(game.getCurrentPlayer().getPosition());
@@ -157,7 +158,6 @@ public class TeleportScenarioTest {
 		LightTrail lt = game.getCurrentPlayer().getLightTrail();
 		
 		assertTrue(lt.contains(squareOne));
-		assertTrue(lt.contains(game.getCurrentPlayer().getStartPosition()));
 		assertTrue(lt.contains(squareTwo));
 	}
 

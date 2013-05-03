@@ -136,14 +136,14 @@ public class Teleport extends Item {
 
     @Override
     public void affect(Player player){
-        if(canTeleport()){
-        	if(!player.justTeleported()){
+    	if(!player.justTeleported()){
+    		if(canTeleport()){
             	player.setJustTeleported(true);
                 player.move(getDestination());
-        	}
-        } else {
-        	throw new IllegalStateException("Cant move to to the teleport destination.");
-        }
+	        } else {
+	        	throw new IllegalStateException("Cant move to to the teleport destination.");
+	        }        	
+    	}
     }
 
     @Override
