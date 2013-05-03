@@ -413,12 +413,12 @@ public class GridGui extends GUIElement{
 					}
 				}
 				
-				if(it.get(0) instanceof ForceFieldGenerator){
-					ForceFieldGenerator ff = (ForceFieldGenerator) it.get(0);
-					if(ff.isActive()){
-						continue;
-					}
-				}
+//				if(it.get(0) instanceof ForceFieldGenerator){
+//					ForceFieldGenerator ff = (ForceFieldGenerator) it.get(0);
+//					if(ff.isActive()){
+//						continue;
+//					}
+//				}
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.getShape(it.get(0)));
                 s.setColor(gui.color(255,0));
