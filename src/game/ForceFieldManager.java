@@ -110,7 +110,7 @@ public class ForceFieldManager implements Observer {
         ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
         
         for (Square square: grid.getAllSquares()) {
-            if (square.getInventory().containsSameType(new ForceFieldGenerator())) {
+            if (square.getInventory().containsSameType(new ForceFieldGenerator()) && square.getInventory().getForceFieldGenerator().isActive()) {
             	Coordinate coordinate = grid.getCoordinate(square);
             	generatorCoordinates.add(coordinate);
             } 

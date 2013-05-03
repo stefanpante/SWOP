@@ -18,28 +18,17 @@ import java.util.Observer;
  * 
  * @author vincentreniers
  */
-public class ForceFieldGenerator extends Item implements Observer{
-    
-	/**
-	 * If the generator has been dropped this is true,
-	 * otherwise false.
-	 */
-	private boolean isUsed = false;
-	
+public class ForceFieldGenerator extends Item implements Activatable, Observer{
+
+    private boolean dropped;
+    private boolean active;
+
 	/**
 	 * If the item is used, the state is changed to used.
 	 */
 	@Override
 	public void notifyUse() {
-		this.isUsed = true;
-	}
-	
-	/**
-	 * Returns true if the item has been used,
-	 * false if the item has not been dropped yet.
-	 */
-	public boolean isUsed(){
-		return this.isUsed;
+		this.drop();
 	}
 
 	@Override
@@ -98,5 +87,24 @@ public class ForceFieldGenerator extends Item implements Observer{
 		// TODO Auto-generated method stub
 		
 	}
-    
+
+    @Override
+    public boolean isDropped() {
+        return this.dropped;
+    }
+
+    @Override
+    public boolean isActive() {
+        return this.active;
+    }
+
+    @Override
+    public void drop() throws IllegalStateException {
+        this.dropped = true;
+    }
+
+    @Override
+    public void activate() throws IllegalStateException {
+        this.active = true;
+    }
 }

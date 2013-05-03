@@ -11,31 +11,23 @@ import move.Movable;
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  *
  */
-public class LightGrenade extends Item {
+public class LightGrenade extends Item implements Activatable {
 	
 	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	
-	/**
-	 * Returns whether the item is active or inactive.
-	 * 
-	 * @return	True when the item is active
-	 * 			False otherwise
-	 */
+
+    @Override
 	public boolean isActive() {
 		return this.currentState == LightGrenadeState.ACTIVE;
 	}
-	
-	/**
-	 * Returns whether the LightGrenade was dropped on the square by a player
-	 * 
-	 * @return	true when the item is dropped
-	 * 			false otherwise
-	 */
+
+    @Override
 	public boolean isDropped() {
 		return (this.currentState == LightGrenadeState.DROPPED);
 	}
-	
-	/**
+
+
+    /**
 	 * Returns whether the LightGrenade was worn out. This means it has already exploded.
 	 * 
 	 * @return	True	If the item is worn out.
@@ -54,13 +46,7 @@ public class LightGrenade extends Item {
 		return this.currentState;
 	}
 	
-	/**
-	 * Activates the item.
-	 * 
-	 * @throws 	IllegalStateException
-	 * 			thrown if the current state isn't inactive. An item can only go to
-	 * 			an active state from an inactive one.
-	 */
+    @Override
 	public void activate() throws IllegalStateException {
 		if(!isDropped())
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the active state.");
@@ -81,12 +67,7 @@ public class LightGrenade extends Item {
 		this.currentState = LightGrenadeState.WORN;
 	}
 	
-	/**
-	 * Drops the item.
-	 * 
-	 * @throws	IllegalStateException
-	 * 			If the item is active or worn out it cannot be dropped.
-	 */
+    @Override
 	public void drop() throws IllegalStateException {
 		if(isActive())
 			throw new IllegalStateException("Cannot drop a LightGrenade which is active.");
