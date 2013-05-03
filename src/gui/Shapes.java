@@ -33,8 +33,7 @@ public class Shapes {
 	public static PShape powerFailureTeleportItem;
 	public static PShape teleportItem;
 	public static PShape teleport;
-	public static PShape forcefieldgenerator_off;
-	public static PShape forcefieldgGenerator_on;
+	public static PShape forcefieldGenerator;
 	
 
 	public Shapes(PApplet gui) {
@@ -64,8 +63,7 @@ public class Shapes {
 		Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/teleportpowerfail.svg").getPath());
 		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/teleportitems.svg").getPath());
 		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());
-		Shapes.forcefieldgenerator_off = gui.loadShape(getClass().getResource("/res/forcefield_off.svg").getPath());
-		Shapes.forcefieldgGenerator_on = gui.loadShape(getClass().getResource("/res/forcefield_on.svg").getPath());
+		Shapes.forcefieldGenerator = gui.loadShape(getClass().getResource("/res/forcefield_on.svg").getPath());
 	}
 	
 	public static PShape getShape(Item item){
@@ -85,7 +83,7 @@ public class Shapes {
 		
 		
 		if(item instanceof ForceFieldGenerator){
-			return Shapes.forcefieldgGenerator_on;
+			return Shapes.forcefieldGenerator;
 			
 		}
 		

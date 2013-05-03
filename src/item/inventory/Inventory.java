@@ -21,7 +21,7 @@ public abstract class Inventory implements MovableEffect {
 	/**
 	 * The size of the inventory, should not be smaller than zero
 	 */
-	private final double maximumSize;
+	private final double maxSize;
 	
 	/**
 	 * A given size should imply the usage of an array,
@@ -45,7 +45,7 @@ public abstract class Inventory implements MovableEffect {
 		if(!isValidMaximumSize(size)) 
 			throw new IllegalArgumentException("The given size is not valid!");
 		
-		this.maximumSize = size;
+		this.maxSize = size;
 		this.items = new ArrayList<Item>();
 	}
 
@@ -98,7 +98,7 @@ public abstract class Inventory implements MovableEffect {
 	 */
 	@Basic
 	public double getMaximumSize(){
-		return this.maximumSize;
+		return this.maxSize;
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public abstract class Inventory implements MovableEffect {
 	@Override
 	public String toString(){
 		String description = "";
-		if(maximumSize == 0){
+		if(maxSize == 0){
 			return "Inventory (empty)";
 		} else {
 			description += "Inventory ("+ getSize() +") containing: "; 

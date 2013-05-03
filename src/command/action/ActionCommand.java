@@ -37,8 +37,6 @@ public abstract class ActionCommand extends AbstractGameCommand {
 			throw new IllegalStateException("The game is over.");
 		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
 			throw new IllegalStateException("The current player has no remaining action left.");
-		if(getGame().isCurrentPlayerStuck())
-			throw new IllegalStateException("The current player is stuck.");
 	}
 	
 	protected void afterActionCommand() {

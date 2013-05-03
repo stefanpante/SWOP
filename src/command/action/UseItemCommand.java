@@ -14,10 +14,14 @@ public class UseItemCommand extends ActionCommand {
 	
 	private Item item;
 
-	/**
-	 * @param game
-	 * @param args
-	 */
+    /**
+     * Create a new UseItemCommand
+     *
+     * @param   game
+     *          The game
+     * @param   item
+     *          The item
+     */
 	public UseItemCommand(Game game, Item item) {
 		super(game);
 		this.item = item;
@@ -44,7 +48,7 @@ public class UseItemCommand extends ActionCommand {
 	
 	@Override
 	protected void afterGameCommand() {
-		
+
 	}
 
 }
