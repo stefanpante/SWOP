@@ -11,7 +11,6 @@ import square.Square;
  * User: Dieter
  * Date: 2/05/13
  * Time: 15:07
- * To change this template use File | Settings | File Templates.
  */
 public class PlayerMoveCommand extends MoveCommand{
 
@@ -32,10 +31,8 @@ public class PlayerMoveCommand extends MoveCommand{
 
     @Override
     protected void afterGameCommand() throws Exception {
-    	
         activateLightGrenade();
     }
-
 
     /**
      * If the player just dropped a LightGrenade on the square he's moving from it has
