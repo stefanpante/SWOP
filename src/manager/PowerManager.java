@@ -49,7 +49,7 @@ public class PowerManager {
 	/**
 	 * Creates a power manager with a reference to the grid.
 	 * 
-	 * @param grid
+	 * @param grid the grid on which the power manager functions.
 	 */
 	public PowerManager(Grid grid) {
 		this.grid = grid;
@@ -88,7 +88,7 @@ public class PowerManager {
 	 * We power fail one square and set two squares near it
 	 * as a secondary and tertiary power fail.
 	 * 
-	 * @param square
+	 * @param square   the square to be powerfailed.
 	 */
 	protected void powerFailSquare(Square square) {
 		Random random = new Random();
@@ -126,13 +126,12 @@ public class PowerManager {
 	 * 1) The square may not be adjacent to F1
 	 * 2) The square must be adjacent to F2
 	 * 
-	 * @param	square
-	 * @param	neighbor
+	 * @param	square  the first square
+	 * @param	neighbor the neighbor of the first square
 	 * @throws	IllegalArgumentException
 	 * 			If the given squares are no neighbors.
 	 * @throws	NoSuchElementException
 	 * 			If no suitable candidate can be found, only off-grid.
-	 * @return
 	 */
 	private Square getCandidateTertiary(Square square, Square neighbor) throws IllegalArgumentException, NoSuchElementException {
 		Direction directionNeighbor = getGrid().getNeighborDirection(square, neighbor);
@@ -143,55 +142,47 @@ public class PowerManager {
 		Random random = new Random();
 		Direction direction = directions.get(random.nextInt(directions.size()));
 		
-		final Square tertiary = getGrid().getNeighbor(neighbor, direction);
-		
-		return tertiary;
+		final Square tertiary;
+        tertiary = getGrid().getNeighbor(neighbor, direction);
+
+        return tertiary;
 	}
 
 	/**
 	 * Clears all powerFailures, for testing purposes.
 	 */
 	public void clearPowerFailures(){
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			square.setPower(Power.getRegularPower());
-		}
+        for (Square square : getGrid().getAllSquares()) {
+            square.setPower(Power.getRegularPower());
+        }
 	}
 	
 	/**
 	 * Removes the powers from the grid.
 	 * 
-	 * @param powers
+	 * @param powers  the list of powers to remove
 	 */
 	private void clearPowers(ArrayList<Power> powers) {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			
-			if(powers.contains(square.getPower()))
-				square.setPower(Power.getRegularPower());
-		}
+
+        for (Square square : getGrid().getAllSquares()) {
+            if (powers.contains(square.getPower()))
+                square.setPower(Power.getRegularPower());
+        }
 	}
 	
 	/**
 	 * Gets the square associated with the power.
 	 * 
-	 * @param	power
+	 * @param	power   the power of which the square is wanted.
 	 * @return	Square	If the power can be found on a square.
 	 * 			Null	If there is no square with the power.
 	 */
 	protected Square getSquare(Power power) {
-		Iterator<Square> iterator = getGrid().getAllSquares().iterator();
-		
-		while(iterator.hasNext()) {
-			Square square = iterator.next();
-			
-			if(square.getPower() == power)
-				return square;
-		}
+
+        for (Square square : getGrid().getAllSquares()) {
+            if (square.getPower() == power)
+                return square;
+        }
 		
 		return null;
 	}
@@ -253,7 +244,7 @@ public class PowerManager {
 	 * 
 	 * If there is a child it must be in line in a certain manner (tertiary).
 	 * 
-	 * @param powers
+	 * @param power     the power to be reset.
 	 */
 	private void resetPower(Power power) {
 		if(power.hasChild()) {
@@ -269,7 +260,7 @@ public class PowerManager {
 	 * 
 	 * Then we need to set it's tertiary power to a new square as well.
 	 * 
-	 * @param power
+	 * @param power  the secondary power to be reset.
 	 */
 	private void resetSecondary(Power power) {
 		power.resetCount();
@@ -300,7 +291,7 @@ public class PowerManager {
 	 * primary and secondary location and then take a random pick from
 	 * the possible squares.
 	 * 
-	 * @param power
+	 * @param power   the tertiary power to reset
 	 */
 	private void resetTertiary(Power power) {
 		power.resetCount();

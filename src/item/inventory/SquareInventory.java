@@ -80,7 +80,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 
 	/**
 	 * Returns whether this SquareInventory
-	 * @return
 	 */
 	public boolean hasTeleport(){
         return getTeleport() != null;
@@ -88,7 +87,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	/**
 	 * Returns the teleport if there is one, otherwise null.
-	 * @return
 	 */
 	public Teleport getTeleport() {
 		for (Item i: getAllItems()) {
@@ -101,8 +99,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	
 	/**
 	 * Returns the force field generator if there is one.
-	 * 
-	 * @return
 	 */
 	public ForceFieldGenerator getForceFieldGenerator() {
 		for (Item i: getAllItems()) {

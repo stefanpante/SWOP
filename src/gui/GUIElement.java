@@ -52,7 +52,6 @@ public abstract class GUIElement implements Drawable{
 	
 	/**
 	 * Returns the color of the button.
-	 * @return
 	 */
 	@Override
 	public int getColor(){
@@ -61,7 +60,6 @@ public abstract class GUIElement implements Drawable{
 	
 	/**
 	 * Sets the color for the button.
-	 * @param color
 	 */
 	@Override
 	public void setColor(int color){
@@ -85,7 +83,6 @@ public abstract class GUIElement implements Drawable{
 	}
 	/**
 	 * Returns the position of the button.
-	 * @return
 	 */
 	@Override
 	public PVector getPosition(){
@@ -94,8 +91,8 @@ public abstract class GUIElement implements Drawable{
 	
 	/**
 	 * Sets the position for the button.
-	 * @param x
-	 * @param y
+	 * @param x  the x position of the element
+	 * @param y  the y position of the element
 	 */
 	@Override
 	public void setPosition(float x, float y){
@@ -105,7 +102,7 @@ public abstract class GUIElement implements Drawable{
 	
 	/**
 	 * Sets the position for the button.
-	 * @param position
+	 * @param position   the position
 	 */
 	@Override
 	public void setPosition(PVector position){
@@ -114,15 +111,13 @@ public abstract class GUIElement implements Drawable{
 	
 	/**
 	 * Returns the visibility of the button.
-	 * @return
 	 */
 	public boolean isVisible(){
 		return this.visible;
 	}
 	
 	/**
-	 * Sets the visibility of the button.
-	 * @param visible
+	 * Sets the visibility of the GUIElement.
 	 */
 	public void setVisibility(boolean visible){
 		this.visible = visible;

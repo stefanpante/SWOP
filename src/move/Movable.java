@@ -18,5 +18,6 @@ public interface Movable {
 	public Square getPosition();
     public int getRange();
     public void resetRange();
-    
+	public boolean justTeleported();
+	public void setJustTeleported(boolean b);
 }

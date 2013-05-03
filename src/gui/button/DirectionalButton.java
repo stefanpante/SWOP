@@ -1,6 +1,5 @@
 package gui.button;
 
-import gui.ObjectronGUI;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;

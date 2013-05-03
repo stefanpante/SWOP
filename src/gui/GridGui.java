@@ -3,7 +3,6 @@ package gui;
 import game.Player;
 import gui.button.DirectionalButton;
 
-import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -14,7 +13,6 @@ import java.util.HashMap;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
-import square.field.ForceField;
 import util.Coordinate;
 import util.OConstants;
 
@@ -262,7 +260,6 @@ public class GridGui extends GUIElement{
 
 	/**
 	 * Changes the player positions.
-	 * @param o
 	 */
 	public void setPlayers(HashMap<Player,Coordinate> players) {
 		this.players.clear();
@@ -282,7 +279,6 @@ public class GridGui extends GUIElement{
 
 	/**
 	 * sets the position of powerFailures
-	 * @param o
 	 */
 	public void setPowerFails(ArrayList<Coordinate> o) {
 		this.powerfail_coors = o;

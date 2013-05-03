@@ -63,6 +63,8 @@ public class Player implements Obstacle, Movable {
 	 * true if the user has moved during his turn
 	 */
 	private boolean moved;
+
+	private boolean justTeleported;
 	
 	/**
 	 * The amount of action a player has during one move
@@ -351,6 +353,7 @@ public class Player implements Obstacle, Movable {
 		position.affect(this);
 		moved = true;
 		decrementActions();
+		this.setJustTeleported(false);
 	}
 	
 	/**
@@ -532,5 +535,13 @@ public class Player implements Obstacle, Movable {
 	public void resetRange() {
 		this.range = 1;
 		
+	}
+
+	public boolean justTeleported() {
+		return justTeleported;
+	}
+
+	public void setJustTeleported(boolean b) {
+		justTeleported = true;
 	}
 }

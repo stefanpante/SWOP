@@ -56,6 +56,7 @@ public class ForceFieldManager implements Observer {
     protected void addForceField(ForceField forceField) throws IllegalArgumentException {
         if(!canHaveAsForceField(forceField))
         	throw new IllegalArgumentException("This force field cannot be added.");
+        
         this.forceFields.add(forceField);
         forceField.bind();
     }
@@ -70,17 +71,21 @@ public class ForceFieldManager implements Observer {
     protected boolean canHaveAsForceField(ForceField forceField) {
         if(forceField == null)
             return false;
-//        if(forceFields.contains(forceField))
-//            return false;
-        for(ForceField f : getAllForceFields()){
-             if(f.equals(forceField)){
-                 System.out.println(forceField +"=/="+ f);
-                 return false;
-             }
-        }
+        if(contains(forceField))
+            return false;
         return true;
     }
-
+    
+    /**
+     * Checks if the forcefield is contained.
+     * 
+     * @param forceField
+     * @return
+     */
+    private boolean contains(ForceField forceField){
+        return forceFields.contains(forceField);
+    }
+    
     /**
      * Returns a new arrayList with the references to the force fields.
      * 

@@ -48,7 +48,6 @@ public class Message extends GUIElement {
 
     /**
      * Returns the label of the message
-     * @return
      */
     public Label getLabel() {
         return this.label;
@@ -56,7 +55,6 @@ public class Message extends GUIElement {
 
     /***
      * Returns the text of the message
-     * @return
      */
     public String getText() {
         return this.text;

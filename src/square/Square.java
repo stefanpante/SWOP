@@ -115,7 +115,7 @@ public class Square implements MovableEffect {
 	};
 
 	public void addField(Field field){
-        fields.add(field);
+		fields.add(field);
 	}
 
 	public void removeField(Field field){

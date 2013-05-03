@@ -517,8 +517,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	public void changePlayer(){
 		try{
-			if(obj  == null){
-			}
 			if(obj.getGame().getCurrentPlayer().getID() == 1){
 				currentPlayerColor = OConstants.PLAYERBLUE;
 			}

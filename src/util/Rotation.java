@@ -64,8 +64,7 @@ public enum Rotation {
 	/**
 	 * Given a direction it will rotate into a new direction.
 	 * 
-	 * @param direction
-	 * @return
+	 * @param direction   the direction
 	 */
 	public abstract Direction rotate(Direction direction);
 	
