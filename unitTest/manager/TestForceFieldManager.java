@@ -27,7 +27,6 @@ public class TestForceFieldManager {
         ArrayList<Coordinate> teleports;
         ArrayList<Coordinate> lightGrenades;
         ArrayList<Coordinate> identityDiscs;
-        ArrayList<Coordinate> forceFieldGen;
 
 
 		walls = new ArrayList<ArrayList<Coordinate>>();
@@ -123,6 +122,27 @@ public class TestForceFieldManager {
         assertEquals(0,  ffm.getAllForceFields().size());
         ffm.update(null,null);
         assertEquals(1, ffm.getAllForceFields().size());
+    }
+
+
+    /**
+     * Two generators are within range.
+     */
+    @Test
+    public void detectionWithWallTest() {
+        Coordinate c1 = new Coordinate(1,0);
+        Coordinate c2 = new Coordinate(3,0);
+
+        ArrayList<Coordinate> forceFieldGen = new ArrayList<Coordinate>();
+        forceFieldGen.add(c1);
+        forceFieldGen.add(c2);
+
+        Grid grid = getGridWith(forceFieldGen);
+        ForceFieldManager ffm = new ForceFieldManager(grid);
+
+        assertEquals(0,  ffm.getAllForceFields().size());
+        ffm.update(null,null);
+        assertEquals(0, ffm.getAllForceFields().size());
     }
 
 
