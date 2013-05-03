@@ -1,6 +1,7 @@
 package command.action;
 
 import game.Game;
+import item.ForceFieldGenerator;
 import item.LightGrenade;
 import move.Movable;
 import square.Direction;
@@ -32,6 +33,7 @@ public class PlayerMoveCommand extends MoveCommand{
     @Override
     protected void afterGameCommand() throws Exception {
         activateLightGrenade();
+        activateForceFieldGenerator();
     }
 
     /**
@@ -51,4 +53,23 @@ public class PlayerMoveCommand extends MoveCommand{
             }
         }
     }
+
+   /**
+     * If the player just dropped a LightGrenade on the square he's moving from it has
+     * to be activated.
+     */
+    private void activateForceFieldGenerator() {
+        if(getStartPosition().getInventory().hasForceFieldGenerator()){
+            ForceFieldGenerator forceFieldGenerator = getStartPosition().getInventory().getForceFieldGenerator();
+
+            try{
+                if(forceFieldGenerator.isDropped()){
+                    forceFieldGenerator.activate();
+                }
+            } catch (Exception exc) {
+                exc.printStackTrace();
+            }
+        }
+    }
+
 }

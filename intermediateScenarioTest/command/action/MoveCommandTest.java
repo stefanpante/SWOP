@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import square.Direction;
 import square.Square;
+import square.power.Power;
 import util.Coordinate;
 
 import java.util.ArrayList;
@@ -231,6 +232,7 @@ public class MoveCommandTest {
         Square expectedSquare = grid.getSquare(new Coordinate(3,0));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
     }
+
     //Case with walls and no teleports, range MAX, NORTH
     @Test
     public void testID8() {

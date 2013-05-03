@@ -32,7 +32,7 @@ abstract class PowerFail extends Power {
 
     @Override
     public void affect(Player player) {
-        player.decrementActions();
+        player.endTurn();
     }
 
     @Override

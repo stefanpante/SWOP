@@ -35,13 +35,11 @@ public class RegularPower extends Power{
 
 	@Override
 	public void affect(Movable movable) {
-		// TODO Auto-generated method stub
-		
-	}
+        // No effect
+    }
 
 	@Override
 	public void affect(IdentityDisc identityDisc) {
-		// TODO Auto-generated method stub
-		
-	}
+        // No effect
+    }
 }
