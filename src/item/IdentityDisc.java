@@ -168,7 +168,6 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	@Override
 	public void resetRange() {
 		this.range = MAX_TRAVEL_DISTANCE;
-		
 	}
 
 	@Override

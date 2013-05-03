@@ -37,7 +37,14 @@ public class IdentityDiscMoveCommand extends MoveCommand {
             throw new IllegalStateException("Cannot throw into given direction.");
             
         }
-        
+    }
+    
+    /**
+     * Performs additional actions after the move to ensure consistency with the domain model.
+     */
+    @Override
+    protected void afterGameCommand() throws Exception {
+        getMovable().resetRange();
     }
 
     }
