@@ -144,7 +144,7 @@ public class MoveHandlerTest {
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
 		
 		if(!(currentPlayer.getPosition().getPower().isFailing()))
-			assertEquals(currentPlayer.getRemainingActions(), 2);
+			assertEquals(currentPlayer.getRemainingActions(), 0);
 	}
 	
 	/**
@@ -270,7 +270,6 @@ public class MoveHandlerTest {
 		
 		// Test the effect of the PowerFailure
 		assertFalse(currentPlayer.equals(game.getCurrentPlayer()));
-		assertEquals(currentPlayer.getRemainingActions(), 3);
 	}
 	
 	/**

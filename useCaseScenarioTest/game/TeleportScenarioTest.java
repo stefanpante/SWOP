@@ -87,7 +87,7 @@ public class TeleportScenarioTest {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
-		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.SOUTH);
 		
 		Coordinate coord = game.getGrid().getCoordinate(game.getCurrentPlayer().getPosition());
 		System.out.println(coord);
@@ -107,7 +107,7 @@ public class TeleportScenarioTest {
 		Item item = new IdentityDisc();
 		squareOne.getInventory().addItem(item);
 		
-		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.SOUTH);
 		// should throw an exception
 		pickUpHandler.pickUp(item);
 	}
@@ -123,7 +123,7 @@ public class TeleportScenarioTest {
 		Item item = new IdentityDisc();
 		squareTwo.getInventory().addItem(item);
 		
-		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.SOUTH);
 		pickUpHandler.pickUp(item);
 		
 		assertTrue(game.getCurrentPlayer().getInventory().hasItem(item));
@@ -134,13 +134,13 @@ public class TeleportScenarioTest {
 	 * Move a player onto a teleporter. Another player is situated on the other teleporter.
 	 * Assert that he is not transported.
 	 */
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = Exception.class)
 	public void testOtherPlayerDestination() throws Exception {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 		
 		game.getNextPlayer().setPosition(squareTwo);
-		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.SOUTH);
 	}
 	
 	/**
@@ -151,9 +151,9 @@ public class TeleportScenarioTest {
 		// clear all powerfailures and obstacles
 		game.getPowerManager().clearPowerFailures();
 				
-		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.SOUTH);
 		assertEquals(game.getCurrentPlayer().getPosition(),squareTwo);
-		moveHandler.move(Direction.NORTH);
+		moveHandler.move(Direction.SOUTH);
 		LightTrail lt = game.getCurrentPlayer().getLightTrail();
 		
 		assertTrue(lt.contains(squareOne));
