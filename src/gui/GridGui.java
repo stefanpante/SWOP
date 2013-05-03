@@ -59,6 +59,8 @@ public class GridGui extends GUIElement{
 	 * the walls to be drawn on the screen
 	 */
 	private ArrayList<SquareGUI> walls_squares;
+	private ArrayList<SquareGUI> forcefields;
+	private ArrayList<SquareGUI> powerfails;
 	/**
 	 * The players to be drawn on the screen
 	 */
@@ -106,6 +108,8 @@ public class GridGui extends GUIElement{
 
 		this.hCells = hCells;
 		this.vCells = vCells;
+		this.forcefields = new ArrayList<SquareGUI>();
+		this.powerfails = new ArrayList<SquareGUI>();
 		this.forcefield_coors = new ArrayList<Coordinate>();
 		this.squares = new HashMap<Coordinate, SquareGUI>();
 		this.players = new ArrayList<SquareGUI>();
@@ -182,7 +186,13 @@ public class GridGui extends GUIElement{
 		for(SquareGUI square : squares.values()){
 			square.draw();
 		}
+		for(SquareGUI ff: forcefields){
+			ff.draw();
+		}
 		
+		for(SquareGUI pf: powerfails){
+			pf.draw();
+		}
 		for(SquareGUI item: items.values()){
 			item.draw();
 		}
@@ -198,6 +208,8 @@ public class GridGui extends GUIElement{
 		for(SquareGUI wall: walls_squares){
 			wall.draw();
 		}
+		
+		
 		
 
 	}
@@ -270,47 +282,34 @@ public class GridGui extends GUIElement{
 	 * @param o
 	 */
 	public void setPowerFails(ArrayList<Coordinate> o) {
-		resetColor();
 		this.powerfail_coors = o;
 		updatePowerFailures();
-		updateForceFields();
-
 	}
 	
 	private void updatePowerFailures(){
+		powerfails.clear();
 		for(Coordinate coor: powerfail_coors){
-			squares.get(coor).setColor(OConstants.POWERFAIL_COLOR);
+			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+			s.setColor(OConstants.POWERFAIL_COLOR);
+			powerfails.add(s);
 		}
 	}
 	
 	public void setForceFields(ArrayList<Coordinate> o){
-		resetColor();
 		this.forcefield_coors = o;
-		updatePowerFailures();
 		updateForceFields();
 	}
 	
 	private void updateForceFields(){
+		forcefields.clear();
 		for(Coordinate coor: forcefield_coors){
-            if(powerfail_coors.contains(coor)){
-				squares.get(coor).setColor(OConstants.POWERFAIL_FORCEFIELD_COLOR);
-			}
-			else{
-				squares.get(coor).setColor(OConstants.FORCEFIELD_COLOR);
-			}
+			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+			s.setColor(OConstants.FORCEFIELD_COLOR);
+			forcefields.add(s);
+			
 		}
 	}
 	
-	
-	private void resetColor(){
-		for(SquareGUI s: squares.values()){
-			s.setColor(OConstants.LIGHTER_GREY);
-		}
-	}
-	
-	
-
-
 
 	/**
 	 * Sets the light trails of the players.
