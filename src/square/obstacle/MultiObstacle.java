@@ -15,7 +15,9 @@ import square.Square;
  */
 public abstract class MultiObstacle extends MultiSquare implements Obstacle {
 
-	
+    /**
+     * Create a new MultiObstacle
+     */
 	public MultiObstacle(){
 		super();
 	}
