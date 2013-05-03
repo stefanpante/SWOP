@@ -5,6 +5,8 @@ import grid.Grid;
 import java.util.*;
 import java.util.Map.Entry;
 
+import manager.ForceFieldManager;
+import manager.PowerManager;
 import notnullcheckweaver.NotNull;
 import square.Direction;
 import square.Square;

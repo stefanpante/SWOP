@@ -1,9 +1,12 @@
-package game;
+package manager;
 
 import static org.junit.Assert.*;
+
+import game.Game;
 import grid.Grid;
 import grid.GridProvider;
 
+import manager.PowerManager;
 import org.junit.Before;
 import org.junit.Test;
 

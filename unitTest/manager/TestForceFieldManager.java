@@ -1,10 +1,9 @@
-package game;
+package manager;
 
 import grid.Grid;
 import grid.GridProvider;
-import grid.RandomGridBuilder;
+import manager.ForceFieldManager;
 import org.junit.*;
-import square.Direction;
 import square.Square;
 import square.field.ForceField;
 import util.Coordinate;
@@ -198,7 +197,7 @@ public class TestForceFieldManager {
     	Coordinate coordTwo = new Coordinate(2,0);
     	
     	manager.update(null, null);
-    	assertEquals( 1, manager.getAllForceFields().size());
+    	assertEquals(1, manager.getAllForceFields().size());
     	
     	Square square = grid.getSquare(coordOne);
     	square.getInventory().addForceFieldGenerator(generator);
