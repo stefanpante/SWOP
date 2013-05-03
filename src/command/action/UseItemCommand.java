@@ -15,12 +15,12 @@ public class UseItemCommand extends ActionCommand {
 	private Item item;
 
     /**
-     * Create a new UseItemCommand
+     * Create a new UseItem Command.
      *
      * @param   game
-     *          The game
+     *          The game.
      * @param   item
-     *          The item
+     *          The item to be used.
      */
 	public UseItemCommand(Game game, Item item) {
 		super(game);

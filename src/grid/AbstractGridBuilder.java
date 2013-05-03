@@ -125,7 +125,6 @@ public abstract class AbstractGridBuilder {
 	
     /**
      * Returns the constraint for the teleports.
-     * @return
      */
 	public GridConstraint getConstraintTeleport() {
 		return constraintTeleport;
@@ -141,7 +140,6 @@ public abstract class AbstractGridBuilder {
 
     /**
      * Returns the constraint for the lightgrenades
-     * @return
      */
 	public GridConstraint getConstraintLightGrenade() {
 		return constraintLightGrenade;
@@ -168,10 +166,17 @@ public abstract class AbstractGridBuilder {
 		this.constraintIdentityDisk = constraintIdentityDisk;
 	}
 	
+	/**
+	 * Returns the constraint for the forcefieldGenerators.
+	 */
 	public GridConstraint getConstraintForceFieldGenerator(){
 		return this.constraintForceFieldGenerator;
 	}
 	
+	/**
+	 * Set the constraint for the forcefieldGenerator
+	 * @param constraintForceFieldGenerator
+	 */
 	public void setConstraintForceFieldGenerator(GridConstraint constraintForceFieldGenerator){
 		this.constraintForceFieldGenerator = constraintForceFieldGenerator;
 	}
@@ -190,8 +195,6 @@ public abstract class AbstractGridBuilder {
 		this.constraintWall = constraintWall;
 	}
 
-	
-	
     /**
      * Sets the maximum horizontal size of the grid ( in squares)
      * @param hSize
@@ -254,10 +257,20 @@ public abstract class AbstractGridBuilder {
 	}
 
 
+	/**
+	 * Returns a random index inside an arrayList
+	 * @param a	the list of which a random index is selected.
+	 */
     protected int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
         return getRandom().nextInt(a.size());
     }
 
+    /**
+     * Selects a number of random coordinates ( in respect to the gridConstraint)
+     * corresponding to Squares on the grid.
+     * @param constraint	the constraint which needs to be satisfied.
+     * @return	An arrayList with coordinates which satisfy the GridConstraint.
+     */
     protected ArrayList<Coordinate> randomLocations(GridConstraint constraint){
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
         ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
@@ -454,7 +467,14 @@ public abstract class AbstractGridBuilder {
 	protected abstract void build() throws IllegalStateException;
 	
 
+	/**
+	 * Return the coordinate for the first player.
+	 */
     public abstract Coordinate getPlayerOneCoordinate();
+    
+    /**
+     * Return the coordinate for the second player.
+     */
     public abstract Coordinate getPlayerTwoCoordinate();
 
 

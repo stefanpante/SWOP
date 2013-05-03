@@ -34,7 +34,7 @@ public class GameHandler extends Handler {
 	private ThrowLaunchableHandler throwLaunchableHandler;
 	
     /**
-     * Used to start a new game.
+     * Used to start a new game with a given number of hCells and vCells.
      */
     public void startNewGame(int hCells, int vCells){
 		try {
@@ -47,9 +47,14 @@ public class GameHandler extends Handler {
 
     }
     
-    public void startNewGame(String filename){
+    /**
+     * Starts a new game with a given filename.
+     * Builds a grid with the given filename as source.
+     * @param filepath	the location of the gridfile
+     */
+    public void startNewGame(String filepath){
     	try{
-    		createGame(filename);
+    		createGame(filepath);
     		initHandlers();
     	}
     	catch(Exception e){
@@ -57,6 +62,9 @@ public class GameHandler extends Handler {
     	}
     }
     
+    /**
+     * Initializes all the used handlers.
+     */
     private void initHandlers(){
     	addPropertyChangeListener(objectronGUI);
     	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);

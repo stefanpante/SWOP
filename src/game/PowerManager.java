@@ -267,7 +267,7 @@ public class PowerManager {
 	 * When resetting a secondary power, we need to move it into
 	 * a new direction.
 	 * 
-	 * Then we need to set it's tertiary power to a new square aswell.
+	 * Then we need to set it's tertiary power to a new square as well.
 	 * 
 	 * @param power
 	 */

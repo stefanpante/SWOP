@@ -47,10 +47,7 @@ public class PickUpCommand extends ActionCommand {
 	 */
 	@Override
 	protected void beforeGameCommand() {
-		if(getGame().getCurrentPlayer().getPosition().getInventory().hasItem(item)){
-			throw new IllegalStateException("Cannot remove an item that isn't in SquareInventory");
-		}
-		
+	
 	}
 
 }

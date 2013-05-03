@@ -29,6 +29,12 @@ public class ThrowLaunchableHandler extends Handler {
 		super(game, listener);
 	}
 	
+	/**
+	 * Start the command to throw an identityDisc.
+	 * @param disc		the disc to be thrown.
+	 * @param direction	the direction in which the disc is thrown.
+	 * @throws Exception
+	 */
 	public void throwLaunchable(IdentityDisc disc, Direction direction) throws Exception {
 		fireChanges();
 		Square startSquare = getGame().getCurrentPlayer().getPosition();

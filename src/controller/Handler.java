@@ -205,6 +205,9 @@ public abstract class Handler {
 
 
 
+	/**
+	 * Returns all the game properties needed to fire propertyChanges.
+	 */
 	protected HashMap<String, Object> getProperties(){
 
 		HashMap<String, Object> properties 			= new HashMap<String, Object>();

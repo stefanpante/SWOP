@@ -16,6 +16,8 @@ import java.util.Observer;
  * create a force field.
  * 
  * Each force field in turn is notified after an action.
+ * 
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class ForceFieldManager implements Observer {
 	
