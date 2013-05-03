@@ -200,7 +200,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		
 
 	public void hcells(String value){
-		System.out.println(value);
 		try{
 			hCells = Integer.parseInt(value);
 			if(hCells < 10){
@@ -233,13 +232,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
 	public void confirm(){
-		// needed to get the values of the
+		// needed to get the width and height of the grid
 		widthGrid.submit();
 		heightGrid.submit();
-		System.out.println();
-		System.out.println("the Grid size" + hCells + " x " + vCells );
-		hideInput();
 		
+		hideInput();
 		setUpGame();
 	}
 
@@ -510,7 +507,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	}
 
 	public void endTurn(){
-		System.out.println("try to end turn");
 		try{
 			obj.getEndTurnHandler().endTurn();
 		}catch(Exception e){
@@ -665,7 +661,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 	public void throwLaunchableItem(IdentityDisc identityDisc,
 			Direction direction) {
 		try{
-			System.out.println(identityDisc == null);
 			obj.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
 		}
 		catch(Exception e){

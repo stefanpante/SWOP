@@ -415,7 +415,7 @@ public class GridGui extends GUIElement{
 				
 				if(it.get(0) instanceof ForceFieldGenerator){
 					ForceFieldGenerator ff = (ForceFieldGenerator) it.get(0);
-					if(ff.isDropped() || ff.isActive()){
+					if(ff.isActive()){
 						continue;
 					}
 				}
