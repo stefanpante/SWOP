@@ -1,4 +1,4 @@
-package game;
+package manager;
 
 import grid.Grid;
 import item.ForceFieldGenerator;
@@ -120,7 +120,7 @@ public class ForceFieldManager implements Observer {
 
         for (Coordinate coordinate : generatorCoordinates) {
             for (Direction direction : Direction.values()) {
-                for (int distance = 0;  distance < MAX_DISTANCE; distance++) {
+                for (int distance = 0;  distance <= MAX_DISTANCE; distance++) {
                     Coordinate coordinateToCheck = coordinate.getCoordinate(direction, distance);
                     
                     if (generatorCoordinates.contains(coordinateToCheck) && !coordinate.equals(coordinateToCheck))
@@ -147,7 +147,7 @@ public class ForceFieldManager implements Observer {
                 return;
             forceField.addSquare(square);
         }
-        
+        System.out.println(forceField);
         try {
         	addForceField(forceField);
         } catch (IllegalArgumentException exc) {
