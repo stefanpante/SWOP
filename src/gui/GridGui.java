@@ -413,7 +413,6 @@ public class GridGui extends GUIElement{
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
                 s.setColor(gui.color(255,0));
 				if(containsTeleport(it)){
-					System.out.println("Coordinate of teleport" + coor);
 					s.setShape(Shapes.teleportItem);
 				}
 				else{
