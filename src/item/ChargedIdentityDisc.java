@@ -45,10 +45,6 @@ public class ChargedIdentityDisc extends IdentityDisc {
 		return super.toString() + "Charged Identity Disc";
 	}
 	
-	public static boolean isChargedIdentityDisc(Object o){
-		return (o instanceof ChargedIdentityDisc);
-	}
-	
 	public boolean isSameType(Item o){
 		return (o instanceof ChargedIdentityDisc);
 	}

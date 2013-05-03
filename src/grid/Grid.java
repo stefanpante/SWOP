@@ -207,9 +207,9 @@ public class Grid {
 	 * 			| coordinate.getY() < this.getVSize()
 	 */
 	private boolean canHaveAsCoordinate(Coordinate coordinate) {
-		if(coordinate == null){
-			return false;
-		}
+		if(coordinate == null) {
+            return false;
+        }
 		if(coordinate.getX() >= this.getHSize()){
 			return false;
 		}
@@ -354,7 +354,7 @@ public class Grid {
 		for(Coordinate coordinate : coordinates){
 			try {
 				squares.add(getSquare(coordinate));
-			} catch (NoSuchElementException e) {
+			} catch (NoSuchElementException ignored) {
 				
 			}
 		}
@@ -474,12 +474,8 @@ public class Grid {
 	 */
 	public boolean hasNeighbor(Square fromSquare, Direction via, Square toSquare) {
 		Square neighbor = getNeighbor(fromSquare, via);
-		if(neighbor == null)
-			return false;
-		if(neighbor.equals(toSquare))
-			return true;
-		return false;
-	}
+        return neighbor != null && neighbor.equals(toSquare);
+    }
 	
 	/**
 	 * Checks whether from the given fromSquare it is possible to move to a
@@ -535,7 +531,7 @@ public class Grid {
 			throw new NoSuchElementException("The " + square + " is not a part of this " + this);
 		}
 		HashMap<Direction, Square> result = new HashMap<Direction, Square>();
-		Square neighbor = null;
+		Square neighbor;
 		for(Direction dir: Direction.values()){
 			try{
 				neighbor = getNeighbor(square, dir);
@@ -585,7 +581,7 @@ public class Grid {
 	
 	/**
 	 * Sets the start position of the first player
-	 * @param playerone
+	 * @param playerone  the startSquare for the first player
 	 */
 	public void setStartPlayerOne(Square playerone){
 		if(!isValidStartPosition(playerone)){
@@ -596,7 +592,7 @@ public class Grid {
 	
 	/**
 	 * Sets the start position of the second player
-	 * @param playerTwo
+	 * @param playerTwo the startsquare for the second player
 	 */
 	public void setStartPlayerTwo(Square playerTwo){
 		if(!isValidStartPosition(playerTwo)){
@@ -607,8 +603,7 @@ public class Grid {
 	
 	/**
 	 * Checks if the given square is a valid start position for the player
-	 * @param player
-	 * @return
+	 * @param player   The square which needs to be checked
 	 */
 	public boolean isValidStartPosition(Square player){
 		return (grid.containsValue(player) && !player.isObstructed());
