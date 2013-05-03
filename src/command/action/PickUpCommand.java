@@ -47,7 +47,7 @@ public class PickUpCommand extends ActionCommand {
 	 */
 	@Override
 	protected void beforeGameCommand() {
-	
+		
 	}
 
 }
