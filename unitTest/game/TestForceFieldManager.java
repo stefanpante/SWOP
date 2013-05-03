@@ -135,13 +135,34 @@ public class TestForceFieldManager {
     	Square square = grid.getSquare(new Coordinate(2,2));
     	square.getInventory().addForceFieldGenerator(generator);
     	
-    	Square squareTwo = grid.getSquare(new Coordinate(2,3));
+    	Square squareTwo = grid.getSquare(new Coordinate(2,4));
     	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
     	
     	System.out.println(grid.getAllCoordinates().size());
     	
     	manager.update(null, null);
     	assertEquals(2, manager.getAllForceFields().size());
+    }
+    
+    @Test
+    public void placeNewForceField() {
+    	ForceFieldGenerator generator = new ForceFieldGenerator();
+    	ForceFieldGenerator generatorTwo = new ForceFieldGenerator();
+    	
+    	Coordinate coordOne = new Coordinate(2,2);
+    	Coordinate coordTwo = new Coordinate(2,4);
+    	
+    	manager.update(null, null);
+    	assertEquals(manager.getAllForceFields().size(), 1);
+    	
+    	Square square = grid.getSquare(coordOne);
+    	square.getInventory().addForceFieldGenerator(generator);
+    	
+    	Square squareTwo = grid.getSquare(coordTwo);
+    	squareTwo.getInventory().addForceFieldGenerator(generatorTwo);
+    	
+    	manager.createForceFieldBetween(coordOne, coordTwo);
+    	assertEquals(manager.getAllForceFields().size(), 2);
     }
     
     @Test
