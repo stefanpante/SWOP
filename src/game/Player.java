@@ -346,6 +346,7 @@ public class Player implements Obstacle, Movable {
 	public void move(Square position) throws IllegalStateException{
 		lightTrail.setHead(getPosition());
 		setPosition(position);
+		position.affect(this);
 		moved = true;
 		decrementActions();
 	}

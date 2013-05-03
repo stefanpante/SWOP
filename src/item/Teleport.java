@@ -150,7 +150,8 @@ public class Teleport extends Item {
 
     @Override
     public void affect(IdentityDisc identityDisc) {
-    	identityDisc.move(getDestination());
+    	identityDisc.decreaseRange();
+    	identityDisc.setPosition(getDestination());
     }
 
 }

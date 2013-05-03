@@ -6,6 +6,7 @@ import game.Game;
 import game.Player;
 import item.ChargedIdentityDisc;
 import item.IdentityDisc;
+import item.Item;
 import item.Teleport;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -282,20 +283,34 @@ public class MoveCommandTest {
         Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
         assertTrue(t0.getDestination().equals(grid.getSquare(teleports.get(1))));
         assertTrue(t1.getDestination().equals(grid.getSquare(teleports.get(0))));
+        
+        System.out.println("Teleport0 location: " + teleports.get(0));
+        System.out.println("Teleport1 location: " + teleports.get(1));
 
         IdentityDisc id = new IdentityDisc();
         Coordinate co2_5 = new Coordinate(2,5);
         Square startSquare = grid.getSquare(co2_5);
         startSquare.getInventory().addItem(id);
-        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.WEST);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.NORTH);
         try {
             m.execute();
         } catch (Exception e) {
             e.printStackTrace();
             fail("Move Command shouldn't throw an exception");
         }
+        System.out.println("Actual location on grid" +getLocationID(grid, id));
+        System.out.println("Expected location on grid" + new Coordinate(4,3));
         Square expectedSquare = grid.getSquare(new Coordinate(4,3));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
+    
+    public Coordinate getLocationID(Grid grid, Item item){
+    	for(Square s: grid.getAllSquares()){
+    		if(s.getInventory().hasItem(item))
+    			return grid.getCoordinate(s);
+    	}
+    	
+    	return null;
     }
 
     //Normal case no walls no teleports, player move NORTH

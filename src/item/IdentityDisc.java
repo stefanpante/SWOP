@@ -29,6 +29,11 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	 */
 
     private int range;
+    
+    /**
+     * The position of the movable.
+     */
+    private Square position;
 
     public IdentityDisc() {
         this(MAX_TRAVEL_DISTANCE);
@@ -71,9 +76,6 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
         return (range >= 0);
     }
 
-
-
-    //TODO: Moet dit niet abstract zijn? Als er nieuwe launchable items bijkomen
     /**
      * Check whether the given travelDirection is a valid travelDirection
      * 	for all the Launchable objects.
@@ -160,11 +162,25 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	public void move(Square square) throws IllegalStateException {
 		this.getInventory().removeItem(this);
 		square.getInventory().addItem(this);
+		this.position = square;
+		square.affect(this);
+		
+	}
+	
+	public void setPosition(Square square){
+		this.getInventory().removeItem(this);
+		square.getInventory().addItem(this);
+		this.position = square;
 	}
 
 	@Override
 	public void resetRange() {
 		this.range = MAX_TRAVEL_DISTANCE;
 		
+	}
+
+	@Override
+	public Square getPosition() {
+		return position;
 	}
 }

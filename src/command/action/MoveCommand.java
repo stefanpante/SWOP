@@ -122,7 +122,7 @@ public class MoveCommand extends ActionCommand {
 				if(!currentSquare.isObstructed()){
 					movable.move(currentSquare);
 					setPrevPosition(getCurrentPosition());
-					setCurrentPosition(currentSquare);
+					setCurrentPosition(movable.getPosition());
 				}
 				else{
 					return;

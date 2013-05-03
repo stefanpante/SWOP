@@ -24,28 +24,28 @@ import java.util.ArrayList;
  */
 @NotNull
 public class Square implements MovableEffect {
-		
+
 	/**
 	 *  Contains all items which were used on this square.
 	 */
 	private SquareInventory inventory;
-	
+
 	/**
 	 * State of the current square. May be a power failure.
 	 */
 	private Power power;
-	
+
 	/**
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
 	private Obstacle obstacle;
 
-    /**
-     * The fields of this Square.
-     */
-    ArrayList<Field> fields = new ArrayList<Field>();
-	
+	/**
+	 * The fields of this Square.
+	 */
+	ArrayList<Field> fields = new ArrayList<Field>();
+
 	/**
 	 * Zero argument constructor for a square.
 	 */
@@ -53,14 +53,14 @@ public class Square implements MovableEffect {
 		this.inventory = new SquareInventory();
 		this.setPower(new RegularPower());
 	}
-	
+
 	/**
 	 * Returns the state of the square.
 	 */
 	public Power getPower() {
 		return this.power;
 	}
-	
+
 	/**
 	 * Sets the power of a square.
 	 * @param power
@@ -68,7 +68,7 @@ public class Square implements MovableEffect {
 	public void setPower(Power power) {
 		this.power = power;
 	}
-	
+
 	/**
 	 * In order for a state to be valid it must not be null.
 	 * 
@@ -83,7 +83,7 @@ public class Square implements MovableEffect {
 			return true;
 	}
 
-	
+
 	/**
 	 * Return the inventory of used items on this Square
 	 * @return	the inventory of used items on this Square
@@ -91,7 +91,7 @@ public class Square implements MovableEffect {
 	public SquareInventory getInventory() {
 		return inventory;
 	}
-	
+
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
 	 *
@@ -114,18 +114,18 @@ public class Square implements MovableEffect {
 		this.obstacle = obstacle;
 	};
 
-    public void addField(Field field){
-        fields.add(field);
-    }
+	public void addField(Field field){
+		fields.add(field);
+	}
 
-    public void removeField(Field field){
-        fields.remove(field);
-    }
+	public void removeField(Field field){
+		fields.remove(field);
+	}
 
-    public ArrayList<Field> getAllFields(){
-        return new ArrayList<Field>(this.fields);
-    }
-	
+	public ArrayList<Field> getAllFields(){
+		return new ArrayList<Field>(this.fields);
+	}
+
 	@Override
 	public String toString() {
 		String s = "Square [ ";
@@ -134,7 +134,7 @@ public class Square implements MovableEffect {
 		s += " ]";
 		return s;
 	}
-	
+
 	/**
 	 * Returns whether this square is obstructed by an obstacle or not.
 	 * 
@@ -142,28 +142,29 @@ public class Square implements MovableEffect {
 	 * 			False	If there is no obstacle.
 	 */
 	public boolean isObstructed(){
-			return obstacle != null;
+		return obstacle != null;
 	}
 
-    public boolean isCoveredByField(){
-        return getAllFields().size() > 0;
-    }
+	public boolean isCoveredByField(){
+		return getAllFields().size() > 0;
+	}
 
-    @Override
-    public void affect(Movable movable) {
-        getInventory().affect(movable);
-        getPower().affect(movable);
-    }
+	@Override
+	public void affect(Movable movable) {
+		getInventory().affect(movable);
+		getPower().affect(movable);
+	}
 
-    @Override
-    public void affect(Player player) {
-        // Double dispatch is called on the lower level
-    }
+	@Override
+	public void affect(Player player) {
+		// Double dispatch is called on the lower level
+	}
 
-    @Override
-    public void affect(IdentityDisc identityDisc) {
-        // Double dispatch is called on the lower level
-    }
+	@Override
+	public void affect(IdentityDisc identityDisc) {
+		getInventory().affect(identityDisc);
+		getPower().affect(identityDisc);
+	}
 
 
 }
