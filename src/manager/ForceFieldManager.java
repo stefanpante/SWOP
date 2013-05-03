@@ -133,14 +133,12 @@ public class ForceFieldManager implements Observer {
     protected void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
-        
         for (Coordinate c : coordinates) {
             Square square = grid.getSquare(c);
             if(square.isCoveredByObstacle() && square.getObstacle().preventsField())
                 return;
             forceField.addSquare(square);
         }
-        System.out.println(forceField);
         try {
         	addForceField(forceField);
         } catch (IllegalArgumentException exc) {
