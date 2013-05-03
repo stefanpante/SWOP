@@ -1,9 +1,5 @@
 package square.field;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import item.ForceFieldGenerator;
 import square.Square;
 
 /**
@@ -34,7 +30,6 @@ public class ForceField extends Field {
      */
     private int remainingActions = ACTIONS_ON;
 
-
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
         super.addSquare(square);
@@ -51,7 +46,6 @@ public class ForceField extends Field {
 		
 		return super.isValidSquare(square);
 	}
-
 	
 	/**
 	 * Turns the force field off.
@@ -59,9 +53,6 @@ public class ForceField extends Field {
 	private void turnOff(){
         setActive(false);
 		this.remainingActions = ACTIONS_ON;
-		
-		for(Square square: getSquares())
-			square.getAllFields().remove(square);
 	}
 	
 	/**
@@ -70,11 +61,13 @@ public class ForceField extends Field {
 	private void turnOn(){
 		setActive(true);
 		this.remainingActions = ACTIONS_OFF;
-
-		for (Square square: getSquares())
-			square.addField(this);
 	}
 	
+	/**
+	 * Decreases the action of the ForceField,
+	 * if there are no remaining actions the state of the field
+	 * is changed to active or inactive.
+	 */
 	public void decreaseActions() {
 		this.remainingActions--;
 		

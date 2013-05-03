@@ -102,6 +102,8 @@ public class MoveCommand extends ActionCommand {
 		//NOOP
 	}
 
+
+
 	@Override
 	protected void duringGameCommand() throws Exception {
 		move();
@@ -111,6 +113,18 @@ public class MoveCommand extends ActionCommand {
 	protected void afterGameCommand() throws Exception {
 		//NOOP
 	}
+
+	@Override
+	protected void beforeActionCommand(){
+		if(!getGame().isActive())
+			throw new IllegalStateException("The game is over.");
+		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
+			throw new IllegalStateException("The current player has no remaining action left.");
+		if(getGame().isCurrentPlayerStuck())
+			throw new IllegalStateException("The current player is stuck.");
+	}
+
+
 	public void move(){
 		setCurrentPosition(getStartPosition());
 		int currentRange = 0;
@@ -127,7 +141,7 @@ public class MoveCommand extends ActionCommand {
 				else{
 					return;
 				}
-				
+
 			} catch (NoSuchElementException e) {
 				return;
 			}  catch (IllegalArgumentException e){

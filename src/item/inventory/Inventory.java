@@ -232,8 +232,9 @@ public abstract class Inventory implements MovableEffect {
 
     @Override
     public void affect(Player player) {
-        // Nothing to do here
-    }
+        for(Item item : getAllItems()){
+            item.affect(player);
+        }    }
 
     @Override
     public void affect(IdentityDisc identityDisc) {

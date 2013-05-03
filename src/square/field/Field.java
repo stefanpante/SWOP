@@ -7,8 +7,6 @@ import move.MovableEffect;
 import square.MultiSquare;
 import square.Square;
 
-import java.util.ArrayList;
-
 /**
  * A field is a collection of several squares,
  * with an effect on moveables.
@@ -28,7 +26,7 @@ public abstract class Field extends MultiSquare implements MovableEffect {
     public boolean isActive() {
         return this.active;
     }
-
+    
     /**
      * Activate of deactivate the given ForceField
      *
@@ -37,14 +35,13 @@ public abstract class Field extends MultiSquare implements MovableEffect {
      */
     public void setActive(boolean active){
         for (Square square: getSquares()){
-            if(active){
+            if (active)
                 square.addField(this);
-            }else{
+            else
                 square.removeField(this);
-            }
         }
+        
         this.active = active;
-
     }
 
     @Override

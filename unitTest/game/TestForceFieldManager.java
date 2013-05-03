@@ -229,12 +229,7 @@ public class TestForceFieldManager {
     	assertTrue(forceField.isActive());
     	
     	manager.update(null, null);
-    	assertTrue(forceField.isActive());
-    	
-    	manager.update(null, null);
     	assertFalse(forceField.isActive());
-    	
     }
-    
 
 }
