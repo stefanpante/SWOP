@@ -141,6 +141,8 @@ public class ForceFieldManager implements Observer {
         
         for (Coordinate c : coordinates) {
             Square square = grid.getSquare(c);
+            if(square.isCoveredByObstacle())
+                return;
             forceField.addSquare(square);
         }
         

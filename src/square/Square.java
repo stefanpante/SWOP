@@ -143,11 +143,15 @@ public class Square implements MovableEffect {
 	 * 			False	If there is no obstacle.
 	 */
 	public boolean isObstructed(){
-			return obstacle != null || isCoveredByField();
+			return isCoveredByObstacle() || isCoveredByField();
 	}
 
     public boolean isCoveredByField(){
         return getAllFields().size() > 0;
+    }
+
+    public boolean isCoveredByObstacle(){
+        return obstacle != null;
     }
 
     @Override
