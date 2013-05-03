@@ -3,6 +3,7 @@ package gui;
 import game.Player;
 import gui.button.DirectionalButton;
 
+import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import processing.core.PApplet;
 import processing.core.PVector;
 import square.Direction;
+import square.field.ForceField;
 import util.Coordinate;
 import util.OConstants;
 
@@ -407,6 +409,13 @@ public class GridGui extends GUIElement{
 				if(it.get(0) instanceof LightGrenade){
 					LightGrenade lg = (LightGrenade) it.get(0);
 					if(lg.isActive()|| lg.isDropped() || lg.isWornOut()){
+						continue;
+					}
+				}
+				
+				if(it.get(0) instanceof ForceFieldGenerator){
+					ForceFieldGenerator ff = (ForceFieldGenerator) it.get(0);
+					if(ff.isDropped() || ff.isActive()){
 						continue;
 					}
 				}

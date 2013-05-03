@@ -2,6 +2,7 @@ package gui;
 
 import gui.button.ItemButton;
 import item.ChargedIdentityDisc;
+import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
@@ -73,6 +74,13 @@ public class Inventory extends GUIElement{
 			if(item instanceof LightGrenade){
 				LightGrenade lg = (LightGrenade) item;
 				if(lg.isActive() || lg.isDropped() || lg.isWornOut()){
+					continue;
+				}
+			}
+			
+			if(item instanceof ForceFieldGenerator){
+				ForceFieldGenerator ff = (ForceFieldGenerator) item;
+				if(ff.isDropped() || ff.isActive()){
 					continue;
 				}
 			}
