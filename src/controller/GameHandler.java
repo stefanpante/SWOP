@@ -76,7 +76,7 @@ public class GameHandler extends Handler {
         try {
             turnHandler.startTurn();
         } catch (Exception e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         this.populateGui();
     }
@@ -143,8 +143,8 @@ public class GameHandler extends Handler {
     }
     
 	/**
-	 * @param hSize
-	 * @param vSize
+	 * @param hSize the hSize of the grid on which the game is played
+	 * @param vSize the vSize of the grid on which the game is played
 	 */
 	public void createGame(int hSize, int vSize) {
 		RandomGridBuilder builder = new RandomGridBuilder(hSize, vSize);

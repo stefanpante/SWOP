@@ -49,10 +49,8 @@ public class EndTurnHandler extends Handler {
 	 * 			false otherwise.
 	 */
 	public boolean checkToProceed(){
-		if(getGame().getCurrentPlayer().getRemainingActions() > 0)
-			return true;
-		return false;
-	}
+        return getGame().getCurrentPlayer().getRemainingActions() > 0;
+    }
 
 	/**
 	 * Check to see if the player hasMoved before ending the turn.

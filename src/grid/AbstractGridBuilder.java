@@ -132,7 +132,7 @@ public abstract class AbstractGridBuilder {
 
     /**
      * sets the constraints for the teleport
-     * @param constraintTeleport
+     * @param constraintTeleport the GridConstraint for teleports.
      */
 	public void setConstraintTeleport(GridConstraint constraintTeleport) {
 		this.constraintTeleport = constraintTeleport;
@@ -175,7 +175,7 @@ public abstract class AbstractGridBuilder {
 	
 	/**
 	 * Set the constraint for the forcefieldGenerator
-	 * @param constraintForceFieldGenerator
+	 * @param constraintForceFieldGenerator the gridConstraint for forcefieldgenerators.
 	 */
 	public void setConstraintForceFieldGenerator(GridConstraint constraintForceFieldGenerator){
 		this.constraintForceFieldGenerator = constraintForceFieldGenerator;
@@ -197,7 +197,7 @@ public abstract class AbstractGridBuilder {
 
     /**
      * Sets the maximum horizontal size of the grid ( in squares)
-     * @param hSize
+     * @param hSize the horizontal size of the grid.
      */
 	public void setHSize(int hSize){
 		if(!isValidHSize(hSize)){
@@ -208,7 +208,7 @@ public abstract class AbstractGridBuilder {
 
     /**
      * sets the maximum vertical size of the grid ( in squares)
-     * @param vSize
+     * @param vSize the vertical size of the grid.
      */
 	public void setVSize(int vSize){
 		if(!isValidVSize(vSize)){
@@ -220,7 +220,7 @@ public abstract class AbstractGridBuilder {
 
     /**
      * Checks  whether the vertical size of the grid is valid
-     * @param vSize2
+     * @param vSize2  the vertical size of the grid.
      */
 	public boolean isValidVSize(int vSize2) {
 		return (vSize2 >= 0);
@@ -228,7 +228,7 @@ public abstract class AbstractGridBuilder {
 
     /**
      * Checks whether the horizontal size of the grid is valid
-     * @param hSize
+     * @param hSize the horizontal size of the grid.
      */
 	public boolean isValidHSize(int hSize){
 		return (hSize >= 0);

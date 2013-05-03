@@ -42,7 +42,7 @@ public class TurnHandler extends Handler implements Observer {
             try {
                 endTurn(false);
             } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
 	}
@@ -79,9 +79,8 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn() throws Exception {
-		Player currentPlayer = getGame().getCurrentPlayer();
-		
-		if(hasLost()){
+
+        if(hasLost()){
 			getGame().end();
     		firePropertyChange(Handler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
 		}

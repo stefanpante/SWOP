@@ -1,19 +1,10 @@
 package controller;
 
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-
-import move.Movable;
-
 import command.AbstractGameCommand;
-import command.action.MoveCommand;
 import command.action.PlayerMoveCommand;
-
-
 import square.Direction;
 import square.Square;
-import util.Coordinate;
 import game.Game;
 import game.Player;
 

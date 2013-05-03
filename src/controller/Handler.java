@@ -120,7 +120,7 @@ public abstract class Handler {
 	/**
 	 * Get a list of all coordinates which have a LightTrail with their associated Player.
 	 * 
-	 * @return	ArrayList<Player, ArrayList<Coordinate>> List of coordinates which have a LightTrail.
+	 * @return	HashMap with coordinates of lightTrails per player List of coordinates which have a LightTrail.
 	 */
 	public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
 		HashMap<Player, LightTrail> map = new HashMap<Player, LightTrail>();
@@ -178,7 +178,7 @@ public abstract class Handler {
 	/**
 	 * Sets the game. This normally done in constructor.
 	 * 
-	 * @param game
+	 * @param game the game which the nadlers use.
 	 */
 	protected void setGame(Game game) {
 		this.game = game;
@@ -228,9 +228,9 @@ public abstract class Handler {
 			if(square.getPower().isFailing())
 				powerFailures.add(coordinate);
 
-			boolean player_position = false;
+			boolean player_position;
 
-			if (square.isObstructed()) {
+            if (square.isObstructed()) {
 				player_position = false;
 
 				for (Player player: getGame().getPlayers()) {
@@ -277,12 +277,9 @@ public abstract class Handler {
 		Player nextPlayer = getGame().getNextPlayer();
 		Player currentPlayer = getGame().getCurrentPlayer();
 
-		if(nextPlayer.getStartPosition().equals(currentPlayer.getPosition())){
-			return true;
-		}
+        return nextPlayer.getStartPosition().equals(currentPlayer.getPosition());
 
-		return false;
-	}
+    }
 
 	/**
 	 * Check if the current player is stuck, if he is stuck, he will lose the game.

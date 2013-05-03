@@ -105,12 +105,10 @@ public class Player implements Obstacle, Movable {
 		if(square == null){
 			return false;
         }
-		
-		if(square.isObstructed())
-			return false;
-		
-		return true;
-	}
+
+        return !square.isObstructed();
+
+    }
 	
 	/**
 	 * A move is valid when the destination square is not null
@@ -157,7 +155,7 @@ public class Player implements Obstacle, Movable {
 	 * An item is valid if the item is not null and if the inventory can
 	 * have the item.
 	 * 
-	 * @param	item
+	 * @param	item    the item to be checked
 	 * @return	True	If item is not null and if the inventory can have the item.
 	 * 					The square must also hold the item.
 	 * 			False	If the item is null or if the inventory cannot have the item.
@@ -166,10 +164,8 @@ public class Player implements Obstacle, Movable {
 	public boolean isValidPickUp(Item item) {
 		if(item == null)
 			return false;
-		if(!inventory.canHaveAsItem(item))
-			return false;
-		return true;
-	}
+        return inventory.canHaveAsItem(item);
+    }
 	
 	/**
 	 * A new position square is valid when it is not null and
@@ -207,7 +203,6 @@ public class Player implements Obstacle, Movable {
 	/**
 	 * Returns whether the current player has already moved 
 	 * 	since the last call of endTurn()
-	 * @return
 	 */
 	public boolean hasMoved(){
 		return moved;
@@ -426,7 +421,7 @@ public class Player implements Obstacle, Movable {
 	/**
 	 * Adds the item to the player's inventory.
 	 * 
-	 * @param	item
+	 * @param	item  the item to be picked up.
 	 * @throws	IllegalArgumentException
 	 * 			Thrown when adding the item would exceed the size of the inventory
 	 */
