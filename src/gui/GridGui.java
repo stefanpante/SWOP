@@ -290,9 +290,9 @@ public class GridGui extends GUIElement{
 		updateForceFields();
 	}
 	
-	public void updateForceFields(){
+	private void updateForceFields(){
 		for(Coordinate coor: forcefield_coors){
-			if(powerfail_coors.contains(coor)){
+            if(powerfail_coors.contains(coor)){
 				squares.get(coor).setColor(OConstants.POWERFAIL_FORCEFIELD_COLOR);
 			}
 			else{
