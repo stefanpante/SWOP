@@ -95,15 +95,15 @@ public abstract class MultiSquare {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+
 
         MultiSquare that = (MultiSquare) o;
 
-        if(!(squares.size() == that.squares.size()))
+        if(getSquares().size() != that.getSquares().size())
             return false;
-        for(Square square : squares){
-            if(!that.squares.contains(square))
+
+        for(Square square : getSquares()){
+            if(!that.getSquares().contains(square))
                 return false;
         }
         return true;
@@ -114,4 +114,13 @@ public abstract class MultiSquare {
         return squares.hashCode();
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for(Square square: getSquares()){
+            s += "("+square.hashCode()+")";
+        }
+
+        return s;
+    }
 }

@@ -30,12 +30,13 @@ public class ForceField extends Field {
      */
     private int remainingActions = ACTIONS_ON;
 
-	@Override
-	public void addSquare(Square square) throws IllegalArgumentException {
-        super.addSquare(square);
-        square.addField(this);
-	}
-	
+
+    public void bind(){
+        for(Square square : getSquares()){
+            square.addField(this);
+        }
+    }
+
 	/**
 	 * Force field cannot extend its maximum length.
 	 */
