@@ -51,7 +51,7 @@ public class ForceFieldManager implements Observer {
      * @throws	IllegalArgumentException
      * 			Throws an exception if the force field is already contained.
      */
-    private void addForceField(ForceField forceField) throws IllegalArgumentException {
+    protected void addForceField(ForceField forceField) throws IllegalArgumentException {
         if(!canHaveAsForceField(forceField))
         	throw new IllegalArgumentException("This force field cannot be added.");
         
@@ -109,11 +109,11 @@ public class ForceFieldManager implements Observer {
     protected void detectForceFields(){   
         ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
         
-        for (Coordinate coordinate: grid.getAllCoordinates()) {
-            Square square = grid.getSquare(coordinate);
-            
-            if (square.getInventory().containsSameType(new ForceFieldGenerator()))
-                generatorCoordinates.add(coordinate);
+        for (Square square: grid.getAllSquares()) {
+            if (square.getInventory().containsSameType(new ForceFieldGenerator())) {
+            	Coordinate coordinate = grid.getCoordinate(square);
+            	generatorCoordinates.add(coordinate);
+            } 
         }
 
         for (Coordinate coordinate : generatorCoordinates) {
@@ -141,13 +141,15 @@ public class ForceFieldManager implements Observer {
         
         for (Coordinate c : coordinates) {
             Square square = grid.getSquare(c);
+            if(square.isCoveredByObstacle())
+                return;
             forceField.addSquare(square);
         }
         
         try {
         	addForceField(forceField);
         } catch (IllegalArgumentException exc) {
-        	// Already contained
+            // Already exists
         }
     }
 

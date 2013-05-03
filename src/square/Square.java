@@ -139,14 +139,19 @@ public class Square implements MovableEffect {
 	 * Returns whether this square is obstructed by an obstacle or not.
 	 * 
 	 * @return	True	if there is an obstacle which is not null.
+     *          True    if there is a field
 	 * 			False	If there is no obstacle.
 	 */
 	public boolean isObstructed(){
-		return obstacle != null;
+	return isCoveredByObstacle() || isCoveredByField();
 	}
-
+	
 	public boolean isCoveredByField(){
 		return getAllFields().size() > 0;
+	}
+	
+	public boolean isCoveredByObstacle(){
+		return obstacle != null;
 	}
 
 	@Override
@@ -165,6 +170,4 @@ public class Square implements MovableEffect {
 		getInventory().affect(identityDisc);
 		getPower().affect(identityDisc);
 	}
-
-
 }

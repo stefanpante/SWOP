@@ -290,9 +290,9 @@ public class GridGui extends GUIElement{
 		updateForceFields();
 	}
 	
-	public void updateForceFields(){
+	private void updateForceFields(){
 		for(Coordinate coor: forcefield_coors){
-			if(powerfail_coors.contains(coor)){
+            if(powerfail_coors.contains(coor)){
 				squares.get(coor).setColor(OConstants.POWERFAIL_FORCEFIELD_COLOR);
 			}
 			else{
@@ -406,11 +406,13 @@ public class GridGui extends GUIElement{
 			if(it.size() == 1){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.getShape(it.get(0)));
+                s.setColor(gui.color(0,0));
 				items.put(coor, s);
 			}
 			
 			if(it.size() >= 2){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+                s.setColor(gui.color(0,0));
 				if(containsTeleport(it)){
 					s.setShape(Shapes.teleportItem);
 				}
