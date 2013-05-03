@@ -183,7 +183,6 @@ public class MoveCommandTest {
         MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.EAST);
         try {
             m.execute();
-            System.out.println(grid.getCoordinate(m.getCurrentPosition()));
         } catch (Exception e) {
             e.printStackTrace();
             fail("Move Command shouldn't throw an exception");
@@ -283,9 +282,6 @@ public class MoveCommandTest {
         Teleport t1 = grid.getSquare(teleports.get(1)).getInventory().getTeleport();
         assertTrue(t0.getDestination().equals(grid.getSquare(teleports.get(1))));
         assertTrue(t1.getDestination().equals(grid.getSquare(teleports.get(0))));
-        
-        System.out.println("Teleport0 location: " + teleports.get(0));
-        System.out.println("Teleport1 location: " + teleports.get(1));
 
         IdentityDisc id = new IdentityDisc();
         Coordinate co2_5 = new Coordinate(2,5);
@@ -298,8 +294,6 @@ public class MoveCommandTest {
             e.printStackTrace();
             fail("Move Command shouldn't throw an exception");
         }
-        System.out.println("Actual location on grid" +getLocationID(grid, id));
-        System.out.println("Expected location on grid" + new Coordinate(4,3));
         Square expectedSquare = grid.getSquare(new Coordinate(4,3));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
     }
@@ -368,5 +362,25 @@ public class MoveCommandTest {
     		
     	}
         assertEquals(player,grid.getSquare(new Coordinate(1,9)).getObstacle());
+    }
+
+    // teleports, player move NORTH
+    @Test
+    public void testPlayer4(){
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
+        Game g = new Game(grid);
+        Coordinate co2_5 = new Coordinate(2,5);
+        Square startSquare = grid.getSquare(co2_5);
+        Player player = g.getCurrentPlayer();
+        MoveCommand m = new PlayerMoveCommand(g,player,startSquare, Direction.NORTH);
+        try {
+            m.execute();
+            System.out.println(grid.getCoordinate(m.getCurrentPosition()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+
+        }
+        assertEquals(player,grid.getSquare(new Coordinate(4,4)).getObstacle());
     }
 }
