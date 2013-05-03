@@ -89,7 +89,9 @@ public class TurnHandler extends Handler implements Observer {
 		increaseCurrentPlayerCount();
 		getGame().getPowerManager().powerFailSquares();
 
-		
+		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
+            getGame().getCurrentPlayer().decrementActions();
+        }
 		if(!getGame().getCurrentPlayer().hasRemainingActions())
 			endTurn(true);
 	}
