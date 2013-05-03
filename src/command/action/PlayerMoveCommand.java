@@ -25,7 +25,7 @@ public class PlayerMoveCommand extends MoveCommand{
     @Override
     protected void beforeGameCommand() {
 		/* Check whether it's possible to move in the given direction */
-        if(!getGame().getGrid().canMoveTo(getGame().getCurrentPlayer().getPosition(), getDirection())){
+        if(!getGame().getGrid().canMoveTo(getStartPosition(), getDirection())){
             throw new IllegalStateException("Cannot move to given direction.");
         }
     }
