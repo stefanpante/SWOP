@@ -222,6 +222,13 @@ public class Coordinate {
         return null;
     }
 
+    /**
+     * Returns a list with coordinates between this coordinate and the given coordinate.
+     *
+     * @param   coordinate
+     *          The last coordinate of the set.
+     * @return  A list with coordinates between this coordinate and the given coordinate
+     */
     public ArrayList<Coordinate> getCoordinatesTo(Coordinate coordinate){
         Direction direction = directionTo(coordinate);
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
@@ -237,7 +244,14 @@ public class Coordinate {
     }
 
 
-
+    /**
+     * Determine the main direction in which the given coordinate lies seen from
+     * this coordinate.
+     *
+     * @param   coordinate
+     *          The coordinate for which the direction is returned
+     * @return  The main direction in which the given coordinate lies
+     */
     public Direction directionTo(Coordinate coordinate){
         if(equals(coordinate))
             throw  new IllegalArgumentException("The given squares are the same.");
@@ -271,8 +285,6 @@ public class Coordinate {
             }
         }
         throw new IllegalArgumentException("The given squares do not lie on a main direction");
-
     }
-
 
 }

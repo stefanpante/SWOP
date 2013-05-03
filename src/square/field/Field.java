@@ -14,23 +14,27 @@ import java.util.ArrayList;
  * with an effect on moveables.
  */
 public abstract class Field extends MultiSquare implements MovableEffect {
-
-
-    /**
+	
+	/**
      * Current state of the ForceField.
      */
     private boolean active = true;
-
+    
     /**
      * Checks if the ForceField is active.
      *
-     * @return	True	If active
-     * 			False	If inactive
+     * @return  True if and only if the square is active
      */
     public boolean isActive() {
         return this.active;
     }
 
+    /**
+     * Activate of deactivate the given ForceField
+     *
+     * @param   active
+     *          Whether the ForceField should be active
+     */
     public void setActive(boolean active){
         for (Square square: getSquares()){
             if(active){
@@ -40,7 +44,6 @@ public abstract class Field extends MultiSquare implements MovableEffect {
             }
         }
         this.active = active;
-
 
     }
 

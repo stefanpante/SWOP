@@ -32,7 +32,6 @@ public class PlayerMoveCommand extends MoveCommand{
 
     @Override
     protected void afterGameCommand() throws Exception {
-    	
         activateLightGrenade();
     }
 
