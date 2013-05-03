@@ -27,6 +27,11 @@ public class TestForceField {
 		this.forceField.decreaseActions();
 		
 		assertFalse(this.forceField.isActive());
+		
+		this.forceField.decreaseActions();
+		this.forceField.decreaseActions();
+		
+		assertTrue(this.forceField.isActive());
 	}
 
 }

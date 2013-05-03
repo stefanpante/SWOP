@@ -29,18 +29,21 @@ public abstract class Field extends MultiSquare implements MovableEffect {
     public boolean isActive() {
         return this.active;
     }
-
+    
+    /**
+     * Sets the field to active or inactive.
+     * 
+     * @param active
+     */
     public void setActive(boolean active){
         for (Square square: getSquares()){
-            if(active){
+            if (active)
                 square.addField(this);
-            }else{
+            else
                 square.removeField(this);
-            }
         }
+        
         this.active = active;
-
-
     }
 
     @Override
