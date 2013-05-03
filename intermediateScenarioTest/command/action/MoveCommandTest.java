@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import square.Direction;
 import square.Square;
+import square.power.Power;
 import util.Coordinate;
 
 import java.util.ArrayList;
@@ -231,6 +232,7 @@ public class MoveCommandTest {
         Square expectedSquare = grid.getSquare(new Coordinate(3,0));
         assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
     }
+
     //Case with walls and no teleports, range MAX, NORTH
     @Test
     public void testID8() {
@@ -306,6 +308,30 @@ public class MoveCommandTest {
     	
     	return null;
     }
+
+    //Case with walls and no teleports, range 3, SOUTH and powerFailure.
+    @Test
+    public void testID11() {
+        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
+        Game g = new Game(grid);
+        IdentityDisc id = new IdentityDisc();
+        Coordinate co5_0 = new Coordinate(5,0);
+        Square startSquare = grid.getSquare(co5_0);
+        startSquare.setPower(Power.getPowerFailure());
+        Square powerFailingSquare1 = grid.getSquare(new Coordinate(6,0));
+        powerFailingSquare1.setPower(Power.getPowerFailure());
+        startSquare.getInventory().addItem(id);
+        MoveCommand m = new IdentityDiscMoveCommand(g,id,startSquare, Direction.SOUTH);
+        try {
+            m.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Move Command shouldn't throw an exception");
+        }
+        Square expectedSquare = grid.getSquare(new Coordinate(8,0));
+        assertTrue(expectedSquare.getInventory().getIdentityDiscs().contains(id));
+    }
+
 
     //Normal case no walls no teleports, player move NORTH
     @Test

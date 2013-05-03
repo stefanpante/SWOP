@@ -170,5 +170,5 @@ public class Square implements MovableEffect {
 	public void affect(IdentityDisc identityDisc) {
 		getInventory().affect(identityDisc);
 		getPower().affect(identityDisc);
-	}
+    }
 }
