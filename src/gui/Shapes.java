@@ -47,11 +47,11 @@ public class Shapes {
 	
 	private void initImages(){
 		Shapes.wall = gui.loadShape(getClass().getResource("/res/wall.svg").getPath());
-		Shapes.powerFail = gui.loadShape(getClass().getResource("/res/powerfailure.svg").getPath());
-		Shapes.identityDisc = gui.loadShape(getClass().getResource("/res/identitydisc.svg").getPath());
-		Shapes.chargedIdentityDisc = gui.loadShape(getClass().getResource("/res/chargedidentitydisc.svg").getPath());
-		Shapes.lightgrenade = gui.loadShape(getClass().getResource("/res/lightgrenade.svg").getPath());
-		Shapes.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
+		//Shapes.powerFail = gui.loadShape(getClass().getResource("/res/powerfailure.svg").getPath());
+		Shapes.identityDisc = gui.loadShape(getClass().getResource("/res/items/identitydisc.svg").getPath());
+		Shapes.chargedIdentityDisc = gui.loadShape(getClass().getResource("/res/items/chargedidentitydisc.svg").getPath());
+		Shapes.lightgrenade = gui.loadShape(getClass().getResource("/res/items/lightgrenade.svg").getPath());
+		//Shapes.powerFailureItem = gui.loadShape(getClass().getResource("/res/powerfailureitems.svg").getPath());
 		
 		Shapes.south = gui.loadShape(getClass().getResource("/res/directions/south.svg").getPath());
 		Shapes.north = gui.loadShape(getClass().getResource("/res/directions/north.svg").getPath());
@@ -62,14 +62,14 @@ public class Shapes {
 		Shapes.northeast =  gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath());
 		Shapes.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
 		
-		Shapes.items = gui.loadShape(getClass().getResource("/res/items.svg").getPath());
-		Shapes.powerFailureTeleportItem = gui.loadShape(getClass().getResource("/res/teleportpowerfailitems.svg").getPath());
-		Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/teleportpowerfail.svg").getPath());
-		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/teleportitems.svg").getPath());
-		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());
-		Shapes.forcefieldGenerator_on = gui.loadShape(getClass().getResource("/res/forcefield_on.svg").getPath());
-		Shapes.forcefieldGenerator_off = gui.loadShape(getClass().getResource("/res/forcefield_off.svg").getPath());
-		Shapes.flag = gui.loadShape(getClass().getResource("/res/flag.svg").getPath());
+		Shapes.items = gui.loadShape(getClass().getResource("/res/items/items.svg").getPath());
+		//Shapes.powerFailureTeleportItem = gui.loadShape(getClass().getResource("/res/items/teleportpowerfailitems.svg").getPath());
+		//Shapes.powerFailureTeleport = gui.loadShape(getClass().getResource("/res/items/teleportpowerfail.svg").getPath());
+		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/items/teleportitems.svg").getPath());
+		Shapes.teleport = gui.loadShape(getClass().getResource("/res/items/teleport.svg").getPath());
+		Shapes.forcefieldGenerator_on = gui.loadShape(getClass().getResource("/res/items/forcefield_on.svg").getPath());
+		Shapes.forcefieldGenerator_off = gui.loadShape(getClass().getResource("/res/items/forcefield_off.svg").getPath());
+		Shapes.flag = gui.loadShape(getClass().getResource("/res/items/flag.svg").getPath());
 	}
 	
 	public static PShape getShape(Item item){
