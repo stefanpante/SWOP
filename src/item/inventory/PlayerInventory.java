@@ -1,6 +1,7 @@
 package item.inventory;
 
 import item.ChargedIdentityDisc;
+import item.Flag;
 import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.Item;
@@ -97,5 +98,17 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	@Override
 	public void removeTeleport(Teleport teleport) throws IllegalStateException {
 		throw new IllegalStateException("A Teleport can not be in a players Inventory");
+	}
+
+	@Override
+	public void addFlag(Flag flag) throws IllegalStateException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeFlag(Flag flag) throws IllegalStateException {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -1,6 +1,7 @@
 package item.inventory;
 
 import item.ChargedIdentityDisc;
+import item.Flag;
 import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.Item;
@@ -229,6 +230,18 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public void addFlag(Flag flag) throws IllegalStateException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeFlag(Flag flag) throws IllegalStateException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

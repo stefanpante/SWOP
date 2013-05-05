@@ -1,6 +1,7 @@
 package item.visitor;
 
 import item.ChargedIdentityDisc;
+import item.Flag;
 import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.LightGrenade;
@@ -28,4 +29,7 @@ public interface AddRemoveItemVisitor {
 
     public void addForceFieldGenerator( ForceFieldGenerator forceFieldGenerator) throws IllegalStateException;
     public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException;
+    
+    public void addFlag(Flag flag) throws IllegalStateException;
+    public void removeFlag(Flag flag) throws IllegalStateException;
 }

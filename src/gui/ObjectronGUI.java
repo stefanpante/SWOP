@@ -15,6 +15,7 @@ import java.util.HashMap;
 import controlP5.Button;
 import controlP5.CColor;
 import controlP5.ControlP5;
+import controlP5.DropdownList;
 import controlP5.Textarea;
 import controlP5.Textfield;
 import controller.GameHandler;
@@ -97,6 +98,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 
 	private Button confirm;
 	private Button filepick;
+	private DropdownList gamemode;
 
 	private Textfield widthGrid;
 
@@ -163,20 +165,29 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener{
 		heightGrid.setLabel("Height of grid");
 		heightGrid.setValue("" + 10);
 		heightGrid.setColorCursor(OConstants.PLAYERBLUE);
-		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,280);
-		confirm.setSize(hSize/2, 35);
-		confirm.setColor(color);
-		confirm.setColorLabel(OConstants.WHITE);
-		confirm.setColorBackground(OConstants.PLAYERBLUE);
+		
+		gamemode = inputController.addDropdownList("gamemode");
+		gamemode.setPosition(hSize/4, 240);
+		gamemode.setWidth(hSize/2);
+		gamemode.getValueLabel().setHeight(35);
+		
+		gamemode.actAsPulldownMenu(true);
+		gamemode.addItems(new String[]{"Race mode", "Capture the flag"});
 		
 		filepick = inputController.addButton("pick");
 		filepick.setLabel("Pick grid from file");
-		filepick.setPosition(hSize/4,240);
+		filepick.setPosition(hSize/4,280);
 		filepick.setSize(hSize/2, 35);
 		filepick.setColor(color);
 		filepick.setColorLabel(OConstants.WHITE);
 		filepick.setColorBackground(OConstants.PLAYERBLUE);
+		
+		confirm = inputController.addButton("confirm");
+		confirm.setPosition(hSize/4,320);
+		confirm.setSize(hSize/2, 35);
+		confirm.setColor(color);
+		confirm.setColorLabel(OConstants.WHITE);
+		confirm.setColorBackground(OConstants.PLAYERBLUE);
 		
 		area = inputController.addTextarea("Warning", "Please make sure your Gridfile is valid!", hSize/4, 320, hSize/2, 100);
 		

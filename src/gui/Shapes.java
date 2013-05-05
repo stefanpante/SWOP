@@ -1,6 +1,7 @@
 package gui;
 
 import item.ChargedIdentityDisc;
+import item.Flag;
 import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.Item;
@@ -36,6 +37,7 @@ public class Shapes {
 	public static PShape teleport;
 	public static PShape forcefieldGenerator_on;
 	public static PShape forcefieldGenerator_off;
+	public static PShape flag;
 	
 
 	public Shapes(PApplet gui) {
@@ -67,6 +69,7 @@ public class Shapes {
 		Shapes.teleport = gui.loadShape(getClass().getResource("/res/teleport.svg").getPath());
 		Shapes.forcefieldGenerator_on = gui.loadShape(getClass().getResource("/res/forcefield_on.svg").getPath());
 		Shapes.forcefieldGenerator_off = gui.loadShape(getClass().getResource("/res/forcefield_off.svg").getPath());
+		Shapes.flag = gui.loadShape(getClass().getResource("/res/flag.svg").getPath());
 	}
 	
 	public static PShape getShape(Item item){
@@ -97,7 +100,9 @@ public class Shapes {
 			}
 		}
 		
-		
+		if(item instanceof Flag){
+			return Shapes.flag;
+		}
 		
 		return null;
 	}
