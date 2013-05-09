@@ -5,6 +5,7 @@ import gui.button.GUIButton;
 import gui.button.TextButton;
 import gui.message.Message;
 import gui.message.TimedMessage;
+import gui.message.YesNoDialog;
 import item.IdentityDisc;
 import item.Item;
 
@@ -81,8 +82,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private TextButton noButton;
 
 	private Label gridLabel;
-	private Label squareInventoryLabel;
-	private Label playerInventoryLabel;
 	private PFont standardFont;
 
 	private Button confirm;
@@ -121,8 +120,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		// Sets up the inventory representation.
 		ArrayList<Item> items = new ArrayList<Item>();
-		squareInventory = new Inventory(items,new PVector(530,55), this);
-		playerInventory = new Inventory(items, new PVector(530,255), this);
+		squareInventory = new Inventory(items,new PVector(530,25), "Square Inventory", this);
+		playerInventory = new Inventory(items, new PVector(530,225),"Player Inventory", this);
 
 		setupButtons();
 		setupLabels();
@@ -242,10 +241,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void setupLabels(){
 		this.gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
 		this.gridLabel.setColor(OConstants.PLAYERBLUE);
-		this.squareInventoryLabel = new Label(155, 25, new PVector(530,25),"Square Inventory", this);
-		this.squareInventoryLabel.setColor(OConstants.PLAYERBLUE);
-		this.playerInventoryLabel = new Label(155, 25, new PVector(530,225),"Player Inventory", this);
-		this.playerInventoryLabel.setColor(OConstants.PLAYERBLUE);
 	}
 
 	public static String PICKUP_ACTION = "pickup";
@@ -310,12 +305,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			confirmEndTurn();
 
 		}
-		//float width, float height, PVector position, String message, PApplet gui
-		
-		m.draw();
+		//m.draw();
 	}
 
-	Message m = new TimedMessage(300, 300, new PVector(100,100), "Test", 3, this);
+	Message m = new YesNoDialog(300, 300, new PVector(100,100), "Test",  this);
+	
 	public void showRemainingActions(){
 		fill(currentPlayerColor);
 		noStroke();
@@ -362,8 +356,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			this.frame.setLocation(frame.getLocation().x, 0);
 		}
 		gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
-		squareInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		playerInventoryLabel.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
 		for(GUIButton button: buttons){
 			button.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
 		}
@@ -385,8 +377,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void drawLabels(){
 
 		this.gridLabel.draw();
-		this.playerInventoryLabel.draw();
-		this.squareInventoryLabel.draw();
 	}
 
 	private  void drawInventories(){
@@ -513,8 +503,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 				currentPlayerColor = OConstants.PLAYERRED;
 			}
 			gridLabel.setColor(currentPlayerColor);
-			squareInventoryLabel.setColor(currentPlayerColor);
-			playerInventoryLabel.setColor(currentPlayerColor);
 
 			for(GUIButton button: buttons)
 				button.setColor(currentPlayerColor);
