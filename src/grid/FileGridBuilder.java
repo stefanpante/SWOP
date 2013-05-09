@@ -1,5 +1,10 @@
 package grid;
 
+import item.ChargedIdentityDisc;
+import item.ForceFieldGenerator;
+import item.IdentityDisc;
+import item.LightGrenade;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -90,11 +95,11 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			setSquares();
 			setConstraints();
 			placeWalls(this.getWallsLocation());
-			placeLightGrenade(randomLocations(getConstraintLightGrenade()));
-			placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
+			placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
+			placeItems(new IdentityDisc(), randomLocations(getConstraintIdentityDisk()));
+			placeItems(new ForceFieldGenerator(), randomLocations(getConstraintForceFieldGenerator()));
 			placeTeleports(randomLocations(getConstraintTeleport()));
-			placeChargedIdentityDisk(getChargedIdentityDiskLocation());
-			placeForceFieldGenerators(randomLocations(getConstraintForceFieldGenerator()));
+			placeItem(getGrid().getSquare(getChargedIdentityDiskLocation()), new ChargedIdentityDisc());
 			checkConsistency();
 		}
 

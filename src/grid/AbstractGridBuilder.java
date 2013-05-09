@@ -332,41 +332,12 @@ public abstract class AbstractGridBuilder {
         return result;
     }
 
-    /**
-     * Place light grenades at the the given coordinates, in respect with the given constraint.
-     *
-     * @param 	coordinates
-     * 			The coordinates where to place the light grenades
-     */
-    protected void placeLightGrenade(ArrayList<Coordinate> coordinates) {
-        if(!getConstraintLightGrenade().satisfiesConstraint(coordinates, getGrid()))
-            throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-        for(Coordinate coordinate : coordinates)
-            placeItem(getGrid().getSquare(coordinate), new LightGrenade());
+    protected void placeItems(Item item, ArrayList<Coordinate> coordinates){
+    	for(Coordinate coordinate: coordinates){
+    		placeItem(getGrid().getSquare(coordinate),item.copy());
+    	}
     }
-
-    /**
-     * Place identity disks on the given coordinates, in respect with the given constraint
-     *
-     * @param 	coordinates
-     * 			The coordinates where to place the identity disks
-     */
-    protected void placeIdentityDisk(ArrayList<Coordinate> coordinates) {
-        if(!getConstraintIdentityDisk().satisfiesConstraint(coordinates, getGrid()))
-            throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-        for(Coordinate coordinate : coordinates)
-            placeItem(getGrid().getSquare(coordinate), new IdentityDisc());
-    }
-
-    protected void placeChargedIdentityDisk(Coordinate coordinate) {
-        if(coordinate == null)
-            return;
-        Square diskSquare = getGrid().getSquare(coordinate);
-        placeItem(diskSquare, new ChargedIdentityDisc());
-    }
-
-
-
+    
     /**
      *
      * @param 	coordinates
@@ -411,18 +382,6 @@ public abstract class AbstractGridBuilder {
             }
         }
     }
-    
-    /**
-    *
-    * @param 	coordinates
-    * 			The coordinates of the locations to place.
-    */
-   protected void placeForceFieldGenerators(ArrayList<Coordinate> coordinates) {
-       if(!getConstraintForceFieldGenerator().satisfiesConstraint(coordinates, getGrid()))
-           throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-       for(Coordinate coordinate : coordinates)
-           placeItem(getGrid().getSquare(coordinate), new ForceFieldGenerator());
-   }
 
     /**
      * Suggest a coordinate for the Charged Disk Location
