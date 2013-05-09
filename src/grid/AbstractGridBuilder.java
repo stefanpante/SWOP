@@ -435,7 +435,5 @@ public abstract class AbstractGridBuilder {
      * Return the coordinate for the second player.
      */
     public abstract Coordinate getPlayerTwoCoordinate();
-
-
 	
 }
