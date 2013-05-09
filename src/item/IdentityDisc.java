@@ -185,4 +185,9 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	public void setJustTeleported(boolean b) {
 		justTeleported = b;
 	}
+
+	@Override
+	public Item copy() {
+		return new IdentityDisc();
+	}
 }

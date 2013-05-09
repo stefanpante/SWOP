@@ -59,4 +59,9 @@ public class Flag extends Item {
 		return false;
 	}
 
+	@Override
+	public Item copy() {
+		return new Flag();
+	}
+
 }
