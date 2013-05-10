@@ -35,19 +35,21 @@
 \headcommand {\slideentry {3}{2}{3}{10/10}{Force Fields}{0}}
 \headcommand {\beamer@framepages {10}{10}}
 \headcommand {\beamer@subsectionentry {0}{3}{3}{11}{Effect}}\headcommand {\beamer@subsectionpages {8}{10}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{11}{MovableEffect}}\headcommand {\beamer@subsectionpages {11}{10}}
-\headcommand {\sectionentry {4}{Aanpassingen}{11}{Aanpassingen}{0}}
-\headcommand {\beamer@sectionpages {8}{10}}
-\headcommand {\beamer@subsectionpages {11}{10}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{11}{Activatable}}\headcommand {\beamer@subsectionpages {11}{10}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{11}{Commands}}\headcommand {\beamer@subsectionpages {11}{10}}
-\headcommand {\sectionentry {5}{Slot}{11}{Slot}{0}}
-\headcommand {\beamer@sectionpages {11}{10}}
-\headcommand {\beamer@subsectionpages {11}{10}}
-\headcommand {\slideentry {5}{0}{1}{11/11}{}{0}}
+\headcommand {\slideentry {3}{3}{1}{11/11}{Effect}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@partpages {1}{11}}
-\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\beamer@sectionpages {11}{11}}
-\headcommand {\beamer@documentpages {11}}
-\headcommand {\def \inserttotalframenumber {11}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{12}{MovableEffect}}\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\sectionentry {4}{Aanpassingen}{12}{Aanpassingen}{0}}
+\headcommand {\beamer@sectionpages {8}{11}}
+\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{12}{Activatable}}\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{12}{Commands}}\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\sectionentry {5}{Slot}{12}{Slot}{0}}
+\headcommand {\beamer@sectionpages {12}{11}}
+\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\slideentry {5}{0}{1}{12/12}{}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@partpages {1}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\beamer@sectionpages {12}{12}}
+\headcommand {\beamer@documentpages {12}}
+\headcommand {\def \inserttotalframenumber {12}}
