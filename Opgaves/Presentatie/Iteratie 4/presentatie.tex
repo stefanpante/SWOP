@@ -100,15 +100,20 @@ Komende iteratie:
 
 \subsubsection{Force Field Manager}
 \begin{frame}
+\begin{multicols}{2}
 \begin{figure}
 	\center
-	%\includegraphics[width= 0.5\linewidth]{img/forcefieldmanager.pdf}
+	\includegraphics[width= 0.9\linewidth]{img/forcefieldmanager.pdf}
 	\caption{Force Field Generators}
 \end{figure}
+
 \begin{itemize}
-	\item Herkent aan de hand van het Grid welke Force Fields geactiveerd kunnen wordne
-	\item Schakelt velden aan en uit
+	\item Herkent aan de hand van het Grid welke Force Fields geactiveerd kunnen worden
+	\item Gekoppeld met elk force field
+	\item Generatoren zijn niet gekoppeld met velden zelf
+	\item Observeert acties en schakelt velden aan en uit
 \end{itemize}
+\end{multicols}
 \end{frame}
 
 \subsection{Effect}
@@ -116,11 +121,16 @@ Komende iteratie:
 \begin{itemize}
 	\item Effecten zijn geen onderdeel meer van de \textit{commands}
 	\item \textbf{Composite Pattern} met \textit{MovableEffect} interface
-	\item 
 \end{itemize}
 \end{frame}
 \subsection{MovableEffect}
-
+\begin{frame}
+\begin{figure}
+	\center
+	%\includegraphics[width= 0.5\linewidth]{img/composite.pdf}
+	\caption{Force Field Generators}
+\end{figure}
+\end{frame}
 
 \section{Aanpassingen}
 

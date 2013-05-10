@@ -38,18 +38,20 @@
 \headcommand {\slideentry {3}{3}{1}{11/11}{Effect}{0}}
 \headcommand {\beamer@framepages {11}{11}}
 \headcommand {\beamer@subsectionentry {0}{3}{4}{12}{MovableEffect}}\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\sectionentry {4}{Aanpassingen}{12}{Aanpassingen}{0}}
-\headcommand {\beamer@sectionpages {8}{11}}
-\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{12}{Activatable}}\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{12}{Commands}}\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\sectionentry {5}{Slot}{12}{Slot}{0}}
-\headcommand {\beamer@sectionpages {12}{11}}
-\headcommand {\beamer@subsectionpages {12}{11}}
-\headcommand {\slideentry {5}{0}{1}{12/12}{}{0}}
+\headcommand {\slideentry {3}{4}{1}{12/12}{MovableEffect}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@partpages {1}{12}}
+\headcommand {\sectionentry {4}{Aanpassingen}{13}{Aanpassingen}{0}}
+\headcommand {\beamer@sectionpages {8}{12}}
 \headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\beamer@sectionpages {12}{12}}
-\headcommand {\beamer@documentpages {12}}
-\headcommand {\def \inserttotalframenumber {12}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{13}{Activatable}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{13}{Commands}}\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\sectionentry {5}{Slot}{13}{Slot}{0}}
+\headcommand {\beamer@sectionpages {13}{12}}
+\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\slideentry {5}{0}{1}{13/13}{}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@sectionpages {13}{13}}
+\headcommand {\beamer@documentpages {13}}
+\headcommand {\def \inserttotalframenumber {13}}
