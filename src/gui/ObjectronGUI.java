@@ -518,43 +518,39 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	@SuppressWarnings("unchecked")
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-
+		String propertyName = evt.getPropertyName();
 		Object o = evt.getNewValue();
-
-		if (evt.getPropertyName().equals(Handler.WALLS_PROPERTY)) {
-			this.grid.setWalls((ArrayList<Coordinate>)o);
-		}else if(evt.getPropertyName().equals(Handler.PLAYERS_PROPERTY)){
-			HashMap<Player,Coordinate> players = (HashMap<Player,Coordinate>) o;
-			this.grid.setPlayers(players);
-		}else if(evt.getPropertyName().equals(Handler.POWER_FAILS_PROPERTY)){
-			this.grid.setPowerFails((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(Handler.LIGHT_TRAILS_PROPERTY)) {
-			this.grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-		}else if(evt.getPropertyName().equals(Handler.CURRENT_POSITION_PROPERTY)){
-			this.grid.setCurrentPlayer((Coordinate)o);
-			this.changePlayer();
-		}else if(evt.getPropertyName().equals(Handler.SQUARE_INVENTORY_PROPERTY)){
-			this.squareInventory.setItems((ArrayList<Item>) o);
-		}else if(evt.getPropertyName().equals(Handler.PLAYER_INVENTORY_PROPERTY)){
-			this.playerInventory.setItems((ArrayList<Item>) o);
-		}else if(evt.getPropertyName().equals(Handler.END_TURN_PROPERTY)){
-			endTurn = true;
-		}else if(evt.getPropertyName().equals(Handler.MESSAGE_PROPERTY)){
-			
-			//TODO: message
-		}else if(evt.getPropertyName().equals(Handler.WIN_PROPERTY)){
-			String player = (String)o;
-			//TODO: message
-		}else if(evt.getPropertyName().equals(Handler.LOSE_PROPERTY)){
-			//TODO: message
-		}else if(evt.getPropertyName().equals(Handler.SQUARES_PROPERTY)){
-			grid.adjustGrid((ArrayList<Coordinate>) o);
-		}else if(evt.getPropertyName().equals(Handler.ITEMS_PROPERTY)){
-			HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
-			grid.setItems(items);
-		}else if(evt.getPropertyName().equals(Handler.FORCEFIELD_PROPERTY)){
-			grid.setForceFields((ArrayList<Coordinate>) o);
+		
+		switch(propertyName){
+		case Handler.WALLS_PROPERTY:	grid.setWalls((ArrayList<Coordinate>) o);
+										break;
+		case Handler.PLAYERS_PROPERTY:  grid.setPlayers((HashMap<Player,Coordinate>) o);
+										break;
+		case Handler.POWER_FAILS_PROPERTY: grid.setPowerFails((ArrayList<Coordinate>) o);
+										break;
+		case Handler.LIGHT_TRAILS_PROPERTY: grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
+										break;
+		case Handler.CURRENT_POSITION_PROPERTY: grid.setCurrentPlayer((Coordinate) o );
+										break;
+		case Handler.SQUARE_INVENTORY_PROPERTY: squareInventory.setItems((ArrayList<Item>) o);
+										break;
+		case Handler.PLAYER_INVENTORY_PROPERTY: playerInventory.setItems((ArrayList<Item>) o);
+										break;
+		case Handler.END_TURN_PROPERTY:	endTurn = true;
+										break;
+		case Handler.MESSAGE_PROPERTY: 	break;
+		case Handler.WIN_PROPERTY: 		break;
+		case Handler.LOSE_PROPERTY : 	break;
+		case Handler.SQUARES_PROPERTY: grid.adjustGrid((ArrayList<Coordinate>) o);
+										break;
+		case Handler.ITEMS_PROPERTY:	HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
+										grid.setItems(items);
+										break;
+		case Handler.FORCEFIELD_PROPERTY: grid.setForceFields((ArrayList<Coordinate>) o);
+	
+		default:					break;
 		}
+		
 		grid.updateItems();
 
 
