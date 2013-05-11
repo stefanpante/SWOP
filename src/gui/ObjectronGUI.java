@@ -243,10 +243,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		this.gridLabel.setColor(OConstants.PLAYERBLUE);
 	}
 
-	public static String PICKUP_ACTION = "pickup";
-	public static String USEITEM_ACTION = "useitem";
-	public static String ENDTURN_ACTION = "endTurn";
-	public static String STARTNEWGAME_ACTION = "startnewgame";
+	public static final String PICKUP_ACTION = "pickup";
+	public static final String USEITEM_ACTION = "useitem";
+	public static final String ENDTURN_ACTION = "endTurn";
+	public static final String STARTNEWGAME_ACTION = "startnewgame";
 
 	private void setupButtons(){
 
@@ -620,15 +620,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		if(evt.getActionCommand().equals(PICKUP_ACTION))
-			this.pickUp();
-		if(evt.getActionCommand().equals(ENDTURN_ACTION))
-			this.endTurn();
-		if(evt.getActionCommand().equals(USEITEM_ACTION))
-			this.useItem();
-		if(evt.getActionCommand().equals(STARTNEWGAME_ACTION))
-			this.startNewGame();
-
+		String command = evt.getActionCommand();
+		switch(command){
+		case PICKUP_ACTION:		this.pickUp();
+								break;
+		case ENDTURN_ACTION:	this.endTurn();
+								break;
+		case USEITEM_ACTION:	this.useItem();
+								break;
+		case STARTNEWGAME_ACTION: this.startNewGame();
+								break;	
+		}
 	}
 
 }
