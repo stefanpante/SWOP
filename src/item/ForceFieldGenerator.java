@@ -18,7 +18,7 @@ import java.util.Observer;
  * 
  * @author vincentreniers
  */
-public class ForceFieldGenerator extends Item implements Activatable, Observer{
+public class ForceFieldGenerator extends Item implements Activatable {
 
     private boolean dropped;
     private boolean active;
@@ -77,12 +77,6 @@ public class ForceFieldGenerator extends Item implements Activatable, Observer{
     public void affect(IdentityDisc identityDisc) {
     	
     }
-
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
 
     @Override
     public boolean isDropped() {

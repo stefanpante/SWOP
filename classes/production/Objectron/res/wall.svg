@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="600px" height="600px" viewBox="0 0 600 600" enable-background="new 0 0 600 600" xml:space="preserve">
+<rect x="100" fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" width="300" height="100"/>
+<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="600,100 400,100 400,0 600,0 "/>
+<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="0,0 100,0 100,100 0,100 "/>
+<g>
+	<rect x="201" y="100" fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" width="300" height="100"/>
+	<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="1,200 201,200 201,100 1,100 	"/>
+	<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="601,100 501,100 501,200 601,200 	"/>
+</g>
+<rect x="99.5" y="200" fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" width="300" height="100"/>
+<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="599.5,300 399.5,300 399.5,200 
+	599.5,200 "/>
+<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="-0.5,200 99.5,200 99.5,300 -0.5,300 
+	"/>
+<g>
+	<rect x="200.5" y="300" fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" width="300" height="100"/>
+	<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="0.5,400 200.5,400 200.5,300 0.5,300 	
+		"/>
+	<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="600.5,300 500.5,300 500.5,400 
+		600.5,400 	"/>
+</g>
+<rect x="99.5" y="395" fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" width="300" height="100"/>
+<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="599.5,495 399.5,495 399.5,395 
+	599.5,395 "/>
+<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="-0.5,395 99.5,395 99.5,495 -0.5,495 
+	"/>
+<g>
+	<rect x="200.5" y="495" fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" width="300" height="100"/>
+	<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="0.5,595 200.5,595 200.5,495 0.5,495 	
+		"/>
+	<polyline fill="#A6A3A3" stroke="#BCBCBB" stroke-width="5" stroke-miterlimit="10" points="600.5,495 500.5,495 500.5,595 
+		600.5,595 	"/>
+</g>
+</svg>
