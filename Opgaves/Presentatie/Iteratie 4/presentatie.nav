@@ -46,20 +46,23 @@
 \headcommand {\beamer@sectionpages {8}{13}}
 \headcommand {\beamer@subsectionpages {13}{13}}
 \headcommand {\beamer@subsectionentry {0}{4}{1}{14}{Activatable}}\headcommand {\beamer@subsectionpages {14}{13}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{14}{Commands}}\headcommand {\beamer@subsectionpages {14}{13}}
-\headcommand {\slideentry {4}{2}{1}{14/14}{Commands}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{14}{Movable}}\headcommand {\beamer@subsectionpages {14}{13}}
+\headcommand {\slideentry {4}{2}{1}{14/14}{Movable}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {4}{2}{2}{15/15}{Commands}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{15}{Commands}}\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {4}{3}{1}{15/15}{Commands}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {4}{2}{3}{16/16}{Commands}{0}}
+\headcommand {\slideentry {4}{3}{2}{16/16}{Commands}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\sectionentry {5}{Slot}{17}{Slot}{0}}
-\headcommand {\beamer@sectionpages {14}{16}}
-\headcommand {\beamer@subsectionpages {14}{16}}
-\headcommand {\slideentry {5}{0}{4}{17/17}{}{0}}
+\headcommand {\slideentry {4}{3}{3}{17/17}{Commands}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\beamer@partpages {1}{17}}
-\headcommand {\beamer@subsectionpages {17}{17}}
-\headcommand {\beamer@sectionpages {17}{17}}
-\headcommand {\beamer@documentpages {17}}
-\headcommand {\def \inserttotalframenumber {17}}
+\headcommand {\sectionentry {5}{Slot}{18}{Slot}{0}}
+\headcommand {\beamer@sectionpages {14}{17}}
+\headcommand {\beamer@subsectionpages {15}{17}}
+\headcommand {\slideentry {5}{0}{4}{18/18}{}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@partpages {1}{18}}
+\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\beamer@sectionpages {18}{18}}
+\headcommand {\beamer@documentpages {18}}
+\headcommand {\def \inserttotalframenumber {18}}
