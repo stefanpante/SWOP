@@ -1,4 +1,4 @@
-\beamer@endinputifotherversion {3.20pt}
+\beamer@endinputifotherversion {3.26pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
@@ -24,34 +24,38 @@
 \headcommand {\sectionentry {3}{Nieuwigheden deze iteratie}{8}{Nieuwigheden deze iteratie}{0}}
 \headcommand {\beamer@sectionpages {6}{7}}
 \headcommand {\beamer@subsectionpages {6}{7}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{8}{Power Failures}}\headcommand {\beamer@subsectionpages {8}{7}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{8}{Force Fields}}\headcommand {\beamer@subsectionpages {8}{7}}
-\headcommand {\slideentry {3}{2}{1}{8/8}{Force Fields}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{8}{Grid Builder}}\headcommand {\beamer@subsectionpages {8}{7}}
+\headcommand {\slideentry {3}{1}{1}{8/8}{Grid Builder}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@subsubsectionentry {0}{3}{2}{1}{9}{Force Field Generators}}
-\headcommand {\slideentry {3}{2}{2}{9/9}{Force Fields}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{9}{Power Failures}}\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\slideentry {3}{2}{1}{9/9}{Power Failures}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\beamer@subsubsectionentry {0}{3}{2}{2}{10}{Force Field Manager}}
-\headcommand {\slideentry {3}{2}{3}{10/10}{Force Fields}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{10}{Force Fields}}\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\slideentry {3}{3}{1}{10/10}{Force Fields}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{11}{Effect}}\headcommand {\beamer@subsectionpages {8}{10}}
-\headcommand {\slideentry {3}{3}{1}{11/11}{Effect}{0}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{3}{1}{11}{Force Field Generators}}
+\headcommand {\slideentry {3}{3}{2}{11/11}{Force Fields}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{12}{MovableEffect}}\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\slideentry {3}{4}{1}{12/12}{MovableEffect}{0}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{3}{2}{12}{Force Field Manager}}
+\headcommand {\slideentry {3}{3}{3}{12/12}{Force Fields}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\sectionentry {4}{Aanpassingen}{13}{Aanpassingen}{0}}
-\headcommand {\beamer@sectionpages {8}{12}}
-\headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\beamer@subsectionentry {0}{4}{1}{13}{Activatable}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{13}{Commands}}\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\sectionentry {5}{Slot}{13}{Slot}{0}}
-\headcommand {\beamer@sectionpages {13}{12}}
-\headcommand {\beamer@subsectionpages {13}{12}}
-\headcommand {\slideentry {5}{0}{1}{13/13}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{13}{MovableEffect}}\headcommand {\beamer@subsectionpages {10}{12}}
+\headcommand {\slideentry {3}{4}{1}{13/13}{MovableEffect}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\sectionentry {4}{Aanpassingen}{14}{Aanpassingen}{0}}
+\headcommand {\beamer@sectionpages {8}{13}}
 \headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\beamer@sectionpages {13}{13}}
-\headcommand {\beamer@documentpages {13}}
-\headcommand {\def \inserttotalframenumber {13}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{14}{Activatable}}\headcommand {\beamer@subsectionpages {14}{13}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{14}{Commands}}\headcommand {\beamer@subsectionpages {14}{13}}
+\headcommand {\slideentry {4}{2}{1}{14/14}{Commands}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\sectionentry {5}{Slot}{15}{Slot}{0}}
+\headcommand {\beamer@sectionpages {14}{14}}
+\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {5}{0}{2}{15/15}{}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\beamer@partpages {1}{15}}
+\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\beamer@sectionpages {15}{15}}
+\headcommand {\beamer@documentpages {15}}
+\headcommand {\def \inserttotalframenumber {15}}

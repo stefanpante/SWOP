@@ -73,7 +73,22 @@ Komende iteratie:
 
 \section{Nieuwigheden deze iteratie}
 
+\subsection{Grid Builder}
+\begin{frame}{Grid Builder}
+\begin{figure}
+	\center
+	\includegraphics[width= 0.7\linewidth]{img/gridbuilder.pdf}
+\end{figure}
+\end{frame}
+
 \subsection{Power Failures}
+\begin{frame}{Power Failures}
+\begin{figure}
+	\center
+	\includegraphics[width= 0.65\linewidth]{img/powerfail.pdf}
+\end{figure}
+\end{frame}
+
 
 \subsection{Force Fields}
 \begin{frame}{Force Fields}
@@ -116,27 +131,38 @@ Komende iteratie:
 \end{multicols}
 \end{frame}
 
-\subsection{Effect}
-\begin{frame}{Effecten}
-\begin{itemize}
-	\item Effecten zijn geen onderdeel meer van de \textit{commands}
-	\item \textbf{Composite Pattern} met \textit{MovableEffect} interface
-\end{itemize}
-\end{frame}
+
 \subsection{MovableEffect}
-\begin{frame}
+\begin{frame}{Effecten}
+\begin{multicols}{2}
+\begin{minipage}{\columnwidth}
 \begin{figure}
 	\center
-	%\includegraphics[width= 0.5\linewidth]{img/composite.pdf}
-	\caption{Force Field Generators}
+	\includegraphics[width=\linewidth]{img/composite.pdf}
+	\caption{Geinspireerd door Composite Pattern}
 \end{figure}
+\end{minipage}
+\begin{minipage}{\columnwidth}
+\begin{itemize}
+	\item Zelfde interface voor complex objec (\textit{square/inventory}) als voor primitief object (\textit{item}) 
+	\item Gecombineerd met \textit{double dispatch} voor onderscheid van effect op \textit{item} en op \textit{player}
+\end{itemize}
+\end{minipage}
+
+
+\end{multicols}
 \end{frame}
 
 \section{Aanpassingen}
 
 \subsection{Activatable}
 \subsection{Commands}
-
+\begin{frame}{Command Pattern}
+\begin{figure}
+	\center
+	\includegraphics[width= 0.8\linewidth]{img/Command_pattern.pdf}
+\end{figure}	
+\end{frame}
 
 
 \section{Slot}
