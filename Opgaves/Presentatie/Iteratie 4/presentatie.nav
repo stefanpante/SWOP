@@ -49,13 +49,17 @@
 \headcommand {\beamer@subsectionentry {0}{4}{2}{14}{Commands}}\headcommand {\beamer@subsectionpages {14}{13}}
 \headcommand {\slideentry {4}{2}{1}{14/14}{Commands}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\sectionentry {5}{Slot}{15}{Slot}{0}}
-\headcommand {\beamer@sectionpages {14}{14}}
-\headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\slideentry {5}{0}{2}{15/15}{}{0}}
+\headcommand {\slideentry {4}{2}{2}{15/15}{Commands}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@partpages {1}{15}}
-\headcommand {\beamer@subsectionpages {15}{15}}
-\headcommand {\beamer@sectionpages {15}{15}}
-\headcommand {\beamer@documentpages {15}}
-\headcommand {\def \inserttotalframenumber {15}}
+\headcommand {\slideentry {4}{2}{3}{16/16}{Commands}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\sectionentry {5}{Slot}{17}{Slot}{0}}
+\headcommand {\beamer@sectionpages {14}{16}}
+\headcommand {\beamer@subsectionpages {14}{16}}
+\headcommand {\slideentry {5}{0}{4}{17/17}{}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\beamer@partpages {1}{17}}
+\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\beamer@sectionpages {17}{17}}
+\headcommand {\beamer@documentpages {17}}
+\headcommand {\def \inserttotalframenumber {17}}

@@ -66,7 +66,7 @@ Komende iteratie:
 \begin{frame}{Test Coverage}
 \begin{figure}[h!]
 	\center
-	%\includegraphics[width= 0.9\linewidth]{img/coverage.png}
+	\includegraphics[width= 0.9\linewidth]{img/coverage.png}
 	\caption{EclEmma test coverage}
 \end{figure}
 \end{frame}
@@ -139,12 +139,12 @@ Komende iteratie:
 \begin{figure}
 	\center
 	\includegraphics[width=\linewidth]{img/composite.pdf}
-	\caption{Geinspireerd door Composite Pattern}
+	\caption{Ge\"{i}nspireerd door Composite Pattern}
 \end{figure}
 \end{minipage}
 \begin{minipage}{\columnwidth}
 \begin{itemize}
-	\item Zelfde interface voor complex objec (\textit{square/inventory}) als voor primitief object (\textit{item}) 
+	\item Zelfde interface voor complex object (\textit{square/inventory}) als voor primitief object (\textit{item}) 
 	\item Gecombineerd met \textit{double dispatch} voor onderscheid van effect op \textit{item} en op \textit{player}
 \end{itemize}
 \end{minipage}
@@ -162,6 +162,31 @@ Komende iteratie:
 	\center
 	\includegraphics[width= 0.8\linewidth]{img/Command_pattern.pdf}
 \end{figure}	
+\end{frame}
+
+
+\begin{frame}
+\begin{multicols}{2}
+\begin{minipage}{\columnwidth}
+\begin{figure}
+	\center
+	\includegraphics[width=\linewidth]{img/movehandler}
+\end{figure}
+\end{minipage}
+\begin{minipage}{\columnwidth}
+\begin{itemize}
+	\item de Handlers gebruiken Commands voor de eigenlijke uitvoering van de actie.
+	\item Zorgt voor sterke encapsulatie binnen de Handlers.
+\end{itemize}
+\end{minipage}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+	\center
+	\includegraphics[scale=0.25]{img/movecommand}
+\end{figure}
 \end{frame}
 
 
