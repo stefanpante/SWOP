@@ -2,6 +2,8 @@ package gui.button;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import gui.GUIElement;
@@ -9,7 +11,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
 
-public abstract class GUIButton extends GUIElement {
+public abstract class GUIButton extends GUIElement implements MouseListener {
 
 
 	/**
@@ -119,5 +121,25 @@ public abstract class GUIButton extends GUIElement {
 	
 	public void setActionCommand(String actionCommand){
 		this.actionCommand = actionCommand;
+	}
+	
+	public void mouseClicked(MouseEvent evt){
+		System.out.println("mouseClicked");
+	}
+	
+	public void mouseEntered(MouseEvent evt){
+		
+	}
+	
+	public void mouseExited(MouseEvent evt){
+		
+	}
+	
+	public void mousePressed(MouseEvent evt){
+		
+	}
+	
+	public void mouseReleased(MouseEvent evt){
+		
 	}
 }
