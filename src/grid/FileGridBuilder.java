@@ -50,13 +50,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	private ArrayList<Coordinate> wall_squares;
 
 	/**
-	 * Start coordinate of the first player
+	 * ArrayList containing the start positions of the players.
 	 */
-	private Coordinate player1;
-	/**
-	 * Start coordinate of the second player.
-	 */
-	private Coordinate player2;
+	private ArrayList<Coordinate> startPositions;
 
 	/**
 	 * Construct a new fileGridBuilder with a given parameter
@@ -64,15 +60,16 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 */
 	public FileGridBuilder(String filepath) throws IOException{
 		this.file = new File(filepath);
+		this.startPositions = new ArrayList<Coordinate>();
 		setRandom(new Random());
-		setConstraints();
 		build();
 	}
 
 	protected void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		excluded.add(player1);
-		excluded.add(player2);
+		for(Coordinate coor: startPositions)
+			excluded.add(coor);
+		
 		setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
 		// TODO: Do we still need the squared location for the light grenade.
 		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded));
@@ -164,9 +161,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 				break;
 				case  '#':		wall_squares.add(new Coordinate(x,y));
 				break;
-				case  '1':		setPlayerOneCoordinate(new Coordinate(x,y));
+				case  '1':		addStartCoordinate(new Coordinate(x,y));
 				break;
-				case '2':		setPlayerTwoCoordinate(new Coordinate(x, y));
+				case '2':		addStartCoordinate(new Coordinate(x, y));
 				default:		break;
 				}
 				x++;
@@ -180,19 +177,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 
 
 	}
-
-	private void setPlayerOneCoordinate(Coordinate coordinate) throws IllegalStateException {
-		if(player1 != null){
-			throw new IllegalStateException("There cannot be two starting positions for player 1");
-		}
-		player1 = coordinate;
-	}
-
-	private void setPlayerTwoCoordinate(Coordinate coordinate) throws IllegalStateException{
-		if(player2 != null){
-			throw new IllegalStateException("There cannot be two starting positions for player 2");
-		}
-		player2 = coordinate;
+	
+	public void addStartCoordinate(Coordinate coor){
+		this.startPositions.add(coor);
 	}
 
 	/**
@@ -209,13 +196,12 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		for(Coordinate coordinate: wall_squares){
 			getGrid().setSquare(coordinate, new Square());
 		}
-		Square p1 = new Square();
-		Square p2 = new Square();
 
-		getGrid().setSquare(player1, p1);
-		getGrid().setSquare(player2, p2);
-		getGrid().setStartPlayerOne(p1);
-		getGrid().setStartPlayerTwo(p2);
+		for(Coordinate coor: startPositions){
+			Square sq = new Square();
+			getGrid().setSquare(coor, sq);
+			getGrid().addStartPosition(sq);
+		}
 	}
 
 	/**
@@ -287,21 +273,20 @@ public class FileGridBuilder extends AbstractGridBuilder{
 				}
 			}
 		}
-		AStar aStar = new AStar(getGrid());
-		if(getGrid().getStartPlayerOne() == null || getGrid().getStartPlayerTwo() == null){
-			throw new IllegalStateException(" There should be a startposition for both players");
+		
+		//TODO: assert that there are at least two start positions.
+
+		for(Square startPlayer1: getGrid().getStartPositions()){
+			for(Square startPlayer2 : getGrid().getStartPositions()){
+				if(startPlayer1 != startPlayer2){
+					AStar aStar = new AStar(getGrid());
+					aStar.shortestPath(startPlayer1, startPlayer2);
+				}
+				
+			}
 		}
-		aStar.shortestPath(getGrid().getStartPlayerOne(), getGrid().getStartPlayerTwo());
+		
 	}
 
-	@Override
-	public Coordinate getPlayerOneCoordinate() {
-		return player1;
-	}
-
-	@Override
-	public Coordinate getPlayerTwoCoordinate() {
-		return player2;
-	}
 
 }

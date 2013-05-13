@@ -426,14 +426,6 @@ public abstract class AbstractGridBuilder {
 	protected abstract void build() throws IllegalStateException;
 	
 
-	/**
-	 * Return the coordinate for the first player.
-	 */
-    public abstract Coordinate getPlayerOneCoordinate();
-    
-    /**
-     * Return the coordinate for the second player.
-     */
-    public abstract Coordinate getPlayerTwoCoordinate();
+	public abstract ArrayList<Coordinate> getStartPositions();
 	
 }

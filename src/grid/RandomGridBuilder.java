@@ -287,6 +287,15 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     public Coordinate getPlayerTwoCoordinate(){
         return new Coordinate(getGrid().getHSize()-1, 0);
     }
+    
+    public ArrayList<Coordinate> getPlayerStartCoordinates(){
+    	ArrayList<Coordinate> startpositions = new ArrayList<Coordinate>();
+    	
+    	startpositions.add(new Coordinate(0,0));
+    	startpositions.add(new Coordinate(0, getGrid().getVSize() -1));
+    	startpositions.add(new Coordinate(getGrid().getHSize() - 1, 0));
+    	startpositions.add(new Coordinate(getGrid().getHSize()-1, getGrid().getVSize() -1));
+    }
 
 	/**
 	 * Finds a random list of sequences of coordinates that follow the given constraint.

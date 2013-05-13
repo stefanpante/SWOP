@@ -71,15 +71,10 @@ public class Grid {
 	private int vSize;
 	
 	/**
-	 * the start position of the second player.
+	 * the start position of the players
 	 */
-	private Square startPlayer1;
 	
-	/**
-	 * The start position of the second player.
-	 */
-	private Square startPlayer2;
-	
+	private ArrayList<Square> startPositions;
 	/**
 	 * Creates a new grid with given height and length.
 	 * 
@@ -94,6 +89,7 @@ public class Grid {
 		grid = new HashMap<Coordinate, Square>();
 		setHSize(hSize);
 		setVSize(vSize);
+		this.startPositions = new ArrayList<Square>();
 	}
 	
 	/**
@@ -579,27 +575,6 @@ public class Grid {
 		throw new NoSuchElementException("The given destination could not be found in this grid");
 	}
 	
-	/**
-	 * Sets the start position of the first player
-	 * @param playerone  the startSquare for the first player
-	 */
-	public void setStartPlayerOne(Square playerone){
-		if(!isValidStartPosition(playerone)){
-			throw new IllegalArgumentException("The given square is not a valid startposition of the player");
-		}
-		this.startPlayer1 = playerone;
-	}
-	
-	/**
-	 * Sets the start position of the second player
-	 * @param playerTwo the startsquare for the second player
-	 */
-	public void setStartPlayerTwo(Square playerTwo){
-		if(!isValidStartPosition(playerTwo)){
-			throw new IllegalArgumentException("The given square is not a valid startposition of the player");
-		}
-		this.startPlayer2 = playerTwo;
-	}
 	
 	/**
 	 * Checks if the given square is a valid start position for the player
@@ -609,13 +584,28 @@ public class Grid {
 		return (grid.containsValue(player) && !player.isObstructed());
 	}
 
-    // TODO: Fix for multiple players
-    public Square getStartPlayer(int i){
-        if(i ==  1)
-            return startPlayer1;
-        return startPlayer2;
-    }
 	
+    /**
+     * Returns the start positions of all the players on the grid.
+     * @return
+     */
+    public ArrayList<Square> getStartPositions(){
+    	return new ArrayList<Square>(startPositions);
+    }
+    
+    /**
+     * Adds a start position for the player on the grid.
+     * @param square
+     */
+    public void addStartPosition(Square square){
+    	if(!isValidStartPosition(square)){
+    		throw new IllegalArgumentException("a startsquare for a player should be valid! (not obstructed and not null");
+    	}
+    	
+    	this.startPositions.add(square);
+    }
+    
+    
 	/**
 	 * Returns a string representation of the grid.
 	 */
