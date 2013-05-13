@@ -181,6 +181,10 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	public void addStartCoordinate(Coordinate coor){
 		this.startPositions.add(coor);
 	}
+	
+	public ArrayList<Coordinate> getStartPositions(){
+		return new ArrayList<Coordinate>(this.startPositions);
+	}
 
 	/**
 	 * Constructs all the squares

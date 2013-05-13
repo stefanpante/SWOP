@@ -33,8 +33,10 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setRandom(new Random());
 		setSquares();
 		setEmptyConstraints();
-		getGrid().setStartPlayerOne(getGrid().getSquare(getPlayerOneCoordinate()));
-		getGrid().setStartPlayerTwo(getGrid().getSquare(getPlayerTwoCoordinate()));
+		for(Coordinate coor: getStartPositions()){
+			Square s = getGrid().getSquare(coor);
+			getGrid().addStartPosition(s);
+		}
 	}
 	
 	/**
@@ -117,6 +119,10 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	@Override
 	protected void build() throws IllegalStateException {
 		setSquares();
+		for(Coordinate coor: getStartPositions()){
+			Square s = getGrid().getSquare(coor);
+			getGrid().addStartPosition(s);
+		}
 		setConstraints();
 		placeWalls(randomWallLocations(getConstraintWall()));
 		placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
@@ -129,11 +135,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		Coordinate coor = getChargedIdentityDiskLocation();
 		placeItem( getGrid().getSquare(coor), new ChargedIdentityDisc());
 		
-		Square sq = getGrid().getSquare(this.getPlayerOneCoordinate());
-		Square sq2 = getGrid().getSquare(this.getPlayerTwoCoordinate());
 		
-		getGrid().setStartPlayerOne(sq);
-        getGrid().setStartPlayerTwo(sq2);
 		
 	}
 
@@ -156,22 +158,22 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 //		placeForceFieldGenerators(fFgen);
 		//placeChargedIdentityDisk(chargedIdentityDisk);
 		
-		Square sq = getGrid().getSquare(getPlayerOneCoordinate());
-		Square sq2 = getGrid().getSquare(getPlayerTwoCoordinate());
+		for(Coordinate coor: getStartPositions()){
+			Square s = getGrid().getSquare(coor);
+			getGrid().addStartPosition(s);
+		}
 		
-        getGrid().setStartPlayerOne(sq);
-        getGrid().setStartPlayerTwo(sq2);
 	}
 	
 
 	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		excluded.add(getPlayerOneCoordinate());
-		excluded.add(getPlayerTwoCoordinate());
-		
 		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
-		grenadesIncluded.add(getSquaredLocation(getPlayerOneCoordinate(), Direction.NORTH, 3));
-		grenadesIncluded.add(getSquaredLocation(getPlayerTwoCoordinate(), Direction.EAST, 3));
+		for(Coordinate coor: getStartPositions()){
+			excluded.add(coor);
+			grenadesIncluded.add(getSquaredLocation(coor, Direction.NORTH, 3));
+		}
+		
 		
 		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
 		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
@@ -255,6 +257,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return coordinates;
 	}
 
+	//FIXME: refactor me to find the coordinates without the use of direction
 	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, Direction direction, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		switch (direction) {
@@ -280,21 +283,17 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return coordinates;
 	}
 
-    public Coordinate getPlayerOneCoordinate(){
-        return new Coordinate(0, getGrid().getVSize() -1);
-    }
-
-    public Coordinate getPlayerTwoCoordinate(){
-        return new Coordinate(getGrid().getHSize()-1, 0);
-    }
     
-    public ArrayList<Coordinate> getPlayerStartCoordinates(){
-    	ArrayList<Coordinate> startpositions = new ArrayList<Coordinate>();
+    @Override
+    public ArrayList<Coordinate> getStartPositions(){
+    	ArrayList<Coordinate> startPositions = new ArrayList<Coordinate>();
     	
-    	startpositions.add(new Coordinate(0,0));
-    	startpositions.add(new Coordinate(0, getGrid().getVSize() -1));
-    	startpositions.add(new Coordinate(getGrid().getHSize() - 1, 0));
-    	startpositions.add(new Coordinate(getGrid().getHSize()-1, getGrid().getVSize() -1));
+    	startPositions.add(new Coordinate(0,0));
+    	startPositions.add(new Coordinate(0, getGrid().getVSize() -1));
+    	startPositions.add(new Coordinate(getGrid().getHSize() - 1, 0));
+    	startPositions.add(new Coordinate(getGrid().getHSize()-1, getGrid().getVSize() -1));
+    	
+    	return startPositions;
     }
 
 	/**
