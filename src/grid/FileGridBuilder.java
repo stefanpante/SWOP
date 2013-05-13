@@ -161,10 +161,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 				break;
 				case  '#':		wall_squares.add(new Coordinate(x,y));
 				break;
-				case  '1':		addStartCoordinate(new Coordinate(x,y));
-				break;
-				case '2':		addStartCoordinate(new Coordinate(x, y));
-				default:		break;
+				default:		checkDigitAddPlayerPosition(c, new Coordinate(x,y));
 				}
 				x++;
 			}
@@ -174,8 +171,12 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			y++;
 			this.setVSize(y);
 		}
-
-
+	}
+	
+	private void checkDigitAddPlayerPosition(char c, Coordinate coor){
+		if(Character.isDigit(c)){
+			addStartCoordinate(coor);
+		}
 	}
 	
 	public void addStartCoordinate(Coordinate coor){

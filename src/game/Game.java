@@ -80,8 +80,9 @@ public class Game {
 	}
 
     public void addPlayers(int amount){
+    	ArrayList<Square> startPositions = getGrid().getStartPositions();
         for(int i = 1; i <= amount; i++){
-            Square startPosition = grid.getStartPlayer(i);
+            Square startPosition = startPositions.get(i - 1);
             Player player = new Player(startPosition,i);
             addPlayer(player);
         }

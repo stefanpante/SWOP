@@ -151,7 +151,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
 			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
-		//FIXME: Replace
+		//	
 //		placeLightGrenade(lightGrenades);
 //		placeIdentityDisk(identityDisks);
 //		placeTeleports(teleports);
