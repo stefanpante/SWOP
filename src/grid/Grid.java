@@ -608,20 +608,13 @@ public class Grid {
 	public boolean isValidStartPosition(Square player){
 		return (grid.containsValue(player) && !player.isObstructed());
 	}
-	
-	/**
-	 * Returns the start square of the first player
-	 */
-	public Square getStartPlayerOne(){
-		return startPlayer1;
-	}
-	
-	/**
-	 * Returns the start square of the second player
-	 */
-	public Square getStartPlayerTwo(){
-		return startPlayer2;
-	}
+
+    // TODO: Fix for multiple players
+    public Square getStartPlayer(int i){
+        if(i ==  1)
+            return startPlayer1;
+        return startPlayer2;
+    }
 	
 	/**
 	 * Returns a string representation of the grid.
