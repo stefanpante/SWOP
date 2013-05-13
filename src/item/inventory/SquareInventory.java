@@ -132,14 +132,6 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return result + super.toString();
 	}
 
-	public boolean containsSameType(Item item){
-		for (Item i: getAllItems()) {
-			if(item.isSameType(i))
-				return true;
-		}
-
-		return false;
-	}
 
 	@Override
 	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
@@ -206,6 +198,20 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
         super.addItem(forceFieldGenerator);
     }
     
+
+	@Override
+	public void addFlag(Flag flag) throws IllegalStateException {
+		super.addItem(flag);
+		
+	}
+
+	@Override
+	public void removeFlag(Flag flag) throws IllegalStateException {
+		super.removeItem(flag);
+		
+	}
+	
+    
     @Override
     public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
         if (!getAllItems().contains(forceFieldGenerator))
@@ -232,17 +238,5 @@ public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 		return false;
 	}
 
-	@Override
-	public void addFlag(Flag flag) throws IllegalStateException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeFlag(Flag flag) throws IllegalStateException {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
 

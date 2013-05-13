@@ -3,6 +3,7 @@ package items;
 import static org.junit.Assert.*;
 
 import item.ChargedIdentityDisc;
+import item.Flag;
 import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
@@ -127,5 +128,13 @@ public class TestSquareInventory {
 		assertFalse(launchableList.contains(it));
 		assertFalse(launchableList.contains(it2));
 		assertEquals(0,launchableList.size());
+	}
+	
+	@Test
+	public void testAddFlag(){
+		SquareInventory sqInv = new SquareInventory();
+		Item it = new Flag();
+		sqInv.addItem(it);
+		assertTrue(sqInv.hasItem(it));
 	}
 }

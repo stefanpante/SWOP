@@ -216,6 +216,14 @@ public abstract class Inventory implements MovableEffect {
 		return discs;
 	}
 
+	public boolean containsSameType(Item item){
+		for (Item i: getAllItems()) {
+			if(item.isSameType(i))
+				return true;
+		}
+
+		return false;
+	}
 
     @Override
     public void affect(Movable movable) {

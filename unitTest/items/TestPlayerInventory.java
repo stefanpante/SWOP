@@ -3,6 +3,7 @@ package items;
 import static org.junit.Assert.*;
 
 import item.ChargedIdentityDisc;
+import item.Flag;
 import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
@@ -93,5 +94,23 @@ public class TestPlayerInventory {
 	public void testAddTeleport(){
 		PlayerInventory pi1 = new PlayerInventory();
 		pi1.addItem(new Teleport());
+	}
+	
+	@Test
+	public void testAddFlag(){
+		PlayerInventory plInv = new PlayerInventory();
+		Flag flag = new Flag();
+		plInv.addItem(flag);
+		assertTrue(plInv.hasItem(flag));
+	}
+	
+	@Test(expected=IllegalStateException.class)
+	public void testAddMoreFlags(){
+		PlayerInventory plInv = new PlayerInventory();
+		Flag flag = new Flag();
+		plInv.addItem(flag);
+		assertTrue(plInv.hasItem(flag));
+		
+		plInv.addItem(new Flag());
 	}
 }
