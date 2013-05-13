@@ -7,7 +7,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import game.Game;
 import grid.GridProvider;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
@@ -16,7 +15,6 @@ import controller.TurnHandler;
 import org.junit.Before;
 import org.junit.Test;
 
-import game.Player;
 import square.Direction;
 import square.Square;
 import square.power.failure.PrimaryPowerFail;
@@ -60,7 +58,7 @@ public class EndTurnHandlerTest {
 	 */
 	@Test 
 	public void hasMoveTest() throws Exception{	
-		game.getPowerManager().clearPowerFailures();
+		game.getPowerGayManager().clearPowerFailures();
 		
 		assertFalse(endTurnHandler.hasMoved());
 		

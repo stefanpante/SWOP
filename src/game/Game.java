@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import manager.ForceFieldManager;
-import manager.PowerManager;
+import manager.PowerGayManager;
 import notnullcheckweaver.NotNull;
 import square.Direction;
 import square.Square;
@@ -52,7 +52,7 @@ public class Game extends Observable {
 	/**
 	 * Manages the power failures in the game.
 	 */
-	private PowerManager powerManager;
+	private PowerGayManager powerGayManager;
 
 
 	/**
@@ -74,7 +74,7 @@ public class Game extends Observable {
 		addPlayer(new Player(bottomLeft, 1));
 		addPlayer(new Player(topRight, 2));
 
-		this.powerManager = new PowerManager(getGrid());
+		this.powerGayManager = new PowerGayManager(getGrid());
         ForceFieldManager forceFieldManager = new ForceFieldManager(getGrid());
         this.addObserver(forceFieldManager);
 		
@@ -259,8 +259,8 @@ public class Game extends Observable {
 	/**
 	 * Returns the power manager.
 	 */
-	public PowerManager getPowerManager() {
-		return this.powerManager;
+	public PowerGayManager getPowerGayManager() {
+		return this.powerGayManager;
 	}
 	
 	/**
