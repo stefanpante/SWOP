@@ -10,7 +10,6 @@ import item.Teleport;
 import org.junit.Before;
 import org.junit.Test;
 
-import game.Game;
 import grid.Grid;
 import grid.GridProvider;
 import controller.EndTurnHandler;
@@ -85,7 +84,7 @@ public class TeleportScenarioTest {
 	@Test
 	public void basicTeleporterTest() throws Exception {
 		// clear all powerfailures and obstacles
-		game.getPowerManager().clearPowerFailures();
+		game.getPowerGayManager().clearPowerFailures();
 		
 		assertFalse(teleport.getDestination().isObstructed());
 		moveHandler.move(Direction.SOUTH);
@@ -103,7 +102,7 @@ public class TeleportScenarioTest {
 	@Test(expected = IllegalStateException.class)
 	public void pickupTeleporterFirstSquare() throws Exception {
 		// clear all powerfailures and obstacles
-		game.getPowerManager().clearPowerFailures();
+		game.getPowerGayManager().clearPowerFailures();
 		
 		Item item = new IdentityDisc();
 		squareOne.getInventory().addItem(item);
@@ -119,7 +118,7 @@ public class TeleportScenarioTest {
 	@Test
 	public void pickupTeleporterSecSquare() throws Exception{
 		// clear all powerfailures and obstacles
-		game.getPowerManager().clearPowerFailures();
+		game.getPowerGayManager().clearPowerFailures();
 		
 		Item item = new IdentityDisc();
 		squareTwo.getInventory().addItem(item);
@@ -138,7 +137,7 @@ public class TeleportScenarioTest {
 	@Test(expected = Exception.class)
 	public void testOtherPlayerDestination() throws Exception {
 		// clear all powerfailures and obstacles
-		game.getPowerManager().clearPowerFailures();
+		game.getPowerGayManager().clearPowerFailures();
 		
 		game.getNextPlayer().setPosition(squareTwo);
 		moveHandler.move(Direction.SOUTH);
@@ -150,7 +149,7 @@ public class TeleportScenarioTest {
 	@Test
 	public void testSplitLightTrail() throws Exception{
 		// clear all powerfailures and obstacles
-		game.getPowerManager().clearPowerFailures();
+		game.getPowerGayManager().clearPowerFailures();
 				
 		moveHandler.move(Direction.SOUTH);
 		assertEquals(game.getCurrentPlayer().getPosition(),squareTwo);

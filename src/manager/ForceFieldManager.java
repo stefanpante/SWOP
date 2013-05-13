@@ -19,7 +19,7 @@ import java.util.Observer;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
-public class ForceFieldManager implements Observer {
+public class ForceFieldManager extends Manager{
 	
 	/**
 	 * Range in which two generators create a force field.
@@ -31,10 +31,6 @@ public class ForceFieldManager implements Observer {
      */
     private ArrayList<ForceField> forceFields;
 
-    /**
-     * The grid the power manager is working on.
-     */
-    private final Grid grid;
     
     /**
      * Instantiates the Force Field manager with a reference to the grid.
@@ -42,7 +38,7 @@ public class ForceFieldManager implements Observer {
      * @param grid
      */
     public ForceFieldManager(Grid grid){
-        this.grid = grid;
+        super(grid);
         this.forceFields = new ArrayList<ForceField>();
     }
     
@@ -112,9 +108,9 @@ public class ForceFieldManager implements Observer {
     protected void detectForceFields(){   
         ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
         
-        for (Square square: grid.getAllSquares()) {
+        for (Square square: getGrid().getAllSquares()) {
             if (square.getInventory().containsSameType(new ForceFieldGenerator()) && square.getInventory().getForceFieldGenerator().isActive()) {
-            	Coordinate coordinate = grid.getCoordinate(square);
+            	Coordinate coordinate = getGrid().getCoordinate(square);
             	generatorCoordinates.add(coordinate);
             } 
         }
@@ -142,7 +138,7 @@ public class ForceFieldManager implements Observer {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {
-            Square square = grid.getSquare(c);
+                Square square = getGrid().getSquare(c);
             if(square.isCoveredByObstacle() && square.getObstacle().preventsField())
                 return;
             forceField.addSquare(square);

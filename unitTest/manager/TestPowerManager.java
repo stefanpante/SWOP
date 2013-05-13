@@ -6,7 +6,6 @@ import game.Game;
 import grid.Grid;
 import grid.GridProvider;
 
-import manager.PowerManager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ import square.power.failure.TertiaryPowerFail;
 import util.Coordinate;
 
 /**
- * Tests the workings of the PowerManager.
+ * Tests the workings of the PowerGayManager.
  * Such as decrementing actions and turns.
  * 
  * Creating the secondary and tertiary power failures in a proper manner.
@@ -28,7 +27,7 @@ import util.Coordinate;
  */
 public class TestPowerManager {
 
-	private PowerManager powerManager;
+	private PowerGayManager powerGayManager;
 	
 	private Grid grid;
 	
@@ -41,65 +40,65 @@ public class TestPowerManager {
 		this.grid = GridProvider.getEmptyGrid();
 		Game game = new Game(grid);
 		
-		this.powerManager = game.getPowerManager();
+		this.powerGayManager = game.getPowerGayManager();
 		this.coordinate = new Coordinate(3,3);;
 		this.square = grid.getSquare(coordinate);
 		
-		powerManager.clearPowerFailures();
+		powerGayManager.clearPowerFailures();
 	}
 	
 	@Test
 	public void powerFailureSquare() {
 		assertFalse(square.getPower().isFailing());
 		
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		assertTrue(square.getPower().isFailing());
 	}
 	
 	@Test
 	public void clearPowerFailures() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		assertTrue(square.getPower().isFailing());
 		
-		this.powerManager.clearPowerFailures();
+		this.powerGayManager.clearPowerFailures();
 		
 		assertFalse(square.getPower().isFailing());
 	}
 	
 	@Test
 	public void decreaseTurn() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		assertEquals(square.getPower().getRemainingTurns(), PrimaryPowerFail.TURNS);
 		assertEquals(square.getPower().getRemainingActions(), PrimaryPowerFail.ACTIONS);
 		
-		this.powerManager.decreaseTurn();
+		this.powerGayManager.decreaseTurn();
 		
 		assertEquals(square.getPower().getRemainingTurns(), PrimaryPowerFail.TURNS - 1);
 	}
 	
 	@Test
 	public void decreaseTurns() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		assertTrue(square.getPower().isFailing());
 		assertEquals(square.getPower().getRemainingTurns(), PrimaryPowerFail.TURNS);
 		
-		this.powerManager.decreaseTurn();
-		this.powerManager.decreaseTurn();
+		this.powerGayManager.decreaseTurn();
+		this.powerGayManager.decreaseTurn();
 		
 		assertTrue(square.getPower().isFailing());
 		
-		this.powerManager.decreaseTurn();
+		this.powerGayManager.decreaseTurn();
 		
 		assertFalse(square.getPower().isFailing());
 	}
 	
 	@Test
 	public void decreaseAction() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		Power secondary = square.getPower().getChild();
 		Power tertiary = secondary.getChild();
@@ -107,7 +106,7 @@ public class TestPowerManager {
 		assertEquals(secondary.getRemainingActions(), SecondaryPowerFail.ACTIONS);
 		assertEquals(tertiary.getRemainingActions(), TertiaryPowerFail.ACTIONS);
 		
-		this.powerManager.decreaseAction();
+		this.powerGayManager.decreaseAction();
 		
 		assertEquals(secondary.getRemainingActions(), SecondaryPowerFail.ACTIONS - 1);
 		assertEquals(tertiary.getRemainingActions(), TertiaryPowerFail.ACTIONS); // (because it is reset)
@@ -118,7 +117,7 @@ public class TestPowerManager {
 	 */
 	@Test
 	public void rotationOfSecondary() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		Power secondary = square.getPower().getChild();
 		
@@ -126,12 +125,12 @@ public class TestPowerManager {
 		
 		Direction direction = secondary.getDirection();
 		
-		this.powerManager.decreaseAction();
+		this.powerGayManager.decreaseAction();
 		
 		assertTrue(secondary.getDirection() == direction);
 		assertEquals(secondary.getDirection(), direction);
 		
-		this.powerManager.decreaseAction();
+		this.powerGayManager.decreaseAction();
 		
 		assertTrue(secondary.getDirection() != direction);
 		assertEquals(secondary.getDirection(), secondary.getRotation().rotate(direction));
@@ -139,12 +138,12 @@ public class TestPowerManager {
 	
 	@Test
 	public void creationOfSecondary() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		Power primary = square.getPower();
 		Power secondary = primary.getChild();
 		
-		Square secondarySquare = powerManager.getSquare(secondary);
+		Square secondarySquare = powerGayManager.getSquare(secondary);
 		
 		assertTrue(grid.getNeighbors(square).containsValue(secondarySquare));
 	}
@@ -155,14 +154,14 @@ public class TestPowerManager {
 	 */
 	@Test
 	public void creationOfTertiary() {
-		this.powerManager.powerFailSquare(square);
+		this.powerGayManager.powerFailSquare(square);
 		
 		Power primary = square.getPower();
 		Power secondary = primary.getChild();
 		Power tertiary = secondary.getChild();
 		
-		Square secondarySquare = powerManager.getSquare(secondary);
-		Square tertiarySquare = powerManager.getSquare(tertiary);
+		Square secondarySquare = powerGayManager.getSquare(secondary);
+		Square tertiarySquare = powerGayManager.getSquare(tertiary);
 		
 		assertFalse(grid.getNeighbors(square).containsValue(tertiarySquare));
 		assertTrue(grid.getNeighbors(secondarySquare).containsValue(tertiarySquare));

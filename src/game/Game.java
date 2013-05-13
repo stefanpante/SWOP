@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import manager.ForceFieldManager;
-import manager.PowerManager;
+import manager.PowerGayManager;
 import notnullcheckweaver.NotNull;
 import square.Direction;
 import square.Square;
@@ -27,7 +27,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 			| isValidCurrentPlayer(getCurrentPlayer())
  */
 @NotNull
-public class Game extends Observable {
+public class Game {
 	
 	/**
 	 * The Grid.
@@ -52,7 +52,7 @@ public class Game extends Observable {
 	/**
 	 * Manages the power failures in the game.
 	 */
-	private PowerManager powerManager;
+	private PowerGayManager powerGayManager;
 
 
 	/**
@@ -64,24 +64,28 @@ public class Game extends Observable {
 	 * 			The grid on which the game will be played.
 	 */
 	public Game(Grid grid){
-		// Build the grid
-		this.setGrid(grid);
-		
-		// Add players
-		this.players = new ArrayList<Player>();
-		Square bottomLeft = grid.getStartPlayerOne();
-		Square topRight = grid.getStartPlayerTwo();
-		addPlayer(new Player(bottomLeft, 1));
-		addPlayer(new Player(topRight, 2));
+        this.powerGayManager = new PowerGayManager(getGrid());
+        this.players = new ArrayList<Player>();
+        this.setGrid(grid);
 
-		this.powerManager = new PowerManager(getGrid());
+        // Add two players to this game
+        addPlayers(2);
+
         ForceFieldManager forceFieldManager = new ForceFieldManager(getGrid());
-        this.addObserver(forceFieldManager);
+        addObserver(forceFieldManager);
 		
 		// Start the game
 		start();
 		setCurrentPlayer(players.get(0));
 	}
+
+    public void addPlayers(int amount){
+        for(int i = 1; i <= amount; i++){
+            Square startPosition = grid.getStartPlayer(i);
+            Player player = new Player(startPosition,i);
+            addPlayer(player);
+        }
+    }
 	
 	/**
 	 * Sets the grid for the game.
@@ -259,8 +263,8 @@ public class Game extends Observable {
 	/**
 	 * Returns the power manager.
 	 */
-	public PowerManager getPowerManager() {
-		return this.powerManager;
+	public PowerGayManager getPowerGayManager() {
+		return this.powerGayManager;
 	}
 	
 	/**
@@ -298,8 +302,10 @@ public class Game extends Observable {
 		return true;
 	}
 
-    public void notifyAction(){
-        setChanged();
-        notifyObservers();
+    public void addObserver(Observer observer){
+        for (Player player : getPlayers()){
+            player.addObserver(observer);
+        }
     }
+
 }

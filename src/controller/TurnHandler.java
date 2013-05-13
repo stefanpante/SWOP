@@ -33,7 +33,7 @@ public class TurnHandler extends Handler implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		getGame().getPowerManager().decreaseAction();
+		getGame().getPowerGayManager().decreaseAction();
 		
 		if(hasWon()){
     		firePropertyChange(Handler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
@@ -70,7 +70,7 @@ public class TurnHandler extends Handler implements Observer {
 	    	getGame().getCurrentPlayer().endTurn();
 	    	getGame().switchToNextPlayer();
 	    	
-	    	getGame().getPowerManager().decreaseTurn();
+	    	getGame().getPowerGayManager().decreaseTurn();
 	    	
 			startTurn();
 		}
@@ -87,7 +87,7 @@ public class TurnHandler extends Handler implements Observer {
 		}
 		
 		increaseCurrentPlayerCount();
-		getGame().getPowerManager().powerFailSquares();
+		getGame().getPowerGayManager().powerFailSquares();
 
 		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
             getGame().getCurrentPlayer().decrementActions();

@@ -17,6 +17,8 @@ import square.obstacle.Obstacle;
 import item.Item;
 import item.inventory.PlayerInventory;
 
+import java.util.Observable;
+
 /**
  * A Player is a Single Obstacle with an Inventory containing items and 
  * a Multi Obstacle Light Trail.
@@ -25,7 +27,7 @@ import item.inventory.PlayerInventory;
  *
  */
 @NotNull
-public class Player implements Obstacle, Movable {
+public class Player extends Observable implements Obstacle, Movable {
 
 	/**
 	 * The start position of this player
@@ -363,6 +365,7 @@ public class Player implements Obstacle, Movable {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+        endAction();
 	}
 	
 
@@ -545,4 +548,9 @@ public class Player implements Obstacle, Movable {
 	public void setJustTeleported(boolean b) {
 		justTeleported = b;
 	}
+
+    private void endAction(){
+        setChanged();
+        notifyObservers();
+    }
 }
