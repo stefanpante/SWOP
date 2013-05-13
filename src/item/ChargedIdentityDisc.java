@@ -53,4 +53,9 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	public void resetRange(){
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
+	
+	@Override
+	public Item copy(){
+		return new ChargedIdentityDisc();
+	}
 }

@@ -176,4 +176,9 @@ public class LightGrenade extends Item implements Activatable {
 		DROPPED,
 		WORN;
 	}
+
+	@Override
+	public Item copy() {
+		return new LightGrenade();
+	}
 }
