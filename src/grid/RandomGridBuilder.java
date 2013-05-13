@@ -1,5 +1,10 @@
 package grid;
 
+import item.ChargedIdentityDisc;
+import item.ForceFieldGenerator;
+import item.IdentityDisc;
+import item.LightGrenade;
+
 import java.util.ArrayList;
 import java.util.Random;
 import square.Direction;
@@ -114,11 +119,15 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setSquares();
 		setConstraints();
 		placeWalls(randomWallLocations(getConstraintWall()));
-		placeLightGrenade(randomLocations(getConstraintLightGrenade()));
-		placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
+		placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
+		placeItems(new IdentityDisc(), randomLocations(getConstraintIdentityDisk()));
+		placeItems(new ForceFieldGenerator(), randomLocations(getConstraintForceFieldGenerator()));
+		//placeLightGrenade(randomLocations(getConstraintLightGrenade()));
+		//placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
 		placeTeleports(randomLocations(getConstraintTeleport()));
-		placeForceFieldGenerators(randomLocations(getConstraintForceFieldGenerator()));
-		placeChargedIdentityDisk(getChargedIdentityDiskLocation());
+		//placeForceFieldGenerators(randomLocations(getConstraintForceFieldGenerator()));
+		Coordinate coor = getChargedIdentityDiskLocation();
+		placeItem( getGrid().getSquare(coor), new ChargedIdentityDisc());
 		
 		Square sq = getGrid().getSquare(this.getPlayerOneCoordinate());
 		Square sq2 = getGrid().getSquare(this.getPlayerTwoCoordinate());
@@ -140,11 +149,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
 			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
-		placeLightGrenade(lightGrenades);
-		placeIdentityDisk(identityDisks);
-		placeTeleports(teleports);
-		placeForceFieldGenerators(fFgen);
-		placeChargedIdentityDisk(chargedIdentityDisk);
+		//FIXME: Replace
+//		placeLightGrenade(lightGrenades);
+//		placeIdentityDisk(identityDisks);
+//		placeTeleports(teleports);
+//		placeForceFieldGenerators(fFgen);
+		//placeChargedIdentityDisk(chargedIdentityDisk);
 		
 		Square sq = getGrid().getSquare(getPlayerOneCoordinate());
 		Square sq2 = getGrid().getSquare(getPlayerTwoCoordinate());

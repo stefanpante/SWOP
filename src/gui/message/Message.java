@@ -3,6 +3,7 @@ package gui.message;
 import gui.GUIElement;
 import gui.Label;
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PVector;
 
 /**
@@ -30,8 +31,8 @@ public class Message extends GUIElement {
      * @param gui
      */
     public Message(float width, float height, PVector position, String message, PApplet gui) {
-        super(height, width, position, gui);
-        Label label = new Label(width, 20, position, "Message", gui);
+        super(width,height, position, gui);
+        this.label = new Label(width, 25, position, "Message", gui);
         setText(message);
     }
 
@@ -41,7 +42,14 @@ public class Message extends GUIElement {
     @Override
     public void draw() {
         if(isVisible()){
+            
+            gui.fill(color);
+            gui.stroke(0, 50);
+            gui.rect(position.x, position.y, width, height);
             label.draw();
+            gui.fill(0,96);
+    		gui.textAlign(PConstants.CENTER, PConstants.CENTER);
+    		gui.text(text, position.x, position.y - 3, width, height);
         }
 
     }

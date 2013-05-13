@@ -39,6 +39,7 @@ public class TimedMessage extends Message {
     public void draw(){
         if(currentFrame < endFrame){
             super.draw();
+            currentFrame++;
         }
     }
 

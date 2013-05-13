@@ -157,4 +157,8 @@ public class Teleport extends Item {
         	identityDisc.move(getDestination());
         }
     }
+    
+    public Item copy(){
+    	return new Teleport();
+    }
 }

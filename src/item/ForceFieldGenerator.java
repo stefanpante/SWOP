@@ -97,4 +97,9 @@ public class ForceFieldGenerator extends Item implements Activatable {
     public void activate() throws IllegalStateException {
         this.active = true;
     }
+
+	@Override
+	public Item copy() {
+		return new ForceFieldGenerator();
+	}
 }

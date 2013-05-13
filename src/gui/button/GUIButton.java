@@ -1,13 +1,29 @@
 package gui.button;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import gui.GUIElement;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
 
-public abstract class GUIButton extends GUIElement {
+public abstract class GUIButton extends GUIElement implements MouseListener {
 
 
+	/**
+	 * The actionListeners for the button
+	 */
+	private ArrayList<ActionListener> actionListeners;
+	
+	/**
+	 * The actionCommand for this button
+	 */
+	
+	private String actionCommand;
 	/**
 	 * The color of the button when the mouse hovered.
 	 */
@@ -28,7 +44,7 @@ public abstract class GUIButton extends GUIElement {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, new PVector(), gui);
 		super.setColor(OConstants.LIGHT_GREY);
-		
+		this.actionListeners = new ArrayList<ActionListener>();
 		this.rolloverColor = OConstants.LIGHTER_GREY;
 
 	}
@@ -76,5 +92,54 @@ public abstract class GUIButton extends GUIElement {
 		return false;
 	}
 	
+	public void isPressed(int mouseX, int mouseY){
+		if(mouseHit(mouseX, mouseY)){
+			notifyActionListeners();
+		}
+	}
+	
+	private void notifyActionListeners(){
+		ActionEvent evt = new ActionEvent(this,ActionEvent.ACTION_PERFORMED, actionCommand);
+		for(ActionListener actionListener: actionListeners){
+			actionListener.actionPerformed(evt);
+		}
+	}
+	
 	public abstract void hover(int mouseX, int mouseY);
+	
+	public void addActionListener(ActionListener listener){
+		this.actionListeners.add(listener);
+	}
+	
+	public void removeActionListener(ActionListener listener){
+		this.actionListeners.remove(listener);
+	}
+	
+	public String getActionCommand(){
+		return this.actionCommand;
+	}
+	
+	public void setActionCommand(String actionCommand){
+		this.actionCommand = actionCommand;
+	}
+	
+	public void mouseClicked(MouseEvent evt){
+		System.out.println("mouseClicked");
+	}
+	
+	public void mouseEntered(MouseEvent evt){
+		
+	}
+	
+	public void mouseExited(MouseEvent evt){
+		
+	}
+	
+	public void mousePressed(MouseEvent evt){
+		
+	}
+	
+	public void mouseReleased(MouseEvent evt){
+		
+	}
 }

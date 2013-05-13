@@ -13,6 +13,7 @@ import util.OConstants;
 
 public class Inventory extends GUIElement{
 
+	//TODO: Refactor to accept height and width in constructor.
 	/**
 	 * The items in this inventory representation
 	 */
@@ -28,6 +29,8 @@ public class Inventory extends GUIElement{
 	 * The list of buttons (representing the items.
 	 */
 	private ArrayList<ItemButton> buttons;
+	
+	private Label label;
 
 	/**
 	 * Constructs a new inventory object. Sets the position to (0,0)
@@ -41,6 +44,8 @@ public class Inventory extends GUIElement{
 		this.buttons = new ArrayList<ItemButton>();
 		super.setColor(OConstants.LIGHTER_GREY);
 		this.selectedButton = null;
+		
+		
 		this.initialize();
 	}
 
@@ -50,9 +55,14 @@ public class Inventory extends GUIElement{
 	 * @param position	the position of this inventory
 	 * @param gui		The PApplet used for drawing.
 	 */
-	public Inventory(ArrayList<Item> items, PVector position, PApplet gui){
-		this(items, gui);
+	public Inventory(ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
+		super(155,185, position,gui);
+		this.items = items;
+		this.buttons = new ArrayList<ItemButton>();
+		super.setColor(OConstants.LIGHTER_GREY);
+		this.selectedButton = null;
 		super.setPosition(position);
+		this.label = new Label(155, 25, position, inventoryName, gui);
 		this.initialize();
 	}
 
@@ -63,7 +73,7 @@ public class Inventory extends GUIElement{
 		buttons.clear();
 		selectedButton = null;
 
-		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN);
+		PVector pos = new PVector(position.x + OConstants.MARGIN, position.y + OConstants.MARGIN + 25);
         for (Item item : items) {
             if (item instanceof LightGrenade) {
                 LightGrenade lg = (LightGrenade) item;
@@ -88,7 +98,7 @@ public class Inventory extends GUIElement{
             //next line when line is full.
             pos = new PVector(pos.x + OConstants.MARGIN + OConstants.SQUARE_WIDTH,
                     pos.y);
-            if (pos.x >= (position.x + width)) {
+            if (pos.x >= (position.x + width )) {
                 pos = new PVector(position.x + OConstants.MARGIN, pos.y + OConstants.MARGIN + OConstants.SQUARE_WIDTH);
 
             }
@@ -110,6 +120,7 @@ public class Inventory extends GUIElement{
 		gui.noStroke();
 		gui.fill(color);
 		gui.rect(position.x, position.y, width, height);
+		label.draw();
 		for(ItemButton button: buttons){
 			button.draw();
 		}
