@@ -11,7 +11,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
 
-public abstract class GUIButton extends GUIElement implements MouseListener {
+public abstract class GUIButton extends GUIElement {
 
 
 	/**
@@ -121,25 +121,5 @@ public abstract class GUIButton extends GUIElement implements MouseListener {
 	
 	public void setActionCommand(String actionCommand){
 		this.actionCommand = actionCommand;
-	}
-	
-	public void mouseClicked(MouseEvent evt){
-		System.out.println("mouseClicked");
-	}
-	
-	public void mouseEntered(MouseEvent evt){
-		
-	}
-	
-	public void mouseExited(MouseEvent evt){
-		
-	}
-	
-	public void mousePressed(MouseEvent evt){
-		
-	}
-	
-	public void mouseReleased(MouseEvent evt){
-		
 	}
 }

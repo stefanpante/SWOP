@@ -356,9 +356,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		obj.populateGui();
 	}
 
-
-
-
 	/**
 	 * Draws the player Label on the screen.
 	 */

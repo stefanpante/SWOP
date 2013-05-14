@@ -46,13 +46,4 @@ public class DirectionalButton extends ShapeButton{
 	public Direction getDirection(){
 		return this.direction;
 	}
-	
-//	public void mousePressed(int mouseX, int mouseY){
-//		if(visible){
-//			if(mouseHit(mouseX, mouseY)){
-//				ObjectronGUI gui2= (ObjectronGUI) gui;
-//				gui2.move(direction);
-//			}
-//		}
-//	}
 }
