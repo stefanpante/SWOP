@@ -1,5 +1,6 @@
 package item;
 
+import effect.Effect;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
@@ -50,24 +51,6 @@ public class Flag extends Item {
 	}
 
 	@Override
-	public void affect(Movable movable) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void affect(Player player) throws IllegalStateException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public boolean isSameType(Item item) {
 		// TODO Auto-generated method stub
 		return false;
@@ -80,6 +63,11 @@ public class Flag extends Item {
 	
 	public Player getPlayer(){
 		return this.player;
+	}
+	@Override
+	public Effect getEffect() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
