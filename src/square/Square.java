@@ -51,7 +51,7 @@ public class Square implements MovableEffect {
 	 * Contains the neighbors of this square
 	 */
 	//TODO: SHould be final, but cannot be set if final. Needs to be added in constructor.
-	private HashMap<Direction, Square> neighbors;
+	private  HashMap<Direction, Square> neighbors;
 
 	/**
 	 * Zero argument constructor for a square.
@@ -165,7 +165,7 @@ public class Square implements MovableEffect {
 	 * Sets all the neighbors of the square instance
 	 * @param neighbors	the neighbors to be set.
 	 */
-	public void setNeighbors(HashMap<Direction, Square> neighbors){
+	public void setNeighbors(final HashMap<Direction, Square> neighbors){
 		this.neighbors = neighbors;
 	}
 	
