@@ -426,7 +426,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			if(item instanceof IdentityDisc){
 				grid.getDirectionalPad().setVisibility(false);
 				grid.getThrowPad().setVisibility(true);
-				grid.getThrowPad().setShape(Shapes.getShape(item));
 				grid.getThrowPad().setIdentityDisc((IdentityDisc) item);
 			}
 			else{

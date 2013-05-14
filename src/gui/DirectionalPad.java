@@ -24,10 +24,11 @@ public class DirectionalPad extends GUIElement{
 	float buttonWidth;
 
 	private float buttonHeight;
+	
 	/**
 	 * The buttons which compose this directionalPad
 	 */
-	private HashMap<Direction,DirectionalButton> buttons;
+	protected HashMap<Direction,DirectionalButton> buttons;
 
 	/**
 	 * Constructs a new DirectionalPad.
