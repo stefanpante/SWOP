@@ -25,11 +25,11 @@ public class GridGui extends GUIElement{
 	 */
 	private DirectionalPad directionalPad;
 
-	
+
 	/**
 	 * The throwpad used to throw an item.
 	 */
-	
+
 	private ThrowPad throwPad;
 	/**
 	 * Number of horizontal cells
@@ -129,7 +129,7 @@ public class GridGui extends GUIElement{
 		this.adjustPad(directionalPad);
 		this.adjustPad(throwPad);
 	}
-	
+
 
 
 	/**
@@ -152,14 +152,10 @@ public class GridGui extends GUIElement{
 			y += sHeight + OConstants.MARGIN;
 		}
 		SquareGUI player1 = new SquareGUI(swidth, sHeight, new PVector(), gui);
-		player1.setColor(OConstants.PLAYERBLUE);
-		players.add(player1);
-
 		SquareGUI player2 = new SquareGUI(swidth, sHeight, new PVector(), gui);
-		player2.setColor(OConstants.PLAYERRED);
 		players.add(player2);
 	}
-	
+
 	/**
 	 * Accepts a list of coordinates which represents the included squares in the grid.
 	 * Non-included squares are removed from the grid.
@@ -167,7 +163,7 @@ public class GridGui extends GUIElement{
 	 */
 	public void adjustGrid(ArrayList<Coordinate> includedSquares){
 		ArrayList<Coordinate> toRemove = new ArrayList<Coordinate>();
-		
+
 		for(Coordinate coordinate: squares.keySet()){
 			if(!includedSquares.contains(coordinate)){
 				toRemove.add(coordinate);
@@ -191,18 +187,18 @@ public class GridGui extends GUIElement{
 		for(SquareGUI ff: forcefields){
 			ff.draw();
 		}
-		
+
 		for(SquareGUI pf: powerfails){
 			pf.draw();
 		}
 		for(SquareGUI item: items.values()){
 			item.draw();
 		}
-		
+
 		for(SquareGUI player: players){
 			player.draw();
 		}
-		
+
 		for(SquareGUI light: lightTrails_Squares){
 			light.draw();
 		}
@@ -210,9 +206,9 @@ public class GridGui extends GUIElement{
 		for(SquareGUI wall: walls_squares){
 			wall.draw();
 		}
-		
-		
-		
+
+
+
 
 	}
 
@@ -265,16 +261,10 @@ public class GridGui extends GUIElement{
 	public void setPlayers(HashMap<Player,Coordinate> players) {
 		this.players.clear();
 		for(Player player : players.keySet() ){
-			if(player.getID() == 1){
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(players.get(player)), gui);
-				s.setColor(OConstants.PLAYERBLUE);
-				this.players.add(s);
-			}
-			if(player.getID() == 2){
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(players.get(player)), gui);
-				s.setColor(OConstants.PLAYERRED);
-				this.players.add(s);
-			}
+			int id  = player.getID();
+			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(players.get(player)), gui);
+			s.setColor(OConstants.PLAYERCOLORS[id -1]);
+			this.players.add(s);
 		}
 	}
 
@@ -285,7 +275,7 @@ public class GridGui extends GUIElement{
 		this.powerfail_coors = o;
 		updatePowerFailures();
 	}
-	
+
 	private void updatePowerFailures(){
 		powerfails.clear();
 		for(Coordinate coor: powerfail_coors){
@@ -294,56 +284,35 @@ public class GridGui extends GUIElement{
 			powerfails.add(s);
 		}
 	}
-	
+
 	public void setForceFields(ArrayList<Coordinate> o){
 		this.forcefield_coors = o;
 		updateForceFields();
 	}
-	
+
 	private void updateForceFields(){
 		forcefields.clear();
 		for(Coordinate coor: forcefield_coors){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 			s.setColor(OConstants.FORCEFIELD_COLOR);
 			forcefields.add(s);
-			
+
 		}
 	}
-	
 
-	/**
-	 * Sets the light trails of the players.
-	 * @param o
-	 */
-	public void setLightTrails(HashMap<Player, ArrayList<Coordinate>> o) {
-		this.lightTrails = o;
-		updateLightTrails();
-	}
-
-	private void updateLightTrails(){
+	public void updateLightTrails(HashMap<Player, ArrayList<Coordinate>> o){
 		lightTrails_Squares.clear();
 		for(Player player: lightTrails.keySet()){
 			ArrayList<Coordinate> playercoor = lightTrails.get(player);
-			try{
-				PVector pos = getPixels(playercoor.get(0));
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
-				s.setColor(OConstants.LIGHTTRAILCOLORS[player.getID() -1][0]);
+			int id = player.getID();
+			float opacity = 80;
+			for(Coordinate coor: playercoor){
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				int color = gui.color(OConstants.PLAYERCOLORS[id -1], opacity);
+				s.setColor(color);
 				lightTrails_Squares.add(s);
-
-			}catch(Exception e){}
-			try{
-				PVector pos = getPixels(playercoor.get(1));
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
-				s.setColor(OConstants.LIGHTTRAILCOLORS[player.getID() -1][1]);
-				lightTrails_Squares.add(s);
-			}catch(Exception e){}
-			try{
-				PVector pos = getPixels(playercoor.get(2));
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, pos, gui);
-				s.setColor(OConstants.LIGHTTRAILCOLORS[player.getID() -1][2]);
-				lightTrails_Squares.add(s);
-			}catch(Exception e){}
-
+				opacity -= 20;
+			}
 		}
 	}
 
@@ -359,7 +328,7 @@ public class GridGui extends GUIElement{
 	private void adjustPad(DirectionalPad pad){
 		pad.setPosition(getPixels(currentPlayer));
 		HashMap<Direction, DirectionalButton> buttons = pad.getButtons();
-		
+
 		for(Direction direction: buttons.keySet()){
 			Coordinate coor = currentPlayer.getNeighbor(direction);
 			DirectionalButton b = buttons.get(direction);
@@ -368,8 +337,8 @@ public class GridGui extends GUIElement{
 				b.setVisibility(false);
 		}
 	}
-	
-	
+
+
 	private PVector getPixels(Coordinate coor) {
 		if(squares.containsKey(coor)){
 			return squares.get(coor).getPosition();
@@ -388,13 +357,13 @@ public class GridGui extends GUIElement{
 		throwPad.mousePressed(mouseX, mouseY);
 	}
 
-	
-	
+
+
 	public void setItems(HashMap<Coordinate,ArrayList<Item>> items){
 		this.items_ = items;
 		this.updateItems();
 	}
-	
+
 	public void updateItems(){
 		items.clear();
 		for(Coordinate coor: items_.keySet()){
@@ -409,20 +378,20 @@ public class GridGui extends GUIElement{
 						continue;
 					}
 				}
-				
+
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.getShape(it.get(0)));
-                s.setColor(gui.color(255,0));
+				s.setColor(gui.color(255,0));
 				items.put(coor, s);
 			}
-			
+
 			if(it.size() >= 2){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-                s.setColor(gui.color(255,0));
+				s.setColor(gui.color(255,0));
 				if(containsTeleport(it)){
 					s.setShape(Shapes.teleportItem);
 				}
-				
+
 				if(containsFlag(it)){
 					s.setShape(Shapes.getFlagItem(it));
 				}
@@ -433,27 +402,27 @@ public class GridGui extends GUIElement{
 			}
 		}
 	}
-	
+
 	private boolean containsTeleport(ArrayList<Item> items){
 		for(Item item: items){
 			if(item instanceof Teleport){
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	private boolean containsFlag(ArrayList<Item> items){
 		for(Item item: items){
 			if(item instanceof Flag){
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	public DirectionalPad getDirectionalPad(){
 		return this.directionalPad;
 	}

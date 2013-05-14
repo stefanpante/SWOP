@@ -19,6 +19,8 @@ import util.Coordinate;
 
 /**
  * Handler class (abstract) that will be implemented by all our use case handlers.
+ * 
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
 public abstract class Handler {
 

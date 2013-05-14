@@ -13,7 +13,7 @@ import java.util.Observer;
 
 
 /**
- * @author Jonas Devlieghere
+ *@author Dieter Castel, Jonas Devlieghere and Stefan Pante
  *
  */
 public class TurnHandler extends Handler implements Observer {

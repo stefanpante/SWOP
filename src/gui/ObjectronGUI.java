@@ -77,10 +77,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private int hSize = 710;
 
 	private int vSize = 580;
-
-	private TextButton yesButton;
-	private TextButton noButton;
-
+	
 	private Label gridLabel;
 	private PFont standardFont;
 
@@ -98,7 +95,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	private int vCells;
 
-	private int currentPlayerColor = OConstants.PLAYERBLUE;
+	private int currentPlayerColor = OConstants.LIGHT_GREY;
 
 	/**
 	 * initializes the objectron gui
@@ -109,8 +106,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
-		System.out.println(color(-48060, 80));
-		
+
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
 		Shapes shapes = new Shapes(this);
@@ -137,7 +133,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	@SuppressWarnings("deprecation")
 	public void initializeInput(){
 		inputController.setFont(standardFont);
-		CColor color = new CColor(OConstants.PLAYERBLUE, OConstants.WHITE,OConstants.PLAYERBLUE, OConstants.PLAYERBLUE, OConstants.PLAYERBLUE);
+		CColor color = new CColor(OConstants.LIGHT_GREY, OConstants.WHITE,OConstants.LIGHT_GREY, OConstants.LIGHT_GREY, OConstants.LIGHT_GREY);
 		widthGrid = inputController.addTextfield("hcells");
 		widthGrid.setPosition(hSize/4 ,100) ;
 		widthGrid.setSize(hSize/2, 35);
@@ -146,7 +142,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		widthGrid.setLabel("Width of the grid");
 		widthGrid.setValue("" + 10);
-		widthGrid.setColorCursor(OConstants.PLAYERBLUE);
+		widthGrid.setColorCursor(OConstants.LIGHT_GREY);
 		heightGrid = inputController.addTextfield("vcells");
 		heightGrid.setPosition(hSize/4,170);
 		heightGrid.setSize(hSize/2, 35);
@@ -154,7 +150,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		heightGrid.setColor(color);
 		heightGrid.setLabel("Height of grid");
 		heightGrid.setValue("" + 10);
-		heightGrid.setColorCursor(OConstants.PLAYERBLUE);
+		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 
 		gamemode = inputController.addDropdownList("gamemode");
 		gamemode.setPosition(hSize/4, 240);
@@ -170,21 +166,21 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		filepick.setSize(hSize/2, 35);
 		filepick.setColor(color);
 		filepick.setColorLabel(OConstants.WHITE);
-		filepick.setColorBackground(OConstants.PLAYERBLUE);
+		filepick.setColorBackground(OConstants.LIGHT_GREY);
 
 		confirm = inputController.addButton("confirm");
 		confirm.setPosition(hSize/4,320);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.WHITE);
-		confirm.setColorBackground(OConstants.PLAYERBLUE);
+		confirm.setColorBackground(OConstants.LIGHT_GREY);
 
 		area = inputController.addTextarea("Warning", "Please make sure your Gridfile is valid!", hSize/4, 320, hSize/2, 100);
 
-		area.setColor(OConstants.PLAYERBLUE);
-		area.setColorLabel(OConstants.PLAYERBLUE);
+		area.setColor(OConstants.LIGHT_GREY);
+		area.setColorLabel(OConstants.LIGHT_GREY);
 		area.setColorBackground(OConstants.WHITE);
-		area.setBorderColor(OConstants.PLAYERBLUE);
+		area.setBorderColor(OConstants.LIGHT_GREY);
 		area.hide();
 
 
@@ -242,7 +238,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 	private void setupLabels(){
 		this.gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
-		this.gridLabel.setColor(OConstants.PLAYERBLUE);
 	}
 
 	public static final String PICKUP_ACTION = "pickup";
@@ -254,21 +249,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 
 		TextButton pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
-		pickUpButton.setColor(OConstants.PLAYERBLUE);
 		pickUpButton.setActionCommand(PICKUP_ACTION);
 
 		TextButton useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
-		useItemButton.setColor(OConstants.PLAYERBLUE);
 		useItemButton.setActionCommand(USEITEM_ACTION);
 
 		TextButton endTurnButton = new TextButton(145, 25, new PVector(535, 415), "end turn", this);
-		endTurnButton.setColor(OConstants.PLAYERBLUE);
 		endTurnButton.setActionCommand(ENDTURN_ACTION);
 
 		TextButton startNewGameButton = new TextButton(145, 25, new PVector(535, 445), "start new game", this);
-		startNewGameButton.setColor(OConstants.PLAYERBLUE);
 		startNewGameButton.setActionCommand(STARTNEWGAME_ACTION);
-
+		
 		buttons.add(pickUpButton);
 		buttons.add(useItemButton);
 		buttons.add(endTurnButton);
@@ -276,11 +267,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		for(GUIButton button: buttons)
 			button.addActionListener(this);
-
-		this.yesButton = new TextButton(75, 25, new PVector(hSize/2 - 80, vSize/2 + mHeight/2), "Yes", this);
-		this.yesButton.setColor(OConstants.PLAYERBLUE);
-		this.noButton = new TextButton(75,25, new PVector(hSize/2 + 5, vSize/2 + mHeight/2), "No", this);
-		this.noButton.setColor(OConstants.PLAYERBLUE);
 
 	}
 
@@ -311,7 +297,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 	Message m = new YesNoDialog(300, 300, new PVector(100,100), "Test",  this);
-	
+
 	public void showRemainingActions(){
 		fill(currentPlayerColor);
 		noStroke();
@@ -402,19 +388,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 
-	/**
-	 * Called when the mouse button is pressed.
-	 */
-	@Override
-	public void mousePressed(){
-		if(!endTurn){
-			
-		}
-		buttonPressed();
-
-
-	}
-
 	@Override
 	public void mouseClicked(){
 		for(GUIButton button: buttons){
@@ -423,21 +396,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			// Checks if the mouse is pressed on an inventory
 			squareInventory.mousePressed(mouseX, mouseY);
 			playerInventory.mousePressed(mouseX, mouseY);
-		}
-	}
-	private void buttonPressed(){
-		if(!endTurn){
-		}else{
-			if(yesButton.mouseHit(mouseX, mouseY)){
-				this.obj.getEndTurnHandler().confirm(true);
-				this.endTurn();
-				this.endTurn = false;
-			}
-
-			if(noButton.mouseHit(mouseX, mouseY)){
-				this.obj.getEndTurnHandler().confirm(false);
-				this.endTurn = false;
-			}
 		}
 	}
 
@@ -497,20 +455,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 	public void changePlayer(){
-		try{
-			if(obj.getGame().getCurrentPlayer().getID() == 1){
-				currentPlayerColor = OConstants.PLAYERBLUE;
-			}
-			else{
-				currentPlayerColor = OConstants.PLAYERRED;
-			}
-			gridLabel.setColor(currentPlayerColor);
 
-			for(GUIButton button: buttons)
-				button.setColor(currentPlayerColor);
-			yesButton.setColor(currentPlayerColor);
-			noButton.setColor(currentPlayerColor);
-		}catch(NullPointerException e){}
+		int id = obj.getGame().getCurrentPlayer().getID();
+		int color = OConstants.PLAYERCOLORS[id -1];
+
+		gridLabel.setColor(color);
+
+		for(GUIButton button: buttons)
+			button.setColor(color);
 
 	}
 
@@ -522,37 +474,37 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public void propertyChange(PropertyChangeEvent evt) {
 		String propertyName = evt.getPropertyName();
 		Object o = evt.getNewValue();
-		
+
 		switch(propertyName){
 		case Handler.WALLS_PROPERTY:	grid.setWalls((ArrayList<Coordinate>) o);
-										break;
+		break;
 		case Handler.PLAYERS_PROPERTY:  grid.setPlayers((HashMap<Player,Coordinate>) o);
-										break;
+		break;
 		case Handler.POWER_FAILS_PROPERTY: grid.setPowerFails((ArrayList<Coordinate>) o);
-										break;
-		case Handler.LIGHT_TRAILS_PROPERTY: grid.setLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-										break;
+		break;
+		case Handler.LIGHT_TRAILS_PROPERTY: grid.updateLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
+		break;
 		case Handler.CURRENT_POSITION_PROPERTY: grid.setCurrentPlayer((Coordinate) o );
-										break;
+		break;
 		case Handler.SQUARE_INVENTORY_PROPERTY: squareInventory.setItems((ArrayList<Item>) o);
-										break;
+		break;
 		case Handler.PLAYER_INVENTORY_PROPERTY: playerInventory.setItems((ArrayList<Item>) o);
-										break;
+		break;
 		case Handler.END_TURN_PROPERTY:	endTurn = true;
-										break;
+		break;
 		case Handler.MESSAGE_PROPERTY: 	break;
 		case Handler.WIN_PROPERTY: 		break;
 		case Handler.LOSE_PROPERTY : 	break;
 		case Handler.SQUARES_PROPERTY: grid.adjustGrid((ArrayList<Coordinate>) o);
-										break;
+		break;
 		case Handler.ITEMS_PROPERTY:	HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
-										grid.setItems(items);
-										break;
+		grid.setItems(items);
+		break;
 		case Handler.FORCEFIELD_PROPERTY: grid.setForceFields((ArrayList<Coordinate>) o);
-	
+
 		default:					break;
 		}
-		
+
 		grid.updateItems();
 
 
@@ -561,8 +513,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private boolean endTurn = false;
 	private void confirmEndTurn() {
 		if(endTurn){
-			yesButton.setVisibility(true);
-			noButton.setVisibility(true);
 			stroke(0, 30);
 			fill(OConstants.LIGHTER_GREY);
 			rect(hSize/2 - mWidth/2, vSize/2 - mHeight/2, mWidth, mHeight + 30);
@@ -576,10 +526,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			fill(0,96);
 			textAlign(PConstants.CENTER, PConstants.CENTER);
 			text("Are you sure you want to end your turn",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
-			noButton.draw();
-			yesButton.draw();
-			noButton.hover(mouseX, mouseY);
-			yesButton.hover(mouseX, mouseY);
 
 		}
 
@@ -625,13 +571,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		String command = evt.getActionCommand();
 		switch(command){
 		case PICKUP_ACTION:		this.pickUp();
-								break;
+		break;
 		case ENDTURN_ACTION:	this.endTurn();
-								break;
+		break;
 		case USEITEM_ACTION:	this.useItem();
-								break;
+		break;
 		case STARTNEWGAME_ACTION: this.startNewGame();
-								break;	
+		break;	
 		}
 	}
 
