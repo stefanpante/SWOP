@@ -100,5 +100,9 @@ public class OConstants {
 	 */
 	
 	public static int SQUARE_WIDTH = 45;
+	
+	public static int getTransparantColor(int color, int opacity){
+		return 0;
+	}
 
 }
