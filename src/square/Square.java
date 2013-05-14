@@ -16,6 +16,7 @@ import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Square class
@@ -44,12 +45,18 @@ public class Square implements MovableEffect {
 	/**
 	 * The fields of this Square.
 	 */
-	ArrayList<Field> fields = new ArrayList<Field>();
+	private ArrayList<Field> fields = new ArrayList<Field>();
+	
+	/**
+	 * Contains the neighbors of this square
+	 */
+	//TODO: SHould be final, but cannot be set if final. Needs to be added in constructor.
+	private HashMap<Direction, Square> neighbors;
 
 	/**
 	 * Zero argument constructor for a square.
 	 */
-	public Square (){
+	public Square(){
 		this.inventory = new SquareInventory();
 		this.setPower(new RegularPower());
 	}
@@ -154,6 +161,32 @@ public class Square implements MovableEffect {
 		return obstacle != null;
 	}
 
+	/**
+	 * Sets all the neighbors of the square instance
+	 * @param neighbors	the neighbors to be set.
+	 */
+	public void setNeighbors(HashMap<Direction, Square> neighbors){
+		this.neighbors = neighbors;
+	}
+	
+	/**
+	 * Returns the neighbors of the square.
+	 * @return
+	 */
+	public HashMap<Direction, Square> getNeighbors(){
+		return new HashMap<Direction, Square>(neighbors);
+	}
+	
+	/**
+	 * Returns the neighbor in the given direction
+	 * @param direction	The direction of the neighbor.
+	 * @return the neighbor in the given direction
+	 */
+	public Square getNeighbor(Direction direction){
+		return neighbors.get(direction);
+	}
+	
+	
 	@Override
 	public void affect(Movable movable) {
 		getInventory().affect(movable);

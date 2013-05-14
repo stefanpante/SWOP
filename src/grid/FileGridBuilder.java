@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import square.Direction;
@@ -188,7 +189,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	}
 
 	/**
-	 * Constructs all the squares
+	 * Constructs all the squares, sets all the neigbors of the square
 	 */
 	@Override
 	protected void setSquares(){
@@ -206,6 +207,11 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			Square sq = new Square();
 			getGrid().setSquare(coor, sq);
 			getGrid().addStartPosition(sq);
+		}
+		
+		for(Square square: getGrid().getAllSquares()){
+			HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
+			square.setNeighbors(neighbors);
 		}
 	}
 

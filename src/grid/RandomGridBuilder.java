@@ -6,6 +6,7 @@ import item.IdentityDisc;
 import item.LightGrenade;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import square.Direction;
 import square.Square;
@@ -323,7 +324,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	}
 	
 	/**
-     * Adds squares to the grid
+     * Adds squares to the grid, sets the neighbors of all the squares
      */
     @Override
     protected void setSquares() {
@@ -333,6 +334,11 @@ public class RandomGridBuilder extends AbstractGridBuilder{
                 coordinate = new Coordinate(x, y);
                 getGrid().setSquare(coordinate, new Square());
             }
+        }
+        
+        for(Square square: getGrid().getAllSquares()){
+        	HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
+        	square.setNeighbors(neighbors);
         }
     }
 
