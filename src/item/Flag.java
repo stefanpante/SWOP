@@ -77,5 +77,9 @@ public class Flag extends Item {
 	public Item copy() {
 		return new Flag();
 	}
+	
+	public Player getPlayer(){
+		return this.player;
+	}
 
 }
