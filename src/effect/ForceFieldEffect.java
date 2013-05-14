@@ -1,6 +1,7 @@
 package effect;
 
 import game.Player;
+import item.Flag;
 import item.IdentityDisc;
 import item.Item;
 import square.field.ForceField;
@@ -23,5 +24,10 @@ public class ForceFieldEffect extends Effect<ForceField> implements ItemEffect {
     @Override
     public void affect(IdentityDisc identityDisc) {
         identityDisc.destroy();
+    }
+
+    @Override
+    public void affect(Flag flag) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }
