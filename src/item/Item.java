@@ -9,7 +9,7 @@ import item.visitor.VisitableItem;
  * 
  * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  **/
-public abstract class Item implements VisitableItem, MovableEffect, ItemPrototype {
+public abstract class Item implements VisitableItem, Affectable, ItemPrototype {
 
     private Inventory inventory;
 

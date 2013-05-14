@@ -1,5 +1,7 @@
 package item;
 
+import effect.Effect;
+import effect.TeleportEffect;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
@@ -129,36 +131,13 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
-    @Override
-    public void affect(Movable movable) {
-        movable.getsAffectedBy(this);
-    }
-
-    @Override
-    public void affect(Player player){
-        System.out.println("affect2");
-
-        if(!player.justTeleported()){
-            System.out.println("affect3");
-            if(canTeleport()){
-            	player.setJustTeleported(true);
-                player.move(getDestination());
-	        } else {
-	        	throw new IllegalStateException("Cant move to to the teleport destination.");
-	        }        	
-    	}
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) {
-        if(!identityDisc.justTeleported()){
-        	identityDisc.setJustTeleported(true);
-        	identityDisc.decreaseRange();
-        	identityDisc.move(getDestination());
-        }
-    }
     
     public Item copy(){
     	return new Teleport();
+    }
+
+    @Override
+    public Effect getEffect() {
+        return new TeleportEffect(this);
     }
 }

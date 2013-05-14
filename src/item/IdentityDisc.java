@@ -1,5 +1,6 @@
 package item;
 
+import effect.Effect;
 import move.MovableEffect;
 import game.Player;
 import item.inventory.*;
@@ -17,7 +18,7 @@ import square.Square;
  *
  */
 @NotNull
-public class IdentityDisc extends Item implements MovableEffect, Movable {
+public class IdentityDisc extends Item implements Movable {
 
 	/**
 	 * The maximum travel distance of an uncharged identity disc.
@@ -132,19 +133,6 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 		return super.toString() + " IdentityDisc";
 	}
 
-    @Override
-    public void affect(Movable movable) {
-        movable.getsAffectedBy(this);
-    }
-
-    public void affect(Player player) {
-        // TODO: The player is only affected if the IdentityDisk hits him.
-        // player.loseTurns(1,false);
-    }
-
-    public void affect(IdentityDisc identityDisc) {
-    }
-
 	@Override
 	public void getsAffectedBy(MovableEffect effect) {
 		// TODO Auto-generated method stub
@@ -190,4 +178,9 @@ public class IdentityDisc extends Item implements MovableEffect, Movable {
 	public Item copy() {
 		return new IdentityDisc();
 	}
+
+    @Override
+    public Effect getEffect() {
+        return null;
+    }
 }

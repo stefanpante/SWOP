@@ -1,5 +1,8 @@
 package square.field;
 
+import effect.Effect;
+import effect.ForceFieldEffect;
+import item.Affectable;
 import square.Square;
 
 /**
@@ -8,7 +11,7 @@ import square.Square;
  * 
  * @author Vincent
  */
-public class ForceField extends Field {
+public class ForceField extends Field implements Affectable {
 	
 	/**
 	 * Maximum length of a Force Field.
@@ -80,4 +83,8 @@ public class ForceField extends Field {
 	}
 
 
+    @Override
+    public Effect getEffect() {
+        return new ForceFieldEffect(this);
+    }
 }

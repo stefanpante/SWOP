@@ -11,7 +11,7 @@ import square.Square;
  * A field is a collection of several squares,
  * with an effect on moveables.
  */
-public abstract class Field extends MultiSquare implements MovableEffect {
+public abstract class Field extends MultiSquare {
 	
 	/**
      * Current state of the ForceField.
@@ -43,18 +43,4 @@ public abstract class Field extends MultiSquare implements MovableEffect {
         this.active = active;
     }
 
-    @Override
-    public void affect(Movable movable) {
-        movable.getsAffectedBy(this);
-    }
-
-    @Override
-    public void affect(Player player) {
-        // A player cannot move onto a field!
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) {
-        identityDisc.destroy();
-    }
 }

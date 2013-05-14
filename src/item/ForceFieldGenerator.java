@@ -1,5 +1,6 @@
 package item;
 
+import effect.Effect;
 import game.Player;
 
 import item.inventory.PlayerInventory;
@@ -64,21 +65,6 @@ public class ForceFieldGenerator extends Item implements Activatable {
 	}
 
     @Override
-    public void affect(Movable movable) {
-        movable.getsAffectedBy(this);
-    }
-
-    @Override
-    public void affect(Player player) {
-        // TODO: Implement the effect of a player entering this force field
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) {
-    	
-    }
-
-    @Override
     public boolean isDropped() {
         return this.dropped;
     }
@@ -102,4 +88,9 @@ public class ForceFieldGenerator extends Item implements Activatable {
 	public Item copy() {
 		return new ForceFieldGenerator();
 	}
+
+    @Override
+    public Effect getEffect() {
+        return null;
+    }
 }

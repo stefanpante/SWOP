@@ -1,5 +1,7 @@
 package item;
 
+import effect.Effect;
+import effect.LightGrenadeEffect;
 import game.Player;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
@@ -151,20 +153,8 @@ public class LightGrenade extends Item implements Activatable {
 		return (o instanceof LightGrenade);
 	}
 
-    @Override
-    public void affect(Movable movable) {
-        movable.getsAffectedBy(this);
-    }
-
-    @Override
-    public void affect(Player player) {
-    	System.out.println("LightGrenade affects player");
-        if(isActive())
-            player.loseActions(2);
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) {
+    public Effect getEffect(){
+        return new LightGrenadeEffect(this);
     }
 
     /**
