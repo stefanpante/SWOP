@@ -124,6 +124,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			Square s = getGrid().getSquare(coor);
 			getGrid().addStartPosition(s);
 		}
+		setNeighbors();
 		setConstraints();
 		placeWalls(randomWallLocations(getConstraintWall()));
 		placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
@@ -334,11 +335,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
                 coordinate = new Coordinate(x, y);
                 getGrid().setSquare(coordinate, new Square());
             }
-        }
-        
-        for(Square square: getGrid().getAllSquares()){
-        	HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
-        	square.setNeighbors(neighbors);
         }
     }
 

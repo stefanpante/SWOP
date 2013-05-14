@@ -4,6 +4,7 @@ import item.Item;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,6 +13,7 @@ import item.ForceFieldGenerator;
 import item.IdentityDisc;
 import item.LightGrenade;
 import item.Teleport;
+import square.Direction;
 import square.Square;
 import square.obstacle.Wall;
 import util.AStar;
@@ -381,6 +383,13 @@ public abstract class AbstractGridBuilder {
                 teleports.get(i).setDestination(destinations.get(i%destinations.size()));
             }
         }
+    }
+    
+    protected void setNeighbors(){
+    	 for(Square square: getGrid().getAllSquares()){
+         	HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
+         	square.setNeighbors(neighbors);
+         }
     }
 
     /**

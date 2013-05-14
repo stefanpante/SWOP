@@ -91,6 +91,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		try{
 			readInput();
 			setSquares();
+			setNeighbors();
 			setConstraints();
 			placeWalls(this.getWallsLocation());
 			placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
@@ -207,11 +208,6 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			Square sq = new Square();
 			getGrid().setSquare(coor, sq);
 			getGrid().addStartPosition(sq);
-		}
-		
-		for(Square square: getGrid().getAllSquares()){
-			HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
-			square.setNeighbors(neighbors);
 		}
 	}
 
