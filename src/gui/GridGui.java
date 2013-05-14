@@ -322,9 +322,8 @@ public class GridGui extends GUIElement{
 
 	private boolean containsTeleport(ArrayList<Item> items){
 		for(Item item: items){
-			if(item instanceof Teleport){
+			if(item instanceof Teleport)
 				return true;
-			}
 		}
 
 		return false;
@@ -332,11 +331,9 @@ public class GridGui extends GUIElement{
 
 	private boolean containsFlag(ArrayList<Item> items){
 		for(Item item: items){
-			if(item instanceof Flag){
+			if(item instanceof Flag)
 				return true;
-			}
 		}
-
 		return false;
 	}
 
