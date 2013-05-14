@@ -12,7 +12,7 @@ import square.Direction;
 /**
  * Unit test case for Identity Disc
  * 
- * @author Vincent R.
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class TestIdentityDisc {
 	

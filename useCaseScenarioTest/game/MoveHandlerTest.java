@@ -333,6 +333,13 @@ public class MoveHandlerTest {
 	}
 	
 	/**
+	 * Tests the forcefield when moved inside of it.
+	 */
+	public void testForceField(){
+		
+	}
+	
+	/**
 	 * Finds a direction from the given square which is not obstructed.
 	 */
 	private Direction getNonObstructedDirection(Square currentPosition) {

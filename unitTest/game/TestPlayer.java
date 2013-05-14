@@ -19,7 +19,7 @@ import square.obstacle.Wall;
 /**
  * Test classes for player.
  * 
- * @author vincentreniers
+ * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
  */
 public class TestPlayer {
 

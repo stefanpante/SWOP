@@ -84,9 +84,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
     
     @Override
     public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
-        if(!this.hasItem(forceFieldGenerator))
-            throw new IllegalStateException("Cannot remove a forcefieldgenerator that isn't in the inventory");
-
         super.removeItem(forceFieldGenerator);
     }
     
@@ -111,9 +108,6 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 
 	@Override
 	public void removeFlag(Flag flag) throws IllegalStateException {
-		if(!this.hasItem(flag))
-			throw new IllegalStateException("Cannot remove a flag that isn't in the inventory");
-		
 		super.removeItem(flag);
 		
 	}
