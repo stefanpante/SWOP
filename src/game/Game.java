@@ -16,7 +16,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 /**
  * Game class, this class controls the flow of the game
  * 
- * @author 	Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ * @author 	Dieter Castel, Jonas Devlieghere   en Stefan Pante
  * @version 0.5
  * 
  * @invar	player1 is a valid player for this game

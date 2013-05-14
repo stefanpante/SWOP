@@ -24,7 +24,7 @@ import util.Coordinate;
 /**
  * Unit test case for Grid Builder.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class TestGridBuilder {
 	

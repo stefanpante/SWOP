@@ -8,7 +8,7 @@ import command.AbstractGameCommand;
 import game.Game;
 
 /**
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public abstract class ActionCommand extends AbstractGameCommand {
 

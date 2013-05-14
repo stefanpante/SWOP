@@ -11,7 +11,7 @@ import square.Square;
  * 
  * @invar squaresPointBack()
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public abstract class MultiObstacle extends MultiSquare implements Obstacle {
 

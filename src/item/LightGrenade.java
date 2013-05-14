@@ -10,7 +10,7 @@ import move.Movable;
 /**
  * This class extends Item and represents a LightGrenade object.
  *  
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 public class LightGrenade extends Item implements Activatable {

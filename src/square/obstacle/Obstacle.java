@@ -5,7 +5,7 @@ import square.Square;
 /**
  * Interface that is used for implementing an obstacle.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 public interface Obstacle {

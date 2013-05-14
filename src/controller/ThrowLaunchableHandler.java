@@ -14,7 +14,7 @@ import square.Square;
 
 /**
  * Handler for the throwing a launchable.
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 public class ThrowLaunchableHandler extends Handler {

@@ -21,7 +21,7 @@ import util.Coordinate;
 /**
  * Constructs a new grid from a file
  *
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 public class FileGridBuilder extends AbstractGridBuilder{

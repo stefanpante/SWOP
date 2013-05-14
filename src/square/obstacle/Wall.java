@@ -13,7 +13,7 @@ import square.Square;
  * 
  * @invariant The minimum amount of squares the wall covers is 2.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
 public class Wall extends MultiObstacle{
 	

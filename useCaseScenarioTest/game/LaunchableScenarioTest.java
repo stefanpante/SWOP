@@ -27,7 +27,7 @@ import controller.UseItemHandler;
 
 /**
  * Scenario tests involving a launchable.
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 public class LaunchableScenarioTest {

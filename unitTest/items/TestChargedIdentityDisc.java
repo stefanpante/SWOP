@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * Unit test case for Charged Identity Disc
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class TestChargedIdentityDisc {
 

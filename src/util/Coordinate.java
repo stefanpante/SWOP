@@ -12,7 +12,7 @@ import square.Direction;
  * 
  * (0,0) by convention is the most left upper square.
  * 
- * @author Jonas Devlieghere, Dieter Castel, Vincent Reniers and Stefan Pante
+ * @author Jonas Devlieghere, Dieter Castel   and Stefan Pante
  * @version 0.9
  *
  * @Invar 	The x-coordinate is a valid x-coordinate.

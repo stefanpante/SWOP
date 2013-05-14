@@ -6,7 +6,7 @@ import game.Player;
 /**
  * End Turn event
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class EndTurnCommand extends ActionCommand {
 

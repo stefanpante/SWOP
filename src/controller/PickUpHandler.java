@@ -13,7 +13,7 @@ import game.Game;
 /**
  * Handler/Controller for the pick up use case
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class PickUpHandler extends Handler {
 	

@@ -7,7 +7,7 @@ import java.util.Random;
  * This is used for scenarios where the player wants to move into a certain direction
  * or for general situations where a direction is needed.
  *
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  * */
 public enum Direction {
 	NORTH {

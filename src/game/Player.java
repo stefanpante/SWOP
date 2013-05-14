@@ -23,7 +23,7 @@ import java.util.Observable;
  * A Player is a Single Obstacle with an Inventory containing items and 
  * a Multi Obstacle Light Trail.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  *
  */
 @NotNull

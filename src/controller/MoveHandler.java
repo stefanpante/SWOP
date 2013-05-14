@@ -11,7 +11,7 @@ import game.Player;
 /**
  * Controller/Handler which controls the player move use case
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class MoveHandler extends Handler {
 

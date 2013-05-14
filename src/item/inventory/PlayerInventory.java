@@ -12,7 +12,7 @@ import item.visitor.AddRemoveItemVisitor;
 /**
  * A player inventory.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	

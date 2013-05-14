@@ -7,7 +7,7 @@ import item.visitor.VisitableItem;
 /**
  * Parent class for all sorts of items.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  **/
 public abstract class Item implements VisitableItem, Affectable, ItemPrototype {
 

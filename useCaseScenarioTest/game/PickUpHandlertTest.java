@@ -20,7 +20,7 @@ import square.Square;
 /**
  * Scenario test for the "pick up" use case.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  * 
  */
 public class PickUpHandlertTest {

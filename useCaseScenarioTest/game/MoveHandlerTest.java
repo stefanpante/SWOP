@@ -36,7 +36,7 @@ import grid.GridProvider;
 /**
  * Scenario test for the Use Case "Move".
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class MoveHandlerTest {
 

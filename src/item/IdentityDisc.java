@@ -14,7 +14,7 @@ import square.Square;
 /**
  * Implementation of the item IdentityDisc
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 @NotNull

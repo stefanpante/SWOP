@@ -13,7 +13,7 @@ import game.Game;
  * Handler/Controller for the use case in which 
  * an item is used
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
 public class UseItemHandler extends Handler {

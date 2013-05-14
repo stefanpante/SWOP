@@ -21,7 +21,7 @@ import java.util.HashMap;
 /**
  * Square class
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
 @NotNull
 public class Square implements MovableEffect {

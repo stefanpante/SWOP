@@ -22,7 +22,7 @@ import square.power.failure.PrimaryPowerFail;
 /**
  * Scenario test for the use case "End Turn"
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class EndTurnHandlerTest {
 	

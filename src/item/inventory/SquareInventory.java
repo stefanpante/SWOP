@@ -13,7 +13,7 @@ import item.visitor.AddRemoveItemVisitor;
  * This class describes the inventory of a square. 
  * 	With the constructor you have to state if this inventory can only have inactive Items.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class SquareInventory extends Inventory implements AddRemoveItemVisitor {
 	

@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
  * to the other. It takes into account all the possible constraints and effects.
  * Such as Teleports, LightGrenades and various other items.
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class MoveCommand extends ActionCommand {
 
