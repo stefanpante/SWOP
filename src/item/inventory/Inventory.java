@@ -14,7 +14,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 /**
  * Inventory class is used to contain items 
  * 
- * @author Dieter Castel, Jonas Devlieghere, Vincent Reniers en Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
 public abstract class Inventory implements MovableEffect {
 
@@ -241,7 +241,7 @@ public abstract class Inventory implements MovableEffect {
     @Override
     public void affect(IdentityDisc identityDisc) {
     	for(Item item : getAllItems()){
-            item.affect(identityDisc);
+            item.affect	(identityDisc);
         }
     }
 

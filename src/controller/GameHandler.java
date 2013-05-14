@@ -16,6 +16,11 @@ import java.util.HashMap;
 
 import util.Coordinate;
 
+/**
+ * 
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
+ *
+ */
 public class GameHandler extends Handler {
 	
 	private ObjectronGUI objectronGUI;
