@@ -26,6 +26,7 @@ public class Shapes {
 	public static PShape powerFailureItem;
 
 	public static HashMap<Direction, PShape> directions;
+	
 	public static PShape items;
 	public static PShape teleportItem;
 	public static PShape teleport;

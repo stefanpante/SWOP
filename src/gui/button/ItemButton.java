@@ -1,5 +1,6 @@
 package gui.button;
 
+import gui.Shapes;
 import item.Item;
 import processing.core.PApplet;
 import processing.core.PShape;
@@ -23,19 +24,11 @@ public class ItemButton extends ShapeButton {
 	 */
 	private int selectedColor = OConstants.LIGHT_GREY;
 
-
-
-	public ItemButton(float width, float height, PShape shape, PApplet gui) {
-		super(width, height, shape, gui);
-		selected = false;
-		this.color = OConstants.LIGHTER_GREY;
-		this.visible = true;
-	}
-
-	public ItemButton(float width, float height, PShape shape,
+	public ItemButton(float width, float height, Item item,
 			PVector position, PApplet gui) {
-		super(width, height, shape, position, gui);
+		super(width, height, Shapes.getShape(item), position, gui);
 		this.color = OConstants.LIGHTER_GREY;
+		this.item = item;
 		selected = false;
 		this.visible = true;
 		this.position = position;
@@ -65,10 +58,6 @@ public class ItemButton extends ShapeButton {
 
 	public Item getItem(){
 		return item;
-	}
-	
-	public void setItem(Item item){
-		this.item = item;
 	}
 
 	public void setSelected(boolean selected){

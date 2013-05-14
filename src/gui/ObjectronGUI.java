@@ -115,8 +115,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		// Sets up the inventory representation.
 		ArrayList<Item> items = new ArrayList<Item>();
-		squareInventory = new Inventory(items,new PVector(530,25), "Square Inventory", this);
-		playerInventory = new Inventory(items, new PVector(530,225),"Player Inventory", this);
+		squareInventory = new Inventory(155, 185, items, new PVector(530,25), "Square Inventory", this);
+		playerInventory = new Inventory(155, 185, items, new PVector(530,225),"Player Inventory", this);
 
 		setupButtons();
 		setupLabels();

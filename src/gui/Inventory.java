@@ -33,30 +33,13 @@ public class Inventory extends GUIElement{
 	private Label label;
 
 	/**
-	 * Constructs a new inventory object. Sets the position to (0,0)
-	 * @param items the items in the inventory
-	 * @param gui the PApplet used for drawing.
-	 */
-	public Inventory(ArrayList<Item> items, PApplet gui) {
-		// float height, float width, PVector position, PApplet gui
-		super(155,155, new PVector(),gui);
-		this.items = items;
-		this.buttons = new ArrayList<ItemButton>();
-		super.setColor(OConstants.LIGHTER_GREY);
-		this.selectedButton = null;
-		
-		
-		this.initialize();
-	}
-
-	/**
 	 * Constructs a new Inventory object
 	 * @param items		the items in the inventory
 	 * @param position	the position of this inventory
 	 * @param gui		The PApplet used for drawing.
 	 */
-	public Inventory(ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
-		super(155,185, position,gui);
+	public Inventory(float width, float height, ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
+		super(width,height, position,gui);
 		this.items = items;
 		this.buttons = new ArrayList<ItemButton>();
 		super.setColor(OConstants.LIGHTER_GREY);
@@ -89,8 +72,7 @@ public class Inventory extends GUIElement{
                 }
             }
             // Add the button to the inventory.
-            ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, Shapes.getShape(item), pos, gui);
-            button.setItem(item);
+            ItemButton button = new ItemButton(OConstants.SQUARE_WIDTH, OConstants.SQUARE_WIDTH, item, pos, gui);
             if (!(item instanceof Teleport)) {
                 buttons.add(button);
             }
