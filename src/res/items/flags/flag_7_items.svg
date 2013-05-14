@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+<g>
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="733.3479" y1="-176.8037" x2="861.2336" y2="-176.8037" gradientTransform="matrix(0.8916 0.4528 0.4528 -0.8916 -254.6737 -258.8611)">
+		<stop  offset="0" style="stop-color:#001F3D"/>
+		<stop  offset="1" style="stop-color:#003366"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M394.834,364.157c2.041-34.976-85.444-52.877-108.5-56.981c0-14.999,10.051-11.834,10.051-11.834
+		l55.006-128.044c0,0,114.313,24.435,114.025,57.903L394.834,364.157z"/>
+	<path fill="#003366" d="M293.268,302.6c2.342-40.271-114.017-57.898-114.017-57.898l70.564-138.956
+		c0,0,114.312,24.438,114.021,57.904L293.268,302.6z"/>
+</g>
+<g>
+	
+		<rect x="141.645" y="67.866" transform="matrix(-0.8916 -0.4528 0.4528 -0.8916 171.1973 560.0834)" fill="#282828" width="21.977" height="383.37"/>
+	<path fill="#282828" d="M248.343,94.51c-0.878,1.722-5.978,0.891-11.388-1.858c-5.402-2.746-9.087-6.37-8.207-8.092
+		c0.87-1.726,5.969-0.886,11.379,1.858C245.531,89.163,249.215,92.787,248.343,94.51z"/>
+	<path fill="#808080" d="M75.654,435.442c-0.878,1.719-5.978,0.887-11.38-1.863c-5.41-2.738-9.094-6.366-8.215-8.088
+		c0.872-1.726,5.97-0.895,11.38,1.855C72.849,430.095,76.525,433.723,75.654,435.442z"/>
+</g>
+<g id="Layer_4">
+	<rect x="377.139" y="41.923" fill="#A6A4A4" width="86.279" height="86.278"/>
+	
+		<line fill="none" stroke="#A6A4A4" stroke-width="3.1366" stroke-miterlimit="10" x1="460.281" y1="46.628" x2="487.975" y2="18.934"/>
+	
+		<line fill="none" stroke="#A6A4A4" stroke-width="3.1366" stroke-miterlimit="10" x1="380.898" y1="48.195" x2="353.2" y2="20.502"/>
+</g>
+</svg>
