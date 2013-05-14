@@ -36,7 +36,6 @@ public class GridGui extends GUIElement{
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
 	private HashMap<Coordinate, SquareGUI> items;
-	private HashMap<Coordinate, ArrayList<Item>> items_ = new HashMap<Coordinate, ArrayList<Item>>();
 
 	/**
 	 * the walls to be drawn on the screen
@@ -44,21 +43,17 @@ public class GridGui extends GUIElement{
 	private ArrayList<SquareGUI> walls_squares;
 	private ArrayList<SquareGUI> forcefields;
 	private ArrayList<SquareGUI> powerfails;
+	private ArrayList<SquareGUI> lightTrails_Squares;
+	
 	/**
 	 * The players to be drawn on the screen
 	 */
 	private ArrayList<SquareGUI> players;
 
 	/**
-	 * The positions of the lightTrails per player
-	 */
-	private HashMap<Player,ArrayList<Coordinate>> lightTrails;
-
-	/**
 	 * The position of the current player.
 	 */
 	private Coordinate currentPlayer;
-
 
 	/**
 	 * The width of a square
@@ -70,12 +65,6 @@ public class GridGui extends GUIElement{
 	 */
 	private float squareHeight;
 
-	/**
-	 * 
-	 */
-	private ArrayList<SquareGUI> lightTrails_Squares;
-
-	private ArrayList<Coordinate> forcefield_coors;
 	/**
 	 * Constructs a new grid representation for the gui
 	 * @param position
@@ -91,7 +80,6 @@ public class GridGui extends GUIElement{
 		
 		this.forcefields = new ArrayList<SquareGUI>();
 		this.powerfails = new ArrayList<SquareGUI>();
-		this.forcefield_coors = new ArrayList<Coordinate>();
 		this.squares = new HashMap<Coordinate, SquareGUI>();
 		this.players = new ArrayList<SquareGUI>();
 		this.items = new HashMap<Coordinate, SquareGUI>();
@@ -156,34 +144,26 @@ public class GridGui extends GUIElement{
 	 */
 	@Override
 	public void draw() {
-		for(SquareGUI square : squares.values()){
+		for(SquareGUI square : squares.values())
 			square.draw();
-		}
-		for(SquareGUI ff: forcefields){
+
+		for(SquareGUI ff: forcefields)
 			ff.draw();
-		}
-
-		for(SquareGUI pf: powerfails){
+		
+		for(SquareGUI pf: powerfails)
 			pf.draw();
-		}
-		for(SquareGUI item: items.values()){
+		
+		for(SquareGUI item: items.values())
 			item.draw();
-		}
-
-		for(SquareGUI player: players){
+		
+		for(SquareGUI player: players)
 			player.draw();
-		}
-
-		for(SquareGUI light: lightTrails_Squares){
+		
+		for(SquareGUI light: lightTrails_Squares)
 			light.draw();
-		}
 
-		for(SquareGUI wall: walls_squares){
+		for(SquareGUI wall: walls_squares)
 			wall.draw();
-		}
-
-
-
 
 	}
 
@@ -242,14 +222,9 @@ public class GridGui extends GUIElement{
 		}
 	}
 
-	public void setForceFields(ArrayList<Coordinate> o){
-		this.forcefield_coors = o;
-		updateForceFields();
-	}
-
-	private void updateForceFields(){
+	public void updateForceFields(ArrayList<Coordinate> o){
 		forcefields.clear();
-		for(Coordinate coor: forcefield_coors){
+		for(Coordinate coor: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 			s.setColor(OConstants.FORCEFIELD_COLOR);
 			forcefields.add(s);
@@ -259,8 +234,8 @@ public class GridGui extends GUIElement{
 
 	public void updateLightTrails(HashMap<Player, ArrayList<Coordinate>> o){
 		lightTrails_Squares.clear();
-		for(Player player: lightTrails.keySet()){
-			ArrayList<Coordinate> playercoor = lightTrails.get(player);
+		for(Player player: o.keySet()){
+			ArrayList<Coordinate> playercoor = o.get(player);
 			int id = player.getID();
 			float opacity = 80;
 			for(Coordinate coor: playercoor){
@@ -314,49 +289,34 @@ public class GridGui extends GUIElement{
 		throwPad.mousePressed(mouseX, mouseY);
 	}
 
-
-
-	public void setItems(HashMap<Coordinate,ArrayList<Item>> items){
-		this.items_ = items;
-		this.updateItems();
-	}
-
-	public void updateItems(){
+	
+	
+	public void updateItems(HashMap<Coordinate,ArrayList<Item>> o){
 		items.clear();
-		for(Coordinate coor: items_.keySet()){
-			ArrayList<Item> it = items_.get(coor);
-			if(it.size() == 0){
-				continue;
-			}
+		for(Coordinate coor: o.keySet()){
+			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+			s.setColor(gui.color(255,0));
+			ArrayList<Item> it = o.get(coor);
+			
 			if(it.size() == 1){
 				if(it.get(0) instanceof LightGrenade){
 					LightGrenade lg = (LightGrenade) it.get(0);
-					if(lg.isActive()|| lg.isDropped() || lg.isWornOut()){
-						continue;
-					}
+					if(!lg.isActive() && !lg.isDropped() && !lg.isWornOut())
+						s.setShape(Shapes.getShape(lg));
 				}
-
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setShape(Shapes.getShape(it.get(0)));
-				s.setColor(gui.color(255,0));
-				items.put(coor, s);
 			}
-
+			
 			if(it.size() >= 2){
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				s.setColor(gui.color(255,0));
 				if(containsTeleport(it)){
 					s.setShape(Shapes.teleportItem);
 				}
-
+				
 				if(containsFlag(it)){
 					s.setShape(Shapes.getFlagItem(it));
 				}
-				else{
-					s.setShape(Shapes.items);
-				}
-				items.put(coor, s);
 			}
+			
+			items.put(coor,s);
 		}
 	}
 

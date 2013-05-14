@@ -498,14 +498,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.SQUARES_PROPERTY: grid.adjustGrid((ArrayList<Coordinate>) o);
 		break;
 		case Handler.ITEMS_PROPERTY:	HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
-		grid.setItems(items);
+		grid.updateItems(items);
 		break;
-		case Handler.FORCEFIELD_PROPERTY: grid.setForceFields((ArrayList<Coordinate>) o);
+		case Handler.FORCEFIELD_PROPERTY: grid.updateForceFields((ArrayList<Coordinate>) o);
 
 		default:					break;
 		}
-
-		grid.updateItems();
 
 
 	}
