@@ -476,11 +476,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		Object o = evt.getNewValue();
 
 		switch(propertyName){
-		case Handler.WALLS_PROPERTY:	grid.setWalls((ArrayList<Coordinate>) o);
+		case Handler.WALLS_PROPERTY:	grid.updateWalls((ArrayList<Coordinate>) o);
 		break;
-		case Handler.PLAYERS_PROPERTY:  grid.setPlayers((HashMap<Player,Coordinate>) o);
+		case Handler.PLAYERS_PROPERTY:  grid.updatePlayers((HashMap<Player,Coordinate>) o);
 		break;
-		case Handler.POWER_FAILS_PROPERTY: grid.setPowerFails((ArrayList<Coordinate>) o);
+		case Handler.POWER_FAILS_PROPERTY: grid.updatePowerFailures((ArrayList<Coordinate>) o);
 		break;
 		case Handler.LIGHT_TRAILS_PROPERTY: grid.updateLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
 		break;

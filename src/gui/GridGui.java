@@ -29,18 +29,8 @@ public class GridGui extends GUIElement{
 	/**
 	 * The throwpad used to throw an item.
 	 */
-
 	private ThrowPad throwPad;
-	/**
-	 * Number of horizontal cells
-	 */
-	private int hCells;
-
-	/**
-	 * number of vertical cells.
-	 */
-	private int vCells;
-
+	
 	/**
 	 * The squares to be drawn onto the screen.
 	 */
@@ -48,15 +38,6 @@ public class GridGui extends GUIElement{
 	private HashMap<Coordinate, SquareGUI> items;
 	private HashMap<Coordinate, ArrayList<Item>> items_ = new HashMap<Coordinate, ArrayList<Item>>();
 
-	/**
-	 * Coordinates of the powerFailures
-	 */
-	private ArrayList<Coordinate> powerfail_coors;
-
-	/**
-	 * Coordinates of the walls
-	 */
-	private ArrayList<Coordinate> walls;
 	/**
 	 * the walls to be drawn on the screen
 	 */
@@ -107,9 +88,7 @@ public class GridGui extends GUIElement{
 	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, position, gui);
-
-		this.hCells = hCells;
-		this.vCells = vCells;
+		
 		this.forcefields = new ArrayList<SquareGUI>();
 		this.powerfails = new ArrayList<SquareGUI>();
 		this.forcefield_coors = new ArrayList<Coordinate>();
@@ -119,8 +98,7 @@ public class GridGui extends GUIElement{
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
-		this.powerfail_coors = new ArrayList<Coordinate>();
-		this.initGrid();
+		this.initGrid(hCells, vCells);
 		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
 		this.squareHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), squareWidth, squareHeight, gui);
@@ -135,7 +113,7 @@ public class GridGui extends GUIElement{
 	/**
 	 * Constructs the actual grid representation
 	 */
-	private void initGrid() {
+	private void initGrid(int hCells, int vCells) {
 		float x = position.x;
 		float y = position.y;
 
@@ -151,9 +129,6 @@ public class GridGui extends GUIElement{
 			x = position.x;
 			y += sHeight + OConstants.MARGIN;
 		}
-		SquareGUI player1 = new SquareGUI(swidth, sHeight, new PVector(), gui);
-		SquareGUI player2 = new SquareGUI(swidth, sHeight, new PVector(), gui);
-		players.add(player2);
 	}
 
 	/**
@@ -235,19 +210,9 @@ public class GridGui extends GUIElement{
 		throwPad.hover(mouseX, mouseY);
 	}
 
-	/**
-	 * Sets the coordinates of the walls.
-	 * @param o
-	 */
-	public void setWalls(ArrayList<Coordinate> o) {
-		this.walls = o;
-		updateWalls();
-
-	}
-
-	private void updateWalls(){
+	public void updateWalls(ArrayList<Coordinate> o ){
 		walls_squares.clear();
-		for(Coordinate wall: walls){
+		for(Coordinate wall: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(wall), gui);
 			s.setVisibility(true);
 			s.setShape(Shapes.wall);
@@ -258,7 +223,7 @@ public class GridGui extends GUIElement{
 	/**
 	 * Changes the player positions.
 	 */
-	public void setPlayers(HashMap<Player,Coordinate> players) {
+	public void updatePlayers(HashMap<Player,Coordinate> players) {
 		this.players.clear();
 		for(Player player : players.keySet() ){
 			int id  = player.getID();
@@ -268,17 +233,9 @@ public class GridGui extends GUIElement{
 		}
 	}
 
-	/**
-	 * sets the position of powerFailures
-	 */
-	public void setPowerFails(ArrayList<Coordinate> o) {
-		this.powerfail_coors = o;
-		updatePowerFailures();
-	}
-
-	private void updatePowerFailures(){
+	public void updatePowerFailures(ArrayList<Coordinate> o){
 		powerfails.clear();
-		for(Coordinate coor: powerfail_coors){
+		for(Coordinate coor: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 			s.setColor(OConstants.POWERFAIL_COLOR);
 			powerfails.add(s);
