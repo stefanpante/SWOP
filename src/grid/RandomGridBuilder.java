@@ -6,7 +6,6 @@ import item.IdentityDisc;
 import item.LightGrenade;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import square.Direction;
 import square.Square;
@@ -173,7 +172,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
 		for(Coordinate coor: getStartPositions()){
 			excluded.add(coor);
-			grenadesIncluded.add(getSquaredLocation(coor, Direction.NORTH, 3));
+			grenadesIncluded.add(getSquaredLocation(coor, 3));
 		}
 		
 		
@@ -259,32 +258,34 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return coordinates;
 	}
 
-	//FIXME: refactor me to find the coordinates without the use of direction
-	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, Direction direction, int size){
+    /**
+     * Returns a list with all the coordinates forming a size X size
+     * rectangle with start as center.
+     * @param   start
+     *          The center of the square that will be returned.
+     * @param   size
+     *          The amount of squares surrounding the starting coordinate.
+     * @return
+     */
+	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-		switch (direction) {
-		case NORTH:
-			for(Coordinate coor = start; coor.getY() >= getGrid().getVSize()-size; coor = coor.getNeighbor(direction)){
-				for(Coordinate coor2 = coor; coor2.getX() <= size-1  ; coor2 = coor2.getNeighbor(Direction.EAST)){
-					if(!getGrid().getSquare(coor2).isObstructed())
-						coordinates.add(coor2);
-				}
-			}
-			break;
-		case EAST:
-			for(Coordinate coor = start; coor.getY() <= size - 1; coor = coor.getNeighbor(Direction.SOUTH)){
-				for(Coordinate coor2 = coor; coor2.getX() >= getGrid().getHSize()-size  ; coor2 = coor2.getNeighbor(Direction.WEST)){
-					if(!getGrid().getSquare(coor2).isObstructed())
-						coordinates.add(coor2);
-				}
-			}
-			break;
-		default:
-			throw new IllegalArgumentException("Cannot get squared locations in that direction");
-		}
-		return coordinates;
+        int centerX = start.getX();
+        int centerY = start.getY();
+        int startX = centerX - size/2;
+        int startY = centerY - size/2;
+        int endX = centerX + size/2;
+        int endY = centerY + size/2;
+        for (int x =startX; x<=endX; x++){
+            for (int y =startY; y<=endY; y++){
+                    Coordinate coor =new Coordinate(x,y);
+                    if(getGrid().getSquare(coor).isObstructed()){
+                        coordinates.add(coor);
+                    }
+            }
+        }
+        coordinates.remove(start);
+        return coordinates;
 	}
-
     
     @Override
     public ArrayList<Coordinate> getStartPositions(){
