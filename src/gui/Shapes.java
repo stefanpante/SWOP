@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.ArrayList;
+
 import item.ChargedIdentityDisc;
 import item.Flag;
 import item.ForceFieldGenerator;
@@ -111,6 +113,17 @@ public class Shapes {
 			return Shapes.flags[id - 1];
 		}
 		
+		return null;
+	}
+
+	public static PShape getFlagItem(ArrayList<Item> it) {
+		for(Item item: it){
+			if(item instanceof Flag){
+				Flag f = (Flag) item;
+				int id = f.getPlayer().getID();
+				return flagsItems[id-1];
+			}
+		}
 		return null;
 	}
 

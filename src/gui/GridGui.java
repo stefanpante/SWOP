@@ -3,6 +3,7 @@ package gui;
 import game.Player;
 import gui.button.DirectionalButton;
 
+import item.Flag;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
@@ -409,12 +410,6 @@ public class GridGui extends GUIElement{
 					}
 				}
 				
-//				if(it.get(0) instanceof ForceFieldGenerator){
-//					ForceFieldGenerator ff = (ForceFieldGenerator) it.get(0);
-//					if(ff.isActive()){
-//						continue;
-//					}
-//				}
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 				s.setShape(Shapes.getShape(it.get(0)));
                 s.setColor(gui.color(255,0));
@@ -427,6 +422,10 @@ public class GridGui extends GUIElement{
 				if(containsTeleport(it)){
 					s.setShape(Shapes.teleportItem);
 				}
+				
+				if(containsFlag(it)){
+					s.setShape(Shapes.getFlagItem(it));
+				}
 				else{
 					s.setShape(Shapes.items);
 				}
@@ -438,6 +437,16 @@ public class GridGui extends GUIElement{
 	private boolean containsTeleport(ArrayList<Item> items){
 		for(Item item: items){
 			if(item instanceof Teleport){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean containsFlag(ArrayList<Item> items){
+		for(Item item: items){
+			if(item instanceof Flag){
 				return true;
 			}
 		}
