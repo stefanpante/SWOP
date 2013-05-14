@@ -20,17 +20,8 @@ public class DirectionalPad extends GUIElement{
 	 * Should be the position of the player.
 	 */
 	private PVector position;
-	/**
-	 * The height of the directionalPad
-	 */
-	private int height;
-	/**
-	 * The width of the directionalPad
-	 */
-	private int width;
-
-
-	private float buttonWidth;
+	
+	float buttonWidth;
 
 	private float buttonHeight;
 	/**
@@ -38,30 +29,13 @@ public class DirectionalPad extends GUIElement{
 	 */
 	private HashMap<Direction,DirectionalButton> buttons;
 
-
-	/**
-	 * Constructs a new directionalPad. position is set to (0,0)
-	 * @param gui 	the PApplet used to draw.
-	 */
-	public DirectionalPad(PApplet gui) {
-		//float height, float width, PVector position, PApplet gui
-		super(145,145, new PVector(), gui);
-		this.gui = gui;
-		this.position = new PVector();
-		this.height = 145;
-		this.width = 145;
-		this.buttonWidth = (width - OConstants.MARGIN*2)/3;
-		this.buttonHeight = (height - OConstants.MARGIN*2)/3;
-		initButtons();
-	}
-
 	/**
 	 * Constructs a new DirectionalPad.
 	 * @param position	the position of the directionalPad
 	 * @param gui		the PApplet used to draw.
 	 */
 	public DirectionalPad(PVector position, float buttonWidth, float buttonHeight,PApplet gui){
-		this(gui);
+		super(145,145, new PVector(), gui);
 		this.buttonHeight = buttonHeight;
 		this.buttonWidth = buttonWidth;
 		super.setPosition(position);
