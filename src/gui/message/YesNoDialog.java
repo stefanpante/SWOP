@@ -9,7 +9,7 @@ public class YesNoDialog extends Message{
 	
 	private TextButton yes;
 	private TextButton no;
-	// float width, float height, PVector position, String text,  PApplet gui
+	
 	public YesNoDialog(float width, float height, PVector position,
 			String message, PApplet gui) {
 		super(width, height, position, message, gui);
@@ -28,6 +28,14 @@ public class YesNoDialog extends Message{
 			yes.draw();
 			no.draw();
 		}
+	}
+	
+	public TextButton getYesButton(){
+		return this.yes;
+	}
+	
+	public TextButton getNoButton(){
+		return this.no;
 	}
 	
 }
