@@ -1,6 +1,7 @@
 package effect;
 
 import game.Player;
+import item.Flag;
 import item.IdentityDisc;
 import item.Item;
 import item.Teleport;
@@ -42,5 +43,10 @@ public class TeleportEffect extends Effect<Teleport> implements PlayerEffect, It
             identityDisc.decreaseRange();
             identityDisc.move(getAffectable().getDestination());
         }
+    }
+
+    @Override
+    public void affect(Flag flag) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }
