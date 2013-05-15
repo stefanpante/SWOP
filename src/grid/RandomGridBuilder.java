@@ -125,19 +125,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 		setNeighbors();
 		setConstraints();
-		placeWalls(randomWallLocations(getConstraintWall()));
-		placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
-		placeItems(new IdentityDisc(), randomLocations(getConstraintIdentityDisk()));
-		placeItems(new ForceFieldGenerator(), randomLocations(getConstraintForceFieldGenerator()));
-		//placeLightGrenade(randomLocations(getConstraintLightGrenade()));
-		//placeIdentityDisk(randomLocations(getConstraintIdentityDisk()));
-		placeTeleports(randomLocations(getConstraintTeleport()));
-		//placeForceFieldGenerators(randomLocations(getConstraintForceFieldGenerator()));
-		Coordinate coor = getChargedIdentityDiskLocation();
-		placeItem( getGrid().getSquare(coor), new ChargedIdentityDisc());
-		
-		
-		
+		placeWalls(randomWallLocations(getConstraintWall()));		
 	}
 
 	/**
@@ -152,12 +140,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
 			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
-		//	
-//		placeLightGrenade(lightGrenades);
-//		placeIdentityDisk(identityDisks);
-//		placeTeleports(teleports);
-//		placeForceFieldGenerators(fFgen);
-		//placeChargedIdentityDisk(chargedIdentityDisk);
 		
 		for(Coordinate coor: getStartPositions()){
 			Square s = getGrid().getSquare(coor);
@@ -174,21 +156,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			excluded.add(coor);
 			grenadesIncluded.add(getSquaredLocation(coor, 3));
 		}
-		
-		
+
 		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
-		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, grenadesIncluded));
-		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
-		setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
-		setConstraintForceFieldGenerator(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS,excluded));
 	}
 	
 	private void setEmptyConstraints(){		
 		setConstraintWall(new GridConstraint());
-		setConstraintLightGrenade(new GridConstraint());
-		setConstraintIdentityDisk(new GridConstraint());
-		setConstraintTeleport(new GridConstraint());
-		setConstraintForceFieldGenerator(new GridConstraint());
 	}
 	
 	/**

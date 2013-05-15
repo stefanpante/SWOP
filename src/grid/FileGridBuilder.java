@@ -72,12 +72,6 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			excluded.add(coor);
 		
 		setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
-		// TODO: Do we still need the squared location for the light grenade.
-		setConstraintLightGrenade(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded));
-		setConstraintIdentityDisk(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, excluded));
-		setConstraintTeleport(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
-		setConstraintForceFieldGenerator(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS,excluded));
-
 	}
 
 
@@ -94,11 +88,6 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			setNeighbors();
 			setConstraints();
 			placeWalls(this.getWallsLocation());
-			placeItems(new LightGrenade(), randomLocations(getConstraintLightGrenade()));
-			placeItems(new IdentityDisc(), randomLocations(getConstraintIdentityDisk()));
-			placeItems(new ForceFieldGenerator(), randomLocations(getConstraintForceFieldGenerator()));
-			placeTeleports(randomLocations(getConstraintTeleport()));
-			placeItem(getGrid().getSquare(getChargedIdentityDiskLocation()), new ChargedIdentityDisc());
 			checkConsistency();
 		}
 

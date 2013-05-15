@@ -44,11 +44,7 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * the constraints for the grid.
 	 */
-	private GridConstraint constraintTeleport;
-	private GridConstraint constraintLightGrenade;
-	private GridConstraint constraintIdentityDisk;
 	private GridConstraint constraintWall;
-	private GridConstraint constraintForceFieldGenerator;
 	
 	/**
 	 * The grid which has been/will be  built.
@@ -123,64 +119,6 @@ public abstract class AbstractGridBuilder {
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
 		square.getInventory().addItem(item);
-	}
-	
-    /**
-     * Returns the constraint for the teleports.
-     */
-	public GridConstraint getConstraintTeleport() {
-		return constraintTeleport;
-	}
-
-    /**
-     * sets the constraints for the teleport
-     * @param constraintTeleport the GridConstraint for teleports.
-     */
-	public void setConstraintTeleport(GridConstraint constraintTeleport) {
-		this.constraintTeleport = constraintTeleport;
-	}
-
-    /**
-     * Returns the constraint for the lightgrenades
-     */
-	public GridConstraint getConstraintLightGrenade() {
-		return constraintLightGrenade;
-	}
-
-    /**
-     * Sets the constraints for the lightgrenades
-     */
-	public void setConstraintLightGrenade(GridConstraint constraintLightGrenade) {
-		this.constraintLightGrenade = constraintLightGrenade;
-	}
-
-    /**
-     * Returns the constraints for the identity discs
-     */
-	public GridConstraint getConstraintIdentityDisk() {
-		return constraintIdentityDisk;
-	}
-
-    /**
-     * sets the constraints for the identity discs
-     */
-	public void setConstraintIdentityDisk(GridConstraint constraintIdentityDisk) {
-		this.constraintIdentityDisk = constraintIdentityDisk;
-	}
-	
-	/**
-	 * Returns the constraint for the forcefieldGenerators.
-	 */
-	public GridConstraint getConstraintForceFieldGenerator(){
-		return this.constraintForceFieldGenerator;
-	}
-	
-	/**
-	 * Set the constraint for the forcefieldGenerator
-	 * @param constraintForceFieldGenerator the gridConstraint for forcefieldgenerators.
-	 */
-	public void setConstraintForceFieldGenerator(GridConstraint constraintForceFieldGenerator){
-		this.constraintForceFieldGenerator = constraintForceFieldGenerator;
 	}
 
     /**
@@ -258,55 +196,6 @@ public abstract class AbstractGridBuilder {
 		return this.walls;
 	}
 
-
-	/**
-	 * Returns a random index inside an arrayList
-	 * @param a	the list of which a random index is selected.
-	 */
-    protected int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
-        return getRandom().nextInt(a.size());
-    }
-
-    /**
-     * Selects a number of random coordinates ( in respect to the gridConstraint)
-     * corresponding to Squares on the grid.
-     * @param constraint	the constraint which needs to be satisfied.
-     * @return	An arrayList with coordinates which satisfy the GridConstraint.
-     */
-    protected ArrayList<Coordinate> randomLocations(GridConstraint constraint){
-        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-        ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
-        int max = (int) (constraint.getPercentage() * getGrid().getAllSquares().size());
-        // Removed excluded squares from candidates
-        candidates.removeAll(constraint.getExcluded());
-        // Removed obstructed squares from candidates
-        ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
-        for(Coordinate coordinate : candidates){
-            if(getGrid().getSquare(coordinate).isObstructed())
-                toBeRemoved.add(coordinate);
-        }
-        candidates.removeAll(toBeRemoved);
-
-        // Add one square from evey list of included coordinates
-        for(ArrayList<Coordinate> includes : constraint.getIncluded()){
-            Coordinate candidate = includes.get(getRandomIndex(includes));
-            while(!candidates.contains(candidate)){
-                candidate = includes.get(getRandomIndex(includes));
-            }
-            coordinates.add(candidate);
-            candidates.remove(candidate);
-        }
-
-        // Keep adding coordinates from candidates until max is reached
-        while(coordinates.size() < max){
-            Coordinate candidate = candidates.get(getRandomIndex(candidates));
-            coordinates.add(candidate);
-            candidates.remove(candidate);
-        }
-
-        return coordinates;
-    }
-
     /**
      * Place walls on the given coordinates
      *
@@ -334,56 +223,7 @@ public abstract class AbstractGridBuilder {
         return result;
     }
 
-    protected void placeItems(Item item, ArrayList<Coordinate> coordinates){
-    	for(Coordinate coordinate: coordinates){
-    		placeItem(getGrid().getSquare(coordinate),item.copy());
-    	}
-    }
     
-    /**
-     *
-     * @param 	coordinates
-     * 			The coordinates of the locations to place.
-     */
-    protected void placeTeleports(ArrayList<Coordinate> coordinates) {
-        if(!getConstraintTeleport().satisfiesConstraint(coordinates, getGrid()))
-            throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-        ArrayList<Teleport> teleports = new ArrayList<Teleport>();
-        ArrayList<Square> destinations = new ArrayList<Square>();
-        Teleport teleport;
-        for(Coordinate coordinate : coordinates){
-            teleport = new Teleport();
-            destinations.add(getGrid().getSquare(coordinate));
-            placeItem(getGrid().getSquare(coordinate), teleport);
-            teleports.add(teleport);
-        }
-        linkTeleports(teleports, destinations, true);
-    }
-
-    /**
-     * Links a list of teleports according to the given boolean value.
-     *
-     * @param 	teleports
-     * 			The list of teleports to link.
-     * @param 	linkRandomly
-     * 			Boolean that hould be true if the linking should happen randomly.
-     * 			Otherwise each teleport will be linked to its next neighbor in the list.
-     */
-    private void linkTeleports(ArrayList<Teleport> teleports, ArrayList<Square> destinations, boolean linkRandomly) {
-        if(linkRandomly){
-            for(Teleport tele : teleports){
-                Square candidateDestination = destinations.get(getRandomIndex(destinations));
-                while(candidateDestination.getInventory().hasItem(tele)){
-                    candidateDestination = destinations.get(getRandomIndex(destinations));
-                }
-                tele.setDestination(candidateDestination);
-            }
-        } else {
-            for(int i=0; i<teleports.size(); i++){
-                teleports.get(i).setDestination(destinations.get(i%destinations.size()));
-            }
-        }
-    }
     
     protected void setNeighbors(){
     	 for(Square square: getGrid().getAllSquares()){
