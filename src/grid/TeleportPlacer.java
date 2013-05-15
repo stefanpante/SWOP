@@ -17,7 +17,7 @@ public class TeleportPlacer extends ItemPlacer {
 
 	@Override
 	public void placeItems() {
-		ArrayList<Coordinate> coordinates = getRandomLocations();
+		ArrayList<Coordinate> coordinates = getLocations();
 		ArrayList<Teleport> teleports = new ArrayList<Teleport>();
 		ArrayList<Square> destinations = new ArrayList<Square>();
 		for(Coordinate coor: coordinates){

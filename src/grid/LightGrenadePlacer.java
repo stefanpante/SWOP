@@ -24,7 +24,7 @@ public class LightGrenadePlacer extends ItemPlacer{
 	 * Places all the light grenades on the given grid.
 	 */
 	public void placeItems(){
-		ArrayList<Coordinate> coordinates = getRandomLocations();
+		ArrayList<Coordinate> coordinates = getLocations();
 		for(Coordinate coor: coordinates){
 			placeItem(getGrid().getSquare(coor), new LightGrenade());
 		}

@@ -78,7 +78,7 @@ public abstract class ItemPlacer {
      * corresponding to Squares on the grid.
      * @return	An arrayList with coordinates which satisfy the itemConstraint.
      */
-    public ArrayList<Coordinate> getRandomLocations(){
+    public ArrayList<Coordinate> getLocations(){
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
         ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
         int max = (int) (getItemConstraint().getPercentage() * getGrid().getAllSquares().size());

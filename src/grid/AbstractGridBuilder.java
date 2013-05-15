@@ -224,46 +224,14 @@ public abstract class AbstractGridBuilder {
     }
 
     
-    
+    /**
+     * Sets the neighbors of each square.
+     */
     protected void setNeighbors(){
     	 for(Square square: getGrid().getAllSquares()){
          	HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
          	square.setNeighbors(neighbors);
          }
-    }
-
-    /**
-     * Suggest a coordinate for the Charged Disk Location
-     *
-     * @return A coordinate equally far away from each player
-     */
-    //FIXME: 	Fix for the support of multiple players.
-    protected Coordinate getChargedIdentityDiskLocation() {
-//        Square player1Square = getGrid().getSquare(getPlayerOneCoordinate());
-//        Square player2Square = getGrid().getSquare(getPlayerTwoCoordinate());
-//        Map.Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
-//        for(Square square : getGrid().getAllSquares()){
-//            if(!square.isObstructed()){
-//                Coordinate thisCoordinate = getGrid().getCoordinate(square);
-//                try{
-//                    AStar aStar = new AStar(getGrid());
-//                    int player1Length = aStar.shortestPath(player1Square, square).size();
-//                    AStar aStar2 = new AStar(getGrid());
-//                    int player2Length = aStar2.shortestPath(player2Square, square).size();
-//                    if(Math.abs(player2Length - player1Length) <= 2){
-//                        int longest = Math.max(player1Length, player2Length);
-//                        if(longest < shortest.getValue()){
-//                            shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
-//                        }
-//                    }
-//                }catch(Exception e){
-//                    System.err.println(e.getMessage());
-//                }
-//            }
-//        }
-//        return shortest.getKey();
-    	
-    	return null;
     }
     
     /**
@@ -276,8 +244,10 @@ public abstract class AbstractGridBuilder {
      * @throws IllegalStateException
      */
 	protected abstract void build() throws IllegalStateException;
-	
 
+	/**
+	 * Returns every possible start position of each player.
+	 */
 	public abstract ArrayList<Coordinate> getStartPositions();
 	
 }
