@@ -1,5 +1,6 @@
 package itemplacer;
 
+import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Teleport;
@@ -12,10 +13,9 @@ import util.Coordinate;
 public class TeleportPlacer extends ItemPlacer {
 
 
-	public TeleportPlacer(Grid grid) {
-		super(grid);
-		ArrayList<Coordinate> excluded = getGrid().getCoordinates(getGrid().getStartPositions());
-		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
+	public TeleportPlacer(Grid grid, ArrayList<Player> players) {
+		super(grid, players);
+		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, getPlayerCoordinates()));
 	}
 
 	@Override

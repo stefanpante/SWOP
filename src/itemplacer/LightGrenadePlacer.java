@@ -1,5 +1,6 @@
 package itemplacer;
 
+import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.LightGrenade;
@@ -19,10 +20,9 @@ public class LightGrenadePlacer extends ItemPlacer{
 	 * Constructs a new LightGrenadePlacer, places the items on the given grid.
 	 * @param grid		The grid on which the items should be placed.
 	 */
-	public LightGrenadePlacer(Grid grid){
-		super(grid);
-		ArrayList<Coordinate> excluded = getGrid().getCoordinates(getGrid().getStartPositions());
-		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_GRENADES, excluded, getIncluded()));
+	public LightGrenadePlacer(Grid grid, ArrayList<Player> players){
+		super(grid, players);
+		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_GRENADES, getPlayerCoordinates(), getIncluded()));
 		
 	}
 	
@@ -38,7 +38,7 @@ public class LightGrenadePlacer extends ItemPlacer{
 	
 	public ArrayList<ArrayList<Coordinate>> getIncluded(){
 		ArrayList<ArrayList<Coordinate>> included = new ArrayList<ArrayList<Coordinate>>();
-		for(Coordinate coordinate: getGrid().getCoordinates(getGrid().getStartPositions()))
+		for(Coordinate coordinate: getPlayerCoordinates())
 			included.add(getSquaredLocation(coordinate, INCLUDED_RADIUS));
 		
 		return included;
