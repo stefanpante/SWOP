@@ -4,8 +4,12 @@ import game.Player;
 
 import item.ChargedIdentityDisc;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Map;
 
+import square.Square;
+import util.AStar;
 import util.Coordinate;
 
 /**
@@ -21,6 +25,8 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
 	 * The players in the game; Needed for the location of the chargedIdentityDisc
 	 */
 	private ArrayList<Player> players;
+	
+	public static int MAX_DIFFERENCE = 2;
 	
 	public ChargedIdentityDiscPlacer(Grid grid, ArrayList<Player> players) {
 		super(grid);
@@ -39,32 +45,42 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
      * @return A coordinate equally far away from each player
      */
     //FIXME: 	Fix for the support of multiple players.
-    protected Coordinate getLocation() {
-//        Square player1Square = getGrid().getSquare(getPlayerOneCoordinate());
-//        Square player2Square = getGrid().getSquare(getPlayerTwoCoordinate());
-//        Map.Entry<Coordinate,Integer> shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(null,Integer.MAX_VALUE);
-//        for(Square square : getGrid().getAllSquares()){
-//            if(!square.isObstructed()){
-//                Coordinate thisCoordinate = getGrid().getCoordinate(square);
-//                try{
-//                    AStar aStar = new AStar(getGrid());
-//                    int player1Length = aStar.shortestPath(player1Square, square).size();
-//                    AStar aStar2 = new AStar(getGrid());
-//                    int player2Length = aStar2.shortestPath(player2Square, square).size();
-//                    if(Math.abs(player2Length - player1Length) <= 2){
-//                        int longest = Math.max(player1Length, player2Length);
-//                        if(longest < shortest.getValue()){
-//                            shortest = new AbstractMap.SimpleEntry<Coordinate,Integer>(thisCoordinate, longest);
-//                        }
-//                    }
-//                }catch(Exception e){
-//                    System.err.println(e.getMessage());
-//                }
-//            }
-//        }
-//        return shortest.getKey();
+    protected Square getLocation() {
+    	ArrayList<Square> playerSquares = new ArrayList<Square>();
+    	for(Player player: players)
+    		playerSquares.add(player.getStartPosition());
+ 
+    	for(Square square : getGrid().getAllSquares()){
+            if(!square.isObstructed()){
+                try{
+                    AStar aStar = new AStar(getGrid());
+                    ArrayList<Integer> lengths = new ArrayList<Integer>();
+                    for(Square playerSquare: playerSquares){
+                    	AStar astar = new AStar(getGrid());
+                    	lengths.add(astar.shortestPath(playerSquare, square).size());
+                    }
+                    
+                    if(compareLengths(lengths))
+                    	return square;
+                }catch(Exception e){
+                    System.err.println(e.getMessage());
+                }
+            }
+        }
     	
     	return null;
+    }
+    
+    private boolean compareLengths(ArrayList<Integer> lengths){
+
+    	for(int i : lengths){
+    		for(int j: lengths){
+    			if (Math.abs(i - j) > MAX_DIFFERENCE)
+    				return false;
+    		}
+    	}
+    	
+    	return true;
     }
 
 }
