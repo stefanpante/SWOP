@@ -151,12 +151,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 
 	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		ArrayList<ArrayList<Coordinate>> grenadesIncluded = new ArrayList<ArrayList<Coordinate>>();
 		for(Coordinate coor: getStartPositions()){
 			excluded.add(coor);
-			grenadesIncluded.add(getSquaredLocation(coor, 3));
 		}
-
 		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
 	}
 	
@@ -231,34 +228,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		return coordinates;
 	}
 
-    /**
-     * Returns a list with all the coordinates forming a size X size
-     * rectangle with start as center.
-     * @param   start
-     *          The center of the square that will be returned.
-     * @param   size
-     *          The amount of squares surrounding the starting coordinate.
-     * @return
-     */
-	private ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
-		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-        int centerX = start.getX();
-        int centerY = start.getY();
-        int startX = centerX - size/2;
-        int startY = centerY - size/2;
-        int endX = centerX + size/2;
-        int endY = centerY + size/2;
-        for (int x =startX; x<=endX; x++){
-            for (int y =startY; y<=endY; y++){
-                    Coordinate coor =new Coordinate(x,y);
-                    if(getGrid().getSquare(coor).isObstructed()){
-                        coordinates.add(coor);
-                    }
-            }
-        }
-        coordinates.remove(start);
-        return coordinates;
-	}
+    
     
     @Override
     public ArrayList<Coordinate> getStartPositions(){

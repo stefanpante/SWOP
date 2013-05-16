@@ -375,6 +375,13 @@ public class Grid {
 		throw new NoSuchElementException("No coordinate found for " + square);
 	}
 	
+	public ArrayList<Coordinate> getCoordinates(ArrayList<Square> squares){
+		ArrayList<Coordinate> coors = new ArrayList<Coordinate>();
+		for(Square square: squares)
+			coors.add(getCoordinate(square));
+		return coors;
+	}
+	
 	/**
 	 * Returns whether the given square is placed in this grid.
 	 * 

@@ -10,6 +10,8 @@ public class ForceFieldGeneratorPlacer extends ItemPlacer {
 
 	public ForceFieldGeneratorPlacer(Grid grid) {
 		super(grid);
+		ArrayList<Coordinate> excluded = getGrid().getCoordinates(getGrid().getStartPositions());
+		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS, excluded));
 	}
 	
 	public void placeItems(){

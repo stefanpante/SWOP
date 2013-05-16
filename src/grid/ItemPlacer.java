@@ -112,6 +112,35 @@ public abstract class ItemPlacer {
     }
     
     /**
+     * Returns a list with all the coordinates forming a size X size
+     * rectangle with start as center.
+     * @param   start
+     *          The center of the square that will be returned.
+     * @param   size
+     *          The amount of squares surrounding the starting coordinate.
+     * @return
+     */
+	protected ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
+		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        int centerX = start.getX();
+        int centerY = start.getY();
+        int startX = centerX - size/2;
+        int startY = centerY - size/2;
+        int endX = centerX + size/2;
+        int endY = centerY + size/2;
+        for (int x =startX; x<=endX; x++){
+            for (int y =startY; y<=endY; y++){
+                    Coordinate coor =new Coordinate(x,y);
+                    if(getGrid().getSquare(coor).isObstructed()){
+                        coordinates.add(coor);
+                    }
+            }
+        }
+        coordinates.remove(start);
+        return coordinates;
+	}
+    
+    /**
 	 * Returns a random index inside an arrayList
 	 * @param a	the list of which a random index is selected.
 	 */

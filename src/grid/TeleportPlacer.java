@@ -12,7 +12,8 @@ public class TeleportPlacer extends ItemPlacer {
 
 	public TeleportPlacer(Grid grid) {
 		super(grid);
-		// TODO Auto-generated constructor stub
+		ArrayList<Coordinate> excluded = getGrid().getCoordinates(getGrid().getStartPositions());
+		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, excluded));
 	}
 
 	@Override
