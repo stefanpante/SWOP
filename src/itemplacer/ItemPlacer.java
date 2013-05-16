@@ -3,6 +3,7 @@ package itemplacer;
 import java.util.ArrayList;
 import java.util.Random;
 
+import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Item;
@@ -22,6 +23,11 @@ public abstract class ItemPlacer {
 	private Grid grid;
 	
 	/**
+	 * The players. Various constraints are in respect to the players.
+	 */
+	
+	private ArrayList<Player> players;
+	/**
 	 * The constraint for placing the items;
 	 */
 	private GridConstraint itemConstraint;
@@ -32,11 +38,12 @@ public abstract class ItemPlacer {
 	private Random random;
 	
 	/**
-	 * 
-	 * @param grid
+	 * Creates a new ItemPlacer
+	 * @param grid	the grid on which the items should be placed.
 	 */
-	public ItemPlacer(Grid grid){
+	public ItemPlacer(Grid grid, ArrayList<Player> players){
 		this.grid = grid;
+		this.players = players;
 		this.random = new Random();
 	}
 	
@@ -65,7 +72,7 @@ public abstract class ItemPlacer {
 	 * 			The item to be placed on the given coordinate
 	 */
 	protected void placeItem(Square square, Item item) throws IllegalArgumentException {
-		if(square.isObstructed())
+		if(square == null || square.isObstructed())
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
 		square.getInventory().addItem(item);
@@ -119,8 +126,8 @@ public abstract class ItemPlacer {
      * @param   start
      *          The center of the square that will be returned.
      * @param   size
-     *          The amount of squares surrounding the starting coordinate.
-     * @return
+     *          The amount of coordinates surrounding the starting coordinate.
+     * @return A list of coordinates surrounding the starting coordinate
      */
 	protected ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
@@ -150,8 +157,23 @@ public abstract class ItemPlacer {
         return random.nextInt(a.size());
     }
     
+    /**
+     * Returns the grid.
+     */
     public Grid getGrid(){
     	return this.grid;
+    }
+    
+    protected ArrayList<Player> getPlayers(){
+    	return new ArrayList<Player>(players);
+    }
+    
+    protected ArrayList<Coordinate> getPlayerCoordinates(){
+    	ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+    	for(Player player: players){
+    		coordinates.add(getGrid().getCoordinate(player.getStartPosition()));
+    	}
+		return coordinates;
     }
 	
 	

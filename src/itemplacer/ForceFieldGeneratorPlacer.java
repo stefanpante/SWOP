@@ -1,5 +1,6 @@
 package itemplacer;
 
+import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.ForceFieldGenerator;
@@ -8,12 +9,20 @@ import java.util.ArrayList;
 
 import util.Coordinate;
 
+/**
+ * Places forcefield generators on the grid.
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
+ *
+ */
 public class ForceFieldGeneratorPlacer extends ItemPlacer {
 
-	public ForceFieldGeneratorPlacer(Grid grid) {
-		super(grid);
-		ArrayList<Coordinate> excluded = getGrid().getCoordinates(getGrid().getStartPositions());
-		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS, excluded));
+	/**
+	 * Constructs a new ForceFieldGeneratorPlacer
+	 * @param grid
+	 */
+	public ForceFieldGeneratorPlacer(Grid grid, ArrayList<Player> players) {
+		super(grid, players);
+		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS, getPlayerCoordinates()));
 	}
 	
 	public void placeItems(){
