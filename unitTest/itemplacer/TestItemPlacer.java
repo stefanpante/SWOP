@@ -1,15 +1,8 @@
-package itenplacer;
+package itemplacer;
 
-import game.Game;
-import game.Player;
-import grid.AbstractGridBuilder;
 import grid.Grid;
 import grid.GridProvider;
-import grid.RandomGridBuilder;
-import item.IdentityDisc;
-import itemplacer.*;
 import org.junit.*;
-import square.Square;
 import util.Coordinate;
 
 import java.util.ArrayList;

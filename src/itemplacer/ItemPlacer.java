@@ -129,7 +129,7 @@ public abstract class ItemPlacer {
      *          The amount of coordinates surrounding the starting coordinate.
      * @return A list of coordinates surrounding the starting coordinate
      */
-    public ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
+    protected ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
         int centerX = start.getX();
         int centerY = start.getY();
@@ -153,7 +153,7 @@ public abstract class ItemPlacer {
 	 * Returns a random index inside an arrayList
 	 * @param a	the list of which a random index is selected.
 	 */
-    public int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
+    protected int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
         return random.nextInt(a.size());
     }
     
