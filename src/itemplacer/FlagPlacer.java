@@ -1,6 +1,7 @@
-package grid;
+package itemplacer;
 
 import game.Player;
+import grid.Grid;
 
 import item.Flag;
 

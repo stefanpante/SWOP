@@ -1,5 +1,7 @@
-package grid;
+package itemplacer;
 
+import grid.Grid;
+import grid.GridConstraint;
 import item.LightGrenade;
 
 import java.util.ArrayList;

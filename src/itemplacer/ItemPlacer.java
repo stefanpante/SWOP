@@ -1,8 +1,10 @@
-package grid;
+package itemplacer;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import grid.Grid;
+import grid.GridConstraint;
 import item.Item;
 import square.Square;
 import util.Coordinate;
