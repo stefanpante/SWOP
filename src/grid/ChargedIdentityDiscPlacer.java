@@ -35,8 +35,8 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
 	
 	@Override
 	public void placeItems(){
-		Coordinate coor = getLocation();
-		placeItem(getGrid().getSquare(coor), new ChargedIdentityDisc());
+		Square square = getLocation();
+		placeItem(square, new ChargedIdentityDisc());
 	}
 	
 	  /**
@@ -44,7 +44,6 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
      *
      * @return A coordinate equally far away from each player
      */
-    //FIXME: 	Fix for the support of multiple players.
     protected Square getLocation() {
     	ArrayList<Square> playerSquares = new ArrayList<Square>();
     	for(Player player: players)
