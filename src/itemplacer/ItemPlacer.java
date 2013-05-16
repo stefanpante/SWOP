@@ -175,7 +175,4 @@ public abstract class ItemPlacer {
     	}
 		return coordinates;
     }
-	
-	
-
 }
