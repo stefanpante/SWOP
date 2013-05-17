@@ -4,7 +4,10 @@ import grid.Grid;
 
 public class CTFGame extends Game {
 
-	public CTFGame(Grid grid) {
+    public static final int MAX_PLAYERS = 9;
+    public static final int MINIUMUM_PLAYERS = 2;
+
+    public CTFGame(Grid grid) {
 		super(grid);
 		// TODO Auto-generated constructor stub
 	}
@@ -20,5 +23,15 @@ public class CTFGame extends Game {
 		// TODO Auto-generated method stub
 		
 	}
+
+    @Override
+    public int getMaximumAmountOfPlayers() {
+        return MAX_PLAYERS;
+    }
+
+    @Override
+    public int getMinimumAmountOfPlayers() {
+        return MINIUMUM_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
 }

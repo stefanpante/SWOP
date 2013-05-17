@@ -70,6 +70,7 @@ public abstract class Game {
 		setCurrentPlayer(players.get(0));
 	}
 
+    //FIXME: move this to a "GameBuilder"??
     public void addPlayers(int amount){
     	ArrayList<Square> startPositions = getGrid().getStartPositions();
         for(int i = 1; i <= amount; i++){
@@ -107,7 +108,8 @@ public abstract class Game {
 		
 		if(players.contains(player))
 			throw new IllegalStateException("Two players should never be the same object");
-		
+		if(players.size() >= getMaximumAmountOfPlayers())
+            throw  new IllegalStateException("There is a maximum of " + getMaximumAmountOfPlayers() + " players in this game.");
 		players.add(player);
 	}
 	
@@ -274,8 +276,12 @@ public abstract class Game {
 	
 	public abstract void checkWinners();
 	public abstract void checkLosers();
-	
-	/**
+
+    public abstract int getMaximumAmountOfPlayers();
+    public abstract int getMinimumAmountOfPlayers();
+
+
+    /**
 	 * Checks if the current player is unable to make a move.
 	 */
 	public boolean isCurrentPlayerStuck(){
