@@ -85,6 +85,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private Textfield widthGrid;
 
 	private Textfield heightGrid;
+	private Textfield numPlayers;
 
 	private boolean initialized = false;
 
@@ -134,10 +135,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		widthGrid.setSize(hSize/2, 35);
 		widthGrid.setAutoClear(false);
 		widthGrid.setColor(color);
-
 		widthGrid.setLabel("Width of the grid");
 		widthGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
 		widthGrid.setColorCursor(OConstants.LIGHT_GREY);
+		
 		heightGrid = inputController.addTextfield("vcells");
 		heightGrid.setPosition(hSize/4,170);
 		heightGrid.setSize(hSize/2, 35);
@@ -147,6 +148,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		heightGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 
+		numPlayers = inputController.addTextfield("numPlayer");
+		numPlayers.setPosition(hSize/4, 240);
+		numPlayers.setSize(hSize/2, 35);
+		numPlayers.setAutoClear(false);
+		numPlayers.setLabel("Number of players ( 2-9)");
+		numPlayers.setValue("" + CTFGame.MIN_PLAYERS);
+		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 		gamemode = inputController.addDropdownList("gamemode");
 		gamemode.setPosition(hSize/4, 240);
 		gamemode.setWidth(hSize/2);
@@ -157,14 +165,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		filepick = inputController.addButton("pick");
 		filepick.setLabel("Pick grid from file");
-		filepick.setPosition(hSize/4,280);
+		filepick.setPosition(hSize/4,350);
 		filepick.setSize(hSize/2, 35);
 		filepick.setColor(color);
 		filepick.setColorLabel(OConstants.WHITE);
 		filepick.setColorBackground(OConstants.LIGHT_GREY);
 
 		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,320);
+		confirm.setPosition(hSize/4,430);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.WHITE);
