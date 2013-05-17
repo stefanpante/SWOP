@@ -1,5 +1,6 @@
 package itemplacer;
 
+import game.Player;
 import grid.Grid;
 import grid.GridProvider;
 import org.junit.*;
@@ -34,7 +35,8 @@ public class TestItemPlacer {
 
     @Test
     public void testSquaredLocations(){
-        ItemPlacer idP = new IdentityDiscPlacer(g);
+        ArrayList<Player> playerList = new ArrayList<Player>();
+        ItemPlacer idP = new IdentityDiscPlacer(g, playerList);
         //Should not be included.
         Coordinate start = new Coordinate(3,3);
 
@@ -79,7 +81,7 @@ public class TestItemPlacer {
 
         ArrayList<Coordinate> result = idP.getSquaredLocation(start, 5);
 
-        assertEquals(result.size(), 24);
+        assertEquals(24, result.size());
 
         assertTrue(result.contains(co1_1));
         assertTrue(result.contains(co2_1));
@@ -118,5 +120,33 @@ public class TestItemPlacer {
         assertFalse(result.contains(co0_3));
         assertFalse(result.contains(co0_4));
         assertFalse(result.contains(co0_5));
+    }
+
+    @Test
+    public void testPlayerLocations(){
+        ArrayList<Player> playerList = new ArrayList<Player>();
+        Coordinate c1 = new Coordinate(0,0);
+        Player p1 = new Player(g.getSquare(c1),1);
+        playerList.add(p1);
+
+        Coordinate c2 = new Coordinate(9,0);
+        Player p2 = new Player(g.getSquare(c1),2);
+        playerList.add(p2);
+
+        Coordinate c3 = new Coordinate(0,9);
+        Player p3 = new Player(g.getSquare(c1),3);
+        playerList.add(p3);
+
+        Coordinate c4 = new Coordinate(9,9);
+        Player p4 = new Player(g.getSquare(c1),4);
+        playerList.add(p4);
+
+        ItemPlacer idP = new IdentityDiscPlacer(g, playerList);
+        ArrayList<Coordinate> result = idP.getPlayerCoordinates();
+        assertEquals(4,result.size());
+        assertTrue(result.contains(c1));
+        assertTrue(result.contains(c2));
+        assertTrue(result.contains(c3));
+        assertTrue(result.contains(c4));
     }
 }
