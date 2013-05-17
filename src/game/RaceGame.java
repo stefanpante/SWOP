@@ -8,4 +8,16 @@ public class RaceGame extends Game{
 		super(grid);
 	}
 
+	@Override
+	public void checkWinners() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkLosers() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

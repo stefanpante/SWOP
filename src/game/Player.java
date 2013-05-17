@@ -358,6 +358,7 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public void kill(){
 		setAlive(false);
+		//TODO: drop flag and remove inventory?.
 	}
 	/**
 	 * Sets whether the player is dead or alive.

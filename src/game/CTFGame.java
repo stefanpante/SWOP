@@ -9,4 +9,16 @@ public class CTFGame extends Game {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void checkWinners() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkLosers() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
