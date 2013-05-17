@@ -240,7 +240,24 @@ public abstract class Game {
 	public ArrayList<Player> getPlayers(){
 		return new ArrayList<Player>(this.players);
 	}
-	
+
+    /**
+     * Sets all the players at once.
+     *
+     * @param players
+     */
+    public void setPlayers(ArrayList<Player> players){
+        if(players.size() < getMinimumAmountOfPlayers() ||
+                players.size() > getMaximumAmountOfPlayers())
+            throw new IllegalStateException("There is a minimum of " + getMinimumAmountOfPlayers()
+                    +" and a maximum of " + getMaximumAmountOfPlayers() + " players for this game.");
+        for(Player p:players){
+            if(p == null)
+                throw new NullPointerException("A player should not be null");
+        }
+        this.players = players;
+    }
+
 	/**
 	 * Checks whether the given current player is a legal currentPlayer for this game object.
 	 * 

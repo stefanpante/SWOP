@@ -5,7 +5,7 @@ import grid.Grid;
 public class CTFGame extends Game {
 
     public static final int MAX_PLAYERS = 9;
-    public static final int MINIUMUM_PLAYERS = 2;
+    public static final int MIN_PLAYERS = 2;
 
     public CTFGame(Grid grid) {
 		super(grid);
@@ -31,7 +31,7 @@ public class CTFGame extends Game {
 
     @Override
     public int getMinimumAmountOfPlayers() {
-        return MINIUMUM_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
+        return MIN_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
 }

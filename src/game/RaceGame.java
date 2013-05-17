@@ -4,8 +4,8 @@ import grid.Grid;
 
 public class RaceGame extends Game{
 
-    public static final int MAXIMUM_PLAYERS = 2;
-    public static final int MINIMUM_PLAYERS = 2;
+    public static final int MAX_PLAYERS = 2;
+    public static final int MIN_PLAYERS = 2;
 
     public RaceGame(Grid grid) {
 		super(grid);
@@ -25,12 +25,12 @@ public class RaceGame extends Game{
 
     @Override
     public int getMaximumAmountOfPlayers() {
-        return MAXIMUM_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
+        return MAX_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public int getMinimumAmountOfPlayers() {
-        return MINIMUM_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
+        return MIN_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
 }
