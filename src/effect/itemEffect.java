@@ -14,5 +14,6 @@ public interface ItemEffect {
 
     public void affect(IdentityDisc identityDisc);
 
+    public void affect(Flag flag);
 
 }
