@@ -18,18 +18,6 @@ public abstract class ShapeButton extends GUIButton {
 	
 	/**
 	 * Constructs a new ShapeButton
-	 * @param width		the width for the button.
-	 * @param height	the height for the button.
-	 * @param shape		the PShape to be drawn on the button.
-	 * @param gui		the PApplet used to draw.
-	 */
-	public ShapeButton(float width, float height, PShape shape, PApplet gui) {
-		super(width, height, gui);
-		this.shape = shape;
-	}
-	
-	/**
-	 * Constructs a new ShapeButton
 	 * @param width		the width for the button
 	 * @param height	the height for the button
 	 * @param shape		the PShape to be drawn on the button

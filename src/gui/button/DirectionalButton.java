@@ -1,5 +1,6 @@
 package gui.button;
 
+import gui.Shapes;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
@@ -9,14 +10,14 @@ import util.OConstants;
 public class DirectionalButton extends ShapeButton{
 
 	/**
-	 * The direction.
+	 * The direction which this button represents
 	 */
 	private Direction direction;
 
 
-	public DirectionalButton(float width, float height, PShape shape, Direction direction, PVector position,
+	public DirectionalButton(float width, float height, Direction direction, PVector position,
 			PApplet gui) {
-		super(width, height, shape, position, gui);
+		super(width, height, Shapes.getDirection(direction), position, gui);
 		this.direction = direction;
 		this.visible = true;
 

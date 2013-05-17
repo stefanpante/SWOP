@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import item.ChargedIdentityDisc;
 import item.Flag;
@@ -11,6 +12,7 @@ import item.LightGrenade;
 import item.Teleport;
 import processing.core.PApplet;
 import processing.core.PShape;
+import square.Direction;
 
 public class Shapes {
 
@@ -22,16 +24,9 @@ public class Shapes {
 	public static PShape chargedIdentityDisc;
 	public static PShape lightgrenade;
 	public static PShape powerFailureItem;
-	
-	public static PShape north;
-	public static PShape south;
-	public static PShape east;
-	public static PShape west;
-	public static PShape northeast;
-	public static PShape northwest;
-	public static PShape southeast;
-	public static PShape southwest;
 
+	public static HashMap<Direction, PShape> directions;
+	
 	public static PShape items;
 	public static PShape teleportItem;
 	public static PShape teleport;
@@ -44,6 +39,7 @@ public class Shapes {
 	public Shapes(PApplet gui) {
 		this.flags = new PShape[9];
 		this.flagsItems = new PShape[9];
+		this.directions = new HashMap<Direction, PShape>();
 		this.gui = gui;
 		this.initImages();
 	}
@@ -56,14 +52,14 @@ public class Shapes {
 		Shapes.lightgrenade = gui.loadShape(getClass().getResource("/res/items/lightgrenade.svg").getPath());
 		Shapes.items = gui.loadShape(getClass().getResource("/res/items/items.svg").getPath());
 		
-		Shapes.south = gui.loadShape(getClass().getResource("/res/directions/south.svg").getPath());
-		Shapes.north = gui.loadShape(getClass().getResource("/res/directions/north.svg").getPath());
-		Shapes.west  = gui.loadShape(getClass().getResource("/res/directions/west.svg").getPath());
-		Shapes.east  = gui.loadShape(getClass().getResource("/res/directions/east.svg").getPath());
-		Shapes.southeast =  gui.loadShape(getClass().getResource("/res/directions/southeast.svg").getPath());
-		Shapes.southwest =  gui.loadShape(getClass().getResource("/res/directions/southwest.svg").getPath());
-		Shapes.northeast =  gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath());
-		Shapes.northwest =  gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath());
+		directions.put(Direction.SOUTH, gui.loadShape(getClass().getResource("/res/directions/south.svg").getPath()));
+		directions.put(Direction.NORTH, gui.loadShape(getClass().getResource("/res/directions/north.svg").getPath()));
+		directions.put(Direction.WEST, gui.loadShape(getClass().getResource("/res/directions/west.svg").getPath()));
+		directions.put(Direction.EAST, gui.loadShape(getClass().getResource("/res/directions/east.svg").getPath()));
+		directions.put(Direction.SOUTHEAST, gui.loadShape(getClass().getResource("/res/directions/southeast.svg").getPath()));
+		directions.put(Direction.SOUTHWEST, gui.loadShape(getClass().getResource("/res/directions/southwest.svg").getPath()));
+		directions.put(Direction.NORTHEAST, gui.loadShape(getClass().getResource("/res/directions/northeast.svg").getPath()));
+		directions.put(Direction.NORTHWEST, gui.loadShape(getClass().getResource("/res/directions/northwest.svg").getPath()));
 		
 		
 		Shapes.teleportItem = gui.loadShape(getClass().getResource("/res/items/teleportitems.svg").getPath());
@@ -125,6 +121,10 @@ public class Shapes {
 			}
 		}
 		return null;
+	}
+	
+	public static PShape getDirection(Direction direction){
+		return directions.get(direction);
 	}
 
 

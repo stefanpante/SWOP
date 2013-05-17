@@ -15,8 +15,6 @@ public class SquareGUI extends GUIElement{
 	
 	private PShape shape;
 
-
-
 	/**
 	 * Constructs a new SquareGUi.
 	 * @param position
@@ -67,9 +65,7 @@ public class SquareGUI extends GUIElement{
 
 	}
 	
-	public void setShape(PShape shape){
-		this.shape = shape;
-	}
+
 
 	/**
 	 * Checks whether the mouse is over the grid and takes appropiate action
@@ -97,14 +93,9 @@ public class SquareGUI extends GUIElement{
 		gui.rect(position.x, position.y, width, height);
 
 	}
-
-	public void reset(){
-		this.shape = null;
-		//this.color = OConstants.LIGHTER_GREY;
-	}
-
-	public boolean hasShape(){
-		return (shape != null);
+	
+	public void setShape(PShape shape){
+		this.shape = shape;
 	}
 	
 	public PShape getShape(){

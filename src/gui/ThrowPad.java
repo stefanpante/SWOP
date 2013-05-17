@@ -23,15 +23,11 @@ public class ThrowPad extends DirectionalPad {
 	}
 
 	private void setUpDirections(){
-		HashMap<Direction, DirectionalButton> buttons = this.getButtons();
-		buttons.get(Direction.SOUTHEAST).setVisibility(false);
-		buttons.get(Direction.SOUTHWEST).setVisibility(false);
-		buttons.get(Direction.NORTHWEST).setVisibility(false);
-		buttons.get(Direction.NORTHEAST).setVisibility(false);
+		buttons.remove(Direction.SOUTHEAST).setVisibility(false);
+		buttons.remove(Direction.SOUTHWEST).setVisibility(false);
+		buttons.remove(Direction.NORTHWEST).setVisibility(false);
+		buttons.remove(Direction.NORTHEAST).setVisibility(false);
 		
-	}
-	public void setShape(PShape shape){
-		this.shape = shape;
 	}
 
 	@Override
@@ -58,7 +54,7 @@ public class ThrowPad extends DirectionalPad {
 
 	}
 
-	public IdentityDisc getLaunchabelItem(){
+	public IdentityDisc getIdentityDisc(){
 		return this.identityDisc;
 	}
 

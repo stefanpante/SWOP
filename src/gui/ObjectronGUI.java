@@ -1,6 +1,7 @@
 package gui;
 
 import game.Player;
+import grid.RandomGridBuilder;
 import gui.button.GUIButton;
 import gui.button.TextButton;
 import gui.message.Message;
@@ -37,6 +38,7 @@ import util.OConstants;
 public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener{
 
 	//TODO: input van size van grid.
+	//TODO: refactor numbers to other shit
 	//TODO: message deftig
 	/**
 	 * SearialVersionUID
@@ -57,15 +59,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	private GameHandler obj;
 
-
 	/**
-	 * The GUI representation of the player inventory
+	 * The GUI representation of the inventories
 	 */
 	private Inventory playerInventory;
-
-	/**
-	 * The GUI representation of the square inventory
-	 */
 	private Inventory squareInventory;
 
 
@@ -74,8 +71,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	private ArrayList<GUIButton> buttons;
 
+	// The start size of the applet
 	private int hSize = 710;
-
 	private int vSize = 580;
 	
 	private Label gridLabel;
@@ -118,15 +115,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		// Sets up the inventory representation.
 		ArrayList<Item> items = new ArrayList<Item>();
-		squareInventory = new Inventory(items,new PVector(530,25), "Square Inventory", this);
-		playerInventory = new Inventory(items, new PVector(530,225),"Player Inventory", this);
+		squareInventory = new Inventory(155, 185, items, new PVector(530,25), "Square Inventory", this);
+		playerInventory = new Inventory(155, 185, items, new PVector(530,225),"Player Inventory", this);
 
 		setupButtons();
 		setupLabels();
 
 		initializeInput();
-
-
 
 	}
 
@@ -141,7 +136,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		widthGrid.setColor(color);
 
 		widthGrid.setLabel("Width of the grid");
-		widthGrid.setValue("" + 10);
+		widthGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
 		widthGrid.setColorCursor(OConstants.LIGHT_GREY);
 		heightGrid = inputController.addTextfield("vcells");
 		heightGrid.setPosition(hSize/4,170);
@@ -149,7 +144,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		heightGrid.setAutoClear(false);
 		heightGrid.setColor(color);
 		heightGrid.setLabel("Height of grid");
-		heightGrid.setValue("" + 10);
+		heightGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 
 		gamemode = inputController.addDropdownList("gamemode");
@@ -206,6 +201,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 
 	}
+	
 	public void vcells(String value){
 		try{
 			vCells = Integer.parseInt(value);
@@ -230,12 +226,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void hideInput(){
 		inputController.hide();
-
 	}
 
 	public void showInput(){
 		inputController.show();
 	}
+	
 	private void setupLabels(){
 		this.gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
 	}
@@ -299,7 +295,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	Message m = new YesNoDialog(300, 300, new PVector(100,100), "Test",  this);
 
 	public void showRemainingActions(){
-		fill(currentPlayerColor);
+		fill(color(0));
 		noStroke();
 		textAlign(LEFT,LEFT);
 		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
@@ -430,7 +426,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			if(item instanceof IdentityDisc){
 				grid.getDirectionalPad().setVisibility(false);
 				grid.getThrowPad().setVisibility(true);
-				grid.getThrowPad().setShape(Shapes.getShape(item));
 				grid.getThrowPad().setIdentityDisc((IdentityDisc) item);
 			}
 			else{
