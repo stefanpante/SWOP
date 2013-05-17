@@ -1,5 +1,6 @@
 package effect;
 
+import item.Flag;
 import item.Item;
 import item.IdentityDisc;
 
