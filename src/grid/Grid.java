@@ -34,30 +34,14 @@ public class Grid {
 	public static float PERCENTAGE_WALLS = 0.2f;
 
 	/**
-	 * Percentage of square covered by grenades
-	 */
-	public static float PERCENTAGE_GRENADES = 0.05f;
-
-	/**
-	 * Percentage of square covered by identity disks
-	 */
-	public static float PERCENTAGE_IDENTITY_DISKS = 0.02f;
-	
-	/**
 	 * Percentage of max length of a wall
 	 */
 	public static float LENGTH_PERCENTAGE_WALL = 0.5f;
 	
 	/**
-	 * Percentage of squares with a teleport.
+	 * HashMap containing all the squares of the grid. the coordinate
+	 * of the square is the key.
 	 */
-	public static float PERCENTAGE_TELEPORTS = 0.03f;
-
-    /**
-     * Percentage of squares with a ForceFieldGenerator
-     */
-    public static float PERCENTAGE_FORCEFIELDGENERATORS = 0.07f;
-	
 	private HashMap<Coordinate, Square> grid;
 	
 	/**

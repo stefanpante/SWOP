@@ -21,6 +21,10 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	 * the player.
 	 */
 	public static int INCLUDED_RADIUS = 7;
+	/**
+	 * Percentage of square covered by identity disks
+	 */
+	public static float PERCENTAGE_IDENTITY_DISKS = 0.02f;
 	
 	/**
 	 * Construct a new IdentityDiscPlacer.
@@ -28,7 +32,7 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	 */
 	public IdentityDiscPlacer(Grid grid, ArrayList<Player> players) {
 		super(grid, players);
-		setItemConstraint(new GridConstraint(Grid.PERCENTAGE_IDENTITY_DISKS, getPlayerCoordinates(), getIncluded()));
+		setItemConstraint(new GridConstraint(IdentityDiscPlacer.PERCENTAGE_IDENTITY_DISKS, getPlayerCoordinates(), getIncluded()));
 	}
 	
 	public void placeItems(){

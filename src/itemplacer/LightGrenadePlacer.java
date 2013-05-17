@@ -17,12 +17,16 @@ public class LightGrenadePlacer extends ItemPlacer{
 
 	public static int INCLUDED_RADIUS = 5;
 	/**
+	 * Percentage of square covered by grenades
+	 */
+	public static float PERCENTAGE_GRENADES = 0.05f;
+	/**
 	 * Constructs a new LightGrenadePlacer, places the items on the given grid.
 	 * @param grid		The grid on which the items should be placed.
 	 */
 	public LightGrenadePlacer(Grid grid, ArrayList<Player> players){
 		super(grid, players);
-		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_GRENADES, getPlayerCoordinates(), getIncluded()));
+		this.setItemConstraint(new GridConstraint(LightGrenadePlacer.PERCENTAGE_GRENADES, getPlayerCoordinates(), getIncluded()));
 		
 	}
 	

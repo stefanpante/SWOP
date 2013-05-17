@@ -130,15 +130,15 @@ public class TestItemPlacer {
         playerList.add(p1);
 
         Coordinate c2 = new Coordinate(9,0);
-        Player p2 = new Player(g.getSquare(c1),2);
+        Player p2 = new Player(g.getSquare(c2),2);
         playerList.add(p2);
 
         Coordinate c3 = new Coordinate(0,9);
-        Player p3 = new Player(g.getSquare(c1),3);
+        Player p3 = new Player(g.getSquare(c3),3);
         playerList.add(p3);
 
         Coordinate c4 = new Coordinate(9,9);
-        Player p4 = new Player(g.getSquare(c1),4);
+        Player p4 = new Player(g.getSquare(c4),4);
         playerList.add(p4);
 
         ItemPlacer idP = new IdentityDiscPlacer(g, playerList);

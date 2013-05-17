@@ -17,12 +17,17 @@ import util.Coordinate;
 public class ForceFieldGeneratorPlacer extends ItemPlacer {
 
 	/**
+	 * Percentage of squares with a ForceFieldGenerator
+	 */
+	public static float PERCENTAGE_FORCEFIELDGENERATORS = 0.07f;
+
+	/**
 	 * Constructs a new ForceFieldGeneratorPlacer
 	 * @param grid
 	 */
 	public ForceFieldGeneratorPlacer(Grid grid, ArrayList<Player> players) {
 		super(grid, players);
-		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_FORCEFIELDGENERATORS, getPlayerCoordinates()));
+		this.setItemConstraint(new GridConstraint(ForceFieldGeneratorPlacer.PERCENTAGE_FORCEFIELDGENERATORS, getPlayerCoordinates()));
 	}
 	
 	public void placeItems(){

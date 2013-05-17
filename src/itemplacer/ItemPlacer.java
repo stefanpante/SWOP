@@ -1,6 +1,7 @@
 package itemplacer;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import game.Player;
@@ -140,9 +141,12 @@ public abstract class ItemPlacer {
         for (int x =startX; x<=endX; x++){
             for (int y =startY; y<=endY; y++){
                     Coordinate coor =new Coordinate(x,y);
-                    if(getGrid().getSquare(coor).isObstructed()){
-                        coordinates.add(coor);
+                    try{
+	                    if(!getGrid().getSquare(coor).isObstructed()){
+	                        coordinates.add(coor);
+	                    }
                     }
+                    catch(NoSuchElementException ignored){}
             }
         }
         coordinates.remove(start);

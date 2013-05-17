@@ -13,9 +13,14 @@ import util.Coordinate;
 public class TeleportPlacer extends ItemPlacer {
 
 
+	/**
+	 * Percentage of squares with a teleport.
+	 */
+	public static float PERCENTAGE_TELEPORTS = 0.03f;
+
 	public TeleportPlacer(Grid grid, ArrayList<Player> players) {
 		super(grid, players);
-		this.setItemConstraint(new GridConstraint(Grid.PERCENTAGE_TELEPORTS, getPlayerCoordinates()));
+		this.setItemConstraint(new GridConstraint(TeleportPlacer.PERCENTAGE_TELEPORTS, getPlayerCoordinates()));
 	}
 
 	@Override
