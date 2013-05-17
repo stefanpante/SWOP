@@ -68,6 +68,8 @@ public class Player extends Observable implements Obstacle, Movable {
 
 	private boolean justTeleported;
 	
+	private boolean alive;
+	
 	/**
 	 * The amount of action a player has during one move
 	 */
@@ -90,6 +92,7 @@ public class Player extends Observable implements Obstacle, Movable {
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
 		this.setInventory(new PlayerInventory());
+		this.alive = true;
 		this.range = 1;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
@@ -340,6 +343,28 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public Square getStartPosition(){
 		return startPosition;
+	}
+	
+	/**
+	 * Boolean which represents the state of the player
+	 */
+	public boolean isAlive(){
+		return this.alive;
+	}
+	
+	/**
+	 * Kills of the player, has other side-effects.
+	 * Destroys the items of a player. drops the flag, etc.
+	 */
+	public void kill(){
+		setAlive(false);
+	}
+	/**
+	 * Sets whether the player is dead or alive.
+	 * @param alive	boolean representing the alive state of the player.
+	 */
+	public void setAlive(boolean alive){
+		this.alive = alive;
 	}
 
 	/**

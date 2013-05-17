@@ -26,7 +26,7 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
 	 * The max difference between the shortest path of each player to the Charged
 	 * IdentityDisc.
 	 */
-	public static int MAX_DIFFERENCE = 2;
+	public static int MAX_DIFFERENCE_LENGTH = 2;
 	
 	/**
 	 * Constructs a new ChargedIdentityDiscPlacer, it should place the ChargedIdentityDisc at 
@@ -88,7 +88,7 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
 
     	for(int i : lengths){
     		for(int j: lengths){
-    			if (Math.abs(i - j) > MAX_DIFFERENCE)
+    			if (Math.abs(i - j) > MAX_DIFFERENCE_LENGTH)
     				return false;
     		}
     	}

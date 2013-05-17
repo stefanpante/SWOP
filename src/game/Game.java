@@ -27,7 +27,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 			| isValidCurrentPlayer(getCurrentPlayer())
  */
 @NotNull
-public class Game {
+public abstract class Game {
 	
 	/**
 	 * The Grid.
@@ -50,21 +50,12 @@ public class Game {
 	private boolean active;
 	
 	/**
-	 * Manages the power failures in the game.
-	 */
-	private PowerGayManager powerGayManager;
-
-
-	/**
 	 *Constructs a new board-based game with a given grid.
-	 *
-	 * Protected for testing purposes. 
 	 * 
 	 * @param 	grid
 	 * 			The grid on which the game will be played.
 	 */
 	public Game(Grid grid){
-        this.powerGayManager = new PowerGayManager(getGrid());
         this.players = new ArrayList<Player>();
         this.setGrid(grid);
 
@@ -175,8 +166,7 @@ public class Game {
 	public void switchToNextPlayer() {
 		Player candidate = getNextPlayer();
 		
-		while(candidate.getRemainingActions() < 0){
-			int ra = candidate.getRemainingActions();
+		while(candidate.getRemainingActions() < 0 || !candidate.isAlive()){
 			candidate.endTurn();
 			int nextPlayer = (players.indexOf(candidate) + 1) % players.size();
 			candidate = players.get(nextPlayer);
@@ -261,12 +251,6 @@ public class Game {
 		return players.contains(currentPlayer);
 	}
 	
-	/**
-	 * Returns the power manager.
-	 */
-	public PowerGayManager getPowerGayManager() {
-		return this.powerGayManager;
-	}
 	
 	/**
 	 * Return if the current game is end
@@ -287,6 +271,9 @@ public class Game {
 	public void end() {
 		this.active = false;
 	}
+	
+	public abstract void checkWinners();
+	public abstract void checkLosers();
 	
 	/**
 	 * Checks if the current player is unable to make a move.
