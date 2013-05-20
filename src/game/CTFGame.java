@@ -19,14 +19,14 @@ public class CTFGame extends Game {
 	}
 
 	@Override
-	public void checkWinners() {
-		// TODO Auto-generated method stub
+	public Player checkWinners() {
+		return null;
 		
 	}
 
 	@Override
-	public void checkLosers() {
-		// TODO Auto-generated method stub
+	public Player checkLosers() {
+		return null;
 		
 	}
 

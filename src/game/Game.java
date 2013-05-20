@@ -269,11 +269,11 @@ public abstract class Game {
     /**
      * Checks if a player has won.
      */
-    public abstract void checkWinners();
+    public abstract Player checkWinners();
     /**
      * Checks if a player has lost.
      */
-	public abstract void checkLosers();
+	public abstract Player checkLosers();
 
 	/**
 	 * Gets the maximum amount of players for this game.

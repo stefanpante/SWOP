@@ -1,25 +1,29 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import grid.Grid;
 
 public class RaceGame extends Game{
 
     public static final int MAX_PLAYERS = 2;
     public static final int MIN_PLAYERS = 2;
+    private HashMap<Player, ArrayList<Flag>> capturedFlags;
 
     public RaceGame() {
 		super();
 	}
 
 	@Override
-	public void checkWinners() {
-		// TODO Auto-generated method stub
+	public Player checkWinners() {
+		return null;
 		
 	}
 
 	@Override
-	public void checkLosers() {
-		// TODO Auto-generated method stub
+	public Player checkLosers() {
+		return null;
 		
 	}
 
