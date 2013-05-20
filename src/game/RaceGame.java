@@ -7,8 +7,8 @@ public class RaceGame extends Game{
     public static final int MAX_PLAYERS = 2;
     public static final int MIN_PLAYERS = 2;
 
-    public RaceGame(Grid grid) {
-		super(grid);
+    public RaceGame() {
+		super();
 	}
 
 	@Override

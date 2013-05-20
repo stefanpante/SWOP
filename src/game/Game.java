@@ -49,43 +49,16 @@ public abstract class Game {
 	 */
 	private boolean active;
 	
-	/**
-	 *Constructs a new board-based game with a given grid.
-	 * 
-	 * @param 	grid
-	 * 			The grid on which the game will be played.
-	 */
-	public Game(Grid grid){
-        this.players = new ArrayList<Player>();
-        this.setGrid(grid);
-
-        // Add two players to this game
-        addPlayers(2);
-
-        ForceFieldManager forceFieldManager = new ForceFieldManager(getGrid());
-        addObserver(forceFieldManager);
-		
-		// Start the game
-		start();
-		setCurrentPlayer(players.get(0));
+	public Game(){
+		this.players = new ArrayList<Player>();
 	}
 
-    //FIXME: move this to a "GameBuilder"??
-    public void addPlayers(int amount){
-    	ArrayList<Square> startPositions = getGrid().getStartPositions();
-        for(int i = 1; i <= amount; i++){
-            Square startPosition = startPositions.get(i - 1);
-            Player player = new Player(startPosition,i);
-            addPlayer(player);
-        }
-    }
-	
 	/**
 	 * Sets the grid for the game.
 	 * 
 	 * @param grid
 	 */
-	private void setGrid(Grid grid) {
+	public void setGrid(Grid grid) {
 		if(!isValidGrid(grid)){
 			throw new IllegalStateException("The given grid is not valid");
 		}
