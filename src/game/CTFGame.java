@@ -13,8 +13,8 @@ public class CTFGame extends Game {
     public static final int MIN_PLAYERS = 2;
     private HashMap<Player, ArrayList<Flag>> capturedFlags;
 
-    public CTFGame(Grid grid) {
-		super(grid);
+    public CTFGame() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 

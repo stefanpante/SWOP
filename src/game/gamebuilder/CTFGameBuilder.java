@@ -1,28 +1,47 @@
 package game.gamebuilder;
 
+import java.io.IOException;
+import game.CTFGame;
 import itemplacer.ChargedIdentityDiscPlacer;
 import itemplacer.FlagPlacer;
 import itemplacer.ForceFieldGeneratorPlacer;
 import itemplacer.IdentityDiscPlacer;
 import itemplacer.TeleportPlacer;
 
+/**
+ * Builds a CTFGame.
+ * 
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
+ *
+ */
 public class CTFGameBuilder extends GameBuilder {
 
 	
-	public CTFGameBuilder() {
-		// TODO Auto-generated constructor stub
-	}
 
-	@Override
-	public void constructPlayers() {
-		// TODO Auto-generated method stub
+	/**
+	 * Constructs a new game based on the horizontal size of the grid,
+	 * the vertical size and the number of players.
+	 * @param hSize		the horizontal size of the grid.
+	 * @param vSize		the vertical size of the grid.
+	 * @param numOfPlayers	the number of player in the game.
+	 */
+	public CTFGameBuilder(int hSize, int vSize, int numOfPlayers) {
+		super(hSize, vSize, numOfPlayers);
+		this.game = new CTFGame();
+		this.build();
 		
 	}
-
-	@Override
-	public void constructGrid() {
-		// TODO Auto-generated method stub
-		
+	
+	/**
+	 * 
+	 * @param filename		the file on which the grid will be based.
+	 * @param numOfPlayers	the number of players in the game.
+	 * @throws IOException	throws an IOException when there is something wrong with the file.
+	 */
+	public CTFGameBuilder(String filename, int numOfPlayers) throws IOException{
+		super(filename, numOfPlayers);
+		this.game = new CTFGame();
+		this.build();
 	}
 
 	@Override
@@ -42,6 +61,11 @@ public class CTFGameBuilder extends GameBuilder {
 		FlagPlacer FPlacer = new FlagPlacer(grid,players);
 		FPlacer.placeItems();
 		
+	}
+
+	@Override
+	public boolean isValidNumberOfPlayers(int numOfPlayers) {
+		return (numOfPlayers <= CTFGame.MAX_PLAYERS && numOfPlayers >= CTFGame.MIN_PLAYERS);
 	}
 
 }

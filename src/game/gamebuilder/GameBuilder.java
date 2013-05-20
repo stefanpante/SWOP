@@ -75,7 +75,7 @@ public abstract class GameBuilder {
 		this.players = new ArrayList<Player>();
 		this.gridBuilder = new FileGridBuilder(filename);
 		this.numOfPlayers = numOfPlayers;
-		this.build();
+		
 	}
 
 	/**
