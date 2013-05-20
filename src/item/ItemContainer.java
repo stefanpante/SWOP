@@ -15,5 +15,7 @@ public interface ItemContainer {
 
     public boolean hasType(Item item);
 
+    public Item getType(Item item);
+
 
 }

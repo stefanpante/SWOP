@@ -1,14 +1,10 @@
 package item;
 
 import effect.Effect;
-import game.Player;
 
 import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
-import move.Movable;
+import square.Square;
 
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * The ForceFieldGenerator generates a line segment between
@@ -24,7 +20,17 @@ public class ForceFieldGenerator extends Item implements Activatable {
     private boolean dropped;
     private boolean active;
 
-	/**
+    @Override
+    public boolean canAddTo(Square square) {
+        return (!square.hasItem(this) && !square.hasType(this));
+    }
+
+    @Override
+    public boolean canAddTo(PlayerInventory playerInventory) {
+        return true;
+    }
+
+    /**
 	 * If the item is used, the state is changed to used.
 	 */
 	@Override
@@ -43,26 +49,6 @@ public class ForceFieldGenerator extends Item implements Activatable {
 	public static boolean isForceFieldGenerator(Item item){
         return item instanceof ForceFieldGenerator;
     }
-
-	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv) throws IllegalStateException {
-		plInv.addForceFieldGenerator(this);
-	}
-
-	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
-		plInv.removeForceFieldGenerator(this);
-	}
-
-	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-		sqInv.addForceFieldGenerator(this);
-	}
-
-	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv)	throws IllegalStateException {
-		sqInv.removeForceFieldGenerator(this);
-	}
 
     @Override
     public boolean isDropped() {

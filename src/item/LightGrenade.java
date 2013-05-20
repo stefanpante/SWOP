@@ -91,13 +91,6 @@ public class LightGrenade extends Item implements Activatable {
 		this.currentState = LightGrenadeState.INACTIVE;
 	}
 
-
-
-    @Override
-    public boolean canAddTo(ItemContainer container) {
-        return container.acceptCanAddTo(this);
-    }
-
     public boolean canAddTo(Square square){
         return (!square.hasItem(this) && !square.hasType(this));
     }
@@ -157,8 +150,4 @@ public class LightGrenade extends Item implements Activatable {
 		WORN;
 	}
 
-	@Override
-	public Item copy() {
-		return new LightGrenade();
-	}
 }

@@ -1,7 +1,6 @@
 package item;
 
 import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
 
 public class ChargedIdentityDisc extends IdentityDisc {
 	
@@ -15,25 +14,6 @@ public class ChargedIdentityDisc extends IdentityDisc {
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
 
-	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-		sqInv.addChargedDisc(this);
-	}
-	
-	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-		sqInv.removeChargedDisc(this);
-	}
-	
-	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv) throws IllegalStateException {
-		plInv.addChargedDisc(this);
-	}
-	
-	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
-		plInv.removeChargedDisc(this);
-	}
 	
 	@Override
 	public boolean isCharged() {
@@ -53,9 +33,5 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	public void resetRange(){
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
-	
-	@Override
-	public Item copy(){
-		return new ChargedIdentityDisc();
-	}
+
 }
