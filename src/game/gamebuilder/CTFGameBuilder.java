@@ -1,7 +1,11 @@
 package game.gamebuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import game.CTFGame;
+import game.Player;
+import grid.Grid;
 import itemplacer.ChargedIdentityDiscPlacer;
 import itemplacer.FlagPlacer;
 import itemplacer.ForceFieldGeneratorPlacer;
@@ -46,6 +50,9 @@ public class CTFGameBuilder extends GameBuilder {
 
 	@Override
 	public void placeItems() {
+		Grid grid = game.getGrid();
+		ArrayList<Player> players = game.getPlayers();
+		
 		ChargedIdentityDiscPlacer CIDPlacer = new ChargedIdentityDiscPlacer(grid, players);
 		CIDPlacer.placeItems();
 		

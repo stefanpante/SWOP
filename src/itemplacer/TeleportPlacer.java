@@ -51,7 +51,7 @@ public class TeleportPlacer extends ItemPlacer {
 	private void linkTeleports(ArrayList<Teleport> teleports, ArrayList<Square> destinations) {
 		for(Teleport teleport : teleports){
 			Square candidateDestination = destinations.get(getRandomIndex(destinations));
-			while(candidateDestination.getInventory().hasItem(teleport)){
+			while(candidateDestination.hasItem(teleport)){
 				candidateDestination = destinations.get(getRandomIndex(destinations));
 			}
 			teleport.setDestination(candidateDestination);

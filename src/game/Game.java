@@ -70,25 +70,6 @@ public abstract class Game {
 	}
 
 	/**
-	 * Add the player to this game
-	 * 
-	 * @param 	player
-	 * 			The player to be set
-	 */
-	public void addPlayer(Player player) throws NullPointerException{
-		if(player == null)
-			throw new NullPointerException("A Player cant be null");
-		
-		if(players.contains(player))
-			throw new IllegalStateException("Two players should never be the same object");
-		if(players.size() >= getMaximumAmountOfPlayers())
-            throw  new IllegalStateException("There is a maximum of " + getMaximumAmountOfPlayers() + " players in this game.");
-		players.add(player);
-	}
-	
-
-
-	/**
 	 * Check whether the given player is a valid player for all the objects of Game.
 	 * @param 	player
 	 *			The player to check.
@@ -263,9 +244,6 @@ public abstract class Game {
 	public void end() {
 		this.active = false;
 	}
-	
-	
-
 
     /**
 	 * Checks if the current player is unable to make a move.
