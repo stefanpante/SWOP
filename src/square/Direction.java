@@ -7,7 +7,7 @@ import java.util.Random;
  * This is used for scenarios where the player wants to move into a certain direction
  * or for general situations where a direction is needed.
  *
- * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  * */
 public enum Direction {
 	NORTH {
@@ -145,8 +145,8 @@ public enum Direction {
 		@Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
-			neighborDirections.add(Direction.NORTH);
-			neighborDirections.add(Direction.WEST);
+            neighborDirections.add(Direction.WEST);
+            neighborDirections.add(Direction.NORTH);
 			return neighborDirections;
 		}
 
@@ -161,7 +161,14 @@ public enum Direction {
 	 * @return returns the direction opposite of this direction.
 	 */
 	abstract public Direction opposite();
-	
+
+    /**
+     * Returns the neighboring directions of the direction on which the method is called.
+     *  At index 0 the direction going counterclockwise (turning left).
+     *  At index 1 the direction going clockwise (turning right).
+     *
+     * @return
+     */
 	abstract public ArrayList<Direction> neighborDirections();
 	
 	abstract public boolean isDiagonal();
@@ -188,5 +195,5 @@ public enum Direction {
 		return dir[random.nextInt(dir.length)];
 	}
 	
-	
+
 }
