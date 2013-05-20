@@ -2,9 +2,7 @@ package game;
 
 public abstract class GameBuilder {
 
-	public GameBuilder() {
-		// TODO Auto-generated constructor stub
-	}
+	public GameBuilder() {	}
 	
 	public abstract void constructPlayers();
 	public abstract void constructGrid();

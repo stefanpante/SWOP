@@ -7,6 +7,7 @@ import grid.FileGridBuilder;
 import grid.RandomGridBuilder;
 import gui.ObjectronGUI;
 
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,13 +24,6 @@ import util.Coordinate;
  */
 public class GameHandler extends Handler {
 	
-	private ObjectronGUI objectronGUI;
-	
-	
-	public GameHandler(ObjectronGUI objectronGUI){
-		this.objectronGUI = objectronGUI;
-	}
-
 	/* Handlers */
 	private EndTurnHandler endTurnHandler;
 	private MoveHandler moveHandler;
@@ -37,6 +31,15 @@ public class GameHandler extends Handler {
 	private UseItemHandler useItemHandler;
 	private TurnHandler turnHandler;
 	private ThrowLaunchableHandler throwLaunchableHandler;
+	
+	private PropertyChangeListener gui;
+	
+	
+	public GameHandler(PropertyChangeListener gui){
+		this.gui = gui;
+	}
+
+	
 	
     /**
      * Used to start a new game with a given number of hCells and vCells.
@@ -71,13 +74,13 @@ public class GameHandler extends Handler {
      * Initializes all the used handlers.
      */
     private void initHandlers(){
-    	addPropertyChangeListener(objectronGUI);
-    	this.endTurnHandler = new EndTurnHandler(getGame(), objectronGUI);
-    	this.moveHandler = new MoveHandler(getGame(),objectronGUI);
-    	this.pickUpHandler = new PickUpHandler(getGame(),objectronGUI);
-    	this.useItemHandler = new UseItemHandler(getGame(),objectronGUI);
-    	this.turnHandler = new TurnHandler(getGame(), objectronGUI);
-    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), objectronGUI);
+    	addPropertyChangeListener(gui);
+    	this.endTurnHandler = new EndTurnHandler(getGame(), gui);
+    	this.moveHandler = new MoveHandler(getGame(),gui);
+    	this.pickUpHandler = new PickUpHandler(getGame(),gui);
+    	this.useItemHandler = new UseItemHandler(getGame(),gui);
+    	this.turnHandler = new TurnHandler(getGame(), gui);
+    	this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), gui);
         try {
             turnHandler.startTurn();
         } catch (Exception e) {

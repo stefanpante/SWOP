@@ -291,11 +291,7 @@ public abstract class Game {
 		this.active = false;
 	}
 	
-	public abstract void checkWinners();
-	public abstract void checkLosers();
-
-    public abstract int getMaximumAmountOfPlayers();
-    public abstract int getMinimumAmountOfPlayers();
+	
 
 
     /**
@@ -318,5 +314,26 @@ public abstract class Game {
             player.addObserver(observer);
         }
     }
+    
+    /**
+     * Checks if a player has won.
+     */
+    public abstract void checkWinners();
+    /**
+     * Checks if a player has lost.
+     */
+	public abstract void checkLosers();
+
+	/**
+	 * Gets the maximum amount of players for this game.
+	 * @return
+	 */
+    public abstract int getMaximumAmountOfPlayers();
+    
+    /**
+     * Get the minimum amount of players for this game.
+     * @return
+     */
+    public abstract int getMinimumAmountOfPlayers();
 
 }
