@@ -1,5 +1,6 @@
 package item.inventory;
 
+import item.ItemContainer;
 import move.Movable;
 import move.MovableEffect;
 import game.Player;
@@ -16,7 +17,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 
  * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
-public abstract class Inventory implements MovableEffect {
+public abstract class Inventory implements MovableEffect, ItemContainer {
 
 	/**
 	 * The size of the inventory, should not be smaller than zero
@@ -141,7 +142,7 @@ public abstract class Inventory implements MovableEffect {
 		if(!canHaveAsItem(item))
 			throw new IllegalStateException("The inventory is full or already contains the item.");
 		else
-			item.setInventory(this);
+			item.setContainer(this);
 			items.add(item);
 			
 	}
@@ -221,28 +222,22 @@ public abstract class Inventory implements MovableEffect {
 			if(item.isSameType(i))
 				return true;
 		}
-
 		return false;
 	}
 
     @Override
     public void affect(Movable movable) {
-        for(Item item : getAllItems()){
-            item.affect(movable);
-        }
+
     }
 
     @Override
     public void affect(Player player) {
-        for(Item item : getAllItems()){
-            item.affect(player);
-        }    }
+
+    }
 
     @Override
     public void affect(IdentityDisc identityDisc) {
-    	for(Item item : getAllItems()){
-            item.affect	(identityDisc);
-        }
+
     }
 
 }

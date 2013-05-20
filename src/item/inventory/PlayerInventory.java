@@ -1,12 +1,6 @@
 package item.inventory;
 
-import item.ChargedIdentityDisc;
-import item.Flag;
-import item.ForceFieldGenerator;
-import item.IdentityDisc;
-import item.Item;
-import item.LightGrenade;
-import item.Teleport;
+import item.*;
 import item.visitor.AddRemoveItemVisitor;
 
 /**
@@ -14,7 +8,7 @@ import item.visitor.AddRemoveItemVisitor;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
-public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
+public class PlayerInventory extends Inventory {
 	
 	/**
 	 * The maximum size 
@@ -28,87 +22,29 @@ public class PlayerInventory extends Inventory implements AddRemoveItemVisitor{
 	public PlayerInventory() {
 		super(PLAYER_INVENTORY_SIZE);
 	}
-	
-	@Override
-	public void addItem(Item item) throws IllegalStateException{
-		item.acceptAddPlayerInventory(this);
-	}
-	
-	@Override
-	public void removeItem(Item item) throws IllegalStateException{
-		item.acceptRemovePlayerInventory(this);
-	}
-	
-	/**
+
+    @Override
+    public boolean hasType(Item item) {
+        return getType(item) != null;
+    }
+
+    @Override
+    public Item getType(Item item) {
+        for(Item it : getAllItems()){
+            if(item.isSameType(it))
+                return it;
+        }
+        return null;
+    }
+
+    /**
 	 * Returns a string representation of this PlayerInventory.
 	 */
 	@Override
 	public String toString() {
 		return "Player " + super.toString();
 	}
-	
-	@Override
-	public void addChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException {
-		super.addItem(chargedDisc);
-	}
 
-	@Override
-	public void removeChargedDisc(ChargedIdentityDisc chargedDisc) throws IllegalStateException {
-		super.removeItem(chargedDisc);
-	}
 
-	@Override
-	public void addIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
-		super.addItem(identityDisc);
-	}
 
-	@Override
-	public void removeIdentityDisc(IdentityDisc identityDisc) throws IllegalStateException {
-		super.removeItem(identityDisc);
-	}
-
-	@Override
-	public void addLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
-		super.addItem(lightGrenade);
-	}
-
-	@Override
-	public void removeLightGrenade(LightGrenade lightGrenade) throws IllegalStateException {
-		super.removeItem(lightGrenade);
-	}
-
-    @Override
-    public void addForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
-        super.addItem(forceFieldGenerator);
-    }
-    
-    @Override
-    public void removeForceFieldGenerator(ForceFieldGenerator forceFieldGenerator) throws IllegalStateException{
-        super.removeItem(forceFieldGenerator);
-    }
-    
-	@Override
-	public void addTeleport(Teleport teleport) throws IllegalStateException {
-		throw new IllegalStateException("A Teleport can not be added to a players Inventory");
-	}
-
-	@Override
-	public void removeTeleport(Teleport teleport) throws IllegalStateException {
-		throw new IllegalStateException("A Teleport can not be in a players Inventory");
-	}
-
-	@Override
-	public void addFlag(Flag flag) throws IllegalStateException {
-		if(this.containsSameType(flag)){
-			throw new IllegalStateException("A player cannot carry more than one flags.");
-		}
-		
-		super.addItem(flag);
-	}
-
-	@Override
-	public void removeFlag(Flag flag) throws IllegalStateException {
-		super.removeItem(flag);
-		
-	}
 }

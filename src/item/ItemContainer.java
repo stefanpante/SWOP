@@ -1,5 +1,7 @@
 package item;
 
+import java.util.ArrayList;
+
 /**
  * User: jonas
  * Date: 20/05/13
@@ -17,5 +19,6 @@ public interface ItemContainer {
 
     public Item getType(Item item);
 
+    public ArrayList<Item> getAllItems();
 
 }

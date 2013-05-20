@@ -196,12 +196,12 @@ public class Square implements MovableEffect, ItemContainer {
 
     @Override
     public boolean hasType(Item item) {
-        return false;
+        return getType(item) != null;
     }
 
     @Override
     public Item getType(Item item) {
-        for(Item it : items){
+        for(Item it : getAllItems()){
             if(item.isSameType(it))
                 return it;
         }
