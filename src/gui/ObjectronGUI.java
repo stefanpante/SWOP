@@ -1,5 +1,6 @@
 package gui;
 
+import game.CTFGame;
 import game.Player;
 import grid.RandomGridBuilder;
 import gui.button.GUIButton;
