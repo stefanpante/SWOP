@@ -2,10 +2,7 @@ package item;
 
 import effect.Effect;
 import effect.TeleportEffect;
-import game.Player;
 import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
-import move.Movable;
 import square.Square;
 
 /**
@@ -68,10 +65,10 @@ public class Teleport extends Item {
     public boolean canHaveAsDestination(Square destination) {
         if(!isValidDestination(destination))
             return false;
-        if(!destination.getInventory().hasTeleport())
+        if(!destination.hasType(this))
             return false;
 
-        Teleport destinationTeleport = destination.getInventory().getTeleport();
+        Teleport destinationTeleport = (Teleport) destination.getType(this);
 
         return !destinationTeleport.equals(this);
     }
@@ -97,24 +94,12 @@ public class Teleport extends Item {
         return getDestination() != null && !getDestination().isObstructed();
     }
 
-    @Override
-    public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-        sqInv.addTeleport(this);
+    public boolean canAddTo(Square square){
+        return (!square.hasItem(this) && !square.hasType(this));
     }
 
-    @Override
-    public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-        sqInv.removeTeleport(this);
-    }
-
-    @Override
-    public void acceptAddPlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
-        plInv.addTeleport(this);
-    }
-
-    @Override
-    public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
-        plInv.removeTeleport(this);
+    public boolean canAddTo(PlayerInventory playerInventory){
+        return false;
     }
 
     @Override

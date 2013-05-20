@@ -2,10 +2,7 @@ package item;
 
 import effect.Effect;
 import move.MovableEffect;
-import game.Player;
-import item.inventory.*;
 import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
 import move.Movable;
 import notnullcheckweaver.NotNull;
 import square.Direction;
@@ -92,22 +89,6 @@ public class IdentityDisc extends Item implements Movable {
         return travelDirection != null && !travelDirection.isDiagonal();
     }
 
-	public void acceptAddSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-		sqInv.addIdentityDisc(this);
-	}
-
-	public void acceptRemoveSquareInventory(SquareInventory sqInv) throws IllegalStateException {
-		sqInv.removeIdentityDisc(this);
-	}
-
-	public void acceptAddPlayerInventory(PlayerInventory plInv)	throws IllegalStateException {
-		plInv.addIdentityDisc(this);
-	}
-
-	public void acceptRemovePlayerInventory(PlayerInventory plInv) throws IllegalStateException {
-		plInv.removeIdentityDisc(this);
-	}
-
 	public boolean isCharged() {
 		return false;
 	}
@@ -127,8 +108,18 @@ public class IdentityDisc extends Item implements Movable {
 	public boolean isSameType(Item o){
 		return (o instanceof IdentityDisc);
 	}
-	
-	@Override
+
+    @Override
+    public boolean canAddTo(Square square) {
+        return (!square.hasItem(this) && !square.hasType(this));
+    }
+
+    @Override
+    public boolean canAddTo(PlayerInventory playerInventory) {
+        return true;
+    }
+
+    @Override
 	public String toString() {
 		return super.toString() + " IdentityDisc";
 	}
@@ -141,16 +132,16 @@ public class IdentityDisc extends Item implements Movable {
 
 	@Override
 	public void move(Square square) throws IllegalStateException {
-		this.getInventory().removeItem(this);
-		square.getInventory().addItem(this);
+        getContainer().removeItem(this);
+        square.addItem(this);
 		this.position = square;
 		square.affect(this);
     	this.setJustTeleported(false);
 	}
 	
 	public void setPosition(Square square){
-		this.getInventory().removeItem(this);
-		square.getInventory().addItem(this);
+        getContainer().removeItem(this);
+        square.addItem(this);
 		this.position = square;
 	}
 
@@ -172,11 +163,6 @@ public class IdentityDisc extends Item implements Movable {
 	@Override
 	public void setJustTeleported(boolean b) {
 		justTeleported = b;
-	}
-
-	@Override
-	public Item copy() {
-		return new IdentityDisc();
 	}
 
     @Override

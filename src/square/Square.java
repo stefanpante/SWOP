@@ -200,6 +200,15 @@ public class Square implements MovableEffect, ItemContainer {
     }
 
     @Override
+    public Item getType(Item item) {
+        for(Item it : items){
+            if(item.isSameType(it))
+                return it;
+        }
+        return null;
+    }
+
+    @Override
     public void affect(Movable movable) {
     }
 

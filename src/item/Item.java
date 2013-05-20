@@ -10,7 +10,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  **/
-public abstract class Item implements Affectable, ItemPrototype {
+public abstract class Item implements Affectable {
 
     private ItemContainer container;
 
@@ -18,9 +18,18 @@ public abstract class Item implements Affectable, ItemPrototype {
         this.container = container;
     }
 
+    protected ItemContainer getContainer(){
+        return this.container;
+    }
+
     public abstract boolean canAddTo(Square square);
 
     public abstract boolean canAddTo(PlayerInventory playerInventory);
+
+    public void destory(){
+        container.removeItem(this);
+        this.setContainer(null);
+    }
 
     /**
 	 * Notifies the item that it has been used.
