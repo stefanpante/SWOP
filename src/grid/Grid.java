@@ -412,7 +412,7 @@ public class Grid {
 	 */	
 	public Square getSquareWith(Item item) {
 		for(Square square : getAllSquares()){
-			if(square.getInventory().hasItem(item))
+			if(square.hasItem(item))
 				return square;
 		}
 		throw new IllegalArgumentException("No squares containing "+item);
@@ -538,35 +538,7 @@ public class Grid {
 	public ArrayList<Square> getNeighborsAsList(Square square) {
 		return new ArrayList<Square>(getNeighbors(square).values());
 	}
-	
-	/**
-	 * Finds the square related to the given destination Teleport.
-	 * 
-	 * @param 	destination
-	 * 			The destination Teleport to find.
-	 * @return	The square having the given destination as a Teleport.
-	 * @throws 	IllegalArgumentException
-	 * 			If the given destination is null or the square of the destination is obstructed.
-	 * @throws	NoSuchElementException
-	 * 			The given destination is no finable in this grid.
-	 */
-	@Deprecated
-	public Square findSquare(Teleport destination) throws IllegalArgumentException, NoSuchElementException{
-		if(destination == null){
-			throw new IllegalArgumentException("The given destination is not a valid destination");
-		}
-		for(Square square : getAllSquares()){
-			if(square.getInventory().hasTeleport() && square.getInventory().getTeleport().equals(destination)){
-				if(square.isObstructed()){
-					throw new IllegalArgumentException("The destination is valid but the recieving teleport is obstructed. Try again later.");
-				}
-				return square;
-			}
-		}
-		throw new NoSuchElementException("The given destination could not be found in this grid");
-	}
-	
-	
+		
 	/**
 	 * Checks if the given square is a valid start position for the player
 	 * @param player   The square which needs to be checked

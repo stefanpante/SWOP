@@ -25,12 +25,12 @@ public class RaceGame extends Game{
 
     @Override
     public int getMaximumAmountOfPlayers() {
-        return MAX_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
+        return MAX_PLAYERS;
     }
 
     @Override
     public int getMinimumAmountOfPlayers() {
-        return MIN_PLAYERS;  //To change body of implemented methods use File | Settings | File Templates.
+        return MIN_PLAYERS;
     }
 
 }

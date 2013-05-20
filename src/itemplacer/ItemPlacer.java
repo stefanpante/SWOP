@@ -76,7 +76,7 @@ public abstract class ItemPlacer {
 		if(square == null || square.isObstructed())
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
-		square.getInventory().addItem(item);
+		square.addItem(item);
 	}
 	
 	public abstract void placeItems();

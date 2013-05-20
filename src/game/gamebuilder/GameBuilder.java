@@ -74,6 +74,7 @@ public abstract class GameBuilder {
 		this.constructGrid();
 		this.constructPlayers();
 		this.placeItems();
+		this.game.start();
 	}
 
 	/**
