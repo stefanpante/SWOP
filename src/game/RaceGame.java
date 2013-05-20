@@ -1,5 +1,7 @@
 package game;
 
+import item.Flag;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,14 +19,9 @@ public class RaceGame extends Game{
 
 	@Override
 	public Player checkWinners() {
+		if(getCurrentPlayer().getPosition() == getOtherPlayers().get(0).getStartPosition())
+			return getCurrentPlayer();
 		return null;
-		
-	}
-
-	@Override
-	public Player checkLosers() {
-		return null;
-		
 	}
 
     @Override

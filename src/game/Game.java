@@ -270,10 +270,15 @@ public abstract class Game {
      * Checks if a player has won.
      */
     public abstract Player checkWinners();
-    /**
-     * Checks if a player has lost.
-     */
-	public abstract Player checkLosers();
+    
+    public Player checkLosers() {
+		if(isCurrentPlayerStuck()){
+			getCurrentPlayer().kill();
+			return getCurrentPlayer();
+		}
+
+		return null;
+	}
 
 	/**
 	 * Gets the maximum amount of players for this game.

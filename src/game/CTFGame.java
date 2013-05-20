@@ -18,18 +18,16 @@ public class CTFGame extends Game {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+    @Override
 	public Player checkWinners() {
+		for(Player player: capturedFlags.keySet()){
+			if(capturedFlags.get(player).size() == this.getOtherPlayers().size()){
+				return player;
+			}
+		}
 		return null;
 		
 	}
-
-	@Override
-	public Player checkLosers() {
-		return null;
-		
-	}
-
     @Override
     public int getMaximumAmountOfPlayers() {
         return MAX_PLAYERS;
