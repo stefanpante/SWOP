@@ -3,30 +3,24 @@ package item;
 import item.inventory.*;
 import move.MovableEffect;
 import item.visitor.VisitableItem;
+import square.Square;
 
 /**
  * Parent class for all sorts of items.
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  **/
-public abstract class Item implements VisitableItem, Affectable, ItemPrototype {
+public abstract class Item implements Affectable, ItemPrototype {
 
-    private Inventory inventory;
+    private ItemContainer container;
 
-    public void setInventory(Inventory inventory2){
-        this.inventory = inventory2;
-    }
-    
-    public Inventory getInventory(){
-    	return this.inventory;
+    public void setContainer(ItemContainer container){
+        this.container = container;
     }
 
-    public void destroy(){
-        inventory.removeItem(this);
-        this.inventory = null;
-    }
+    public abstract boolean canAddTo(Square square);
 
-
+    public abstract boolean canAddTo(PlayerInventory playerInventory);
 
     /**
 	 * Notifies the item that it has been used.

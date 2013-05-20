@@ -2,10 +2,8 @@ package item;
 
 import effect.Effect;
 import effect.LightGrenadeEffect;
-import game.Player;
 import item.inventory.PlayerInventory;
-import item.inventory.SquareInventory;
-import move.Movable;
+import square.Square;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -92,8 +90,23 @@ public class LightGrenade extends Item implements Activatable {
 			throw new IllegalStateException("Cannot go from state " + this.currentState + " to the inactive state.");
 		this.currentState = LightGrenadeState.INACTIVE;
 	}
-	
-	/**
+
+
+
+    @Override
+    public boolean canAddTo(ItemContainer container) {
+        return container.acceptCanAddTo(this);
+    }
+
+    public boolean canAddTo(Square square){
+        return (!square.hasItem(this) && !square.hasType(this));
+    }
+
+    public boolean canAddTo(PlayerInventory playerInventory){
+        return true;
+    }
+
+    /**
 	 * If the item is used this means it has been dropped on a square.
 	 * 
 	 * @throws	IllegalStateException
@@ -113,29 +126,6 @@ public class LightGrenade extends Item implements Activatable {
 		return super.toString() + " LightGrenade";
 	}
 
-	@Override
-	public void acceptAddSquareInventory(SquareInventory sqInv) 
-			throws IllegalStateException {
-		sqInv.addLightGrenade(this);		
-	}
-	
-	@Override
-	public void acceptRemoveSquareInventory(SquareInventory sqInv)
-			throws IllegalStateException {
-		sqInv.removeLightGrenade(this);
-	}
-
-	@Override
-	public void acceptAddPlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
-		plInv.addLightGrenade(this);
-	}
-
-	@Override
-	public void acceptRemovePlayerInventory(PlayerInventory plInv)
-			throws IllegalStateException {
-		plInv.removeLightGrenade(this);
-	}
 	
 	/*
 	 * Returns whether the given object is a lightgrenade

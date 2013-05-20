@@ -1,16 +1,16 @@
 package square;
 
 
+import item.Item;
+import item.ItemContainer;
 import move.MovableEffect;
 import game.Player;
 import item.IdentityDisc;
-import item.inventory.SquareInventory;
 
 import move.Movable;
 import square.field.Field;
 import square.obstacle.Obstacle;
 import square.power.Power;
-import square.power.RegularPower;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
@@ -24,12 +24,13 @@ import java.util.HashMap;
  * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
 @NotNull
-public class Square implements MovableEffect {
+public class Square implements MovableEffect, ItemContainer {
 
-	/**
-	 *  Contains all items which were used on this square.
-	 */
-	private SquareInventory inventory;
+    /**
+     * List of items on this square
+     */
+    ArrayList<Item> items;
+
 
 	/**
 	 * State of the current square. May be a power failure.
@@ -53,13 +54,7 @@ public class Square implements MovableEffect {
 	//TODO: SHould be final, but cannot be set if final. Needs to be added in constructor.
 	private  HashMap<Direction, Square> neighbors;
 
-	/**
-	 * Zero argument constructor for a square.
-	 */
-	public Square(){
-		this.inventory = new SquareInventory();
-		this.setPower(new RegularPower());
-	}
+
 
 	/**
 	 * Returns the state of the square.
@@ -90,14 +85,6 @@ public class Square implements MovableEffect {
 			return true;
 	}
 
-
-	/**
-	 * Return the inventory of used items on this Square
-	 * @return	the inventory of used items on this Square
-	 */
-	public SquareInventory getInventory() {
-		return inventory;
-	}
 
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
@@ -137,7 +124,6 @@ public class Square implements MovableEffect {
 	public String toString() {
 		String s = "Square [ ";
 		s += "Obstacle: " + obstacle;
-		s += "Inv: " + this.getInventory();
 		s += " ]";
 		return s;
 	}
@@ -185,24 +171,43 @@ public class Square implements MovableEffect {
 	public Square getNeighbor(Direction direction){
 		return neighbors.get(direction);
 	}
-	
-	
-	@Override
-	public void affect(Movable movable) {
-		getInventory().affect(movable);
-		getPower().affect(movable);
-	}
 
-	@Override
-	public void affect(Player player) {
-        System.out.println("affect");
-		getInventory().affect(player);
-        getPower().affect(player);
-	}
+    public ArrayList<Item> getAllItems(){
+        return new ArrayList<Item>(items);
+    }
 
-	@Override
-	public void affect(IdentityDisc identityDisc) {
-		getInventory().affect(identityDisc);
-		getPower().affect(identityDisc);
+
+
+    public void addItem(Item item){
+        if(item.canAddTo(this))
+            throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
+        items.add(item);
+        item.setContainer(this);
+    }
+
+    public void removeItem(Item item){
+        if(!hasItem(item))
+            throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
+    }
+
+    public boolean hasItem(Item item){
+        return items.contains(item);
+    }
+
+    @Override
+    public boolean hasType(Item item) {
+        return false;
+    }
+
+    @Override
+    public void affect(Movable movable) {
+    }
+
+    @Override
+    public void affect(Player player) throws IllegalStateException {
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
     }
 }
