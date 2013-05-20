@@ -34,19 +34,10 @@ public abstract class GameBuilder {
 	protected Game game;
 
 	/**
-	 * The grid for the game which is being constructed.
-	 */
-	protected Grid grid;
-
-	/**
 	 * The builder used to construct the grid.
 	 */
 	protected AbstractGridBuilder gridBuilder;
 
-	/**
-	 * The players which will be used by the game.
-	 */
-	protected ArrayList<Player> players;
 
 	private int numOfPlayers;
 
@@ -58,7 +49,6 @@ public abstract class GameBuilder {
 	 * @param numOfPlayers	the number of player in the game.
 	 */
 	public GameBuilder(int hSize, int vSize, int numOfPlayers) {
-		this.players = new ArrayList<Player>();
 		this.gridBuilder = new RandomGridBuilder(hSize, vSize);
 		this.numOfPlayers = numOfPlayers;
 		this.build();
@@ -72,7 +62,6 @@ public abstract class GameBuilder {
 	 * @throws IOException	throws an IOException when there is something wrong with the file.
 	 */
 	public GameBuilder(String filename, int numOfPlayers) throws IOException{
-		this.players = new ArrayList<Player>();
 		this.gridBuilder = new FileGridBuilder(filename);
 		this.numOfPlayers = numOfPlayers;
 		
@@ -91,7 +80,8 @@ public abstract class GameBuilder {
 	 * Constructs the grid for the game.
 	 */
 	protected void constructGrid(){
-		this.grid  = gridBuilder.getGrid();
+		Grid grid  = gridBuilder.getGrid();
+		this.game.setGrid(grid);
 	}
 	
 	/**
@@ -101,15 +91,17 @@ public abstract class GameBuilder {
 		if(!isValidNumberOfPlayers(this.numOfPlayers)){
 			throw new IllegalStateException("The amount of players is not valid for the specified game mode.");
 		}
-		ArrayList<Square> startPositions = grid.getStartPositions();
+		ArrayList<Square> startPositions = this.game.getGrid().getStartPositions();
 
 		if(startPositions.size() < numOfPlayers){
 			throw new IllegalStateException("The number of players cannot be more than the number of startpositions");
 		}
+		ArrayList<Player> players = new ArrayList<Player>();
 
 		for(int i = 0; i < this.numOfPlayers; i++){
 			players.add(new Player(startPositions.get(0), i + 1));
 		}
+		this.game.setPlayers(players);
 	}
 
 
@@ -118,6 +110,9 @@ public abstract class GameBuilder {
 	 * Places all the items on the grid.
 	 */
 	protected void placeItems() {
+		Grid grid = game.getGrid();
+		ArrayList<Player> players = game.getPlayers();
+		
 		ChargedIdentityDiscPlacer CIDPlacer = new ChargedIdentityDiscPlacer(grid, players);
 		CIDPlacer.placeItems();
 
@@ -137,22 +132,6 @@ public abstract class GameBuilder {
 	 * @return	true if the number of players is vaid, false otherwise.
 	 */
 	public abstract boolean isValidNumberOfPlayers(int numOfPlayers);
-
-	/**
-	 * Returns the arraylist of players
-	 * @return
-	 */
-	protected ArrayList<Player> getPlayers(){
-		return this.players;
-	}
-
-	/**
-	 * Returns the grid used.
-	 * @return
-	 */
-	public Grid getGrid(){
-		return this.grid;
-	}
 
 	/**
 	 * Returns the game.
