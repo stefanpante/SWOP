@@ -129,13 +129,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	@SuppressWarnings("deprecation")
 	public void initializeInput(){
 		inputController.setFont(standardFont);
-		CColor color = new CColor(OConstants.BLACK, OConstants.WHITE,OConstants.BLACK, OConstants.BLACK, OConstants.BLACK);
+		CColor color = new CColor(OConstants.LIGHT_GREY, OConstants.WHITE,OConstants.LIGHT_GREY, OConstants.BLACK, OConstants.BLACK);
 		widthGrid = inputController.addTextfield("Width of the grid");
 		widthGrid.setPosition(hSize/4 ,100) ;
 		widthGrid.setSize(hSize/2, 35);
 		widthGrid.setAutoClear(false);
 		widthGrid.setColor(color);
 		widthGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
+		widthGrid.setColorForeground(OConstants.LIGHT_GREY);
 		widthGrid.setColorCursor(OConstants.LIGHT_GREY);
 		
 		heightGrid = inputController.addTextfield("Height of the grid");
@@ -144,6 +145,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		heightGrid.setAutoClear(false);
 		heightGrid.setColor(color);
 		heightGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
+		heightGrid.setColorForeground(OConstants.LIGHT_GREY);
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 
 		numPlayers = inputController.addTextfield("Number of players");
@@ -152,6 +154,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		numPlayers.setAutoClear(false);
 		numPlayers.setValue("" + CTFGameMode.MIN_PLAYERS);
 		numPlayers.setColor(color);
+		numPlayers.setColorForeground(OConstants.LIGHT_GREY);
 		numPlayers.hide();
 		
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
@@ -174,8 +177,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		filepick.setPosition(hSize/4,350);
 		filepick.setSize(hSize/2, 35);
 		filepick.setColor(color);
-		filepick.setColorLabel(OConstants.WHITE);
-		filepick.setColorBackground(OConstants.LIGHT_GREY);
+		filepick.setColorLabel(OConstants.BLACK);
+		filepick.setColorBackground(OConstants.LIGHTER_GREY);
 
 		RadioButton rButton = inputController.addRadioButton("Gay");
 		rButton.setPosition(hSize/4,500);
@@ -184,8 +187,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		confirm.setPosition(hSize/4,390);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
-		confirm.setColorLabel(OConstants.WHITE);
-		confirm.setColorBackground(OConstants.LIGHT_GREY);
+		confirm.setColorLabel(OConstants.BLACK);
+		confirm.setColorBackground(OConstants.LIGHTER_GREY);
 	}
 
 	public void pick(){
@@ -522,6 +525,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		switch(mode){
 			case 0: 			numPlayers.hide();
 								this.gameMode = GameHandler.RACEGAMEMODE;
+								this.numPlayers.setText("" +2);
 								break;
 								
 			case 1:				numPlayers.show();

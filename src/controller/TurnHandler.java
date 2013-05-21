@@ -32,10 +32,7 @@ public class TurnHandler extends Handler implements Observer {
 	}
 	
 	@Override
-	public void update(Observable o, Object arg) {
-		//FIXME: 
-		getGame().getPowerGayManager().decreaseAction();
-		
+	public void update(Observable o, Object arg) {		
 		if(hasWon()){
     		firePropertyChange(Handler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
@@ -69,10 +66,7 @@ public class TurnHandler extends Handler implements Observer {
 					"and has no actions left and therefore lost the game");
 		}else{			
 	    	getGame().getCurrentPlayer().endTurn();
-	    	getGame().switchToNextPlayer();
-	    	
-	    	getGame().getPowerGayManager().decreaseTurn();
-	    	
+	    	getGame().switchToNextPlayer();	    	
 			startTurn();
 		}
 	}
@@ -88,11 +82,8 @@ public class TurnHandler extends Handler implements Observer {
 		}
 		
 		increaseCurrentPlayerCount();
-		getGame().getPowerGayManager().powerFailSquares();
-
-		if(getGame().getCurrentPlayer().getPosition().getPower().isFailing()){
-            getGame().getCurrentPlayer().decrementActions();
-        }
+		
+		
 		if(!getGame().getCurrentPlayer().hasRemainingActions())
 			endTurn(true);
 	}

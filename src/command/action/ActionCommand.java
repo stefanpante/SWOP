@@ -31,7 +31,6 @@ public abstract class ActionCommand extends AbstractGameCommand {
         duringGameCommand();
         afterGameCommand();
         afterActionCommand();
-        getGame().notifyAction();
     }
 
     /**

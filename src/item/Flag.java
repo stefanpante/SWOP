@@ -25,7 +25,12 @@ public class Flag extends Item {
 	}
 
 
-    @Override
+    public Flag() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	@Override
     public boolean canAddTo(Square square) {
         return false;
     }
