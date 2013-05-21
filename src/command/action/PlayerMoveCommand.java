@@ -42,47 +42,7 @@ public class PlayerMoveCommand extends MoveCommand{
      */
     @Override
     protected void afterGameCommand() throws Exception {
-        activateLightGrenade();
-        activateForceFieldGenerator();
         getMovable().resetRange();
-    }
-
-    /**
-     * If the player just dropped a LightGrenade on the square he's moving from it has
-     * to be activated.
-     */
-    // XXX: Shouldn't be necessary anymore.
-    @Deprecated
-    private void activateLightGrenade() {
-        if(getStartPosition().hasType(new LightGrenade())){
-            LightGrenade lg = getStartPosition().getType(new LightGrenade());
-
-            try{
-                if(lg.isDropped()){
-                    lg.activate();
-                }
-            } catch (Exception exc) {
-                exc.printStackTrace();
-            }
-        }
-    }
-
-   /**
-     * If the player just dropped a LightGrenade on the square he's moving from it has
-     * to be activated.
-     */
-    private void activateForceFieldGenerator() {
-        if(getStartPosition().getInventory().hasForceFieldGenerator()){
-            ForceFieldGenerator forceFieldGenerator = getStartPosition().getInventory().getForceFieldGenerator();
-
-            try{
-                if(forceFieldGenerator.isDropped()){
-                    forceFieldGenerator.activate();
-                }
-            } catch (Exception exc) {
-                exc.printStackTrace();
-            }
-        }
     }
 
 }
