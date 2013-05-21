@@ -215,7 +215,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 	public void confirm(){
-		// this works !System.out.println(widthGrid.getText());
+		//this works !System.out.println(widthGrid.getText());
 
 		//hideInput();
 		//setUpGame();

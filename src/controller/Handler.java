@@ -161,7 +161,7 @@ public abstract class Handler {
      * @return ArrayList<item>	List of all items of the current square.
      */
     public ArrayList<Item> getSquareItems() {
-        return getGame().getCurrentPlayer().getPosition().getInventory().getAllItems();
+        return getGame().getCurrentPlayer().getPosition().getAllItems();
     }
 
     /**
@@ -170,7 +170,7 @@ public abstract class Handler {
      * @return ArrayList<item>	List of all items of the current player.
      */
     public ArrayList<Item> getPlayerItems() {
-        return getGame().getCurrentPlayer().getInventory().getAllItems();
+        return getGame().getCurrentPlayer().getAllItems();
     }
 
     /**
@@ -214,6 +214,7 @@ public abstract class Handler {
     /**
      * Returns all the game properties needed to fire propertyChanges.
      */
+    //FIXME: Power failures
     protected HashMap<String, Object> getProperties() {
 
         HashMap<String, Object> properties = new HashMap<String, Object>();
@@ -227,7 +228,7 @@ public abstract class Handler {
 
         for (Coordinate coordinate : getGame().getGrid().getAllCoordinates()) {
 
-            items.put(coordinate, getGame().getGrid().getSquare(coordinate).getInventory().getAllItems());
+            items.put(coordinate, getGame().getGrid().getSquare(coordinate).getAllItems());
 
             Square square = getGame().getGrid().getSquare(coordinate);
 
