@@ -12,6 +12,7 @@ import util.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 /**
  * Square class
@@ -128,7 +129,9 @@ public class Square implements ItemContainer {
 	 * @param direction	The direction of the neighbor.
 	 * @return the neighbor in the given direction
 	 */
-	public Square getNeighbor(Direction direction){
+	public Square getNeighbor(Direction direction) throws NoSuchElementException {
+        if(!neighbors.containsKey(direction))
+            throw new NoSuchElementException("There is no neighbor in the given direction (" + direction + ")");
 		return neighbors.get(direction);
 	}
 
