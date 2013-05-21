@@ -7,8 +7,6 @@ import item.inter.ItemContainer;
 
 import square.field.Field;
 import square.obstacle.Obstacle;
-import square.power.Power;
-
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 import util.Direction;
@@ -35,11 +33,6 @@ public class Square implements ItemContainer {
     ArrayList<Effect> effects;
 
 	/**
-	 * State of the current square. May be a power failure.
-	 */
-	private Power power;
-
-	/**
 	 * The obstacle of this Square object.
 	 */
 	@Nullable
@@ -53,37 +46,7 @@ public class Square implements ItemContainer {
 	/**
 	 * Contains the neighbors of this square
 	 */
-	//TODO: SHould be final, but cannot be set if final. Needs to be added in constructor.
 	private  HashMap<Direction, Square> neighbors;
-
-
-
-	/**
-	 * Returns the state of the square.
-	 */
-	public Power getPower() {
-		return this.power;
-	}
-
-	/**
-	 * Sets the power of a square.
-	 * @param power
-	 */
-	public void setPower(Power power) {
-		this.power = power;
-	}
-
-	/**
-	 * In order for a state to be valid it must not be null.
-	 * 
-	 * @param	state
-	 * @return	True	If state is not null.
-	 * 			False	If state is null.
-	 */
-	public boolean isValidState(Power state) {
-        return state != null;
-	}
-
 
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.

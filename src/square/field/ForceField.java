@@ -1,8 +1,7 @@
 package square.field;
 
-import effect.Effect;
-import effect.ForceFieldEffect;
-import item.inter.Affectable;
+import game.Player;
+import item.IdentityDisc;
 import square.Square;
 
 /**
@@ -11,7 +10,7 @@ import square.Square;
  * 
  * @author Vincent
  */
-public class ForceField extends Field implements Affectable {
+public class ForceField extends Field {
 	
 	/**
 	 * Maximum length of a Force Field.
@@ -34,11 +33,6 @@ public class ForceField extends Field implements Affectable {
     private int remainingActions = ACTIONS_ON;
 
 
-    public void bind(){
-        for(Square square : getSquares()){
-            square.addField(this);
-        }
-    }
 
 	/**
 	 * Force field cannot extend its maximum length.
@@ -81,8 +75,12 @@ public class ForceField extends Field implements Affectable {
 	}
 
 
+
     @Override
-    public Effect getEffect() {
-        return new ForceFieldEffect(this);
+    public void affect(Player player) throws IllegalStateException {
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
     }
 }

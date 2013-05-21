@@ -1,12 +1,9 @@
 package item;
 
-import effect.DropFlagCommand;
+import command.effect.DropFlagCommand;
 import game.Player;
 import item.inter.Activatable;
 import square.Square;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * This class extends Item and represents a LightGrenade object.

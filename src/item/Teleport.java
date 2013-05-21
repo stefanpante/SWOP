@@ -1,6 +1,6 @@
 package item;
 
-import effect.DropFlagCommand;
+import command.effect.DropFlagCommand;
 import game.Player;
 import square.Square;
 
@@ -123,7 +123,7 @@ public class Teleport extends Item {
         }
 
         //Teleport
-        //TODO:teleport effect
+        player.setPosition(this.destination);
     }
 
     @Override
