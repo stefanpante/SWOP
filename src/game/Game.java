@@ -63,8 +63,11 @@ public abstract class Game {
 	 * @param numOfPlayers
 	 */
 	
-	public Game(int numOfPlayers){
+	public Game(GameMode gameMode, int numOfPlayers){
+		this.gameMode = gameMode;
 		this.numOfPlayers = numOfPlayers;
+		gameMode.setGame(this);
+		gameMode.build();
 	}
 
 	/**
