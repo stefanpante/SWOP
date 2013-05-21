@@ -8,8 +8,10 @@ import grid.Grid;
 import grid.RandomGridBuilder;
 
 import itemplacer.ChargedIdentityDiscPlacer;
+import itemplacer.FlagPlacer;
 import itemplacer.ForceFieldGeneratorPlacer;
 import itemplacer.IdentityDiscPlacer;
+import itemplacer.LightGrenadePlacer;
 import itemplacer.TeleportPlacer;
 
 import java.io.IOException;
@@ -31,14 +33,17 @@ public abstract class GameBuilder {
 	/**
 	 * The game which is constructed
 	 */
-	protected Game game;
+	private Game game;
 
 	/**
 	 * The builder used to construct the grid.
 	 */
-	protected AbstractGridBuilder gridBuilder;
+	private AbstractGridBuilder gridBuilder;
 
 
+	/**
+	 * The number of players to construct
+	 */
 	private int numOfPlayers;
 
 	/**
@@ -48,11 +53,10 @@ public abstract class GameBuilder {
 	 * @param vSize		the vertical size of the grid.
 	 * @param numOfPlayers	the number of player in the game.
 	 */
-	public GameBuilder(int hSize, int vSize, int numOfPlayers) {
+	public GameBuilder(int hSize, int vSize, int numOfPlayers, Game game) {
+		this.game = game;
 		this.gridBuilder = new RandomGridBuilder(hSize, vSize);
 		this.numOfPlayers = numOfPlayers;
-		this.build();
-
 	}
 
 	/**
@@ -65,16 +69,6 @@ public abstract class GameBuilder {
 		this.gridBuilder = new FileGridBuilder(filename);
 		this.numOfPlayers = numOfPlayers;
 		
-	}
-
-	/**
-	 * Builds the actual game.
-	 */
-	protected void build(){
-		this.constructGrid();
-		this.constructPlayers();
-		this.placeItems();
-		this.game.start();
 	}
 
 	/**
@@ -104,28 +98,68 @@ public abstract class GameBuilder {
 		}
 		this.game.setPlayers(players);
 	}
-
-
-
+	
 	/**
-	 * Places all the items on the grid.
+	 * Places the lightGrenades on the grid.
+	 * @param grid
+	 * @param players
 	 */
-	protected void placeItems() {
-		Grid grid = game.getGrid();
-		ArrayList<Player> players = game.getPlayers();
-		
-		ChargedIdentityDiscPlacer CIDPlacer = new ChargedIdentityDiscPlacer(grid, players);
-		CIDPlacer.placeItems();
-
-		ForceFieldGeneratorPlacer FFGPlacer = new ForceFieldGeneratorPlacer(grid, players);
+	public void placeLightGrenades(){
+		LightGrenadePlacer LGPlacer = new LightGrenadePlacer(game.getGrid(), game.getPlayers());
+		LGPlacer.placeItems();
+	}
+	
+	/**
+	 * Places the ForcefieldGenerators on the grid.
+	 * @param grid
+	 * @param players
+	 */
+	public void placeForceFieldGenerators(){
+		ForceFieldGeneratorPlacer FFGPlacer = new ForceFieldGeneratorPlacer(game.getGrid(), game.getPlayers());
 		FFGPlacer.placeItems();
-
-		IdentityDiscPlacer IDPlacer = new IdentityDiscPlacer(grid, players);
+	}
+	
+	/**
+	 * Places the identityDiscs on the grid.
+	 * @param grid
+	 * @param players
+	 */
+	public void placeIdentityDiscs(){
+		IdentityDiscPlacer IDPlacer = new IdentityDiscPlacer(game.getGrid(), game.getPlayers());
 		IDPlacer.placeItems();
-
-		TeleportPlacer TPPlacer = new TeleportPlacer(grid, players);
+	}
+	
+	/**
+	 * Places the chargedIdentityDiscs on the grid.
+	 * @param grid
+	 * @param players
+	 */
+	public void placeChargedIdentityDisc(){
+		ChargedIdentityDiscPlacer CIDPlacer = new ChargedIdentityDiscPlacer(game.getGrid(), game.getPlayers());
+		CIDPlacer.placeItems();
+	}
+	
+	/**
+	 * Places the teleports on the grid.
+	 * @param grid
+	 * @param players
+	 */
+	public void placeTeleports(){
+		TeleportPlacer TPPlacer = new TeleportPlacer(game.getGrid(), game.getPlayers());
 		TPPlacer.placeItems();
 	}
+	
+	/**
+	 * Places the flags on the grid.
+	 * @param grid
+	 * @param players
+	 */
+	public void placeFlags(Grid grid, ArrayList<Player> players){
+		FlagPlacer FPlacer = new FlagPlacer(game.getGrid(), game.getPlayers());
+		FPlacer.placeItems();
+	}
+	
+	
 
 	/**
 	 * Checks whether the given number of players is valid.
