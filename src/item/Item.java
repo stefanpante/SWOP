@@ -13,23 +13,50 @@ import square.Square;
  **/
 public abstract class Item implements Effect {
 
+    /**
+     * The container of this item
+     */
     private ItemContainer container;
 
+    /**
+     * Set the container of this item
+     *
+     * @param container
+     */
     public void setContainer(ItemContainer container){
+        if(!isValidContainer(container))
+            throw new IllegalArgumentException("The given Item Container is not valid");
         this.container = container;
     }
 
+    private boolean isValidContainer(ItemContainer container) {
+        return container != null;
+    }
+
+    /**
+     * Return the container of this item
+     * @return
+     */
     protected ItemContainer getContainer(){
         return this.container;
     }
 
     public abstract boolean canAddTo(Square square);
 
+    /**
+     * Check whether this item can be added to the given player
+     *
+     * @param   player
+     *          The player to be checked
+     * @return  True if and only if the player has enough space
+     */
     public boolean canAddTo(Player player){
         return player.getAllItems().size() < player.MAX_ITEMS;
     }
 
-
+    /**
+     * Destory this item
+     */
     public void destory(){
         container.removeItem(this);
         this.setContainer(null);
