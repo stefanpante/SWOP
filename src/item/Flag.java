@@ -2,7 +2,6 @@ package item;
 
 import effect.Effect;
 import game.Player;
-import item.inventory.PlayerInventory;
 import square.Square;
 
 /**

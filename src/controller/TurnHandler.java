@@ -33,6 +33,7 @@ public class TurnHandler extends Handler implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		//FIXME: 
 		getGame().getPowerGayManager().decreaseAction();
 		
 		if(hasWon()){
