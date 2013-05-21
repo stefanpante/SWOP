@@ -2,9 +2,12 @@ package square;
 
 
 import effect.Effect;
+import game.Player;
+import item.IdentityDisc;
 import item.Item;
 import item.inter.ItemContainer;
 
+import item.inter.Movable;
 import square.field.Field;
 import square.obstacle.Obstacle;
 import notnullcheckweaver.NotNull;
@@ -102,7 +105,7 @@ public class Square implements ItemContainer {
 	 * 			False	If there is no obstacle.
 	 */
 	public boolean isObstructed(){
-	return isCoveredByObstacle() || isCoveredByField();
+	    return isCoveredByObstacle() || isCoveredByField();
 	}
 	
 	public boolean isCoveredByField(){
@@ -179,6 +182,13 @@ public class Square implements ItemContainer {
                 return it;
         }
         return null;
+    }
+
+    public void acceptMove(Movable movable){
+        for(Item it: items){
+            it.affect(movable);
+        }
+        //TODO for loop for other effects
     }
 
     /**

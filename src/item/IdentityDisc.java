@@ -121,9 +121,10 @@ public class IdentityDisc extends Item implements Movable {
 
 	@Override
 	public void move(Square square) throws IllegalStateException {
-        getContainer().removeItem(this);
-        square.addItem(this);
-		this.position = square;
+        if(!position.getNeighbors().containsValue(square))
+            throw new IllegalStateException("Cannot move to non neighboring square");
+        position.acceptMove(this);
+        setPosition(square);
     	this.setJustTeleported(false);
 	}
 	

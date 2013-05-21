@@ -229,6 +229,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 		addSquare(startPosition);
 	}
 
+    @Override
     public void setPosition(Square position) throws IllegalStateException {
         if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
@@ -314,13 +315,18 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	public void move(Square position) throws IllegalStateException{
         if(currentPosition.isCoveredByField())
             throw new IllegalStateException("Cannot move while in a field!");
-        decrementActions();
-		setPosition(position);
-		position.affect(this);
+        if(!position.getNeighbors().containsValue(currentPosition))
+            throw new IllegalStateException("Cannot move to non neighboring square");
+        position.acceptMove(this);
+        setPosition(position);
 		moved = true;
 		this.setJustTeleported(false);
+        decrementActions();
 	}
-	
+
+
+
+
 	/**
 	 * Decrements the remaining actions by one and notifies the observers of this player.
 	 * 
