@@ -186,29 +186,18 @@ public class Square implements ItemContainer {
         return null;
     }
 
+    /**
+     * Accepts the moving of a movable onto a square and gives the movable its effects.
+     *
+     * @param   movable
+     *          The movable which will be affected.
+     */
     public void acceptMove(Movable movable){
         for(Item it: items){
             it.affect(movable);
         }
-        //TODO for loop for other effects
-    }
-
-    /**
-     * Add an effect to this squares
-     *
-     * @param   effect
-     *          The effect to be added
-     */
-    public void addEffect(Effect effect){
-        effects.add(effect);
-    }
-
-    /**
-     * Remove an effect from this square
-     *
-     * @param   effect
-     */
-    public void removeEffect(Effect effect){
-        effects.remove(effect);
+        for(Field field: getAllFields()){
+            field.affect(movable);
+        }
     }
 }
