@@ -313,6 +313,9 @@ public class GridGui extends GUIElement{
 					if(!lg.isActive())
 						s.setShape(Shapes.getShape(lg));
 				}
+				else{
+					s.setShape(Shapes.getShape(it.get(0)));
+				}
 			}
 			
 			if(it.size() >= 2){

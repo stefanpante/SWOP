@@ -130,8 +130,6 @@ public class GameHandler extends Handler {
 			throw new IllegalStateException("The specified game mode does not exist.");
 		}
 		
-		System.out.println("Is the game mode null:" + mode == null);
-
 		setGame(new Game(mode, numOfPlayers));
 		initHandlers();
 	}

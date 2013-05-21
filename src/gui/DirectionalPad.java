@@ -11,11 +11,6 @@ import util.OConstants;
 
 public class DirectionalPad extends GUIElement{
 
-	/**
-	 * PApplet used to draw.
-	 */
-	protected PApplet gui;
-
 	float buttonWidth;
 
 	private float buttonHeight;

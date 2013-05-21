@@ -229,9 +229,10 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     public ArrayList<Coordinate> getStartPositions(){
     	ArrayList<Coordinate> startPositions = new ArrayList<Coordinate>();
     	
-    	startPositions.add(new Coordinate(0,0));
+    	
     	startPositions.add(new Coordinate(0, getGrid().getVSize() -1));
     	startPositions.add(new Coordinate(getGrid().getHSize() - 1, 0));
+    	startPositions.add(new Coordinate(0,0));
     	startPositions.add(new Coordinate(getGrid().getHSize()-1, getGrid().getVSize() -1));
     	
     	return startPositions;

@@ -225,7 +225,6 @@ public class Coordinate {
         coordinates.add(this);
         Coordinate neighbor = getNeighbor(direction);
         while(!neighbor.equals(coordinate)){
-            System.out.println(neighbor);
             coordinates.add(neighbor);
             neighbor = neighbor.getNeighbor(direction);
         }

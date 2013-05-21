@@ -34,7 +34,6 @@ public class ThrowPad extends DirectionalPad {
 	@Override
 	public void mousePressed(int mouseX, int mouseY){
 		if(visible){
-			System.out.println("Throw pad pressed");
 			for(DirectionalButton button: getButtons().values()){
 				if(button.mouseHit(mouseX, mouseY)){
 					ObjectronGUI gui2= (ObjectronGUI) gui;
