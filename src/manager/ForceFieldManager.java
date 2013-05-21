@@ -66,9 +66,7 @@ public class ForceFieldManager extends Manager{
     protected boolean canHaveAsForceField(ForceField forceField) {
         if(forceField == null)
             return false;
-        if(contains(forceField))
-            return false;
-        return true;
+        return !contains(forceField);
     }
     
     /**

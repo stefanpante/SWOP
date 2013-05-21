@@ -108,7 +108,7 @@ public abstract class Game {
 							+ ") is not a valid agrument of the field currentPlayer from the class Game");
 		}
 		this.currentPlayer = currentPlayer;
-	};
+	}
 	
 	/**
 	 * Switches player. e.g.: if the current player is the first player,

@@ -186,17 +186,8 @@ public class Grid {
 	 * 			| coordinate.getY() < this.getVSize()
 	 */
 	private boolean canHaveAsCoordinate(Coordinate coordinate) {
-		if(coordinate == null) {
-            return false;
-        }
-		if(coordinate.getX() >= this.getHSize()){
-			return false;
-		}
-		if(coordinate.getY() >= this.getVSize()){
-			return false;
-		}
-		return true;
-	}
+        return coordinate != null && coordinate.getX() < this.getHSize() && coordinate.getY() < this.getVSize();
+    }
 
 	/**
 	 * Returns whether the given square is a valid square for all grids.
@@ -208,11 +199,8 @@ public class Grid {
 	 * 			| square != null
 	 */
 	public static boolean isValidSquare(Square square) {
-		if(square == null){
-			return false;
-		}
-		return true;
-	}
+        return square != null;
+    }
 	
 	/**
 	 * Returns whether the given square is a valid square for this grid.
@@ -224,11 +212,8 @@ public class Grid {
 	 * 			| ! this.contains(square)
 	 */
 	public boolean canHaveAsSquare(Square square){
-		if(this.contains(square)){
-			return false;
-		}
-		return true;
-	}
+        return !this.contains(square);
+    }
 
 	/**
 	 * Checks whether the given coordinate is a valid coordinate for all the grids.
@@ -242,18 +227,8 @@ public class Grid {
 	 * 			|	coordinate.getY() >= 0
 	 */
 	public boolean isValidCoordinate(Coordinate coordinate) {
-		if(coordinate == null){
-			return false;
-		}
-		
-		if(coordinate.getX() < 0){
-			return false;
-		}
-		if(coordinate.getY() < 0){
-			return false;
-		}
-		return true;
-	}
+        return coordinate != null && coordinate.getX() >= 0 && coordinate.getY() >= 0;
+    }
 
 	/**
 	 * Returns the neighbor of the given square.

@@ -80,10 +80,7 @@ public class Square implements MovableEffect, ItemContainer {
 	 * 			False	If state is null.
 	 */
 	public boolean isValidState(Power state) {
-		if(state == null)
-			return false;
-		else
-			return true;
+        return state != null;
 	}
 
 
@@ -95,7 +92,7 @@ public class Square implements MovableEffect, ItemContainer {
 	 */
 	public Obstacle getObstacle() {
 		return obstacle;
-	};
+	}
 
 	/**
 	 * Sets the value of the obstacle of Square if the given value is valid. 
@@ -107,7 +104,7 @@ public class Square implements MovableEffect, ItemContainer {
 	@Nullable
 	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
 		this.obstacle = obstacle;
-	};
+	}
 
 	public void addField(Field field){
 		fields.add(field);

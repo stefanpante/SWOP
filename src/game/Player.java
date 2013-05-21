@@ -115,10 +115,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 * 			False	If the square is null or obstructed.
 	 */
 	public static boolean isValidStartPosition(Square square) {
-		if(square == null){
-			return false;
-        }
-        return !square.isObstructed();
+        return square != null && !square.isObstructed();
     }
 	
 	/**
@@ -130,12 +127,8 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 * 			False	If square is null or obstructed.
 	 */
 	public static boolean isValidPosition(Square newPosition) {
-		if(newPosition == null)
-			return false;
-		if(newPosition.isObstructed())
-			return false;
-		return true;
-	}
+        return newPosition != null && !newPosition.isObstructed();
+    }
 
 	
 	/**
@@ -159,12 +152,8 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 */
 	@Override
 	public boolean isValidSquare(Square square) {
-		if(square == null)
-			return false;
-		if(square == currentPosition)
-			return false;
-		return true;
-	}
+        return square != null && square != currentPosition;
+    }
 	
 	/**
 	 * Checks whether a given number of actions is a valid number of actions to lose.

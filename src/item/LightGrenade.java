@@ -95,10 +95,6 @@ public class LightGrenade extends Item implements Activatable {
         return (!square.hasItem(this) && !square.hasType(this));
     }
 
-    public boolean canAddTo(PlayerInventory playerInventory){
-        return true;
-    }
-
     /**
 	 * If the item is used this means it has been dropped on a square.
 	 * 
@@ -147,7 +143,7 @@ public class LightGrenade extends Item implements Activatable {
 		ACTIVE,
 		INACTIVE,
 		DROPPED,
-		WORN;
+		WORN
 	}
 
 }
