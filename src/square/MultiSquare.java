@@ -53,6 +53,24 @@ public abstract class MultiSquare {
         squares.add(square);
     }
 
+    public void addSquare(int i, Square square){
+        if(!isValidSquare(square))
+            throw new IllegalArgumentException("Cannot add square to this MultiObstacle: the square is invalid.");
+        squares.add(i,square);
+    }
+
+    public Square getSquare(int i){
+        if(i >= squares.size())
+            throw new IndexOutOfBoundsException("There is no square at the given position");
+        return squares.get(i);
+    }
+
+    public void removeSquare(int i){
+        if(i >= squares.size())
+            throw new IndexOutOfBoundsException("There is no square at the given position");
+        squares.remove(i);
+    }
+
     /**
      * Removes a square of this MultiSquare.
      *

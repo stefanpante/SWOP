@@ -15,6 +15,8 @@ public class PowerManager extends Manager {
         super(grid);
     }
 
+
+
     @Override
     public void update(Observable o, Object arg) {
 

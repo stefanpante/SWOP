@@ -1,5 +1,7 @@
 package square.field;
 
+import effect.Effect;
+import item.inter.Movable;
 import square.MultiSquare;
 import square.Square;
 
@@ -7,7 +9,7 @@ import square.Square;
  * A field is a collection of several squares,
  * with an effect on moveables.
  */
-public abstract class Field extends MultiSquare {
+public abstract class Field extends MultiSquare implements Effect {
 	
 	/**
      * Current state of the ForceField.
@@ -30,13 +32,35 @@ public abstract class Field extends MultiSquare {
      *          Whether the ForceField should be active
      */
     public void setActive(boolean active){
-        for (Square square: getSquares()){
-            if (active)
-                square.addField(this);
-            else
-                square.removeField(this);
-        }
+        if(active)
+            bindAll();
+        else
+            unbindAll();
         this.active = active;
+    }
+
+
+    public void bindAll(){
+        for(Square square : getSquares())
+            square.addField(this);
+    }
+
+    public void unbindAll(){
+        for(Square square : getSquares())
+            square.removeField(this);
+    }
+
+    public void bind(Square square){
+        square.addField(this);
+    }
+
+    public void unbind(Square square){
+        square.removeField(this);
+    }
+
+    @Override
+    public void affect(Movable movable) {
+        movable.acceptEffect(this);
     }
 
 }
