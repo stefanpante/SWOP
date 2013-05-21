@@ -1,15 +1,14 @@
-package move;
+package item.inter;
 
 import game.Player;
 import item.IdentityDisc;
-import move.Movable;
 
 /**
  * User: jonas
- * Date: 02/05/13
- * Time: 13:39
+ * Date: 21/05/13
+ * Time: 11:50
  */
-public interface MovableEffect {
+public interface Effect {
 
     public void affect(Movable movable);
 

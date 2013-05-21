@@ -1,9 +1,5 @@
 package square.field;
 
-import game.Player;
-import item.IdentityDisc;
-import move.Movable;
-import move.MovableEffect;
 import square.MultiSquare;
 import square.Square;
 

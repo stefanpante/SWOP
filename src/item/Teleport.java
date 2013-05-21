@@ -1,8 +1,6 @@
 package item;
 
-import effect.Effect;
-import effect.TeleportEffect;
-import item.inventory.PlayerInventory;
+import game.Player;
 import square.Square;
 
 /**
@@ -98,9 +96,6 @@ public class Teleport extends Item {
         return (!square.hasItem(this) && !square.hasType(this));
     }
 
-    public boolean canAddTo(PlayerInventory playerInventory){
-        return false;
-    }
 
     @Override
     public String toString() {
@@ -121,8 +116,14 @@ public class Teleport extends Item {
     	return new Teleport();
     }
 
+
     @Override
-    public Effect getEffect() {
-        return new TeleportEffect(this);
+    public void affect(Player player) throws IllegalStateException {
+        // TODO:
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
+        // TODO:
     }
 }

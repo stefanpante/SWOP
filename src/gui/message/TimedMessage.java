@@ -12,7 +12,6 @@ public class TimedMessage extends Message {
     /**
      * The duration of the message in sec.
      */
-    private float duration;
     private float endFrame;
     private float currentFrame;
 
@@ -32,7 +31,6 @@ public class TimedMessage extends Message {
     }
 
     public void setDuration(int duration) {
-        this.duration = duration;
         this.endFrame = duration * gui.frameRate;
     }
 

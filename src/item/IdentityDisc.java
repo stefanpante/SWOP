@@ -1,9 +1,8 @@
 package item;
 
-import effect.Effect;
-import move.MovableEffect;
-import item.inventory.PlayerInventory;
-import move.Movable;
+import game.Player;
+import item.inter.Effect;
+import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import util.Direction;
 import square.Square;
@@ -115,19 +114,8 @@ public class IdentityDisc extends Item implements Movable {
     }
 
     @Override
-    public boolean canAddTo(PlayerInventory playerInventory) {
-        return true;
-    }
-
-    @Override
 	public String toString() {
 		return super.toString() + " IdentityDisc";
-	}
-
-	@Override
-	public void getsAffectedBy(MovableEffect effect) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -166,7 +154,17 @@ public class IdentityDisc extends Item implements Movable {
 	}
 
     @Override
-    public Effect getEffect() {
-        return null;
+    public void acceptEffect(Effect effect) {
+        effect.affect(this);
+    }
+
+    @Override
+    public void affect(Player player) throws IllegalStateException {
+        // TODO:
+    }
+
+    @Override
+    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
+        // Two identity disks do not interfere
     }
 }

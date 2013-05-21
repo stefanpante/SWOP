@@ -94,17 +94,9 @@ public abstract class Power implements MovableEffect {
 	 * 			False if the given power has a shorter lifespan.
 	 */
 	public boolean isLifeSpanLonger(Power power) {
-		if(power.getRemainingTurns() > this.remainingTurns)
-			return true;
-		
-		if(power.getRemainingTurns() < this.remainingTurns)
-			return false;
-			
-		if(power.getRemainingActions() > this.remainingActions)
-			return true;
-		
-		return false;
-	}
+        return power.getRemainingTurns() > this.remainingTurns || power.getRemainingTurns() >= this.remainingTurns && power.getRemainingActions() > this.remainingActions;
+
+    }
 	
 	/**
 	 * Checks if the given turns are valid.

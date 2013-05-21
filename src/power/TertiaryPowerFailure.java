@@ -2,7 +2,7 @@ package power;
 
 import game.Player;
 import item.IdentityDisc;
-import move.Movable;
+import item.inter.Movable;
 
 /**
  * User: jonas

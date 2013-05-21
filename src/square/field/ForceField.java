@@ -2,7 +2,7 @@ package square.field;
 
 import effect.Effect;
 import effect.ForceFieldEffect;
-import item.Affectable;
+import item.inter.Affectable;
 import square.Square;
 
 /**
@@ -45,11 +45,9 @@ public class ForceField extends Field implements Affectable {
 	 */
 	@Override
 	public boolean isValidSquare(Square square) {
-		if(getLength() >= MAX_LENGTH)
-			return false;
-		
-		return super.isValidSquare(square);
-	}
+        return getLength() < MAX_LENGTH && super.isValidSquare(square);
+
+    }
 	
 	/**
 	 * Turns the force field off.

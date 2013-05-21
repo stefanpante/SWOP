@@ -1,4 +1,6 @@
-package item;
+package item.inter;
+
+import item.Item;
 
 import java.util.ArrayList;
 

@@ -4,7 +4,7 @@
 package command.action;
 
 import game.Game;
-import move.Movable;
+import item.inter.Movable;
 import util.Direction;
 import square.Square;
 

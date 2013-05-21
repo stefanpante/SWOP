@@ -1,8 +1,7 @@
 package item;
 
-import effect.Effect;
-import effect.LightGrenadeEffect;
-import item.inventory.PlayerInventory;
+import game.Player;
+import item.inter.Activatable;
 import square.Square;
 
 /**
@@ -12,6 +11,8 @@ import square.Square;
  *
  */
 public class LightGrenade extends Item implements Activatable {
+
+    public static final int LOST_ACTIONS = 3;
 	
 	LightGrenadeState currentState = LightGrenadeState.INACTIVE; 
 	
@@ -53,7 +54,7 @@ public class LightGrenade extends Item implements Activatable {
 		
 		this.currentState = LightGrenadeState.ACTIVE;
 	}
-	
+
 	/**
 	 * Wears the item out.
 	 * 
@@ -95,10 +96,6 @@ public class LightGrenade extends Item implements Activatable {
         return (!square.hasItem(this) && !square.hasType(this));
     }
 
-    public boolean canAddTo(PlayerInventory playerInventory){
-        return true;
-    }
-
     /**
 	 * If the item is used this means it has been dropped on a square.
 	 * 
@@ -119,7 +116,6 @@ public class LightGrenade extends Item implements Activatable {
 		return super.toString() + " LightGrenade";
 	}
 
-	
 	/*
 	 * Returns whether the given object is a lightgrenade
 	 */
@@ -136,9 +132,19 @@ public class LightGrenade extends Item implements Activatable {
 		return (o instanceof LightGrenade);
 	}
 
-    public Effect getEffect(){
-        return new LightGrenadeEffect(this);
+
+    @Override
+    public void affect(Player player) {
+        // Decrement actions
+        player.loseActions(LOST_ACTIONS);
+        // Handle the flag
     }
+
+    @Override
+    public void affect(IdentityDisc identityDisc){
+        // TODO: Effect when identity disk moves over Light Grenade
+    }
+
 
     /**
 	 * The state of the LightGrenade.
@@ -147,7 +153,7 @@ public class LightGrenade extends Item implements Activatable {
 		ACTIVE,
 		INACTIVE,
 		DROPPED,
-		WORN;
+		WORN
 	}
 
 }

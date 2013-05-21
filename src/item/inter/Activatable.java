@@ -1,4 +1,4 @@
-package item;
+package item.inter;
 
 /**
  * User: jonas
