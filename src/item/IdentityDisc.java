@@ -1,7 +1,7 @@
 package item;
 
 import game.Player;
-import item.inter.Effect;
+import effect.Effect;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import util.Direction;

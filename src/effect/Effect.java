@@ -1,7 +1,8 @@
-package item.inter;
+package effect;
 
 import game.Player;
 import item.IdentityDisc;
+import item.inter.Movable;
 
 /**
  * User: jonas

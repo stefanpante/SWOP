@@ -1,6 +1,5 @@
 package item;
 
-import item.inventory.PlayerInventory;
 
 public class ChargedIdentityDisc extends IdentityDisc {
 	
@@ -13,7 +12,6 @@ public class ChargedIdentityDisc extends IdentityDisc {
 		super();
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
-
 	
 	@Override
 	public boolean isCharged() {

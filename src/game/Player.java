@@ -5,7 +5,7 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
-import item.inter.Effect;
+import effect.Effect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;

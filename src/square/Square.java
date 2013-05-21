@@ -1,13 +1,10 @@
 package square;
 
 
+import effect.Effect;
 import item.Item;
 import item.inter.ItemContainer;
-import move.MovableEffect;
-import game.Player;
-import item.IdentityDisc;
 
-import item.inter.Movable;
 import square.field.Field;
 import square.obstacle.Obstacle;
 import square.power.Power;
@@ -25,13 +22,17 @@ import java.util.HashMap;
  * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
 @NotNull
-public class Square implements MovableEffect, ItemContainer {
+public class Square implements ItemContainer {
 
     /**
      * List of items on this square
      */
     ArrayList<Item> items;
 
+    /**
+     * List of effects on this square
+     */
+    ArrayList<Effect> effects;
 
 	/**
 	 * State of the current square. May be a power failure.
@@ -213,15 +214,22 @@ public class Square implements MovableEffect, ItemContainer {
         return null;
     }
 
-    @Override
-    public void affect(Movable movable) {
+    /**
+     * Add an effect to this squares
+     *
+     * @param   effect
+     *          The effect to be added
+     */
+    public void addEffect(Effect effect){
+        effects.add(effect);
     }
 
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
+    /**
+     * Remove an effect from this square
+     *
+     * @param   effect
+     */
+    public void removeEffect(Effect effect){
+        effects.remove(effect);
     }
 }
