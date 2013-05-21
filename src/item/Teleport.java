@@ -1,6 +1,6 @@
 package item;
 
-import effect.DropFlagCommand;
+import command.effect.DropFlagCommand;
 import game.Player;
 import square.Square;
 

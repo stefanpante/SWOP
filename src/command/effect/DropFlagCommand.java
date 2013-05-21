@@ -1,4 +1,4 @@
-package effect;
+package command.effect;
 
 import command.AbstractEffectCommand;
 import game.Player;
