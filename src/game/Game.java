@@ -1,5 +1,6 @@
 package game;
 
+import game.mode.GameMode;
 import grid.Grid;
 
 import java.util.*;
@@ -47,8 +48,23 @@ public abstract class Game {
 	 */
 	private boolean active;
 	
-	public Game(){
-		this.players = new ArrayList<Player>();
+	/**
+	 * The number of players in the game.
+	 */
+	private int numOfPlayers;
+	
+	/**
+	 * The type of game which is played;
+	 */
+	private GameMode gameMode;
+	
+	/**
+	 * 
+	 * @param numOfPlayers
+	 */
+	
+	public Game(int numOfPlayers){
+		this.numOfPlayers = numOfPlayers;
 	}
 
 	/**
@@ -199,10 +215,10 @@ public abstract class Game {
      * @param players
      */
     public void setPlayers(ArrayList<Player> players){
-        if(players.size() < getMinimumAmountOfPlayers() ||
-                players.size() > getMaximumAmountOfPlayers())
-            throw new IllegalStateException("There is a minimum of " + getMinimumAmountOfPlayers()
-                    +" and a maximum of " + getMaximumAmountOfPlayers() + " players for this game.");
+        if(players.size() < gameMode.getMinimumAmountOfPlayers() ||
+                players.size() > gameMode.getMaximumAmountOfPlayers())
+            throw new IllegalStateException("There is a minimum of " + gameMode.getMinimumAmountOfPlayers()
+                    +" and a maximum of " + gameMode.getMaximumAmountOfPlayers() + " players for this game.");
         for(Player p:players){
             if(p == null)
                 throw new NullPointerException("A player should not be null");
@@ -277,17 +293,9 @@ public abstract class Game {
 
 		return null;
 	}
-
-	/**
-	 * Gets the maximum amount of players for this game.
-	 * @return
-	 */
-    public abstract int getMaximumAmountOfPlayers();
     
-    /**
-     * Get the minimum amount of players for this game.
-     * @return
-     */
-    public abstract int getMinimumAmountOfPlayers();
+    public int getNumberOfPlayers(){
+    	return this.numOfPlayers;
+    }
 
 }

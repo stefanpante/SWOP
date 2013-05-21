@@ -28,7 +28,7 @@ import square.Square;
  * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  *
  */
-public abstract class GameBuilder {
+public class GameBuilder {
 
 	/**
 	 * The game which is constructed
@@ -36,16 +36,14 @@ public abstract class GameBuilder {
 	private Game game;
 
 	/**
-	 * The builder used to construct the grid.
-	 */
-	private AbstractGridBuilder gridBuilder;
-
-
-	/**
 	 * The number of players to construct
 	 */
 	private int numOfPlayers;
 
+	public GameBuilder(Game game){
+		this.game = game;
+	}
+	
 	/**
 	 * Constructs a new game based on the horizontal size of the grid,
 	 * the vertical size and the number of players.
@@ -53,39 +51,15 @@ public abstract class GameBuilder {
 	 * @param vSize		the vertical size of the grid.
 	 * @param numOfPlayers	the number of player in the game.
 	 */
-	public GameBuilder(int hSize, int vSize, int numOfPlayers, Game game) {
+	public GameBuilder(Game game, int numOfPlayers) {
 		this.game = game;
-		this.gridBuilder = new RandomGridBuilder(hSize, vSize);
 		this.numOfPlayers = numOfPlayers;
 	}
 
-	/**
-	 * 
-	 * @param filename		the file on which the grid will be based.
-	 * @param numOfPlayers	the number of players in the game.
-	 * @throws IOException	throws an IOException when there is something wrong with the file.
-	 */
-	public GameBuilder(String filename, int numOfPlayers) throws IOException{
-		this.gridBuilder = new FileGridBuilder(filename);
-		this.numOfPlayers = numOfPlayers;
-		
-	}
-
-	/**
-	 * Constructs the grid for the game.
-	 */
-	protected void constructGrid(){
-		Grid grid  = gridBuilder.getGrid();
-		this.game.setGrid(grid);
-	}
-	
 	/**
 	 * Constructs the players for the game.
 	 */
-	protected void constructPlayers(){
-		if(!isValidNumberOfPlayers(this.numOfPlayers)){
-			throw new IllegalStateException("The amount of players is not valid for the specified game mode.");
-		}
+	public void constructPlayers(){
 		ArrayList<Square> startPositions = this.game.getGrid().getStartPositions();
 
 		if(startPositions.size() < numOfPlayers){
@@ -154,19 +128,10 @@ public abstract class GameBuilder {
 	 * @param grid
 	 * @param players
 	 */
-	public void placeFlags(Grid grid, ArrayList<Player> players){
+	public void placeFlags(){
 		FlagPlacer FPlacer = new FlagPlacer(game.getGrid(), game.getPlayers());
 		FPlacer.placeItems();
 	}
-	
-	
-
-	/**
-	 * Checks whether the given number of players is valid.
-	 * @param numOfPlayers	the number of players to be checked.
-	 * @return	true if the number of players is vaid, false otherwise.
-	 */
-	public abstract boolean isValidNumberOfPlayers(int numOfPlayers);
 
 	/**
 	 * Returns the game.
