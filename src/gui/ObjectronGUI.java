@@ -202,7 +202,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void confirm(){
 		hideInput();
-		System.out.println(Integer.parseInt(widthGrid.getText()) + " : " + heightGrid.getText() +" : " + numPlayers.getText());
+		this.hCells = Integer.parseInt(widthGrid.getText()) ;
+		this.vCells = Integer.parseInt(heightGrid.getText());
 		setUpGame(Integer.parseInt(widthGrid.getText()), Integer.parseInt(heightGrid.getText()), 
 				Integer.parseInt(numPlayers.getText()));
 	}
@@ -281,7 +282,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			gameHandler = new GameHandler(this);
 			gameHandler.startNewGame(hCells, vCells,numOfPlayers, gameMode);
 			initInterface();
-			//gameHandler.fireChanges();
+			gameHandler.fireChanges();
 		}catch(Exception exc){
 			this.showException(exc);
 		}
@@ -294,7 +295,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		hCells = gameHandler.getGame().getGrid().getHSize();
 		vCells = gameHandler.getGame().getGrid().getVSize();
 		initInterface();
-		//gameHandler.fireChanges();
+		gameHandler.fireChanges();
 		}catch(Exception exc){
 			this.showException(exc);
 		}
@@ -310,7 +311,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			w = (int) (sw * hCells);
 
 		}
-
+		System.out.println("Init the new GridGUI");
 		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
 		this.initialized = true;
 		if( h < 550){

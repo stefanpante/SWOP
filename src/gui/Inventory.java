@@ -158,7 +158,6 @@ public class Inventory extends GUIElement{
 
 	public Item getSelectedItem() {
 		if(selectedButton == null){
-			System.out.println("null mothafuckas");
 			return null;
 		}
 		return selectedButton.getItem();

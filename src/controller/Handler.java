@@ -192,8 +192,7 @@ public abstract class Handler {
      */
     public void fireChanges() {
         HashMap<String, Object> properties = getProperties();
-
-        System.out.println("There are players:" +getGame().getPlayers().size());
+        
         firePropertyChange(Handler.POWER_FAILS_PROPERTY, properties.get(Handler.POWER_FAILS_PROPERTY));
         firePropertyChange(Handler.SQUARES_PROPERTY, properties.get(Handler.SQUARES_PROPERTY));
 
@@ -228,7 +227,7 @@ public abstract class Handler {
             items.put(coordinate, getGame().getGrid().getSquare(coordinate).getAllItems());
 
             Square square = getGame().getGrid().getSquare(coordinate);
-
+            squares.add(coordinate);
             //FIXME: add powerfailures to the properties.
             boolean player_position;
 
@@ -251,7 +250,7 @@ public abstract class Handler {
                 }
             }
 
-            squares.add(coordinate);
+            
 
             for (Player player : getGame().getPlayers()) {
                 if (player.getPosition() == square)

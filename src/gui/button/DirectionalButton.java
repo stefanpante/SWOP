@@ -17,6 +17,7 @@ public class DirectionalButton extends ShapeButton{
 	public DirectionalButton(float width, float height, Direction direction, PVector position,
 			PApplet gui) {
 		super(width, height, Shapes.getDirection(direction), position, gui);
+		System.out.println(Shapes.getDirection(direction) == null);
 		this.direction = direction;
 		this.visible = true;
 
@@ -37,6 +38,7 @@ public class DirectionalButton extends ShapeButton{
 	public void hover(int mouseX, int mouseY){
 		if(visible){
 			if(mouseHit(mouseX, mouseY)){
+				
 				gui.shape(shape , position.x + OConstants.MARGIN,position.y + OConstants.MARGIN, 
 						width -  OConstants.MARGIN*2,height-  OConstants.MARGIN*2);
 			}

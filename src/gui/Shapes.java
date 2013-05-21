@@ -96,7 +96,7 @@ public class Shapes {
 		
 		if(item instanceof ForceFieldGenerator){
 			ForceFieldGenerator ffg = (ForceFieldGenerator) item;
-			if(ffg.isDropped())
+			if(ffg.isActive())
 				return Shapes.forcefieldGenerator_on;
 			else{
 				return Shapes.forcefieldGenerator_off;

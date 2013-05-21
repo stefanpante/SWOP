@@ -112,7 +112,7 @@ public class GridGui extends GUIElement{
 	private void initGrid(int hCells, int vCells) {
 		float x = position.x;
 		float y = position.y;
-
+		
 		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
 		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		for(int i = 0; i < vCells; i++){
@@ -152,7 +152,6 @@ public class GridGui extends GUIElement{
 	 */
 	@Override
 	public void draw() {
-		
 		gridLabel.draw();
 		for(SquareGUI square : squares.values())
 			square.draw();
