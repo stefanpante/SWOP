@@ -37,7 +37,7 @@ public class PowerFailure extends Field {
      *          The square with the primary power failure
      */
     public PowerFailure(Square primary){
-        if(!isValidSquare(getSquare()))
+        if(!isValidSquare(primary))
             throw new IllegalArgumentException("The given square cannot be added to this Power Failure.");
         this.actions = 0;
         this.active = true;
