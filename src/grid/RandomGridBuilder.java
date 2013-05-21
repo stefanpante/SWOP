@@ -1,6 +1,7 @@
 package grid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import util.Direction;
 import square.Square;
@@ -135,11 +136,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
 			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
 	throws IllegalStateException{
-		
+		setSquares();
 		for(Coordinate coor: getStartPositions()){
 			Square s = getGrid().getSquare(coor);
 			getGrid().addStartPosition(s);
 		}
+		setNeighbors();
 		
 	}
 	
