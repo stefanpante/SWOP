@@ -68,7 +68,7 @@ public class GameBuilder {
 		ArrayList<Player> players = new ArrayList<Player>();
 
 		for(int i = 0; i < this.numOfPlayers; i++){
-			players.add(new Player(startPositions.get(0), i + 1));
+			players.add(new Player(startPositions.get(i), i + 1));
 		}
 		this.game.setPlayers(players);
 	}

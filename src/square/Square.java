@@ -51,6 +51,10 @@ public class Square implements ItemContainer {
 	 */
 	private  HashMap<Direction, Square> neighbors;
 
+	
+	public Square(){
+		this.items = new ArrayList<Item>();
+	}
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
 	 *

@@ -24,12 +24,10 @@ import controlP5.ControlListener;
 import controlP5.ControlP5;
 import controlP5.DropdownList;
 import controlP5.RadioButton;
-import controlP5.Textarea;
 import controlP5.Textfield;
 import controller.GameHandler;
 import controller.Handler;
 import processing.core.PApplet;
-import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
 import util.Direction;
@@ -98,7 +96,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	private int hCells;
 	private int vCells;
-	private int currentPlayerColor = OConstants.LIGHT_GREY;
 
 	/**
 	 * initializes the objectron gui
@@ -189,36 +186,20 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.WHITE);
 		confirm.setColorBackground(OConstants.LIGHT_GREY);
-
-		area = inputController.addTextarea("Warning", "Please make sure your Gridfile is valid!", hSize/4, 320, hSize/2, 100);
-
-		area.setColor(OConstants.LIGHT_GREY);
-		area.setColorLabel(OConstants.LIGHT_GREY);
-		area.setColorBackground(OConstants.WHITE);
-		area.setBorderColor(OConstants.LIGHT_GREY);
-		area.hide();
-
-
 	}
-
-	public void gamemode(){
-		System.out.println("Dropdown");
-	}
-	
-	Textarea area;
 
 	public void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		fd.setVisible(true);
-		setUpGame(fd.getDirectory() + fd.getFile());
 		hideInput();
+		setUpGame(fd.getDirectory() + fd.getFile());
+		
 	}
 
 	public void confirm(){
-		//this works !System.out.println(widthGrid.getText());
-
-		//hideInput();
-		//setUpGame();
+		hideInput();
+		setUpGame(Integer.parseInt(widthGrid.getText()), Integer.parseInt(heightGrid.getText()), 
+				Integer.parseInt(numPlayers.getText()));
 	}
 
 
@@ -237,7 +218,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public static final String GAMEMODE = "gamemode";
 
 	private void setupButtons(){
-
 
 		TextButton pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
 		pickUpButton.setActionCommand(PICKUP_ACTION);
@@ -280,7 +260,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			drawButtons(); 
 			showRemainingActions();
 		}
-		//m.draw();
 	}
 
 	public void showRemainingActions(){
@@ -291,22 +270,28 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 	private void setUpGame(String filePath){
-		area.show();
+		try{
 		gameHandler = new GameHandler(this);
 		//gameHandler.startNewGame(filePath, currentPlayerColor, currentPlayerColor);
 		hCells = gameHandler.getGame().getGrid().getHSize();
 		vCells = gameHandler.getGame().getGrid().getVSize();
 		initInterface();
-		gameHandler.fireChanges();   
+		gameHandler.fireChanges();
+		}catch(Exception exc){
+			this.showException(exc);
+		}
 
 	}
 	
-	private void setUpGame(){
-
-		gameHandler = new GameHandler(this);
-		//gameHandler.startNewGame(hCells, vCells);
-		initInterface();
-		gameHandler.fireChanges();
+	private void setUpGame(int hCells, int vCells, int numOfPlayers){
+		try{
+			gameHandler = new GameHandler(this);
+			gameHandler.startNewGame(hCells, vCells,numOfPlayers, gameMode);
+			initInterface();
+			gameHandler.fireChanges();
+		}catch(Exception exc){
+			this.showException(exc);
+		}
 	}
 
 	private void initInterface(){
