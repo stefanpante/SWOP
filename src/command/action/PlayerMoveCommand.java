@@ -52,8 +52,8 @@ public class PlayerMoveCommand extends MoveCommand{
      * to be activated.
      */
     private void activateLightGrenade() {
-        if(getStartPosition().getInventory().hasLightGrenade()){
-            LightGrenade lg = getStartPosition().getInventory().getLightGrenade();
+        if(getStartPosition().hasType(new LightGrenade())){
+            LightGrenade lg = getStartPosition().getType(new LightGrenade());
 
             try{
                 if(lg.isDropped()){

@@ -34,7 +34,7 @@ public class PickUpCommand extends ActionCommand {
 	@Override
 	protected void duringGameCommand(){
 		getGame().getCurrentPlayer().pickUp(getItem());
-		getGame().getCurrentPlayer().getPosition().getInventory().removeItem(getItem());
+		getGame().getCurrentPlayer().getPosition().removeItem(getItem());
 	}
 	
 	@Override
