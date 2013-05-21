@@ -1,9 +1,5 @@
 package square;
 
-
-import effect.Effect;
-import game.Player;
-import item.IdentityDisc;
 import item.Item;
 import item.inter.ItemContainer;
 
@@ -29,11 +25,6 @@ public class Square implements ItemContainer {
      * List of items on this square
      */
     ArrayList<Item> items;
-
-    /**
-     * List of effects on this square
-     */
-    ArrayList<Effect> effects;
 
 	/**
 	 * The obstacle of this Square object.
@@ -148,7 +139,7 @@ public class Square implements ItemContainer {
 
     @Override
     public void addItem(Item item){
-        if(item == null)
+        if(!isValidItem(item))
             throw new IllegalArgumentException("The item cannot be null");
         if(!item.canAddTo(this))
             throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
@@ -156,9 +147,13 @@ public class Square implements ItemContainer {
         item.setContainer(this);
     }
 
+    private boolean isValidItem(Item item) {
+        return item != null;
+    }
+
     @Override
     public void removeItem(Item item){
-        if(item == null)
+        if(!isValidItem(item))
             throw new IllegalArgumentException("The item cannot be null");
         if(!hasItem(item))
             throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
@@ -184,29 +179,18 @@ public class Square implements ItemContainer {
         return null;
     }
 
+    /**
+     * Accepts the moving of a movable onto a square and gives the movable its effects.
+     *
+     * @param   movable
+     *          The movable which will be affected.
+     */
     public void acceptMove(Movable movable){
         for(Item it: items){
             it.affect(movable);
         }
-        //TODO for loop for other effects
-    }
-
-    /**
-     * Add an effect to this squares
-     *
-     * @param   effect
-     *          The effect to be added
-     */
-    public void addEffect(Effect effect){
-        effects.add(effect);
-    }
-
-    /**
-     * Remove an effect from this square
-     *
-     * @param   effect
-     */
-    public void removeEffect(Effect effect){
-        effects.remove(effect);
+        for(Field field: getAllFields()){
+            field.affect(movable);
+        }
     }
 }
