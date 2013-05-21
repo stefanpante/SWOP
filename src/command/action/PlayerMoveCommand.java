@@ -3,7 +3,7 @@ package command.action;
 import game.Game;
 import item.ForceFieldGenerator;
 import item.LightGrenade;
-import move.Movable;
+import item.inter.Movable;
 import util.Direction;
 import square.Square;
 

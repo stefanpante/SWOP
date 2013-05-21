@@ -1,8 +1,7 @@
 package item;
 
-import effect.Effect;
-
-import item.inventory.PlayerInventory;
+import game.Player;
+import item.inter.Activatable;
 import square.Square;
 
 
@@ -23,11 +22,6 @@ public class ForceFieldGenerator extends Item implements Activatable {
     @Override
     public boolean canAddTo(Square square) {
         return (!square.hasItem(this) && !square.hasType(this));
-    }
-
-    @Override
-    public boolean canAddTo(PlayerInventory playerInventory) {
-        return true;
     }
 
     /**
@@ -70,13 +64,13 @@ public class ForceFieldGenerator extends Item implements Activatable {
         this.active = true;
     }
 
-	@Override
-	public Item copy() {
-		return new ForceFieldGenerator();
-	}
+    @Override
+    public void affect(Player player) throws IllegalStateException {
+        // TODO: Nothing
+    }
 
     @Override
-    public Effect getEffect() {
-        return null;
+    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
+        // TODO: Nothing
     }
 }

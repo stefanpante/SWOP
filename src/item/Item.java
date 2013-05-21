@@ -1,7 +1,9 @@
 package item;
 
 import game.Player;
-import move.MovableEffect;
+import item.inter.Effect;
+import item.inter.ItemContainer;
+import item.inter.Movable;
 import square.Square;
 
 /**
@@ -9,7 +11,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  **/
-public abstract class Item implements Affectable {
+public abstract class Item implements Effect {
 
     private ItemContainer container;
 
@@ -60,5 +62,10 @@ public abstract class Item implements Affectable {
 	}
 	
 	public abstract boolean isSameType(Item item);
+
+    @Override
+    public void affect(Movable movable) {
+        movable.acceptEffect(this);
+    }
 
 }

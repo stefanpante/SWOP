@@ -2,7 +2,7 @@ package square.field;
 
 import effect.Effect;
 import effect.ForceFieldEffect;
-import item.Affectable;
+import item.inter.Affectable;
 import square.Square;
 
 /**

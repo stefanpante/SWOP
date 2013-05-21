@@ -2,12 +2,12 @@ package square;
 
 
 import item.Item;
-import item.ItemContainer;
+import item.inter.ItemContainer;
 import move.MovableEffect;
 import game.Player;
 import item.IdentityDisc;
 
-import move.Movable;
+import item.inter.Movable;
 import square.field.Field;
 import square.obstacle.Obstacle;
 import square.power.Power;

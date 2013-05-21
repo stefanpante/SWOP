@@ -5,9 +5,9 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
-import item.ItemContainer;
-import move.MovableEffect;
-import move.Movable;
+import item.inter.Effect;
+import item.inter.ItemContainer;
+import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
@@ -228,11 +228,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 		this.startPosition = pos;
 		addSquare(startPosition);
 	}
-
-    @Override
-    public void getsAffectedBy(MovableEffect effect) {
-        effect.affect(this);
-    }
 
     public void setPosition(Square position) throws IllegalStateException {
         if(!isValidPosition(position))
@@ -503,6 +498,11 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	public void setJustTeleported(boolean b) {
 		justTeleported = b;
 	}
+
+    @Override
+    public void acceptEffect(Effect effect) {
+        effect.affect(this);
+    }
 
     private void endAction(){
         setChanged();

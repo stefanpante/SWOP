@@ -1,7 +1,7 @@
 package square.power;
 
 import item.IdentityDisc;
-import move.Movable;
+import item.inter.Movable;
 import game.Player;
 
 /**
