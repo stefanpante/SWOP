@@ -2,8 +2,6 @@ package square;
 
 
 import effect.Effect;
-import game.Player;
-import item.IdentityDisc;
 import item.Item;
 import item.inter.ItemContainer;
 
@@ -148,7 +146,7 @@ public class Square implements ItemContainer {
 
     @Override
     public void addItem(Item item){
-        if(item == null)
+        if(!isValidItem(item))
             throw new IllegalArgumentException("The item cannot be null");
         if(!item.canAddTo(this))
             throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
@@ -156,9 +154,13 @@ public class Square implements ItemContainer {
         item.setContainer(this);
     }
 
+    private boolean isValidItem(Item item) {
+        return item != null;
+    }
+
     @Override
     public void removeItem(Item item){
-        if(item == null)
+        if(!isValidItem(item))
             throw new IllegalArgumentException("The item cannot be null");
         if(!hasItem(item))
             throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
