@@ -1,5 +1,6 @@
 package item;
 
+import effect.DropFlagCommand;
 import game.Player;
 import effect.Effect;
 import item.inter.Movable;
@@ -160,7 +161,12 @@ public class IdentityDisc extends Item implements Movable {
 
     @Override
     public void affect(Player player) throws IllegalStateException {
-        // TODO:
+        DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
+        try {
+            dropFlagCommand.execute();
+        } catch (Exception ignored){
+            //If there is no flag to drop nothing special to do.
+        }
     }
 
     @Override

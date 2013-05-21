@@ -1,8 +1,12 @@
 package item;
 
+import effect.DropFlagCommand;
 import game.Player;
 import item.inter.Activatable;
 import square.Square;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -138,6 +142,12 @@ public class LightGrenade extends Item implements Activatable {
         // Decrement actions
         player.loseActions(LOST_ACTIONS);
         // Handle the flag
+        DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
+        try {
+            dropFlagCommand.execute();
+        } catch (Exception ignored){
+            //If there is no flag to drop nothing special to do.
+        }
     }
 
     @Override

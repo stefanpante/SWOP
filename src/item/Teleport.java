@@ -1,5 +1,6 @@
 package item;
 
+import effect.DropFlagCommand;
 import game.Player;
 import square.Square;
 
@@ -111,15 +112,18 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
-    
-    public Item copy(){
-    	return new Teleport();
-    }
-
-
     @Override
     public void affect(Player player) throws IllegalStateException {
-        // TODO:
+        //Drop flag if need be.
+        DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
+        try {
+            dropFlagCommand.execute();
+        } catch (Exception ignored){
+            //If there is no flag to drop nothing special to do.
+        }
+
+        //Teleport
+        //TODO:teleport effect
     }
 
     @Override
