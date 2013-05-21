@@ -5,9 +5,6 @@ import game.mode.CTFGameMode;
 import grid.RandomGridBuilder;
 import gui.button.GUIButton;
 import gui.button.TextButton;
-import gui.message.Message;
-import gui.message.TimedMessage;
-import gui.message.YesNoDialog;
 import item.IdentityDisc;
 import item.Item;
 
@@ -22,8 +19,11 @@ import java.util.HashMap;
 
 import controlP5.Button;
 import controlP5.CColor;
+import controlP5.ControlEvent;
+import controlP5.ControlListener;
 import controlP5.ControlP5;
 import controlP5.DropdownList;
+import controlP5.RadioButton;
 import controlP5.Textarea;
 import controlP5.Textfield;
 import controller.GameHandler;
@@ -37,7 +37,7 @@ import util.Coordinate;
 import util.OConstants;
 
 @SuppressWarnings("serial")
-public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener{
+public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener, ControlListener{
 
 	//TODO: input van size van grid.
 	//TODO: refactor numbers to other shit
@@ -73,23 +73,31 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private int hSize = 710;
 	private int vSize = 580;
 
+	/**
+	 * The standard font for the gui.
+	 */
 	private PFont standardFont;
 
+	/**
+	 * Buttons & controllers used in the initialisation of the game.
+	 */
 	private Button confirm;
 	private Button filepick;
 	private DropdownList gamemode;
-
 	private Textfield widthGrid;
-
 	private Textfield heightGrid;
 	private Textfield numPlayers;
 
+	/**
+	 * Boolean which symbolizes if the game has been initialized
+	 */
 	private boolean initialized = false;
-
+	
+	/**
+	 * Integer to store the number of horizontal/ vertical cells.
+	 */
 	private int hCells;
-
 	private int vCells;
-
 	private int currentPlayerColor = OConstants.LIGHT_GREY;
 
 	/**
@@ -124,39 +132,45 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	@SuppressWarnings("deprecation")
 	public void initializeInput(){
 		inputController.setFont(standardFont);
-		CColor color = new CColor(OConstants.LIGHT_GREY, OConstants.WHITE,OConstants.LIGHT_GREY, OConstants.LIGHT_GREY, OConstants.LIGHT_GREY);
-		widthGrid = inputController.addTextfield("hcells");
+		CColor color = new CColor(OConstants.BLACK, OConstants.WHITE,OConstants.BLACK, OConstants.BLACK, OConstants.BLACK);
+		widthGrid = inputController.addTextfield("Width of the grid");
 		widthGrid.setPosition(hSize/4 ,100) ;
 		widthGrid.setSize(hSize/2, 35);
 		widthGrid.setAutoClear(false);
 		widthGrid.setColor(color);
-		widthGrid.setLabel("Width of the grid");
 		widthGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
 		widthGrid.setColorCursor(OConstants.LIGHT_GREY);
 		
-		heightGrid = inputController.addTextfield("vcells");
+		heightGrid = inputController.addTextfield("Height of the grid");
 		heightGrid.setPosition(hSize/4,170);
 		heightGrid.setSize(hSize/2, 35);
 		heightGrid.setAutoClear(false);
 		heightGrid.setColor(color);
-		heightGrid.setLabel("Height of grid");
 		heightGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 
-		numPlayers = inputController.addTextfield("numPlayer");
-		numPlayers.setPosition(hSize/4, 240);
+		numPlayers = inputController.addTextfield("Number of players");
+		numPlayers.setPosition(hSize/4, 285);
 		numPlayers.setSize(hSize/2, 35);
 		numPlayers.setAutoClear(false);
-		numPlayers.setLabel("Number of players ( 2-9)");
 		numPlayers.setValue("" + CTFGameMode.MIN_PLAYERS);
+		numPlayers.setColor(color);
+		numPlayers.hide();
+		
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
-		gamemode = inputController.addDropdownList("gamemode");
-		gamemode.setPosition(hSize/4, 240);
-		gamemode.setWidth(hSize/2);
-		gamemode.getValueLabel().setHeight(35);
-
+		gamemode = inputController.addDropdownList(GAMEMODE);
+		gamemode.setPosition(hSize/4 - 1, 275);
+		gamemode.setSize(hSize/2 +2, 35);
+		gamemode.setHeight(110);
 		gamemode.actAsPulldownMenu(true);
+		gamemode.setItemHeight(35);
+		gamemode.setBarHeight(35);
+		gamemode.beginItems();
 		gamemode.addItems(new String[]{"Race mode", "Capture the flag"});
+		gamemode.endItems();
+		gamemode.setColorLabel(OConstants.BLACK);
+		gamemode.setColorBackground(OConstants.LIGHTER_GREY);
+		gamemode.setColorForeground(OConstants.LIGHT_GREY);
 
 		filepick = inputController.addButton("pick");
 		filepick.setLabel("Pick grid from file");
@@ -166,8 +180,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		filepick.setColorLabel(OConstants.WHITE);
 		filepick.setColorBackground(OConstants.LIGHT_GREY);
 
+		RadioButton rButton = inputController.addRadioButton("Gay");
+		rButton.setPosition(hSize/4,500);
+		rButton.setSize(hSize/2, 35);
 		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,430);
+		confirm.setPosition(hSize/4,390);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.WHITE);
@@ -184,6 +201,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	}
 
+	public void gamemode(){
+		System.out.println("Dropdown");
+	}
+	
 	Textarea area;
 
 	public void pick(){
@@ -193,37 +214,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		hideInput();
 	}
 
-
-	public void hcells(String value){
-		try{
-			hCells = Integer.parseInt(value);
-			if(hCells < 10){
-			}
-
-		}catch(Exception e){
-		}
-
-	}
-	
-	public void vcells(String value){
-		try{
-			vCells = Integer.parseInt(value);
-			if(vCells < 10){
-			}
-
-		}catch(Exception e){
-		}
-
-
-	}
-
 	public void confirm(){
-		// needed to get the width and height of the grid
-		widthGrid.submit();
-		heightGrid.submit();
+		//this works !System.out.println(widthGrid.getText());
 
-		hideInput();
-		setUpGame();
+		//hideInput();
+		//setUpGame();
 	}
 
 
@@ -239,6 +234,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public static final String USEITEM_ACTION = "useitem";
 	public static final String ENDTURN_ACTION = "endTurn";
 	public static final String STARTNEWGAME_ACTION = "startnewgame";
+	public static final String GAMEMODE = "gamemode";
 
 	private void setupButtons(){
 
@@ -283,14 +279,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			drawInventories();
 			drawButtons(); 
 			showRemainingActions();
-
-			confirmEndTurn();
-
 		}
 		//m.draw();
 	}
-
-	Message m = new YesNoDialog(300, 300, new PVector(100,100), "Test",  this);
 
 	public void showRemainingActions(){
 		fill(color(0));
@@ -302,17 +293,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void setUpGame(String filePath){
 		area.show();
 		gameHandler = new GameHandler(this);
-		gameHandler.startNewGame(filePath, currentPlayerColor, currentPlayerColor);
+		//gameHandler.startNewGame(filePath, currentPlayerColor, currentPlayerColor);
 		hCells = gameHandler.getGame().getGrid().getHSize();
 		vCells = gameHandler.getGame().getGrid().getVSize();
 		initInterface();
 		gameHandler.fireChanges();   
 
 	}
+	
 	private void setUpGame(){
 
 		gameHandler = new GameHandler(this);
-		gameHandler.startNewGame(hCells, vCells);
+		//gameHandler.startNewGame(hCells, vCells);
 		initInterface();
 		gameHandler.fireChanges();
 	}
@@ -488,45 +480,25 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 	private boolean endTurn = false;
-	private void confirmEndTurn() {
-		if(endTurn){
-			stroke(0, 30);
-			fill(OConstants.LIGHTER_GREY);
-			rect(hSize/2 - mWidth/2, vSize/2 - mHeight/2, mWidth, mHeight + 30);
-			noStroke();
-			fill(currentPlayerColor);
-			rect(hSize/2 - mWidth/2+1, vSize/2 - mHeight/2+1, mWidth-1, 25);
-			fill(color(255));
-			textAlign(PConstants.LEFT, PConstants.CENTER);
-			text("Message",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1, mWidth-6, 22);
-
-			fill(0,96);
-			textAlign(PConstants.CENTER, PConstants.CENTER);
-			text("Are you sure you want to end your turn",hSize/2 - mWidth/2+5, vSize/2 - mHeight/2+1 + 25, mWidth-6, 73);
-
-		}
-
-	}
 
 	@Override
 	public void stop(){
 		try{
 			System.exit(0);
 		}
-		catch(Exception e)
-		{}		
+		catch(Exception ignored){}		
 
 	}
 
-	private int mHeight = 125;
-	private int mWidth = 300;
+	private int messageHeight = 125;
+	private int messageWidth = 300;
 
 
 	private void showException(Exception exc){
 		exc.printStackTrace();
 		String message = exc.getMessage();
-		PVector position = new PVector(hSize/2 - mWidth/2, vSize/2 - mHeight/2);
-		m = new TimedMessage(mWidth, mHeight, position, message, 4, this);
+		PVector position = new PVector(hSize/2 - messageWidth/2, vSize/2 - messageHeight/2);
+		//m = new TimedMessage(messageWidth, messageHeight, position, message, 4, this);
 	}
 
 	public void throwLaunchableItem(IdentityDisc identityDisc,
@@ -556,6 +528,24 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case STARTNEWGAME_ACTION: this.startNewGame();
 		break;	
 		}
+	}
+	
+	int gameMode;
+	@Override
+	public void controlEvent(ControlEvent arg0) {
+		int mode = (int) arg0.getValue();
+		switch(mode){
+			case 0: 			numPlayers.hide();
+								this.gameMode = GameHandler.RACEGAMEMODE;
+								break;
+								
+			case 1:				numPlayers.show();
+								this.gameMode = GameHandler.CTFGAMEMODE;
+								break;
+			default:			break;
+		}
+		
+		
 	}
 
 }

@@ -2,22 +2,13 @@ package controller;
 
 import game.Game;
 import game.Player;
-import game.gamebuilder.CTFGameBuilder;
-import game.gamebuilder.GameBuilder;
-import game.gamebuilder.RaceGameBuilder;
-import grid.AbstractGridBuilder;
-import grid.FileGridBuilder;
-import grid.RandomGridBuilder;
-import gui.ObjectronGUI;
 
+import game.mode.CTFGameMode;
+import game.mode.GameMode;
+import game.mode.RaceGameMode;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-
-
-
 import util.Coordinate;
 
 /**
@@ -129,32 +120,32 @@ public class GameHandler extends Handler {
 	 * @param vSize the vSize of the grid on which the game is played
 	 */
 	public void startNewGame(int hSize, int vSize, int numOfPlayers, int gameMode) {
-		GameBuilder builder;
-
-		switch(gameMode){
-		case 0:		builder = new CTFGameBuilder(hSize, vSize, numOfPlayers);
-		break;
-		case 1:		builder = new RaceGameBuilder(hSize, vSize, numOfPlayers);
-		break;
-		default: 	throw new IllegalStateException(" The specified game mode doesnt exist.");
+		GameMode mode;
+		if(gameMode == 0){
+			mode = new CTFGameMode(hSize, vSize);
+		}else if(gameMode == 1){
+			mode = new RaceGameMode(hSize, vSize);
+		}
+		else{
+			throw new IllegalStateException("The specified game mode does not exist.");
 		}
 
-		setGame(builder.getGame());
+		setGame(new Game(mode, numOfPlayers));
 		initHandlers();
 	}
 
 	public void startNewGame(String filename, int numOfPlayers, int gameMode) throws IOException{
-		GameBuilder builder;
-
-		switch(gameMode){
-		case 0:		builder = new CTFGameBuilder(filename, numOfPlayers);
-		break;
-		case 1:		builder = new RaceGameBuilder(filename, numOfPlayers);
-		break;
-		default: 	throw new IllegalStateException(" The specified game mode doesnt exist.");
+		GameMode mode;
+		if(gameMode == 0){
+			mode = new CTFGameMode(filename);
+		}else if(gameMode == 1){
+			mode = new RaceGameMode(filename);
+		}
+		else{
+			throw new IllegalStateException("The specified game mode does not exist.");
 		}
 
-		setGame(builder.getGame());
+		setGame(new Game(mode, numOfPlayers));
 		initHandlers();
 	}
 

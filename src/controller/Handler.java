@@ -2,19 +2,15 @@ package controller;
 
 import game.Game;
 import game.Player;
-import item.IdentityDisc;
 import item.Item;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import square.Square;
 import square.field.Field;
 import square.obstacle.LightTrail;
-import square.power.Power;
 import util.Coordinate;
 
 /**
@@ -161,7 +157,7 @@ public abstract class Handler {
      * @return ArrayList<item>	List of all items of the current square.
      */
     public ArrayList<Item> getSquareItems() {
-        return getGame().getCurrentPlayer().getPosition().getInventory().getAllItems();
+        return getGame().getCurrentPlayer().getPosition().getAllItems();
     }
 
     /**
@@ -170,7 +166,7 @@ public abstract class Handler {
      * @return ArrayList<item>	List of all items of the current player.
      */
     public ArrayList<Item> getPlayerItems() {
-        return getGame().getCurrentPlayer().getInventory().getAllItems();
+        return getGame().getCurrentPlayer().getAllItems();
     }
 
     /**
@@ -214,6 +210,7 @@ public abstract class Handler {
     /**
      * Returns all the game properties needed to fire propertyChanges.
      */
+    //FIXME: Power failures
     protected HashMap<String, Object> getProperties() {
 
         HashMap<String, Object> properties = new HashMap<String, Object>();
@@ -227,13 +224,11 @@ public abstract class Handler {
 
         for (Coordinate coordinate : getGame().getGrid().getAllCoordinates()) {
 
-            items.put(coordinate, getGame().getGrid().getSquare(coordinate).getInventory().getAllItems());
+            items.put(coordinate, getGame().getGrid().getSquare(coordinate).getAllItems());
 
             Square square = getGame().getGrid().getSquare(coordinate);
 
-            if (square.getPower().isFailing())
-                powerFailures.add(coordinate);
-
+            //FIXME: add powerfailures to the properties.
             boolean player_position;
 
             if (square.isObstructed()) {
@@ -278,6 +273,7 @@ public abstract class Handler {
      *
      * @return true if the move causes the player to win.
      */
+    @Deprecated // Should be checked in de game mode now.
     public boolean hasWon() {
         Player nextPlayer = getGame().getNextPlayer();
         Player currentPlayer = getGame().getCurrentPlayer();

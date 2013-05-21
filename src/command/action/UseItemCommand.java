@@ -36,7 +36,7 @@ public class UseItemCommand extends ActionCommand {
 	 */
 	@Override
 	protected void beforeGameCommand() {
-		if(!getGame().getCurrentPlayer().getInventory().hasItem(getItem())){
+		if(!getGame().getCurrentPlayer().hasItem(getItem())){
 			throw new IllegalStateException("Player can't throw a Launchable that isn't in his inventory!");
 		}
 	}
@@ -47,7 +47,7 @@ public class UseItemCommand extends ActionCommand {
 	@Override
 	protected void duringGameCommand(){
 		// adds the item to the inventory of the Square where the player is positioned.
-		getGame().getCurrentPlayer().getPosition().getInventory().addItem(item);
+		getGame().getCurrentPlayer().getPosition().addItem(item);
 		// removes the the item from the players inventory and calls all appropiate methods in player.
 		getGame().getCurrentPlayer().useItem(getItem());
 	}

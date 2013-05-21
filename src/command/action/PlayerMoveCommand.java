@@ -51,9 +51,11 @@ public class PlayerMoveCommand extends MoveCommand{
      * If the player just dropped a LightGrenade on the square he's moving from it has
      * to be activated.
      */
+    // XXX: Shouldn't be necessary anymore.
+    @Deprecated
     private void activateLightGrenade() {
-        if(getStartPosition().getInventory().hasLightGrenade()){
-            LightGrenade lg = getStartPosition().getInventory().getLightGrenade();
+        if(getStartPosition().hasType(new LightGrenade())){
+            LightGrenade lg = getStartPosition().getType(new LightGrenade());
 
             try{
                 if(lg.isDropped()){

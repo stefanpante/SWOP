@@ -92,6 +92,7 @@ public class GridGui extends GUIElement{
 		this.initGrid(hCells, vCells);
 		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
 		this.squareHeight = (height- vCells * OConstants.MARGIN) / vCells;
+		//public DirectionalPad(PVector position, float buttonWidth, float buttonHeight,PApplet gui){
 		this.directionalPad = new DirectionalPad(new PVector(25, 55), squareWidth, squareHeight, gui);
 		this.throwPad = new ThrowPad(new PVector(25,55), squareWidth, squareHeight, gui);
 		throwPad.setVisibility(false);

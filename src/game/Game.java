@@ -26,7 +26,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * 			| isValidCurrentPlayer(getCurrentPlayer())
  */
 @NotNull
-public abstract class Game {
+public class Game {
 	
 	/**
 	 * The Grid.
@@ -282,11 +282,6 @@ public abstract class Game {
             player.addObserver(observer);
         }
     }
-    
-    /**
-     * Checks if a player has won.
-     */
-    public abstract Player checkWinners();
     
     public Player checkLosers() {
 		if(isCurrentPlayerStuck()){
