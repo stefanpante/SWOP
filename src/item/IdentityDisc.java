@@ -124,7 +124,6 @@ public class IdentityDisc extends Item implements Movable {
         getContainer().removeItem(this);
         square.addItem(this);
 		this.position = square;
-		square.affect(this);
     	this.setJustTeleported(false);
 	}
 	
@@ -161,6 +160,9 @@ public class IdentityDisc extends Item implements Movable {
 
     @Override
     public void affect(Player player) throws IllegalStateException {
+        //TODO: Check this    \/   boolean.
+        player.loseTurns(1, false);
+        //TODO:LAND DISC ON SQUARE OF THE PLAYER?
         DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
         try {
             dropFlagCommand.execute();
@@ -171,6 +173,6 @@ public class IdentityDisc extends Item implements Movable {
 
     @Override
     public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        // Two identity disks do not interfere
+        // Two identity disks do not interfere.
     }
 }

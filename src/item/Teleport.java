@@ -123,7 +123,7 @@ public class Teleport extends Item {
         }
 
         //Teleport
-        //TODO:teleport effect
+        player.setPosition(this.destination);
     }
 
     @Override
