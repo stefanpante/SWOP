@@ -111,7 +111,7 @@ public class IdentityDisc extends Item implements Movable {
 
     @Override
     public boolean canAddTo(Square square) {
-        return (!square.hasItem(this) && !square.hasType(this));
+        return (!square.hasItem(this));
     }
 
     @Override
