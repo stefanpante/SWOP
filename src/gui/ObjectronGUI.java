@@ -1,7 +1,7 @@
 package gui;
 
-import game.CTFGame;
 import game.Player;
+import game.mode.CTFGameMode;
 import grid.RandomGridBuilder;
 import gui.button.GUIButton;
 import gui.button.TextButton;
@@ -154,7 +154,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		numPlayers.setSize(hSize/2, 35);
 		numPlayers.setAutoClear(false);
 		numPlayers.setLabel("Number of players ( 2-9)");
-		numPlayers.setValue("" + CTFGame.MIN_PLAYERS);
+		numPlayers.setValue("" + CTFGameMode.MIN_PLAYERS);
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
 		gamemode = inputController.addDropdownList("gamemode");
 		gamemode.setPosition(hSize/4, 240);
