@@ -193,6 +193,7 @@ public abstract class Handler {
     public void fireChanges() {
         HashMap<String, Object> properties = getProperties();
 
+        System.out.println("There are players:" +getGame().getPlayers().size());
         firePropertyChange(Handler.POWER_FAILS_PROPERTY, properties.get(Handler.POWER_FAILS_PROPERTY));
         firePropertyChange(Handler.SQUARES_PROPERTY, properties.get(Handler.SQUARES_PROPERTY));
 

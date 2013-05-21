@@ -104,6 +104,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
         this.setJustTeleported(false);
 		this.id = id;
 		this.lightTrail = new LightTrail();
+		this.items = new ArrayList<Item>();
 	}
 	
 	/**

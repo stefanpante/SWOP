@@ -68,6 +68,7 @@ public class Game {
 		this.numOfPlayers = numOfPlayers;
 		gameMode.setGame(this);
 		gameMode.build();
+		this.setCurrentPlayer(players.get(0));
 	}
 
 	/**

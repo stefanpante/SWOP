@@ -60,14 +60,14 @@ public class Inventory extends GUIElement{
         for (Item item : items) {
             if (item instanceof LightGrenade) {
                 LightGrenade lg = (LightGrenade) item;
-                if (lg.isActive() || lg.isDropped() || lg.isWornOut()) {
+                if (lg.isActive()) {
                     continue;
                 }
             }
 
             if (item instanceof ForceFieldGenerator) {
                 ForceFieldGenerator ff = (ForceFieldGenerator) item;
-                if (ff.isDropped() || ff.isActive()) {
+                if (ff.isActive()) {
                     continue;
                 }
             }

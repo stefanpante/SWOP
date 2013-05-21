@@ -311,7 +311,7 @@ public class GridGui extends GUIElement{
 			if(it.size() == 1){
 				if(it.get(0) instanceof LightGrenade){
 					LightGrenade lg = (LightGrenade) it.get(0);
-					if(!lg.isActive() && !lg.isDropped() && !lg.isWornOut())
+					if(!lg.isActive())
 						s.setShape(Shapes.getShape(lg));
 				}
 			}

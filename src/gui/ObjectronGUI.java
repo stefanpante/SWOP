@@ -155,6 +155,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		numPlayers.setValue("" + CTFGameMode.MIN_PLAYERS);
 		numPlayers.setColor(color);
 		numPlayers.setColorForeground(OConstants.LIGHT_GREY);
+		this.numPlayers.setText("" +2);
 		numPlayers.hide();
 		
 		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
@@ -201,6 +202,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void confirm(){
 		hideInput();
+		System.out.println(Integer.parseInt(widthGrid.getText()) + " : " + heightGrid.getText() +" : " + numPlayers.getText());
 		setUpGame(Integer.parseInt(widthGrid.getText()), Integer.parseInt(heightGrid.getText()), 
 				Integer.parseInt(numPlayers.getText()));
 	}
@@ -272,29 +274,31 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		text("Remaining actions: " + gameHandler.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
 
-	private void setUpGame(String filePath){
-		try{
-		gameHandler = new GameHandler(this);
-		//gameHandler.startNewGame(filePath, currentPlayerColor, currentPlayerColor);
-		hCells = gameHandler.getGame().getGrid().getHSize();
-		vCells = gameHandler.getGame().getGrid().getVSize();
-		initInterface();
-		gameHandler.fireChanges();
-		}catch(Exception exc){
-			this.showException(exc);
-		}
-
-	}
+	
 	
 	private void setUpGame(int hCells, int vCells, int numOfPlayers){
 		try{
 			gameHandler = new GameHandler(this);
 			gameHandler.startNewGame(hCells, vCells,numOfPlayers, gameMode);
 			initInterface();
-			gameHandler.fireChanges();
+			//gameHandler.fireChanges();
 		}catch(Exception exc){
 			this.showException(exc);
 		}
+	}
+	
+	private void setUpGame(String filePath){
+		try{
+		gameHandler = new GameHandler(this);
+		//gameHandler.startNewGame(filePath, , currentPlayerColor);
+		hCells = gameHandler.getGame().getGrid().getHSize();
+		vCells = gameHandler.getGame().getGrid().getVSize();
+		initInterface();
+		//gameHandler.fireChanges();
+		}catch(Exception exc){
+			this.showException(exc);
+		}
+
 	}
 
 	private void initInterface(){
@@ -518,7 +522,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 	
-	int gameMode;
+	private int gameMode = 0;
 	@Override
 	public void controlEvent(ControlEvent arg0) {
 		int mode = (int) arg0.getValue();
