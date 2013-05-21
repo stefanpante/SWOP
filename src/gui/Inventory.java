@@ -45,7 +45,7 @@ public class Inventory extends GUIElement{
 		super.setColor(OConstants.LIGHTER_GREY);
 		this.selectedButton = null;
 		super.setPosition(position);
-		this.label = new Label(155, 25, position, inventoryName, gui);
+		this.label = new Label(width, 25, position, inventoryName, gui);
 		this.initialize();
 	}
 

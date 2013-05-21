@@ -36,15 +36,12 @@ import util.Direction;
 import util.Coordinate;
 import util.OConstants;
 
+@SuppressWarnings("serial")
 public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener{
 
 	//TODO: input van size van grid.
 	//TODO: refactor numbers to other shit
 	//TODO: message deftig
-	/**
-	 * SearialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Used to input the size of the grid.
@@ -58,7 +55,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	/**
 	 * The processingHandler to send changes to the game model.
 	 */
-	private GameHandler obj;
+	private GameHandler gameHandler;
 
 	/**
 	 * The GUI representation of the inventories
@@ -75,8 +72,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	// The start size of the applet
 	private int hSize = 710;
 	private int vSize = 580;
-	
-	private Label gridLabel;
+
 	private PFont standardFont;
 
 	private Button confirm;
@@ -121,8 +117,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		playerInventory = new Inventory(155, 185, items, new PVector(530,225),"Player Inventory", this);
 
 		setupButtons();
-		setupLabels();
-
 		initializeInput();
 
 	}
@@ -240,10 +234,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public void showInput(){
 		inputController.show();
 	}
-	
-	private void setupLabels(){
-		this.gridLabel = new Label(495, 25, new PVector(25,25),"Player 1", this);
-	}
 
 	public static final String PICKUP_ACTION = "pickup";
 	public static final String USEITEM_ACTION = "useitem";
@@ -290,7 +280,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 				grid.hover(mouseX, mouseY);
 			}
 
-			drawLabels();
 			drawInventories();
 			drawButtons(); 
 			showRemainingActions();
@@ -307,25 +296,25 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		fill(color(0));
 		noStroke();
 		textAlign(LEFT,LEFT);
-		text("Remaining actions: " + obj.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
+		text("Remaining actions: " + gameHandler.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
 	}
 
 	private void setUpGame(String filePath){
 		area.show();
-		obj = new GameHandler(this);
-		obj.startNewGame(filePath);
-		hCells = obj.getGame().getGrid().getHSize();
-		vCells = obj.getGame().getGrid().getVSize();
+		gameHandler = new GameHandler(this);
+		gameHandler.startNewGame(filePath, currentPlayerColor, currentPlayerColor);
+		hCells = gameHandler.getGame().getGrid().getHSize();
+		vCells = gameHandler.getGame().getGrid().getVSize();
 		initInterface();
-		obj.fireChanges();   
+		gameHandler.fireChanges();   
 
 	}
 	private void setUpGame(){
 
-		obj = new GameHandler(this);
-		obj.startNewGame(hCells, vCells);
+		gameHandler = new GameHandler(this);
+		gameHandler.startNewGame(hCells, vCells);
 		initInterface();
-		obj.fireChanges();
+		gameHandler.fireChanges();
 	}
 
 	private void initInterface(){
@@ -348,7 +337,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			this.frame.setSize(w+215, h + 125);
 			this.frame.setLocation(frame.getLocation().x, 0);
 		}
-		gridLabel.setWidth(grid.getWidth() - OConstants.MARGIN);
 		for(GUIButton button: buttons){
 			button.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
 		}
@@ -358,15 +346,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		// update the positions of the inventories and buttons.
 
 		textFont(standardFont);
-		obj.populateGui();
-	}
-
-	/**
-	 * Draws the player Label on the screen.
-	 */
-	private void drawLabels(){
-
-		this.gridLabel.draw();
+		gameHandler.populateGui();
 	}
 
 	private  void drawInventories(){
@@ -409,7 +389,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void move(Direction direction){
 		try{
-			obj.getMoveHandler().move(direction);
+			gameHandler.getMoveHandler().move(direction);
 		}catch(Exception e){
 			showException(e);
 		}
@@ -420,7 +400,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 		else{
 			try{
-				obj.getPickupHandler().pickUp(item);
+				gameHandler.getPickupHandler().pickUp(item);
 			}catch(Exception e){
 				showException(e);
 			}
@@ -439,7 +419,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			}
 			else{
 				try{
-					obj.getUseItemHandler().useItem(item);
+					gameHandler.getUseItemHandler().useItem(item);
 				}catch(Exception e){
 					showException(e);
 				}
@@ -449,7 +429,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void endTurn(){
 		try{
-			obj.getEndTurnHandler().endTurn();
+			gameHandler.getEndTurnHandler().endTurn();
 		}catch(Exception e){
 			showException(e);
 		}
@@ -457,10 +437,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void changePlayer(){
 
-		int id = obj.getGame().getCurrentPlayer().getID();
+		int id = gameHandler.getGame().getCurrentPlayer().getID();
 		int color = OConstants.PLAYERCOLORS[id -1];
-
-		gridLabel.setColor(color);
 
 		for(GUIButton button: buttons)
 			button.setColor(color);
@@ -554,7 +532,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public void throwLaunchableItem(IdentityDisc identityDisc,
 			Direction direction) {
 		try{
-			obj.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
+			gameHandler.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
 		}
 		catch(Exception e){
 			showException(e);
