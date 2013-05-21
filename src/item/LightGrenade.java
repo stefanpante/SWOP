@@ -8,7 +8,7 @@ import square.Square;
 /**
  * This class extends Item and represents a LightGrenade object.
  *  
- * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  *
  */
 public class LightGrenade extends Item implements Activatable {

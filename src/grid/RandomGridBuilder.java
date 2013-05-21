@@ -1,13 +1,8 @@
 package grid;
 
-import item.ChargedIdentityDisc;
-import item.ForceFieldGenerator;
-import item.IdentityDisc;
-import item.LightGrenade;
-
 import java.util.ArrayList;
 import java.util.Random;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.obstacle.Wall;
 import util.Coordinate;

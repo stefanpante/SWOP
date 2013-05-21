@@ -12,7 +12,7 @@ import item.LightGrenade;
 import item.Teleport;
 import processing.core.PApplet;
 import processing.core.PShape;
-import square.Direction;
+import util.Direction;
 
 public class Shapes {
 

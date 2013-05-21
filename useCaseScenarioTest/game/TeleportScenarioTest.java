@@ -18,7 +18,7 @@ import controller.PickUpHandler;
 import controller.ThrowLaunchableHandler;
 import controller.TurnHandler;
 import controller.UseItemHandler;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import util.Coordinate;

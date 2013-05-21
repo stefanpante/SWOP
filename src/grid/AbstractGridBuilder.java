@@ -2,21 +2,13 @@ package grid;
 
 import item.Item;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
-import item.ChargedIdentityDisc;
-import item.ForceFieldGenerator;
-import item.IdentityDisc;
-import item.LightGrenade;
-import item.Teleport;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.obstacle.Wall;
-import util.AStar;
 import util.Coordinate;
 
 import be.kuleuven.cs.som.annotate.Basic;

@@ -7,7 +7,7 @@ import item.IdentityDisc;
 import org.junit.Before;
 import org.junit.Test;
 
-import square.Direction;
+import util.Direction;
 
 /**
  * Unit test case for Identity Disc

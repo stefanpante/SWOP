@@ -2,14 +2,13 @@ package manager;
 
 import grid.Grid;
 import item.ForceFieldGenerator;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.field.ForceField;
 import util.Coordinate;
 
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Force field manager makes sure that Generates within eachother's range

@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 import processing.core.PApplet;
 import processing.core.PVector;
-import square.Direction;
+import util.Direction;
 import util.Coordinate;
 import util.OConstants;
 

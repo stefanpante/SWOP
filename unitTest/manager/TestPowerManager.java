@@ -9,7 +9,7 @@ import grid.GridProvider;
 import org.junit.Before;
 import org.junit.Test;
 
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.power.Power;
 import square.power.failure.PrimaryPowerFail;

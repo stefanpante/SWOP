@@ -2,8 +2,7 @@ package command.action;
 
 import item.IdentityDisc;
 import game.Game;
-import move.Movable;
-import square.Direction;
+import util.Direction;
 import square.Square;
 
 /**

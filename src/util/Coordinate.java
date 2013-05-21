@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import be.kuleuven.cs.som.annotate.*;
 
-import square.Direction;
-
 /**
  * Coordinate2D represents a point in 2D space, 
  * has an x-coordinate and y-coordinate

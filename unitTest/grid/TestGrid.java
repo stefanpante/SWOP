@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import square.obstacle.LightTrail;
 
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.obstacle.Wall;
 import util.Coordinate;

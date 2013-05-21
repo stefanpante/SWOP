@@ -15,7 +15,7 @@ import controller.TurnHandler;
 import org.junit.Before;
 import org.junit.Test;
 
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.power.failure.PrimaryPowerFail;
 

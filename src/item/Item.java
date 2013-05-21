@@ -1,8 +1,7 @@
 package item;
 
-import item.inventory.*;
+import game.Player;
 import move.MovableEffect;
-import item.visitor.VisitableItem;
 import square.Square;
 
 /**
@@ -24,7 +23,10 @@ public abstract class Item implements Affectable {
 
     public abstract boolean canAddTo(Square square);
 
-    public abstract boolean canAddTo(PlayerInventory playerInventory);
+    public boolean canAddTo(Player player){
+        return player.getAllItems().size() < player.MAX_ITEMS;
+    }
+
 
     public void destory(){
         container.removeItem(this);

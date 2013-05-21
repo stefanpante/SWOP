@@ -1,13 +1,12 @@
 package grid;
 
 import item.Item;
-import item.Teleport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-import square.Direction;
+import util.Direction;
 import square.Square;
 import util.Coordinate;
 import be.kuleuven.cs.som.annotate.Basic;

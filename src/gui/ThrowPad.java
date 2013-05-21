@@ -2,13 +2,11 @@ package gui;
 
 import item.IdentityDisc;
 
-import java.util.HashMap;
-
 import gui.button.DirectionalButton;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
-import square.Direction;
+import util.Direction;
 
 public class ThrowPad extends DirectionalPad {
 

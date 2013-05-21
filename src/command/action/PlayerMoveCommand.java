@@ -4,7 +4,7 @@ import game.Game;
 import item.ForceFieldGenerator;
 import item.LightGrenade;
 import move.Movable;
-import square.Direction;
+import util.Direction;
 import square.Square;
 
 /**

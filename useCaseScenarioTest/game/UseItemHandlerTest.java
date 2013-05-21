@@ -12,18 +12,14 @@ import controller.MoveHandler;
 import controller.TurnHandler;
 import controller.UseItemHandler;
 import item.LightGrenade;
-import game.Game;
 import grid.Grid;
 import grid.RandomGridBuilder;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import command.AbstractGameCommand;
 
-
-import game.Player;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Wall;

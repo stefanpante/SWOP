@@ -5,7 +5,7 @@ import move.MovableEffect;
 import item.inventory.PlayerInventory;
 import move.Movable;
 import notnullcheckweaver.NotNull;
-import square.Direction;
+import util.Direction;
 import square.Square;
 
 /**

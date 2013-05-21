@@ -2,11 +2,6 @@ package item;
 
 import java.util.ArrayList;
 
-/**
- * User: jonas
- * Date: 20/05/13
- * Time: 13:53
- */
 public interface ItemContainer {
 
     public void addItem(Item item);

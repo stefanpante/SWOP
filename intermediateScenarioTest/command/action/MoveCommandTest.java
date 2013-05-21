@@ -10,13 +10,11 @@ import item.Item;
 import item.Teleport;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import square.Direction;
+import util.Direction;
 import square.Square;
-import square.power.Power;
 import util.Coordinate;
 
 import java.util.ArrayList;
-import java.util.prefs.Preferences;
 
 import static org.junit.Assert.*;
 

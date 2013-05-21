@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 import org.junit.*;
 
-import square.Direction;
 import square.Square;
-import square.obstacle.Wall;
 
 public class TestWall {
 	

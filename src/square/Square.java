@@ -14,6 +14,7 @@ import square.power.Power;
 
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
+import util.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,24 +173,31 @@ public class Square implements MovableEffect, ItemContainer {
 		return neighbors.get(direction);
 	}
 
+    @Override
     public ArrayList<Item> getAllItems(){
         return new ArrayList<Item>(items);
     }
 
-
-
+    @Override
     public void addItem(Item item){
+        if(item == null)
+            throw new IllegalArgumentException("The item cannot be null");
         if(item.canAddTo(this))
             throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
         items.add(item);
         item.setContainer(this);
     }
 
+    @Override
     public void removeItem(Item item){
+        if(item == null)
+            throw new IllegalArgumentException("The item cannot be null");
         if(!hasItem(item))
             throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
+        items.remove(item);
     }
 
+    @Override
     public boolean hasItem(Item item){
         return items.contains(item);
     }

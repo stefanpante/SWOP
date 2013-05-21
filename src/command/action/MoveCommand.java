@@ -4,12 +4,10 @@
 package command.action;
 
 import game.Game;
-import item.LightGrenade;
 import move.Movable;
-import square.Direction;
+import util.Direction;
 import square.Square;
 
-import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 /**

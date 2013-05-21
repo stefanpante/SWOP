@@ -3,7 +3,7 @@ package controller;
 import java.beans.PropertyChangeListener;
 import command.AbstractGameCommand;
 import command.action.PlayerMoveCommand;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import game.Game;
 import game.Player;

@@ -3,10 +3,6 @@ package game;
 import static org.junit.Assert.*;
 
 
-
-
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 import controller.MoveHandler;
@@ -19,18 +15,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import game.Player;
-
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.obstacle.LightTrail;
 import square.obstacle.Wall;
 import square.power.failure.PrimaryPowerFail;
-import util.Coordinate;
 
-import game.Game;
 import grid.Grid;
-import grid.RandomGridBuilder;
 import grid.GridProvider;
 
 /**

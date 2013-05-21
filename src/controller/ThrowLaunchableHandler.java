@@ -9,7 +9,7 @@ import java.beans.PropertyChangeListener;
 import command.AbstractGameCommand;
 import command.action.IdentityDiscMoveCommand;
 
-import square.Direction;
+import util.Direction;
 import square.Square;
 
 /**

@@ -5,10 +5,8 @@ import grid.Grid;
 import java.util.*;
 import java.util.Map.Entry;
 
-import manager.ForceFieldManager;
-import manager.PowerGayManager;
 import notnullcheckweaver.NotNull;
-import square.Direction;
+import util.Direction;
 import square.Square;
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;

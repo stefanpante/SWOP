@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
-import square.Direction;
+import util.Direction;
 import square.Square;
 import square.power.Power;
 import grid.Grid;

@@ -5,6 +5,7 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
+import item.ItemContainer;
 import move.MovableEffect;
 import move.Movable;
 import notnullcheckweaver.NotNull;
@@ -15,8 +16,8 @@ import square.obstacle.LightTrail;
 import square.obstacle.Obstacle;
 
 import item.Item;
-import item.inventory.PlayerInventory;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -27,7 +28,17 @@ import java.util.Observable;
  *
  */
 @NotNull
-public class Player extends Observable implements Obstacle, Movable {
+public class Player extends Observable implements Obstacle, Movable, ItemContainer {
+
+    /**
+     * Maximum amount of items a player can have
+     */
+    public static final int MAX_ITEMS = 6;
+
+    /**
+     * List of items on this square
+     */
+    ArrayList<Item> items;
 
 	/**
 	 * The start position of this player
@@ -39,11 +50,6 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	@Nullable
 	private Square currentPosition;
-	
-	/**
-	 * The inventory of the player
-	 */
-	private PlayerInventory inventory;
 	
 	/**
 	 * The player's ID.
@@ -91,7 +97,6 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
-		this.setInventory(new PlayerInventory());
 		this.alive = true;
 		this.range = 1;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
@@ -113,9 +118,7 @@ public class Player extends Observable implements Obstacle, Movable {
 		if(square == null){
 			return false;
         }
-
         return !square.isObstructed();
-
     }
 	
 	/**
@@ -133,20 +136,7 @@ public class Player extends Observable implements Obstacle, Movable {
 			return false;
 		return true;
 	}
-	
-	/**
-	 * An inventory is considered valid when the inventory is not null.
-	 * 
-	 * @param	inventory
-	 * @return	True	If inventory is not null
-	 * 			False	If inventory is null.
-	 */
-	public static boolean isValidInventory(PlayerInventory inventory) {
-		if(inventory == null)
-			return false;
-		
-		return true;
-	}
+
 	
 	/**
 	 * Returns if the number of actions is valid for the player
@@ -158,22 +148,7 @@ public class Player extends Observable implements Obstacle, Movable {
 	public static boolean isValidRemainingActions(int actions){
 		return actions <= Player.MAX_ALLOWED_ACTIONS;
 	}
-	
-	/**
-	 * An item is valid if the item is not null and if the inventory can
-	 * have the item.
-	 * 
-	 * @param	item    the item to be checked
-	 * @return	True	If item is not null and if the inventory can have the item.
-	 * 					The square must also hold the item.
-	 * 			False	If the item is null or if the inventory cannot have the item.
-	 * 					Or if the square does not have the item.
-	 */
-	public boolean isValidPickUp(Item item) {
-		if(item == null)
-			return false;
-        return inventory.canHaveAsItem(item);
-    }
+
 	
 	/**
 	 * A new position square is valid when it is not null and
@@ -261,7 +236,6 @@ public class Player extends Observable implements Obstacle, Movable {
 	private void setStartPosition(Square pos) throws IllegalArgumentException {
 		if(!isValidStartPosition(pos))
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
-		
 		this.startPosition = pos;
 		addSquare(startPosition);
 	}
@@ -283,20 +257,6 @@ public class Player extends Observable implements Obstacle, Movable {
         return 1;
     }
 
-    /**
-	 * Sets an inventory for the player
-	 * @param 	inventory 
-	 * 			The new inventory for the player.
-	 * @throws 	IllegalArgumentException
-	 * 			Thrown if the given inventory is not valid for the player.
-	 */
-	public void setInventory(PlayerInventory inventory) throws IllegalArgumentException{
-		if(!isValidInventory(inventory))
-			throw new IllegalArgumentException("The given inventory is not valid for the player.");
-		
-		this.inventory = inventory;
-	}
-
 	/**
 	 * Returns the name of the player.
 	 * 
@@ -312,14 +272,6 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public int getID() {
 		return this.id;
-	}
-
-	/**
-	 * Returns the player's inventory.
-	 * @return the inventory of this player
-	 */
-	public PlayerInventory getInventory(){
-		return inventory;
 	}
 
 	/**
@@ -358,10 +310,11 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public void kill(){
 		setAlive(false);
-		//TODO: drop flag and remove inventory?.
 	}
+
 	/**
 	 * Sets whether the player is dead or alive.
+     *
 	 * @param alive	boolean representing the alive state of the player.
 	 */
 	public void setAlive(boolean alive){
@@ -377,11 +330,10 @@ public class Player extends Observable implements Obstacle, Movable {
 	public void move(Square position) throws IllegalStateException{
         if(currentPosition.isCoveredByField())
             throw new IllegalStateException("Cannot move while in a field!");
-		lightTrail.setHead(getPosition());
+        decrementActions();
 		setPosition(position);
 		position.affect(this);
 		moved = true;
-		decrementActions();
 		this.setJustTeleported(false);
 	}
 	
@@ -391,6 +343,7 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public void decrementActions(){
 		this.remainingActions--;
+        lightTrail.setHead(getPosition());
         endAction();
 	}
 	
@@ -419,7 +372,6 @@ public class Player extends Observable implements Obstacle, Movable {
 		this.setRemainingActions(remActions);
 	}
 	
-
 	/**
 	 * Causes a player to lose actions
 	 * 
@@ -442,14 +394,9 @@ public class Player extends Observable implements Obstacle, Movable {
 	 */
 	public void performEmptyActions(){
 		while(remainingActions > 0){
-			lightTrail.setHead(currentPosition);
 			this.decrementActions();
-			
 		}
 	}
-	
-
-	
 
 	/**
 	 * Adds the item to the player's inventory.
@@ -459,12 +406,8 @@ public class Player extends Observable implements Obstacle, Movable {
 	 * 			Thrown when adding the item would exceed the size of the inventory
 	 */
 	public void pickUp(Item item) throws IllegalArgumentException {
-		if(!isValidPickUp(item))
-			throw new IllegalArgumentException("The item cannot be added to the player inventory");
-		
-		inventory.addItem(item);
+		addItem(item);
 		item.notifyPickUp();
-		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
 
@@ -479,12 +422,11 @@ public class Player extends Observable implements Obstacle, Movable {
 	public void useItem(Item item) throws IllegalStateException {
 		if(item == null)
 			throw new IllegalStateException("Can't use a 'null' item");
-		inventory.removeItem(item);
+        removeItem(item);
 		item.notifyUse();
-		lightTrail.setHead(getPosition());
 		decrementActions();
 	}
-	
+
 	/**
 	 * End's the player his turn. Adds Player.MAX_ALLOWED_ACTIONS to the remaining actions.
 	 * 
@@ -493,7 +435,6 @@ public class Player extends Observable implements Obstacle, Movable {
 		// should perform empty action for every action left
 		while (remainingActions > 0){
 			decrementActions();
-			lightTrail.setHead(getPosition());
 		}
 		remainingActions += Player.MAX_ALLOWED_ACTIONS;
 		moved = false;
@@ -560,7 +501,6 @@ public class Player extends Observable implements Obstacle, Movable {
 		return "Player " + this.getID();
 	}
 
-	
 	@Override
 	public void resetRange() {
 		this.range = 1;
@@ -578,5 +518,48 @@ public class Player extends Observable implements Obstacle, Movable {
     private void endAction(){
         setChanged();
         notifyObservers();
+    }
+
+    @Override
+    public void addItem(Item item) {
+        if(item == null)
+            throw new IllegalArgumentException("The item cannot be null");
+        if(item.canAddTo(this))
+            throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
+        items.add(item);
+        item.setContainer(this);
+    }
+
+    @Override
+    public void removeItem(Item item) {
+        if(item == null)
+            throw new IllegalArgumentException("The item cannot be null");
+        if(!hasItem(item))
+            throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
+        items.remove(item);
+    }
+
+    @Override
+    public boolean hasItem(Item item) {
+        return items.contains(item);
+    }
+
+    @Override
+    public boolean hasType(Item item) {
+        return getType(item) != null;
+    }
+
+    @Override
+    public Item getType(Item item) {
+        for(Item it : getAllItems()){
+            if(item.isSameType(it))
+                return it;
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Item> getAllItems() {
+        return new ArrayList<Item>(items);
     }
 }

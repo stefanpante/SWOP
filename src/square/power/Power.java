@@ -3,7 +3,7 @@ package square.power;
 import java.util.ArrayList;
 
 import move.MovableEffect;
-import square.Direction;
+import util.Direction;
 import square.power.failure.PrimaryPowerFail;
 import util.Rotation;
 

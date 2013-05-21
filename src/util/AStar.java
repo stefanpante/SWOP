@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
-import square.Direction;
 import square.Square;
 
 public class AStar {

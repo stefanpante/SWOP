@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import square.Direction;
+import util.Direction;
 import util.Coordinate;
 
 

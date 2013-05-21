@@ -2,9 +2,8 @@ package gui.button;
 
 import gui.Shapes;
 import processing.core.PApplet;
-import processing.core.PShape;
 import processing.core.PVector;
-import square.Direction;
+import util.Direction;
 import util.OConstants;
 
 public class DirectionalButton extends ShapeButton{

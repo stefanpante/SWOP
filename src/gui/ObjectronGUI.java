@@ -32,7 +32,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PVector;
-import square.Direction;
+import util.Direction;
 import util.Coordinate;
 import util.OConstants;
 
