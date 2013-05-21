@@ -1,7 +1,5 @@
 package square;
 
-
-import effect.Effect;
 import item.Item;
 import item.inter.ItemContainer;
 
@@ -27,11 +25,6 @@ public class Square implements ItemContainer {
      * List of items on this square
      */
     ArrayList<Item> items;
-
-    /**
-     * List of effects on this square
-     */
-    ArrayList<Effect> effects;
 
 	/**
 	 * The obstacle of this Square object.
