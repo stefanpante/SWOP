@@ -1,7 +1,6 @@
 package item;
 
 import game.Player;
-import item.inter.Activatable;
 import square.Square;
 
 
@@ -14,9 +13,8 @@ import square.Square;
  * 
  * @author vincentreniers
  */
-public class ForceFieldGenerator extends Item implements Activatable {
+public class ForceFieldGenerator extends Item{
 
-    private boolean dropped;
     private boolean active;
 
     @Override
@@ -29,48 +27,29 @@ public class ForceFieldGenerator extends Item implements Activatable {
 	 */
 	@Override
 	public void notifyUse() {
-		this.drop();
+		this.activate();
 	}
 
 	@Override
 	public boolean isSameType(Item item) {
         return item instanceof ForceFieldGenerator;
     }
-	
-	/**
-	 * Checks if the item given is a force field generator.
-	 */
-	public static boolean isForceFieldGenerator(Item item){
-        return item instanceof ForceFieldGenerator;
-    }
 
-    @Override
-    public boolean isDropped() {
-        return this.dropped;
-    }
-
-    @Override
     public boolean isActive() {
         return this.active;
     }
 
-    @Override
-    public void drop() throws IllegalStateException {
-        this.dropped = true;
-    }
-
-    @Override
-    public void activate() throws IllegalStateException {
+    public void activate(){
         this.active = true;
     }
 
     @Override
     public void affect(Player player) throws IllegalStateException {
-        // TODO: Nothing
+         //TODO: see if there is something to do here or if it is handled elsewhere.
     }
 
     @Override
     public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        // TODO: Nothing
+          //Nothing specific to do here.
     }
 }

@@ -123,11 +123,15 @@ public class Teleport extends Item {
         }
 
         //Teleport
+        player.setJustTeleported(true);
         player.setPosition(this.destination);
+
     }
 
     @Override
     public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        // TODO:
+        identityDisc.setJustTeleported(true);
+        identityDisc.setPosition(this.destination);
+        identityDisc.decreaseRange();
     }
 }
