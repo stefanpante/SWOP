@@ -111,7 +111,7 @@ public class Square implements ItemContainer {
 	 * Sets all the neighbors of the square instance
 	 * @param neighbors	the neighbors to be set.
 	 */
-	public void setNeighbors(final HashMap<Direction, Square> neighbors){
+	public void setNeighbors(HashMap<Direction, Square> neighbors){
 		this.neighbors = neighbors;
 	}
 	
