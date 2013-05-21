@@ -64,6 +64,8 @@ public class GridGui extends GUIElement{
 	 * The height of the square.
 	 */
 	private float squareHeight;
+	
+	private Label gridLabel;
 
 	/**
 	 * Constructs a new grid representation for the gui
@@ -86,6 +88,7 @@ public class GridGui extends GUIElement{
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
+		this.gridLabel = new Label(width, 25, new PVector(position.x, position.y -25), "The grid", gui);
 		this.initGrid(hCells, vCells);
 		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
 		this.squareHeight = (height- vCells * OConstants.MARGIN) / vCells;
@@ -94,6 +97,10 @@ public class GridGui extends GUIElement{
 		throwPad.setVisibility(false);
 		this.adjustPad(directionalPad);
 		this.adjustPad(throwPad);
+	}
+	
+	public Label getLabel(){
+		return this.gridLabel;
 	}
 
 
@@ -144,6 +151,8 @@ public class GridGui extends GUIElement{
 	 */
 	@Override
 	public void draw() {
+		
+		gridLabel.draw();
 		for(SquareGUI square : squares.values())
 			square.draw();
 
