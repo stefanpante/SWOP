@@ -12,12 +12,15 @@ import square.Square;
  */
 public class Flag extends Item {
 
+	/**
+	 * The owner of the flag
+	 */
 	private Player player;
 	
-	
-	public Flag(){
-		
-	}
+	/**
+	 * Constructs a new flag.
+	 * @param player	the player to which the flag belongs.
+	 */
 	public Flag(Player player){
 		this.player = player;
 	}
@@ -29,22 +32,28 @@ public class Flag extends Item {
     }
 
     @Override
-    public boolean canAddTo(PlayerInventory playerInventory) {
-        return false;
-    }
-
-    @Override
 	public boolean isSameType(Item item) {
 		return (item instanceof Flag);
 	}
 	
+    /**
+     * Returns the player to which this flags belongs.
+     */
 	public Player getPlayer(){
 		return this.player;
 	}
+
+
 	@Override
-	public Effect getEffect() {
+	public void affect(Player player) throws IllegalStateException {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
+
+	@Override
+	public void affect(IdentityDisc identityDisc) throws IllegalStateException {
+		// TODO Auto-generated method stub
+		
+	}
 }
