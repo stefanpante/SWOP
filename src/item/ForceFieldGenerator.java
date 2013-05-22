@@ -11,7 +11,7 @@ import square.Square;
  * The Generator holds a reference to the line segment.
  * This line segment switches on and off.
  * 
- * @author vincentreniers
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
 public class ForceFieldGenerator extends Item{
 

@@ -526,7 +526,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
     public void addItem(Item item) {
         if(item == null)
             throw new IllegalArgumentException("The item cannot be null");
-        if(item.canAddTo(this))
+        if(!item.canAddTo(this))
             throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
         items.add(item);
         item.setContainer(this);

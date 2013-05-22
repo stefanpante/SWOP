@@ -26,6 +26,9 @@ public abstract class Item implements Effect {
     public void setContainer(ItemContainer container){
         if(!isValidContainer(container))
             throw new IllegalArgumentException("The given Item Container is not valid");
+        if(this.container != null){
+        	this.container.removeItem(this);
+        }
         this.container = container;
     }
 

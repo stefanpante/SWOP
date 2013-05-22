@@ -27,6 +27,7 @@ import controlP5.ControlListener;
 import controlP5.ControlP5;
 import controlP5.DropdownList;
 import controlP5.RadioButton;
+import controlP5.Textarea;
 import controlP5.Textfield;
 import controller.GameHandler;
 import controller.Handler;
@@ -40,10 +41,15 @@ import util.OConstants;
 @SuppressWarnings("serial")
 public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener, ControlListener{
 
-	//TODO: input van size van grid.
-	//TODO: refactor numbers to other shit
-	//TODO: message deftig
-
+	/* The actions which are used by the buttons */
+	public static final String PICKUP_ACTION = "pickup";
+	public static final String USEITEM_ACTION = "useitem";
+	public static final String ENDTURN_ACTION = "endTurn";
+	public static final String STARTNEWGAME_ACTION = "startnewgame";
+	public static final String GAMEMODE = "gamemode";
+	public static final String CONFIRM = "yes";
+	public static final String DENY = "no";
+	
 	/**
 	 * Used to input the size of the grid.
 	 */
@@ -70,10 +76,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	private ArrayList<GUIButton> buttons;
 
-	// The start size of the applet
+	/**
+	 * The starting size of the applet.
+	 */
 	private int hSize = 710;
 	private int vSize = 580;
 
+	/**
+	 * The default width and height of a message
+	 */
+	private int messageHeight = 125;
+	private int messageWidth = 300;
 	/**
 	 * The standard font for the gui.
 	 */
@@ -100,8 +113,34 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private int hCells;
 	private int vCells;
 
-	private ArrayList<Message> messages;
+	/**
+	 * The messages which can be displayed
+	 */
+	private YesNoDialog endTurnDialog;
+	private TimedMessage message;
 
+	/**
+	 * The current color of the player.
+	 */
+	private int currentColor;
+	/**
+	 * Boolean which is used to control the flow of the end turn
+	 */
+	private boolean endTurn = false;
+	
+	/**
+	 * Used to determine the gameMode
+	 */
+	private int gameMode = 0;
+	
+	private Textarea warning;
+
+	private String warningText = "You have done something wrong: \n " +
+			"\t - A random grid has a minimum size of 10 x 10 \n " +
+			"\t - If you have specified a file, please make sure it is correct \n " +
+			"\t - The maximum number of players for a generated grid is 4 \n" +
+			"\t   and the maximum amount for a grid from file is equal to \n" +
+			"\t   the number of start positions specified in the file";
 	/**
 	 * initializes the objectron gui
 	 */
@@ -111,7 +150,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
-		this.messages = new ArrayList<Message>();
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
 		Shapes shapes = new Shapes(this);
@@ -131,8 +169,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	}
 
+	/**
+	 * initializes the form to be displayed when the game is started.
+	 */
 	@SuppressWarnings("deprecation")
-	public void initializeInput(){
+	private void initializeInput(){
 		inputController.setFont(standardFont);
 		CColor color = new CColor(OConstants.LIGHT_GREY.getIntColor(), 
 				OConstants.WHITE.getIntColor(),OConstants.LIGHT_GREY.getIntColor(), 
@@ -187,28 +228,42 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		filepick.setColor(color);
 		filepick.setColorLabel(OConstants.BLACK.getIntColor());
 		filepick.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
-
-		RadioButton rButton = inputController.addRadioButton("Gay");
-		rButton.setPosition(hSize/4,500);
-		rButton.setSize(hSize/2, 35);
+		
 		confirm = inputController.addButton("confirm");
 		confirm.setPosition(hSize/4,390);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.BLACK.getIntColor());
 		confirm.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
-	}
+	
+		warning = inputController.addTextarea("Hallo");
+		warning.setText(warningText);
+		warning.setSize(hSize/2, 150);
+		warning.setPosition(hSize/4, 430);
+		warning.show();
+		warning.setColorBackground(color(255, 200, 200));
+		warning.setColorValue(color(199,0,0));
+		warning.setColorActive(color(199,0,0));
+		warning.setColor(color(199,0,0));
+		warning.setLineHeight(18);
+		warning.setColor(color);
+		warning.hide();
+		}
 
-	public void pick(){
+	/**
+	 * starts a game with a grid from file.
+	 */
+	private void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		fd.setVisible(true);
-		hideInput();
 		setUpGame(fd.getDirectory() + fd.getFile());
 
 	}
 
-	public void confirm(){
-		hideInput();
+	/**
+	 * Starts a game with a random grid.
+	 */
+	private void confirm(){
 		this.hCells = Integer.parseInt(widthGrid.getText()) ;
 		this.vCells = Integer.parseInt(heightGrid.getText());
 		setUpGame(Integer.parseInt(widthGrid.getText()), Integer.parseInt(heightGrid.getText()), 
@@ -216,22 +271,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 
-	public void hideInput(){
+	private void hideInput(){
 		inputController.hide();
 	}
 
-	public void showInput(){
+	private void showInput(){
 		inputController.show();
+		warning.hide();
 	}
 
-	public static final String PICKUP_ACTION = "pickup";
-	public static final String USEITEM_ACTION = "useitem";
-	public static final String ENDTURN_ACTION = "endTurn";
-	public static final String STARTNEWGAME_ACTION = "startnewgame";
-	public static final String GAMEMODE = "gamemode";
-	public static final String CONFIRM = "yes";
-	public static final String DENY = "no";
-
+	/**
+	 * Sets up the buttons used by the actual game.
+	 */
 	private void setupButtons(){
 
 		TextButton pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
@@ -256,6 +307,67 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	}
 
+	private void setUpGame(int hCells, int vCells, int numOfPlayers){
+		try{
+			gameHandler = new GameHandler(this);
+			gameHandler.startNewGame(hCells, vCells,numOfPlayers, gameMode);
+			initInterface();
+			hideInput();
+			gameHandler.fireChanges();
+		}catch(Exception exc){
+			this.warning.show();
+			exc.printStackTrace();
+		}
+	}
+
+	private void setUpGame(String filePath){
+		try{
+			gameHandler = new GameHandler(this);
+			//gameHandler.startNewGame(filePath, , currentPlayerColor);
+			hCells = gameHandler.getGame().getGrid().getHSize();
+			vCells = gameHandler.getGame().getGrid().getVSize();
+			initInterface();
+			hideInput();
+			gameHandler.fireChanges();
+		}catch(Exception exc){
+			this.warning.show();
+			exc.printStackTrace();
+		}
+	
+	}
+
+	private void initInterface(){
+		int w = 60 * hCells;
+		int h = 60 * vCells;
+		if(h >= displayHeight - 150){
+			float sw = (displayHeight - 150)/ vCells;
+			h = displayHeight - 150;
+			w = (int) (sw * hCells);
+	
+		}
+		System.out.println("Init the new GridGUI");
+		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
+		this.initialized = true;
+		if( h < 550){
+			h = 550;
+		}
+		size(w + 215, h + 125);
+		if(this.frame != null){
+			this.frame.setSize(w+215, h + 125);
+			this.frame.setLocation(frame.getLocation().x, 0);
+		}
+		for(GUIButton button: buttons){
+			button.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
+		}
+	
+		playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
+		// update the positions of the inventories and buttons.
+	
+		textFont(standardFont);
+		gameHandler.populateGui();
+	}
+
 	/**
 	 * Draws the entire game
 	 */
@@ -278,102 +390,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 
-	public void drawMessages(){
-		if(endTurnDialog != null){
-			endTurnDialog.draw();
-		}
-		if(message != null){
-			message.draw();
-		}
-	}
-
-	public void showRemainingActions(){
-		fill(color(0));
-		noStroke();
-		textAlign(LEFT,LEFT);
-		text("Remaining actions: " + gameHandler.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
-	}
-
-
-
-	private void setUpGame(int hCells, int vCells, int numOfPlayers){
-		try{
-			gameHandler = new GameHandler(this);
-			gameHandler.startNewGame(hCells, vCells,numOfPlayers, gameMode);
-			initInterface();
-			gameHandler.fireChanges();
-		}catch(Exception exc){
-			this.showException(exc);
-		}
-	}
-
-	private void setUpGame(String filePath){
-		try{
-			gameHandler = new GameHandler(this);
-			//gameHandler.startNewGame(filePath, , currentPlayerColor);
-			hCells = gameHandler.getGame().getGrid().getHSize();
-			vCells = gameHandler.getGame().getGrid().getVSize();
-			initInterface();
-			gameHandler.fireChanges();
-		}catch(Exception exc){
-			this.showException(exc);
-		}
-
-	}
-
-	private void initInterface(){
-		int w = 60 * hCells;
-		int h = 60 * vCells;
-		if(h >= displayHeight - 150){
-			float sw = (displayHeight - 150)/ vCells;
-			h = displayHeight - 150;
-			w = (int) (sw * hCells);
-
-		}
-		System.out.println("Init the new GridGUI");
-		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
-		this.initialized = true;
-		if( h < 550){
-			h = 550;
-		}
-		size(w + 215, h + 125);
-		if(this.frame != null){
-			this.frame.setSize(w+215, h + 125);
-			this.frame.setLocation(frame.getLocation().x, 0);
-		}
-		for(GUIButton button: buttons){
-			button.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2);
-		}
-
-		playerInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		squareInventory.setX(grid.getPosition().x + grid.getWidth() + OConstants.MARGIN);
-		// update the positions of the inventories and buttons.
-
-		textFont(standardFont);
-		gameHandler.populateGui();
-	}
-
-	private  void drawInventories(){
-		// Draws the square inventory.
-		squareInventory.draw();
-		// Draws the player inventory.
-		playerInventory.draw();
-
-		if(!endTurn){
-			// mouseOver on the square inventory
-			squareInventory.hover(mouseX, mouseY);
-			// mouseOver on the player inventory
-			playerInventory.hover(mouseX, mouseY);
-		}
-	}
-
-	private void drawButtons(){
-		for(GUIButton button: buttons){
-			button.draw();
-			button.hover(mouseX, mouseY);
-		}
-	}
-
 	@Override
 	public void mouseClicked(){
 		if(!endTurn){
@@ -389,9 +405,45 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			endTurnDialog.isPressed(mouseX, mouseY);
 		}
 	}
+
+	private void drawMessages(){
+		if(endTurnDialog != null){
+			endTurnDialog.draw();
+		}
+		if(message != null){
+			message.draw();
+		}
+	}
+
+	private  void drawInventories(){
+		// Draws the square inventory.
+		squareInventory.draw();
+		// Draws the player inventory.
+		playerInventory.draw();
 	
-	private YesNoDialog endTurnDialog;
-	private TimedMessage message;
+		if(!endTurn){
+			// mouseOver on the square inventory
+			squareInventory.hover(mouseX, mouseY);
+			// mouseOver on the player inventory
+			playerInventory.hover(mouseX, mouseY);
+		}
+	}
+
+	private void drawButtons(){
+		for(GUIButton button: buttons){
+			button.draw();
+			button.hover(mouseX, mouseY);
+		}
+	}
+
+	private void showRemainingActions(){
+		fill(color(0));
+		noStroke();
+		textAlign(LEFT,LEFT);
+		text("Remaining actions: " + gameHandler.getGame().getCurrentPlayer().getRemainingActions(), grid.getPosition().x + grid.getWidth() + OConstants.MARGIN*2, 490 );
+	}
+
+
 
 	private void startNewGame() {
 		this.initialized = false;
@@ -407,7 +459,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 	
-	public void pickUp(){
+	private void pickUp(){
 		Item item = squareInventory.getSelectedItem();
 		if(item == null){
 		}
@@ -420,7 +472,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 
-	public void useItem(){
+	private void useItem(){
 		Item item = playerInventory.getSelectedItem();
 		if(item == null){
 		}
@@ -440,7 +492,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 
-	public void endTurn(){
+	private  void endTurn(){
 		endTurn = true;
 		
 		String message = " Do you really want to end your turn?";
@@ -450,7 +502,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		
 		changePlayer();
 	}
-	public void endTurn(String value){
+	
+	private void endTurn(String value){
 		if(value.equals(CONFIRM)){
 			try{
 				gameHandler.getEndTurnHandler().confirm(true);
@@ -464,8 +517,30 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		
 	}
 
-	int currentColor;
-	public void changePlayer(){
+	public void throwLaunchableItem(IdentityDisc identityDisc,
+			Direction direction) {
+		try{
+			gameHandler.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
+		}
+		catch(Exception e){
+			showException(e);
+		}
+	
+		grid.getDirectionalPad().setVisibility(true);
+		grid.getThrowPad().setVisibility(false);
+	
+	}
+
+	@Override
+	public void stop(){
+		try{
+			System.exit(0);
+		}
+		catch(Exception ignored){}		
+	
+	}
+
+	private void changePlayer(){
 
 		int id = gameHandler.getGame().getCurrentPlayer().getID();
 		currentColor = OConstants.PLAYERCOLORS[id -1].getIntColor();
@@ -479,6 +554,18 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	}
 
+	private void showException(Exception exc){
+		exc.printStackTrace();
+		String text = exc.getMessage();
+		showMessage(text);
+	}
+	
+	private void showMessage(String text){
+		PVector position = new PVector(hSize/2 - messageWidth/2, vSize/2 - messageHeight/2);
+		message = new TimedMessage(messageWidth, messageHeight, position, text, 4, this);
+		message.getLabel().setColor(currentColor);
+	}
+
 	/**
 	 * Accepts propertychanges.
 	 */
@@ -487,7 +574,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public void propertyChange(PropertyChangeEvent evt) {
 		String propertyName = evt.getPropertyName();
 		Object o = evt.getNewValue();
-
+	
 		switch(propertyName){
 		case Handler.WALLS_PROPERTY:	grid.updateWalls((ArrayList<Coordinate>) o);
 		break;
@@ -505,8 +592,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.PLAYER_INVENTORY_PROPERTY: playerInventory.setItems((ArrayList<Item>) o);
 		break;
 		case Handler.END_TURN_PROPERTY:	endTurn();
-
-
 		break;
 		case Handler.MESSAGE_PROPERTY: 	showMessage((String) o);
 		break;
@@ -521,49 +606,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		break;
 		default:					break;
 		}
-
-
-	}
-
-	private boolean endTurn = false;
-
-	@Override
-	public void stop(){
-		try{
-			System.exit(0);
-		}
-		catch(Exception ignored){}		
-
-	}
-
-	private int messageHeight = 125;
-	private int messageWidth = 300;
-
-
-	private void showException(Exception exc){
-		exc.printStackTrace();
-		String text = exc.getMessage();
-		showMessage(text);
-	}
 	
-	private void showMessage(String text){
-		PVector position = new PVector(hSize/2 - messageWidth/2, vSize/2 - messageHeight/2);
-		message = new TimedMessage(messageWidth, messageHeight, position, text, 4, this);
-		message.setColor(currentColor);
-	}
-
-	public void throwLaunchableItem(IdentityDisc identityDisc,
-			Direction direction) {
-		try{
-			gameHandler.getThrowLaunchableHandler().throwLaunchable(identityDisc, direction);
-		}
-		catch(Exception e){
-			showException(e);
-		}
-
-		grid.getDirectionalPad().setVisibility(true);
-		grid.getThrowPad().setVisibility(false);
-
+	
 	}
 
 	@Override
@@ -584,7 +628,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 
-	private int gameMode = 0;
 	@Override
 	public void controlEvent(ControlEvent arg0) {
 		int mode = (int) arg0.getValue();

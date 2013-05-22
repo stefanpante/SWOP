@@ -13,7 +13,7 @@ public class OConstants {
 	public static Color WHITE = new Color(255,255,255);
 	public static Color BLACK = new Color(0,0,0);
 	public static Color LIGHTER_GREY = new Color(241,241,241);
-	public static Color LIGHT_GREY = new Color(170,170,170);
+	public static Color LIGHT_GREY = new Color(200,200,200);
 	public static Color POWERFAIL_COLOR = new Color(255,156, 70);
 	public static Color FORCEFIELD_COLOR = new Color(102,204,255);
 	
