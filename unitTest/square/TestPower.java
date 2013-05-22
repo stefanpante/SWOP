@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import square.Square;
-import square.power.failure.PrimaryPowerFail;
 
 public class TestPower {
 
