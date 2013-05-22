@@ -4,7 +4,6 @@ import effect.Effect;
 import item.Item;
 import item.inter.ItemContainer;
 
-import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import util.Direction;
 
@@ -167,7 +166,7 @@ public class Square implements ItemContainer {
 	public boolean isObstructed(){
 		boolean obstructed = false;
 		for(Effect effect : getAllEffects()){
-			if(effect.canMoveTo())
+			if(effect.prohibitsPlayer())
 				obstructed = true;
 		}
 		return obstructed;

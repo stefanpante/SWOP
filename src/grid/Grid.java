@@ -443,7 +443,7 @@ public class Grid {
 	 * neighboring square in the given direction. 
 	 * 
 	 * @param 	fromSquare
-	 * 			The square from which the canMoveTo will be checked.
+	 * 			The square from which the prohibitsPlayer will be checked.
 	 * @param 	direction
 	 * 			The direction of the neighbor that will be checked.
 	 * @return	True 	if it is possible to move in the given direction

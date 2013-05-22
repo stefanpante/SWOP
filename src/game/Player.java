@@ -327,9 +327,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 		moved = true;
 	}
 
-
-
-
 	/**
 	 * Decrements the remaining actions by one and notifies the observers of this player.
 	 * 

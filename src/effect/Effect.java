@@ -12,13 +12,12 @@ import item.inter.Movable;
 public interface Effect {
 
     /**
-     * Indicates whether this Effect prohibits the movable from
-     * moving to the owner of this effect.
+     * Indicates whether this Effect prohibits the player
      *
      * @return  True if and only if the Movable can move to the
      *          owner of this effect.
      */
-    public boolean canMoveTo();
+    public boolean prohibitsPlayer();
 
     /**
      * Affect the Movable with this Effect on moving onto

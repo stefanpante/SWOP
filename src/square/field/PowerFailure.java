@@ -221,7 +221,7 @@ public class PowerFailure extends Field {
     }
 
 	@Override
-	public boolean canMoveTo() {
+	public boolean prohibitsPlayer() {
 		return true;
 	}
 

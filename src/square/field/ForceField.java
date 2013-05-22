@@ -76,7 +76,7 @@ public class ForceField extends Field  {
 	}
 
 	@Override
-	public boolean canMoveTo() {
+	public boolean prohibitsPlayer() {
 		return false;
 	}
 

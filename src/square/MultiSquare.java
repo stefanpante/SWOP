@@ -50,16 +50,33 @@ public abstract class MultiSquare {
     public void addSquare(Square square) throws IllegalArgumentException{
         if(!isValidSquare(square))
             throw new IllegalArgumentException("Cannot add square to this MultiObstacle: the square is invalid.");
-        // Do not call on getSquares()! returns copy
         squares.add(square);
     }
 
+    /**
+     * Adds a square to this MultiSquare at the given position
+     *
+     * @param   i
+     *          The position of the square to be added
+     * @param   square
+     *          The square to be added
+     * @throws  NoSuchElementException
+     *          If there is no square at the given position
+     */
     public void addSquare(int i, Square square){
         if(!isValidSquare(square))
             throw new NoSuchElementException("Cannot add square to this MultiObstacle: the square is invalid.");
         squares.add(i,square);
     }
 
+    /**
+     * Get the square of this MultiSquare at the given position
+     *
+     * @param   i
+     *          The position of the square to be added
+     * @throws  NoSuchElementException
+     *          If there is no square at the given position
+     */
     public Square getSquare(int i){
         if(i >= squares.size())
             throw new NoSuchElementException("There is no square at the given position");
@@ -84,8 +101,6 @@ public abstract class MultiSquare {
         if(!getSquares().contains(square)){
             throw new IllegalArgumentException("A square that is not added can not part of the obstacle cannot be removed.");
         }else{
-            square.setObstacle(null);
-            // Do not call on getSquares()! returns copy
             squares.remove(square);
         }
     }
@@ -110,8 +125,6 @@ public abstract class MultiSquare {
 
     @Override
     public boolean equals(Object o) {
-
-
         MultiSquare that = (MultiSquare) o;
 
         if(getSquares().size() != that.getSquares().size())
@@ -135,7 +148,6 @@ public abstract class MultiSquare {
         for(Square square: getSquares()){
             s += "("+square.hashCode()+")";
         }
-
         return s;
     }
 }
