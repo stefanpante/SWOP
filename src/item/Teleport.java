@@ -1,5 +1,6 @@
 package item;
 
+import item.inter.Movable;
 import command.effect.DropFlagCommand;
 import game.Player;
 import square.Square;
@@ -14,7 +15,6 @@ public class Teleport extends Item {
     /**
      * The destination of this teleport.
      */
-    //TODO: Consideration final
     private Square destination;
 
     /**
@@ -112,26 +112,41 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-        //Drop flag if need be.
-        DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
-        try {
-            dropFlagCommand.execute();
-        } catch (Exception ignored){
-            //If there is no flag to drop nothing special to do.
-        }
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		movable.acceptMoveToEffect(this);
+		
+	}
 
-        //Teleport
-        player.setJustTeleported(true);
-        player.setPosition(this.destination);
+	@Override
+	public void onMoveToEffect(Player player) {
+		//FIXME: not sure if this sufficient		
+		player.setPosition(getDestination());
+		
+	}
 
-    }
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		//FIXME: not sure if this sufficient	
+		identityDisc.setPosition(getDestination());
+		
+	}
 
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        identityDisc.setJustTeleported(true);
-        identityDisc.setPosition(this.destination);
-        identityDisc.decreaseRange();
-    }
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		movable.acceptStandOnEffect(this);
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// nothing to do here.
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// nothing to do here;
+		
+	}
 }

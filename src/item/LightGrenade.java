@@ -1,5 +1,6 @@
 package item;
 
+import item.inter.Movable;
 import command.effect.DropFlagCommand;
 import game.Player;
 import square.Square;
@@ -59,28 +60,45 @@ public class LightGrenade extends Item{
 		return (o instanceof LightGrenade);
 	}
 
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		movable.acceptStandOnEffect(this);
+		
+	}
 
-    @Override
-    public void affect(Player player) {
-        if(isActive()){
-            // Decrement actions
-            player.loseActions(LOST_ACTIONS);
-            // Handle the flag
-            DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
-            try {
-                dropFlagCommand.execute();
-            } catch (Exception ignored){
-                //If there is no flag to drop nothing special to do.
-            }
-            this.destory();
-        }
-    }
+	@Override
+	public void onMoveToEffect(Player player) {
+		if(this.isActive()){
+			player.loseActions(3);
+		}
+		
+		this.destroy();
+		
+	}
 
-    @Override
-    public void affect(IdentityDisc identityDisc){
-        if(isActive()){
-            identityDisc.decreaseRange();
-            this.destory();
-        }
-    }
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

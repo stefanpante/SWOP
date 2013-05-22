@@ -257,6 +257,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		fd.setVisible(true);
+		System.out.println(fd.getDirectory() + fd.getFile());
 		setUpGame(fd.getDirectory() + fd.getFile());
 
 	}
@@ -328,7 +329,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void setUpGame(String filePath){
 		try{
 			gameHandler = new GameHandler(this);
-			//gameHandler.startNewGame(filePath, , currentPlayerColor);
+			gameHandler.startNewGame(filePath, Integer.parseInt(numPlayers.getText()), gameMode);
 			hCells = gameHandler.getGame().getGrid().getHSize();
 			vCells = gameHandler.getGame().getGrid().getVSize();
 			initInterface();
@@ -452,6 +453,13 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	private void startNewGame() {
 		this.initialized = false;
+		hSize = 710;
+		vSize = 580;
+		size(hSize,vSize);
+		if(frame != null){
+			frame.setSize(hSize, vSize);
+			frame.setLocation(displayWidth/2 - hSize/2, displayHeight/2 - vSize/2);
+		}
 		this.showInput();
 
 	}

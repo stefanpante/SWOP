@@ -1,7 +1,6 @@
 package square.field;
 
 import effect.Effect;
-import item.inter.Movable;
 import square.MultiSquare;
 import square.Square;
 
@@ -56,11 +55,6 @@ public abstract class Field extends MultiSquare implements Effect {
 
     public void unbind(Square square){
         square.removeField(this);
-    }
-
-    @Override
-    public void affect(Movable movable) {
-        movable.acceptEffect(this);
     }
 
 }

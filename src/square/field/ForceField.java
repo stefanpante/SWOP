@@ -2,15 +2,16 @@ package square.field;
 
 import game.Player;
 import item.IdentityDisc;
+import item.inter.Movable;
 import square.Square;
 
 /**
  * Force field is a obstacle which covers multiple squares
  * and can be turned on and off.
  * 
- * @author Vincent
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
-public class ForceField extends Field {
+public class ForceField extends Field  {
 	
 	/**
 	 * Maximum length of a Force Field.
@@ -74,14 +75,46 @@ public class ForceField extends Field {
 			this.turnOn();
 	}
 
+	@Override
+	public boolean canMoveTo() {
+		return false;
+	}
 
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		movable.acceptMoveToEffect(this);
+		
+	}
 
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-    }
+	@Override
+	public void onMoveToEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        identityDisc.destory();
-    }
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		identityDisc.destroy();
+	}
+
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		movable.acceptStandOnEffect(this);
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// do nothing.
+	}
+
+	@Override
+	public boolean canMoveFrom() {
+		return false;
+	}
 }

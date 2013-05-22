@@ -54,13 +54,13 @@ public abstract class Item implements Effect {
      * @return  True if and only if the player has enough space
      */
     public boolean canAddTo(Player player){
-        return player.getAllItems().size() < player.MAX_ITEMS;
+        return player.getAllItems().size() < Player.MAX_ITEMS;
     }
 
     /**
      * Destory this item
      */
-    public void destory(){
+    public void destroy(){
         container.removeItem(this);
         this.setContainer(null);
     }
@@ -91,11 +91,53 @@ public abstract class Item implements Effect {
 		return "Item";
 	}
 	
-	public abstract boolean isSameType(Item item);
+	
+	
+	@Override
+	public boolean canMoveFrom(){
+		return true;
+	}
+	
+	@Override
+	public boolean canMoveTo(){
+		return true;
+	}
+	
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		// nothing
+		
+	}
 
-    @Override
-    public void affect(Movable movable) {
-        movable.acceptEffect(this);
-    }
+	@Override
+	public void onMoveToEffect(Player player) {
+		// nothing
+		
+	}
+
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		// nothing
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		// nothing
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// nothing
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// nothing
+		
+	}
+	public abstract boolean isSameType(Item item);
 
 }

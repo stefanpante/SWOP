@@ -30,6 +30,8 @@ public class IdentityDisc extends Item implements Movable {
     
     private boolean justTeleported;
     
+    private boolean active;
+    
     /**
      * The position of the movable.
      */
@@ -41,7 +43,7 @@ public class IdentityDisc extends Item implements Movable {
 
     public IdentityDisc(int range){
         this.range = range;
-        this.setJustTeleported(false);
+        this.active = false;
     }
 
 
@@ -114,6 +116,17 @@ public class IdentityDisc extends Item implements Movable {
         return (!square.hasItem(this));
     }
 
+    public boolean isActive(){
+    	return this.active;
+    }
+    
+    public void deactivate(){
+    	this.active = false;
+    }
+    
+    public void activate(){
+    	this.active = true;
+    }
     @Override
 	public String toString() {
 		return super.toString() + " IdentityDisc";
@@ -125,7 +138,6 @@ public class IdentityDisc extends Item implements Movable {
             throw new IllegalStateException("Cannot move to non neighboring square");
         position.acceptMove(this);
         setPosition(square);
-    	this.setJustTeleported(false);
 	}
 	
 	public void setPosition(Square square){
@@ -143,37 +155,35 @@ public class IdentityDisc extends Item implements Movable {
 	public Square getPosition() {
 		return position;
 	}
+    @Override
+    public void acceptStandOnEffect(Effect effect) {
+        effect.onStandOnEffect(this);
+     }
+    
+    @Override
+    public void acceptMoveToEffect(Effect effect){
+    	effect.onMoveToEffect(this);
+    }
 
 	@Override
-	public boolean justTeleported() {
-		return justTeleported;
+	public void onMoveToEffect(Movable movable) {
+		movable.acceptMoveToEffect(this);
+		
 	}
 
 	@Override
-	public void setJustTeleported(boolean b) {
-		justTeleported = b;
+	public void onStandOnEffect(Movable movable) {
+		movable.acceptStandOnEffect(this);
 	}
 
-    @Override
-    public void acceptEffect(Effect effect) {
-        effect.affect(this);
-    }
-
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-        //TODO: Check this    \/   boolean.
-        player.loseTurns(1, false);
-        //TODO:LAND DISC ON SQUARE OF THE PLAYER?
-        DropFlagCommand dropFlagCommand = new DropFlagCommand(player);
-        try {
-            dropFlagCommand.execute();
-        } catch (Exception ignored){
-            //If there is no flag to drop nothing special to do.
-        }
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        // Two identity disks do not interfere.
-    }
+	@Override
+	public void onStandOnEffect(Player player) {
+		if(isActive()){
+			//FIXME: Not sure about the false.
+			player.loseTurns(1, false);
+		}
+		this.deactivate();
+		
+		
+	}
 }

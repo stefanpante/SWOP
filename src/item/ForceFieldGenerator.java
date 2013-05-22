@@ -1,5 +1,6 @@
 package item;
 
+import item.inter.Movable;
 import game.Player;
 import square.Square;
 
@@ -43,13 +44,6 @@ public class ForceFieldGenerator extends Item{
         this.active = true;
     }
 
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-         //TODO: see if there is something to do here or if it is handled elsewhere.
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-          //Nothing specific to do here.
-    }
+   
+	
 }
