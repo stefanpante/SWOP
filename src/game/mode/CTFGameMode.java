@@ -37,19 +37,17 @@ public class CTFGameMode extends GameMode{
 	}
 
 	@Override
-	public void checkWin() {
-		if(getGame() == null){
+	public boolean checkWin() {
+		if(getGame() == null)
 			throw new IllegalStateException("The game needs to be set before wins can be checked");
-		}
-		
+		return false;
 	}
 
 	@Override
-	public void checkLoss() {
-		if(getGame() == null){
+	public boolean checkLoss() {
+		if(getGame() == null)
 			throw new IllegalStateException("The game needs to be set before losses can be checked");
-		}
-		
+        return false;
 	}
 
 	@Override

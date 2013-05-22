@@ -254,28 +254,4 @@ public abstract class Handler {
         return properties;
     }
 
-    /**
-     * Checks if the end of the move causes the current player to win.
-     *
-     * @return true if the move causes the player to win.
-     */
-    @Deprecated // Should be checked in de game mode now.
-    public boolean hasWon() {
-        Player nextPlayer = getGame().getNextPlayer();
-        Player currentPlayer = getGame().getCurrentPlayer();
-
-        return nextPlayer.getStartPosition().equals(currentPlayer.getPosition());
-
-    }
-
-    /**
-     * Check if the current player is stuck, if he is stuck, he will lose the game.
-     *
-     * @return a boolean which represents the loss of the game.
-     */
-    public boolean hasLost() {
-        return getGame().isCurrentPlayerStuck();
-    }
-
-
 }

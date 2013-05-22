@@ -1,9 +1,13 @@
 package game.mode;
 
 import java.io.IOException;
+import java.util.Map;
 
 import game.Game;
+import game.Player;
 import game.gamebuilder.GameBuilder;
+import square.Square;
+import util.Direction;
 
 public class RaceGameMode extends GameMode{
 
@@ -36,20 +40,23 @@ public class RaceGameMode extends GameMode{
 	}
 
 	@Override
-	public void checkWin() {
-		if(getGame() == null){
+	public boolean checkWin() {
+		if(getGame() == null)
 			throw new IllegalStateException("The game needs to be set before wins can be checked");
-		}
-		
-	}
+
+        Player nextPlayer = getGame().getNextPlayer();
+        Player currentPlayer = getGame().getCurrentPlayer();
+        return nextPlayer.getStartPosition().equals(currentPlayer.getPosition());
+    }
 
 	@Override
-	public void checkLoss() {
-		if(getGame() == null){
+	public boolean checkLoss() {
+		if(getGame() == null)
 			throw new IllegalStateException("The game needs to be set before losses can be checked");
-		}
-		
-	}
+	    return getGame().isCurrentPlayerStuck();
+    }
+
+
 
 	@Override
 	public boolean isValidNumberOfPlayers(int numOfPlayers) {

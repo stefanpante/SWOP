@@ -33,7 +33,7 @@ public class TurnHandler extends Handler implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {		
-		if(hasWon()){
+		if(getGame().getGameMode().checkWin()){
     		firePropertyChange(Handler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
     	} else if(isEndOfTurn()) {
@@ -75,13 +75,14 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn() throws Exception {
-        fireChanges();
-        if(hasLost()){
+         fireChanges();
+        if(getGame().getGameMode().checkLoss()){
 			getGame().end();
     		firePropertyChange(Handler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
 		}
 		
 		increaseCurrentPlayerCount();
+
 
 		if(!getGame().getCurrentPlayer().hasRemainingActions())
 			endTurn(true);
