@@ -82,6 +82,6 @@ public class ForceField extends Field {
 
     @Override
     public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-        identityDisc.destory();
+        identityDisc.destroy();
     }
 }

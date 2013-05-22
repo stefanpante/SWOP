@@ -1,5 +1,6 @@
 package item;
 
+import item.inter.Movable;
 import effect.Effect;
 import game.Player;
 import square.Square;
@@ -45,19 +46,5 @@ public class Flag extends Item {
      */
 	public Player getPlayer(){
 		return this.player;
-	}
-
-
-	@Override
-	public void affect(Player player) throws IllegalStateException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-		// TODO Auto-generated method stub
-		
 	}
 }

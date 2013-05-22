@@ -1,6 +1,7 @@
 package item.inter;
 
 import effect.Effect;
+import effect.NewEffect;
 import square.Square;
 
 public interface Movable {
@@ -45,5 +46,6 @@ public interface Movable {
     //FIXME: See if needed?
 	public void setJustTeleported(boolean b);
 
-    public void acceptEffect(Effect effect);
+    public void acceptStandOnEffect(NewEffect effect);
+    public void acceptMoveToEffect(NewEffect effect);
 }

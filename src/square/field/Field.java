@@ -60,7 +60,7 @@ public abstract class Field extends MultiSquare implements Effect {
 
     @Override
     public void affect(Movable movable) {
-        movable.acceptEffect(this);
+        movable.acceptStandOnEffect(this);
     }
 
 }

@@ -1,5 +1,6 @@
 package item;
 
+import item.inter.Movable;
 import game.Player;
 import square.Square;
 
@@ -43,13 +44,39 @@ public class ForceFieldGenerator extends Item{
         this.active = true;
     }
 
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-         //TODO: see if there is something to do here or if it is handled elsewhere.
-    }
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-          //Nothing specific to do here.
-    }
+	@Override
+	public void onMoveToEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
 }
