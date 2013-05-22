@@ -299,7 +299,10 @@ public class Game {
 
 	public void setActivate(boolean active) {
 		this.active = active;
-		
 	}
+
+    public GameMode getGameMode(){
+        return this.gameMode;
+    }
 
 }

@@ -46,8 +46,8 @@ public abstract class GameMode {
 	}
 	
 	public abstract void build();
-	public abstract void checkWin();
-	public abstract void checkLoss();
+	public abstract boolean checkWin();
+	public abstract boolean checkLoss();
 	public abstract boolean isValidNumberOfPlayers(int numOfPlayers);
 
 	public abstract int getMinimumAmountOfPlayers();
