@@ -217,7 +217,7 @@ public class GridGui extends GUIElement{
 		for(Player player : players.keySet() ){
 			int id  = player.getID();
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(players.get(player)), gui);
-			s.setColor(OConstants.PLAYERCOLORS[id -1]);
+			s.setColor(OConstants.PLAYERCOLORS[id -1].getIntColor());
 			this.players.add(s);
 		}
 	}
@@ -226,7 +226,7 @@ public class GridGui extends GUIElement{
 		powerfails.clear();
 		for(Coordinate coor: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-			s.setColor(OConstants.POWERFAIL_COLOR);
+			s.setColor(OConstants.POWERFAIL_COLOR.getTransparantIntColor(128));
 			powerfails.add(s);
 		}
 	}
@@ -235,7 +235,7 @@ public class GridGui extends GUIElement{
 		forcefields.clear();
 		for(Coordinate coor: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-			s.setColor(OConstants.FORCEFIELD_COLOR);
+			s.setColor(OConstants.FORCEFIELD_COLOR.getTransparantIntColor(128));
 			forcefields.add(s);
 
 		}
@@ -246,17 +246,17 @@ public class GridGui extends GUIElement{
 		for(Player player: o.keySet()){
 			ArrayList<Coordinate> playercoor = o.get(player);
 			int id = player.getID();
-			float opacity = 80;
+			int alpha = 150;
 			for(Coordinate coor: playercoor){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				int color = gui.color(OConstants.PLAYERCOLORS[id -1], opacity);
+				int color = OConstants.PLAYERCOLORS[id -1].getTransparantIntColor(alpha);
 				s.setColor(color);
 				lightTrails_Squares.add(s);
-				opacity -= 20;
+				alpha -= 30;
 			}
 		}
 	}
-
+	
 
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;

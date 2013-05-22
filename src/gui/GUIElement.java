@@ -46,7 +46,7 @@ public abstract class GUIElement implements Drawable{
 		this.width = width;
 		this.position = position;
 		this.gui = gui;
-		this.color = OConstants.LIGHTER_GREY;
+		this.color = OConstants.LIGHTER_GREY.getIntColor();
 		this.visible = true;
 	}
 	

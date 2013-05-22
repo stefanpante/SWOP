@@ -43,9 +43,9 @@ public abstract class GUIButton extends GUIElement {
 	public GUIButton(float width, float height, PApplet gui) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, new PVector(), gui);
-		super.setColor(OConstants.LIGHT_GREY);
+		super.setColor(OConstants.LIGHT_GREY.getIntColor());
 		this.actionListeners = new ArrayList<ActionListener>();
-		this.rolloverColor = OConstants.LIGHTER_GREY;
+		this.rolloverColor = OConstants.LIGHTER_GREY.getIntColor();
 
 	}
 	
