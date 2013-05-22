@@ -19,7 +19,7 @@ public class ForceFieldGenerator extends Item{
 
     @Override
     public boolean canAddTo(Square square) {
-        return (!square.hasItem(this) && !square.hasType(this));
+        return !square.hasItem(this);
     }
 
     /**
