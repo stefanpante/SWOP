@@ -2,6 +2,7 @@ package square.field;
 
 import game.Player;
 import item.IdentityDisc;
+import item.inter.Movable;
 import square.Square;
 import util.Direction;
 
@@ -189,14 +190,6 @@ public class PowerFailure extends Field {
         return this.rotation;
     }
 
-    @Override
-    public void affect(Player player) throws IllegalStateException {
-    }
-
-    @Override
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException {
-    }
-
     /**
      * Desttry this Power Failure
      */
@@ -209,7 +202,7 @@ public class PowerFailure extends Field {
     }
 
     /**
-     * Returns wether this Power Failure is active
+     * Returns whether this Power Failure is active
      *
      * @return  True if and only if this Power Failure is active
      */
@@ -226,4 +219,49 @@ public class PowerFailure extends Field {
                 ", active=" + active +
                 '}';
     }
+
+	@Override
+	public boolean canMoveTo() {
+		return true;
+	}
+
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		movable.acceptMoveToEffect(this);
+		
+	}
+
+	@Override
+	public void onMoveToEffect(Player player) {
+		player.loseActions(1);
+		
+	}
+
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		identityDisc.decreaseRange();
+	}
+
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		movable.acceptStandOnEffect(this);
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// nothing to do here.
+		
+	}
+
+	@Override
+	public boolean canMoveFrom() {
+		return true;
+	}
 }

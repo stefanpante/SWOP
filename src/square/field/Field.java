@@ -1,7 +1,6 @@
 package square.field;
 
-import effect.Effect;
-import item.inter.Movable;
+import effect.NewEffect;
 import square.MultiSquare;
 import square.Square;
 
@@ -9,7 +8,7 @@ import square.Square;
  * A field is a collection of several squares,
  * with an effect on moveables.
  */
-public abstract class Field extends MultiSquare implements Effect {
+public abstract class Field extends MultiSquare implements NewEffect {
 	
 	/**
      * Current state of the ForceField.
@@ -56,11 +55,6 @@ public abstract class Field extends MultiSquare implements Effect {
 
     public void unbind(Square square){
         square.removeField(this);
-    }
-
-    @Override
-    public void affect(Movable movable) {
-        movable.acceptStandOnEffect(this);
     }
 
 }

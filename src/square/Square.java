@@ -1,6 +1,7 @@
 package square;
 
 import effect.Effect;
+import effect.NewEffect;
 import item.Item;
 import item.inter.ItemContainer;
 
@@ -37,7 +38,7 @@ public class Square implements ItemContainer {
 	/**
 	 * The effects of this Square.
 	 */
-	private ArrayList<Effect> effects;
+	private ArrayList<NewEffect> effects;
 	
 	/**
 	 * Contains the neighbors of this square
@@ -47,7 +48,7 @@ public class Square implements ItemContainer {
 	
 	public Square(){
 		this.items = new ArrayList<Item>();
-        this.effects = new ArrayList<Effect>();
+        this.effects = new ArrayList<NewEffect>();
 	}
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
@@ -71,16 +72,16 @@ public class Square implements ItemContainer {
 		this.obstacle = obstacle;
 	}
 
-	public void addEffect(Effect effect){
+	public void addEffect(NewEffect effect){
 		effects.add(effect);
 	}
 
-	public void removeField(Effect effect){
+	public void removeField(NewEffect effect){
         effects.remove(effect);
 	}
 
-	public ArrayList<Effect> getAllEffects(){
-		return new ArrayList<Effect>(this.effects);
+	public ArrayList<NewEffect> getAllEffects(){
+		return new ArrayList<NewEffect>(this.effects);
 	}
 
 	@Override
