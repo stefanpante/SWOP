@@ -98,7 +98,7 @@ public class PowerFailure extends Field {
      * Initial creation of the tail of this Power Failure
      */
     private void createTail(){
-        this.rotation = random.nextInt(1);
+        this.rotation = random.nextInt(2);
         try{
             this.direction = Direction.getRandomDirection();
             // Create secondary and tertiary
@@ -159,7 +159,7 @@ public class PowerFailure extends Field {
     /**
      * Determine a random direction for the tertiary Power Failure
      *
-      * @return A random pick from the direction in which the
+     * @return  A random pick from the direction in which the
      *          secondary Power Failure lies and the two
      *          neighboring directions.
      */
@@ -167,7 +167,7 @@ public class PowerFailure extends Field {
         ArrayList<Direction> possibleDirections = new ArrayList<Direction>();
         possibleDirections.add(getDirection());
         possibleDirections.addAll(getDirection().neighborDirections());
-        return possibleDirections.get(random.nextInt(2));
+        return possibleDirections.get(random.nextInt(3));
     }
 
     /**
@@ -217,4 +217,13 @@ public class PowerFailure extends Field {
         return this.active;
     }
 
+    @Override
+    public String toString() {
+        return "PowerFailure{" +
+                "rotation=" + rotation +
+                ", direction=" + direction +
+                ", actions=" + actions +
+                ", active=" + active +
+                '}';
+    }
 }
