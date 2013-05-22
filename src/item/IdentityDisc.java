@@ -3,7 +3,6 @@ package item;
 import command.effect.DropFlagCommand;
 import game.Player;
 import effect.Effect;
-import effect.NewEffect;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import util.Direction;
@@ -157,12 +156,12 @@ public class IdentityDisc extends Item implements Movable {
 		return position;
 	}
     @Override
-    public void acceptStandOnEffect(NewEffect effect) {
+    public void acceptStandOnEffect(Effect effect) {
         effect.onStandOnEffect(this);
      }
     
     @Override
-    public void acceptMoveToEffect(NewEffect effect){
+    public void acceptMoveToEffect(Effect effect){
     	effect.onMoveToEffect(this);
     }
 

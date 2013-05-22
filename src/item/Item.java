@@ -1,7 +1,7 @@
 package item;
 
 import game.Player;
-import effect.NewEffect;
+import effect.Effect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import square.Square;
@@ -11,7 +11,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  **/
-public abstract class Item implements NewEffect {
+public abstract class Item implements Effect {
 
     /**
      * The container of this item

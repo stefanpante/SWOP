@@ -6,15 +6,54 @@ import item.inter.Movable;
 
 /**
  * User: jonas
- * Date: 21/05/13
- * Time: 11:50
+ * Date: 22/05/13
+ * Time: 17:44
  */
 public interface Effect {
 
-    public void affect(Movable movable);
+    /**
+     * Indicates whether this Effect prohibits the movable from
+     * moving to the owner of this effect.
+     *
+     * @return  True if and only if the Movable can move to the
+     *          owner of this effect.
+     */
+    public boolean canMoveTo();
 
-    public void affect(Player player) throws IllegalStateException;
+    /**
+     * Affect the Movable with this Effect on moving onto
+     * the owner of this Effect.
+     *
+     * @param   movable
+     *          The movable to be affected on moving
+     *          onto the owner of this effect.
+     */
+    public void onMoveToEffect(Movable movable);
 
-    public void affect(IdentityDisc identityDisc) throws IllegalStateException;
+    public void onMoveToEffect(Player player);
 
+    public void onMoveToEffect(IdentityDisc identityDisc);
+
+    /**
+     * Affect the Movable with this Effect on standing on
+     * the owner of this Effect.
+     *
+     * @param   movable
+     *          The movable to be affected on standing
+     *          on the owner of this effect.
+     */
+    public void onStandOnEffect(Movable movable);
+
+    public void onStandOnEffect(Player player);
+
+    public void onStandOnEffect(IdentityDisc identityDisc);
+
+    /**
+     * Indicates whether this Effect prohibits the movable from
+     * moving from the owner of this effect.
+     *
+     * @return  True if and only if the Movable can move from the
+     *          owner of this effect.
+     */
+    public boolean canMoveFrom();
 }

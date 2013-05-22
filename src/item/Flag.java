@@ -1,7 +1,6 @@
 package item;
 
 import item.inter.Movable;
-import effect.Effect;
 import game.Player;
 import square.Square;
 

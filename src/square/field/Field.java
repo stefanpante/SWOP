@@ -1,6 +1,6 @@
 package square.field;
 
-import effect.NewEffect;
+import effect.Effect;
 import square.MultiSquare;
 import square.Square;
 
@@ -8,7 +8,7 @@ import square.Square;
  * A field is a collection of several squares,
  * with an effect on moveables.
  */
-public abstract class Field extends MultiSquare implements NewEffect {
+public abstract class Field extends MultiSquare implements Effect {
 	
 	/**
      * Current state of the ForceField.

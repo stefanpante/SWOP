@@ -6,7 +6,6 @@ package game;
 import be.kuleuven.cs.som.annotate.Basic;
 
 import effect.Effect;
-import effect.NewEffect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
@@ -550,13 +549,13 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
     }
 
 	@Override
-	public void acceptStandOnEffect(NewEffect effect) {
+	public void acceptStandOnEffect(Effect effect) {
 		effect.onStandOnEffect(this);
 		
 	}
 
 	@Override
-	public void acceptMoveToEffect(NewEffect effect) {
+	public void acceptMoveToEffect(Effect effect) {
 		effect.onMoveToEffect(this);
 		
 	}

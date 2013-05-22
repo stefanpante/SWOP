@@ -1,7 +1,6 @@
 package item.inter;
 
 import effect.Effect;
-import effect.NewEffect;
 import square.Square;
 
 public interface Movable {
@@ -40,6 +39,6 @@ public interface Movable {
      */
     public void resetRange();
 
-    public void acceptStandOnEffect(NewEffect effect);
-    public void acceptMoveToEffect(NewEffect effect);
+    public void acceptStandOnEffect(Effect effect);
+    public void acceptMoveToEffect(Effect effect);
 }
