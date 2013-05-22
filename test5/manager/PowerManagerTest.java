@@ -1,8 +1,10 @@
 package manager;
 
+import effect.Effect;
 import grid.Grid;
 import org.junit.*;
 import square.Square;
+import square.field.PowerFailure;
 import util.Coordinate;
 
 import java.util.ArrayList;
@@ -26,8 +28,10 @@ public class PowerManagerTest {
         assertFalse(pm.getGrid() == null);
         pm.update(null, null);
         for(Square square : grid.getAllSquares()){
-            if(square.isCoveredByField()){
-                System.out.println(grid.getCoordinate(square));
+            for(Effect effect : square.getAllEffects()){
+                if(effect instanceof PowerFailure)
+                    System.out.println(grid.getCoordinate(square));
+
             }
         }
     }

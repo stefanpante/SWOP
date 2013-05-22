@@ -37,7 +37,6 @@ public abstract class Handler {
     public static final String WIN_PROPERTY = "Win";
     public static final String LOSE_PROPERTY = "Lose";
     public static final String SQUARES_PROPERTY = "squares";
-    public static final String FORCEFIELD_PROPERTY = "forcefields";
 
     /**
      * The game which this handler uses.
@@ -202,7 +201,6 @@ public abstract class Handler {
         firePropertyChange(Handler.ITEMS_PROPERTY, properties.get(Handler.ITEMS_PROPERTY));
         firePropertyChange(Handler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
         firePropertyChange(Handler.PLAYERS_PROPERTY, properties.get(Handler.PLAYERS_PROPERTY));
-        firePropertyChange(Handler.FORCEFIELD_PROPERTY, properties.get(Handler.FORCEFIELD_PROPERTY));
         firePropertyChange(Handler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
     }
 
@@ -243,15 +241,6 @@ public abstract class Handler {
                     walls.add(coordinate);
             }
 
-            for (Field field : square.getAllFields()) {
-                for (Square sq : field.getSquares()) {
-                    if (!forcefields.contains(getGame().getGrid().getCoordinate(sq)))
-                        forcefields.add(getGame().getGrid().getCoordinate(sq));
-                }
-            }
-
-            
-
             for (Player player : getGame().getPlayers()) {
                 if (player.getPosition() == square)
                     players.put(player, coordinate);
@@ -259,7 +248,6 @@ public abstract class Handler {
         }
 
         properties.put(Handler.POWER_FAILS_PROPERTY, powerFailures);
-        properties.put(Handler.FORCEFIELD_PROPERTY, forcefields);
         properties.put(Handler.ITEMS_PROPERTY, items);
         properties.put(Handler.WALLS_PROPERTY, walls);
         properties.put(Handler.SQUARES_PROPERTY, squares);
