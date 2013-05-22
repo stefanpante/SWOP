@@ -1,10 +1,8 @@
-package command.effect;
+package effect.event;
 
-import command.AbstractEffectCommand;
 import game.Player;
 import item.Flag;
 import item.Item;
-import item.inter.Movable;
 import square.Square;
 
 import java.util.ArrayList;
@@ -17,14 +15,14 @@ import java.util.Random;
  * Time: 15:57
  * To change this template use File | Settings | File Templates.
  */
-public class DropFlagCommand extends AbstractEffectCommand{
+public class DropFlagEvent extends AbstractEffectEvent{
 
     /**
      * Construct a Game Command
      *
      * @param movable The game of this command
      */
-    public DropFlagCommand(Player movable) {
+    public DropFlagEvent(Player movable) {
         super(movable);
     }
 

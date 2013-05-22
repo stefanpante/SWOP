@@ -1,6 +1,5 @@
 package item;
 
-import command.effect.DropFlagCommand;
 import game.Player;
 import effect.Effect;
 import item.inter.Movable;
@@ -183,7 +182,5 @@ public class IdentityDisc extends Item implements Movable {
 			player.loseTurns(1, false);
 		}
 		this.deactivate();
-		
-		
 	}
 }

@@ -1,15 +1,15 @@
-package command;
+package effect.event;
 
 import item.inter.Movable;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Dieter
- * Date: 21/05/13
- * Time: 15:52
+ * Date: 22/05/13
+ * Time: 21:31
  * To change this template use File | Settings | File Templates.
  */
-public abstract class AbstractEffectCommand implements Command {
+public abstract class AbstractEffectEvent {
 
     /**
      * The game of this command
@@ -21,7 +21,7 @@ public abstract class AbstractEffectCommand implements Command {
      * @param   movable
      *          The game of this command
      */
-    public AbstractEffectCommand(Movable movable){
+    public AbstractEffectEvent(Movable movable){
         setMovable(movable);
     }
 
@@ -32,4 +32,6 @@ public abstract class AbstractEffectCommand implements Command {
     public Movable getMovable(){
         return movable;
     }
+
+    abstract void execute() throws Exception;
 }
