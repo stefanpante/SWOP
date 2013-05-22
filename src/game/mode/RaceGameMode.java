@@ -31,6 +31,8 @@ public class RaceGameMode extends GameMode{
 		gameBuilder.placeChargedIdentityDisc();
 		gameBuilder.placeTeleports();
 		
+		getGame().setActivate(true);
+		
 	}
 
 	@Override

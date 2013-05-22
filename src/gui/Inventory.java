@@ -48,6 +48,10 @@ public class Inventory extends GUIElement{
 		this.label = new Label(width, 25, position, inventoryName, gui);
 		this.initialize();
 	}
+	
+	public Label getLabel(){
+		return this.label;
+	}
 
 	/**
 	 * creates all the buttons.

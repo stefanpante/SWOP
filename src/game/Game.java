@@ -297,4 +297,9 @@ public class Game {
     	return this.numOfPlayers;
     }
 
+	public void setActivate(boolean active) {
+		this.active = active;
+		
+	}
+
 }

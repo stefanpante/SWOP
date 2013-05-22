@@ -32,6 +32,8 @@ public class CTFGameMode extends GameMode{
 		gameBuilder.placeTeleports();
 		gameBuilder.placeFlags();
 		
+		getGame().setActivate(true);
+		
 	}
 
 	@Override

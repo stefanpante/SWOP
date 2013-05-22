@@ -427,6 +427,10 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 		for(GUIButton button: buttons)
 			button.setColor(color);
+		
+		playerInventory.getLabel().setColor(color);
+		squareInventory.getLabel().setColor(color);
+		grid.getLabel().setColor(color);
 
 	}
 
@@ -449,6 +453,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.LIGHT_TRAILS_PROPERTY: grid.updateLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
 		break;
 		case Handler.CURRENT_POSITION_PROPERTY: grid.setCurrentPlayer((Coordinate) o );
+												changePlayer();
 		break;
 		case Handler.SQUARE_INVENTORY_PROPERTY: squareInventory.setItems((ArrayList<Item>) o);
 		break;
