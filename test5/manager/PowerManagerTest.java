@@ -29,14 +29,18 @@ public class PowerManagerTest {
         Grid grid = getGrid();
 
         PowerManager pm = new PowerManager(grid);
-        pm.update(null, null);
-        for(Square square : grid.getAllSquares()){
-            assertFalse(square.getNeighbors() == null);
-            for(Effect effect : square.getAllEffects()){
-                if(effect instanceof PowerFailure)
-                    System.out.println(grid.getCoordinate(square));
 
+        for(int i = 0; i < 10; i++){
+            pm.update(null, null);
+            for(Square square : grid.getAllSquares()){
+                assertFalse(square.getNeighbors() == null);
+                for(Effect effect : square.getAllEffects()){
+                    if(effect instanceof PowerFailure)
+                        System.out.println(grid.getCoordinate(square));
+                }
             }
         }
+
+
     }
 }

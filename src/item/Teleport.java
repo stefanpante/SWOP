@@ -93,9 +93,9 @@ public class Teleport extends Item {
         return getDestination() != null && !getDestination().isObstructed();
     }
 
-    public boolean canAddTo(Square square){
-        return (!square.hasItem(this) && !square.hasType(this));
-    }
+        public boolean canAddTo(Square square){
+            return (!square.hasItem(this) && !square.hasType(this));
+        }
 
 
     @Override

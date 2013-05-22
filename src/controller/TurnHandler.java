@@ -75,15 +75,14 @@ public class TurnHandler extends Handler implements Observer {
 	 * Start a new turn
 	 */
 	public void startTurn() throws Exception {
-         fireChanges();
+        fireChanges();
         if(hasLost()){
 			getGame().end();
     		firePropertyChange(Handler.LOSE_PROPERTY, getGame().getCurrentPlayer().toString());	
 		}
 		
 		increaseCurrentPlayerCount();
-		
-		
+
 		if(!getGame().getCurrentPlayer().hasRemainingActions())
 			endTurn(true);
 	}

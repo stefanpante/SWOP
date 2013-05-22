@@ -6,6 +6,7 @@ import square.Square;
 import util.Direction;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**
@@ -97,71 +98,68 @@ public class PowerFailure extends Field {
      * Initial creation of the tail of this Power Failure
      */
     private void createTail(){
-        // Random rotation and direction
-        this.rotation = random.nextInt(1);
+        this.rotation = random.nextInt(2);
+        try{
+            this.direction = Direction.getRandomDirection();
+            // Create secondary and tertiary
+            Square primary = getSquare(PRIMARY);
+            Square secondary = primary.getNeighbor(direction);
+            Square tertiary = secondary.getNeighbor(getTertiaryDirection());
 
-        boolean ok = false;
-
-        while(!ok){
-            try{
-                this.direction = Direction.getRandomDirection();
-                // Create secondary and tertiary
-                Square primary = getSquare(PRIMARY);
-                Square secondary = primary.getNeighbor(direction);
-                Square tertiary = secondary.getNeighbor(getTertiaryDirection());
-
-                // Add and bind the squaress
-                addSquare(SECONDARY,secondary);
-                addSquare(TERTIARY,tertiary);
-                bindAll();
-                ok = true;
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            // Add and bind the squaress
+            addSquare(SECONDARY,secondary);
+            addSquare(TERTIARY, tertiary);
+            bindAll();
+        }catch (NoSuchElementException ignored){
 
         }
-
-
     }
 
     /**
      * Update the Secondary Power Failure
      */
     private void updateSecondary(){
-        Square oldSecondary = getSquare(SECONDARY);
-        unbind(oldSecondary);
-        removeSquare(oldSecondary);
+        try{
+            Square oldSecondary = getSquare(SECONDARY);
+            unbind(oldSecondary);
+            removeSquare(oldSecondary);
 
-        Direction direction = getDirection().neighborDirections().get(getRotation());
-        Square primary = getSquare(PRIMARY);
-        Square secondary = primary.getNeighbor(direction);
-        addSquare(SECONDARY,secondary);
-        bind(secondary);
+            Direction direction = getDirection().neighborDirections().get(getRotation());
+            Square primary = getSquare(PRIMARY);
+            Square secondary = primary.getNeighbor(direction);
+            addSquare(SECONDARY,secondary);
+            bind(secondary);
+            updateTertiary();
+        }catch (NoSuchElementException ignored){
 
-        updateTertiary();
+        }
     }
 
     /**
      * Updat the tertiary Power Failure
      */
     private void updateTertiary(){
-        Square oldTertiary = getSquare(TERTIARY);
-        unbind(oldTertiary);
-        removeSquare(oldTertiary);
+        try{
+            Square oldTertiary = getSquare(TERTIARY);
+            unbind(oldTertiary);
+            removeSquare(oldTertiary);
 
-        Square secondary = getSquare(SECONDARY);
+            Square secondary = getSquare(SECONDARY);
 
-        Direction direction = getTertiaryDirection();
-        Square tertiary = secondary.getNeighbor(direction);
-        addSquare(TERTIARY,tertiary);
+            Direction direction = getTertiaryDirection();
+            Square tertiary = secondary.getNeighbor(direction);
+            addSquare(TERTIARY,tertiary);
+            bind(tertiary);
+        }catch (NoSuchElementException ignored){
 
-        bind(tertiary);
+        }
+
     }
 
     /**
      * Determine a random direction for the tertiary Power Failure
      *
-      * @return A random pick from the direction in which the
+     * @return  A random pick from the direction in which the
      *          secondary Power Failure lies and the two
      *          neighboring directions.
      */
@@ -169,7 +167,7 @@ public class PowerFailure extends Field {
         ArrayList<Direction> possibleDirections = new ArrayList<Direction>();
         possibleDirections.add(getDirection());
         possibleDirections.addAll(getDirection().neighborDirections());
-        return possibleDirections.get(random.nextInt(2));
+        return possibleDirections.get(random.nextInt(3));
     }
 
     /**
@@ -219,4 +217,13 @@ public class PowerFailure extends Field {
         return this.active;
     }
 
+    @Override
+    public String toString() {
+        return "PowerFailure{" +
+                "rotation=" + rotation +
+                ", direction=" + direction +
+                ", actions=" + actions +
+                ", active=" + active +
+                '}';
+    }
 }

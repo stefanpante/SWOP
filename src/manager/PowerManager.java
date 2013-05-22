@@ -43,6 +43,7 @@ public class PowerManager extends Manager {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println(o);
         updatePowerFailures();
         createNewPowerFailures();
     }
@@ -69,7 +70,8 @@ public class PowerManager extends Manager {
     private void createNewPowerFailures() {
         for(Square square : getGrid().getAllSquares()){
             if(RANDOM.nextFloat() < POWERFAIL_CHANCE){
-                powerFailures.add(new PowerFailure(square));
+                PowerFailure powerFailure = new PowerFailure(square);
+                powerFailures.add(powerFailure);
             }
         }
     }

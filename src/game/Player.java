@@ -318,8 +318,8 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
             throw new IllegalStateException("Cannot move to non neighboring square");
         //Decrement Actions before actual move for LightTrails.
         decrementActions();
-        position.acceptMove(this);
         setPosition(position);
+        position.acceptMove(this);
 		moved = true;
 		this.setJustTeleported(false);
 	}
