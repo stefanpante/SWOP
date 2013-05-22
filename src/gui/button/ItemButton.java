@@ -22,12 +22,12 @@ public class ItemButton extends ShapeButton {
 	/**
 	 * The background color when the button is selected.
 	 */
-	private int selectedColor = OConstants.LIGHT_GREY;
+	private int selectedColor = OConstants.LIGHT_GREY.getIntColor();
 
 	public ItemButton(float width, float height, Item item,
 			PVector position, PApplet gui) {
 		super(width, height, Shapes.getShape(item), position, gui);
-		this.color = OConstants.LIGHTER_GREY;
+		this.color = OConstants.LIGHTER_GREY.getIntColor();
 		this.item = item;
 		selected = false;
 		this.visible = true;

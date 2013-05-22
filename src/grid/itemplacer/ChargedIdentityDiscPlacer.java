@@ -1,17 +1,14 @@
-package itemplacer;
+package grid.itemplacer;
 
 import game.Player;
 import grid.Grid;
 
 import item.ChargedIdentityDisc;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.Map;
 
 import square.Square;
 import util.AStar;
-import util.Coordinate;
 
 /**
  * Places the chargedIdentityDisc on the specified grid.

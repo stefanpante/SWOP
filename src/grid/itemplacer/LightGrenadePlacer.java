@@ -1,4 +1,4 @@
-package itemplacer;
+package grid.itemplacer;
 
 import game.Player;
 import grid.Grid;

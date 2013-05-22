@@ -1,11 +1,14 @@
-package itemplacer;
+package grid.itemplacer;
 
 import game.Player;
 import grid.Grid;
 
 import item.Flag;
+import item.Item;
 
 import java.util.ArrayList;
+
+import square.Square;
 
 /**
  * Class to place flags on the grid.
@@ -29,7 +32,16 @@ public class FlagPlacer extends ItemPlacer {
 	public void placeItems() {
 		for(Player player: getPlayers()){
 			placeItem(player.getStartPosition(), new Flag(player));
+			System.out.println(player.getStartPosition().hasType(new Flag()));
 		}
+	}
+	
+	@Override
+	protected void placeItem(Square square, Item item) throws IllegalArgumentException {
+		if(square == null)
+			return;
+			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
+		square.addItem(item);
 	}
 
 }

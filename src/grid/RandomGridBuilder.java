@@ -74,12 +74,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @param	teleports
 	 * 			A list of coordinates that should contain a teleport.
 	 */
-	protected RandomGridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
-			ArrayList<Coordinate> lightGrenades, 
-			ArrayList<Coordinate> identityDisks, 
-			ArrayList<Coordinate> teleports,
-			ArrayList<Coordinate> forceFieldGenerators,
-			Coordinate chargedIdentityDisk){
+	protected RandomGridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls){
 		setHSize(hSize);
 	    setVSize(vSize);
 		
@@ -89,8 +84,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setEmptyConstraints();
 		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		placeWalls(walls);
-		build(lightGrenades, identityDisks, teleports,forceFieldGenerators, chargedIdentityDisk);
+		build(walls);
 	}
 
 	/**
@@ -133,14 +127,15 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @param chargedIdentityDisk  the location of the chargedIdentityDisk
 	 * @throws IllegalStateException
 	 */
-	protected void build(ArrayList<Coordinate> lightGrenades, ArrayList<Coordinate> identityDisks, ArrayList<Coordinate> teleports, 
-			ArrayList<Coordinate> fFgen, Coordinate chargedIdentityDisk)
+	protected void build(ArrayList<ArrayList<Coordinate>> walls)
 	throws IllegalStateException{
-		
+		setSquares();
 		for(Coordinate coor: getStartPositions()){
 			Square s = getGrid().getSquare(coor);
 			getGrid().addStartPosition(s);
 		}
+		setNeighbors();
+		placeWalls(walls);
 		
 	}
 	

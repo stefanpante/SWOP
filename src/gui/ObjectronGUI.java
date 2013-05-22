@@ -129,15 +129,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	@SuppressWarnings("deprecation")
 	public void initializeInput(){
 		inputController.setFont(standardFont);
-		CColor color = new CColor(OConstants.LIGHT_GREY, OConstants.WHITE,OConstants.LIGHT_GREY, OConstants.BLACK, OConstants.BLACK);
+		CColor color = new CColor(OConstants.LIGHT_GREY.getIntColor(), 
+				OConstants.WHITE.getIntColor(),OConstants.LIGHT_GREY.getIntColor(), 
+				OConstants.BLACK.getIntColor(), OConstants.BLACK.getIntColor());
 		widthGrid = inputController.addTextfield("Width of the grid");
 		widthGrid.setPosition(hSize/4 ,100) ;
 		widthGrid.setSize(hSize/2, 35);
 		widthGrid.setAutoClear(false);
 		widthGrid.setColor(color);
 		widthGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
-		widthGrid.setColorForeground(OConstants.LIGHT_GREY);
-		widthGrid.setColorCursor(OConstants.LIGHT_GREY);
+		widthGrid.setColorForeground(OConstants.LIGHT_GREY.getIntColor());
+		widthGrid.setColorCursor(OConstants.LIGHT_GREY.getIntColor());
 		
 		heightGrid = inputController.addTextfield("Height of the grid");
 		heightGrid.setPosition(hSize/4,170);
@@ -145,8 +147,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		heightGrid.setAutoClear(false);
 		heightGrid.setColor(color);
 		heightGrid.setValue("" + RandomGridBuilder.MIN_HSIZE);
-		heightGrid.setColorForeground(OConstants.LIGHT_GREY);
-		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
+		heightGrid.setColorForeground(OConstants.LIGHT_GREY.getIntColor());
+		heightGrid.setColorCursor(OConstants.LIGHT_GREY.getIntColor());
 
 		numPlayers = inputController.addTextfield("Number of players");
 		numPlayers.setPosition(hSize/4, 285);
@@ -154,11 +156,11 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		numPlayers.setAutoClear(false);
 		numPlayers.setValue("" + CTFGameMode.MIN_PLAYERS);
 		numPlayers.setColor(color);
-		numPlayers.setColorForeground(OConstants.LIGHT_GREY);
+		numPlayers.setColorForeground(OConstants.LIGHT_GREY.getIntColor());
 		this.numPlayers.setText("" +2);
 		numPlayers.hide();
 		
-		heightGrid.setColorCursor(OConstants.LIGHT_GREY);
+		heightGrid.setColorCursor(OConstants.LIGHT_GREY.getIntColor());
 		gamemode = inputController.addDropdownList(GAMEMODE);
 		gamemode.setPosition(hSize/4 - 1, 275);
 		gamemode.setSize(hSize/2 +2, 35);
@@ -169,17 +171,17 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		gamemode.beginItems();
 		gamemode.addItems(new String[]{"Race mode", "Capture the flag"});
 		gamemode.endItems();
-		gamemode.setColorLabel(OConstants.BLACK);
-		gamemode.setColorBackground(OConstants.LIGHTER_GREY);
-		gamemode.setColorForeground(OConstants.LIGHT_GREY);
+		gamemode.setColorLabel(OConstants.BLACK.getIntColor());
+		gamemode.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
+		gamemode.setColorForeground(OConstants.LIGHT_GREY.getIntColor());
 
 		filepick = inputController.addButton("pick");
 		filepick.setLabel("Pick grid from file");
 		filepick.setPosition(hSize/4,350);
 		filepick.setSize(hSize/2, 35);
 		filepick.setColor(color);
-		filepick.setColorLabel(OConstants.BLACK);
-		filepick.setColorBackground(OConstants.LIGHTER_GREY);
+		filepick.setColorLabel(OConstants.BLACK.getIntColor());
+		filepick.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
 
 		RadioButton rButton = inputController.addRadioButton("Gay");
 		rButton.setPosition(hSize/4,500);
@@ -188,8 +190,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		confirm.setPosition(hSize/4,390);
 		confirm.setSize(hSize/2, 35);
 		confirm.setColor(color);
-		confirm.setColorLabel(OConstants.BLACK);
-		confirm.setColorBackground(OConstants.LIGHTER_GREY);
+		confirm.setColorLabel(OConstants.BLACK.getIntColor());
+		confirm.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
 	}
 
 	public void pick(){
@@ -423,10 +425,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	public void changePlayer(){
 
 		int id = gameHandler.getGame().getCurrentPlayer().getID();
-		int color = OConstants.PLAYERCOLORS[id -1];
+		int color = OConstants.PLAYERCOLORS[id -1].getIntColor();
 
 		for(GUIButton button: buttons)
 			button.setColor(color);
+		
+		playerInventory.getLabel().setColor(color);
+		squareInventory.getLabel().setColor(color);
+		grid.getLabel().setColor(color);
 
 	}
 
@@ -449,6 +455,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.LIGHT_TRAILS_PROPERTY: grid.updateLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
 		break;
 		case Handler.CURRENT_POSITION_PROPERTY: grid.setCurrentPlayer((Coordinate) o );
+												changePlayer();
 		break;
 		case Handler.SQUARE_INVENTORY_PROPERTY: squareInventory.setItems((ArrayList<Item>) o);
 		break;

@@ -2,19 +2,14 @@ package game.gamebuilder;
 
 import game.Game;
 import game.Player;
-import grid.AbstractGridBuilder;
-import grid.FileGridBuilder;
-import grid.Grid;
-import grid.RandomGridBuilder;
 
-import itemplacer.ChargedIdentityDiscPlacer;
-import itemplacer.FlagPlacer;
-import itemplacer.ForceFieldGeneratorPlacer;
-import itemplacer.IdentityDiscPlacer;
-import itemplacer.LightGrenadePlacer;
-import itemplacer.TeleportPlacer;
+import grid.itemplacer.ChargedIdentityDiscPlacer;
+import grid.itemplacer.FlagPlacer;
+import grid.itemplacer.ForceFieldGeneratorPlacer;
+import grid.itemplacer.IdentityDiscPlacer;
+import grid.itemplacer.LightGrenadePlacer;
+import grid.itemplacer.TeleportPlacer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import square.Square;

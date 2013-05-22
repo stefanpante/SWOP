@@ -42,11 +42,15 @@ public class Inventory extends GUIElement{
 		super(width,height, position,gui);
 		this.items = items;
 		this.buttons = new ArrayList<ItemButton>();
-		super.setColor(OConstants.LIGHTER_GREY);
+		super.setColor(OConstants.LIGHTER_GREY.getIntColor());
 		this.selectedButton = null;
 		super.setPosition(position);
 		this.label = new Label(width, 25, position, inventoryName, gui);
 		this.initialize();
+	}
+	
+	public Label getLabel(){
+		return this.label;
 	}
 
 	/**

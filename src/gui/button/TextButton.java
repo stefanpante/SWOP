@@ -23,8 +23,8 @@ public class TextButton extends GUIButton {
 	public TextButton(float width, float height, PVector position, String text,  PApplet gui) {
 		super(width, height, position, gui);
 		this.text = text;
-		this.setColor(OConstants.LIGHTER_GREY);
-		this.setRolloverColor(OConstants.LIGHT_GREY);
+		this.setColor(OConstants.LIGHTER_GREY.getIntColor());
+		this.setRolloverColor(OConstants.LIGHT_GREY.getIntColor());
 	}
 
 	@Override

@@ -121,9 +121,9 @@ public class GameHandler extends Handler {
 	 */
 	public void startNewGame(int hSize, int vSize, int numOfPlayers, int gameMode) {
 		GameMode mode;
-		if(gameMode == 0){
+		if(gameMode == GameHandler.CTFGAMEMODE){
 			mode = new CTFGameMode(hSize, vSize);
-		}else if(gameMode == 1){
+		}else if(gameMode == GameHandler.RACEGAMEMODE){
 			mode = new RaceGameMode(hSize, vSize);
 		}
 		else{

@@ -32,7 +32,7 @@ public class Flag extends Item {
 
 	@Override
     public boolean canAddTo(Square square) {
-        return false;
+        return true;
     }
 
     @Override

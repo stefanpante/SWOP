@@ -32,7 +32,7 @@ public class Label extends GUIElement{
 	public Label(float width, float height, PVector position, String text, PApplet gui) {
 		//float width, float height, PVector position, PApplet gui
 		super(width, height, position, gui);
-		this.textColor = OConstants.WHITE;
+		this.textColor = OConstants.WHITE.getIntColor();
 		this.hAlign = PConstants.CENTER;
 		this.vAlign = PConstants.CENTER;
 		this.textSize = 16;
