@@ -18,7 +18,7 @@ import be.kuleuven.cs.som.annotate.Raw;
  * It contains squares on coordinates that range from (0,0) (upper leftmost square) to
  * 	(<code>getHSize()</code>-1, <code>getVSize()</code>-1) (lower rightmost square).
  * 
- * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
 public class Grid {
 	
@@ -69,7 +69,7 @@ public class Grid {
 	 * @effect	setVSize(vSize)
 	 */
 	public Grid(int hSize, int vSize) throws IllegalArgumentException{
-		grid = new HashMap<Coordinate, Square>();
+		this.grid = new HashMap<Coordinate, Square>();
 		setHSize(hSize);
 		setVSize(vSize);
 		this.startPositions = new ArrayList<Square>();

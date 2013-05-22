@@ -1,4 +1,4 @@
-package itemplacer;
+package grid.itemplacer;
 
 import game.Player;
 import grid.Grid;
@@ -6,7 +6,6 @@ import grid.GridConstraint;
 import item.IdentityDisc;
 import java.util.ArrayList;
 
-import square.Square;
 import util.Coordinate;
 
 /**

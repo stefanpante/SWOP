@@ -1,4 +1,4 @@
-package itemplacer;
+package grid.itemplacer;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;

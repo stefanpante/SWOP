@@ -1,7 +1,6 @@
 package manager;
 
 import grid.Grid;
-import grid.GridProvider;
 import org.junit.*;
 import square.Square;
 import util.Coordinate;
@@ -19,11 +18,6 @@ public class PowerManagerTest {
 
     private Grid grid;
     private static final ArrayList<Coordinate> empty = new ArrayList<Coordinate>();
-
-    @Before
-    public void setUpBefore() {
-        this.grid = GridProvider.getGrid(10,10,new ArrayList<ArrayList<Coordinate>>(),empty,empty,empty,empty,null);
-    }
 
 
     @Test
