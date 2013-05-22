@@ -34,12 +34,12 @@ public class TestTeleport {
 		assertFalse(teleport.canHaveAsDestination(null));
 		
 		Square square = new Square();
-		square.getInventory().addItem(teleport);
+		square.addItem(teleport);
 		
 		assertFalse(teleport.canHaveAsDestination(square));
 		
 		Square sq2 = new Square();
-		sq2.getInventory().addItem(teleportTwo);
+		sq2.addItem(teleportTwo);
 		assertTrue(teleport.canHaveAsDestination(sq2));
 	}
 	
@@ -47,8 +47,8 @@ public class TestTeleport {
 	public void setDestination() {
 		Square square = new Square();
 		Square square2 = new Square();
-		square.getInventory().addItem(teleport);
-		square2.getInventory().addItem(teleportTwo);
+		square.addItem(teleport);
+		square2.addItem(teleportTwo);
 		teleport.setDestination(square2);
 		assertEquals(teleport.getDestination(), square2);
 	}
@@ -56,7 +56,7 @@ public class TestTeleport {
 	@Test(expected=IllegalArgumentException.class)
 	public void setDestinationSelf() {
 		Square sq = new Square();
-		sq.getInventory().addItem(teleport);
+		sq.addItem(teleport);
 		teleport.setDestination(sq);
 	}
 	
