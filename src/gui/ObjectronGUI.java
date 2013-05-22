@@ -131,7 +131,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	/**
 	 * Used to determine the gameMode
 	 */
-	private int gameMode = 0;
+	private int gameMode = GameHandler.RACEGAMEMODE;
 	
 	private Textarea warning;
 
@@ -253,6 +253,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	/**
 	 * starts a game with a grid from file.
 	 */
+	@SuppressWarnings("unused")
 	private void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		fd.setVisible(true);
@@ -263,6 +264,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	/**
 	 * Starts a game with a random grid.
 	 */
+	@SuppressWarnings("unused")
 	private void confirm(){
 		this.hCells = Integer.parseInt(widthGrid.getText()) ;
 		this.vCells = Integer.parseInt(heightGrid.getText());
@@ -277,6 +279,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	private void showInput(){
 		inputController.show();
+		if(gamemode.equals(GameHandler.RACEGAMEMODE)){
+			numPlayers.hide();
+		}
 		warning.hide();
 	}
 
