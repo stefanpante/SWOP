@@ -487,6 +487,7 @@ public class Grid {
 	 * 			If the given square is not a part of this grid.
 	 * 			| !contains(square)
 	 */
+	@Deprecated
 	public HashMap<Direction, Square> getNeighbors(Square square) throws NoSuchElementException {
 		if(!contains(square)){
 			throw new NoSuchElementException("The " + square + " is not a part of this " + this);
