@@ -2,10 +2,7 @@ package game;
 
 import static org.junit.Assert.*;
 
-import game.Player;
-import item.Item;
-import item.LightGrenade;
-import item.inventory.PlayerInventory;
+import item.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,7 +16,7 @@ import square.obstacle.Wall;
 /**
  * Test classes for player.
  * 
- * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
 public class TestPlayer {
 
@@ -96,41 +93,16 @@ public class TestPlayer {
 		Square square = new Square();
 		Item item = new LightGrenade();
 		
-		square.getInventory().addItem(item);
+		square.addItem(item);
 		
 		Player player = new Player(square, 0);
-		assertTrue(player.isValidPickUp(item));
-		assertEquals(player.getInventory().getSize(), 0);
-		assertFalse(player.getInventory().hasItem(item));
+		assertEquals(0, player.getAllItems().size());
+		assertFalse(player.hasItem(item));
 		
 		player.pickUp(item);
-		assertTrue(player.getInventory().hasItem(item));
-		assertFalse(player.isValidPickUp(item));
+		assertTrue(player.hasItem(item));
 	}
-	
-	/**
-	 * Test if inventory which is null is invalid.
-	 */
-	@Test
-	public void testIsValidInventory() {
-		assertFalse(Player.isValidInventory(null));
-		
-		Player player = new Player(new Square(), 0);
-		PlayerInventory inventory = new PlayerInventory();
-		
-		assertTrue(Player.isValidInventory(inventory));
-		player.setInventory(inventory);
-	}
-	
-	/**
-	 * Test if setting an inventory which is null, results in exception.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void testIsValidInventoryNull() {
-		Player player = new Player(new Square(), 0);
-		player.setInventory(null);
-	}
-	
+
 	/**
 	 * Test if using an item that is null results in exception.
 	 */
@@ -161,10 +133,10 @@ public class TestPlayer {
 		Square square = new Square();
 		
 		Player player = new Player(square, 0);
-		player.getInventory().addItem(lightGrenade);
+		player.addItem(lightGrenade);
 		
 		player.useItem(lightGrenade);
-		assertFalse(player.getInventory().hasItem(lightGrenade));
+		assertFalse(player.hasItem(lightGrenade));
 	}
 	
 	/**
@@ -213,4 +185,96 @@ public class TestPlayer {
 		player.move(square2);
 	}
 
+
+    @Test
+    public void testPlayerInventoryMaximumSize() {
+        Player p1 = new Player(new Square(),1);
+        assertEquals(6, p1.getMaxItems());
+    }
+
+    @Test
+    public void testPlayerInventorySize() {
+        Player p1 = new Player(new Square(),1);
+
+        LightGrenade lg1 = new LightGrenade();
+        LightGrenade lg2 = new LightGrenade();
+        LightGrenade lg3 = new LightGrenade();
+
+        Item it1 = new IdentityDisc();
+        Item it2 = new ChargedIdentityDisc();
+        Item it3 = new IdentityDisc();
+
+        assertEquals(0, p1.getAllItems().size());
+        p1.addItem(it1);
+        assertEquals(1, p1.getAllItems().size());
+        p1.addItem(lg1);
+        assertEquals(2, p1.getAllItems().size());
+        p1.addItem(it2);
+        assertEquals(3, p1.getAllItems().size());
+        p1.addItem(lg2);
+        assertEquals(4, p1.getAllItems().size());
+        p1.addItem(it3);
+        assertEquals(5, p1.getAllItems().size());
+        p1.addItem(lg3);
+        assertEquals(6, p1.getAllItems().size());
+    }
+
+
+
+
+
+    @Test(expected = IllegalStateException.class)
+    public void testPlayerInventorySize2() {
+        Player p1 = new Player(new Square(),1);
+
+        LightGrenade lg1 = new LightGrenade();
+        LightGrenade lg2 = new LightGrenade();
+        LightGrenade lg3 = new LightGrenade();
+
+        Item it1 = new IdentityDisc();
+        Item it2 = new ChargedIdentityDisc();
+        Item it3 = new IdentityDisc();
+        Item it4 = new IdentityDisc();
+
+        assertEquals(0, p1.getAllItems().size());
+        p1.addItem(it1);
+        assertEquals(1, p1.getAllItems().size());
+        p1.addItem(lg1);
+        assertEquals(2, p1.getAllItems().size());
+        p1.addItem(it2);
+        assertEquals(3, p1.getAllItems().size());
+        p1.addItem(lg2);
+        assertEquals(4, p1.getAllItems().size());
+        p1.addItem(it3);
+        assertEquals(5, p1.getAllItems().size());
+        p1.addItem(lg3);
+        assertEquals(6, p1.getAllItems().size());
+
+        p1.addItem(it4);
+        //Should throw exception cause limit is 6.
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void testAddTeleport(){
+        Player p1 = new Player(new Square(),1);
+        p1.addItem(new Teleport());
+    }
+
+    @Test
+    public void testAddFlag(){
+        Player p1 = new Player(new Square(),1);
+        Flag flag = new Flag();
+        p1.addItem(flag);
+        assertTrue(p1.hasItem(flag));
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void testAddMoreFlags(){
+        Player p1 = new Player(new Square(),1);
+        Flag flag = new Flag();
+        p1.addItem(flag);
+        assertTrue(p1.hasItem(flag));
+
+        p1.addItem(new Flag());
+    }
 }

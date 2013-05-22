@@ -1,18 +1,10 @@
 package square;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
-
-import java.util.List;
-import java.util.ArrayList;
-
-import grid.RandomGridBuilder;
-import item.IdentityDisc;
-import item.Item;
-import item.LightGrenade;
-import item.Teleport;
-import item.inventory.Inventory;
+import item.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,6 +16,7 @@ import org.junit.Test;
 import square.obstacle.MultiObstacle;
 import square.obstacle.Wall;
 
+import java.util.ArrayList;
 
 
 public class TestSquare {
@@ -54,27 +47,27 @@ public class TestSquare {
 		Item it3 = new IdentityDisc();
 
 
-		sq.getInventory().addItem(lg1);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().getSize() == 1);
+		sq.addItem(lg1);
+		assertTrue(sq.hasItem(lg1));
+		assertTrue(sq.getAllItems().size() == 1);
 		
-		sq.getInventory().addItem(it1);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(it1));
-		assertTrue(sq.getInventory().getSize() == 2);
+		sq.addItem(it1);
+		assertTrue(sq.hasItem(lg1));
+		assertTrue(sq.hasItem(it1));
+		assertTrue(sq.getAllItems().size() == 2);
 		
-		sq.getInventory().addItem(it2);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(it1));
-		assertTrue(sq.getInventory().hasItem(it2));
-		assertTrue(sq.getInventory().getSize() == 3);
+		sq.addItem(it2);
+		assertTrue(sq.hasItem(lg1));
+		assertTrue(sq.hasItem(it1));
+		assertTrue(sq.hasItem(it2));
+		assertTrue(sq.getAllItems().size() == 3);
 
-		sq.getInventory().addItem(it3);
-		assertTrue(sq.getInventory().hasItem(lg1));
-		assertTrue(sq.getInventory().hasItem(it1));
-		assertTrue(sq.getInventory().hasItem(it2));
-		assertTrue(sq.getInventory().hasItem(it3));
-		assertTrue(sq.getInventory().getSize() == 4);
+		sq.addItem(it3);
+		assertTrue(sq.hasItem(lg1));
+		assertTrue(sq.hasItem(it1));
+		assertTrue(sq.hasItem(it2));
+		assertTrue(sq.hasItem(it3));
+		assertTrue(sq.getAllItems().size() == 4);
 	}
 		
 	@Test
@@ -86,17 +79,16 @@ public class TestSquare {
 		Item it2 = new IdentityDisc();
 		Item it3 = new IdentityDisc();
 
-		sq.getInventory().addItem(lg1);
-		sq.getInventory().addItem(it1);		
-		sq.getInventory().addItem(it2);
-		sq.getInventory().addItem(it3);
-		
-		Inventory inv = sq.getInventory();
-		assertTrue(inv.getSize() == 4);
-		assertTrue(inv.hasItem(lg1));
-		assertTrue(inv.hasItem(it1));
-		assertTrue(inv.hasItem(it2));
-		assertTrue(inv.hasItem(it3));
+		sq.addItem(lg1);
+		sq.addItem(it1);
+		sq.addItem(it2);
+		sq.addItem(it3);
+
+		assertTrue(sq.getAllItems().size() == 4);
+		assertTrue(sq.hasItem(lg1));
+		assertTrue(sq.hasItem(it1));
+		assertTrue(sq.hasItem(it2));
+		assertTrue(sq.hasItem(it3));
 
 	}
 
@@ -111,17 +103,17 @@ public class TestSquare {
 		Item lg3 = new LightGrenade();
 		Item it = new IdentityDisc();
 		
-		sq1.getInventory().addItem(lg1);
-		assertTrue(sq1.getInventory().hasItem((lg1)));
+		sq1.addItem(lg1);
+		assertTrue(sq1.hasItem((lg1)));
 		
 		
-		sq2.getInventory().addItem(lg2);
-		assertTrue(sq2.getInventory().hasItem(lg2));
+		sq2.addItem(lg2);
+		assertTrue(sq2.hasItem(lg2));
 		
-		sq3.getInventory().addItem(lg3);
-		sq3.getInventory().addItem(it);
-		assertTrue(sq3.getInventory().hasItem(lg3));
-		assertTrue(sq3.getInventory().hasItem(it));
+		sq3.addItem(lg3);
+		sq3.addItem(it);
+		assertTrue(sq3.hasItem(lg3));
+		assertTrue(sq3.hasItem(it));
 	}
 	
 	/************************************
@@ -129,7 +121,7 @@ public class TestSquare {
 	 ************************************/
 
 	
-//	@Test TODO: move this to TestObstacle?
+	@Test
 	public void testSetObstacle() {
 		Square square = new Square();
 		Square otherSquare = new Square();
@@ -145,6 +137,87 @@ public class TestSquare {
 	public void testIsObstructed() {
 		Square square = new Square();
 		assertFalse(square.isObstructed());
-	}	
+	}
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCanHaveAsItemTwice(){
+        Square sq = new Square();
+        Item it1 = new IdentityDisc();
+        sq.addItem(it1);
+        //Should give exception.
+        sq.addItem(it1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddItemLightGrenade() {
+        Square sq = new Square();
+        LightGrenade lg = new LightGrenade();
+        sq.addItem(lg);
+        assertTrue(sq.hasType(new LightGrenade()));
+        assertTrue(lg.equals(sq.getType(new LightGrenade())));
+        LightGrenade lg2 = new LightGrenade();
+        sq.addItem(lg2);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddItemNull() {
+        Square sq = new Square();
+        sq.addItem(null);
+    }
+
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testTakeLightGrenade() {
+        Square sq = new Square();
+        LightGrenade lg = new LightGrenade();
+        sq.addItem(lg);
+        assertTrue(sq.hasType(new LightGrenade()));
+        sq.removeItem(lg);
+        assertFalse(sq.hasType(new LightGrenade()));
+        assertFalse(sq.hasItem(lg));
+        LightGrenade lg2 = new LightGrenade();
+        sq.removeItem(lg2);
+    }
+
+
+
+    @Test
+    public void testHasLightGrenade(){
+        Square sq = new Square();
+        Item it = new IdentityDisc();
+        LightGrenade lg = new LightGrenade();
+
+        assertFalse(sq.hasType(new LightGrenade()));
+        sq.addItem(it);
+        assertFalse(sq.hasType(new LightGrenade()));
+        sq.addItem(lg);
+        assertTrue(sq.hasType(new LightGrenade()));
+        sq.removeItem(it);
+        assertTrue(sq.hasType(new LightGrenade()));
+        sq.removeItem(lg);
+        assertFalse(sq.hasType(new LightGrenade()));
+    }
+
+    @Test
+    public void testAddLaunchable(){
+        Square sq = new Square();
+        Item it = new IdentityDisc();
+        sq.addItem(it);
+        assertTrue(sq.hasType(new IdentityDisc()));
+        Item it2 = new ChargedIdentityDisc();
+        sq.addItem(it2);
+        assertTrue(sq.hasType(new IdentityDisc()));
+        sq.removeItem(it);
+        assertTrue(sq.hasType(new IdentityDisc()));
+    }
+
+
+    @Test
+    public void testAddFlag(){
+        Square sq = new Square();
+        Item it = new Flag();
+        sq.addItem(it);
+        assertTrue(sq.hasItem(new Flag()));
+    }
 }
