@@ -1,7 +1,6 @@
 package square;
 
 import effect.Effect;
-import effect.NewEffect;
 import item.Item;
 import item.inter.ItemContainer;
 
