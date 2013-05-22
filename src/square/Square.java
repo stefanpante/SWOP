@@ -1,6 +1,7 @@
 package square;
 
 import effect.Effect;
+import effect.NewEffect;
 import item.Item;
 import item.inter.ItemContainer;
 
@@ -15,7 +16,7 @@ import java.util.NoSuchElementException;
 /**
  * Square class
  *
- * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
+ * @author Dieter Castel, Jonas Devlieghere en Stefan Pante
  */
 @NotNull
 public class Square implements ItemContainer {
@@ -28,7 +29,7 @@ public class Square implements ItemContainer {
     /**
      * The effects of this Square.
      */
-    private ArrayList<Effect> effects;
+    private ArrayList<NewEffect> effects;
 
     /**
      * Contains the neighbors of this square
@@ -38,41 +39,46 @@ public class Square implements ItemContainer {
 
     public Square(){
         this.items = new ArrayList<Item>();
-        this.effects = new ArrayList<Effect>();
+        this.effects = new ArrayList<NewEffect>();
     }
 
     /**
      * Adds the given effect to the list of effects.
      */
-    public void addEffect(Effect effect) throws  IllegalArgumentException{
+    public void addEffect(NewEffect effect) throws IllegalArgumentException{
         if(effect == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("The effect can not be null.");
         effects.add(effect);
     }
 
     /**
      * Removes the given effect from the list of effects.
      */
-    public void removeField(Effect effect)throws  IllegalArgumentException{
+    public void removeField(NewEffect effect) throws IllegalArgumentException{
         if(effects.contains(effect))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("The effect can not be null.");
         effects.remove(effect);
     }
 
-    public ArrayList<Effect> getAllEffects(){
-        return new ArrayList<Effect>(this.effects);
+    public ArrayList<NewEffect> getAllEffects(){
+        return new ArrayList<NewEffect>(this.effects);
     }
 
     @Override
     public String toString() {
         String s = "Square [ ";
+        s += items;
+        s += ", ";
+        s += effects;
         s += " ]";
         return s;
     }
 
     /**
      * Sets all the neighbors of the square instance
-     * @param neighbors	the neighbors to be set.
+     *
+     * @param   neighbors
+     *          The neighbors to be set.
      */
     public void setNeighbors(HashMap<Direction, Square> neighbors){
         this.neighbors = neighbors;
@@ -80,7 +86,8 @@ public class Square implements ItemContainer {
 
     /**
      * Returns the neighbors of the square.
-     * @return
+     *
+     * @return  The neighbors of this square.
      */
     public HashMap<Direction, Square> getNeighbors(){
         return new HashMap<Direction, Square>(neighbors);
@@ -105,21 +112,17 @@ public class Square implements ItemContainer {
     @Override
     public void addItem(Item item){
         if(!isValidItem(item))
-            throw new IllegalArgumentException("The item cannot be null");
+            throw new IllegalArgumentException("The given item is not valid (cannot be null)");
         if(!item.canAddTo(this))
             throw new IllegalArgumentException("Cannot add " +item+ " to " + this);
         items.add(item);
         item.setContainer(this);
     }
 
-    private boolean isValidItem(Item item) {
-        return item != null;
-    }
-
     @Override
     public void removeItem(Item item){
         if(!isValidItem(item))
-            throw new IllegalArgumentException("The item cannot be null");
+            throw new IllegalArgumentException("The given item is not valid (cannot be null)");
         if(!hasItem(item))
             throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
         items.remove(item);
@@ -145,6 +148,17 @@ public class Square implements ItemContainer {
     }
 
     /**
+     * Check whether the given item is valid.
+     *
+     * @param   item
+     *          The item to be checked
+     * @return  True if and only if the item is not null.
+     */
+    private boolean isValidItem(Item item) {
+        return item != null;
+    }
+
+    /**
      * Accepts the moving of a movable onto a square and gives the movable its effects.
      *
      * @param   movable
@@ -154,8 +168,23 @@ public class Square implements ItemContainer {
         for(Item it: items){
             it.affect(movable);
         }
-        for(Effect effect: getAllEffects()){
-            effect.affect(movable);
+        for(NewEffect effect: getAllEffects()){
+            effect.onMoveToEffect(movable);
         }
+    }
+
+    /**
+     * Check whether this square is obstructed
+     *
+     * @return  True if and only if none of the effect blocks
+     *          movement.
+     */
+    public boolean isObstructed(){
+        boolean obstructed = false;
+        for(NewEffect effect : getAllEffects()){
+            if(effect.canMoveTo())
+                obstructed = true;
+        }
+        return obstructed;
     }
 }
