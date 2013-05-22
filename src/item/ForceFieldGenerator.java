@@ -44,39 +44,6 @@ public class ForceFieldGenerator extends Item{
         this.active = true;
     }
 
-	@Override
-	public void onMoveToEffect(Movable movable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onMoveToEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onMoveToEffect(IdentityDisc identityDisc) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Movable movable) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStandOnEffect(IdentityDisc identityDisc) {
-		// TODO Auto-generated method stub
-		
-	}
+   
+	
 }

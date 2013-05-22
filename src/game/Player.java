@@ -6,6 +6,7 @@ package game;
 import be.kuleuven.cs.som.annotate.Basic;
 
 import effect.Effect;
+import effect.NewEffect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
@@ -71,8 +72,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 * true if the user has moved during his turn
 	 */
 	private boolean moved;
-
-	private boolean justTeleported;
 	
 	private boolean alive;
 	
@@ -101,7 +100,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 		this.range = 1;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
-        this.setJustTeleported(false);
 		this.id = id;
 		this.lightTrail = new LightTrail();
 		this.items = new ArrayList<Item>();
@@ -328,7 +326,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
         setPosition(position);
         position.acceptMove(this);
 		moved = true;
-		this.setJustTeleported(false);
 	}
 
 
@@ -504,19 +501,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 		
 	}
 
-	public boolean justTeleported() {
-		return justTeleported;
-	}
-
-	public void setJustTeleported(boolean b) {
-		justTeleported = b;
-	}
-
-    @Override
-    public void acceptEffect(Effect effect) {
-        effect.affect(this);
-    }
-
     private void endAction(){
         setChanged();
         notifyObservers();
@@ -564,4 +548,16 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
     public ArrayList<Item> getAllItems() {
         return new ArrayList<Item>(items);
     }
+
+	@Override
+	public void acceptStandOnEffect(NewEffect effect) {
+		effect.onStandOnEffect(this);
+		
+	}
+
+	@Override
+	public void acceptMoveToEffect(NewEffect effect) {
+		effect.onMoveToEffect(this);
+		
+	}
 }

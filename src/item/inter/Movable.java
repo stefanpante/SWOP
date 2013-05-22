@@ -40,12 +40,6 @@ public interface Movable {
      */
     public void resetRange();
 
-    //FIXME: See if needed?
-	public boolean justTeleported();
-
-    //FIXME: See if needed?
-	public void setJustTeleported(boolean b);
-
     public void acceptStandOnEffect(NewEffect effect);
     public void acceptMoveToEffect(NewEffect effect);
 }

@@ -45,7 +45,6 @@ public class IdentityDisc extends Item implements Movable {
     public IdentityDisc(int range){
         this.range = range;
         this.active = false;
-        this.setJustTeleported(false);
     }
 
 
@@ -140,7 +139,6 @@ public class IdentityDisc extends Item implements Movable {
             throw new IllegalStateException("Cannot move to non neighboring square");
         position.acceptMove(this);
         setPosition(square);
-    	this.setJustTeleported(false);
 	}
 	
 	public void setPosition(Square square){
@@ -158,17 +156,6 @@ public class IdentityDisc extends Item implements Movable {
 	public Square getPosition() {
 		return position;
 	}
-
-	@Override
-	public boolean justTeleported() {
-		return justTeleported;
-	}
-
-	@Override
-	public void setJustTeleported(boolean b) {
-		justTeleported = b;
-	}
-
     @Override
     public void acceptStandOnEffect(NewEffect effect) {
         effect.onStandOnEffect(this);

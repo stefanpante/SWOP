@@ -188,10 +188,8 @@ public class Square implements ItemContainer {
      */
     public void acceptMove(Movable movable){
         for(Item it: items){
-            it.affect(movable);
+            it.onMoveToEffect(movable);
         }
-        for(Effect effect: getAllEffects()){
-            effect.affect(movable);
-        }
+//       µ
     }
 }
