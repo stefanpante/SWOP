@@ -36,7 +36,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
     /**
      * Checks if preconditions are met for the action.
      */
-    protected void beforeActionCommand() {
+    private void beforeActionCommand() {
         if (!getGame().isActive())
             throw new IllegalStateException("The game is over.");
         if (getGame().getCurrentPlayer().getRemainingActions() <= 0)
@@ -46,7 +46,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
     /**
      * Checks if the post conditions are met for this action.
      */
-    protected void afterActionCommand() {
+    private void afterActionCommand() {
         //Currently nothing is needed here.
     }
 
