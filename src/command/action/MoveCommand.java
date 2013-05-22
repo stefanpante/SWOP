@@ -99,24 +99,22 @@ public class MoveCommand extends ActionCommand {
 		return currentPosition;
 	}
 
-	@Override
-	protected void beforeGameCommand() {
-        if(getGame().isCurrentPlayerStuck())
-            throw new IllegalStateException("The current player is stuck.");
+    @Override
+    protected void beforeGameCommand() throws Exception {
+        //NOOP
     }
 
-	@Override
+    @Override
 	protected void duringGameCommand() throws Exception {
 		move();
 	}
 
-	@Override
-	protected void afterGameCommand() throws Exception {
-		//NOOP
-	}
+    @Override
+    protected void afterGameCommand() throws Exception {
+        //NOOP
+    }
 
-
-	/**
+    /**
 	 * performs the actual move of the movable
 	 */
 	protected void move(){
