@@ -1,7 +1,7 @@
 package item;
 
+import effect.event.DropFlagEvent;
 import item.inter.Movable;
-import command.effect.DropFlagCommand;
 import game.Player;
 import square.Square;
 
@@ -68,7 +68,13 @@ public class LightGrenade extends Item{
 
 	@Override
 	public void onMoveToEffect(Player player) {
-		if(this.isActive()){
+        DropFlagEvent dropFlag = new DropFlagEvent();
+        try {
+            dropFlag.execute();
+        } catch (Exception e) {
+               //  Nothing to do
+        }
+        if(this.isActive()){
 			player.loseActions(3);
 		}
 		
