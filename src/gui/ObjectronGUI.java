@@ -6,6 +6,7 @@ import grid.RandomGridBuilder;
 import gui.button.GUIButton;
 import gui.button.TextButton;
 import gui.message.Message;
+import gui.message.TimedMessage;
 import gui.message.YesNoDialog;
 import item.IdentityDisc;
 import item.Item;
@@ -281,6 +282,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		if(endTurnDialog != null){
 			endTurnDialog.draw();
 		}
+		if(message != null){
+			message.draw();
+		}
 	}
 
 	public void showRemainingActions(){
@@ -386,7 +390,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		}
 	}
 	
-	YesNoDialog endTurnDialog;
+	private YesNoDialog endTurnDialog;
+	private TimedMessage message;
 
 	private void startNewGame() {
 		this.initialized = false;
@@ -437,11 +442,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void endTurn(){
 		endTurn = true;
-		// (float width, float height, PVector position,String message, PApplet gui) {
+		
 		String message = " Do you really want to end your turn?";
 		PVector pos = new PVector(hSize/2 - messageWidth/2, vSize/2 - messageHeight/2);
 		endTurnDialog = new YesNoDialog(messageWidth, messageHeight, pos, message, this);
 		endTurnDialog.setColor(currentColor);
+		
 		changePlayer();
 	}
 	public void endTurn(String value){
@@ -502,9 +508,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 
 		break;
-		case Handler.MESSAGE_PROPERTY: 	break;
-		case Handler.WIN_PROPERTY: 		break;
-		case Handler.LOSE_PROPERTY : 	break;
+		case Handler.MESSAGE_PROPERTY: 	showMessage((String) o);
+		break;
+		case Handler.WIN_PROPERTY: 		showMessage((String) o);
+		break;
+		case Handler.LOSE_PROPERTY : 	showMessage((String) o);
+		break;
 		case Handler.SQUARES_PROPERTY: grid.adjustGrid((ArrayList<Coordinate>) o);
 		break;
 		case Handler.ITEMS_PROPERTY:	HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
@@ -533,9 +542,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	private void showException(Exception exc){
 		exc.printStackTrace();
-		String message = exc.getMessage();
+		String text = exc.getMessage();
+		showMessage(text);
+	}
+	
+	private void showMessage(String text){
 		PVector position = new PVector(hSize/2 - messageWidth/2, vSize/2 - messageHeight/2);
-		//m = new TimedMessage(messageWidth, messageHeight, position, message, 4, this);
+		message = new TimedMessage(messageWidth, messageHeight, position, text, 4, this);
+		message.setColor(currentColor);
 	}
 
 	public void throwLaunchableItem(IdentityDisc identityDisc,
