@@ -471,8 +471,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.ITEMS_PROPERTY:	HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
 		grid.updateItems(items);
 		break;
-		case Handler.FORCEFIELD_PROPERTY: grid.updateForceFields((ArrayList<Coordinate>) o);
-
 		default:					break;
 		}
 

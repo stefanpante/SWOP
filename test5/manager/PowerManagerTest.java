@@ -2,6 +2,7 @@ package manager;
 
 import effect.Effect;
 import grid.Grid;
+import grid.RandomGridBuilder;
 import org.junit.*;
 import square.Square;
 import square.field.PowerFailure;
@@ -18,16 +19,19 @@ import static org.junit.Assert.assertFalse;
  */
 public class PowerManagerTest {
 
-    private Grid grid;
-    private static final ArrayList<Coordinate> empty = new ArrayList<Coordinate>();
-
+    private static Grid getGrid(){
+        RandomGridBuilder rgb = new RandomGridBuilder();
+        return rgb.getGrid();
+    }
 
     @Test
     public void test(){
+        Grid grid = getGrid();
+
         PowerManager pm = new PowerManager(grid);
-        assertFalse(pm.getGrid() == null);
         pm.update(null, null);
         for(Square square : grid.getAllSquares()){
+            assertFalse(square.getNeighbors() == null);
             for(Effect effect : square.getAllEffects()){
                 if(effect instanceof PowerFailure)
                     System.out.println(grid.getCoordinate(square));
