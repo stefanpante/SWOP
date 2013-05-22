@@ -195,6 +195,13 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
     }
 
     /**
+     * Returns the maximum amount of items a player can carry.
+     */
+    public int getMaxItems(){
+        return MAX_ITEMS;
+    }
+
+    /**
 	 * Returns whether this player still has remaning actions.
 	 * 
 	 * @return	True	If this player has more then 0 remaining actions.
