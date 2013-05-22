@@ -28,6 +28,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();
+		setNeighbors();
 		setEmptyConstraints();
 		for(Coordinate coor: getStartPositions()){
 			Square s = getGrid().getSquare(coor);
