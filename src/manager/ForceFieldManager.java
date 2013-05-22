@@ -137,7 +137,7 @@ public class ForceFieldManager extends Manager{
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {
                 Square square = getGrid().getSquare(c);
-            if(square.isCoveredByObstacle() && square.getObstacle().preventsField())
+            if(square.isObstructed())
                 return;
             forceField.addSquare(square);
         }

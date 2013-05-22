@@ -165,7 +165,7 @@ public class Square implements ItemContainer {
 	public boolean isObstructed(){
 		boolean obstructed = false;
 		for(Effect effect : getAllEffects()){
-			if(effect.canMoveTo())
+			if(effect.prohibitsPlayer())
 				obstructed = true;
 		}
 		return obstructed;

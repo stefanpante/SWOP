@@ -99,7 +99,7 @@ public abstract class Item implements Effect {
 	}
 	
 	@Override
-	public boolean canMoveTo(){
+	public boolean prohibitsPlayer(){
 		return true;
 	}
 	

@@ -1,7 +1,7 @@
 package item;
 
+import effect.event.DropFlagEvent;
 import item.inter.Movable;
-import command.effect.DropFlagCommand;
 import game.Player;
 import square.Square;
 
@@ -93,9 +93,13 @@ public class Teleport extends Item {
         return getDestination() != null && !getDestination().isObstructed();
     }
 
-        public boolean canAddTo(Square square){
-            return (!square.hasItem(this) && !square.hasType(this));
-        }
+    public boolean canAddTo(Square square){
+        return (!square.hasItem(this) && !square.hasType(this));
+    }
+
+    public boolean canAddTo(Player player){
+        return false;
+    }
 
 
     @Override
@@ -120,8 +124,13 @@ public class Teleport extends Item {
 
 	@Override
 	public void onMoveToEffect(Player player) {
-		//FIXME: not sure if this sufficient		
-		player.setPosition(getDestination());
+        DropFlagEvent dropFlag = new DropFlagEvent();
+        try {
+            dropFlag.execute();
+        } catch (Exception e) {
+            //  Nothing to do
+        }
+        player.setPosition(getDestination());
 		
 	}
 

@@ -30,7 +30,7 @@ public class TestGrid {
 	}
 	
 	/**
-	 * Test canMoveTo in the corners without walls.
+	 * Test prohibitsPlayer in the corners without walls.
 	 */
 	@Test 
 	public void testCanMoveToCorners1(){
@@ -67,7 +67,7 @@ public class TestGrid {
 		}
 		
 		/**
-		 * Test the canMoveTo with walls
+		 * Test the prohibitsPlayer with walls
 		 */
 		@SuppressWarnings("unused")
 		@Test 
@@ -111,7 +111,7 @@ public class TestGrid {
 		}
 		
 		/**
-		 * Tests canMoveTo with a lightTrail
+		 * Tests prohibitsPlayer with a lightTrail
 		 */
 		@Test
 		public void testCanMoveTo3(){
