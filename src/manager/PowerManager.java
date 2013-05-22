@@ -15,12 +15,27 @@ import java.util.Random;
  */
 public class PowerManager extends Manager {
 
+    /**
+     * The chance a Square has a Power Failure
+     */
     public static final float POWERFAIL_CHANCE = 0.01f;
 
+    /**
+     * The list of Power Failures of this Power Manager
+     */
     private ArrayList<PowerFailure> powerFailures;
-    private static final Random random = new Random();
 
+    /**
+     * Random generator for this Power Manager
+     */
+    private static final Random RANDOM = new Random();
 
+    /**
+     * Create a new Power Manager
+     *
+     * @param   grid
+     *          The Grid
+     */
     public PowerManager(Grid grid){
         super(grid);
         this.powerFailures = new ArrayList<PowerFailure>();
@@ -28,8 +43,14 @@ public class PowerManager extends Manager {
 
     @Override
     public void update(Observable o, Object arg) {
+        updatePowerFailures();
         createNewPowerFailures();
+    }
 
+    /**
+     * Update all Power Failures and remove those that became inactive.
+     */
+    private void updatePowerFailures() {
         ArrayList<PowerFailure> inactivePowerFailures = new ArrayList<PowerFailure>();
         for(PowerFailure powerFailure : powerFailures){
             if(powerFailure.isActive()){
@@ -41,9 +62,13 @@ public class PowerManager extends Manager {
         powerFailures.removeAll(inactivePowerFailures);
     }
 
+    /**
+     * Iterate over every square and create a Power Failure with a
+     * POWERFAIL_CHANCE chance.
+     */
     private void createNewPowerFailures() {
         for(Square square : getGrid().getAllSquares()){
-            if(random.nextFloat() < POWERFAIL_CHANCE){
+            if(RANDOM.nextFloat() < POWERFAIL_CHANCE){
                 powerFailures.add(new PowerFailure(square));
             }
         }

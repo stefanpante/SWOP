@@ -15,17 +15,44 @@ import java.util.Random;
  */
 public class PowerFailure extends Field {
 
+    /**
+     * The lenght of a Power Failure Field
+     */
     public static final int LENGTH = 3;
+
+    /**
+     * The duration of this Power Failure in terms of turns
+     */
     public static final int DURATION_TURNS = 3;
+
+    /**
+     * The duration of this Power Failure in therms of actions
+     */
     public static final int DURATION_ACTIONS = Player.MAX_ALLOWED_ACTIONS * DURATION_TURNS;
+
 
     private static final int PRIMARY = 0;
     private static final int SECONDARY = 1;
     private static final int TERTIARY = 2;
 
+    /**
+     * The direction in which this Power Failure rotates
+     */
     private int rotation;
+
+    /**
+     * The direction in which this Power Failure lies
+     */
     private Direction direction;
+
+    /**
+     * The amount of actions this Power Failure has lived
+     */
     private int actions;
+
+    /**
+     * Flag that indicates whether this Power Failure is alive
+     */
     private boolean active;
 
     private final Random random = new Random();
@@ -72,17 +99,29 @@ public class PowerFailure extends Field {
     private void createTail(){
         // Random rotation and direction
         this.rotation = random.nextInt(1);
-        this.direction = Direction.getRandomDirection();
 
-        // Create secondary and tertiary
-        Square primary = getSquare(PRIMARY);
-        Square secondary = primary.getNeighbor(direction);
-        Square tertiary = secondary.getNeighbor(getTertiaryDirection());
+        boolean ok = false;
 
-        // Add and bind the squaress
-        addSquare(SECONDARY,secondary);
-        addSquare(TERTIARY,tertiary);
-        bindAll();
+        while(!ok){
+            try{
+                this.direction = Direction.getRandomDirection();
+                // Create secondary and tertiary
+                Square primary = getSquare(PRIMARY);
+                Square secondary = primary.getNeighbor(direction);
+                Square tertiary = secondary.getNeighbor(getTertiaryDirection());
+
+                // Add and bind the squaress
+                addSquare(SECONDARY,secondary);
+                addSquare(TERTIARY,tertiary);
+                bindAll();
+                ok = true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
+
     }
 
     /**
@@ -179,4 +218,5 @@ public class PowerFailure extends Field {
     public boolean isActive(){
         return this.active;
     }
+
 }
