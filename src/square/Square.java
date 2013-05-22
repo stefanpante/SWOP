@@ -5,10 +5,7 @@ import item.Item;
 import item.inter.ItemContainer;
 
 import item.inter.Movable;
-import square.field.Field;
-import square.obstacle.Obstacle;
 import notnullcheckweaver.NotNull;
-import notnullcheckweaver.Nullable;
 import util.Direction;
 
 import java.util.ArrayList;
@@ -17,7 +14,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Square class
- * 
+ *
  * @author Dieter Castel, Jonas Devlieghere   en Stefan Pante
  */
 @NotNull
@@ -28,110 +25,77 @@ public class Square implements ItemContainer {
      */
     private ArrayList<Item> items;
 
-	/**
-	 * The obstacle of this Square object.
-	 */
-	@Nullable
-	private Obstacle obstacle;
+    /**
+     * The effects of this Square.
+     */
+    private ArrayList<Effect> effects;
 
-	/**
-	 * The effects of this Square.
-	 */
-	private ArrayList<Effect> effects;
-	
-	/**
-	 * Contains the neighbors of this square
-	 */
-	private  HashMap<Direction, Square> neighbors;
+    /**
+     * Contains the neighbors of this square
+     */
+    private  HashMap<Direction, Square> neighbors;
 
-	
-	public Square(){
-		this.items = new ArrayList<Item>();
+
+    public Square(){
+        this.items = new ArrayList<Item>();
         this.effects = new ArrayList<Effect>();
-	}
-	/**
-	 * Returns the value of the obstacle of this Square as an Obstacle.
-	 *
-	 * @return 	An object of the Obstacle class.
-	 * 			| Obstacle
-	 */
-	public Obstacle getObstacle() {
-		return obstacle;
-	}
+    }
 
-	/**
-	 * Sets the value of the obstacle of Square if the given value is valid. 
-	 * 
-	 * @param 	obstacle
-	 *			The obstacle to set.
-	 * @post 	The given value is the current value of the obstacle of this Square.
-	 */
-	@Nullable
-	public void setObstacle(Obstacle obstacle) throws IllegalArgumentException {
-		this.obstacle = obstacle;
-	}
+    /**
+     * Adds the given effect to the list of effects.
+     */
+    public void addEffect(Effect effect) throws  IllegalArgumentException{
+        if(effect == null)
+            throw new IllegalArgumentException();
+        effects.add(effect);
+    }
 
-	public void addEffect(Effect effect){
-		effects.add(effect);
-	}
-
-	public void removeField(Effect effect){
+    /**
+     * Removes the given effect from the list of effects.
+     */
+    public void removeField(Effect effect)throws  IllegalArgumentException{
+        if(effects.contains(effect))
+            throw new IllegalArgumentException();
         effects.remove(effect);
-	}
+    }
 
-	public ArrayList<Effect> getAllEffects(){
-		return new ArrayList<Effect>(this.effects);
-	}
+    public ArrayList<Effect> getAllEffects(){
+        return new ArrayList<Effect>(this.effects);
+    }
 
-	@Override
-	public String toString() {
-		String s = "Square [ ";
-		s += "Obstacle: " + obstacle;
-		s += " ]";
-		return s;
-	}
+    @Override
+    public String toString() {
+        String s = "Square [ ";
+        s += " ]";
+        return s;
+    }
 
-	/**
-	 * Returns whether this square is obstructed by an obstacle or not.
-	 * 
-	 * @return	True	if there is an obstacle which is not null.
-     *          True    if there is a field
-	 * 			False	If there is no obstacle.
-	 */
-	public boolean isObstructed(){
-	    return isCoveredByObstacle();
-	}
-	
-	public boolean isCoveredByObstacle(){
-		return obstacle != null;
-	}
+    /**
+     * Sets all the neighbors of the square instance
+     * @param neighbors	the neighbors to be set.
+     */
+    public void setNeighbors(HashMap<Direction, Square> neighbors){
+        this.neighbors = neighbors;
+    }
 
-	/**
-	 * Sets all the neighbors of the square instance
-	 * @param neighbors	the neighbors to be set.
-	 */
-	public void setNeighbors(HashMap<Direction, Square> neighbors){
-		this.neighbors = neighbors;
-	}
-	
-	/**
-	 * Returns the neighbors of the square.
-	 * @return
-	 */
-	public HashMap<Direction, Square> getNeighbors(){
-		return new HashMap<Direction, Square>(neighbors);
-	}
-	
-	/**
-	 * Returns the neighbor in the given direction
-	 * @param direction	The direction of the neighbor.
-	 * @return the neighbor in the given direction
-	 */
-	public Square getNeighbor(Direction direction) throws NoSuchElementException {
+    /**
+     * Returns the neighbors of the square.
+     * @return
+     */
+    public HashMap<Direction, Square> getNeighbors(){
+        return new HashMap<Direction, Square>(neighbors);
+    }
+
+    /**
+     * Returns the neighbor in the given direction
+     * @param direction	The direction of the neighbor.
+     * @return the neighbor in the given direction
+     */
+    public Square getNeighbor(Direction direction) throws NoSuchElementException {
         if(!neighbors.containsKey(direction))
             throw new NoSuchElementException("There is no neighbor in the given direction (" + direction + ")");
-		return neighbors.get(direction);
-	}
+        return neighbors.get(direction);
+    }
 
     @Override
     public ArrayList<Item> getAllItems(){
