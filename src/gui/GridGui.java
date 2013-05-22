@@ -88,7 +88,7 @@ public class GridGui extends GUIElement{
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
-		this.gridLabel = new Label(width, 25, new PVector(position.x, position.y -25), "The grid", gui);
+		this.gridLabel = new Label(width - OConstants.MARGIN, 25, new PVector(position.x, position.y -30), "The grid", gui);
 		this.initGrid(hCells, vCells);
 		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
 		this.squareHeight = (height- vCells * OConstants.MARGIN) / vCells;
