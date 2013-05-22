@@ -5,6 +5,7 @@ import game.mode.CTFGameMode;
 import grid.RandomGridBuilder;
 import gui.button.GUIButton;
 import gui.button.TextButton;
+import gui.message.Message;
 import item.IdentityDisc;
 import item.Item;
 
@@ -96,6 +97,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	private int hCells;
 	private int vCells;
+	
+	private ArrayList<Message> messages;
 
 	/**
 	 * initializes the objectron gui
@@ -106,7 +109,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
-
+		this.messages = new ArrayList<Message>();
 		// Loads all the shapes used.
 		@SuppressWarnings("unused")
 		Shapes shapes = new Shapes(this);
@@ -266,7 +269,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 			drawInventories();
 			drawButtons(); 
+			drawMessages();
 			showRemainingActions();
+		}
+	}
+	
+	public void drawMessages(){
+		for(Message message: messages){
+			message.draw();
 		}
 	}
 
@@ -462,6 +472,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.PLAYER_INVENTORY_PROPERTY: playerInventory.setItems((ArrayList<Item>) o);
 		break;
 		case Handler.END_TURN_PROPERTY:	endTurn = true;
+										
 		break;
 		case Handler.MESSAGE_PROPERTY: 	break;
 		case Handler.WIN_PROPERTY: 		break;

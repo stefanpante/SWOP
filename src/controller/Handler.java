@@ -208,7 +208,6 @@ public abstract class Handler {
     /**
      * Returns all the game properties needed to fire propertyChanges.
      */
-    //FIXME: Power failures
     protected HashMap<String, Object> getProperties() {
 
         HashMap<String, Object> properties = new HashMap<String, Object>();
@@ -226,7 +225,6 @@ public abstract class Handler {
 
             Square square = getGame().getGrid().getSquare(coordinate);
             squares.add(coordinate);
-            //FIXME: add powerfailures to the properties.
             boolean player_position;
 
             if (square.isObstructed()) {
