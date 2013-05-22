@@ -8,7 +8,7 @@ import square.Square;
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
-public interface Obstacle {
+public interface Obstacle{
 	
 	/**
 	 * Checks if a square is contained in the obstacle.

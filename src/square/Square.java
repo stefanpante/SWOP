@@ -3,8 +3,6 @@ package square;
 import effect.Effect;
 import item.Item;
 import item.inter.ItemContainer;
-
-import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import util.Direction;
 

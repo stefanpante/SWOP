@@ -1,6 +1,7 @@
 package square.obstacle;
 
 
+import effect.Effect;
 import square.MultiSquare;
 import square.Square;
 
@@ -13,7 +14,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
-public abstract class MultiObstacle extends MultiSquare implements Obstacle {
+public abstract class MultiObstacle extends MultiSquare implements Obstacle, Effect {
 
     /**
      * Create a new MultiObstacle
@@ -25,7 +26,7 @@ public abstract class MultiObstacle extends MultiSquare implements Obstacle {
     @Override
     public void addSquare(Square square){
         super.addSquare(square);
-        square.setObstacle(this);
+        square.addEffect(this);
     }
 
 	/**
@@ -35,7 +36,7 @@ public abstract class MultiObstacle extends MultiSquare implements Obstacle {
 	 */
 	protected boolean squaresPointBack(){
 		for(Square sq: getSquares()){
-			if(!sq.getObstacle().equals(this))
+			if(!sq.getAllEffects().contains(this))
 				return false;
 		}
 		return true;

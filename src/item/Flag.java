@@ -1,5 +1,6 @@
 package item;
 
+import item.inter.ItemContainer;
 import item.inter.Movable;
 import game.Player;
 import square.Square;
@@ -45,5 +46,22 @@ public class Flag extends Item {
      */
 	public Player getPlayer(){
 		return this.player;
+	}
+	
+	/**
+	 * Sets the container of the this flag. If the container is equal to the flags'
+	 * owner the item his container becomes the startSquare of the player and is added
+	 * to the container.
+	 */
+	@Override
+	public void setContainer(ItemContainer itemContainer){
+		if(itemContainer == this.player){
+			itemContainer.removeItem(this);
+			player.getStartPosition().addItem(this);
+		}
+		else{
+			getContainer().removeItem(this);
+			setContainer(itemContainer);
+		}
 	}
 }

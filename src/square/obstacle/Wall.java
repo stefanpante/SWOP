@@ -1,5 +1,9 @@
 package square.obstacle;
 
+import game.Player;
+import item.IdentityDisc;
+import item.inter.Movable;
+
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -62,5 +66,51 @@ public class Wall extends MultiObstacle{
     public boolean preventsField() {
         return true;
     }
+
+	@Override
+	public boolean canMoveTo() {
+		return false;
+	}
+
+	@Override
+	public void onMoveToEffect(Movable movable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMoveToEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMoveToEffect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Movable movable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStandOnEffect(IdentityDisc identityDisc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean canMoveFrom() {
+		return false;
+	}
 
 }
