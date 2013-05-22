@@ -30,7 +30,7 @@ public class GridGui extends GUIElement{
 	 * The throwpad used to throw an item.
 	 */
 	private ThrowPad throwPad;
-	
+
 	/**
 	 * The squares to be drawn onto the screen.
 	 */
@@ -44,7 +44,7 @@ public class GridGui extends GUIElement{
 	private ArrayList<SquareGUI> forcefields;
 	private ArrayList<SquareGUI> powerfails;
 	private ArrayList<SquareGUI> lightTrails_Squares;
-	
+
 	/**
 	 * The players to be drawn on the screen
 	 */
@@ -64,7 +64,7 @@ public class GridGui extends GUIElement{
 	 * The height of the square.
 	 */
 	private float squareHeight;
-	
+
 	private Label gridLabel;
 
 	/**
@@ -79,7 +79,7 @@ public class GridGui extends GUIElement{
 	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, position, gui);
-		
+
 		this.forcefields = new ArrayList<SquareGUI>();
 		this.powerfails = new ArrayList<SquareGUI>();
 		this.squares = new HashMap<Coordinate, SquareGUI>();
@@ -99,7 +99,7 @@ public class GridGui extends GUIElement{
 		this.adjustPad(directionalPad);
 		this.adjustPad(throwPad);
 	}
-	
+
 	public Label getLabel(){
 		return this.gridLabel;
 	}
@@ -112,7 +112,7 @@ public class GridGui extends GUIElement{
 	private void initGrid(int hCells, int vCells) {
 		float x = position.x;
 		float y = position.y;
-		
+
 		float swidth = (width - hCells * OConstants.MARGIN) / hCells;
 		float sHeight = (height- vCells * OConstants.MARGIN) / vCells;
 		for(int i = 0; i < vCells; i++){
@@ -158,16 +158,16 @@ public class GridGui extends GUIElement{
 
 		for(SquareGUI ff: forcefields)
 			ff.draw();
-		
+
 		for(SquareGUI pf: powerfails)
 			pf.draw();
-		
+
 		for(SquareGUI item: items.values())
 			item.draw();
-		
+
 		for(SquareGUI player: players)
 			player.draw();
-		
+
 		for(SquareGUI light: lightTrails_Squares)
 			light.draw();
 
@@ -298,15 +298,22 @@ public class GridGui extends GUIElement{
 		throwPad.mousePressed(mouseX, mouseY);
 	}
 
-	
-	
+
+
 	public void updateItems(HashMap<Coordinate,ArrayList<Item>> o){
 		items.clear();
+		for(ArrayList<Item> items: o.values()){
+			for(Item item: items){
+				if(item instanceof Flag){
+					System.out.println("Flag found");
+				}
+			}
+		}
 		for(Coordinate coor: o.keySet()){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 			s.setColor(gui.color(255,0));
 			ArrayList<Item> it = o.get(coor);
-			
+
 			if(it.size() == 1){
 				if(it.get(0) instanceof LightGrenade){
 					LightGrenade lg = (LightGrenade) it.get(0);
@@ -317,17 +324,17 @@ public class GridGui extends GUIElement{
 					s.setShape(Shapes.getShape(it.get(0)));
 				}
 			}
-			
+
 			if(it.size() >= 2){
 				if(containsTeleport(it)){
 					s.setShape(Shapes.teleportItem);
 				}
-				
+
 				if(containsFlag(it)){
 					s.setShape(Shapes.getFlagItem(it));
 				}
 			}
-			
+
 			items.put(coor,s);
 		}
 	}
