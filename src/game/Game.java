@@ -6,6 +6,8 @@ import grid.Grid;
 import java.util.*;
 import java.util.Map.Entry;
 
+import manager.ForceFieldManager;
+import manager.PowerManager;
 import notnullcheckweaver.NotNull;
 import util.Direction;
 import square.Square;
@@ -58,17 +60,15 @@ public class Game {
 	 */
 	private GameMode gameMode;
 	
-	/**
-	 * 
-	 * @param numOfPlayers
-	 */
-	
 	public Game(GameMode gameMode, int numOfPlayers){
 		this.gameMode = gameMode;
 		this.numOfPlayers = numOfPlayers;
 		gameMode.setGame(this);
 		gameMode.build();
 		this.setCurrentPlayer(players.get(0));
+
+        addObserver(new ForceFieldManager(getGrid()));
+        addObserver(new PowerManager(getGrid()));
 	}
 
 	/**
