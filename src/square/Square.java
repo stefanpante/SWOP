@@ -1,5 +1,6 @@
 package square;
 
+import effect.Effect;
 import item.Item;
 import item.inter.ItemContainer;
 
@@ -25,7 +26,7 @@ public class Square implements ItemContainer {
     /**
      * List of items on this square
      */
-    ArrayList<Item> items;
+    private ArrayList<Item> items;
 
 	/**
 	 * The obstacle of this Square object.
@@ -34,9 +35,9 @@ public class Square implements ItemContainer {
 	private Obstacle obstacle;
 
 	/**
-	 * The fields of this Square.
+	 * The effects of this Square.
 	 */
-	private ArrayList<Field> fields = new ArrayList<Field>();
+	private ArrayList<Effect> effects;
 	
 	/**
 	 * Contains the neighbors of this square
@@ -46,6 +47,7 @@ public class Square implements ItemContainer {
 	
 	public Square(){
 		this.items = new ArrayList<Item>();
+        this.effects = new ArrayList<Effect>();
 	}
 	/**
 	 * Returns the value of the obstacle of this Square as an Obstacle.
@@ -69,16 +71,16 @@ public class Square implements ItemContainer {
 		this.obstacle = obstacle;
 	}
 
-	public void addField(Field field){
-		fields.add(field);
+	public void addEffect(Effect effect){
+		effects.add(effect);
 	}
 
-	public void removeField(Field field){
-        fields.remove(field);
+	public void removeField(Effect effect){
+        effects.remove(effect);
 	}
 
-	public ArrayList<Field> getAllFields(){
-		return new ArrayList<Field>(this.fields);
+	public ArrayList<Effect> getAllEffects(){
+		return new ArrayList<Effect>(this.effects);
 	}
 
 	@Override
@@ -97,11 +99,7 @@ public class Square implements ItemContainer {
 	 * 			False	If there is no obstacle.
 	 */
 	public boolean isObstructed(){
-	    return isCoveredByObstacle() || isCoveredByField();
-	}
-	
-	public boolean isCoveredByField(){
-		return getAllFields().size() > 0;
+	    return isCoveredByObstacle();
 	}
 	
 	public boolean isCoveredByObstacle(){
@@ -192,8 +190,8 @@ public class Square implements ItemContainer {
         for(Item it: items){
             it.affect(movable);
         }
-        for(Field field: getAllFields()){
-            field.affect(movable);
+        for(Effect effect: getAllEffects()){
+            effect.affect(movable);
         }
     }
 }

@@ -314,15 +314,14 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 * 		  	thrown if the player is unable to make this move 
 	 */
 	public void move(Square position) throws IllegalStateException{
-        if(currentPosition.isCoveredByField())
-            throw new IllegalStateException("Cannot move while in a field!");
         if(!position.getNeighbors().containsValue(currentPosition))
             throw new IllegalStateException("Cannot move to non neighboring square");
+        //Decrement Actions before actual move for LightTrails.
+        decrementActions();
         position.acceptMove(this);
         setPosition(position);
 		moved = true;
 		this.setJustTeleported(false);
-        decrementActions();
 	}
 
 

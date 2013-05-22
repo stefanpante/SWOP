@@ -60,7 +60,7 @@ public class TurnHandler extends Handler implements Observer {
 	 */
 	public void endTurn(boolean skip) throws Exception {
         fireChanges();
-		if(!skip && !getGame().getCurrentPlayer().hasMoved() && !getGame().getCurrentPlayer().getPosition().isCoveredByField()){
+		if(!skip && !getGame().getCurrentPlayer().hasMoved()){
 			getGame().end();
 			throw new IllegalStateException("The current player hasn't moved in this turn " +
 					"and has no actions left and therefore lost the game");

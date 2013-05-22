@@ -42,7 +42,7 @@ public abstract class Field extends MultiSquare implements Effect {
 
     public void bindAll(){
         for(Square square : getSquares())
-            square.addField(this);
+            square.addEffect(this);
     }
 
     public void unbindAll(){
@@ -51,7 +51,7 @@ public abstract class Field extends MultiSquare implements Effect {
     }
 
     public void bind(Square square){
-        square.addField(this);
+        square.addEffect(this);
     }
 
     public void unbind(Square square){

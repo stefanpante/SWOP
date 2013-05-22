@@ -99,39 +99,22 @@ public class MoveCommand extends ActionCommand {
 		return currentPosition;
 	}
 
-	@Override
-	protected void beforeGameCommand() {
-		//NOOP
-	}
+    @Override
+    protected void beforeGameCommand() throws Exception {
+        //NOOP
+    }
 
-
-
-	@Override
+    @Override
 	protected void duringGameCommand() throws Exception {
 		move();
 	}
 
-	@Override
-	protected void afterGameCommand() throws Exception {
-		//NOOP
-	}
+    @Override
+    protected void afterGameCommand() throws Exception {
+        //NOOP
+    }
 
-	/**
-	 * Checks if the action would cause an invalidation of the model.
-	 * Checks all the precondition for the move action.
-	 */
-	@Override
-	protected void beforeActionCommand(){
-		if(!getGame().isActive())
-			throw new IllegalStateException("The game is over.");
-		if(getGame().getCurrentPlayer().getRemainingActions() <= 0)
-			throw new IllegalStateException("The current player has no remaining action left.");
-		if(getGame().isCurrentPlayerStuck())
-			throw new IllegalStateException("The current player is stuck.");
-	}
-
-
-	/**
+    /**
 	 * performs the actual move of the movable
 	 */
 	protected void move(){
