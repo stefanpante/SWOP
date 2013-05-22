@@ -1,6 +1,7 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import be.kuleuven.cs.som.annotate.*;
 
@@ -127,18 +128,20 @@ public class Coordinate {
 	}
 	
 	/**
-	 * Returns a list of all eight neighbors of this coordinate.
+	 * Returns a list of all eight neighbors of this coordinate in respect to the direction.
 	 */
-	public ArrayList<Coordinate> getAllNeighbors(){
-		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-		coordinates.add(new Coordinate(x+1, y));
-		coordinates.add(new Coordinate(x+1, y+1));
-		coordinates.add(new Coordinate(x+1, y-1));
-		coordinates.add(new Coordinate(x-1, y));
-		coordinates.add(new Coordinate(x-1, y+1));
-		coordinates.add(new Coordinate(x-1, y-1));
-		coordinates.add(new Coordinate(x	, y-1));
-		coordinates.add(new Coordinate(x	, y+1));
+	public HashMap<Direction,Coordinate> getAllNeighbors(){
+		HashMap<Direction,Coordinate> coordinates = new HashMap<Direction, Coordinate>();
+		
+		coordinates.put(Direction.EAST,new Coordinate(x+1, y));
+		coordinates.put(Direction.SOUTHEAST,new Coordinate(x+1, y+1));
+		coordinates.put(Direction.NORTHEAST,new Coordinate(x+1, y-1));
+		coordinates.put(Direction.WEST,new Coordinate(x-1, y));
+		coordinates.put(Direction.SOUTHWEST,new Coordinate(x-1, y+1));
+		coordinates.put(Direction.NORTHWEST,new Coordinate(x-1, y-1));
+		coordinates.put(Direction.NORTH,new Coordinate(x	, y-1));
+		coordinates.put(Direction.SOUTH,new Coordinate(x	, y+1));
+		
 		return coordinates;
 	}
 

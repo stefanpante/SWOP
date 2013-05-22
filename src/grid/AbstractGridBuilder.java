@@ -221,7 +221,15 @@ public abstract class AbstractGridBuilder {
      */
     protected void setNeighbors(){
     	 for(Square square: getGrid().getAllSquares()){
-         	HashMap<Direction, Square> neighbors = getGrid().getNeighbors(square);
+    		 HashMap<Direction, Square> neighbors = new HashMap<Direction, Square>();
+    		 HashMap<Direction, Coordinate> neighborsCoordinates = getGrid().getCoordinate(square).getAllNeighbors();
+    		 for(Direction direction: neighborsCoordinates.keySet()){
+    			 try{
+    				 Square s = getGrid().getSquare(neighborsCoordinates.get(direction));
+    				 neighbors.put(direction, s);
+    			 }catch(Exception ignored){/* nothing to do here */}
+    		 }
+    		 
          	square.setNeighbors(neighbors);
          }
     }

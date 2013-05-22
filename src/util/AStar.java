@@ -66,7 +66,8 @@ public class AStar {
 				return reconstructPath(current,start);
 			}
 
-			for(SquareContainer neighbour : getSquareContainers(grid.getNeighbors(current.getSquare()))){
+			
+			for(SquareContainer neighbour : getSquareContainers(current.getSquare().getNeighbors())){
 				boolean neighbourIsBetter;
 				if(neighbour.getSquare().isObstructed())
 					continue;

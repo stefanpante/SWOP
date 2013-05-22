@@ -69,6 +69,7 @@ public class TestGrid {
 		/**
 		 * Test the canMoveTo with walls
 		 */
+		@SuppressWarnings("unused")
 		@Test 
 		public void testCanMoveTo2(){
 			AbstractGridBuilder gb = new RandomGridBuilder();
@@ -78,8 +79,8 @@ public class TestGrid {
 			Square tr = grid.getSquare(new Coordinate(9,0));
 			
 			
-			Wall blWall = new Wall(grid.getNeighbor(bl, Direction.EAST),grid.getNeighbor(bl, Direction.NORTHEAST));
-			Wall trWall = new Wall(grid.getNeighbor(tr,Direction.SOUTHWEST), grid.getNeighbor(tr,Direction.SOUTH));
+			Wall blWall = new Wall(bl.getNeighbor( Direction.EAST),bl.getNeighbor(Direction.NORTHEAST));
+			Wall trWall = new Wall(tr.getNeighbor(Direction.SOUTHWEST), tr.getNeighbor(Direction.SOUTH));
 
 			
 			//TEST CORNERS.
