@@ -1,5 +1,6 @@
 package controller;
 
+import effect.Effect;
 import game.Game;
 import game.Player;
 import item.Item;
@@ -20,23 +21,24 @@ import util.Coordinate;
  */
 public abstract class Handler {
 
+	// TODO: Implements effect in property changes.
     /**
      * Property constants
      */
+    public static final String SQUARES_PROPERTY = "squares";
+
     public static final String WALLS_PROPERTY = "Walls";
     public static final String PLAYERS_PROPERTY = "Players";
+    public static final String EFFECTS_PROPERTY = "Effects";
     public static final String CURRENT_PLAYER_PROPERTY = "CurrentPlayer";
     public static final String CURRENT_POSITION_PROPERTY = "CurrentPosition";
-    public static final String MESSAGE_PROPERTY = "Message";
     public static final String SQUARE_INVENTORY_PROPERTY = "SquareInventory";
     public static final String PLAYER_INVENTORY_PROPERTY = "PlayerInventory";
-    public static final String ITEMS_PROPERTY = "items";
+    public static final String ITEMS_PROPERTY = "Items";
     public static final String END_TURN_PROPERTY = "EndTurnProperty";
-    public static final String LIGHT_TRAILS_PROPERTY = "LightTrails";
-    public static final String POWER_FAILS_PROPERTY = "PowerFails";
+    public static final String MESSAGE_PROPERTY = "Message";
     public static final String WIN_PROPERTY = "Win";
     public static final String LOSE_PROPERTY = "Lose";
-    public static final String SQUARES_PROPERTY = "squares";
 
     /**
      * The game which this handler uses.
@@ -118,38 +120,6 @@ public abstract class Handler {
         return players;
     }
 
-
-    /**
-     * Get a list of all coordinates which have a LightTrail with their associated Player.
-     *
-     * @return HashMap with coordinates of lightTrails per player List of coordinates which have a LightTrail.
-     */
-    public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
-        HashMap<Player, LightTrail> map = new HashMap<Player, LightTrail>();
-        for (Player player : getGame().getPlayers()) {
-            map.put(player, player.getLightTrail());
-        }
-        Iterator<Player> iterator = map.keySet().iterator();
-        HashMap<Player, Coordinate> players = getPlayerLocations();
-
-        HashMap<Player, ArrayList<Coordinate>> hashMap = new HashMap<Player, ArrayList<Coordinate>>();
-
-        while (iterator.hasNext()) {
-            Player player = iterator.next();
-
-            ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
-            ArrayList<Square> squares = map.get(player).getSquares();
-
-            for (Coordinate coordinate : getGame().getGrid().getAllCoordinates())
-                if (squares.contains(getGame().getGrid().getSquare(coordinate)) && !players.containsValue(coordinate))
-                    coords.add(coordinate);
-
-            hashMap.put(player, coords);
-        }
-
-        return hashMap;
-    }
-
     /**
      * Get a list of Items of the current square.
      *
@@ -192,14 +162,12 @@ public abstract class Handler {
     public void fireChanges() {
         HashMap<String, Object> properties = getProperties();
         
-        firePropertyChange(Handler.POWER_FAILS_PROPERTY, properties.get(Handler.POWER_FAILS_PROPERTY));
+        firePropertyChange(Handler.EFFECTS_PROPERTY, properties.get(Handler.EFFECTS_PROPERTY));
         firePropertyChange(Handler.SQUARES_PROPERTY, properties.get(Handler.SQUARES_PROPERTY));
-
         firePropertyChange(Handler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
         firePropertyChange(Handler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
         firePropertyChange(Handler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
         firePropertyChange(Handler.ITEMS_PROPERTY, properties.get(Handler.ITEMS_PROPERTY));
-        firePropertyChange(Handler.LIGHT_TRAILS_PROPERTY, getLightTrailLocations());
         firePropertyChange(Handler.PLAYERS_PROPERTY, properties.get(Handler.PLAYERS_PROPERTY));
         firePropertyChange(Handler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
     }
@@ -211,8 +179,7 @@ public abstract class Handler {
     protected HashMap<String, Object> getProperties() {
 
         HashMap<String, Object> properties = new HashMap<String, Object>();
-        ArrayList<Coordinate> forcefields = new ArrayList<Coordinate>();
-        ArrayList<Coordinate> powerFailures = new ArrayList<Coordinate>();
+        HashMap<Coordinate, ArrayList<Effect>> effects = new HashMap<Coordinate, ArrayList<Effect>>();
         ArrayList<Coordinate> walls = new ArrayList<Coordinate>();
         ArrayList<Coordinate> squares = new ArrayList<Coordinate>();
         HashMap<Coordinate, ArrayList<Item>> items = new HashMap<Coordinate, ArrayList<Item>>();
@@ -225,6 +192,7 @@ public abstract class Handler {
 
             Square square = getGame().getGrid().getSquare(coordinate);
             squares.add(coordinate);
+            effects.put(coordinate, square.getAllEffects());
             boolean player_position;
 
             if (square.isObstructed()) {
@@ -245,7 +213,7 @@ public abstract class Handler {
             }
         }
 
-        properties.put(Handler.POWER_FAILS_PROPERTY, powerFailures);
+        properties.put(Handler.EFFECTS_PROPERTY, effects);
         properties.put(Handler.ITEMS_PROPERTY, items);
         properties.put(Handler.WALLS_PROPERTY, walls);
         properties.put(Handler.SQUARES_PROPERTY, squares);

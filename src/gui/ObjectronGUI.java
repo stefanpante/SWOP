@@ -1,5 +1,6 @@
 package gui;
 
+import effect.Effect;
 import game.Player;
 import game.mode.CTFGameMode;
 import grid.RandomGridBuilder;
@@ -593,10 +594,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		break;
 		case Handler.PLAYERS_PROPERTY:  grid.updatePlayers((HashMap<Player,Coordinate>) o);
 		break;
-		case Handler.POWER_FAILS_PROPERTY: grid.updatePowerFailures((ArrayList<Coordinate>) o);
-		break;
-		case Handler.LIGHT_TRAILS_PROPERTY: grid.updateLightTrails((HashMap<Player,ArrayList<Coordinate>>) o);
-		break;
+		case Handler.EFFECTS_PROPERTY: grid.updateEffects((HashMap<Coordinate, ArrayList<Effect>>) o);
 		case Handler.CURRENT_POSITION_PROPERTY: grid.setCurrentPlayer((Coordinate) o );
 		changePlayer();
 		break;
