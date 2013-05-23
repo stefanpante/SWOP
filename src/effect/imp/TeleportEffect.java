@@ -21,7 +21,7 @@ public class TeleportEffect extends DropFlagEffect {
      */
     public TeleportEffect(Square centerSquare, Square teleportDestination) {
         super(centerSquare);
-        setPriority(EffectPriority.MoveDeparture);
+        setPriority(EffectPriority.Move);
     }
 
     public Square getTeleportDestination() {
