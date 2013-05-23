@@ -5,6 +5,7 @@ import game.Player;
 import item.Flag;
 import item.IdentityDisc;
 import item.Item;
+import square.GridElement;
 import square.Square;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.Random;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class DropFlagEffect extends Effect {
-    Square centerSquare;
+    private Square centerSquare;
 
     /**
      * Creates a new  DropflagEffect with a square around which the flag will be dropped.
@@ -45,10 +46,19 @@ public abstract class DropFlagEffect extends Effect {
         if(flag != null){
             player.removeItem(flag);
             Random rnd = new Random();
-            ArrayList<Square> neighbors = new ArrayList<>(getCenterSquare().getNeighbors().values());
+            ArrayList<GridElement> neighbors = new ArrayList<GridElement>(getCenterSquare().getNeighbors().values());
             int randomIndex = rnd.nextInt(neighbors.size());
-            Square newLocation = neighbors.get(randomIndex);
-            newLocation.addItem(flag);
+            
+            boolean foundLocation = false;
+            GridElement newLocation = null;
+            while(!foundLocation){
+            	newLocation = neighbors.get(randomIndex);
+            	if(newLocation.isSameType(new Square())){
+            		((Square) newLocation).addItem(flag);
+            		break;
+            	}
+            }
+            
         }
     }
 }
