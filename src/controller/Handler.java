@@ -9,6 +9,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import square.GridElement;
 import square.Square;
 import util.Coordinate;
 
@@ -186,28 +187,32 @@ public abstract class Handler {
 
         for (Coordinate coordinate : getGame().getGrid().getAllCoordinates()) {
 
-            items.put(coordinate, getGame().getGrid().getGridElement(coordinate).getAllItems());
+            GridElement gridElement = getGame().getGrid().getGridElement(coordinate);
 
-            Square square = getGame().getGrid().getGridElement(coordinate);
-            squares.add(coordinate);
-            effects.put(coordinate, square.getAllEffects());
-            boolean player_position;
+            if(gridElement.isSameType(new Square())){
+                Square square = (Square) gridElement;
 
-            if (square.isObstacle()) {
-                player_position = false;
+                items.put(coordinate, square.getAllItems());
+                squares.add(coordinate);
+                effects.put(coordinate, square.getAllEffects());
+                boolean player_position;
+
+                if (square.isObstacle()) {
+                    player_position = false;
+
+                    for (Player player : getGame().getPlayers()) {
+                        if (player.getPosition() == square)
+                            player_position = true;
+                    }
+
+                    if (!player_position)
+                        walls.add(coordinate);
+                }
 
                 for (Player player : getGame().getPlayers()) {
                     if (player.getPosition() == square)
-                        player_position = true;
+                        players.put(player, coordinate);
                 }
-
-                if (!player_position)
-                    walls.add(coordinate);
-            }
-
-            for (Player player : getGame().getPlayers()) {
-                if (player.getPosition() == square)
-                    players.put(player, coordinate);
             }
         }
 

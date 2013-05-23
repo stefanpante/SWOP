@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
+import square.GridElement;
 import square.Square;
 
 public class AStar {
@@ -26,10 +27,13 @@ public class AStar {
 	
 	private void boxAllSquares(Grid grid, Square start, Square goal) {
 		this.source = new ArrayList<SquareContainer>();
-		for(Square square : grid.getAllGridElements()){
-			SquareContainer sq = new SquareContainer(square);
-			sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
-			this.source.add(sq);
+		for(GridElement gridElement : grid.getAllGridElements()){
+            if(gridElement.isSameType(new Square())){
+                Square square = (Square) gridElement;
+                SquareContainer sq = new SquareContainer(square);
+                sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
+                this.source.add(sq);
+            }
 		}
 	}
 	
@@ -210,13 +214,5 @@ public class AStar {
 		private AStar getOuterType() {
 			return AStar.this;
 		}
-		
-		
-
-		
-		
 	}
-	
-
-	
 }

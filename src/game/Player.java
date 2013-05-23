@@ -138,19 +138,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 		return actions <= Player.MAX_ALLOWED_ACTIONS;
 	}
 
-	
-	/**
-	 * A new position square is valid when it is not null and
-	 * when it does not equal the current square.
-	 * 
-	 * @returns	True	Square is not null and does not equal current position.
-	 * @returns	False	Square is null or equals current position.
-	 */
-	@Override
-	public boolean isValidSquare(Square square) {
-        return square != null && square != currentPosition;
-    }
-	
 	/**
 	 * Checks whether a given number of actions is a valid number of actions to lose.
 	 * @return 		true if the number is larger than or equal to zero.
@@ -176,19 +163,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 		return moved;
 	}
 
-	/**
-	 * A player doesn't bounce back a launchable item when he is hit by it.
-	 */
-	@Override
-	public boolean bouncesBack() {
-		return false;
-	}
-
-    @Override
-    public boolean preventsField() {
-        return false;
-    }
-
     /**
      * Returns the maximum amount of items a player can carry.
      */
@@ -208,17 +182,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 	}
 
 	/**
-	 * Returns whether the player covers the given square
-	 * 
-	 * @param 	square
-	 * 			The square to check.
-	 */
-	@Override
-	public boolean contains(Square square) {
-		return square.equals(currentPosition);
-	}
-
-	/**
 	 * Sets the start position for the player
 	 * 
 	 * @param	pos	the position to be used as the start position for the player
@@ -229,15 +192,12 @@ public class Player extends Observable implements Movable, ItemContainer {
 		if(!isValidStartPosition(pos))
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		this.startPosition = pos;
-		addSquare(startPosition);
 	}
 
     @Override
     public void setPosition(Square position) throws IllegalStateException {
         if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
-		removeSquare(this.getPosition());
-		addSquare(position);
 	}
 
     @Override
@@ -439,37 +399,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 		}
 		
 		this.remainingActions = remainingActions;
-	}
-	
-	/**
-	 * Adds a given square as a square covered by the player obstacle.
-	 * 
-	 * @param 	square
-	 * 			The square to add.
-	 * @throws	IllegalArgumentException
-	 * 			If the given square can not be added as a square.
-	 * 			| !isValidSquare()
-	 */
-	@Override
-	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidSquare(square))
-			throw new IllegalArgumentException("The given " + square + " is not a valid square");
-		currentPosition = square;
-	}
-
-	/**
-	 * Removes the given square as a covered square of this obstacle.
-	 * 
-	 * @post	getPosition() == null
-	 * @throws	IllegalArgumentException
-	 * 			If the given square is not the currentPosition of this player.
-	 * 			| !square.equals(getPosition())
-	 */
-	@Override
-	public void removeSquare(Square square) throws IllegalArgumentException {
-		if(!square.equals(this.getPosition()))
-			throw new IllegalArgumentException("Can't remove the"+ square +" that is not covered by this player");
-		currentPosition = null;
 	}
 	
 	/**
