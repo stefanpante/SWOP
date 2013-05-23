@@ -1,7 +1,6 @@
 package item;
 
 import effect.Effect;
-import effect.event.DropFlagEvent;
 import effect.imp.EmptyEffect;
 import effect.imp.LightGrenadeEffect;
 import item.inter.Movable;
