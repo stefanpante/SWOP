@@ -1,8 +1,6 @@
 package item;
 
 import effect.imp.EmptyEffect;
-import effect.imp.ForceFieldEffect;
-import game.Player;
 import effect.Effect;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
@@ -38,7 +36,7 @@ public class IdentityDisc extends Item implements Movable {
     /**
      * The position of the movable.
      */
-    private Square position;
+    private Square currentPosition;
     private Square previousPosition;
 
     public IdentityDisc() {
@@ -138,21 +136,25 @@ public class IdentityDisc extends Item implements Movable {
 
 	@Override
 	public void move(Square square) throws IllegalStateException {
-        if(!position.getNeighbors().containsValue(square))
+        if(!currentPosition.getNeighbors().containsValue(square))
             throw new IllegalStateException("Cannot move to non neighboring square");
-        setPosition(square);
+        setPosition(square, true);
 	}
 
     @Override
     public void setPosition(Square square, boolean updatePrevious) {
-        // FIXME
+        if(updatePrevious){
+            getContainer().removeItem(this);
+            this.previousPosition = this.currentPosition;
+            this.currentPosition = square;
+            currentPosition.addItem(this);
+            currentPosition.affect(this);
+        }else{
+            this.currentPosition = square;
+        }
     }
 
-    public void setPosition(Square square){
-        getContainer().removeItem(this);
-        square.addItem(this);
-		this.position = square;
-	}
+
 
 	@Override
 	public void resetRange() {
@@ -161,7 +163,7 @@ public class IdentityDisc extends Item implements Movable {
 
 	@Override
 	public Square getPosition() {
-		return position;
+		return currentPosition;
 	}
 
     @Override
