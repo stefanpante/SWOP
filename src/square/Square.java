@@ -110,7 +110,12 @@ public class Square extends GridElement implements ItemContainer {
 		return new ArrayList<Item>(items);
 	}
 
-	@Override
+    @Override
+    public boolean isSameType(ItemContainer itemContainer) {
+        return itemContainer instanceof Square;
+    }
+
+    @Override
 	public void addItem(Item item){
 		if(!isValidItem(item))
 			throw new IllegalArgumentException("The given item is not valid (cannot be null)");

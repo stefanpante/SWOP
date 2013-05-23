@@ -469,4 +469,9 @@ public class Player extends Observable implements Movable, ItemContainer {
         return new ArrayList<Item>(items);
     }
 
+    @Override
+    public boolean isSameType(ItemContainer itemContainer) {
+        return itemContainer instanceof Player;
+    }
+
 }

@@ -2,6 +2,8 @@ package item;
 
 import effect.Effect;
 import effect.event.DropFlagEvent;
+import effect.imp.EmptyEffect;
+import effect.imp.LightGrenadeEffect;
 import effect.imp.TeleportEffect;
 import item.inter.Movable;
 import game.Player;
@@ -124,7 +126,11 @@ public class Teleport extends Item {
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();
-        //TODO: Square should be set in square! effects.add(new TeleportEffect());
+        if(getContainer().isSameType(new Square())){
+            effects.add(new TeleportEffect((Square) getContainer(), getDestination()));
+        }else{
+            effects.add(new EmptyEffect());
+        }
         return effects;
     }
 }
