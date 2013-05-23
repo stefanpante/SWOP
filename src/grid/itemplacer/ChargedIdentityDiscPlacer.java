@@ -7,6 +7,7 @@ import item.ChargedIdentityDisc;
 
 import java.util.ArrayList;
 
+import square.GridElement;
 import square.Square;
 import util.AStar;
 
@@ -54,18 +55,19 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
     	for(Player player: getPlayers())
     		playerSquares.add(player.getStartPosition());
  
-    	for(Square square : getGrid().getAllGridElements()){
-            if(!square.isObstructed()){
+    	for(GridElement gridElement : getGrid().getAllGridElements()){
+            if(!gridElement.isObstacle()){
                 try{
                     AStar aStar = new AStar(getGrid());
                     ArrayList<Integer> lengths = new ArrayList<Integer>();
                     for(Square playerSquare: playerSquares){
                     	AStar astar = new AStar(getGrid());
-                    	lengths.add(astar.shortestPath(playerSquare, square).size());
+                    	lengths.add(astar.shortestPath(playerSquare, gridElement).size());
                     }
                     
                     if(compareLengths(lengths))
-                    	return square;
+                    	if(gridElement instanceof Square)
+                    		return (Square) gridElement;
                 }catch(Exception e){
                     System.err.println(e.getMessage());
                 }

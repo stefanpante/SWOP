@@ -8,6 +8,7 @@ import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Item;
+import square.GridElement;
 import square.Square;
 import util.Coordinate;
 
@@ -73,9 +74,10 @@ public abstract class ItemPlacer {
 	 * 			The item to be placed on the given coordinate
 	 */
 	protected void placeItem(Square square, Item item) throws IllegalArgumentException {
-		if(square == null || square.isObstructed())
+		if(square == null || square.isObstacle())
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
+
 		square.addItem(item);
 	}
 	
@@ -97,7 +99,7 @@ public abstract class ItemPlacer {
         // Removed obstructed squares from candidates
         ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
         for(Coordinate coordinate : candidates){
-            if(getGrid().getGridElement(coordinate).isObstructed())
+            if(getGrid().getGridElement(coordinate).isObstacle())
                 toBeRemoved.add(coordinate);
         }
         candidates.removeAll(toBeRemoved);
@@ -142,7 +144,7 @@ public abstract class ItemPlacer {
             for (int y =startY; y<=endY; y++){
                     Coordinate coor =new Coordinate(x,y);
                     try{
-	                    if(!getGrid().getGridElement(coor).isObstructed()){
+	                    if(!getGrid().getGridElement(coor).isObstacle()){
 	                        coordinates.add(coor);
 	                    }
                     }

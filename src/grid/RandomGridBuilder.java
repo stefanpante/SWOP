@@ -23,15 +23,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	public RandomGridBuilder() {
 		setHSize(10);
         setVSize(10);
-		setGrid(new Grid(10, 10));
 		setRandom(new Random());
 		setSquares();
 		setNeighbors();
+		setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
+		setStartPositions();
 		setEmptyConstraints();
-		for(Coordinate coor: getStartPositions()){
-			Square s = getGrid().getGridElement(coor);
-			getGrid().addStartPosition(s);
-		}
 	}
 	
 	/**
@@ -49,9 +46,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		super();
 		setHSize(hSize);
         setVSize(vSize);
-		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
-		
 		build();
 	}
 
@@ -77,12 +72,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		super();
 		setHSize(hSize);
 	    setVSize(vSize);
-		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
 		setEmptyConstraints();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		build(walls);
+		
 	}
 
 	/**
@@ -107,13 +102,11 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	@Override
 	protected void build() throws IllegalStateException {
 		setSquares();
-		for(Coordinate coor: getStartPositions()){
-			Square s = getGrid().getGridElement(coor);
-			getGrid().addStartPosition(s);
-		}
 		setNeighbors();
 		setConstraints();
-		placeWalls(randomWallLocations(getConstraintWall()));		
+		placeWalls(randomWallLocations(getConstraintWall()));
+		setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
+		setStartPositions();
 	}
 
 	/**
@@ -128,19 +121,17 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build(ArrayList<ArrayList<Coordinate>> walls)
 	throws IllegalStateException{
 		setSquares();
-		for(Coordinate coor: getStartPositions()){
-			Square s = getGrid().getGridElement(coor);
-			getGrid().addStartPosition(s);
-		}
 		setNeighbors();
 		placeWalls(walls);
+		setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
+		setStartPositions();
 		
 	}
 	
 
 	private void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		for(Coordinate coor: getStartPositions()){
+		for(Coordinate coor: getStartCoordinates()){
 			excluded.add(coor);
 		}
 		setConstraintWall(new GridConstraint(Grid.PERCENTAGE_WALLS, excluded));
@@ -200,8 +191,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 	} 
     
-	@Override
-    public ArrayList<Coordinate> getStartPositions(){
+    private ArrayList<Coordinate> getStartCoordinates(){
     	ArrayList<Coordinate> startPositions = new ArrayList<Coordinate>();
     	
     	
@@ -248,9 +238,14 @@ public class RandomGridBuilder extends AbstractGridBuilder{
         for(int x = 0; x < getGrid().getHSize(); x++){
             for(int y = 0; y < getGrid().getVSize(); y++){
                 coordinate = new Coordinate(x, y);
-               this.gridElements.put(coordinate, new Square());
+                Square square = new Square();
+               this.gridElements.put(coordinate, square);
+               if(getStartCoordinates().contains(coordinate)){
+            	   this.startPositions.add(square);
+               }
             }
         }
+        
     }
 
 }

@@ -140,7 +140,7 @@ public class GridConstraint {
 
         boolean[] includes = new boolean[getIncluded().size()];
         for(Coordinate coordinate : coordinates){
-            if(grid.getGridElement(coordinate).isObstructed())
+            if(grid.getGridElement(coordinate).isObstacle())
                 return false;
             if(getExcluded().contains(coordinate))
                 return false;

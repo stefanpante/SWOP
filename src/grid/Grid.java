@@ -1,5 +1,6 @@
 package grid;
 
+import item.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -389,7 +390,7 @@ public class Grid {
 				g1 = getNeighbor(fromGridElement, dirs.get(0)); 
 				g2 = getNeighbor(fromGridElement, dirs.get(1));
 			} catch (Exception exp){
-				//This should never happen since directionGridElement exists.
+				//This should never happen since directionG exists.
 				assert(false);
 			}
 			if(g1 != null && g2 != null){
