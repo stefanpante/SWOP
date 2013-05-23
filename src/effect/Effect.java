@@ -6,53 +6,24 @@ import item.inter.Movable;
 
 /**
  * User: jonas
- * Date: 22/05/13
- * Time: 17:44
+ * Date: 23/05/13
+ * Time: 12:22
  */
-public interface Effect {
+public abstract class Effect {
 
-    /**
-     * Indicates whether this Effect prohibits the player
-     *
-     * @return  True if and only if the Movable can move to the
-     *          owner of this effect.
-     */
-    public boolean prohibitsPlayer();
+    private EffectPriority effectPriority;
 
-    /**
-     * Affect the Movable with this Effect on moving onto
-     * the owner of this Effect.
-     *
-     * @param   movable
-     *          The movable to be affected on moving
-     *          onto the owner of this effect.
-     */
-    public void onMoveToEffect(Movable movable);
 
-    public void onMoveToEffect(Player player);
+    public void setPriority(EffectPriority effectPriority){
+        this.effectPriority = effectPriority;
+    }
 
-    public void onMoveToEffect(IdentityDisc identityDisc);
+    public boolean hasPriority(EffectPriority effectPriority){
+        return this.effectPriority == effectPriority;
+    }
 
-    /**
-     * Affect the Movable with this Effect on standing on
-     * the owner of this Effect.
-     *
-     * @param   movable
-     *          The movable to be affected on standing
-     *          on the owner of this effect.
-     */
-    public void onStandOnEffect(Movable movable);
+    public abstract void execute(Player player);
 
-    public void onStandOnEffect(Player player);
+    public abstract void execute(IdentityDisc identityDisc);
 
-    public void onStandOnEffect(IdentityDisc identityDisc);
-
-    /**
-     * Indicates whether this Effect prohibits the movable from
-     * moving from the owner of this effect.
-     *
-     * @return  True if and only if the Movable can move from the
-     *          owner of this effect.
-     */
-    public boolean canMoveFrom();
 }
