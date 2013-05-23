@@ -76,9 +76,10 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * The amount of action a player has during one move
 	 */
 	public static final int MAX_ALLOWED_ACTIONS = 4;
-	
-		
-	/**
+    private Square previousPosition;
+
+
+    /**
 	 * creates a new player with a given name and start position
 	 * 
 	 * @param	startPosition	
@@ -195,10 +196,22 @@ public class Player extends Observable implements Movable, ItemContainer {
 	}
 
     @Override
-    public void setPosition(Square position) throws IllegalStateException {
+    public void setPosition(Square position, boolean updatePrevious) throws IllegalStateException {
         if(!isValidPosition(position))
-			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
+			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
+        if(updatePrevious){
+            this.previousPosition = this.currentPosition;
+            this.currentPosition = position;
+            position.affect(this);
+        }else{
+            this.currentPosition = position;
+        }
 	}
+
+    @Override
+    public Square getPreviousPosition(){
+        return this.previousPosition;
+    }
 
     @Override
     public int getRange() {
@@ -279,8 +292,8 @@ public class Player extends Observable implements Movable, ItemContainer {
         if(!position.getNeighbors().containsValue(currentPosition))
             throw new IllegalStateException("Cannot move to non neighboring square");
         //Decrement Actions before actual move for LightTrails.
+        position.affect(this);
         decrementActions();
-        setPosition(position);
 		moved = true;
 	}
 

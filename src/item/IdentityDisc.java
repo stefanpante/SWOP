@@ -39,6 +39,7 @@ public class IdentityDisc extends Item implements Movable {
      * The position of the movable.
      */
     private Square position;
+    private Square previousPosition;
 
     public IdentityDisc() {
         this(MAX_TRAVEL_DISTANCE);
@@ -141,8 +142,13 @@ public class IdentityDisc extends Item implements Movable {
             throw new IllegalStateException("Cannot move to non neighboring square");
         setPosition(square);
 	}
-	
-	public void setPosition(Square square){
+
+    @Override
+    public void setPosition(Square square, boolean updatePrevious) {
+        // FIXME
+    }
+
+    public void setPosition(Square square){
         getContainer().removeItem(this);
         square.addItem(this);
 		this.position = square;
@@ -157,6 +163,11 @@ public class IdentityDisc extends Item implements Movable {
 	public Square getPosition() {
 		return position;
 	}
+
+    @Override
+    public Square getPreviousPosition() {
+        return previousPosition;
+    }
 
     @Override
     public ArrayList<Effect> getEffects() {

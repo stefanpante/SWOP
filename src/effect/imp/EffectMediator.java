@@ -1,6 +1,7 @@
 package effect.imp;
 
 import effect.Effect;
+import effect.EffectPriority;
 import effect.filter.*;
 import square.Square;
 
@@ -19,30 +20,41 @@ public class EffectMediator {
         this.effects = effects;
     }
 
+    private ArrayList<Effect> getSquareEffectBy(EffectPriority priority){
+        PriorityCriteria priorityCriteria = new PriorityCriteria(priority);
+        return priorityCriteria.meetsCriteria(this.effects);
+    }
+
     public ArrayList<Effect> getResultingEffects(){
-        ArrayList<Effect> forceFieldEffects = getSquareEffectBy(new ForceFieldCriteria());
-        if(forceFieldEffects.size() > 0)
-            return forceFieldEffects;
-
-        ArrayList<Effect> playerEffects = getSquareEffectBy(new PlayerCriteria());
-        if(playerEffects.size() > 0)
-            return  playerEffects;
-
-        ArrayList<Effect> moveBlockingEffects = getSquareEffectBy(new MoveBlockingCriteria());
-        if(moveBlockingEffects.size() > 0)
-            return moveBlockingEffects;
-
-        ArrayList<Effect> moveEffects = getSquareEffectBy(new MoveCriteria());
-        if(moveEffects.size() > 0)
-            return moveEffects;
-
-        ArrayList<Effect> itemEffects = getSquareEffectBy(new ItemCriteria());
-        return  itemEffects;
-
+        int length = EffectPriority.values().length;
+        return getEffectsBetween(EffectPriority.values()[0],EffectPriority.values()[length-1]);
     }
 
-    private ArrayList<Effect> getSquareEffectBy(PriorityCriteria criteria){
-        return criteria.meetsCriteria(this.effects);
+    public ArrayList<Effect> getEffectsBetween(EffectPriority low, EffectPriority high){
+        int lowIndex = low.ordinal();
+        int highIndex = high.ordinal();
+
+        if(lowIndex > highIndex)
+            throw new IllegalArgumentException("The priority for low is higher than for high.");
+
+        boolean nextOneBlocked = false;
+        for(int i = lowIndex; i <= highIndex; i++){
+            ArrayList<Effect> effects = getSquareEffectBy(EffectPriority.values()[i]);
+            if(effects.size() > 0){
+                if(EffectPriority.values()[i] == EffectPriority.MoveEffectBlock){
+                    nextOneBlocked = true;
+                }else{
+                    if(!nextOneBlocked){
+                        return effects;
+                    }else{
+                        nextOneBlocked = false;
+                    }
+                }
+            }
+        }
+        return new ArrayList<>();
     }
+
+
 
 }
