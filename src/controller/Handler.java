@@ -170,7 +170,7 @@ public abstract class Handler {
         firePropertyChange(Handler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
         firePropertyChange(Handler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
         firePropertyChange(Handler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
-        firePropertyChange(Handler.LIGHTTRAIL_PROPERTY,getLightTrailLocations())l
+        firePropertyChange(Handler.LIGHTTRAIL_PROPERTY,getLightTrailLocations());
         firePropertyChange(Handler.ITEMS_PROPERTY, properties.get(Handler.ITEMS_PROPERTY));
         firePropertyChange(Handler.PLAYERS_PROPERTY, properties.get(Handler.PLAYERS_PROPERTY));
         firePropertyChange(Handler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
