@@ -7,6 +7,7 @@ import item.Teleport;
 
 import java.util.ArrayList;
 
+import square.GridElement;
 import square.Square;
 import util.Coordinate;
 
@@ -31,9 +32,12 @@ public class TeleportPlacer extends ItemPlacer {
 		for(Coordinate coor: coordinates){
 			Teleport teleport = new Teleport();
 			teleports.add(teleport);
-			Square square = getGrid().getGridElement(coor);
-			destinations.add(square);
-			placeItem(square, teleport);
+			GridElement square = getGrid().getGridElement(coor);
+			if(square.isSameType(new Square())){
+				Square s = (Square) square;
+				destinations.add(s);
+				placeItem(s, teleport);
+			}
 		}
 
 		this.linkTeleports(teleports, destinations);

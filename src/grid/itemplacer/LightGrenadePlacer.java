@@ -6,6 +6,8 @@ import grid.GridConstraint;
 import item.LightGrenade;
 
 import java.util.ArrayList;
+
+import square.Square;
 import util.Coordinate;
 
 /**
@@ -36,7 +38,8 @@ public class LightGrenadePlacer extends ItemPlacer{
 	public void placeItems(){
 		ArrayList<Coordinate> coordinates = getLocations();
 		for(Coordinate coor: coordinates){
-			placeItem(getGrid().getGridElement(coor), new LightGrenade());
+			if(getGrid().getGridElement(coor).isSameType(new Square()))
+				placeItem((Square) getGrid().getGridElement(coor), new LightGrenade());
 		}
 	}
 	

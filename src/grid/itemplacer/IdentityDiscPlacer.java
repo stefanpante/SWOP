@@ -6,6 +6,7 @@ import grid.GridConstraint;
 import item.IdentityDisc;
 import java.util.ArrayList;
 
+import square.Square;
 import util.Coordinate;
 
 /**
@@ -37,8 +38,9 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	public void placeItems(){
 		ArrayList<Coordinate> coordinates = getLocations();
 		for(Coordinate coor: coordinates){
-			placeItem(getGrid().getGridElement(coor), new IdentityDisc());
-		}
+			if(getGrid().getGridElement(coor).isSameType(new Square()))
+				placeItem((Square) getGrid().getGridElement(coor), new IdentityDisc());
+		}	
 	}
 	
 	public ArrayList<ArrayList<Coordinate>> getIncluded(){
