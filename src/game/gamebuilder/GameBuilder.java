@@ -56,6 +56,9 @@ public class GameBuilder {
 	 */
 	public void constructPlayers(){
 		ArrayList<Square> startPositions = this.game.getGrid().getStartPositions();
+		for(Square s: game.getGrid().getStartPositions()){
+			System.out.println(game.getGrid().getCoordinate(s));
+		}
 
 		if(startPositions.size() < numOfPlayers){
 			throw new IllegalStateException("The number of players cannot be more than the number of startpositions");
@@ -64,6 +67,7 @@ public class GameBuilder {
 
 		for(int i = 0; i < this.numOfPlayers; i++){
 			players.add(new Player(startPositions.get(i), i + 1));
+			System.out.println("Player " + i + " Startposition: " + game.getGrid().getCoordinate(players.get(i).getStartPosition()));
 		}
 		this.game.setPlayers(players);
 	}

@@ -37,6 +37,7 @@ public class TeleportPlacer extends ItemPlacer {
 				Square s = (Square) square;
 				destinations.add(s);
 				placeItem(s, teleport);
+				System.out.println("teleport placed");
 			}
 		}
 

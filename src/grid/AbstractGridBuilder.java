@@ -191,17 +191,16 @@ public abstract class AbstractGridBuilder {
 	 * 			The coordinates where to place the walls
 	 */
 	protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
-		if(!getConstraintWall().satisfiesConstraint(flatten(walls), getGrid()))
-			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
-		for(ArrayList<Coordinate> sequence : walls){
-			ArrayList<GridElement> toRemove = getGrid().getGridElements(sequence);
-			
+		/*if(!getConstraintWall().satisfiesConstraint(flatten(walls), getGrid()))
+			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");*/
+		for(ArrayList<Coordinate> sequence : walls){			
 			ArrayList<Brick> bricks = new ArrayList<Brick>();
 			for(Coordinate coor: sequence){
 				Brick brick = new Brick();
 				this.gridElements.put(coor, brick);
 			}
-			this.walls.add(new Wall(bricks));
+			//FIXME
+			//this.walls.add(new Wall(bricks));
 		}
 	}
 

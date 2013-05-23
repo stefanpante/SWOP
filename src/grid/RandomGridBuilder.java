@@ -156,9 +156,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		int maxPercentageLength;
 		/* Determine length */
 		if(direction == Direction.NORTH){
-			maxPercentageLength = Math.round(Grid.LENGTH_PERCENTAGE_WALL * getGrid().getVSize());
+			maxPercentageLength = Math.round(Grid.LENGTH_PERCENTAGE_WALL * getVSize());
 		}else{
-			maxPercentageLength = Math.round(Grid.LENGTH_PERCENTAGE_WALL * getGrid().getHSize());
+			maxPercentageLength = Math.round(Grid.LENGTH_PERCENTAGE_WALL * getHSize());
 		}
 		int length = Math.min(maxWallLength, maxPercentageLength);
 		/* Choose start candidate and start constructing wall */
@@ -195,10 +195,10 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     	ArrayList<Coordinate> startPositions = new ArrayList<Coordinate>();
     	
     	
-    	startPositions.add(new Coordinate(0, getGrid().getVSize() -1));
-    	startPositions.add(new Coordinate(getGrid().getHSize() - 1, 0));
+    	startPositions.add(new Coordinate(0, getVSize() -1));
+    	startPositions.add(new Coordinate(getHSize() - 1, 0));
     	startPositions.add(new Coordinate(0,0));
-    	startPositions.add(new Coordinate(getGrid().getHSize()-1, getGrid().getVSize() -1));
+    	startPositions.add(new Coordinate(getHSize()-1, getVSize() -1));
     	
     	return startPositions;
     }
@@ -211,7 +211,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @return	A list of sequences of coordinates.
 	 */
 	protected ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint) {
-		ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
+		ArrayList<Coordinate> candidates = new ArrayList<Coordinate>(gridElements.keySet());
 		ArrayList<ArrayList<Coordinate>> result = new ArrayList<ArrayList<Coordinate>>();
 		
 		// Removed excluded squares from candidates
@@ -235,8 +235,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     @Override
     protected void setSquares() {
         Coordinate coordinate;
-        for(int x = 0; x < getGrid().getHSize(); x++){
-            for(int y = 0; y < getGrid().getVSize(); y++){
+        for(int x = 0; x < getHSize(); x++){
+            for(int y = 0; y < getVSize(); y++){
                 coordinate = new Coordinate(x, y);
                 Square square = new Square();
                this.gridElements.put(coordinate, square);

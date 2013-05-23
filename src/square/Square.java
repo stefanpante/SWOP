@@ -141,7 +141,7 @@ public class Square extends GridElement implements ItemContainer {
 
 	@Override
 	public boolean hasType(Item item) {
-		return filterItemsByType(item) != null;
+		return filterItemsByType(item).size() > 0;
 	}
 
 	@Override

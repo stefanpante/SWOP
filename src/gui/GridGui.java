@@ -37,6 +37,7 @@ public class GridGui extends GUIElement{
 	 */
 	private HashMap<Coordinate, SquareGUI> squares;
 	private HashMap<Coordinate, SquareGUI> items;
+	private HashMap<Coordinate, PVector> positions;
 
 	/**
 	 * the walls to be drawn on the screen
@@ -91,6 +92,7 @@ public class GridGui extends GUIElement{
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
+		this.positions = new HashMap<Coordinate, PVector>();
 		this.gridLabel = new Label(width - OConstants.MARGIN, 25, new PVector(position.x, position.y -30), "The grid", gui);
 		this.initGrid(hCells, vCells);
 		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
@@ -123,6 +125,7 @@ public class GridGui extends GUIElement{
 				PVector pos = new PVector(x,y);
 				SquareGUI s = new SquareGUI( swidth, sHeight,pos, gui);
 				squares.put(new Coordinate(j,i),s);
+				positions.put(new Coordinate(j,i),pos);
 				x += swidth + OConstants.MARGIN;
 			}
 			x = position.x;
@@ -257,8 +260,8 @@ public class GridGui extends GUIElement{
 
 
 	private PVector getPixels(Coordinate coor) {
-		if(squares.containsKey(coor)){
-			return squares.get(coor).getPosition();
+		if(positions.containsKey(coor)){
+			return positions.get(coor);
 		}
 
 		return new PVector();

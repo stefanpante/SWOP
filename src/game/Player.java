@@ -192,6 +192,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 		if(!isValidStartPosition(pos))
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		this.startPosition = pos;
+		this.currentPosition = pos;
 	}
 
     @Override

@@ -595,6 +595,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.PLAYERS_PROPERTY:  grid.updatePlayers((HashMap<Player,Coordinate>) o);
 		break;
 		case Handler.EFFECTS_PROPERTY: grid.updateEffects((HashMap<Coordinate, ArrayList<Effect>>) o);
+		break;
 		case Handler.CURRENT_POSITION_PROPERTY: grid.setCurrentPlayer((Coordinate) o );
 		changePlayer();
 		break;
@@ -620,6 +621,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	
 	
 	}
+
+	
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {

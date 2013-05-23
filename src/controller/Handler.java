@@ -9,6 +9,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import square.Brick;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
@@ -25,8 +26,6 @@ public abstract class Handler {
      * Property constants
      */
     public static final String SQUARES_PROPERTY = "squares";
-
-    public static final String WALLS_PROPERTY = "Walls";
     public static final String PLAYERS_PROPERTY = "Players";
     public static final String EFFECTS_PROPERTY = "Effects";
     public static final String CURRENT_PLAYER_PROPERTY = "CurrentPlayer";
@@ -38,6 +37,7 @@ public abstract class Handler {
     public static final String MESSAGE_PROPERTY = "Message";
     public static final String WIN_PROPERTY = "Win";
     public static final String LOSE_PROPERTY = "Lose";
+	public static final String WALLS_PROPERTY = "walls";
 
     /**
      * The game which this handler uses.
@@ -125,6 +125,7 @@ public abstract class Handler {
      * @return ArrayList<item>	List of all items of the current square.
      */
     public ArrayList<Item> getSquareItems() {
+    	System.out.println("is Current player position null? " + getGame() == null);
         return getGame().getCurrentPlayer().getPosition().getAllItems();
     }
 
@@ -191,7 +192,7 @@ public abstract class Handler {
 
             if(gridElement.isSameType(new Square())){
                 Square square = (Square) gridElement;
-
+                
                 items.put(coordinate, square.getAllItems());
                 squares.add(coordinate);
                 effects.put(coordinate, square.getAllEffects());
@@ -214,11 +215,15 @@ public abstract class Handler {
                         players.put(player, coordinate);
                 }
             }
+            else if(gridElement instanceof Brick){
+            	walls.add(coordinate);
+            }
+          
         }
 
         properties.put(Handler.EFFECTS_PROPERTY, effects);
         properties.put(Handler.ITEMS_PROPERTY, items);
-        properties.put(Handler.WALLS_PROPERTY, walls);
+        properties.put(Handler.WALLS_PROPERTY,walls);
         properties.put(Handler.SQUARES_PROPERTY, squares);
         properties.put(Handler.PLAYERS_PROPERTY, players);
 

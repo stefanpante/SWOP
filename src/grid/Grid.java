@@ -463,7 +463,6 @@ public class Grid {
     	if(!isValidStartPosition(square)){
     		throw new IllegalArgumentException("a startsquare for a player should be valid! (not obstructed and not null");
     	}
-    	
     	this.startPositions.add(square);
     }
     
