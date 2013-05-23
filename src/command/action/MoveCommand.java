@@ -125,7 +125,7 @@ public class MoveCommand extends ActionCommand {
 		do{
 			try {
 				currentSquare = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
-				if(!currentSquare.isObstructed()){
+				if(!currentSquare.isObstacle()){
 					movable.move(currentSquare);
 					setPrevPosition(getCurrentPosition());
 					setCurrentPosition(movable.getPosition());
@@ -140,7 +140,7 @@ public class MoveCommand extends ActionCommand {
 				return;
 			}
 			currentRange++;
-		} while(!getCurrentPosition().isObstructed()
+		} while(!getCurrentPosition().isObstacle()
 				&& currentRange < getMovable().getRange()
 				&& getMovable().getRange() > 0);
 

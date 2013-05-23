@@ -4,7 +4,6 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
-import square.obstacle.LightTrail;
 
 /**
  * User: jonas
