@@ -31,7 +31,7 @@ public class TeleportPlacer extends ItemPlacer {
 		for(Coordinate coor: coordinates){
 			Teleport teleport = new Teleport();
 			teleports.add(teleport);
-			Square square = getGrid().getSquare(coor);
+			Square square = getGrid().getGridElement(coor);
 			destinations.add(square);
 			placeItem(square, teleport);
 		}

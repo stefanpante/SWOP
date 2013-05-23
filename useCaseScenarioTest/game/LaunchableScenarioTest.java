@@ -170,7 +170,7 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
-		Square currentPosition = game.getGrid().getSquare(new Coordinate(0,0));
+		Square currentPosition = game.getGrid().getGridElement(new Coordinate(0,0));
 		// All possible throw directions
 		Direction[] directions = new Direction[]{Direction.SOUTH, Direction.EAST};
 		game.getCurrentPlayer().move(currentPosition);
@@ -199,7 +199,7 @@ public class LaunchableScenarioTest {
 
 		}
 		
-		currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
+		currentPosition = game.getGrid().getGridElement(new Coordinate(4,4));
 		// All possible throw directions
 		directions = new Direction[]{Direction.NORTH, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
@@ -250,7 +250,7 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
-		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
+		Square currentPosition = game.getGrid().getGridElement(new Coordinate(4,4));
 		game.getCurrentPlayer().move(currentPosition);
 
 		// new identity disc
@@ -264,7 +264,7 @@ public class LaunchableScenarioTest {
 			fail("ThrowLaunchableHander shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(game.getGrid().getSquare(new Coordinate(4,0)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(4,0)).getInventory().hasItem(id));
 
 		// new identity disc
 		ChargedIdentityDisc id2 = new ChargedIdentityDisc();
@@ -277,7 +277,7 @@ public class LaunchableScenarioTest {
 			fail("ThrowLaunchableHander shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(game.getGrid().getSquare(new Coordinate(4,9)).getInventory().hasItem(id2));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(4,9)).getInventory().hasItem(id2));
 
 
 		// Player is switched after three actions.
@@ -289,7 +289,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void throwChargedDisk2(){
-		Square position2 = game.getGrid().getSquare(new Coordinate(4,0));
+		Square position2 = game.getGrid().getGridElement(new Coordinate(4,0));
 		game.getCurrentPlayer().move(position2);
 		
 		// new identity disc
@@ -304,7 +304,7 @@ public class LaunchableScenarioTest {
 			fail("ThrowLaunchableHander shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(game.getGrid().getSquare(new Coordinate(0,0)).getInventory().hasItem(id3));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(0,0)).getInventory().hasItem(id3));
 
 	}
 
@@ -318,12 +318,12 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
-		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
+		Square currentPosition = game.getGrid().getGridElement(new Coordinate(4,4));
 		// All possible throw directions
 		game.getCurrentPlayer().move(currentPosition);
 
-		Square s1 = game.getGrid().getSquare(new Coordinate(6,4));
-		Square s2 = game.getGrid().getSquare(new Coordinate(6,5));
+		Square s1 = game.getGrid().getGridElement(new Coordinate(6,4));
+		Square s2 = game.getGrid().getGridElement(new Coordinate(6,5));
 		Wall wall = new Wall(s1,s2);
 
 		IdentityDisc id = new IdentityDisc();
@@ -335,7 +335,7 @@ public class LaunchableScenarioTest {
 			fail("ThrowLaunchableHander shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(game.getGrid().getSquare(new Coordinate(5,4)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(5,4)).getInventory().hasItem(id));
 
 	}
 
@@ -351,12 +351,12 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
-		Square currentPosition = game.getGrid().getSquare(new Coordinate(4,4));
+		Square currentPosition = game.getGrid().getGridElement(new Coordinate(4,4));
 		// All possible throw directions
 		game.getCurrentPlayer().move(currentPosition);
 
-		Square s1 = game.getGrid().getSquare(new Coordinate(9,4));
-		Square s2 = game.getGrid().getSquare(new Coordinate(9,5));
+		Square s1 = game.getGrid().getGridElement(new Coordinate(9,4));
+		Square s2 = game.getGrid().getGridElement(new Coordinate(9,5));
 		Wall wall = new Wall(s1,s2);
 
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
@@ -368,7 +368,7 @@ public class LaunchableScenarioTest {
 			fail("ThrowLaunchableHander shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(game.getGrid().getSquare(new Coordinate(8,4)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(8,4)).getInventory().hasItem(id));
 	}
 
 	/**
@@ -381,7 +381,7 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Throw the identity disc in all possible directions.
-		Square currentPosition = game.getGrid().getSquare(new Coordinate(2,4));
+		Square currentPosition = game.getGrid().getGridElement(new Coordinate(2,4));
 		// All possible throw directions
 		Player player = game.getCurrentPlayer();
 		
@@ -396,7 +396,7 @@ public class LaunchableScenarioTest {
 			fail("ThrowLaunchableHander shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(game.getGrid().getSquare(new Coordinate(0,4)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(0,4)).getInventory().hasItem(id));
 		
 
 	}
@@ -412,8 +412,8 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Place the players so they can hit each other
-		game.getCurrentPlayer().move(game.getGrid().getSquare(new Coordinate(4,4)));
-		game.getNextPlayer().move(game.getGrid().getSquare(new Coordinate(4,2)));
+		game.getCurrentPlayer().move(game.getGrid().getGridElement(new Coordinate(4,4)));
+		game.getNextPlayer().move(game.getGrid().getGridElement(new Coordinate(4,2)));
 
 
 		// The inventory of the player should contain the identityDisc
@@ -446,8 +446,8 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 
 		// Place the players so they can hit each other
-		game.getCurrentPlayer().move(game.getGrid().getSquare(new Coordinate(4,4)));
-		game.getNextPlayer().move(game.getGrid().getSquare(new Coordinate(1,4)));
+		game.getCurrentPlayer().move(game.getGrid().getGridElement(new Coordinate(4,4)));
+		game.getNextPlayer().move(game.getGrid().getGridElement(new Coordinate(1,4)));
 
 
 		// The inventory of the player should contain the identityDisc
@@ -481,8 +481,8 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 		
 		// add a teleporter 
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
+		Square s1 = game.getGrid().getGridElement(new Coordinate(0,7));
+		Square s2 = game.getGrid().getGridElement(new Coordinate(3,4));
 		Teleport teleport = new Teleport();
 		Teleport teleport2 = new Teleport();
 		s1.getInventory().addItem(teleport);
@@ -499,7 +499,7 @@ public class LaunchableScenarioTest {
 			e.printStackTrace();
 		}
 		// Get the square were the disc should land.
-		assertTrue(game.getGrid().getSquare(new Coordinate(3,4)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(3,4)).getInventory().hasItem(id));
 	}
 
 	/**
@@ -513,8 +513,8 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 		
 		// add a teleporter 
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
-		Square s2 = game.getGrid().getSquare(new Coordinate(3,4));
+		Square s1 = game.getGrid().getGridElement(new Coordinate(0,7));
+		Square s2 = game.getGrid().getGridElement(new Coordinate(3,4));
 		
 		Teleport teleport = new Teleport();
 		Teleport teleport2 = new Teleport();
@@ -536,7 +536,7 @@ public class LaunchableScenarioTest {
 			e.printStackTrace();
 		}
 		// Get the square were the disc should land.
-		assertTrue(game.getGrid().getSquare(new Coordinate(3,0)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(3,0)).getInventory().hasItem(id));
 	}
 
 	/**
@@ -551,8 +551,8 @@ public class LaunchableScenarioTest {
 		game.getPowerGayManager().clearPowerFailures();
 		
 		// add a teleporter 
-		Square s1 = game.getGrid().getSquare(new Coordinate(0,7));
-		Square s2 = game.getGrid().getSquare(new Coordinate(0,8));
+		Square s1 = game.getGrid().getGridElement(new Coordinate(0,7));
+		Square s2 = game.getGrid().getGridElement(new Coordinate(0,8));
 		
 		
 		IdentityDisc id = new IdentityDisc();
@@ -565,7 +565,7 @@ public class LaunchableScenarioTest {
 			e.printStackTrace();
 		}
 		// Get the square were the disc should land.
-		assertTrue(game.getGrid().getSquare(new Coordinate(0,6)).getInventory().hasItem(id));
+		assertTrue(game.getGrid().getGridElement(new Coordinate(0,6)).getInventory().hasItem(id));
 	}
 
 	private Direction getValidDirection(Game game, Square currentPosition){

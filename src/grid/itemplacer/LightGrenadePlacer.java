@@ -36,7 +36,7 @@ public class LightGrenadePlacer extends ItemPlacer{
 	public void placeItems(){
 		ArrayList<Coordinate> coordinates = getLocations();
 		for(Coordinate coor: coordinates){
-			placeItem(getGrid().getSquare(coor), new LightGrenade());
+			placeItem(getGrid().getGridElement(coor), new LightGrenade());
 		}
 	}
 	

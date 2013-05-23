@@ -453,7 +453,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 */
 	@Override
 	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidSquare(square))
+		if(!isValidGridElement(square))
 			throw new IllegalArgumentException("The given " + square + " is not a valid square");
 		currentPosition = square;
 	}

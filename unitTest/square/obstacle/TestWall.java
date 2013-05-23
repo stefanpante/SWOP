@@ -105,8 +105,8 @@ public class TestWall {
 				
 		Wall wall = new Wall(squareOne, squareTwo);
 		
-		assertTrue(wall.isValidSquare(squareThree));
-		assertTrue(wall.isValidSquare(new Square()));
+		assertTrue(wall.isValidGridElement(squareThree));
+		assertTrue(wall.isValidGridElement(new Square()));
 		assertFalse(wall.contains(squareThree));
 		
 		wall.addSquare(squareThree);
@@ -127,13 +127,13 @@ public class TestWall {
 		
 		Wall wall = new Wall(squareOne, squareTwo);
 		
-		assertFalse(wall.isValidSquare(squareTwo));
-		assertFalse(wall.isValidSquare(null));
-		assertTrue(wall.isValidSquare(squareThree));
+		assertFalse(wall.isValidGridElement(squareTwo));
+		assertFalse(wall.isValidGridElement(null));
+		assertTrue(wall.isValidGridElement(squareThree));
 		
 		wall.addSquare(squareThree);
 		
-		assertFalse(wall.isValidSquare(squareThree));
+		assertFalse(wall.isValidGridElement(squareThree));
 		assertTrue(wall.squaresPointBack());
 
 	}

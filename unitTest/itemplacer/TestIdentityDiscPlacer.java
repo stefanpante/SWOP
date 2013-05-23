@@ -48,22 +48,22 @@ public class TestIdentityDiscPlacer {
 			g = GridProvider.getEmptyGrid();
 			Coordinate c1 = new Coordinate(0,0);
 			playerCoordinate.add(c1);
-			Player p1 = new Player(g.getSquare(c1),1);
+			Player p1 = new Player(g.getGridElement(c1),1);
 			playerList.add(p1);
 
 			Coordinate c2 = new Coordinate(9,0);
 			playerCoordinate.add(c2);
-			Player p2 = new Player(g.getSquare(c2),2);
+			Player p2 = new Player(g.getGridElement(c2),2);
 			playerList.add(p2);
 
 			Coordinate c3 = new Coordinate(0,9);
 			playerCoordinate.add(c3);
-			Player p3 = new Player(g.getSquare(c3),3);
+			Player p3 = new Player(g.getGridElement(c3),3);
 			playerList.add(p3);
 
 			Coordinate c4 = new Coordinate(9,9);
 			playerCoordinate.add(c4);
-			Player p4 = new Player(g.getSquare(c4),4);
+			Player p4 = new Player(g.getGridElement(c4),4);
 			playerList.add(p4);
 
 			IdentityDiscPlacer idP = new IdentityDiscPlacer(g, playerList);
@@ -73,7 +73,7 @@ public class TestIdentityDiscPlacer {
 				ArrayList<Coordinate> locations = idP.getSquaredLocation(coordinate, IdentityDiscPlacer.INCLUDED_RADIUS );
 				boolean contains = false;
 				for(Coordinate coor: locations){
-					contains |= g.getSquare(coor).getInventory().containsSameType(new IdentityDisc());
+					contains |= g.getGridElement(coor).getInventory().containsSameType(new IdentityDisc());
 				}
 			}
 		}

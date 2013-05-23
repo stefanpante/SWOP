@@ -68,7 +68,7 @@ public class PowerManager extends Manager {
      * POWERFAIL_CHANCE chance.
      */
     private void createNewPowerFailures() {
-        for(Square square : getGrid().getAllSquares()){
+        for(Square square : getGrid().getAllGridElements()){
             if(RANDOM.nextFloat() < POWERFAIL_CHANCE){
                 PowerFailure powerFailure = new PowerFailure(square);
                 powerFailures.add(powerFailure);

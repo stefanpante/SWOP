@@ -26,7 +26,7 @@ public class AStar {
 	
 	private void boxAllSquares(Grid grid, Square start, Square goal) {
 		this.source = new ArrayList<SquareContainer>();
-		for(Square square : grid.getAllSquares()){
+		for(Square square : grid.getAllGridElements()){
 			SquareContainer sq = new SquareContainer(square);
 			sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
 			this.source.add(sq);

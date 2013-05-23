@@ -137,7 +137,7 @@ public class TestLightTrail {
 		Square squareOne = new Square();
 
 		lightTrail.addSquare(squareOne);
-		assertFalse(lightTrail.isValidSquare(squareOne));
+		assertFalse(lightTrail.isValidGridElement(squareOne));
 		assertTrue(lightTrail.squaresPointBack());
 	}
 
@@ -148,7 +148,7 @@ public class TestLightTrail {
 	public void testIsValid() {
 		LightTrail lightTrail = new LightTrail();
 
-		assertTrue(lightTrail.isValidSquare(new Square()));
+		assertTrue(lightTrail.isValidGridElement(new Square()));
 	}
 
 	/**

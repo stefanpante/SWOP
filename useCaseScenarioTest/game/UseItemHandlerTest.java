@@ -131,7 +131,7 @@ public class UseItemHandlerTest {
 		Grid grid = game.getGrid();
 		
 		Square obstructedSquare = null;
-		for(Square square: grid.getAllSquares()){
+		for(Square square: grid.getAllGridElements()){
 			if(square.isObstructed() && square.getObstacle() instanceof Wall){
 				obstructedSquare = square;
 				break;
@@ -155,7 +155,7 @@ public class UseItemHandlerTest {
 		
 		Random random = new Random();
 		
-		ArrayList<Square> squaresgrid = grid.getAllSquares();
+		ArrayList<Square> squaresgrid = grid.getAllGridElements();
 		Square obstructedSquare = squaresgrid.get(random.nextInt(squaresgrid.size()));
 		
 		LightTrail lt = new LightTrail();

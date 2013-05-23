@@ -25,7 +25,7 @@ public class TestField {
 	public void addSquare() {
 		Square square = new Square();
 		
-		assertTrue(forceField.isValidSquare(square));
+		assertTrue(forceField.isValidGridElement(square));
 		
 		forceField.addSquare(square);
 		
@@ -37,12 +37,12 @@ public class TestField {
 	public void isValidSquare() {
 		Square square = new Square();
 		
-		assertFalse(forceField.isValidSquare(null));
-		assertTrue(forceField.isValidSquare(square));
+		assertFalse(forceField.isValidGridElement(null));
+		assertTrue(forceField.isValidGridElement(square));
 		
 		forceField.addSquare(square);
 		
-		assertFalse(forceField.isValidSquare(square));
+		assertFalse(forceField.isValidGridElement(square));
 	}
 
 }

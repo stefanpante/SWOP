@@ -233,34 +233,6 @@ public class GridGui extends GUIElement{
 			powerfails.add(s);
 		}
 	}
-	
-	@Deprecated
-	public void updateForceFields(ArrayList<Coordinate> o){
-		forcefields.clear();
-		for(Coordinate coor: o){
-			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-			s.setColor(OConstants.FORCEFIELD_COLOR.getTransparantIntColor(128));
-			forcefields.add(s);
-
-		}
-	}
-	@Deprecated
-	public void updateLightTrails(HashMap<Player, ArrayList<Coordinate>> o){
-		lightTrails_Squares.clear();
-		for(Player player: o.keySet()){
-			ArrayList<Coordinate> playercoor = o.get(player);
-			int id = player.getID();
-			int alpha = 150;
-			for(Coordinate coor: playercoor){
-				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
-				int color = OConstants.PLAYERCOLORS[id -1].getTransparantIntColor(alpha);
-				s.setColor(color);
-				lightTrails_Squares.add(s);
-				alpha -= 30;
-			}
-		}
-	}
-	
 
 	public void setCurrentPlayer(Coordinate coordinate) {
 		this.currentPlayer = coordinate;

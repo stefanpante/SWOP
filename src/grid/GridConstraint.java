@@ -134,13 +134,13 @@ public class GridConstraint {
         if(coordinates == null)
             return false;
 
-        float percentage = (float) coordinates.size() / grid.getAllSquares().size();
+        float percentage = (float) coordinates.size() / grid.getAllGridElements().size();
         if(percentage > getPercentage())
             return false;
 
         boolean[] includes = new boolean[getIncluded().size()];
         for(Coordinate coordinate : coordinates){
-            if(grid.getSquare(coordinate).isObstructed())
+            if(grid.getGridElement(coordinate).isObstructed())
                 return false;
             if(getExcluded().contains(coordinate))
                 return false;

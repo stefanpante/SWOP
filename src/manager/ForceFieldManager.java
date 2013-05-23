@@ -105,7 +105,7 @@ public class ForceFieldManager extends Manager{
     protected void detectForceFields(){   
         ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
         
-        for (Square square: getGrid().getAllSquares()) {
+        for (Square square: getGrid().getAllGridElements()) {
 
             if (square.hasType(new ForceFieldGenerator()) && ((ForceFieldGenerator)square.filterItemsByType(new ForceFieldGenerator())).isActive()) {
             	Coordinate coordinate = getGrid().getCoordinate(square);
@@ -136,7 +136,7 @@ public class ForceFieldManager extends Manager{
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {
-                Square square = getGrid().getSquare(c);
+                Square square = getGrid().getGridElement(c);
             if(square.isObstructed())
                 return;
             forceField.addSquare(square);

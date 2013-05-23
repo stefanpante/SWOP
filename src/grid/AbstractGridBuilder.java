@@ -7,8 +7,9 @@ import java.util.HashMap;
 import java.util.Random;
 
 import util.Direction;
+import square.GridElement;
 import square.Square;
-import square.obstacle.Wall;
+import square.multi.Wall;
 import util.Coordinate;
 
 import be.kuleuven.cs.som.annotate.Basic;
@@ -53,11 +54,17 @@ public abstract class AbstractGridBuilder {
 	 */
 	protected ArrayList<Wall> walls;
 
+	
+	protected HashMap<Coordinate, GridElement> gridElements;
+	
+
+	
     /**
      * Initializes objects needed by the grid builder.
      */
 	public AbstractGridBuilder(){
 		this.walls = new ArrayList<Wall>();
+		this.gridElements = new HashMap<Coordinate, GridElement>();
 	}
 	
 	/**
@@ -95,22 +102,6 @@ public abstract class AbstractGridBuilder {
 	 */
 	protected void setRandom(Random random) {
 		this.random = random;
-	}
-
-    
-	/**
-	 * Place an item on the given coordinate
-	 * 
-	 * @param 	square
-	 * 			The coordinate to place the given item on
-	 * @param 	item
-	 * 			The item to be placed on the given coordinate
-	 */
-	protected void placeItem(Square square, Item item) throws IllegalArgumentException {
-		if(square.isObstructed())
-			return;
-			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
-		square.addItem(item);
 	}
 
     /**
@@ -198,7 +189,8 @@ public abstract class AbstractGridBuilder {
         if(!getConstraintWall().satisfiesConstraint(flatten(walls), getGrid()))
             throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");
         for(ArrayList<Coordinate> sequence : walls){
-            this.walls.add(new Wall(getGrid().getSquares(sequence)));
+        	ArrayList<Square> toRemove = getGrid().getGridElements(sequence);
+            this.walls.add(new Wall());
         }
     }
 
@@ -220,12 +212,12 @@ public abstract class AbstractGridBuilder {
      * Sets the neighbors of each square.
      */
     protected void setNeighbors(){
-    	 for(Square square: getGrid().getAllSquares()){
+    	 for(Square square: getGrid().getAllGridElements()){
     		 HashMap<Direction, Square> neighbors = new HashMap<Direction, Square>();
     		 HashMap<Direction, Coordinate> neighborsCoordinates = getGrid().getCoordinate(square).getAllNeighbors();
     		 for(Direction direction: neighborsCoordinates.keySet()){
     			 try{
-    				 Square s = getGrid().getSquare(neighborsCoordinates.get(direction));
+    				 Square s = getGrid().getGridElement(neighborsCoordinates.get(direction));
     				 neighbors.put(direction, s);
     			 }catch(Exception ignored){/* nothing to do here */}
     		 }
