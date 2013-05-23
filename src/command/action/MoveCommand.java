@@ -129,8 +129,8 @@ public class MoveCommand extends ActionCommand {
 				if(!gridElement.isObstacle() && gridElement.isSameType(new Square())){
                     Square square = (Square) gridElement;
 					movable.move(square);
-					setPrevPosition(getCurrentPosition());
-					setCurrentPosition(movable.getPosition());
+					//setPrevPosition(getCurrentPosition());
+					//setCurrentPosition(movable.getPosition());
 				}else{
 					return;
 				}
@@ -141,8 +141,7 @@ public class MoveCommand extends ActionCommand {
 				return;
 			}
 			currentRange++;
-		} while(!getCurrentPosition().isObstacle()
-				&& currentRange < getMovable().getRange()
+		} while(currentRange < getMovable().getRange()
 				&& getMovable().getRange() > 0);
 
 	}
