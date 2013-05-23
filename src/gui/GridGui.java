@@ -1,5 +1,6 @@
 package gui;
 
+import effect.Effect;
 import game.Player;
 import gui.button.DirectionalButton;
 
@@ -44,6 +45,7 @@ public class GridGui extends GUIElement{
 	private ArrayList<SquareGUI> forcefields;
 	private ArrayList<SquareGUI> powerfails;
 	private ArrayList<SquareGUI> lightTrails_Squares;
+	private ArrayList<SquareGUI> effects;
 
 	/**
 	 * The players to be drawn on the screen
@@ -85,6 +87,7 @@ public class GridGui extends GUIElement{
 		this.squares = new HashMap<Coordinate, SquareGUI>();
 		this.players = new ArrayList<SquareGUI>();
 		this.items = new HashMap<Coordinate, SquareGUI>();
+		this.effects = new ArrayList<SquareGUI>();
 		this.lightTrails_Squares = new ArrayList<SquareGUI>();
 		this.walls_squares = new ArrayList<SquareGUI>();
 		this.currentPlayer = new Coordinate(0,0);
@@ -230,7 +233,8 @@ public class GridGui extends GUIElement{
 			powerfails.add(s);
 		}
 	}
-
+	
+	@Deprecated
 	public void updateForceFields(ArrayList<Coordinate> o){
 		forcefields.clear();
 		for(Coordinate coor: o){
@@ -240,7 +244,7 @@ public class GridGui extends GUIElement{
 
 		}
 	}
-
+	@Deprecated
 	public void updateLightTrails(HashMap<Player, ArrayList<Coordinate>> o){
 		lightTrails_Squares.clear();
 		for(Player player: o.keySet()){
@@ -362,6 +366,24 @@ public class GridGui extends GUIElement{
 
 	public ThrowPad getThrowPad() {
 		return this.throwPad;
+	}
+
+	public void updateEffects(HashMap<Coordinate, ArrayList<Effect>> o) {
+		effects.clear();
+		for(Coordinate coordinate: o.keySet()){
+			ArrayList<Effect> effects = o.get(coordinate);
+			PVector Position = getPixels(coordinate);
+			for(Effect effect: effects){
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, position, gui);
+				s.setColor(getEffectColor(effect));
+				this.effects.add(s);
+			}
+		}
+	}
+	
+	// TODO this needs to be implemented when i know how the effects are named
+	private int getEffectColor(Effect effect){
+		return 0;
 	}
 
 }
