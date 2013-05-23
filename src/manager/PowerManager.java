@@ -1,6 +1,7 @@
 package manager;
 
 import grid.Grid;
+import square.GridElement;
 import square.Square;
 import square.field.PowerFailure;
 
@@ -68,9 +69,9 @@ public class PowerManager extends Manager {
      * POWERFAIL_CHANCE chance.
      */
     private void createNewPowerFailures() {
-        for(Square square : getGrid().getAllGridElements()){
-            if(RANDOM.nextFloat() < POWERFAIL_CHANCE){
-                PowerFailure powerFailure = new PowerFailure(square);
+        for(GridElement gridElement : getGrid().getAllGridElements()){
+            if(RANDOM.nextFloat() < POWERFAIL_CHANCE && gridElement.isSameType(new Square())){
+                PowerFailure powerFailure = new PowerFailure((Square) gridElement);
                 powerFailures.add(powerFailure);
             }
         }

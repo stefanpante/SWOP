@@ -127,4 +127,9 @@ public class Square extends GridElement implements ItemContainer {
     public boolean isObstacle() {
         return false;
     }
+
+    @Override
+    public boolean isSameType(GridElement gridElement) {
+        return gridElement instanceof Square;
+    }
 }

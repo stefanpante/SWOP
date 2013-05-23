@@ -11,4 +11,10 @@ public class Brick extends GridElement {
     public boolean isObstacle() {
         return true;
     }
+
+
+    @Override
+    public boolean isSameType(GridElement gridElement) {
+        return gridElement instanceof Brick;
+    }
 }
