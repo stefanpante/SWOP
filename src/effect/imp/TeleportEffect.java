@@ -1,6 +1,5 @@
 package effect.imp;
 
-import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
@@ -22,7 +21,7 @@ public class TeleportEffect extends DropFlagEffect {
      */
     public TeleportEffect(Square centerSquare, Square teleportDestination) {
         super(centerSquare);
-        setPriority(EffectPriority.MoveExecuting);
+        setPriority(EffectPriority.MoveDeparture);
     }
 
     public Square getTeleportDestination() {

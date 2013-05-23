@@ -4,25 +4,27 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
-import square.obstacle.LightTrail;
 
 /**
- * User: jonas
+ * Created with IntelliJ IDEA.
+ * User: Dieter
  * Date: 23/05/13
- * Time: 13:04
+ * Time: 16:00
+ * To change this template use File | Settings | File Templates.
  */
-public class LightTrailEffect extends Effect {
+public class ForceFieldEffect extends Effect {
 
-    public void LightTrail(){
-          setPriority(EffectPriority.MoveEnter);
+    public void ForceFieldEffect(){
+        setPriority(EffectPriority.ForceField);
     }
 
     @Override
     public void execute(Player player) {
+
     }
 
     @Override
     public void execute(IdentityDisc identityDisc) {
-        //
+        identityDisc.destroy();
     }
 }

@@ -1,9 +1,6 @@
 package effect.filter;
 
-import effect.Effect;
 import effect.EffectPriority;
-
-import java.util.ArrayList;
 
 /**
  * User: jonas
@@ -12,7 +9,7 @@ import java.util.ArrayList;
  */
 public class MoveBlockingCriteria extends PriorityCriteria {
 
-    private static final EffectPriority ACCEPTED = EffectPriority.MoveBlocking;
+    private static final EffectPriority ACCEPTED = EffectPriority.MoveEnter;
 
     @Override
     public EffectPriority getAccepted() {
