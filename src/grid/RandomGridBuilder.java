@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import util.Direction;
 import square.Square;
-import square.obstacle.Wall;
 import util.Coordinate;
 
 /**
@@ -30,7 +29,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setNeighbors();
 		setEmptyConstraints();
 		for(Coordinate coor: getStartPositions()){
-			Square s = getGrid().getSquare(coor);
+			Square s = getGrid().getGridElement(coor);
 			getGrid().addStartPosition(s);
 		}
 	}
@@ -47,11 +46,11 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The vertical size of the grid this gridBuilder will build.
 	 */
 	public RandomGridBuilder(int hSize, int vSize) {
+		super();
 		setHSize(hSize);
         setVSize(vSize);
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
-		this.walls = new ArrayList<Wall>();	
 		
 		build();
 	}
@@ -75,14 +74,13 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			A list of coordinates that should contain a teleport.
 	 */
 	protected RandomGridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls){
+		super();
 		setHSize(hSize);
 	    setVSize(vSize);
-		
 		setGrid(new Grid(hSize, vSize));
 		setRandom(new Random());
 		setSquares();
 		setEmptyConstraints();
-		this.walls = new ArrayList<Wall>();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		build(walls);
 	}
@@ -110,7 +108,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build() throws IllegalStateException {
 		setSquares();
 		for(Coordinate coor: getStartPositions()){
-			Square s = getGrid().getSquare(coor);
+			Square s = getGrid().getGridElement(coor);
 			getGrid().addStartPosition(s);
 		}
 		setNeighbors();
@@ -131,7 +129,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	throws IllegalStateException{
 		setSquares();
 		for(Coordinate coor: getStartPositions()){
-			Square s = getGrid().getSquare(coor);
+			Square s = getGrid().getGridElement(coor);
 			getGrid().addStartPosition(s);
 		}
 		setNeighbors();
@@ -200,28 +198,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 			}
 			candidates.remove(coordinate);
 		}
-	}
-	
-	/**
-	 * Returns the coordinates of the given walls on the grid of this GridBuilder.
-	 * 
-	 * @param 	walls
-	 * 			The walls of which the coordinates are wanted.
-	 * @return	The coordinates covered by the walls.
-	 */
-	public ArrayList<Coordinate> getCoordinatesOfWalls(ArrayList<Wall> walls) {
-		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
-		for(Wall wall : walls){
-			for(Square square : wall.getGridElements()){
-				coordinates.add(getGrid().getCoordinate(square));
-			}
-		}
-		return coordinates;
-	}
-
+	} 
     
-    
-    @Override
+	@Override
     public ArrayList<Coordinate> getStartPositions(){
     	ArrayList<Coordinate> startPositions = new ArrayList<Coordinate>();
     	
@@ -269,7 +248,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
         for(int x = 0; x < getGrid().getHSize(); x++){
             for(int y = 0; y < getGrid().getVSize(); y++){
                 coordinate = new Coordinate(x, y);
-                getGrid().setSquare(coordinate, new Square());
+               this.gridElements.put(coordinate, new Square());
             }
         }
     }

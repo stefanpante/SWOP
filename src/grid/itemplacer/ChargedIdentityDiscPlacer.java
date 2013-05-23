@@ -54,7 +54,7 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
     	for(Player player: getPlayers())
     		playerSquares.add(player.getStartPosition());
  
-    	for(Square square : getGrid().getAllSquares()){
+    	for(Square square : getGrid().getAllGridElements()){
             if(!square.isObstructed()){
                 try{
                     AStar aStar = new AStar(getGrid());

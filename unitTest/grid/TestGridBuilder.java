@@ -54,13 +54,13 @@ public class TestGridBuilder {
 		for(int x = 0; x < hSize; x++){
 			for(int y = 0; y < vSize; y++){
 				coor = new Coordinate(x, y);
-				Square sq =grid.getSquare(coor);
+				Square sq =grid.getGridElement(coor);
 				if(wallsPos.contains(coor)){
 					coveredSquares++;
 					assertTrue(sq.isObstructed());
 					assertTrue(walls.contains(sq.getObstacle()));
 				} else {
-					assertFalse(grid.getSquare(coor).isObstructed());
+					assertFalse(grid.getGridElement(coor).isObstructed());
 					assertFalse(walls.contains(sq.getObstacle()));
 				}
 			}
@@ -76,10 +76,10 @@ public class TestGridBuilder {
 		ArrayList<Coordinate> wallsPos = gridBuilder.getCoordinatesOfWalls(gridBuilder.getWalls());
 		Coordinate lowerleft = new Coordinate(0, vSize -1);
 
-		assertFalse(grid.getSquare(lowerleft).isObstructed());
+		assertFalse(grid.getGridElement(lowerleft).isObstructed());
 		assertFalse(wallsPos.contains(lowerleft));
 		Coordinate upperRight = new Coordinate(hSize-1, 0);
-		assertFalse(grid.getSquare(upperRight).isObstructed());
+		assertFalse(grid.getGridElement(upperRight).isObstructed());
 		assertFalse(wallsPos.contains(upperRight));
 	}
 	
@@ -132,7 +132,7 @@ public class TestGridBuilder {
 		for(Coordinate coor = lowerleft; coor.getY() >= vSize-3; coor = coor.getNeighbor(Direction.NORTH)){
 			for(Coordinate coor2 = coor; coor2.getX() <= 2  ; coor2 = coor2.getNeighbor(Direction.EAST)){
 				System.out.println(coor2);
-				if(grid.getSquare(coor2).getInventory().hasLightGrenade()){
+				if(grid.getGridElement(coor2).getInventory().hasLightGrenade()){
 					assert(true);
 					break;
 				}
@@ -143,7 +143,7 @@ public class TestGridBuilder {
 		for(Coordinate coor = upperRight; coor.getY() <= 2; coor = coor.getNeighbor(Direction.SOUTH)){
 			for(Coordinate coor2 = coor; coor2.getX() >= hSize - 3  ; coor2 = coor2.getNeighbor(Direction.WEST)){
 				System.out.println(coor2);
-				if(grid.getSquare(coor2).getInventory().hasLightGrenade()){
+				if(grid.getGridElement(coor2).getInventory().hasLightGrenade()){
 					assert(true);
 					break;
 				}
@@ -159,7 +159,7 @@ public class TestGridBuilder {
 	public void testTeleportsCoupling() {
 		ArrayList<Teleport> teleportItems = new ArrayList<Teleport>();
 		
-		for(Square square: grid.getAllSquares()) {
+		for(Square square: grid.getAllGridElements()) {
 			if(square.getInventory().hasTeleport())
 				teleportItems.add(square.getInventory().getTeleport());
 		}
@@ -182,7 +182,7 @@ public class TestGridBuilder {
 		this.gridBuilder = new RandomGridBuilder();
 		this.grid = this.gridBuilder.getGrid();
 		
-		Iterator<Square> iterator = grid.getAllSquares().iterator();
+		Iterator<Square> iterator = grid.getAllGridElements().iterator();
 		
 		while(iterator.hasNext())
 			assertFalse(iterator.next().isObstructed());

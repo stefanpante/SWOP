@@ -42,7 +42,7 @@ public class TestPowerManager {
 		
 		this.powerGayManager = game.getPowerGayManager();
 		this.coordinate = new Coordinate(3,3);;
-		this.square = grid.getSquare(coordinate);
+		this.square = grid.getGridElement(coordinate);
 		
 		powerGayManager.clearPowerFailures();
 	}
@@ -143,7 +143,7 @@ public class TestPowerManager {
 		Power primary = square.getPower();
 		Power secondary = primary.getChild();
 		
-		Square secondarySquare = powerGayManager.getSquare(secondary);
+		Square secondarySquare = powerGayManager.getGridElement(secondary);
 		
 		assertTrue(grid.getNeighbors(square).containsValue(secondarySquare));
 	}
@@ -160,8 +160,8 @@ public class TestPowerManager {
 		Power secondary = primary.getChild();
 		Power tertiary = secondary.getChild();
 		
-		Square secondarySquare = powerGayManager.getSquare(secondary);
-		Square tertiarySquare = powerGayManager.getSquare(tertiary);
+		Square secondarySquare = powerGayManager.getGridElement(secondary);
+		Square tertiarySquare = powerGayManager.getGridElement(tertiary);
 		
 		assertFalse(grid.getNeighbors(square).containsValue(tertiarySquare));
 		assertTrue(grid.getNeighbors(secondarySquare).containsValue(tertiarySquare));

@@ -135,7 +135,6 @@ public class IdentityDisc extends Item implements Movable {
 	public void move(Square square) throws IllegalStateException {
         if(!position.getNeighbors().containsValue(square))
             throw new IllegalStateException("Cannot move to non neighboring square");
-        position.acceptMove(this);
         setPosition(square);
 	}
 	
@@ -154,33 +153,5 @@ public class IdentityDisc extends Item implements Movable {
 	public Square getPosition() {
 		return position;
 	}
-    @Override
-    public void acceptStandOnEffect(Effect effect) {
-        effect.onStandOnEffect(this);
-     }
-    
-    @Override
-    public void acceptMoveToEffect(Effect effect){
-    	effect.onMoveToEffect(this);
-    }
 
-	@Override
-	public void onMoveToEffect(Movable movable) {
-		movable.acceptMoveToEffect(this);
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Movable movable) {
-		movable.acceptStandOnEffect(this);
-	}
-
-	@Override
-	public void onStandOnEffect(Player player) {
-		if(isActive()){
-			//FIXME: Not sure about the false.
-			player.loseTurns(1, false);
-		}
-		this.deactivate();
-	}
 }

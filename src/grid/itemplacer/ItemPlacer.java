@@ -91,13 +91,13 @@ public abstract class ItemPlacer {
     public ArrayList<Coordinate> getLocations(){
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
         ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
-        int max = (int) (getItemConstraint().getPercentage() * getGrid().getAllSquares().size());
+        int max = (int) (getItemConstraint().getPercentage() * getGrid().getAllGridElements().size());
         // Removed excluded squares from candidates
         candidates.removeAll(getItemConstraint().getExcluded());
         // Removed obstructed squares from candidates
         ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
         for(Coordinate coordinate : candidates){
-            if(getGrid().getSquare(coordinate).isObstructed())
+            if(getGrid().getGridElement(coordinate).isObstructed())
                 toBeRemoved.add(coordinate);
         }
         candidates.removeAll(toBeRemoved);
@@ -142,7 +142,7 @@ public abstract class ItemPlacer {
             for (int y =startY; y<=endY; y++){
                     Coordinate coor =new Coordinate(x,y);
                     try{
-	                    if(!getGrid().getSquare(coor).isObstructed()){
+	                    if(!getGrid().getGridElement(coor).isObstructed()){
 	                        coordinates.add(coor);
 	                    }
                     }

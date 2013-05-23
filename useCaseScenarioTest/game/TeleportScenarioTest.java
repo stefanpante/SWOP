@@ -60,8 +60,8 @@ public class TeleportScenarioTest {
 		endTurnHandler = new EndTurnHandler(game, null);
 		turnHandler = new TurnHandler(game,null);
 		
-		squareOne = game.getGrid().getSquare(new Coordinate(0,8));
-		squareTwo = game.getGrid().getSquare(new Coordinate(3,4));
+		squareOne = game.getGrid().getGridElement(new Coordinate(0,8));
+		squareTwo = game.getGrid().getGridElement(new Coordinate(3,4));
 		
 		teleport = new Teleport();
 		teleportDestination = new Teleport();
@@ -73,7 +73,7 @@ public class TeleportScenarioTest {
 		teleportDestination.setDestination(squareOne);
 		
 		// Place players
-		Square nextToTeleport = game.getGrid().getSquare(new Coordinate(0,7));
+		Square nextToTeleport = game.getGrid().getGridElement(new Coordinate(0,7));
 		game.getCurrentPlayer().setPosition(nextToTeleport);
 		
 	}

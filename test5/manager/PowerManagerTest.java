@@ -32,7 +32,7 @@ public class PowerManagerTest {
 
         for(int i = 0; i < 10; i++){
             pm.update(null, null);
-            for(Square square : grid.getAllSquares()){
+            for(Square square : grid.getAllGridElements()){
                 assertFalse(square.getNeighbors() == null);
                 for(Effect effect : square.getAllEffects()){
                     if(effect instanceof PowerFailure)

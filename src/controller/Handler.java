@@ -186,14 +186,14 @@ public abstract class Handler {
 
         for (Coordinate coordinate : getGame().getGrid().getAllCoordinates()) {
 
-            items.put(coordinate, getGame().getGrid().getSquare(coordinate).getAllItems());
+            items.put(coordinate, getGame().getGrid().getGridElement(coordinate).getAllItems());
 
-            Square square = getGame().getGrid().getSquare(coordinate);
+            Square square = getGame().getGrid().getGridElement(coordinate);
             squares.add(coordinate);
             effects.put(coordinate, square.getAllEffects());
             boolean player_position;
 
-            if (square.isObstructed()) {
+            if (square.isObstacle()) {
                 player_position = false;
 
                 for (Player player : getGame().getPlayers()) {

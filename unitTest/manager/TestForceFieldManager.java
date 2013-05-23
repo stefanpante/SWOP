@@ -53,7 +53,7 @@ public class TestForceFieldManager {
         Grid grid =  GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldsGen, new Coordinate(3, 3));
 
         for(Coordinate c : forceFieldsGen){
-            grid.getSquare(c).getInventory().getForceFieldGenerator().activate();
+            grid.getGridElement(c).getInventory().getForceFieldGenerator().activate();
         }
 
         return grid;

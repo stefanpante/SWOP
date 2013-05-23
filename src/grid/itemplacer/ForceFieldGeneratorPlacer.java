@@ -33,7 +33,7 @@ public class ForceFieldGeneratorPlacer extends ItemPlacer {
 	public void placeItems(){
 		ArrayList<Coordinate> coordinates = getLocations();
 		for(Coordinate coor: coordinates){
-			placeItem(getGrid().getSquare(coor), new ForceFieldGenerator());
+			placeItem(getGrid().getGridElement(coor), new ForceFieldGenerator());
 		}
 	}
 

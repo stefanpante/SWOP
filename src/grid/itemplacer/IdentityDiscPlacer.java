@@ -37,7 +37,7 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	public void placeItems(){
 		ArrayList<Coordinate> coordinates = getLocations();
 		for(Coordinate coor: coordinates){
-			placeItem(getGrid().getSquare(coor), new IdentityDisc());
+			placeItem(getGrid().getGridElement(coor), new IdentityDisc());
 		}
 	}
 	

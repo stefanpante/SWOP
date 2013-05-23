@@ -67,7 +67,8 @@ public class Teleport extends Item {
         if(!destination.hasType(this))
             return false;
 
-        Teleport destinationTeleport = (Teleport) destination.filterItemsByType(this);
+
+        Teleport destinationTeleport = (Teleport) destination.filterItemsByType(this).get(0);
 
         return !destinationTeleport.equals(this);
     }
@@ -90,7 +91,7 @@ public class Teleport extends Item {
      *          is set and not obstructed.
      */
     public boolean canTeleport(){
-        return getDestination() != null && !getDestination().isObstructed();
+        return getDestination() != null && !getDestination().isObstacle();
     }
 
     public boolean canAddTo(Square square){
@@ -116,46 +117,4 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
-	@Override
-	public void onMoveToEffect(Movable movable) {
-		movable.acceptMoveToEffect(this);
-		
-	}
-
-	@Override
-	public void onMoveToEffect(Player player) {
-        DropFlagEvent dropFlag = new DropFlagEvent();
-        try {
-            dropFlag.execute();
-        } catch (Exception e) {
-            //  Nothing to do
-        }
-        player.setPosition(getDestination());
-		
-	}
-
-	@Override
-	public void onMoveToEffect(IdentityDisc identityDisc) {
-		//FIXME: not sure if this sufficient	
-		identityDisc.setPosition(getDestination());
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Movable movable) {
-		movable.acceptStandOnEffect(this);
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Player player) {
-		// nothing to do here.
-		
-	}
-
-	@Override
-	public void onStandOnEffect(IdentityDisc identityDisc) {
-		// nothing to do here;
-		
-	}
 }

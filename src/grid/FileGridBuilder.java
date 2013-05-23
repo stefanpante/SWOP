@@ -56,6 +56,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	public FileGridBuilder(String filepath) throws IOException{
 		this.file = new File(filepath);
 		this.startPositions = new ArrayList<Coordinate>();
+	
 		setRandom(new Random());
 		build();
 	}
@@ -177,19 +178,19 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 */
 	@Override
 	protected void setSquares(){
-		setGrid(new Grid(getHSize(), getVSize()));
 
 		for(Coordinate coordinate: free_squares){
-			getGrid().setSquare(coordinate, new Square());
+			this.gridElements.put(coordinate, new Square());
 		}
 
 		for(Coordinate coordinate: wall_squares){
-			getGrid().setSquare(coordinate, new Square());
+			//getGrid().setSquare(coordinate, new Square());
 		}
 
 		for(Coordinate coor: startPositions){
 			Square sq = new Square();
-			getGrid().setSquare(coor, sq);
+			this.gridElements.put(coor, sq);
+			//getGrid().setSquare(coor, sq);
 			getGrid().addStartPosition(sq);
 		}
 	}
@@ -252,8 +253,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 
 	public void checkConsistency() throws IllegalStateException {
 		// Check whether there are no islands
-		for(Square sq: getGrid().getAllSquares()){
-			for(Square sq2: getGrid().getAllSquares()){
+		for(Square sq: getGrid().getAllGridElements()){
+			for(Square sq2: getGrid().getAllGridElements()){
 				if(sq != sq2){
 					if(!sq.isObstructed() && !sq2.isObstructed()){
 						AStar aStar = new AStar(getGrid());

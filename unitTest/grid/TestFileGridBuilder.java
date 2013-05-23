@@ -66,7 +66,7 @@ public class TestFileGridBuilder {
 		try {
 			builder = new FileGridBuilder(filepath);
 			Grid grid = builder.getGrid();
-			assertEquals(33,grid.getAllSquares().size());
+			assertEquals(33,grid.getAllGridElements().size());
 			assertEquals(countWalls(grid), 5);
 			assertEquals(new Coordinate(7,0), grid.getCoordinate(grid.getStartPlayerOne()));
 			assertEquals(new Coordinate(0,3), grid.getCoordinate(grid.getStartPlayerTwo()));
@@ -81,7 +81,7 @@ public class TestFileGridBuilder {
 	
 	private int countWalls(Grid grid){
 		int i = 0;
-		for(Square sq: grid.getAllSquares()){
+		for(Square sq: grid.getAllGridElements()){
 			if(sq.isObstructed()){
 				i++;
 			}

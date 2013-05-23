@@ -37,8 +37,8 @@ public class TestGrid {
 			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
-			Square bl = grid.getSquare(new Coordinate(0,9));
-			Square tr = grid.getSquare(new Coordinate(9,0));
+			Square bl = grid.getGridElement(new Coordinate(0,9));
+			Square tr = grid.getGridElement(new Coordinate(9,0));
 			
 			//TEST CORNERS.
 			//	Bottom Left
@@ -75,8 +75,8 @@ public class TestGrid {
 			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
-			Square bl = grid.getSquare(new Coordinate(0,9));
-			Square tr = grid.getSquare(new Coordinate(9,0));
+			Square bl = grid.getGridElement(new Coordinate(0,9));
+			Square tr = grid.getGridElement(new Coordinate(9,0));
 			
 			
 			Wall blWall = new Wall(bl.getNeighbor( Direction.EAST),bl.getNeighbor(Direction.NORTHEAST));
@@ -118,8 +118,8 @@ public class TestGrid {
 			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
-			Square bl = grid.getSquare(new Coordinate(0,9));
-			Square tr = grid.getSquare(new Coordinate(9,0));
+			Square bl = grid.getGridElement(new Coordinate(0,9));
+			Square tr = grid.getGridElement(new Coordinate(9,0));
 			
 			LightTrail blLightTrail = new LightTrail();
 			try {
@@ -182,11 +182,11 @@ public class TestGrid {
 			coordinates.add(coMin11);
 			coordinates.add(co99);
 			
-			ArrayList<Square> squares = grid.getSquares(coordinates);
-			assertTrue(squares.contains(grid.getSquare(co11)));
-			assertTrue(squares.contains(grid.getSquare(co01)));
-			assertTrue(squares.contains(grid.getSquare(co00)));
-			assertTrue(squares.contains(grid.getSquare(co99)));
+			ArrayList<Square> squares = grid.getGridElements(coordinates);
+			assertTrue(squares.contains(grid.getGridElement(co11)));
+			assertTrue(squares.contains(grid.getGridElement(co01)));
+			assertTrue(squares.contains(grid.getGridElement(co00)));
+			assertTrue(squares.contains(grid.getGridElement(co99)));
 			assertEquals(4,squares.size());
 		}
 		
@@ -196,7 +196,7 @@ public class TestGrid {
 			Grid grid = gb.getGrid();
 			
 			Coordinate coord = new Coordinate(0,0);
-			Square square = grid.getSquare(coord);
+			Square square = grid.getGridElement(coord);
 			
 			HashMap<Direction, Square> neighbors = grid.getNeighbors(square);
 			assertEquals(neighbors.values().size(), 3);
@@ -206,7 +206,7 @@ public class TestGrid {
 			assertTrue(grid.hasNeighbor(square, Direction.SOUTHEAST, neighborSquare));
 			
 			coord = new Coordinate(2,2);
-			square = grid.getSquare(coord);
+			square = grid.getGridElement(coord);
 			neighbors = grid.getNeighbors(square);
 			assertEquals(neighbors.values().size(), 8);
 			
