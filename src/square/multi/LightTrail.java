@@ -42,13 +42,14 @@ public class LightTrail extends Field {
 	@Override
 	public void addGridElement(Square square) throws IllegalArgumentException {
 		if(!isValidGridElement(square))
-			throw new IllegalArgumentException("This square is not valid for this lighttrails");
+			throw new IllegalArgumentException("This square is not valid for this Light Trail.");
 		
 		if(getLength() >= MAX_LENGTH) 
 			this.removeGridElement(getLastSquare());
 		
 		super.addGridElement(square);
 		this.trailqueue.add(square);
+        setEffects(square);
 	}
 	
 	/**
@@ -63,6 +64,7 @@ public class LightTrail extends Field {
 	public void removeGridElement(Square square) throws IllegalArgumentException {
 		super.removeGridElement(square);
 		trailqueue.remove(square);
+        removeEffects(square);
 	}
 	
 	/**
