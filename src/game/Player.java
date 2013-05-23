@@ -54,7 +54,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	private final int id;
 	
-	private int range;
 	/**
 	 * The player's Light Trail
 	 */
@@ -95,7 +94,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
 		this.setStartPosition(startPosition);
 		this.alive = true;
-		this.range = 1;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
 		this.id = id;
@@ -431,8 +429,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
 	@Override
 	public void resetRange() {
-		this.range = 1;
-		
+
 	}
 
     private void endAction(){
