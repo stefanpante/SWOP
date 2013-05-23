@@ -1,11 +1,15 @@
 package item;
 
+import effect.imp.EmptyEffect;
+import effect.imp.ForceFieldEffect;
 import game.Player;
 import effect.Effect;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import util.Direction;
 import square.Square;
+
+import java.util.ArrayList;
 
 /**
  * Implementation of the item IdentityDisc
@@ -16,7 +20,7 @@ import square.Square;
 @NotNull
 public class IdentityDisc extends Item implements Movable {
 
-	/**
+    /**
 	 * The maximum travel distance of an uncharged identity disc.
 	 */
 	public static int MAX_TRAVEL_DISTANCE = 3;
@@ -153,5 +157,12 @@ public class IdentityDisc extends Item implements Movable {
 	public Square getPosition() {
 		return position;
 	}
+
+    @Override
+    public ArrayList<Effect> getEffects() {
+        ArrayList<Effect> effects = new ArrayList<>();
+        effects.add(new EmptyEffect());
+        return effects;
+    }
 
 }

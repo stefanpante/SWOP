@@ -1,9 +1,13 @@
 package item;
 
+import effect.Effect;
 import effect.event.DropFlagEvent;
+import effect.imp.TeleportEffect;
 import item.inter.Movable;
 import game.Player;
 import square.Square;
+
+import java.util.ArrayList;
 
 /**
  * Implements a teleport with a certain destination.
@@ -117,4 +121,10 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
+    @Override
+    public ArrayList<Effect> getEffects() {
+        ArrayList<Effect> effects = new ArrayList<>();
+        //TODO: Square should be set in square! effects.add(new TeleportEffect());
+        return effects;
+    }
 }

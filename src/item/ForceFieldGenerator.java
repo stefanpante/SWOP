@@ -1,8 +1,14 @@
 package item;
 
+import effect.Effect;
+import effect.imp.EmptyEffect;
+import effect.imp.ForceFieldEffect;
+import effect.imp.ForceFieldStuckEffect;
 import item.inter.Movable;
 import game.Player;
 import square.Square;
+
+import java.util.ArrayList;
 
 
 /**
@@ -23,17 +29,17 @@ public class ForceFieldGenerator extends Item{
         return !square.hasItem(this);
     }
 
-    /**
-	 * If the item is used, the state is changed to used.
-	 */
-	@Override
-	public void notifyUse() {
-		this.activate();
-	}
-
 	@Override
 	public boolean isSameType(Item item) {
         return item instanceof ForceFieldGenerator;
+    }
+
+    @Override
+    public ArrayList<Effect> getEffects() {
+        ArrayList<Effect> effects = new ArrayList<>();
+        effects.add(new ForceFieldEffect());
+        effects.add(new ForceFieldStuckEffect());
+        return effects;
     }
 
     public boolean isActive() {

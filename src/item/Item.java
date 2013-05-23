@@ -6,6 +6,8 @@ import item.inter.ItemContainer;
 import item.inter.Movable;
 import square.Square;
 
+import java.util.ArrayList;
+
 /**
  * Parent class for all sorts of items.
  * 
@@ -65,24 +67,6 @@ public abstract class Item {
         this.setContainer(null);
     }
 
-    /**
-	 * Notifies the item that it has been used.
-	 * No specific operation is needed at this level. Inheriting item may
-	 * determine if it needs to handle internal operations if it is beeing used.
-	 */
-	public void notifyUse() {
-		
-	}
-	
-	/**
-	 * Notifies the item that it has been picked up.
-	 * No specific operation is needed at this level. Inheriting item may
-	 * determine if it needs to handle internal operations if it is beeing picked up.
-	 */
-	public void notifyPickUp() {
-		
-	}
-	
 	/**
 	 * Returns a string representation of this object.
 	 */
@@ -92,5 +76,7 @@ public abstract class Item {
 	}
 
 	public abstract boolean isSameType(Item item);
+
+    public abstract ArrayList<Effect> getEffects();
 
 }

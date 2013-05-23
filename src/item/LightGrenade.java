@@ -1,9 +1,13 @@
 package item;
 
+import effect.Effect;
 import effect.event.DropFlagEvent;
+import effect.imp.LightGrenadeEffect;
 import item.inter.Movable;
 import game.Player;
 import square.Square;
+
+import java.util.ArrayList;
 
 /**
  * This class extends Item and represents a LightGrenade object.
@@ -31,11 +35,6 @@ public class LightGrenade extends Item{
         return (!square.hasItem(this) && !square.hasType(this));
     }
 
-    @Override
-    public void notifyUse(){
-        activate();
-    }
-
 	/**
 	 * Returns the string representation of this LightGrenade
 	 */
@@ -59,5 +58,12 @@ public class LightGrenade extends Item{
 	public boolean isSameType(Item o){
 		return (o instanceof LightGrenade);
 	}
+
+    @Override
+    public ArrayList<Effect> getEffects() {
+        ArrayList<Effect> effects = new ArrayList<>();
+        //TODO: Square should be set in square! effects.add(new LightGrenadeEffect());
+        return effects;
+    }
 
 }

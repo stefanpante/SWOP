@@ -1,9 +1,13 @@
 package item;
 
+import effect.Effect;
+import effect.imp.EmptyEffect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import game.Player;
 import square.Square;
+
+import java.util.ArrayList;
 
 /**
  * Represents a flag item. Belongs to a certain player.
@@ -40,7 +44,14 @@ public class Flag extends Item {
 	public boolean isSameType(Item item) {
 		return (item instanceof Flag);
 	}
-	
+
+    @Override
+    public ArrayList<Effect> getEffects() {
+        ArrayList<Effect> effects = new ArrayList<>();
+        effects.add(new EmptyEffect());
+        return effects;
+    }
+
     /**
      * Returns the player to which this flags belongs.
      */
