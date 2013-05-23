@@ -15,7 +15,7 @@ public class EffectMediator {
 
     private ArrayList<Effect> effects;
 
-    public EffectMediator(ArrayList<Effect> effects){
+    public void setEffects(ArrayList<Effect> effects){
         this.effects = effects;
     }
 
@@ -44,7 +44,5 @@ public class EffectMediator {
     private ArrayList<Effect> getSquareEffectBy(PriorityCriteria criteria){
         return criteria.meetsCriteria(this.effects);
     }
-
-
 
 }

@@ -354,7 +354,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	public void pickUp(Item item) throws IllegalArgumentException {
 		addItem(item);
-		item.notifyPickUp();
 		decrementActions();
 	}
 
@@ -370,7 +369,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 		if(item == null)
 			throw new IllegalStateException("Can't use a 'null' item");
         removeItem(item);
-		item.notifyUse();
 		decrementActions();
 	}
 
