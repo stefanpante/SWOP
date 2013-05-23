@@ -204,11 +204,14 @@ public class Player extends Observable implements Movable, ItemContainer {
             this.previousPosition = this.currentPosition;
             this.currentPosition = position;
             position.affect(this);
+            this.moved = true;
+            decrementActions();
         }else{
             this.currentPosition = position;
             throw new IllegalArgumentException("Unable to move to there!");
         }
-	}
+        System.out.println(position);
+    }
 
     @Override
     public Square getPreviousPosition(){
@@ -293,10 +296,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	public void move(Square position) throws IllegalStateException{
         if(!position.getNeighbors().containsValue(currentPosition))
             throw new IllegalStateException("Cannot move to non neighboring square");
-        //Decrement Actions before actual move for LightTrails.
-        position.affect(this);
-        decrementActions();
-		moved = true;
+        setPosition(position,true);
 	}
 
 	/**
