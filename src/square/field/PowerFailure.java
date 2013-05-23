@@ -235,7 +235,7 @@ public class PowerFailure extends Field {
 
     @Override
     public void removeEffects(Square square) {
-        square.addEffect(powerFailureEffect);
+        square.removeEffect(powerFailureEffect);
     }
 
 }
