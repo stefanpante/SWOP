@@ -206,6 +206,7 @@ public class Player extends Observable implements Movable, ItemContainer {
             position.affect(this);
         }else{
             this.currentPosition = position;
+            throw new IllegalArgumentException("Unable to move to there!");
         }
 	}
 
