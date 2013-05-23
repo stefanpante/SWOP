@@ -212,18 +212,13 @@ public abstract class AbstractGridBuilder {
      * Sets the neighbors of each square.
      */
     protected void setNeighbors(){
-    	 for(Square square: getGrid().getAllGridElements()){
-    		 HashMap<Direction, Square> neighbors = new HashMap<Direction, Square>();
-    		 HashMap<Direction, Coordinate> neighborsCoordinates = getGrid().getCoordinate(square).getAllNeighbors();
-    		 for(Direction direction: neighborsCoordinates.keySet()){
-    			 try{
-    				 Square s = getGrid().getGridElement(neighborsCoordinates.get(direction));
-    				 neighbors.put(direction, s);
-    			 }catch(Exception ignored){/* nothing to do here */}
-    		 }
-    		 
-         	square.setNeighbors(neighbors);
-         }
+    	for(Coordinate coordinate: this.gridElements.keySet()){
+    		GridElement element = gridElements.get(coordinate);
+    		HashMap<Direction, GridElement> neighbors = new HashMap<Direction,GridElement>();
+    		HashMap<Direction, Coordinate> neighborCoordinates = coordinate.getAllNeighbors();
+    		for(Direction direction: neighborCoordinates.keySet())
+    			this.gridElements.get(direction)
+    	}
     }
     
     /**
