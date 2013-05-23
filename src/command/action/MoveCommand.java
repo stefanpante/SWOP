@@ -5,6 +5,7 @@ package command.action;
 
 import game.Game;
 import item.inter.Movable;
+import square.GridElement;
 import util.Direction;
 import square.Square;
 
@@ -124,13 +125,13 @@ public class MoveCommand extends ActionCommand {
 
 		do{
 			try {
-				currentSquare = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
-				if(!currentSquare.isObstacle()){
-					movable.move(currentSquare);
+				GridElement gridElement = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
+				if(!gridElement.isObstacle() && gridElement.isSameType(new Square())){
+                    Square square = (Square) gridElement;
+					movable.move(square);
 					setPrevPosition(getCurrentPosition());
 					setCurrentPosition(movable.getPosition());
-				}
-				else{
+				}else{
 					return;
 				}
 
