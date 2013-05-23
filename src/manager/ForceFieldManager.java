@@ -54,7 +54,7 @@ public class ForceFieldManager extends Manager{
         	throw new IllegalArgumentException("This force field cannot be added.");
         
         this.forceFields.add(forceField);
-        forceField.bindAll();
+        forceField.setAllEffects();
     }
     
     /**

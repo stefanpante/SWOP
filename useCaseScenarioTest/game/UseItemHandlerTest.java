@@ -25,7 +25,7 @@ import square.multi.LightTrail;
 import square.obstacle.Wall;
 
 /**
- * Scenario test for the use case "use Item"
+ * Scenario test for the use case "use Square"
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
@@ -55,20 +55,20 @@ public class UseItemHandlerTest {
 		LightGrenade lg = new LightGrenade();
 		game.getCurrentPlayer().getInventory().addItem(lg);
 		
-		// Item should be in the inventory of the player
+		// Square should be in the inventory of the player
 		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
 		useItemHandler.useItem(lg);
 		
-		// Item shouldn't be in the inventory of the player anymore
+		// Square shouldn't be in the inventory of the player anymore
 		assertFalse(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
-		// Item should be in the inventory of the square
+		// Square should be in the inventory of the square
 		assertTrue(game.getCurrentPlayer().getPosition().getInventory().getAllItems().contains(lg));
 		
 		// The state of the lightGrenade should still be inactive when placed until moved
 		assertTrue(lg.isDropped());
 		assertFalse(lg.isActive());
 		
-		// Item should become active when moved
+		// Square should become active when moved
 		MoveHandler mh = new MoveHandler(game,null);
 		
 		for(Direction direction: Direction.values()) {
@@ -97,7 +97,7 @@ public class UseItemHandlerTest {
 		LightGrenade lg = new LightGrenade();
 		game.getCurrentPlayer().getInventory().addItem(lg);
 	
-		// Item should be in the inventory of the player
+		// Square should be in the inventory of the player
 		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
 		// This should throw an exception
 		useItemHandler.useItem(lg);
@@ -116,7 +116,7 @@ public class UseItemHandlerTest {
 		LightGrenade lg = new LightGrenade();
 		game.getCurrentPlayer().getInventory().addItem(lg);
 	
-		// Item should be in the inventory of the player
+		// Square should be in the inventory of the player
 		assertTrue(game.getCurrentPlayer().getInventory().getAllItems().contains(lg));
 		// This should throw an exception
 		useItemHandler.useItem(lg);	

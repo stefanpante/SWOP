@@ -15,7 +15,7 @@ public interface ItemContainer {
     public void addItem(Item item);
 
     /**
-     * Removes the given item from the Item
+     * Removes the given item from the Square
      * @param   item
      *          The item which will be removed.
      */

@@ -1,6 +1,5 @@
 package effect.imp;
 
-import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
@@ -20,7 +19,7 @@ public class LightGrenadeEffect extends DropFlagEffect {
      */
     public LightGrenadeEffect(Square centerSquare) {
         super(centerSquare);
-        setPriority(EffectPriority.Item);
+        setPriority(EffectPriority.Square);
     }
 
     @Override

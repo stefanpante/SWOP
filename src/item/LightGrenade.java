@@ -10,7 +10,7 @@ import square.Square;
 import java.util.ArrayList;
 
 /**
- * This class extends Item and represents a LightGrenade object.
+ * This class extends Square and represents a LightGrenade object.
  *  
  * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  *

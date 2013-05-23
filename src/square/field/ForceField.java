@@ -1,10 +1,8 @@
 package square.field;
 
-import game.Player;
-import item.IdentityDisc;
-import item.inter.Movable;
+import effect.imp.ForceFieldEffect;
+import effect.imp.ForceFieldStuckEffect;
 import square.Square;
-import square.multi.MultiGridElement;
 
 /**
  * Force field is a obstacle which covers multiple squares
@@ -13,6 +11,9 @@ import square.multi.MultiGridElement;
  * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
 public class ForceField extends Field {
+
+    private ForceFieldEffect forceFieldEffect;
+    private ForceFieldStuckEffect forceFieldStuckEffect;
 	
 	/**
 	 * Maximum length of a Force Field.
@@ -40,6 +41,14 @@ public class ForceField extends Field {
     private boolean active = true;
 
     /**
+     * Create a new Force Field
+     */
+    public ForceField(){
+        this.forceFieldEffect = new ForceFieldEffect();
+        this.forceFieldStuckEffect = new ForceFieldStuckEffect();
+    }
+
+    /**
      * Checks if the ForceField is active.
      *
      * @return  True if and only if the square is active
@@ -56,9 +65,9 @@ public class ForceField extends Field {
      */
     public void setActive(boolean active){
         if(active)
-            bindAll();
+            setAllEffects();
         else
-            unbindAll();
+            removeAllEffects();
         this.active = active;
     }
 
@@ -103,4 +112,15 @@ public class ForceField extends Field {
 			this.turnOn();
 	}
 
+    @Override
+    public void setEffects(Square square) {
+        square.addEffect(forceFieldEffect);
+        square.addEffect(forceFieldStuckEffect);
+    }
+
+    @Override
+    public void removeEffects(Square square) {
+        square.addEffect(forceFieldEffect);
+        square.removeEffect(forceFieldStuckEffect);
+    }
 }

@@ -61,7 +61,7 @@ public class IdentityDisc extends Item implements Movable {
     }
 
     /**
-     * Sets the range for this Launchable Item
+     * Sets the range for this Launchable Square
      * @param range	the range
      * @throws IllegalArgumentException
      * 		   thrown when the range is smaller than zero.

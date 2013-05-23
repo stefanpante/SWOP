@@ -17,7 +17,7 @@ public class PickUpCommand extends ActionCommand {
 	/**
 	 * Command to pick up an item
 	 * @param game	the game.
-	 * @param item	the Item which will be picked up
+	 * @param item	the Square which will be picked up
 	 */
 	public PickUpCommand(Game game, Item item) {
 		super(game);

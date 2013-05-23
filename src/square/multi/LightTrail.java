@@ -1,6 +1,8 @@
 package square.multi;
 
 import java.util.LinkedList;
+
+import effect.imp.LightTrailEffect;
 import square.Square;
 import square.field.Field;
 
@@ -11,6 +13,8 @@ import square.field.Field;
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
 public class LightTrail extends Field {
+
+    private LightTrailEffect lightTrailEffect;
 
 	private LinkedList<Square> trailqueue;
 	
@@ -95,6 +99,15 @@ public class LightTrail extends Field {
 			this.addGridElement(square);
 	}
 
+    @Override
+    public void setEffects(Square square) {
+        square.addEffect(lightTrailEffect);
+    }
+
+    @Override
+    public void removeEffects(Square square) {
+        square.addEffect(lightTrailEffect);
+    }
 
 
 }

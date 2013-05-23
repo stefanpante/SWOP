@@ -30,7 +30,7 @@ public enum EffectPriority {
     /**
      * Priority allowing items on a Square to affect the movable on it such as Light Grenades.
      */
-    Item,
+    Square,
     /**
      * Lowest priority allowing to prevent a player from leaving
      */

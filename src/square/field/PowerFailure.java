@@ -1,5 +1,7 @@
 package square.field;
 
+import effect.Effect;
+import effect.imp.PowerFailureEffect;
 import game.Player;
 import square.GridElement;
 import square.Square;
@@ -57,6 +59,7 @@ public class PowerFailure extends Field {
     private boolean active;
 
     private final Random random = new Random();
+    private PowerFailureEffect powerFailureEffect;
 
     /**
      * Create a new Power Failure with the given square as primary.
@@ -67,6 +70,7 @@ public class PowerFailure extends Field {
     public PowerFailure(Square primary){
         if(!isValidGridElement(primary))
             throw new IllegalArgumentException("The given square cannot be added to this Power Failure.");
+        this.powerFailureEffect = new PowerFailureEffect();
         this.actions = 0;
         this.active = true;
         addGridElement(PRIMARY,primary);
@@ -106,10 +110,10 @@ public class PowerFailure extends Field {
             GridElement secondary = primary.getNeighbor(direction);
             GridElement tertiary = secondary.getNeighbor(getTertiaryDirection());
             if(secondary.isSameType(new Square()) && tertiary.isSameType(new Square())) {
-                // Add and bind the squaress
+                // Add and setEffects the squaress
                 addGridElement(SECONDARY,(Square)secondary);
                 addGridElement(TERTIARY, (Square)tertiary);
-                bindAll();
+                setAllEffects();
             }
         }catch (NoSuchElementException ignored){
 
@@ -122,7 +126,7 @@ public class PowerFailure extends Field {
     private void updateSecondary(){
         try{
             Square oldSecondary = getGridElement(SECONDARY);
-            unbind(oldSecondary);
+            removeEffects(oldSecondary);
             removeGridElement(oldSecondary);
 
             Direction direction = getDirection().neighborDirections().get(getRotation());
@@ -130,7 +134,7 @@ public class PowerFailure extends Field {
             GridElement secondary = primary.getNeighbor(direction);
             if(secondary.isSameType(new Square())){
                 addGridElement(SECONDARY,(Square)secondary);
-                bind((Square)secondary);
+                setEffects((Square) secondary);
                 updateTertiary();
             }
         }catch (NoSuchElementException ignored){
@@ -144,7 +148,7 @@ public class PowerFailure extends Field {
     private void updateTertiary(){
         try{
             Square oldTertiary = getGridElement(TERTIARY);
-            unbind(oldTertiary);
+            removeEffects(oldTertiary);
             removeGridElement(oldTertiary);
 
             Square secondary = getGridElement(SECONDARY);
@@ -153,7 +157,7 @@ public class PowerFailure extends Field {
             GridElement tertiary = secondary.getNeighbor(direction);
             if(tertiary.isSameType(new Square())){
                 addGridElement(TERTIARY,(Square)tertiary);
-                bind((Square)tertiary);
+                setEffects((Square) tertiary);
             }
         }catch (NoSuchElementException ignored){
 
@@ -198,7 +202,7 @@ public class PowerFailure extends Field {
      * Desttry this Power Failure
      */
     public void destroy(){
-        unbindAll();
+        removeAllEffects();
         for(Square square: getGridElements()){
             removeGridElement(square);
         }
@@ -222,6 +226,16 @@ public class PowerFailure extends Field {
                 ", actions=" + actions +
                 ", active=" + active +
                 '}';
+    }
+
+    @Override
+    public void setEffects(Square square) {
+        square.addEffect(powerFailureEffect);
+    }
+
+    @Override
+    public void removeEffects(Square square) {
+        square.addEffect(powerFailureEffect);
     }
 
 }

@@ -102,15 +102,15 @@ public class TestInventory {
 //	@Test
 //	public void testGetItem(){
 //		Inventory inventory = new SquareInventory();
-//		Item item1 = new IdentityDisc();
+//		Square item1 = new IdentityDisc();
 //		Integer hash1 = item1.hashCode();
-//		Item item2 = new IdentityDisc();
+//		Square item2 = new IdentityDisc();
 //		Integer hash2 = item1.hashCode();
-//		Item item3 = new LightGrenade();
+//		Square item3 = new LightGrenade();
 //		Integer hash3 = item1.hashCode();
-//		Item item4 = new ChargedIdentityDisc();
+//		Square item4 = new ChargedIdentityDisc();
 //		Integer hash4 = item1.hashCode();
-//		Item item5 = new Teleport();
+//		Square item5 = new Teleport();
 //		Integer hash5 = item1.hashCode();
 //		
 //		inventory.addItem(item1);

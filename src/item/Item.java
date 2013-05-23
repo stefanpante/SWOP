@@ -27,7 +27,7 @@ public abstract class Item {
      */
     public void setContainer(ItemContainer container){
         if(!isValidContainer(container))
-            throw new IllegalArgumentException("The given Item Container is not valid");
+            throw new IllegalArgumentException("The given Square Container is not valid");
         if(this.container != null){
         	this.container.removeItem(this);
         }
@@ -72,7 +72,7 @@ public abstract class Item {
 	 */
 	@Override
 	public String toString() {
-		return "Item";
+		return "Square";
 	}
 
 	public abstract boolean isSameType(Item item);

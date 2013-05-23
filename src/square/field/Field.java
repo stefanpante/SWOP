@@ -9,22 +9,18 @@ import square.multi.MultiGridElement;
  */
 public abstract class Field extends MultiGridElement<Square> {
 
-    public void bindAll(){
+    public void setAllEffects(){
         for(Square square : getGridElements())
-            bind(square);
+            setEffects(square);
     }
 
-    public void unbindAll(){
+    public void removeAllEffects(){
         for(Square square : getGridElements())
-            unbind(square);
+            removeEffects(square);
     }
 
-    public void bind(Square square){
-        // TODO:
-    }
+    public abstract void setEffects(Square square);
 
-    public void unbind(Square square){
-        // TODO:
-    }
+    public abstract void removeEffects(Square square);
 
 }
