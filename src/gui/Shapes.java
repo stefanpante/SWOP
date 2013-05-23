@@ -85,7 +85,6 @@ public class Shapes {
 		}
 		
 		if(item instanceof Teleport){
-			System.out.println("teleport is active");
 			return Shapes.teleport;
 		}
 		

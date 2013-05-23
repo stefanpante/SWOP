@@ -2,6 +2,7 @@ package gui;
 
 import effect.Effect;
 import effect.imp.ForceFieldEffect;
+import effect.imp.PowerFailureEffect;
 import game.Player;
 import gui.button.DirectionalButton;
 
@@ -172,14 +173,19 @@ public class GridGui extends GUIElement{
 		for(SquareGUI item: items.values())
 			item.draw();
 
-		for(SquareGUI player: players)
-			player.draw();
-
 		for(SquareGUI light: lightTrails_Squares)
 			light.draw();
 
 		for(SquareGUI wall: walls_squares)
 			wall.draw();
+		
+		for(SquareGUI effect: effects){
+			effect.draw();
+		}
+		
+		for(SquareGUI player: players)
+			player.draw();
+
 
 	}
 
@@ -348,8 +354,9 @@ public class GridGui extends GUIElement{
 		effects.clear();
 		for(Coordinate coordinate: o.keySet()){
 			ArrayList<Effect> effects = o.get(coordinate);
-			PVector Position = getPixels(coordinate);
+			PVector position = getPixels(coordinate);
 			for(Effect effect: effects){
+				
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, position, gui);
 				int color = getEffectColor(effect);
 				if(color != -1){
@@ -365,7 +372,9 @@ public class GridGui extends GUIElement{
 		if(effect instanceof ForceFieldEffect){
 			return OConstants.FORCEFIELD_COLOR.getTransparantIntColor(70);
 		}
-		
+		if(effect instanceof PowerFailureEffect){
+			return OConstants.POWERFAIL_COLOR.getTransparantIntColor(70);
+		}
 		return -1;
 	}
 
