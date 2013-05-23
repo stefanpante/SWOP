@@ -1,6 +1,7 @@
 package square.field;
 
 import game.Player;
+import square.GridElement;
 import square.Square;
 import util.Direction;
 
@@ -102,13 +103,14 @@ public class PowerFailure extends Field {
             this.direction = Direction.getRandomDirection();
             // Create secondary and tertiary
             Square primary = getGridElement(PRIMARY);
-            Square secondary = primary.getNeighbor(direction);
-            Square tertiary = secondary.getNeighbor(getTertiaryDirection());
-
-            // Add and bind the squaress
-            addGridElement(SECONDARY,secondary);
-            addGridElement(TERTIARY, tertiary);
-            bindAll();
+            GridElement secondary = primary.getNeighbor(direction);
+            GridElement tertiary = secondary.getNeighbor(getTertiaryDirection());
+            if(secondary.isSameType(new Square()) && tertiary.isSameType(new Square())) {
+                // Add and bind the squaress
+                addGridElement(SECONDARY,(Square)secondary);
+                addGridElement(TERTIARY, (Square)tertiary);
+                bindAll();
+            }
         }catch (NoSuchElementException ignored){
 
         }
@@ -125,10 +127,12 @@ public class PowerFailure extends Field {
 
             Direction direction = getDirection().neighborDirections().get(getRotation());
             Square primary = getGridElement(PRIMARY);
-            Square secondary = primary.getNeighbor(direction);
-            addGridElement(SECONDARY,secondary);
-            bind(secondary);
-            updateTertiary();
+            GridElement secondary = primary.getNeighbor(direction);
+            if(secondary.isSameType(new Square())){
+                addGridElement(SECONDARY,(Square)secondary);
+                bind((Square)secondary);
+                updateTertiary();
+            }
         }catch (NoSuchElementException ignored){
 
         }
@@ -146,9 +150,11 @@ public class PowerFailure extends Field {
             Square secondary = getGridElement(SECONDARY);
 
             Direction direction = getTertiaryDirection();
-            Square tertiary = secondary.getNeighbor(direction);
-            addGridElement(TERTIARY,tertiary);
-            bind(tertiary);
+            GridElement tertiary = secondary.getNeighbor(direction);
+            if(tertiary.isSameType(new Square())){
+                addGridElement(TERTIARY,(Square)tertiary);
+                bind((Square)tertiary);
+            }
         }catch (NoSuchElementException ignored){
 
         }
