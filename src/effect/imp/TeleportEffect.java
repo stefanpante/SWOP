@@ -31,7 +31,7 @@ public class TeleportEffect extends DropFlagEffect {
     @Override
     public void execute(Player player) {
         dropFlag(player);
-        player.setPosition(getTeleportDestination());
+        player.setPosition(getTeleportDestination(),true);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class ForceFieldEffect extends Effect {
 
     @Override
     public void execute(Player player) {
-        //TODO set player one position back.
+        player.setPosition(player.getPreviousPosition(),false);
     }
 
     @Override

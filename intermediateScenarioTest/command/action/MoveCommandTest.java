@@ -50,6 +50,7 @@ public class MoveCommandTest {
      * 	8	|	|	|	|	|	|	|	|	|	|	|
      *	9 	|	|	|	|	|	|	|	|	|	|	|
      *
+     * see MoveCommandTest.txt
      */
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {

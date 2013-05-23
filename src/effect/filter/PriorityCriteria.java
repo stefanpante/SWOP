@@ -10,16 +10,19 @@ import java.util.ArrayList;
  * Date: 23/05/13
  * Time: 13:35
  */
-public abstract class PriorityCriteria implements Criteria {
+public class PriorityCriteria implements Criteria {
 
+    private EffectPriority effectPriority;
 
-    public abstract EffectPriority getAccepted();
+    public PriorityCriteria(EffectPriority priority){
+        this.effectPriority = priority;
+    }
 
     @Override
     public ArrayList<Effect> meetsCriteria(ArrayList<Effect> effects) {
         ArrayList<Effect> accepted = new ArrayList<>();
         for(Effect effect : effects){
-            if(effect.hasPriority(getAccepted()))
+            if(effect.hasPriority(this.effectPriority))
                 accepted.add(effect);
         }
         return accepted;
