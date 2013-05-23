@@ -32,8 +32,8 @@ public class TurnHandler extends Handler implements Observer {
 	}
 	
 	@Override
-	public void update(Observable o, Object arg) {		
-		if(getGame().getGameMode().checkWin()){
+	public void update(Observable o, Object arg) {
+        if(getGame().getGameMode().checkWin()){
     		firePropertyChange(Handler.WIN_PROPERTY, getGame().getCurrentPlayer().toString());
     		getGame().end();
     	} else if(isEndOfTurn()) {

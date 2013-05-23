@@ -61,4 +61,9 @@ public abstract class DropFlagEffect extends Effect {
             
         }
     }
+
+    @Override
+    public String toString() {
+        return "DropFlagEffect";
+    }
 }

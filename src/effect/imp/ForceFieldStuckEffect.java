@@ -28,4 +28,9 @@ public class ForceFieldStuckEffect extends Effect {
     public void execute(IdentityDisc identityDisc) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public String toString() {
+        return "ForceFieldStuckEffect";
+    }
 }

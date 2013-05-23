@@ -40,7 +40,7 @@ public class LightGrenade extends Item{
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + " LightGrenade";
+		return super.toString() + "LightGrenade";
 	}
 
 	/*

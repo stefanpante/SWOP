@@ -129,9 +129,10 @@ public class IdentityDisc extends Item implements Movable {
     public void activate(){
     	this.active = true;
     }
+
     @Override
 	public String toString() {
-		return super.toString() + " IdentityDisc";
+		return super.toString() + "IdentityDisc";
 	}
 
 	@Override
@@ -153,8 +154,6 @@ public class IdentityDisc extends Item implements Movable {
             this.currentPosition = square;
         }
     }
-
-
 
 	@Override
 	public void resetRange() {

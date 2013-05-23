@@ -30,4 +30,10 @@ public class LightGrenadeEffect extends DropFlagEffect {
     @Override
     public void execute(IdentityDisc identityDisc) {
     }
+
+    @Override
+    public String toString() {
+        return "LightGrenadeEffect";
+    }
+
 }

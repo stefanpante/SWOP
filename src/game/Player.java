@@ -196,6 +196,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
     @Override
     public void setPosition(Square position, boolean updatePrevious) throws IllegalStateException {
+        System.out.println("LOLOLOLOL " + position + " and   " + updatePrevious);
         if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
         if(updatePrevious){
@@ -206,9 +207,8 @@ public class Player extends Observable implements Movable, ItemContainer {
             decrementActions();
         }else{
             this.currentPosition = position;
-            throw new IllegalArgumentException("Unable to move to there!");
+            throw new IllegalStateException("Unable to move to there!");
         }
-        System.out.println(position);
     }
 
     @Override
@@ -243,7 +243,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	@Basic
 	public Square getPosition() {
-		return currentPosition;
+        return currentPosition;
 	}
 
 	/**
@@ -302,10 +302,10 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * 
 	 */
 	public void decrementActions(){
-		this.remainingActions--;
-        lightTrail.setHead(getPosition());
+        this.remainingActions--;
+        lightTrail.setHead(getPreviousPosition());
         endAction();
-	}
+    }
 	
 
 	/**

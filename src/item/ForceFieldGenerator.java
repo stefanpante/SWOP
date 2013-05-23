@@ -50,6 +50,11 @@ public class ForceFieldGenerator extends Item{
         this.active = true;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "ForceFieldGenerator";
+    }
+
    
 	
 }

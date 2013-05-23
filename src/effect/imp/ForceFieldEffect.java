@@ -27,4 +27,9 @@ public class ForceFieldEffect extends Effect {
     public void execute(IdentityDisc identityDisc) {
         identityDisc.destroy();
     }
+
+    @Override
+    public String toString() {
+        return "ForceFieldEffect";
+    }
 }

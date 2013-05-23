@@ -22,4 +22,9 @@ public class PowerFailureEffect extends Effect {
     public void execute(IdentityDisc identityDisc) {
         identityDisc.decreaseRange();
     }
+
+    @Override
+    public String toString() {
+        return "PowerFailureEffect";
+    }
 }

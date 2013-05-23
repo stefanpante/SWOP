@@ -23,7 +23,7 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	
 	@Override
 	public String toString() {
-		return super.toString() + "Charged Identity Disc";
+		return super.toString() + "ChargedIdentityDisc";
 	}
 	
 	public boolean isSameType(Item o){

@@ -75,4 +75,9 @@ public class Flag extends Item {
 			setContainer(itemContainer);
 		}
 	}
+
+    @Override
+    public String toString() {
+        return super.toString() + "Flag";
+    }
 }

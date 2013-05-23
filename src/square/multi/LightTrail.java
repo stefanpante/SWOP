@@ -28,7 +28,8 @@ public class LightTrail extends Field {
 	 */
 	public LightTrail() {
 		super();
-		trailqueue  = new LinkedList<Square>();
+		this.trailqueue  = new LinkedList<Square>();
+        this.lightTrailEffect = new LightTrailEffect();
 	}
 	
 	/**
@@ -94,11 +95,15 @@ public class LightTrail extends Field {
 	}
 
 	public void setHead(Square square) {
-		
-		if(getNewestSquare() == square)
-			this.removeGridElement(getLastSquare());
-		else
-			this.addGridElement(square);
+        try{
+            if(getNewestSquare() == square)
+                this.removeGridElement(getLastSquare());
+            else
+                this.addGridElement(square);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 	}
 
     @Override

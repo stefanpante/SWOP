@@ -25,4 +25,10 @@ public class LightTrailEffect extends Effect {
     public void execute(IdentityDisc identityDisc) {
         //
     }
+
+    @Override
+    public String toString() {
+        return "LightTrailEffect";
+    }
+
 }

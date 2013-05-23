@@ -20,4 +20,9 @@ public class EmptyEffect extends Effect {
     public void execute(IdentityDisc identityDisc) {
         // Do nothing
     }
+
+    @Override
+    public String toString() {
+        return "EmptyEffect";
+    }
 }

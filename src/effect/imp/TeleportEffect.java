@@ -38,4 +38,9 @@ public class TeleportEffect extends DropFlagEffect {
     public void execute(IdentityDisc identityDisc) {
         identityDisc.setPosition(getTeleportDestination(),true);
     }
+
+    @Override
+    public String toString() {
+        return "TeleportEffect";
+    }
 }

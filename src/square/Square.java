@@ -6,7 +6,6 @@ import game.Player;
 import item.IdentityDisc;
 import item.Item;
 import item.inter.ItemContainer;
-import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 
 import java.util.ArrayList;
@@ -79,12 +78,13 @@ public class Square extends GridElement implements ItemContainer {
     private ArrayList<Effect> getResultingEffects(){
         ArrayList<Effect> result = new ArrayList<>(this.getAllEffects());
         result.addAll(getAllItemEffects());
-        effectMediator.setEffects(this.getAllEffects());
+        effectMediator.setEffects(result);
         return effectMediator.getResultingEffects();
     }
 
     public void affect(Player player){
         for(Effect e: getResultingEffects()){
+            System.out.println(e);
             e.execute(player);
         }
     }
@@ -100,6 +100,8 @@ public class Square extends GridElement implements ItemContainer {
 		String s = "Square [ ";
 		s += items;
 		s += ", ";
+        s += getAllItemEffects();
+        s += ", ";
 		s += effects;
 		s += " ]";
 		return s;
