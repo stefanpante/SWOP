@@ -153,6 +153,22 @@ public class GridGui extends GUIElement{
 			squares.remove(coordinate);
 		}
 	}
+	
+	public void updateLightTrails(HashMap<Player, ArrayList<Coordinate>> o){
+		lightTrails_Squares.clear();
+		for(Player player: o.keySet()){
+			ArrayList<Coordinate> playercoor = o.get(player);
+			int id = player.getID();
+			int alpha = 150;
+			for(Coordinate coor: playercoor){
+				SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
+				int color = OConstants.PLAYERCOLORS[id -1].getTransparantIntColor(alpha);
+				s.setColor(color);
+				lightTrails_Squares.add(s);
+				alpha -= 30;
+			}
+		}
+	}
 
 
 	/**
@@ -183,6 +199,8 @@ public class GridGui extends GUIElement{
 			effect.draw();
 		}
 		
+		for(SquareGUI light: lightTrails_Squares)
+			light.draw();
 		for(SquareGUI player: players)
 			player.draw();
 

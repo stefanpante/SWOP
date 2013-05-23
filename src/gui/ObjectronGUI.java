@@ -616,6 +616,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		case Handler.ITEMS_PROPERTY:	HashMap<Coordinate, ArrayList<Item>> items = (HashMap<Coordinate,ArrayList<Item>>) o;
 		grid.updateItems(items);
 		break;
+		case Handler.LIGHTTRAIL_PROPERTY:  grid.updateLightTrails((HashMap<Player, ArrayList<Coordinate>>) o );
+		break;
 		default:					break;
 		}
 	

@@ -8,10 +8,12 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import square.Brick;
 import square.GridElement;
 import square.Square;
+import square.multi.LightTrail;
 import util.Coordinate;
 
 /**
@@ -38,6 +40,7 @@ public abstract class Handler {
     public static final String WIN_PROPERTY = "Win";
     public static final String LOSE_PROPERTY = "Lose";
 	public static final String WALLS_PROPERTY = "walls";
+	public static final String LIGHTTRAIL_PROPERTY = "LightTrails";
 
     /**
      * The game which this handler uses.
@@ -167,6 +170,7 @@ public abstract class Handler {
         firePropertyChange(Handler.CURRENT_PLAYER_PROPERTY, getGame().getCurrentPlayer().getName());
         firePropertyChange(Handler.PLAYER_INVENTORY_PROPERTY, getPlayerItems());
         firePropertyChange(Handler.SQUARE_INVENTORY_PROPERTY, getSquareItems());
+        firePropertyChange(Handler.LIGHTTRAIL_PROPERTY,getLightTrailLocations())l
         firePropertyChange(Handler.ITEMS_PROPERTY, properties.get(Handler.ITEMS_PROPERTY));
         firePropertyChange(Handler.PLAYERS_PROPERTY, properties.get(Handler.PLAYERS_PROPERTY));
         firePropertyChange(Handler.CURRENT_POSITION_PROPERTY, getGame().getGrid().getCoordinate(getGame().getCurrentPlayer().getPosition()));
@@ -228,6 +232,36 @@ public abstract class Handler {
         properties.put(Handler.PLAYERS_PROPERTY, players);
 
         return properties;
+    }
+    
+    /**
+     * Get a list of all coordinates which have a LightTrail with their associated Player.
+     *
+     * @return HashMap with coordinates of lightTrails per player List of coordinates which have a LightTrail.
+     */
+    public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
+        HashMap<Player, LightTrail> map = new HashMap<Player, LightTrail>();
+        for (Player player : getGame().getPlayers()) {
+            map.put(player, player.getLightTrail());
+        }
+        Iterator<Player> iterator = map.keySet().iterator();
+        HashMap<Player, Coordinate> players = getPlayerLocations();
+
+        HashMap<Player, ArrayList<Coordinate>> hashMap = new HashMap<Player, ArrayList<Coordinate>>();
+
+        while (iterator.hasNext()) {
+            Player player = iterator.next();
+
+            ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+            ArrayList<Square> squares = map.get(player).getGridElements();
+
+            for(Square square: squares){
+            	coords.add(getGame().getGrid().getCoordinate(square));
+            }
+            hashMap.put(player, coords);
+        }
+
+        return hashMap;
     }
 
 }
