@@ -1,6 +1,7 @@
 package gui;
 
 import effect.Effect;
+import effect.imp.ForceFieldEffect;
 import game.Player;
 import gui.button.DirectionalButton;
 
@@ -350,15 +351,22 @@ public class GridGui extends GUIElement{
 			PVector Position = getPixels(coordinate);
 			for(Effect effect: effects){
 				SquareGUI s = new SquareGUI(squareWidth, squareHeight, position, gui);
-				s.setColor(getEffectColor(effect));
-				this.effects.add(s);
+				int color = getEffectColor(effect);
+				if(color != -1){
+					s.setColor(color);
+					this.effects.add(s);
+				}
 			}
 		}
 	}
 	
 	// TODO this needs to be implemented when i know how the effects are named
 	private int getEffectColor(Effect effect){
-		return 0;
+		if(effect instanceof ForceFieldEffect){
+			return OConstants.FORCEFIELD_COLOR.getTransparantIntColor(70);
+		}
+		
+		return -1;
 	}
 
 }

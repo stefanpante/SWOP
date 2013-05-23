@@ -34,7 +34,6 @@ public class IdentityDiscMoveCommand extends MoveCommand {
 		/* Check whether it's possible to move in the given direction */
         if(getDirection().isDiagonal()){
             throw new IllegalStateException("Cannot throw into given direction.");
-            
         }
     }
     
