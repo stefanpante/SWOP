@@ -48,7 +48,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * ArrayList containing the start positions of the players.
 	 */
-	private ArrayList<Coordinate> startPositions;
+	private ArrayList<Coordinate> startCoordinates;
 
 	/**
 	 * Construct a new fileGridBuilder with a given parameter
@@ -56,7 +56,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 */
 	public FileGridBuilder(String filepath) throws IOException{
 		this.file = new File(filepath);
-		this.startPositions = new ArrayList<Coordinate>();
+		this.startCoordinates = new ArrayList<Coordinate>();
 	
 		setRandom(new Random());
 		build();
@@ -64,7 +64,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 
 	protected void setConstraints(){
 		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		for(Coordinate coor: startPositions)
+		for(Coordinate coor: startCoordinates)
 			excluded.add(coor);
 		
 		setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
@@ -84,6 +84,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			setNeighbors();
 			setConstraints();
 			placeWalls(this.getWallsLocation());
+			setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
+			setStartPositions();
 			checkConsistency();
 		}
 
@@ -167,11 +169,11 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	}
 	
 	public void addStartCoordinate(Coordinate coor){
-		this.startPositions.add(coor);
+		this.startCoordinates.add(coor);
 	}
 	
 	public ArrayList<Coordinate> getStartPositions(){
-		return new ArrayList<Coordinate>(this.startPositions);
+		return new ArrayList<Coordinate>(this.startCoordinates);
 	}
 
 	/**
@@ -185,14 +187,13 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		}
 
 		for(Coordinate coordinate: wall_squares){
-			//getGrid().setSquare(coordinate, new Square());
+			this.gridElements.put(coordinate, new Square());
 		}
 
-		for(Coordinate coor: startPositions){
+		for(Coordinate coor: startCoordinates){
 			Square sq = new Square();
+			this.startPositions.add(sq);
 			this.gridElements.put(coor, sq);
-			//getGrid().setSquare(coor, sq);
-			getGrid().addStartPosition(sq);
 		}
 	}
 
@@ -257,7 +258,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		for(GridElement el1: getGrid().getAllGridElements()){
 			for(GridElement el2: getGrid().getAllGridElements()){
 				if(el1 != el2){
-					if(!el1.isObstacle()() && !el2.isObstacle()){
+					if(!el1.isObstacle() && !el2.isObstacle()){
 						AStar aStar = new AStar(getGrid());
 						// throws illegalStateException when there is no path
 						aStar.shortestPath(el1, el2);
@@ -266,7 +267,6 @@ public class FileGridBuilder extends AbstractGridBuilder{
 			}
 		}
 		
-		//TODO: assert that there are at least two start positions.
 
 		for(Square startPlayer1: getGrid().getStartPositions()){
 			for(Square startPlayer2 : getGrid().getStartPositions()){

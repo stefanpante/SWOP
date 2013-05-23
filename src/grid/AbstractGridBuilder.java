@@ -55,8 +55,11 @@ public abstract class AbstractGridBuilder {
 	 */
 	protected ArrayList<Wall> walls;
 
-
+	
 	protected HashMap<Coordinate, GridElement> gridElements;
+	
+	protected ArrayList<Square> startPositions;
+	
 
 
 
@@ -65,6 +68,7 @@ public abstract class AbstractGridBuilder {
 	 */
 	public AbstractGridBuilder(){
 		this.walls = new ArrayList<Wall>();
+		this.startPositions = new ArrayList<Square>();
 		this.gridElements = new HashMap<Coordinate, GridElement>();
 	}
 
@@ -233,6 +237,12 @@ public abstract class AbstractGridBuilder {
 
 		}
 	}
+	
+	protected void setStartPositions(){
+		for(Square square: startPositions){
+			getGrid().addStartPosition(square);
+		}
+	}
 
 	/**
 	 * Adds the squares to the grid.
@@ -245,9 +255,5 @@ public abstract class AbstractGridBuilder {
 	 */
 	protected abstract void build() throws IllegalStateException;
 
-	/**
-	 * Returns every possible start position of each player.
-	 */
-	public abstract ArrayList<Coordinate> getStartPositions();
 
 }

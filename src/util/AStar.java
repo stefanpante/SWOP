@@ -24,11 +24,11 @@ public class AStar {
 		openSet = new PriorityQueue<GridElementContainer>();
 	}
 	
-	private void boxAllSquares(Grid grid, Square start, Square goal) {
+	private void boxAllGridElements(Grid grid, GridElement el1, GridElement el2) {
 		this.source = new ArrayList<GridElementContainer>();
 		for(GridElement element : grid.getAllGridElements()){
 			GridElementContainer sq = new GridElementContainer(element);
-			sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
+			sq.setHeuristicDistanceFromGoal(manhattan(el1, el2));
 			this.source.add(sq);
 		}
 	}
@@ -52,10 +52,10 @@ public class AStar {
 		return null;
 	}
 
-	public ArrayList<Coordinate> shortestPath(Square startSquare, Square goalSquare){	
-		boxAllSquares(grid, startSquare, goalSquare);
-		GridElementContainer start = getGridElementContainer(startSquare);
-		GridElementContainer goal = getGridElementContainer(goalSquare);
+	public ArrayList<Coordinate> shortestPath(GridElement el1, GridElement el2){	
+		boxAllGridElements(grid, el1, el2);
+		GridElementContainer start = getGridElementContainer(el1);
+		GridElementContainer goal = getGridElementContainer(el2);
 		
 		openSet.add(start);
 		while(!openSet.isEmpty()){
@@ -90,7 +90,7 @@ public class AStar {
 			}
 
 		}
-		throw new IllegalStateException("No path from " + grid.getCoordinate(startSquare) + " to " +grid.getCoordinate(goalSquare));
+		throw new IllegalStateException("No path from " + grid.getCoordinate(el1) + " to " +grid.getCoordinate(el2));
 	}
 	
 	private int manhattan(Square startSquare, Square goalSquare){
