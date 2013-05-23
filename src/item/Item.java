@@ -11,7 +11,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  **/
-public abstract class Item implements Effect {
+public abstract class Item {
 
     /**
      * The container of this item
@@ -90,54 +90,7 @@ public abstract class Item implements Effect {
 	public String toString() {
 		return "Item";
 	}
-	
-	
-	
-	@Override
-	public boolean canMoveFrom(){
-		return true;
-	}
-	
-	@Override
-	public boolean prohibitsPlayer(){
-		return true;
-	}
-	
-	@Override
-	public void onMoveToEffect(Movable movable) {
-		// nothing
-		
-	}
 
-	@Override
-	public void onMoveToEffect(Player player) {
-		// nothing
-		
-	}
-
-	@Override
-	public void onMoveToEffect(IdentityDisc identityDisc) {
-		// nothing
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Movable movable) {
-		// nothing
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Player player) {
-		// nothing
-		
-	}
-
-	@Override
-	public void onStandOnEffect(IdentityDisc identityDisc) {
-		// nothing
-		
-	}
 	public abstract boolean isSameType(Item item);
 
 }

@@ -107,10 +107,13 @@ public class ForceFieldManager extends Manager{
         
         for (Square square: getGrid().getAllSquares()) {
 
-            if (square.hasType(new ForceFieldGenerator()) && ((ForceFieldGenerator)square.filterItemsByType(new ForceFieldGenerator())).isActive()) {
-            	Coordinate coordinate = getGrid().getCoordinate(square);
-            	generatorCoordinates.add(coordinate);
-            } 
+            if (square.hasType(new ForceFieldGenerator())) {
+                ForceFieldGenerator forceFieldGenerators = (ForceFieldGenerator)square.filterItemsByType(new ForceFieldGenerator()).get(0);
+                if(forceFieldGenerators.isActive()){
+                    Coordinate coordinate = getGrid().getCoordinate(square);
+                    generatorCoordinates.add(coordinate);
+                }
+            }
         }
 
         for (Coordinate coordinate : generatorCoordinates) {
@@ -137,9 +140,9 @@ public class ForceFieldManager extends Manager{
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {
                 Square square = getGrid().getSquare(c);
-            if(square.isObstructed())
+            if(square.isObstacle())
                 return;
-            forceField.addSquare(square);
+            forceField.addGridElement(square);
         }
         try {
         	addForceField(forceField);

@@ -193,7 +193,7 @@ public abstract class Handler {
             effects.put(coordinate, square.getAllEffects());
             boolean player_position;
 
-            if (square.isObstructed()) {
+            if (square.isObstacle()) {
                 player_position = false;
 
                 for (Player player : getGame().getPlayers()) {
