@@ -38,6 +38,7 @@ public abstract class GridElement {
 
     /**
      * Returns the neighbor in the given direction
+     *
      * @param direction	The direction of the neighbor.
      * @return the neighbor in the given direction
      */
@@ -48,4 +49,6 @@ public abstract class GridElement {
     }
 
     public abstract boolean isObstacle();
+
+    public abstract boolean isSameType(GridElement gridElement);
 }

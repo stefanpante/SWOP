@@ -138,8 +138,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 		return actions <= Player.MAX_ALLOWED_ACTIONS;
 	}
 
-
-	
 	/**
 	 * Checks whether a given number of actions is a valid number of actions to lose.
 	 * @return 		true if the number is larger than or equal to zero.
@@ -199,7 +197,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     @Override
     public void setPosition(Square position) throws IllegalStateException {
         if(!isValidPosition(position))
-			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
+			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");		
 	}
 
     @Override
@@ -356,7 +354,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	public void pickUp(Item item) throws IllegalArgumentException {
 		addItem(item);
-		item.notifyPickUp();
 		decrementActions();
 	}
 
@@ -372,7 +369,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 		if(item == null)
 			throw new IllegalStateException("Can't use a 'null' item");
         removeItem(item);
-		item.notifyUse();
 		decrementActions();
 	}
 
@@ -402,24 +398,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 		
 		this.remainingActions = remainingActions;
 	}
-
 	
-	/**
-	 * Adds a given square as a square covered by the player obstacle.
-	 * 
-	 * @param 	square
-	 * 			The square to add.
-	 * @throws	IllegalArgumentException
-	 * 			If the given square can not be added as a square.
-	 * 			| !isValidSquare()
-	 */
-	@Override
-	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidGridElement(square))
-			throw new IllegalArgumentException("The given " + square + " is not a valid square");
-		currentPosition = square;
-	}
-
 	/**
 	 * Returns the light trail of this player
 	 * 
@@ -488,6 +467,11 @@ public class Player extends Observable implements Movable, ItemContainer {
     @Override
     public ArrayList<Item> getAllItems() {
         return new ArrayList<Item>(items);
+    }
+
+    @Override
+    public boolean isSameType(ItemContainer itemContainer) {
+        return itemContainer instanceof Player;
     }
 
 }

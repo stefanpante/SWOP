@@ -106,13 +106,16 @@ public class ForceFieldManager extends Manager{
     protected void detectForceFields(){   
         ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
         
-        for (Square square: getGrid().getAllGridElements()) {
+        for (GridElement gridElement: getGrid().getAllGridElements()) {
 
-            if (square.hasType(new ForceFieldGenerator())) {
-                ForceFieldGenerator forceFieldGenerators = (ForceFieldGenerator)square.filterItemsByType(new ForceFieldGenerator()).get(0);
-                if(forceFieldGenerators.isActive()){
-                    Coordinate coordinate = getGrid().getCoordinate(square);
-                    generatorCoordinates.add(coordinate);
+            if(gridElement.isSameType(new Square())){
+                Square square = (Square) gridElement;
+                if (square.hasType(new ForceFieldGenerator())) {
+                    ForceFieldGenerator forceFieldGenerators = (ForceFieldGenerator)square.filterItemsByType(new ForceFieldGenerator()).get(0);
+                    if(forceFieldGenerators.isActive()){
+                        Coordinate coordinate = getGrid().getCoordinate(square);
+                        generatorCoordinates.add(coordinate);
+                    }
                 }
             }
         }
@@ -140,11 +143,13 @@ public class ForceFieldManager extends Manager{
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {
-                Square square = getGrid().getGridElement(c);
-
-            if(square.isObstacle())
+            GridElement gridElement = getGrid().getGridElement(c);
+            if(gridElement.isObstacle())
                 return;
-            forceField.addGridElement(square);
+            if(gridElement.isSameType(new Square())){
+                Square square = (Square) gridElement;
+                forceField.addGridElement(square);
+            }
         }
         try {
         	addForceField(forceField);

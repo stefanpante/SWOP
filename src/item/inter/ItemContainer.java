@@ -53,4 +53,6 @@ public interface ItemContainer {
      */
     public ArrayList<Item> getAllItems();
 
+    public boolean isSameType(ItemContainer itemContainer);
+
 }

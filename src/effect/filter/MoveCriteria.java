@@ -9,7 +9,7 @@ import effect.EffectPriority;
  */
 public class MoveCriteria extends PriorityCriteria {
 
-    private static final EffectPriority ACCEPTED = EffectPriority.MoveDeparture;
+    private static final EffectPriority ACCEPTED = EffectPriority.Move;
 
     @Override
     public EffectPriority getAccepted() {

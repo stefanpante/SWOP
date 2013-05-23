@@ -9,7 +9,6 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 import square.GridElement;
-import square.Square;
 
 public class AStar {
 	
@@ -23,7 +22,17 @@ public class AStar {
 		closedSet = new ArrayList<GridElementContainer>();
 		openSet = new PriorityQueue<GridElementContainer>();
 	}
-	
+
+/**
+ * Place all gridelements in a container usable by the A*-Algorithm
+ *
+ * @param   grid
+ *          The grid of the game
+ * @param   start
+ *          The start gridelement
+ * @param   goal
+ *          The goal gridelement
+ */
 	private void boxAllGridElements(Grid grid, GridElement el1, GridElement el2) {
 		this.source = new ArrayList<GridElementContainer>();
 		for(GridElement element : grid.getAllGridElements()){
@@ -33,16 +42,34 @@ public class AStar {
 		}
 	}
 	
-	private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Direction,GridElement> gridElements){
-		ArrayList<GridElementContainer> squareContainers = new ArrayList<GridElementContainer>();
-		for(Entry<Direction,GridElement> entry : gridElements.entrySet()){
-			GridElementContainer sq = getGridElementContainer(entry.getValue());
-			if(sq != null)
-				squareContainers.add(sq);
-		}
-		return squareContainers;
-	}
 	
+
+
+
+    /**
+     * Return the gridelement containers for a list of gridelements
+     *
+     * @param   gridelements
+     *          The gridelements to be boxed
+     * @return  A list of gridelement Containers
+     */
+private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Direction,GridElement> gridElements){
+	ArrayList<GridElementContainer> gridElementContainers = new ArrayList<GridElementContainer>();
+	for(Entry<Direction,GridElement> entry : gridElements.entrySet()){
+		GridElementContainer sq = getGridElementContainer(entry.getValue());
+			if(sq != null)
+				gridElementContainers.add(sq);
+		}
+		return gridElementContainers;
+	}
+
+/**
+ * Return the gridelement container for a given gridelement
+ *
+ * @param   gridelement
+ *          The gridelement
+ * @return  The gridelement container for a given gridelement
+ */
 	private GridElementContainer getGridElementContainer(GridElement gridElement){
 		for(GridElementContainer sc : source){
 			if(sc.getGridElement().equals(gridElement)){
@@ -52,11 +79,22 @@ public class AStar {
 		return null;
 	}
 
+
+/**
+ * Returns a list of coordinates with the shortest path
+ * between the given start gridelement and goal gridelement.
+ *
+ * @param   startgridelement
+ *          The gridelement at the start of the path
+ * @param   goalgridelement
+ *          The gridelement at the end of the path
+ * @return  The shortest path between the two gridelements
+ */
 	public ArrayList<Coordinate> shortestPath(GridElement el1, GridElement el2){	
 		boxAllGridElements(grid, el1, el2);
 		GridElementContainer start = getGridElementContainer(el1);
 		GridElementContainer goal = getGridElementContainer(el2);
-		
+ 
 		openSet.add(start);
 		while(!openSet.isEmpty()){
 			GridElementContainer current = openSet.remove(); 
@@ -92,20 +130,29 @@ public class AStar {
 		}
 		throw new IllegalStateException("No path from " + grid.getCoordinate(el1) + " to " +grid.getCoordinate(el2));
 	}
-	
-	private int manhattan(Square startSquare, Square goalSquare){
-		Coordinate start = grid.getCoordinate(startSquare);
-		Coordinate goal = grid.getCoordinate(goalSquare);
+
+    /**
+     * Calculates the manhattan distance between the two gridelements
+     *
+     * @param   el1
+     *          The start gridelement
+     * @param   el2
+     *          The goal gridelements
+     * @return  The manhattan distance between the two gridelements
+     */
+	private int manhattan(GridElement el1, GridElement el2){
+		Coordinate start = grid.getCoordinate(el1);
+		Coordinate goal = grid.getCoordinate(el2);
 		return Math.abs(start.getX() - goal.getX()) + Math.abs(start.getY() - (goal.getY()));
 	}
 
-	private ArrayList<Coordinate> reconstructPath(GridElementContainer squareContainer, GridElementContainer startSquareContainer){
+	private ArrayList<Coordinate> reconstructPath(GridElementContainer gridElementContainer, GridElementContainer startGridElementContainer){
 		ArrayList<Coordinate> path = new ArrayList<Coordinate>();
-		while(!(squareContainer.getPreviousGridElementContainer() == null)){
-			path.add(grid.getCoordinate(squareContainer.getGridElement()));
-			squareContainer = squareContainer.getPreviousGridElementContainer();
+		while(!(gridElementContainer.getPreviousGridElementContainer() == null)){
+			path.add(grid.getCoordinate(gridElementContainer.getGridElement()));
+			gridElementContainer = gridElementContainer.getPreviousGridElementContainer();
 		}
-		path.add(grid.getCoordinate(startSquareContainer.getGridElement()));
+		path.add(grid.getCoordinate(startGridElementContainer.getGridElement()));
 		Collections.reverse(path);
 		return path;
 	}
@@ -210,13 +257,5 @@ public class AStar {
 		private AStar getOuterType() {
 			return AStar.this;
 		}
-		
-		
-
-		
-		
 	}
-	
-
-	
 }

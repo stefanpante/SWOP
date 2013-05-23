@@ -5,23 +5,19 @@ import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
 
-/**
- * User: jonas
- * Date: 23/05/13
- * Time: 13:04
- */
-public class LightTrailEffect extends Effect {
+public class EmptyEffect extends Effect {
 
-    public void LightTrail(){
-          setPriority(EffectPriority.MoveBlock);
+    public void EmptyEffect(){
+        setPriority(EffectPriority.Item);
     }
 
     @Override
     public void execute(Player player) {
+        // Do nothing
     }
 
     @Override
     public void execute(IdentityDisc identityDisc) {
-        //
+        // Do nothing
     }
 }

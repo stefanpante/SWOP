@@ -25,6 +25,7 @@ public class Brick extends GridElement {
     public boolean isObstacle() {
         return true;
     }
+<<<<<<< HEAD
     
     /**
      * sets the wall to which is this bricks belongs.
@@ -51,4 +52,12 @@ public class Brick extends GridElement {
     }
     
     
+=======
+
+
+    @Override
+    public boolean isSameType(GridElement gridElement) {
+        return gridElement instanceof Brick;
+    }
+>>>>>>> bc56f6772869e2bc5044aa5823888bfd5e2e8b59
 }

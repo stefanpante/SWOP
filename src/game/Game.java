@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import manager.ForceFieldManager;
 import manager.PowerManager;
 import notnullcheckweaver.NotNull;
+import square.GridElement;
 import util.Direction;
 import square.Square;
 import be.kuleuven.cs.som.annotate.Basic;
@@ -270,7 +271,7 @@ public class Game {
 		if(!getCurrentPlayer().hasMoved()){
 			return false; 
 		}
-		for(Entry<Direction, Square> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+		for(Entry<Direction, GridElement> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
 			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
 				return false;
 			}

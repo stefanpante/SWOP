@@ -1,8 +1,12 @@
 package square;
 
 import effect.Effect;
+import effect.imp.EffectMediator;
+import game.Player;
+import item.IdentityDisc;
 import item.Item;
 import item.inter.ItemContainer;
+import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 
 import java.util.ArrayList;
@@ -16,6 +20,10 @@ import java.util.NoSuchElementException;
 @NotNull
 public class Square extends GridElement implements ItemContainer {
 
+    /**
+     * The effect mediator of this square.
+     */
+    private EffectMediator effectMediator;
 	/**
 	 * List of items on this square
 	 */
@@ -30,8 +38,9 @@ public class Square extends GridElement implements ItemContainer {
 
 
 	public Square(){
-		this.items = new ArrayList<Item>();
-		this.effects = new ArrayList<Effect>();
+		this.items = new ArrayList<>();
+		this.effects = new ArrayList<>();
+        this.effectMediator = new EffectMediator();
 	}
 
 	/**
@@ -54,9 +63,37 @@ public class Square extends GridElement implements ItemContainer {
 		effects.remove(effect);
 	}
 
+    //TODO: bad naming much? this are not all effects.
 	public ArrayList<Effect> getAllEffects(){
 		return new ArrayList<Effect>(this.effects);
 	}
+
+    public ArrayList<Effect> getAllItemEffects(){
+        ArrayList<Effect> result = new ArrayList<>();
+        for(Item i : getAllItems()){
+            result.addAll(i.getEffects());
+        }
+        return result;
+    }
+
+    private ArrayList<Effect> getResultingEffects(){
+        ArrayList<Effect> result = new ArrayList<>(this.getAllEffects());
+        result.addAll(getAllItemEffects());
+        effectMediator.setEffects(this.getAllEffects());
+        return effectMediator.getResultingEffects();
+    }
+
+    public void affect(Player player){
+        for(Effect e: getResultingEffects()){
+            e.execute(player);
+        }
+    }
+
+    public void affect(IdentityDisc identityDisc){
+        for(Effect e: getResultingEffects()){
+            e.execute(identityDisc);
+        }
+    }
 
 	@Override
 	public String toString() {
@@ -73,7 +110,12 @@ public class Square extends GridElement implements ItemContainer {
 		return new ArrayList<Item>(items);
 	}
 
-	@Override
+    @Override
+    public boolean isSameType(ItemContainer itemContainer) {
+        return itemContainer instanceof Square;
+    }
+
+    @Override
 	public void addItem(Item item){
 		if(!isValidItem(item))
 			throw new IllegalArgumentException("The given item is not valid (cannot be null)");
@@ -126,5 +168,10 @@ public class Square extends GridElement implements ItemContainer {
     @Override
     public boolean isObstacle() {
         return false;
+    }
+
+    @Override
+    public boolean isSameType(GridElement gridElement) {
+        return gridElement instanceof Square;
     }
 }

@@ -1,9 +1,15 @@
 package item;
 
+import effect.Effect;
 import effect.event.DropFlagEvent;
+import effect.imp.EmptyEffect;
+import effect.imp.LightGrenadeEffect;
+import effect.imp.TeleportEffect;
 import item.inter.Movable;
 import game.Player;
 import square.Square;
+
+import java.util.ArrayList;
 
 /**
  * Implements a teleport with a certain destination.
@@ -117,4 +123,14 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
+    @Override
+    public ArrayList<Effect> getEffects() {
+        ArrayList<Effect> effects = new ArrayList<>();
+        if(getContainer().isSameType(new Square())){
+            effects.add(new TeleportEffect((Square) getContainer(), getDestination()));
+        }else{
+            effects.add(new EmptyEffect());
+        }
+        return effects;
+    }
 }
