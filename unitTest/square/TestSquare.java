@@ -16,8 +16,6 @@ import org.junit.Test;
 import square.obstacle.MultiObstacle;
 import square.obstacle.Wall;
 
-import java.util.ArrayList;
-
 
 public class TestSquare {
 
@@ -154,7 +152,7 @@ public class TestSquare {
         LightGrenade lg = new LightGrenade();
         sq.addItem(lg);
         assertTrue(sq.hasType(new LightGrenade()));
-        assertTrue(lg.equals(sq.getType(new LightGrenade())));
+        assertTrue(lg.equals(sq.filterItemsByType(new LightGrenade())));
         LightGrenade lg2 = new LightGrenade();
         sq.addItem(lg2);
     }

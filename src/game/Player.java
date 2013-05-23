@@ -528,11 +528,11 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 
     @Override
     public boolean hasType(Item item) {
-        return getType(item) != null;
+        return filterItemsByType(item) != null;
     }
 
     @Override
-    public Item getType(Item item) {
+    public Item filterItemsByType(Item item) {
         for(Item it : getAllItems()){
             if(item.isSameType(it))
                 return it;

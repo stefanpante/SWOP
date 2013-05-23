@@ -4,10 +4,8 @@ import effect.Effect;
 import item.Item;
 import item.inter.ItemContainer;
 import notnullcheckweaver.NotNull;
-import util.Direction;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 /**
@@ -16,7 +14,7 @@ import java.util.NoSuchElementException;
  * @author Dieter Castel, Jonas Devlieghere en Stefan Pante
  */
 @NotNull
-public class Square implements ItemContainer {
+public class Square extends GridElement implements ItemContainer {
 
 	/**
 	 * List of items on this square
@@ -28,10 +26,7 @@ public class Square implements ItemContainer {
 	 */
 	private ArrayList<Effect> effects;
 
-	/**
-	 * Contains the neighbors of this square
-	 */
-	private  HashMap<Direction, Square> neighbors;
+
 
 
 	public Square(){
@@ -51,9 +46,11 @@ public class Square implements ItemContainer {
 	/**
 	 * Removes the given effect from the list of effects.
 	 */
-	public void removeField(Effect effect) throws IllegalArgumentException{
-		if(effects.contains(effect))
-			throw new IllegalArgumentException("The effect can not be null.");
+	public void removeEffect(Effect effect) throws IllegalArgumentException{
+        if(effect == null)
+            throw new NoSuchElementException("The effect can not be null.");
+		if(!effects.contains(effect))
+			throw new NoSuchElementException("The square does not contain the given effect.");
 		effects.remove(effect);
 	}
 
@@ -69,36 +66,6 @@ public class Square implements ItemContainer {
 		s += effects;
 		s += " ]";
 		return s;
-	}
-
-	/**
-	 * Sets all the neighbors of the square instance
-	 *
-	 * @param   neighbors
-	 *          The neighbors to be set.
-	 */
-	public void setNeighbors(HashMap<Direction, Square> neighbors){
-		this.neighbors = neighbors;
-	}
-
-	/**
-	 * Returns the neighbors of the square.
-	 *
-	 * @return  The neighbors of this square.
-	 */
-	public HashMap<Direction, Square> getNeighbors(){
-		return new HashMap<Direction, Square>(neighbors);
-	}
-
-	/**
-	 * Returns the neighbor in the given direction
-	 * @param direction	The direction of the neighbor.
-	 * @return the neighbor in the given direction
-	 */
-	public Square getNeighbor(Direction direction) throws NoSuchElementException {
-		if(!neighbors.containsKey(direction))
-			throw new NoSuchElementException("There is no neighbor in the given direction (" + direction + ")");
-		return neighbors.get(direction);
 	}
 
 	@Override
@@ -123,7 +90,7 @@ public class Square implements ItemContainer {
 		if(!hasItem(item))
 			throw new IllegalArgumentException("Cannot remove" +item+ " from " + this);
 		items.remove(item);
-	}
+    }
 
 	@Override
 	public boolean hasItem(Item item){
@@ -132,16 +99,17 @@ public class Square implements ItemContainer {
 
 	@Override
 	public boolean hasType(Item item) {
-		return getType(item) != null;
+		return filterItemsByType(item) != null;
 	}
 
 	@Override
-	public Item getType(Item item) {
+	public ArrayList<Item> filterItemsByType(Item item) {
+        ArrayList<Item> result = new ArrayList<>();
 		for(Item it : getAllItems()){
 			if(item.isSameType(it))
-				return it;
+				result.add(it);
 		}
-		return null;
+		return result;
 	}
 
 	/**
@@ -155,19 +123,4 @@ public class Square implements ItemContainer {
 		return item != null;
 	}
 
-
-	/**
-	 * Check whether this square is obstructed
-	 *
-	 * @return  True if and only if none of the effect blocks
-	 *          movement.
-	 */
-	public boolean isObstructed(){
-		boolean obstructed = false;
-		for(Effect effect : getAllEffects()){
-			if(effect.prohibitsPlayer())
-				obstructed = true;
-		}
-		return obstructed;
-	}
 }

@@ -45,7 +45,7 @@ public interface ItemContainer {
      * @param   item
      *          The item of which the type will be used.
      */
-    public Item getType(Item item);
+    public ArrayList<Item> filterItemsByType(Item item);
 
     /**
      * Returns all the items in the container as a list.

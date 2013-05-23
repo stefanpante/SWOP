@@ -67,7 +67,7 @@ public class Teleport extends Item {
         if(!destination.hasType(this))
             return false;
 
-        Teleport destinationTeleport = (Teleport) destination.getType(this);
+        Teleport destinationTeleport = (Teleport) destination.filterItemsByType(this);
 
         return !destinationTeleport.equals(this);
     }
