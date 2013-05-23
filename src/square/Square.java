@@ -123,4 +123,8 @@ public class Square extends GridElement implements ItemContainer {
 		return item != null;
 	}
 
+    @Override
+    public boolean isObstacle() {
+        return false;
+    }
 }

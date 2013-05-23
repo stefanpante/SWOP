@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import square.obstacle.LightTrail;
+import square.multi.LightTrail;
 
 import util.Direction;
 import square.Square;
@@ -162,7 +162,7 @@ public class TestGrid {
 		}
 		
 		/**
-		 * Tests using getSquares() by adding a bunch of squares to the grid.
+		 * Tests using getGridElements() by adding a bunch of squares to the grid.
 		 */
 		@Test
 		public void testGetSquares(){

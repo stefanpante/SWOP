@@ -46,4 +46,6 @@ public abstract class GridElement {
             throw new NoSuchElementException("There is no neighbor in the given direction (" + direction + ")");
         return neighbors.get(direction);
     }
+
+    public abstract boolean isObstacle();
 }

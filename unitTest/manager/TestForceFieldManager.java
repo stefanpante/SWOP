@@ -2,13 +2,10 @@ package manager;
 
 import grid.Grid;
 import grid.GridProvider;
-import manager.ForceFieldManager;
 import org.junit.*;
 import square.Square;
 import square.field.ForceField;
 import util.Coordinate;
-
-import item.ForceFieldGenerator;
 
 import java.util.ArrayList;
 
@@ -164,7 +161,7 @@ public class TestForceFieldManager {
         ffm.update(null,null);
         for(ForceField ff : ffm.getAllForceFields()){
             assertFalse(ff.isActive());
-            for(Square square : ff.getSquares()){
+            for(Square square : ff.getGridElements()){
                 assertFalse(square.isCoveredByField());
             }
         }

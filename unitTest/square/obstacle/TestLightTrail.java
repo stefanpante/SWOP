@@ -3,9 +3,9 @@ package square.obstacle;
 import static org.junit.Assert.*;
 
 import square.*;
-import square.obstacle.*;
 
 import org.junit.*;
+import square.multi.LightTrail;
 
 public class TestLightTrail {
 
@@ -57,7 +57,7 @@ public class TestLightTrail {
 		lightTrail.addSquare(squareFour);
 		assertEquals(lightTrail.getLength(), 3);
 		
-		assertFalse(lightTrail.getSquares().contains(squareOne));
+		assertFalse(lightTrail.getGridElements().contains(squareOne));
 		assertTrue(lightTrail.squaresPointBack());
 	}
 	
@@ -158,13 +158,13 @@ public class TestLightTrail {
 	public void testGetLength() {
 		LightTrail lightTrail = new LightTrail();
 
-		assertEquals(lightTrail.getSquares().size(), 0);
-		assertEquals(lightTrail.getSquares().size(), lightTrail.getLength());
+		assertEquals(lightTrail.getGridElements().size(), 0);
+		assertEquals(lightTrail.getGridElements().size(), lightTrail.getLength());
 
 		lightTrail.addSquare(new Square());
 
-		assertEquals(lightTrail.getSquares().size(), 1);
-		assertEquals(lightTrail.getSquares().size(), lightTrail.getLength());
+		assertEquals(lightTrail.getGridElements().size(), 1);
+		assertEquals(lightTrail.getGridElements().size(), lightTrail.getLength());
 		assertTrue(lightTrail.squaresPointBack());
 	}
 

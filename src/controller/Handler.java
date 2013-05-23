@@ -8,10 +8,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+
 import square.Square;
-import square.field.Field;
-import square.obstacle.LightTrail;
 import util.Coordinate;
 
 /**

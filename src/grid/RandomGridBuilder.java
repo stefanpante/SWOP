@@ -1,7 +1,6 @@
 package grid;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import util.Direction;
 import square.Square;
@@ -213,7 +212,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	public ArrayList<Coordinate> getCoordinatesOfWalls(ArrayList<Wall> walls) {
 		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
 		for(Wall wall : walls){
-			for(Square square : wall.getSquares()){
+			for(Square square : wall.getGridElements()){
 				coordinates.add(getGrid().getCoordinate(square));
 			}
 		}

@@ -1,11 +1,8 @@
-package square.obstacle;
+package square.multi;
 
 import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Queue;
-
 import square.Square;
+import square.field.Field;
 
 /**
  * LightTrail is a trail that is left behind the player while he
@@ -13,7 +10,7 @@ import square.Square;
  * 
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  */
-public class LightTrail extends MultiObstacle {
+public class LightTrail extends Field {
 
 	private LinkedList<Square> trailqueue;
 	
@@ -39,14 +36,14 @@ public class LightTrail extends MultiObstacle {
 	 * 			If the square is not valid.
 	 */
 	@Override
-	public void addSquare(Square square) throws IllegalArgumentException {
-		if(!isValidSquare(square))
+	public void addGridElement(Square square) throws IllegalArgumentException {
+		if(!isValidGridElement(square))
 			throw new IllegalArgumentException("This square is not valid for this lighttrails");
 		
 		if(getLength() >= MAX_LENGTH) 
-			this.removeSquare(getLastSquare());
+			this.removeGridElement(getLastSquare());
 		
-		super.addSquare(square);
+		super.addGridElement(square);
 		this.trailqueue.add(square);
 	}
 	
@@ -59,8 +56,8 @@ public class LightTrail extends MultiObstacle {
 	 * 			If the square is not valid.
 	 */
 	@Override
-	public void removeSquare(Square square) throws IllegalArgumentException {
-		super.removeSquare(square);
+	public void removeGridElement(Square square) throws IllegalArgumentException {
+		super.removeGridElement(square);
 		trailqueue.remove(square);
 	}
 	
@@ -72,7 +69,7 @@ public class LightTrail extends MultiObstacle {
 	 */
 	public Square getLastSquare() {
 		if(getLength() >= 1)
-			return getSquares().get(0);
+			return getGridElements().get(0);
 		else
 			return null;
 	}
@@ -85,7 +82,7 @@ public class LightTrail extends MultiObstacle {
 	 */
 	public Square getNewestSquare() {
 		if(getLength() >= 1)
-			return getSquares().get(getLength() - 1);
+			return getGridElements().get(getLength() - 1);
 		else
 			return null;
 	}
@@ -93,25 +90,11 @@ public class LightTrail extends MultiObstacle {
 	public void setHead(Square square) {
 		
 		if(getNewestSquare() == square)
-			this.removeSquare(getLastSquare());
+			this.removeGridElement(getLastSquare());
 		else
-			this.addSquare(square);
+			this.addGridElement(square);
 	}
 
-	/**
-	 * The LightTrail bounces a launchable item back onto the previous square it passed.
-	 * 
-	 * @return	True always.
-	 */
-	@Override
-	public boolean bouncesBack() {
-		return true;
-	}
-
-    @Override
-    public boolean preventsField() {
-        return false;
-    }
 
 
 }

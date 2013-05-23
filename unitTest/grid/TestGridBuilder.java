@@ -90,7 +90,7 @@ public class TestGridBuilder {
 		HashSet<Square> wallNeighborSquares = new HashSet<Square>();
 		
 		for(Wall w :walls){
-			for(Square sq: w.getSquares()){
+			for(Square sq: w.getGridElements()){
 				if(!wallSquares.contains(sq)){
 					wallSquares.add(sq);
 				} else  {
@@ -100,7 +100,7 @@ public class TestGridBuilder {
 				for(Direction dir: Direction.values()){
 					try{
 						Square neighbor = grid.getNeighbor(sq, dir);
-						if(!w.getSquares().contains(neighbor)){
+						if(!w.getGridElements().contains(neighbor)){
 							wallNeighborSquares.add(neighbor);
 						}
 					} catch(NoSuchElementException e){

@@ -1,8 +1,6 @@
 package square.field;
 
 import game.Player;
-import item.IdentityDisc;
-import item.inter.Movable;
 import square.Square;
 import util.Direction;
 
@@ -66,11 +64,11 @@ public class PowerFailure extends Field {
      *          The square with the primary power failure
      */
     public PowerFailure(Square primary){
-        if(!isValidSquare(primary))
+        if(!isValidGridElement(primary))
             throw new IllegalArgumentException("The given square cannot be added to this Power Failure.");
         this.actions = 0;
         this.active = true;
-        addSquare(PRIMARY,primary);
+        addGridElement(PRIMARY,primary);
         createTail();
     }
 
@@ -91,8 +89,8 @@ public class PowerFailure extends Field {
      * Force field cannot extend its maximum length.
      */
     @Override
-    public boolean isValidSquare(Square square) {
-        return getLength() <= LENGTH && super.isValidSquare(square);
+    public boolean isValidGridElement(Square square) {
+        return getLength() <= LENGTH && super.isValidGridElement(square);
     }
 
     /**
@@ -103,13 +101,13 @@ public class PowerFailure extends Field {
         try{
             this.direction = Direction.getRandomDirection();
             // Create secondary and tertiary
-            Square primary = getSquare(PRIMARY);
+            Square primary = getGridElement(PRIMARY);
             Square secondary = primary.getNeighbor(direction);
             Square tertiary = secondary.getNeighbor(getTertiaryDirection());
 
             // Add and bind the squaress
-            addSquare(SECONDARY,secondary);
-            addSquare(TERTIARY, tertiary);
+            addGridElement(SECONDARY,secondary);
+            addGridElement(TERTIARY, tertiary);
             bindAll();
         }catch (NoSuchElementException ignored){
 
@@ -121,14 +119,14 @@ public class PowerFailure extends Field {
      */
     private void updateSecondary(){
         try{
-            Square oldSecondary = getSquare(SECONDARY);
+            Square oldSecondary = getGridElement(SECONDARY);
             unbind(oldSecondary);
-            removeSquare(oldSecondary);
+            removeGridElement(oldSecondary);
 
             Direction direction = getDirection().neighborDirections().get(getRotation());
-            Square primary = getSquare(PRIMARY);
+            Square primary = getGridElement(PRIMARY);
             Square secondary = primary.getNeighbor(direction);
-            addSquare(SECONDARY,secondary);
+            addGridElement(SECONDARY,secondary);
             bind(secondary);
             updateTertiary();
         }catch (NoSuchElementException ignored){
@@ -141,15 +139,15 @@ public class PowerFailure extends Field {
      */
     private void updateTertiary(){
         try{
-            Square oldTertiary = getSquare(TERTIARY);
+            Square oldTertiary = getGridElement(TERTIARY);
             unbind(oldTertiary);
-            removeSquare(oldTertiary);
+            removeGridElement(oldTertiary);
 
-            Square secondary = getSquare(SECONDARY);
+            Square secondary = getGridElement(SECONDARY);
 
             Direction direction = getTertiaryDirection();
             Square tertiary = secondary.getNeighbor(direction);
-            addSquare(TERTIARY,tertiary);
+            addGridElement(TERTIARY,tertiary);
             bind(tertiary);
         }catch (NoSuchElementException ignored){
 
@@ -195,8 +193,8 @@ public class PowerFailure extends Field {
      */
     public void destroy(){
         unbindAll();
-        for(Square square: getSquares()){
-            removeSquare(square);
+        for(Square square: getGridElements()){
+            removeGridElement(square);
         }
         this.active = false;
     }
@@ -220,48 +218,4 @@ public class PowerFailure extends Field {
                 '}';
     }
 
-	@Override
-	public boolean prohibitsPlayer() {
-		return true;
-	}
-
-	@Override
-	public void onMoveToEffect(Movable movable) {
-		movable.acceptMoveToEffect(this);
-		
-	}
-
-	@Override
-	public void onMoveToEffect(Player player) {
-		player.loseActions(1);
-		
-	}
-
-	@Override
-	public void onMoveToEffect(IdentityDisc identityDisc) {
-		identityDisc.decreaseRange();
-	}
-
-	@Override
-	public void onStandOnEffect(Movable movable) {
-		movable.acceptStandOnEffect(this);
-		
-	}
-
-	@Override
-	public void onStandOnEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onStandOnEffect(IdentityDisc identityDisc) {
-		// nothing to do here.
-		
-	}
-
-	@Override
-	public boolean canMoveFrom() {
-		return true;
-	}
 }

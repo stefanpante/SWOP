@@ -20,7 +20,7 @@ import controller.TurnHandler;
 import controller.UseItemHandler;
 import util.Direction;
 import square.Square;
-import square.obstacle.LightTrail;
+import square.multi.LightTrail;
 import util.Coordinate;
 
 /**

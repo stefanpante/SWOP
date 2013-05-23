@@ -5,14 +5,13 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
-import effect.Effect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
 
 import square.Square;
-import square.obstacle.LightTrail;
+import square.multi.LightTrail;
 import square.obstacle.Obstacle;
 
 import item.Item;
@@ -113,7 +112,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 * 			False	If the square is null or obstructed.
 	 */
 	public static boolean isValidStartPosition(Square square) {
-        return square != null && !square.isObstructed();
+        return square != null;
     }
 	
 	/**
@@ -125,7 +124,7 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 	 * 			False	If square is null or obstructed.
 	 */
 	public static boolean isValidPosition(Square newPosition) {
-        return newPosition != null && !newPosition.isObstructed();
+        return newPosition != null;
     }
 
 	
@@ -323,7 +322,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
         //Decrement Actions before actual move for LightTrails.
         decrementActions();
         setPosition(position);
-        position.acceptMove(this);
 		moved = true;
 	}
 
@@ -458,7 +456,6 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
 		if(!isValidSquare(square))
 			throw new IllegalArgumentException("The given " + square + " is not a valid square");
 		currentPosition = square;
-		square.setObstacle(this);
 	}
 
 	/**
@@ -532,12 +529,13 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
     }
 
     @Override
-    public Item filterItemsByType(Item item) {
+    public ArrayList<Item> filterItemsByType(Item item) {
+        ArrayList<Item> result = new ArrayList<>();
         for(Item it : getAllItems()){
             if(item.isSameType(it))
-                return it;
+                result.add(it);
         }
-        return null;
+        return result;
     }
 
     @Override
@@ -545,15 +543,4 @@ public class Player extends Observable implements Obstacle, Movable, ItemContain
         return new ArrayList<Item>(items);
     }
 
-	@Override
-	public void acceptStandOnEffect(Effect effect) {
-		effect.onStandOnEffect(this);
-		
-	}
-
-	@Override
-	public void acceptMoveToEffect(Effect effect) {
-		effect.onMoveToEffect(this);
-		
-	}
 }

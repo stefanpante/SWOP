@@ -39,6 +39,4 @@ public interface Movable {
      */
     public void resetRange();
 
-    public void acceptStandOnEffect(Effect effect);
-    public void acceptMoveToEffect(Effect effect);
 }

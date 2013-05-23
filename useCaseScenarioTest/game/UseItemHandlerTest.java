@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import util.Direction;
 import square.Square;
-import square.obstacle.LightTrail;
+import square.multi.LightTrail;
 import square.obstacle.Wall;
 
 /**

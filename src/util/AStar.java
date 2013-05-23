@@ -69,7 +69,7 @@ public class AStar {
 			
 			for(SquareContainer neighbour : getSquareContainers(current.getSquare().getNeighbors())){
 				boolean neighbourIsBetter;
-				if(neighbour.getSquare().isObstructed())
+				if(neighbour.getSquare().isObstacle())
 					continue;
 				if(closedSet.contains(neighbour))
 					continue;
