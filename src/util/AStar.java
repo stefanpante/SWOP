@@ -24,7 +24,17 @@ public class AStar {
 		closedSet = new ArrayList<SquareContainer>();
 		openSet = new PriorityQueue<SquareContainer>();
 	}
-	
+
+    /**
+     * Place all squares in a container usable by the A*-Algorithm
+     *
+     * @param   grid
+     *          The grid of the game
+     * @param   start
+     *          The start square
+     * @param   goal
+     *          The goal square
+     */
 	private void boxAllSquares(Grid grid, Square start, Square goal) {
 		this.source = new ArrayList<SquareContainer>();
 		for(GridElement gridElement : grid.getAllGridElements()){
@@ -36,7 +46,14 @@ public class AStar {
             }
 		}
 	}
-	
+
+    /**
+     * Return the square containers for a list of squares
+     *
+     * @param   squares
+     *          The squares to be boxed
+     * @return  A list of Square Containers
+     */
 	private ArrayList<SquareContainer> getSquareContainers(HashMap<Direction,Square> squares){
 		ArrayList<SquareContainer> squareContainers = new ArrayList<SquareContainer>();
 		for(Entry<Direction,Square> entry : squares.entrySet()){
@@ -46,7 +63,14 @@ public class AStar {
 		}
 		return squareContainers;
 	}
-	
+
+    /**
+     * Return the square container for a given square
+     *
+     * @param   square
+     *          The square
+     * @return  The square container for a given square
+     */
 	private SquareContainer getSquareContainer(Square square){
 		for(SquareContainer sc : source){
 			if(sc.getSquare().equals(square)){
@@ -56,6 +80,16 @@ public class AStar {
 		return null;
 	}
 
+    /**
+     * Returns a list of coordinates with the shortest path
+     * between the given start square and goal square.
+     *
+     * @param   startSquare
+     *          The square at the start of the path
+     * @param   goalSquare
+     *          The square at the end of the path
+     * @return  The shortest path between the two squares
+     */
 	public ArrayList<Coordinate> shortestPath(Square startSquare, Square goalSquare){	
 		boxAllSquares(grid, startSquare, goalSquare);
 		SquareContainer start = getSquareContainer(startSquare);
@@ -96,7 +130,16 @@ public class AStar {
 		}
 		throw new IllegalStateException("No path from " + grid.getCoordinate(startSquare) + " to " +grid.getCoordinate(goalSquare));
 	}
-	
+
+    /**
+     * Calculates the manhattan distance between the two squares
+     *
+     * @param   startSquare
+     *          The start square
+     * @param   goalSquare
+     *          The goal squares
+     * @return  The manhattan distance between the two squares
+     */
 	private int manhattan(Square startSquare, Square goalSquare){
 		Coordinate start = grid.getCoordinate(startSquare);
 		Coordinate goal = grid.getCoordinate(goalSquare);
