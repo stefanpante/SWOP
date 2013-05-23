@@ -15,12 +15,7 @@ public class ChargedIdentityDisc extends IdentityDisc {
 		super();
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
-	
-	@Override
-	public boolean isCharged() {
-		return true;
-	}
-	
+		
 	@Override
 	public String toString() {
 		return super.toString() + "ChargedIdentityDisc";
