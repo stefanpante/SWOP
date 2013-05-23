@@ -93,14 +93,6 @@ public class IdentityDisc extends Item implements Movable {
         return travelDirection != null && !travelDirection.isDiagonal();
     }
 
-	public boolean isCharged() {
-		return false;
-	}
-	
-	public static boolean isIdentityDisc(Object o){
-		return (o instanceof IdentityDisc);
-	}
-
     /**
      * Decrease the range by one.
      */

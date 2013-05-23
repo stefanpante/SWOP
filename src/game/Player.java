@@ -92,12 +92,12 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
+		this.lightTrail = new LightTrail();
 		this.setStartPosition(startPosition);
 		this.alive = true;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
 		this.moved = false;
 		this.id = id;
-		this.lightTrail = new LightTrail();
 		this.items = new ArrayList<Item>();
 	}
 	
@@ -190,6 +190,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	private void setStartPosition(Square pos) throws IllegalArgumentException {
 		if(!isValidStartPosition(pos))
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
+		//this.lightTrail.setHead(pos);
 		this.startPosition = pos;
 		this.currentPosition = pos;
 	}
