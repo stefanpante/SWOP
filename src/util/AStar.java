@@ -8,44 +8,44 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
+import square.GridElement;
 import square.Square;
 
 public class AStar {
 	
-	private ArrayList<SquareContainer> source;
-	
-	private ArrayList<SquareContainer> closedSet;
-	private PriorityQueue<SquareContainer> openSet;
+	private ArrayList<GridElementContainer> source;
+	private ArrayList<GridElementContainer> closedSet;
+	private PriorityQueue<GridElementContainer> openSet;
 	private Grid grid;
 	
 	public AStar(Grid grid){
 		this.grid = grid;
-		closedSet = new ArrayList<SquareContainer>();
-		openSet = new PriorityQueue<SquareContainer>();
+		closedSet = new ArrayList<GridElementContainer>();
+		openSet = new PriorityQueue<GridElementContainer>();
 	}
 	
 	private void boxAllSquares(Grid grid, Square start, Square goal) {
-		this.source = new ArrayList<SquareContainer>();
-		for(Square square : grid.getAllGridElements()){
-			SquareContainer sq = new SquareContainer(square);
+		this.source = new ArrayList<GridElementContainer>();
+		for(GridElement element : grid.getAllGridElements()){
+			GridElementContainer sq = new GridElementContainer(element);
 			sq.setHeuristicDistanceFromGoal(manhattan(start, goal));
 			this.source.add(sq);
 		}
 	}
 	
-	private ArrayList<SquareContainer> getSquareContainers(HashMap<Direction,Square> squares){
-		ArrayList<SquareContainer> squareContainers = new ArrayList<SquareContainer>();
-		for(Entry<Direction,Square> entry : squares.entrySet()){
-			SquareContainer sq = getSquareContainer(entry.getValue());
+	private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Direction,GridElement> gridElements){
+		ArrayList<GridElementContainer> squareContainers = new ArrayList<GridElementContainer>();
+		for(Entry<Direction,GridElement> entry : gridElements.entrySet()){
+			GridElementContainer sq = getGridElementContainer(entry.getValue());
 			if(sq != null)
 				squareContainers.add(sq);
 		}
 		return squareContainers;
 	}
 	
-	private SquareContainer getSquareContainer(Square square){
-		for(SquareContainer sc : source){
-			if(sc.getSquare().equals(square)){
+	private GridElementContainer getGridElementContainer(GridElement gridElement){
+		for(GridElementContainer sc : source){
+			if(sc.getGridElement().equals(gridElement)){
 				return sc;
 			}
 		}
@@ -54,12 +54,12 @@ public class AStar {
 
 	public ArrayList<Coordinate> shortestPath(Square startSquare, Square goalSquare){	
 		boxAllSquares(grid, startSquare, goalSquare);
-		SquareContainer start = getSquareContainer(startSquare);
-		SquareContainer goal = getSquareContainer(goalSquare);
+		GridElementContainer start = getGridElementContainer(startSquare);
+		GridElementContainer goal = getGridElementContainer(goalSquare);
 		
 		openSet.add(start);
 		while(!openSet.isEmpty()){
-			SquareContainer current = openSet.remove(); 
+			GridElementContainer current = openSet.remove(); 
 			closedSet.add(current);
 
 			if(current.equals(goal)){
@@ -67,9 +67,9 @@ public class AStar {
 			}
 
 			
-			for(SquareContainer neighbour : getSquareContainers(current.getSquare().getNeighbors())){
+			for(GridElementContainer neighbour : getGridElementContainers(current.getGridElement().getNeighbors())){
 				boolean neighbourIsBetter;
-				if(neighbour.getSquare().isObstacle())
+				if(neighbour.getGridElement().isObstacle())
 					continue;
 				if(closedSet.contains(neighbour))
 					continue;
@@ -84,7 +84,7 @@ public class AStar {
 				}
 
 				if(neighbourIsBetter){
-					neighbour.setPreviousSquareContainer(current);
+					neighbour.setPreviousGridElementContainer(current);
 					neighbour.setDistanceFromStart(neighbourDistanceFromStart);
 				}
 			}
@@ -99,42 +99,42 @@ public class AStar {
 		return Math.abs(start.getX() - goal.getX()) + Math.abs(start.getY() - (goal.getY()));
 	}
 
-	private ArrayList<Coordinate> reconstructPath(SquareContainer squareContainer, SquareContainer startSquareContainer){
+	private ArrayList<Coordinate> reconstructPath(GridElementContainer squareContainer, GridElementContainer startSquareContainer){
 		ArrayList<Coordinate> path = new ArrayList<Coordinate>();
-		while(!(squareContainer.getPreviousSquareContainer() == null)){
-			path.add(grid.getCoordinate(squareContainer.getSquare()));
-			squareContainer = squareContainer.getPreviousSquareContainer();
+		while(!(squareContainer.getPreviousGridElementContainer() == null)){
+			path.add(grid.getCoordinate(squareContainer.getGridElement()));
+			squareContainer = squareContainer.getPreviousGridElementContainer();
 		}
-		path.add(grid.getCoordinate(startSquareContainer.getSquare()));
+		path.add(grid.getCoordinate(startSquareContainer.getGridElement()));
 		Collections.reverse(path);
 		return path;
 	}
 
-	private class SquareContainer implements Comparable<SquareContainer> {
+	private class GridElementContainer implements Comparable<GridElementContainer> {
 
-		private Square square;
-		private SquareContainer previous;
+		private GridElement gridElement;
+		private GridElementContainer previous;
 		private int distanceFromStart;
 		private int distanceFromGoal;
 		
-		public SquareContainer(Square square){
-			setSquare(square);
+		public GridElementContainer(GridElement gridElement){
+			setGridElement(gridElement);
 		}
 		
-		public Square getSquare(){
-			return this.square;
+		public GridElement getGridElement(){
+			return this.gridElement;
 		}
 		
-		public void setSquare(Square square){
-			this.square = square;
+		public void setGridElement(GridElement gridElement){
+			this.gridElement = gridElement;
 		}
 		
-		public SquareContainer getPreviousSquareContainer(){
+		public GridElementContainer getPreviousGridElementContainer(){
 			return this.previous;
 		}
 		
-		public void setPreviousSquareContainer(SquareContainer squareContainer){
-			this.previous = squareContainer;
+		public void setPreviousGridElementContainer(GridElementContainer gridElementContainer){
+			this.previous = gridElementContainer;
 		}
 		
 		public void setDistanceFromStart(int distance){
@@ -153,7 +153,7 @@ public class AStar {
 			return this.distanceFromGoal;
 		}
 		
-		public int compareTo(SquareContainer other) { 
+		public int compareTo(GridElementContainer other) { 
 		    final int BEFORE = -1;
 		    final int EQUAL = 0;
 		    final int AFTER = 1;
@@ -175,7 +175,7 @@ public class AStar {
 			int result = 1;
 			result = prime * result + getOuterType().hashCode();
 			result = prime * result
-					+ ((square == null) ? 0 : square.hashCode());
+					+ ((gridElement == null) ? 0 : gridElement.hashCode());
 			return result;
 		}
 
@@ -193,15 +193,15 @@ public class AStar {
 			if (getClass() != obj.getClass()) {
 				return false;
 			}
-			SquareContainer other = (SquareContainer) obj;
+			GridElementContainer other = (GridElementContainer) obj;
 			if (!getOuterType().equals(other.getOuterType())) {
 				return false;
 			}
-			if (square == null) {
-				if (other.square != null) {
+			if (gridElement == null) {
+				if (other.gridElement != null) {
 					return false;
 				}
-			} else if (!square.equals(other.square)) {
+			} else if (!gridElement.equals(other.gridElement)) {
 				return false;
 			}
 			return true;

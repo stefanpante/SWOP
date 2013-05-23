@@ -44,9 +44,10 @@ public class Wall extends MultiGridElement<Brick> {
 	public Wall(ArrayList<Brick> sequence) throws IllegalArgumentException {
 		if(sequence.size() < 2) 
 			throw new IllegalArgumentException("A wall should have at least two bricks");
-		for(Brick sq: sequence){
-			assert sq != null;
-			super.addGridElement(sq);
+		for(Brick brick: sequence){
+			assert brick != null;
+			brick.addWall(this);
+			super.addGridElement(brick);
 		}
 	}
 

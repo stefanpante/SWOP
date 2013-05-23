@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import util.Direction;
+import square.GridElement;
 import square.Square;
 import util.AStar;
 import util.Coordinate;
@@ -253,13 +254,13 @@ public class FileGridBuilder extends AbstractGridBuilder{
 
 	public void checkConsistency() throws IllegalStateException {
 		// Check whether there are no islands
-		for(Square sq: getGrid().getAllGridElements()){
-			for(Square sq2: getGrid().getAllGridElements()){
-				if(sq != sq2){
-					if(!sq.isObstructed() && !sq2.isObstructed()){
+		for(GridElement el1: getGrid().getAllGridElements()){
+			for(GridElement el2: getGrid().getAllGridElements()){
+				if(el1 != el2){
+					if(!el1.isObstacle()() && !el2.isObstacle()){
 						AStar aStar = new AStar(getGrid());
 						// throws illegalStateException when there is no path
-						aStar.shortestPath(sq, sq2);
+						aStar.shortestPath(el1, el2);
 					}
 				}
 			}
