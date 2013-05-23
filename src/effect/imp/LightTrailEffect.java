@@ -4,8 +4,6 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
-import square.obstacle.LightTrail;
-
 /**
  * User: jonas
  * Date: 23/05/13
@@ -14,7 +12,7 @@ import square.obstacle.LightTrail;
 public class LightTrailEffect extends Effect {
 
     public void LightTrail(){
-          setPriority(EffectPriority.MoveEnter);
+          setPriority(EffectPriority.MoveBlock);
     }
 
     @Override

@@ -8,7 +8,8 @@ package effect;
 public enum EffectPriority {
     Player,
     ForceField,
-    MoveEnter,
+    MoveBlock,
+    Move,
     MoveDeparture,
     Item;
 }

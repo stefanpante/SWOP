@@ -18,10 +18,10 @@ public class ForceFieldStuckEffect extends Effect {
         setPriority(EffectPriority.MoveDeparture);
     }
 
-
+    //FIXME: how to set this stuck effect on a ForceField that goes on and off?
     @Override
     public void execute(Player player) {
-        //To change body of implemented methods use File | Settings | File Templates.
+
     }
 
     @Override
