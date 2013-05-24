@@ -6,11 +6,9 @@ import square.Square;
 import util.Direction;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Dieter
  * Date: 2/05/13
  * Time: 15:07
- * To change this template use File | Settings | File Templates.
  */
 public class IdentityDiscMoveCommand extends MoveCommand {
 
@@ -41,7 +39,7 @@ public class IdentityDiscMoveCommand extends MoveCommand {
      * Performs additional actions after the move to ensure consistency with the domain model.
      */
     @Override
-    protected void afterGameCommand() throws Exception {
+    protected void afterGameCommand() {
         getMovable().resetRange();
     }
 

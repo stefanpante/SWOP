@@ -29,18 +29,18 @@ public class Grid {
 	/**
 	 * Max percentage of walls in this grid.
 	 */
-	public static float PERCENTAGE_WALLS = 0.2f;
+	public static final float PERCENTAGE_WALLS = 0.2f;
 
 	/**
 	 * Percentage of max length of a wall
 	 */
-	public static float LENGTH_PERCENTAGE_WALL = 0.5f;
+	public static final float LENGTH_PERCENTAGE_WALL = 0.5f;
 	
 	/**
 	 * HashMap containing all the gridElements of the grid. the coordinate
 	 * of the gridElement is the key.
 	 */
-	private HashMap<Coordinate, GridElement> grid;
+	private final HashMap<Coordinate, GridElement> grid;
 	
 	/**
 	 * The horizontal size of the grid.
@@ -56,7 +56,7 @@ public class Grid {
 	 * the start position of the players
 	 */
 	
-	private ArrayList<Square> startPositions;
+	private final ArrayList<Square> startPositions;
 	
 	/**
 	 * Creates a new grid with given height and length.
@@ -72,7 +72,7 @@ public class Grid {
 		this.grid = grid;
 		setHSize(hSize);
 		setVSize(vSize);
-		this.startPositions = new ArrayList<Square>();
+		this.startPositions = new ArrayList<>();
 	}
 	
 	/**
@@ -191,7 +191,7 @@ public class Grid {
 	 * 			Not in a specific order.
 	 */
 	public ArrayList<GridElement> getGridElements(ArrayList<Coordinate> coordinates){
-		ArrayList<GridElement> gridElements = new ArrayList<GridElement>();
+		ArrayList<GridElement> gridElements = new ArrayList<>();
 		for(Coordinate coordinate : coordinates){
 			try {
 				gridElements.add(getGridElement(coordinate));
@@ -226,7 +226,7 @@ public class Grid {
 	 * @return				the coordinates of the gridElements
 	 */
 	public ArrayList<Coordinate> getCoordinates(ArrayList<? extends GridElement> gridElements){
-		ArrayList<Coordinate> coors = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> coors = new ArrayList<>();
 		for(GridElement gridElement: gridElements)
 			coors.add(getCoordinate(gridElement));
 		return coors;
@@ -266,7 +266,7 @@ public class Grid {
 	 */
 	@Basic @Raw
 	public ArrayList<GridElement> getAllGridElements(){
-		return new ArrayList<GridElement>(grid.values());
+		return new ArrayList<>(grid.values());
 	}
 	
 	/**
@@ -276,7 +276,7 @@ public class Grid {
 	 */
 	@Basic @Raw
 	public ArrayList<Coordinate> getAllCoordinates(){
-		return new ArrayList<Coordinate>(grid.keySet());
+		return new ArrayList<>(grid.keySet());
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class Grid {
      * @return
      */
     public ArrayList<Square> getStartPositions(){
-    	return new ArrayList<Square>(startPositions);
+    	return new ArrayList<>(startPositions);
     }
     
     /**

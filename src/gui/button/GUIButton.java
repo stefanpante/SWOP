@@ -15,7 +15,7 @@ public abstract class GUIButton extends GUIElement {
 	/**
 	 * The actionListeners for the button
 	 */
-	private ArrayList<ActionListener> actionListeners;
+	private final ArrayList<ActionListener> actionListeners;
 	
 	/**
 	 * The actionCommand for this button
@@ -42,7 +42,7 @@ public abstract class GUIButton extends GUIElement {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, new PVector(), gui);
 		super.setColor(OConstants.LIGHT_GREY.getIntColor());
-		this.actionListeners = new ArrayList<ActionListener>();
+		this.actionListeners = new ArrayList<>();
 		this.rolloverColor = OConstants.LIGHTER_GREY.getIntColor();
 
 	}

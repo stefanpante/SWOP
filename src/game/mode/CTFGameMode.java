@@ -5,7 +5,6 @@ import game.gamebuilder.GameBuilder;
 import item.Flag;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +12,7 @@ import java.util.Set;
 
 public class CTFGameMode extends GameMode{
 
-    public static int MIN_PLAYERS = 2;
+    public static final int MIN_PLAYERS = 2;
     public static int MAX_PLAYERS = 9;
     private HashMap<Player,Set<Flag>> winMap;
 
@@ -44,7 +43,7 @@ public class CTFGameMode extends GameMode{
         gameBuilder.placeTeleports();
         gameBuilder.placeFlags();
 
-        getGame().setActivate(true);
+        getGame().setActivate();
 
     }
 

@@ -12,7 +12,7 @@ import square.field.Field;
  */
 public class LightTrail extends Field {
 
-    private LightTrailEffect lightTrailEffect;
+    private final LightTrailEffect lightTrailEffect;
 
 	/**
 	 * Maximum length of a LightTrail.

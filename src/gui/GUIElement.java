@@ -34,7 +34,7 @@ public abstract class GUIElement implements Drawable{
 	/**
 	 * The PApplet used to draw
 	 */
-	protected PApplet gui;
+	protected final PApplet gui;
 	
 	/**
 	 * The position of the GUIElement, the top left corner

@@ -21,12 +21,11 @@ public class TimedMessage extends Message {
      * @param height   The height of the message.
      * @param position The position of the message
      * @param message  The String which is displayed.
-     * @param duration How long the message is displayed.
      * @param gui
      */
-    public TimedMessage(float width, float height, PVector position, String message, int duration, PApplet gui) {
+    public TimedMessage(float width, float height, PVector position, String message, PApplet gui) {
         super(width, height, position, message, gui);
-        this.setDuration(duration);
+        this.setDuration(4);
     }
 
     void setDuration(int duration) {

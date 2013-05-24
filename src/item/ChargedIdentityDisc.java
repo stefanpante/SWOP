@@ -6,7 +6,7 @@ public class ChargedIdentityDisc extends IdentityDisc {
 	/**
 	 * The maximum travel distance of an identity disc.
 	 */
-	public static int MAX_TRAVEL_DISTANCE = Integer.MAX_VALUE;
+	public static final int MAX_TRAVEL_DISTANCE = Integer.MAX_VALUE;
 
     /**
      * Basic constructor with zero arguments.

@@ -21,17 +21,16 @@ public class Label extends GUIElement{
 	private int hAlign;
 	private int vAlign;
 	/**
-	 * 
-	 * @param width
-	 * @param height
-	 * @param position
-	 * @param gui
-	 */
+	 *
+     * @param width
+     * @param position
+     * @param gui
+     */
 	
 
-	public Label(float width, float height, PVector position, String text, PApplet gui) {
+	public Label(float width, PVector position, String text, PApplet gui) {
 		//float width, float height, PVector position, PApplet gui
-		super(width, height, position, gui);
+		super(width, (float) 25, position, gui);
 		this.textColor = OConstants.WHITE.getIntColor();
 		this.hAlign = PConstants.CENTER;
 		this.vAlign = PConstants.CENTER;

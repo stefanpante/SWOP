@@ -10,7 +10,7 @@ public abstract class ShapeButton extends GUIButton {
 	/**
 	 * The shape of the button.
 	 */
-    PShape shape;
+    final PShape shape;
 	/**
 	 * The rollover shape of this button.
 	 */

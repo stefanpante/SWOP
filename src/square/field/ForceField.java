@@ -12,8 +12,8 @@ import square.Square;
  */
 public class ForceField extends Field {
 
-    private ForceFieldEffect forceFieldEffect;
-    private ForceFieldStuckEffect forceFieldStuckEffect;
+    private final ForceFieldEffect forceFieldEffect;
+    private final ForceFieldStuckEffect forceFieldStuckEffect;
 	
 	/**
 	 * Maximum length of a Force Field.

@@ -6,11 +6,9 @@ import game.Player;
 import item.IdentityDisc;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Dieter
  * Date: 23/05/13
  * Time: 16:09
- * To change this template use File | Settings | File Templates.
  */
 public class ForceFieldStuckEffect extends Effect {
 

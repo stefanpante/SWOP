@@ -18,8 +18,8 @@ import java.util.HashMap;
  */
 public class GameHandler extends Handler {
 
-	public static int CTFGAMEMODE = 0;
-	public static int RACEGAMEMODE = 1;
+	public static final int CTFGAMEMODE = 0;
+	public static final int RACEGAMEMODE = 1;
 	/* Handlers */
 	private EndTurnHandler endTurnHandler;
 	private MoveHandler moveHandler;
@@ -28,7 +28,7 @@ public class GameHandler extends Handler {
 	private TurnHandler turnHandler;
 	private ThrowIdentityDiskHandler throwLaunchableHandler;
 
-	private PropertyChangeListener gui;
+	private final PropertyChangeListener gui;
 
 
 	public GameHandler(PropertyChangeListener gui){

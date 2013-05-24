@@ -15,20 +15,20 @@ public class MultiGridElement<T extends GridElement> {
     /**
      * An MultiGridElement covers a set of Grid Elements.
      */
-    private ArrayList<T> gridElements;
+    private final ArrayList<T> gridElements;
 
     /**
      * Create a new MutliGridElement
      */
     protected MultiGridElement(){
-        gridElements = new ArrayList<T>();
+        gridElements = new ArrayList<>();
     }
 
     /**
      * Returns a list of Grid Elements which this MutliGridElement covers.
      */
     public ArrayList<T> getGridElements() {
-        return new ArrayList<T>(this.gridElements);
+        return new ArrayList<>(this.gridElements);
     }
 
     /**

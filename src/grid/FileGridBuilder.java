@@ -24,7 +24,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * the file to be parsed.
 	 */
-	private File file;
+	private final File file;
 
 	/**
 	 * the buffered reader used to read the file.
@@ -44,7 +44,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * ArrayList containing the start positions of the players.
 	 */
-	private ArrayList<Coordinate> startCoordinates;
+	private final ArrayList<Coordinate> startCoordinates;
 
 	/**
 	 * Construct a new fileGridBuilder with a given parameter
@@ -52,9 +52,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * @param   filepath
      *          The path to the file
 	 */
-	public FileGridBuilder(String filepath) throws IOException{
+	public FileGridBuilder(String filepath) {
 		this.file = new File(filepath);
-		this.startCoordinates = new ArrayList<Coordinate>();
+		this.startCoordinates = new ArrayList<>();
 	
 		setRandom(new Random());
 		build();
@@ -125,16 +125,16 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * 			When an IO error occurs.
 	 */
 	private void parseFile() throws IOException{
-		int x = 0;
+		int x;
 		int y = 0;
 
 		this.setHSize(0);
-		this.free_squares = new ArrayList<Coordinate>();
+		this.free_squares = new ArrayList<>();
 		/*
 	  Squares not part of the grid
 	 */
-        ArrayList<Coordinate> not_squares = new ArrayList<Coordinate>();
-		this.wall_squares = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> not_squares = new ArrayList<>();
+		this.wall_squares = new ArrayList<>();
 		String line;
 		while((line = br.readLine()) != null){
 			char[] chars = line.toCharArray();
@@ -168,10 +168,6 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	void addStartCoordinate(Coordinate coor){
 		this.startCoordinates.add(coor);
 	}
-	
-	public ArrayList<Coordinate> getStartPositions(){
-		return new ArrayList<Coordinate>(this.startCoordinates);
-	}
 
 	/**
 	 * Constructs all the squares, sets all the neigbors of the square
@@ -199,13 +195,13 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * The walls are checked for consistency after the building process.
 	 */
 	private ArrayList<ArrayList<Coordinate>> getWallsLocation(){
-		ArrayList<ArrayList<Coordinate>> wallsLocation = new ArrayList<ArrayList<Coordinate>>();
+		ArrayList<ArrayList<Coordinate>> wallsLocation = new ArrayList<>();
 		// make a copy of the initial walls array, so that it can be saved for later.
-		ArrayList<Coordinate> walls = new ArrayList<Coordinate>(wall_squares);
+		ArrayList<Coordinate> walls = new ArrayList<>(wall_squares);
 		// we remove all the formed walls from the wall_squares array
 		while(!wall_squares.isEmpty()){
 			// A sequence of squares is used to construct a wall.
-			ArrayList<Coordinate> sequence = new ArrayList<Coordinate>();
+			ArrayList<Coordinate> sequence = new ArrayList<>();
 			// Get the first coordinate in the walls array
 			Coordinate coordinate = wall_squares.get(0);
 
@@ -232,7 +228,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * @return  the sequence of coordinates which make up a part of the wall.
 	 */
 	private ArrayList<Coordinate> getWallSequence(Coordinate coordinate, Direction direction){
-		ArrayList<Coordinate> sequence = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> sequence = new ArrayList<>();
 		wall_squares.remove(coordinate);
 		Coordinate coor = coordinate;
 		boolean finished = false;
