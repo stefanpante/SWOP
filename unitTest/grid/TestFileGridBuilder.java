@@ -3,9 +3,12 @@ package grid;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
+import square.Brick;
+import square.GridElement;
 import square.Square;
 import util.Coordinate;
 
@@ -68,8 +71,13 @@ public class TestFileGridBuilder {
 			Grid grid = builder.getGrid();
 			assertEquals(33,grid.getAllGridElements().size());
 			assertEquals(countWalls(grid), 5);
-			assertEquals(new Coordinate(7,0), grid.getCoordinate(grid.getStartPlayerOne()));
-			assertEquals(new Coordinate(0,3), grid.getCoordinate(grid.getStartPlayerTwo()));
+			ArrayList<Coordinate> starts = new ArrayList<Coordinate>();
+			for(Square s: grid.getStartPositions()){
+				starts.add(grid.getCoordinate(s));
+			}
+			assertTrue(starts.contains(new Coordinate(7,0)));
+			assertTrue(starts.contains(new Coordinate(0,3)));
+;
 			
 		} catch (IOException e) {
 			fail("IOException, test failed");
@@ -81,8 +89,8 @@ public class TestFileGridBuilder {
 	
 	private int countWalls(Grid grid){
 		int i = 0;
-		for(Square sq: grid.getAllGridElements()){
-			if(sq.isObstructed()){
+		for(GridElement sq: grid.getAllGridElements()){
+			if(sq instanceof Brick){
 				i++;
 			}
 		}

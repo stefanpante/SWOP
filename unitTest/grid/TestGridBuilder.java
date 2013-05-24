@@ -17,8 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import util.Direction;
+import square.Brick;
+import square.GridElement;
 import square.Square;
-import square.obstacle.Wall;
+import square.multi.Wall;
 import util.Coordinate;
 
 /**
@@ -45,7 +47,12 @@ public class TestGridBuilder {
 	@Test
 	public void testWallsCoverage(){
 		ArrayList<Wall> walls = gridBuilder.getWalls();
-		ArrayList<Coordinate> wallsPos = gridBuilder.getCoordinatesOfWalls(walls);
+		ArrayList<Brick> bricks = new ArrayList<Brick>();
+		for(Wall wall: walls){
+			bricks.addAll(wall.getGridElements());
+		}
+		ArrayList<Coordinate> wallsPos = grid.getCoordinates(bricks);
+		
 		Coordinate coor;
 		
 		double amountOfSquares = hSize*vSize;
@@ -54,14 +61,14 @@ public class TestGridBuilder {
 		for(int x = 0; x < hSize; x++){
 			for(int y = 0; y < vSize; y++){
 				coor = new Coordinate(x, y);
-				Square sq =grid.getGridElement(coor);
+				GridElement sq =grid.getGridElement(coor);
 				if(wallsPos.contains(coor)){
 					coveredSquares++;
-					assertTrue(sq.isObstructed());
-					assertTrue(walls.contains(sq.getObstacle()));
+					assertTrue(sq.isObstacle());
+					assertTrue(walls.contains(sq));
 				} else {
-					assertFalse(grid.getGridElement(coor).isObstructed());
-					assertFalse(walls.contains(sq.getObstacle()));
+					assertFalse(grid.getGridElement(coor).isObstacle());
+					assertFalse(walls.contains(sq));
 				}
 			}
 		}
@@ -73,24 +80,29 @@ public class TestGridBuilder {
 	
 	@Test
 	public void testWallsNotOnStartPos(){
-		ArrayList<Coordinate> wallsPos = gridBuilder.getCoordinatesOfWalls(gridBuilder.getWalls());
+		ArrayList<Wall> walls = gridBuilder.getWalls();
+		ArrayList<Brick> bricks = new ArrayList<Brick>();
+		for(Wall wall: walls){
+			bricks.addAll(wall.getGridElements());
+		}
+		ArrayList<Coordinate> wallsPos = grid.getCoordinates(bricks);
 		Coordinate lowerleft = new Coordinate(0, vSize -1);
 
-		assertFalse(grid.getGridElement(lowerleft).isObstructed());
+		assertFalse(grid.getGridElement(lowerleft).isObstacle());
 		assertFalse(wallsPos.contains(lowerleft));
 		Coordinate upperRight = new Coordinate(hSize-1, 0);
-		assertFalse(grid.getGridElement(upperRight).isObstructed());
+		assertFalse(grid.getGridElement(upperRight).isObstacle());
 		assertFalse(wallsPos.contains(upperRight));
 	}
 	
 	@Test
 	public void testWallsNoIntersection(){
 		ArrayList<Wall> walls = gridBuilder.getWalls();
-		HashSet<Square> wallSquares = new HashSet<Square>();
-		HashSet<Square> wallNeighborSquares = new HashSet<Square>();
+		HashSet<GridElement> wallSquares = new HashSet<GridElement>();
+		HashSet<GridElement> wallNeighborSquares = new HashSet<GridElement>();
 		
 		for(Wall w :walls){
-			for(Square sq: w.getGridElements()){
+			for(GridElement sq: w.getGridElements()){
 				if(!wallSquares.contains(sq)){
 					wallSquares.add(sq);
 				} else  {
@@ -99,7 +111,7 @@ public class TestGridBuilder {
 				}
 				for(Direction dir: Direction.values()){
 					try{
-						Square neighbor = grid.getNeighbor(sq, dir);
+						GridElement neighbor = sq.getNeighbor(dir);
 						if(!w.getGridElements().contains(neighbor)){
 							wallNeighborSquares.add(neighbor);
 						}
@@ -110,7 +122,7 @@ public class TestGridBuilder {
 			}
 		}
 		
-		for(Square s: wallNeighborSquares){
+		for(GridElement s: wallNeighborSquares){
 			assertFalse(wallSquares.contains(s));
 		}
 	}
@@ -122,54 +134,6 @@ public class TestGridBuilder {
 		
 		for(Wall w: walls){
 			assertTrue(Math.ceil(w.getLength()/hSize) <= Grid.LENGTH_PERCENTAGE_WALL);
-		}
-	}
-	
-	
-	@Test
-	public void testLGNearStart(){
-		Coordinate lowerleft = new Coordinate(0, vSize-1);
-		for(Coordinate coor = lowerleft; coor.getY() >= vSize-3; coor = coor.getNeighbor(Direction.NORTH)){
-			for(Coordinate coor2 = coor; coor2.getX() <= 2  ; coor2 = coor2.getNeighbor(Direction.EAST)){
-				System.out.println(coor2);
-				if(grid.getGridElement(coor2).getInventory().hasLightGrenade()){
-					assert(true);
-					break;
-				}
-			}
-		}
-		
-		Coordinate upperRight = new Coordinate(hSize-1, 0);
-		for(Coordinate coor = upperRight; coor.getY() <= 2; coor = coor.getNeighbor(Direction.SOUTH)){
-			for(Coordinate coor2 = coor; coor2.getX() >= hSize - 3  ; coor2 = coor2.getNeighbor(Direction.WEST)){
-				System.out.println(coor2);
-				if(grid.getGridElement(coor2).getInventory().hasLightGrenade()){
-					assert(true);
-					break;
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Gets all the teleports on the grid and checks if there is a corresponding 
-	 * square for each destination.
-	 */
-	@Test
-	public void testTeleportsCoupling() {
-		ArrayList<Teleport> teleportItems = new ArrayList<Teleport>();
-		
-		for(Square square: grid.getAllGridElements()) {
-			if(square.getInventory().hasTeleport())
-				teleportItems.add(square.getInventory().getTeleport());
-		}
-		
-		for(Teleport teleport: teleportItems) {
-			try{
-				grid.contains(teleport.getDestination());
-			}catch(Exception exc){
-				assert(false);
-			}
 		}
 	}
 	

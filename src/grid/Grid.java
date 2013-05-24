@@ -1,12 +1,9 @@
 package grid;
 
-import item.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-
-import util.Direction;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
@@ -16,7 +13,7 @@ import be.kuleuven.cs.som.annotate.Raw;
 /**
  * This class describes a grid object.
  * 
- * It contains squares on coordinates that range from (0,0) (upper leftmost square) to
+ * It contains GridElements on coordinates that range from (0,0) (upper leftmost square) to
  * 	(<code>getHSize()</code>-1, <code>getVSize()</code>-1) (lower rightmost square).
  * 
  * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
@@ -59,6 +56,7 @@ public class Grid {
 	 */
 	
 	private ArrayList<Square> startPositions;
+	
 	/**
 	 * Creates a new grid with given height and length.
 	 * 
@@ -149,32 +147,6 @@ public class Grid {
 	}
 
 	/**
-	 * Returns whether the given square is a valid square for all grids.
-	 * 
-	 * @param 	square
-	 * 			The square to check.
-	 * @return	True 	if the given square is an actual square.
-	 * 			False	otherwise.
-	 * 			| square != null
-	 */
-	public static boolean isValidGridElement(GridElement gridElement) {
-        return gridElement != null;
-    }
-	
-	/**
-	 * Returns whether the given square is a valid square for this grid.
-	 * 
-	 * @param 	square
-	 * 			The square to check.
-	 * @return	True	if the square is not already located in this grid.
-	 * 			False	otherwise.
-	 * 			| ! this.contains(square)
-	 */
-	public boolean canHaveAsSquare(Square square){
-        return !this.contains(square);
-    }
-
-	/**
 	 * Checks whether the given coordinate is a valid coordinate for all the grids.
 	 *  
 	 * @param 	coordinate
@@ -188,29 +160,6 @@ public class Grid {
 	public boolean isValidCoordinate(Coordinate coordinate) {
         return coordinate != null && coordinate.getX() >= 0 && coordinate.getY() >= 0;
     }
-
-	/**
-	 * Returns the neighbor of the given square.
-	 * 
-	 * @param 	square
-	 * 			The square from which the neighbor will be returned.
-	 * @param 	direction
-	 * 			The direction in which the neighbor will be calculated.
-	 * @return	The neighbor of the given square in the given direction.	
-	 * @throws 	NoSuchElementException
-	 * 			If there is no square at the neighboring coordinate.
-	 */
-	public GridElement getNeighbor(GridElement gridElement, Direction direction) throws NoSuchElementException {
-		Coordinate coordinate = getCoordinate(gridElement);
-		Coordinate c = coordinate.getNeighbor(direction);
-		try{
-			return getGridElement(c);
-		}catch(NoSuchElementException ex){
-			throw new NoSuchElementException("There is no neighbor in "+ direction 
-					+" direction of the "+ gridElement 
-					+" at coordinate " + coordinate+".");
-		}
-	}
 	
 	/**
 	 * Returns the square at the given coordinate.
@@ -270,7 +219,12 @@ public class Grid {
 		throw new NoSuchElementException("No coordinate found for " + gridElement);
 	}
 	
-	public ArrayList<Coordinate> getCoordinates(ArrayList<GridElement> gridElements){
+	/**
+	 * Returns the coordinates corresponding to the given gridElements.
+	 * @param gridElements		the gridElements of which the coordinates are returned
+	 * @return				the coordinates of the gridElements
+	 */
+	public ArrayList<Coordinate> getCoordinates(ArrayList<? extends GridElement> gridElements){
 		ArrayList<Coordinate> coors = new ArrayList<Coordinate>();
 		for(GridElement gridElement: gridElements)
 			coors.add(getCoordinate(gridElement));
@@ -323,121 +277,7 @@ public class Grid {
 	public ArrayList<Coordinate> getAllCoordinates(){
 		return new ArrayList<Coordinate>(grid.keySet());
 	}
-	
-	/**
-	 * Checks if there is a neighbor in the given direction for the given square.
-	 * 
-	 * @param	gridElement	
-	 * 			The square from which the check will be executed.
-	 * @param 	direction 	
-	 * 			The direction in which the check will be executed.
-	 * @return 	True if this square has a neighbor in the given direction
-	 * 			otherwise False.
-	 */
-	public boolean hasNeighbor(GridElement gridElement, Direction direction){
-		try {
-			this.getNeighbor(gridElement, direction);
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-		return true;
-	}
-	
-	/**
-	 * Checks if the given squares are neighbors in the given direction.
-	 * 
-	 * @param	fromGridElement
-	 * 			The square which will be the starting reference point.
-	 * @param 	via 	
-	 * 			The direction in which the square should be a neighbor.
-	 * @param 	toGridElement 
-	 * 			The square that should be the neighbor in the given direction of fromSquare.
-	 * @return 	true if the square is the neighbor in the given direction
-	 * 			otherwise false
-	 */
-	public boolean hasNeighbor(GridElement fromGridElement, Direction via, GridElement toGridElement) {
-		GridElement neighbor = getNeighbor(fromGridElement, via);
-        return neighbor != null && neighbor.equals(toGridElement);
-    }
-	
-	/**
-	 * Checks whether from the given fromSquare it is possible to move to a
-	 * neighboring square in the given direction. 
-	 * 
-	 * @param 	fromGridElement
-	 * 			The square from which the prohibitsPlayer will be checked.
-	 * @param 	direction
-	 * 			The direction of the neighbor that will be checked.
-	 * @return	True 	if it is possible to move in the given direction
-	 * 			False	otherwise.
-	 */
-	// FIXME this method isnt correct anymore
-	@Deprecated
-	public boolean canMoveTo(GridElement fromGridElement, Direction direction){
-		GridElement directionGridElement;
-		try {
-			directionGridElement = getNeighbor(fromGridElement, direction);
-		} catch (Exception e) {
-			return false;
-		}
-		if(directionGridElement.isObstacle())
-			return false;
-		if(direction.isDiagonal()){
-			GridElement g1 = null;
-			GridElement g2 = null;
-			ArrayList<Direction> dirs = direction.neighborDirections();
-			try{
-				g1 = getNeighbor(fromGridElement, dirs.get(0)); 
-				g2 = getNeighbor(fromGridElement, dirs.get(1));
-			} catch (Exception exp){
-				//This should never happen since directionG exists.
-				assert(false);
-			}
-			if(g1 != null && g2 != null){
-				if(g1.isObstacle() && g2.isObstacle()){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	
-	/**
-	 * Returns an HashMap with the neighbors of the given square by direction.
-	 * 
-	 * @return 	An HashMap with neighbors with there direction as the key
-	 * 			and the Square as value.
-	 * @throws	NoSuchElementException
-	 * 			If the given square is not a part of this grid.
-	 * 			| !contains(square)
-	 */
-	@Deprecated
-	public HashMap<Direction, GridElement> getNeighbors(GridElement gridElement) throws NoSuchElementException {
-		if(!contains(gridElement)){
-			throw new NoSuchElementException("The " + gridElement + " is not a part of this " + this);
-		}
-		HashMap<Direction, GridElement> result = new HashMap<Direction, GridElement>();
-		GridElement neighbor;
-		for(Direction dir: Direction.values()){
-			try{
-				neighbor = getNeighbor(gridElement, dir);
-				result.put(dir, neighbor);
-			} catch(NoSuchElementException ex){
-				//Happens when there is no other neighbor.
-			}
-		}
-		return result;
-	}
-	
-	/**
-	 * Returns the neighbors of this square as a list.
-	 * 
-	 * @return Returns the neighbors of this square as a list.
-	 */
-	public ArrayList<GridElement> getNeighborsAsList(GridElement gridElement) {
-		return new ArrayList<GridElement>(getNeighbors(gridElement).values());
-	}
-		
+
 	/**
 	 * Checks if the given square is a valid start position for the player
 	 * @param player   The square which needs to be checked
@@ -474,5 +314,4 @@ public class Grid {
 	public String toString() {
 		return "Grid (hSize="+getHSize()+", vSize" + getVSize()+")";
 	}
-
 }

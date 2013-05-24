@@ -268,15 +268,16 @@ public class Game {
     /**
 	 * Checks if the current player is unable to make a move.
 	 */
+	//FIXME
 	public boolean isCurrentPlayerStuck(){
 		if(!getCurrentPlayer().hasMoved()){
 			return false; 
 		}
-		for(Entry<Direction, GridElement> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+	/*	for(Entry<Direction, GridElement> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
 			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
 				return false;
 			}
-		}
+		}*/
 		return true;
 	}
 
