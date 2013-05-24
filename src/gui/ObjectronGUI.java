@@ -402,11 +402,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		if(!endTurn){
 			for(GUIButton button: buttons){
 				button.isPressed(mouseX, mouseY);
-				grid.mousePressed(mouseX, mouseY);
-				// Checks if the mouse is pressed on an inventory
-				squareInventory.mousePressed(mouseX, mouseY);
-				playerInventory.mousePressed(mouseX, mouseY);
+				
 			}
+			grid.mousePressed(mouseX, mouseY);
+			// Checks if the mouse is pressed on an inventory
+			squareInventory.mousePressed(mouseX, mouseY);
+			playerInventory.mousePressed(mouseX, mouseY);
 		}
 		else{
 			endTurnDialog.isPressed(mouseX, mouseY);

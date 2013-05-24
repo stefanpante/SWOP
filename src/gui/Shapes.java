@@ -104,7 +104,6 @@ public class Shapes {
 		}
 		
 		if(item instanceof Flag){
-			System.out.println("Selected flag");
 			Flag flag = (Flag) item;
 			int id = flag.getPlayer().getID();
 			return Shapes.flags[id - 1];
