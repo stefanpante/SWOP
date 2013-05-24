@@ -44,7 +44,7 @@ public class Square extends GridElement implements ItemContainer {
 	 */
 	public void addEffect(Effect effect) throws IllegalArgumentException{
 		if(effect == null)
-			throw new IllegalArgumentException("The effect can not be null.");
+			throw new IllegalArgumentException("The effect cannot be null.");
 		effects.add(effect);
 	}
 
@@ -53,9 +53,9 @@ public class Square extends GridElement implements ItemContainer {
 	 */
 	public void removeEffect(Effect effect) throws IllegalArgumentException{
         if(effect == null)
-            throw new NoSuchElementException("The effect can not be null.");
+            throw new NoSuchElementException("The effect to be removed cannot be null.");
 		if(!effects.contains(effect))
-			throw new NoSuchElementException("The square does not contain the given effect.");
+			throw new NoSuchElementException("Cannot remove an effect that's not on this square.");
 		effects.remove(effect);
 	}
 

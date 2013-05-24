@@ -21,6 +21,7 @@ public class ForceFieldStuckEffect extends Effect {
     //FIXME: how to set this stuck effect on a ForceField that goes on and off?
     @Override
     public void execute(Player player) {
+        System.out.println("Executing on Player: " + this);
         player.setPosition(player.getPosition(),false);
     }
 

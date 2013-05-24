@@ -5,6 +5,8 @@ package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
 
+import effect.Effect;
+import effect.imp.PlayerEffect;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
@@ -70,6 +72,8 @@ public class Player extends Observable implements Movable, ItemContainer {
 	private boolean moved;
 	
 	private boolean alive;
+
+    private PlayerEffect playerEffect;
 	
 	/**
 	 * The amount of action a player has during one move
@@ -92,7 +96,8 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @throws	IllegalArgumentException	If the given name is not valid.
 	 */
 	public Player(Square startPosition, int id) throws IllegalArgumentException {
-		this.lightTrail = new LightTrail();
+        this.playerEffect = new PlayerEffect();
+        this.lightTrail = new LightTrail();
 		this.setStartPosition(startPosition);
 		this.alive = true;
 		this.remainingActions = MAX_ALLOWED_ACTIONS;
@@ -190,26 +195,43 @@ public class Player extends Observable implements Movable, ItemContainer {
 	private void setStartPosition(Square pos) throws IllegalArgumentException {
 		if(!isValidStartPosition(pos))
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
-		//this.lightTrail.setHead(pos);
 		this.startPosition = pos;
 		this.currentPosition = pos;
+        startPosition.addEffect(playerEffect);
 	}
 
     @Override
     public void setPosition(Square position, boolean updatePrevious) throws IllegalStateException {
-        System.out.println(position + " and   " + updatePrevious);
+        System.out.println("IN:" + position + " and   " + updatePrevious);
         if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
-        if(updatePrevious){
-            this.previousPosition = this.currentPosition;
-            this.currentPosition = position;
-            position.affect(this);
-            this.moved = true;
-            decrementActions();
-        }else{
-            this.currentPosition = position;
-            throw new IllegalStateException("Unable to move to there!");
+        try{
+            if(updatePrevious){
+                // Set new Position and update Previous Position
+                this.previousPosition = this.currentPosition;
+                this.currentPosition = position;
+
+                // Remove the Player Effect from the Previous Square
+                this.previousPosition.removeEffect(getPlayerEffect());
+
+                // Affect the Player on the current Square
+                this.currentPosition.affect(this);
+
+                // Place a Player Effect on the current Square
+                this.currentPosition.addEffect(getPlayerEffect());
+                this.moved = true;
+                decrementActions();
+                System.out.println("UIT:" + position);
+            }else{
+                this.currentPosition = position;
+                this.currentPosition.addEffect(getPlayerEffect());
+                System.out.println("UIT:" + position);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     @Override
@@ -485,6 +507,10 @@ public class Player extends Observable implements Movable, ItemContainer {
     @Override
     public boolean isSameType(ItemContainer itemContainer) {
         return itemContainer instanceof Player;
+    }
+
+    public Effect getPlayerEffect(){
+        return this.playerEffect;
     }
 
 }
