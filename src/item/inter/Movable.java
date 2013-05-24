@@ -20,7 +20,9 @@ public interface Movable {
      *
 	 * @param square
 	 */
-	public void setPosition(Square square, boolean updatePrevious);
+	public void setPosition(Square square);
+
+    public void resetPosition(Square square);
 
 	/**
 	 * Returns the current position of the movable.

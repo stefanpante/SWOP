@@ -467,7 +467,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	public void move(Direction direction){
 		try{
-			gameHandler.getMoveHandler().move(direction);
+            gameHandler.getMoveHandler().move(direction);
 		}catch(Exception e){
 			showException(e);
 		}

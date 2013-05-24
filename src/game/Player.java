@@ -197,41 +197,39 @@ public class Player extends Observable implements Movable, ItemContainer {
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		this.startPosition = pos;
 		this.currentPosition = pos;
-        startPosition.addEffect(playerEffect);
+        // startPosition.addEffect(playerEffect);
 	}
 
-    @Override
-    public void setPosition(Square position, boolean updatePrevious) throws IllegalStateException {
-        System.out.println("IN:" + position + " and   " + updatePrevious);
+
+    /**
+     * Moves the player to another square
+     *
+     * @throws	IllegalStateException
+     * 		  	thrown if the player is unable to make this move
+     */
+    public void move(Square position) throws IllegalStateException{
+        if(!position.getNeighbors().containsValue(currentPosition))
+            throw new IllegalStateException("Cannot move to non neighboring square");
         if(!isValidPosition(position))
-			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
+            throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
+        setPosition(position);
         try{
-            if(updatePrevious){
-                // Set new Position and update Previous Position
-                this.previousPosition = this.currentPosition;
-                this.currentPosition = position;
-
-                // Remove the Player Effect from the Previous Square
-                this.previousPosition.removeEffect(getPlayerEffect());
-
-                // Affect the Player on the current Square
-                this.currentPosition.affect(this);
-
-                // Place a Player Effect on the current Square
-                this.currentPosition.addEffect(getPlayerEffect());
-                this.moved = true;
-                decrementActions();
-                System.out.println("UIT:" + position);
-            }else{
-                this.currentPosition = position;
-                this.currentPosition.addEffect(getPlayerEffect());
-                System.out.println("UIT:" + position);
-
-            }
+            this.currentPosition.affect(this);
+            this.moved = true;
+            decrementActions();
+            System.out.println("UIT:" + position);
         }catch (Exception e){
-            e.printStackTrace();
+            throw e;
         }
+    }
 
+    public void resetPosition(Square position){
+        this.currentPosition = position;
+    }
+
+    public void setPosition(Square position) throws IllegalStateException {
+        this.previousPosition = this.currentPosition;
+        this.currentPosition = position;
     }
 
     @Override
@@ -308,17 +306,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 		this.alive = alive;
 	}
 
-	/**
-	 * Moves the player to another square
-	 * 
-	 * @throws	IllegalStateException
-	 * 		  	thrown if the player is unable to make this move 
-	 */
-	public void move(Square position) throws IllegalStateException{
-        if(!position.getNeighbors().containsValue(currentPosition))
-            throw new IllegalStateException("Cannot move to non neighboring square");
-        setPosition(position,true);
-	}
+
 
 	/**
 	 * Decrements the remaining actions by one and notifies the observers of this player.

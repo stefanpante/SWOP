@@ -119,30 +119,31 @@ public class MoveCommand extends ActionCommand {
 	 * performs the actual move of the movable
 	 */
 	protected void move(){
+        System.out.println("MOVE");
+
 		setCurrentPosition(getStartPosition());
 		int currentRange = 0;
 		Square currentSquare;
 
-		do{
-			try {
-				GridElement gridElement = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
-				if(!gridElement.isObstacle() && gridElement.isSameType(new Square())){
+        try {
+
+            do{
+                GridElement gridElement = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
+                if(!gridElement.isObstacle() && gridElement.isSameType(new Square())){
+                    currentRange++;
                     Square square = (Square) gridElement;
-					movable.move(square);
-					//setPrevPosition(getCurrentPosition());
-					//setCurrentPosition(movable.getPosition());
-				}else{
-					return;
-				}
-
-			} catch (NoSuchElementException e) {
-				return;
-			}  catch (IllegalArgumentException e){
-				return;
-			}
-			currentRange++;
-		} while(currentRange < getMovable().getRange()
-				&& getMovable().getRange() > 0);
-
+                    System.out.println("move called");
+                    movable.move(square);
+                    //setPrevPosition(getCurrentPosition());
+                    //setCurrentPosition(movable.getPosition());
+                }else{
+                    return;
+                }
+            } while(currentRange < getMovable().getRange()
+                    && getMovable().getRange() > 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
 	}
 }

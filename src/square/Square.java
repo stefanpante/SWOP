@@ -92,7 +92,7 @@ public class Square extends GridElement implements ItemContainer {
 
 	@Override
 	public String toString() {
-		String s = "Square [ ";
+		String s = "Square (" +hashCode()+ ") [ ";
 		s += items;
 		s += ", ";
         s += getAllItemEffects();
