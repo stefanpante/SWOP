@@ -151,7 +151,7 @@
 
 \begin{frame}{Items en Effecten}
 \vspace{1.5in}
-Items hebben vaak een effect op de player, Hierop komen we later terug
+Items hebben vaak een effect op de player, hierop komen we later terug.
 \end{frame}
 
 \begin{frame}{ItemContainer}
@@ -249,47 +249,74 @@ Capture the flag en Race Game
 \item verschillend aantal spelers mogelijk.
 \item Verschillende win en lose conditions.
 \end{itemize}
-
-\end{frame}
-\begin{frame}{RaceGameMode}
 \end{frame}
 
-\begin{frame}{CTFGameMode}
+\begin{frame}{GameMode}
+\begin{center}
+\includegraphics[width=0.9\linewidth]{images/gamemode}
+\end{center}
 \end{frame}
+
+\begin{frame}{GameBuilder}
+Wordt gebruikt door de GameMode om een correcte consistente opbouw van een game te garanderen.
+\begin{center}
+\includegraphics[width=0.7\linewidth]{images/gamebuilder}
+\end{center}
+\end{frame}
+
 
 \subsection{Acties}
 
 \begin{frame}{Command (Command pattern)}
+Alle acties door player worden uitgevoerd met behulp van commands.
+\begin{center}
+\includegraphics[width=0.7\linewidth]{images/command}
+\end{center}
 \end{frame}
 
-\begin{frame}{Move}
+\begin{frame}{Movable}
+Weinig verschillen tussen Move van een player en move van een IdentityDisc.
+\begin{center}
+\includegraphics[width=0.8\linewidth]{images/movable}
+\end{center}
 \end{frame}
 
-\begin{frame}{Pick Up}
+\begin{frame}{MoveCommand}
+Move van IdentityDisc en Player wordt uitgevoerd met dezelfde methode. Enkel pre- en postcondities verschillen. Verschillen worden opgevangen door de effecten.
+\begin{center}
+\includegraphics[width=0.95\linewidth]{images/movecommand}
+\end{center}
 \end{frame}
 
-\begin{frame}{Pick Up Sequence diagram}
+\begin{frame}{PickUpCommand}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{images/pickupcommand}
+\end{center}
 \end{frame}
 
-\begin{frame}{Use Item}
-\end{frame}
-
-\begin{frame}{Use Item Sequence diagram}
-\end{frame}
-
-\begin{frame}{Throw IdentityDisk}
-\end{frame}
-
-\begin{frame}{Throw IdentityDisk Sequence diagram}
-\end{frame}
-
-\begin{frame}{End Turn}
-\end{frame}
-
-\begin{frame}{End Turn Sequence Diagram}
+\begin{frame}{UseItemCommand}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{images/useitemcommand}
+\end{center}
 
 \end{frame}
+
+\begin{frame}{EndTurnCommand}
+\begin{center}
+\includegraphics[width=0.95\linewidth]{images/endturncommand}
+\end{center}
+\end{frame}
+
 \subsection{Handlers}
+
+\begin{frame}{Handlers}
+\begin{itemize}
+\item Handlers controleren de flow tussen Model en View,
+\item LightWeight door gebruik van command Pattern
+\item Gebruikt propertyChanges om wijzigen aan GUI door te geven \\
+= Model View Adapter
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Handlers}
 \begin{itemize}

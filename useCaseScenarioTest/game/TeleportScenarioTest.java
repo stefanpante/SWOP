@@ -15,7 +15,7 @@ import grid.GridProvider;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
 import controller.PickUpHandler;
-import controller.ThrowLaunchableHandler;
+import controller.ThrowIdentityDiskHandler;
 import controller.TurnHandler;
 import controller.UseItemHandler;
 import util.Direction;
@@ -36,7 +36,7 @@ public class TeleportScenarioTest {
 	private MoveHandler moveHandler;
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
-	private ThrowLaunchableHandler throwLaunchableHandler;
+	private ThrowIdentityDiskHandler throwLaunchableHandler;
 	private EndTurnHandler endTurnHandler;
 	private TurnHandler turnHandler;
 	
@@ -56,7 +56,7 @@ public class TeleportScenarioTest {
 		moveHandler = new MoveHandler(game, null);
 		pickUpHandler = new PickUpHandler(game,null);
 		useItemHandler = new UseItemHandler(game, null);
-		throwLaunchableHandler = new ThrowLaunchableHandler(game, null);
+		throwLaunchableHandler = new ThrowIdentityDiskHandler(game, null);
 		endTurnHandler = new EndTurnHandler(game, null);
 		turnHandler = new TurnHandler(game,null);
 		

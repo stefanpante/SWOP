@@ -26,7 +26,7 @@ public class GameHandler extends Handler {
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
 	private TurnHandler turnHandler;
-	private ThrowLaunchableHandler throwLaunchableHandler;
+	private ThrowIdentityDiskHandler throwLaunchableHandler;
 
 	private PropertyChangeListener gui;
 
@@ -45,7 +45,7 @@ public class GameHandler extends Handler {
 		this.pickUpHandler = new PickUpHandler(getGame(),gui);
 		this.useItemHandler = new UseItemHandler(getGame(),gui);
 		this.turnHandler = new TurnHandler(getGame(), gui);
-		this.throwLaunchableHandler = new ThrowLaunchableHandler(getGame(), gui);
+		this.throwLaunchableHandler = new ThrowIdentityDiskHandler(getGame(), gui);
 		try {
 			turnHandler.startTurn();
 		} catch (Exception e) {
@@ -111,7 +111,7 @@ public class GameHandler extends Handler {
 	 * Returns the throwLaunchableHandler.
 	 * @return	the throwLaunchableHandler.
 	 */
-	public ThrowLaunchableHandler getThrowLaunchableHandler(){
+	public ThrowIdentityDiskHandler getThrowLaunchableHandler(){
 		return this.throwLaunchableHandler;
 	}
 

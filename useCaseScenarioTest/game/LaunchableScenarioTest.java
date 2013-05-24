@@ -21,7 +21,7 @@ import util.Coordinate;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
 import controller.PickUpHandler;
-import controller.ThrowLaunchableHandler;
+import controller.ThrowIdentityDiskHandler;
 import controller.TurnHandler;
 import controller.UseItemHandler;
 
@@ -38,7 +38,7 @@ public class LaunchableScenarioTest {
 	private MoveHandler moveHandler;
 	private PickUpHandler pickUpHandler;
 	private UseItemHandler useItemHandler;
-	private ThrowLaunchableHandler throwLaunchableHandler;
+	private ThrowIdentityDiskHandler throwLaunchableHandler;
 	private EndTurnHandler endTurnHandler;
 	private TurnHandler turnHandler;
 	
@@ -54,7 +54,7 @@ public class LaunchableScenarioTest {
 		moveHandler = new MoveHandler(game, null);
 		pickUpHandler = new PickUpHandler(game,null);
 		useItemHandler = new UseItemHandler(game, null);
-		throwLaunchableHandler = new ThrowLaunchableHandler(game, null);
+		throwLaunchableHandler = new ThrowIdentityDiskHandler(game, null);
 		endTurnHandler = new EndTurnHandler(game, null);
 		turnHandler = new TurnHandler(game,null);
 	}
@@ -345,7 +345,7 @@ public class LaunchableScenarioTest {
 	@Test
 	public void throwChargedDiskWall(){
 
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);	
+		ThrowIdentityDiskHandler ih = new ThrowIdentityDiskHandler(game, null);	
 
 		// make sure there are no powerfailures
 		game.getPowerGayManager().clearPowerFailures();
@@ -406,7 +406,7 @@ public class LaunchableScenarioTest {
 	@Test
 	public void hitOtherPlayer(){
 
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
+		ThrowIdentityDiskHandler ih = new ThrowIdentityDiskHandler(game, null);
 
 		// Make sure there aren't any obstacles and powerfailures in the way
 		game.getPowerGayManager().clearPowerFailures();
@@ -475,7 +475,7 @@ public class LaunchableScenarioTest {
 	@Test 
 	public void throwDiscTeleporter(){
 		
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
+		ThrowIdentityDiskHandler ih = new ThrowIdentityDiskHandler(game, null);
 		
 		// Make sure the grid is clear
 		game.getPowerGayManager().clearPowerFailures();
@@ -507,7 +507,7 @@ public class LaunchableScenarioTest {
 	 */
 	@Test
 	public void throwChargedDiskTeleporter(){
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
+		ThrowIdentityDiskHandler ih = new ThrowIdentityDiskHandler(game, null);
 		
 		// Make sure the grid is clear
 		game.getPowerGayManager().clearPowerFailures();
@@ -545,7 +545,7 @@ public class LaunchableScenarioTest {
 	@Test 
 	public void throwDiscPowerFailure(){
 		
-		ThrowLaunchableHandler ih = new ThrowLaunchableHandler(game, null);
+		ThrowIdentityDiskHandler ih = new ThrowIdentityDiskHandler(game, null);
 		
 		// Make sure the grid is clear
 		game.getPowerGayManager().clearPowerFailures();

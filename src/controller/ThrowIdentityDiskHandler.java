@@ -17,7 +17,7 @@ import square.Square;
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante
  *
  */
-public class ThrowLaunchableHandler extends Handler {
+public class ThrowIdentityDiskHandler extends Handler {
 
 
 	/**
@@ -25,7 +25,7 @@ public class ThrowLaunchableHandler extends Handler {
 	 * @param game		the game instance which will be used.
 	 * @param listener	the PropertyChangeHandler used by this handler.
 	 */
-	public ThrowLaunchableHandler(Game game, PropertyChangeListener listener) {
+	public ThrowIdentityDiskHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
 	}
 	
