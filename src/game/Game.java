@@ -57,10 +57,10 @@ public class Game {
 	/**
 	 * The type of game which is played;
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     private final GameMode gameMode;
 	
-	public Game(@org.jetbrains.annotations.NotNull GameMode gameMode, int numOfPlayers){
+	public Game(@NotNull GameMode gameMode, int numOfPlayers){
 		this.gameMode = gameMode;
 		this.numOfPlayers = numOfPlayers;
 		gameMode.setGame(this);
@@ -181,7 +181,7 @@ public class Game {
 	 * Returns all players
 	 * @return Returns all players of this game
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     public ArrayList<Player> getPlayers(){
 		return new ArrayList<>(this.players);
 	}
@@ -191,7 +191,7 @@ public class Game {
      *
      * @param players
      */
-    public void setPlayers(@org.jetbrains.annotations.NotNull ArrayList<Player> players){
+    public void setPlayers(@NotNull ArrayList<Player> players){
         if(players.size() < gameMode.getMinimumAmountOfPlayers() ||
                 players.size() > gameMode.getMaximumAmountOfPlayers())
             throw new IllegalStateException("There is a minimum of " + gameMode.getMinimumAmountOfPlayers()
@@ -267,7 +267,7 @@ public class Game {
 		this.active = true;
 	}
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     public GameMode getGameMode(){
         return this.gameMode;
     }

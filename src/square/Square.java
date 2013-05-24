@@ -23,18 +23,18 @@ public class Square extends GridElement implements ItemContainer {
     /**
      * The effect mediator of this square.
      */
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     private final EffectMediator effectMediator;
 	/**
 	 * List of items on this square
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     private final ArrayList<Item> items;
 
 	/**
 	 * The effects of this Square.
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     private final ArrayList<Effect> effects;
 
 	public Square(){
@@ -63,12 +63,12 @@ public class Square extends GridElement implements ItemContainer {
 		effects.remove(effect);
 	}
 
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     public ArrayList<Effect> getAllSquareEffects(){
 		return new ArrayList<>(this.effects);
 	}
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     ArrayList<Effect> getAllItemEffects(){
         ArrayList<Effect> result = new ArrayList<>();
         for(Item i : getAllItems()){
@@ -77,7 +77,7 @@ public class Square extends GridElement implements ItemContainer {
         return result;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     private ArrayList<Effect> getAllEffects(){
         ArrayList<Effect> result = new ArrayList<>(this.getAllSquareEffects());
         result.addAll(getAllItemEffects());
@@ -100,7 +100,7 @@ public class Square extends GridElement implements ItemContainer {
         }
     }
 
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     @Override
 	public String toString() {
 		String s = "Square (" +hashCode()+ ") [ ";
@@ -113,7 +113,7 @@ public class Square extends GridElement implements ItemContainer {
 		return s;
 	}
 
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     @Override
 	public ArrayList<Item> getAllItems(){
 		return new ArrayList<>(items);
@@ -125,7 +125,7 @@ public class Square extends GridElement implements ItemContainer {
     }
 
     @Override
-	public void addItem(@org.jetbrains.annotations.NotNull Item item){
+	public void addItem(@NotNull Item item){
 		if(!isValidItem(item))
 			throw new IllegalArgumentException("The given item is not valid (cannot be null)");
 		if(!item.canAddTo(this))
@@ -149,13 +149,13 @@ public class Square extends GridElement implements ItemContainer {
 	}
 
 	@Override
-	public boolean hasType(@org.jetbrains.annotations.NotNull Item item) {
+	public boolean hasType(@NotNull Item item) {
 		return filterItemsByType(item).size() > 0;
 	}
 
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     @Override
-	public ArrayList<Item> filterItemsByType(@org.jetbrains.annotations.NotNull Item item) {
+	public ArrayList<Item> filterItemsByType(@NotNull Item item) {
         ArrayList<Item> result = new ArrayList<>();
 		for(Item it : getAllItems()){
 			if(item.isSameType(it))

@@ -32,7 +32,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     /**
      * List of items on this square
      */
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     private final ArrayList<Item> items;
 
 	/**
@@ -54,7 +54,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	/**
 	 * The player's Light Trail
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     private final LightTrail lightTrail;
 	
 	/**
@@ -69,7 +69,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	
 	private boolean alive;
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     private final PlayerEffect playerEffect;
 	
 	/**
@@ -273,7 +273,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @return	The name of this player. 
 	 * 
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     public String getName(){
 		return "Player " + getID();
 	}
@@ -454,13 +454,13 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * 
 	 * @return	This player's light trail
 	 */
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     public LightTrail getLightTrail(){
 		return this.lightTrail;
 	}
 
 	
-	@org.jetbrains.annotations.NotNull
+	@NotNull
     @Override
 	public String toString() {
 		return "Player " + this.getID();
@@ -501,13 +501,13 @@ public class Player extends Observable implements Movable, ItemContainer {
     }
 
     @Override
-    public boolean hasType(@org.jetbrains.annotations.NotNull Item item) {
+    public boolean hasType(@NotNull Item item) {
         return filterItemsByType(item).size() > 0;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
-    public ArrayList<Item> filterItemsByType(@org.jetbrains.annotations.NotNull Item item) {
+    public ArrayList<Item> filterItemsByType(@NotNull Item item) {
         ArrayList<Item> result = new ArrayList<>();
         for(Item it : getAllItems()){
             if(item.isSameType(it))
@@ -516,7 +516,7 @@ public class Player extends Observable implements Movable, ItemContainer {
         return result;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
     public ArrayList<Item> getAllItems() {
         return new ArrayList<Item>(items);
@@ -527,7 +527,7 @@ public class Player extends Observable implements Movable, ItemContainer {
         return itemContainer instanceof Player;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     public Effect getPlayerEffect(){
         return this.playerEffect;
     }

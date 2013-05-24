@@ -107,7 +107,7 @@ public class IdentityDisc extends Item implements Movable {
 	}
 
     @Override
-    public boolean canAddTo(@org.jetbrains.annotations.NotNull Square square) {
+    public boolean canAddTo(@NotNull Square square) {
         return (!square.hasItem(this));
     }
 
@@ -175,7 +175,7 @@ public class IdentityDisc extends Item implements Movable {
         return previousPosition;
     }
 
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();
