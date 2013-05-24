@@ -1,14 +1,15 @@
 package grid;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
-import be.kuleuven.cs.som.annotate.Basic;
-import be.kuleuven.cs.som.annotate.Raw;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 /**
  * This class describes a grid object.

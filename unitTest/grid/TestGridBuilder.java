@@ -3,25 +3,20 @@
  */
 package grid;
 
-import static org.junit.Assert.*;
-
-
-import item.Teleport;
+import org.junit.Before;
+import org.junit.Test;
+import square.Brick;
+import square.GridElement;
+import square.multi.Wall;
+import util.Coordinate;
+import util.Direction;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import util.Direction;
-import square.Brick;
-import square.GridElement;
-import square.Square;
-import square.multi.Wall;
-import util.Coordinate;
+import static org.junit.Assert.*;
 
 /**
  * Unit test case for Grid Builder.

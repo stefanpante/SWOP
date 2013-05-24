@@ -2,7 +2,6 @@ package square.multi;
 
 
 import square.Brick;
-import square.multi.MultiGridElement;
 
 import java.util.ArrayList;
 

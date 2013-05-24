@@ -3,8 +3,9 @@
  */
 package grid;
 
-import java.util.ArrayList;
 import util.Coordinate;
+
+import java.util.ArrayList;
 
 /**
  * @author jonas

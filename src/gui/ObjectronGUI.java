@@ -1,43 +1,33 @@
 package gui;
 
+import controlP5.Button;
+import controlP5.*;
+import controller.GameHandler;
+import controller.Handler;
 import effect.Effect;
 import game.Player;
 import game.mode.CTFGameMode;
 import grid.RandomGridBuilder;
 import gui.button.GUIButton;
 import gui.button.TextButton;
-import gui.message.Message;
 import gui.message.TimedMessage;
 import gui.message.YesNoDialog;
 import item.IdentityDisc;
 import item.Item;
+import processing.core.PApplet;
+import processing.core.PFont;
+import processing.core.PVector;
+import util.Coordinate;
+import util.Direction;
+import util.OConstants;
 
-import java.awt.FileDialog;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-
-import controlP5.Button;
-import controlP5.CColor;
-import controlP5.ControlEvent;
-import controlP5.ControlListener;
-import controlP5.ControlP5;
-import controlP5.DropdownList;
-import controlP5.RadioButton;
-import controlP5.Textarea;
-import controlP5.Textfield;
-import controller.GameHandler;
-import controller.Handler;
-import processing.core.PApplet;
-import processing.core.PFont;
-import processing.core.PVector;
-import util.Direction;
-import util.Coordinate;
-import util.OConstants;
 
 @SuppressWarnings("serial")
 public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener, ControlListener{
@@ -476,9 +466,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	
 	private void pickUp(){
 		Item item = squareInventory.getSelectedItem();
-		if(item == null){
-		}
-		else{
+		if(item != null){
 			try{
 				gameHandler.getPickupHandler().pickUp(item);
 			}catch(Exception e){
@@ -490,8 +478,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void useItem(){
 		Item item = playerInventory.getSelectedItem();
 		if(item == null){
-		}
-		else{
 			if(item instanceof IdentityDisc){
 				grid.getDirectionalPad().setVisibility(false);
 				grid.getThrowPad().setVisibility(true);

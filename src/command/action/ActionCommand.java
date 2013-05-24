@@ -4,7 +4,6 @@
 package command.action;
 
 import command.AbstractGameCommand;
-
 import game.Game;
 
 /**

@@ -2,9 +2,7 @@ package item;
 
 import effect.Effect;
 import effect.imp.EmptyEffect;
-import effect.imp.LightGrenadeEffect;
 import effect.imp.TeleportEffect;
-import item.inter.Movable;
 import game.Player;
 import square.Square;
 

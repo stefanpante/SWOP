@@ -9,6 +9,7 @@ import item.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import square.GridElement;
 import util.Direction;
 import square.Square;
 import util.Coordinate;
@@ -85,7 +86,7 @@ public class MoveCommandTest {
     @Before
     public void setUp() throws Exception {
         // Set the grid.
-        g = new Game(new CTFGameMode(10,10, winMap), 2);
+        g = new Game(new CTFGameMode(10,10), 2);
         grid = GridProvider.getGrid(10, 10, walls);
 
         for(Coordinate co : lightGrenades){

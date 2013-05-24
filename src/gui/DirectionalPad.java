@@ -1,13 +1,12 @@
 package gui;
 
 import gui.button.DirectionalButton;
-
-import java.util.HashMap;
-
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.Direction;
 import util.OConstants;
+
+import java.util.HashMap;
 
 public class DirectionalPad extends GUIElement{
 

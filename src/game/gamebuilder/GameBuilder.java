@@ -2,17 +2,10 @@ package game.gamebuilder;
 
 import game.Game;
 import game.Player;
-
-import grid.itemplacer.ChargedIdentityDiscPlacer;
-import grid.itemplacer.FlagPlacer;
-import grid.itemplacer.ForceFieldGeneratorPlacer;
-import grid.itemplacer.IdentityDiscPlacer;
-import grid.itemplacer.LightGrenadePlacer;
-import grid.itemplacer.TeleportPlacer;
+import grid.itemplacer.*;
+import square.Square;
 
 import java.util.ArrayList;
-
-import square.Square;
 
 /**
  * Class used to create the game. Used to construct all the components of

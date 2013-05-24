@@ -1,11 +1,9 @@
 package square.obstacle;
 
-import static org.junit.Assert.*;
-
-import square.*;
-
-import org.junit.*;
+import square.Square;
 import square.multi.LightTrail;
+
+import static org.junit.Assert.*;
 
 public class TestLightTrail {
 
@@ -23,12 +21,11 @@ public class TestLightTrail {
 
 		assertEquals(lightTrail.getLength(), 0); 
 
-		lightTrail.addSquare(squareOne);
+		lightTrail.addGridElement(squareOne);
 		assertEquals(lightTrail.getLength(), 1);
 		
-		lightTrail.addSquare(squareTwo);
+		lightTrail.addGridElement(squareTwo);
 		assertEquals(lightTrail.getLength(), 2);
-		assertTrue(lightTrail.squaresPointBack());
 	}
 
 	/**
@@ -42,23 +39,26 @@ public class TestLightTrail {
 		Square squareTwo = new Square();
 		Square squareThree = new Square();
 		Square squareFour = new Square();
+		Square squareFive = new Square();
 
 		assertEquals(lightTrail.getLength(), 0); 
 
-		lightTrail.addSquare(squareOne);
+		lightTrail.addGridElement(squareOne);
 		assertEquals(lightTrail.getLength(), 1);
 		
-		lightTrail.addSquare(squareTwo);
+		lightTrail.addGridElement(squareTwo);
 		assertEquals(lightTrail.getLength(), 2);
 		
-		lightTrail.addSquare(squareThree);
+		lightTrail.addGridElement(squareThree);
 		assertEquals(lightTrail.getLength(), 3);
 		
-		lightTrail.addSquare(squareFour);
-		assertEquals(lightTrail.getLength(), 3);
+		lightTrail.addGridElement(squareFour);
+		assertEquals(lightTrail.getLength(), 4);
+		
+		lightTrail.addGridElement(squareFive);
+		assertEquals(lightTrail.getLength(), 4);
 		
 		assertFalse(lightTrail.getGridElements().contains(squareOne));
-		assertTrue(lightTrail.squaresPointBack());
 	}
 	
 	/**
@@ -79,52 +79,8 @@ public class TestLightTrail {
 
 		Square squareOne = new Square();
 
-		lightTrail.addSquare(squareOne);
-		assertTrue(lightTrail.squaresPointBack());
-		lightTrail.addSquare(squareOne);
-	}
-	
-	/**
-	 * Test if adding a square results in the square
-	 * beeing set as obstructed.
-	 */
-	@Test
-	public void testAdding() {
-		LightTrail lightTrail = new LightTrail();
-		
-		Square squareOne = new Square();
-		assertFalse(squareOne.isObstructed());
-		
-		lightTrail.addSquare(squareOne);
-		assertTrue(squareOne.isObstructed());
-		
-		Square squareTwo = new Square();
-		assertFalse(squareTwo.isObstructed());
-		
-		lightTrail.addSquare(squareTwo);
-		assertTrue(squareTwo.isObstructed());
-		assertTrue(lightTrail.squaresPointBack());
-	}
-	
-	/**
-	 * Test adding a square after maximum capacity,
-	 * the last one is set to non obstructed.
-	 */
-	@Test
-	public void testAddingMax() {
-		LightTrail lightTrail = new LightTrail();
-		
-		Square firstSquare = new Square();
-		lightTrail.addSquare(firstSquare);
-		
-		assertTrue(firstSquare.isObstructed());
-		
-		lightTrail.addSquare(new Square());
-		lightTrail.addSquare(new Square());
-		lightTrail.addSquare(new Square());
-		
-		assertFalse(firstSquare.isObstructed());
-		assertTrue(lightTrail.squaresPointBack());
+		lightTrail.addGridElement(squareOne);
+		lightTrail.addGridElement(squareOne);
 	}
 
 	/**
@@ -136,9 +92,8 @@ public class TestLightTrail {
 
 		Square squareOne = new Square();
 
-		lightTrail.addSquare(squareOne);
+		lightTrail.addGridElement(squareOne);
 		assertFalse(lightTrail.isValidGridElement(squareOne));
-		assertTrue(lightTrail.squaresPointBack());
 	}
 
 	/**
@@ -161,11 +116,10 @@ public class TestLightTrail {
 		assertEquals(lightTrail.getGridElements().size(), 0);
 		assertEquals(lightTrail.getGridElements().size(), lightTrail.getLength());
 
-		lightTrail.addSquare(new Square());
+		lightTrail.addGridElement(new Square());
 
 		assertEquals(lightTrail.getGridElements().size(), 1);
 		assertEquals(lightTrail.getGridElements().size(), lightTrail.getLength());
-		assertTrue(lightTrail.squaresPointBack());
 	}
 
 

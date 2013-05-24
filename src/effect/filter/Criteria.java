@@ -1,7 +1,6 @@
 package effect.filter;
 
 import effect.Effect;
-import effect.EffectPriority;
 
 import java.util.ArrayList;
 

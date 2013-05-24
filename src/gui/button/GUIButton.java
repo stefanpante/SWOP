@@ -1,15 +1,13 @@
 package gui.button;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
-
 import gui.GUIElement;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public abstract class GUIButton extends GUIElement {
 

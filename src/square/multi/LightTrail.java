@@ -1,7 +1,5 @@
 package square.multi;
 
-import java.util.LinkedList;
-
 import effect.imp.LightTrailEffect;
 import square.Square;
 import square.field.Field;
@@ -53,7 +51,7 @@ public class LightTrail extends Field {
 	 * Removes a square of the obstacle.
 	 * 
 	 * @param 	square
-	 * 
+	 *          The square to be removed.
 	 * @throws 	IllegalArgumentException 
 	 * 			If the square is not valid.
 	 */

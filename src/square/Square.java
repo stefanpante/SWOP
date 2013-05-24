@@ -1,7 +1,6 @@
 package square;
 
 import effect.Effect;
-import effect.EffectPriority;
 import effect.imp.EffectMediator;
 import game.Player;
 import item.IdentityDisc;

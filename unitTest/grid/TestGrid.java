@@ -3,21 +3,14 @@
  */
 package grid;
 
-import static org.junit.Assert.*;
-
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
 import org.junit.Test;
-
-import square.multi.LightTrail;
-
-import util.Direction;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 /**
  * @author Dieter Castel, Jonas Devlieghere and Stefan Pante

@@ -1,27 +1,19 @@
 package game;
 
-import static org.junit.Assert.*;
-
+import controller.*;
+import grid.Grid;
+import grid.GridProvider;
 import item.IdentityDisc;
 import item.Item;
 import item.Teleport;
-
-
 import org.junit.Before;
 import org.junit.Test;
-
-import grid.Grid;
-import grid.GridProvider;
-import controller.EndTurnHandler;
-import controller.MoveHandler;
-import controller.PickUpHandler;
-import controller.ThrowIdentityDiskHandler;
-import controller.TurnHandler;
-import controller.UseItemHandler;
-import util.Direction;
 import square.Square;
 import square.multi.LightTrail;
 import util.Coordinate;
+import util.Direction;
+
+import static org.junit.Assert.*;
 
 /**
  * 

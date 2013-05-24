@@ -1,29 +1,19 @@
 package game;
 
-import static org.junit.Assert.*;
-
-
+import controller.*;
 import grid.Grid;
 import grid.GridProvider;
-
 import item.ChargedIdentityDisc;
 import item.IdentityDisc;
 import item.Teleport;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import util.Direction;
 import square.Square;
 import square.obstacle.Wall;
 import util.Coordinate;
+import util.Direction;
 
-import controller.EndTurnHandler;
-import controller.MoveHandler;
-import controller.PickUpHandler;
-import controller.ThrowIdentityDiskHandler;
-import controller.TurnHandler;
-import controller.UseItemHandler;
+import static org.junit.Assert.*;
 
 /**
  * Scenario tests involving a launchable.

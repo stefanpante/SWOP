@@ -1,16 +1,10 @@
 package game;
 
-import static org.junit.Assert.*;
-
 import item.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import org.junit.*;
 import square.Square;
+
+import static org.junit.Assert.*;
 
 /**
  * Test classes for player.
@@ -211,7 +205,7 @@ public class TestPlayer {
         //Should throw exception cause limit is 6.
     }
 
-    @Test(expected=IllegalStateException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void testAddTeleport(){
         Player p1 = new Player(new Square(),1);
         p1.addItem(new Teleport());

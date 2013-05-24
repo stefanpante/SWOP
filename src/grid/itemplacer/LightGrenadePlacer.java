@@ -4,11 +4,10 @@ import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.LightGrenade;
-
-import java.util.ArrayList;
-
 import square.Square;
 import util.Coordinate;
+
+import java.util.ArrayList;
 
 /**
  * Places all the light grenades on the grid.

@@ -1,18 +1,15 @@
 package game;
 
 import be.kuleuven.cs.som.annotate.Basic;
-
 import effect.Effect;
 import effect.imp.PlayerEffect;
+import item.Item;
 import item.inter.ItemContainer;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
 import notnullcheckweaver.Nullable;
-
 import square.Square;
 import square.multi.LightTrail;
-
-import item.Item;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -221,20 +218,42 @@ public class Player extends Observable implements Movable, ItemContainer {
         }
     }
 
+    /**
+     * Resets the position of the player. This happens if a player
+     * is thrown back because of an effect.
+     *
+     * @param   position
+     *          The position where the player is reset.
+     */
     public void resetPosition(Square position){
         this.currentPosition = position;
         currentPosition.addSquareEffect(getPlayerEffect());
     }
 
-    public void setPosition(Square position) throws IllegalStateException {
+    /**
+     * Set the position of the Player.
+     *
+     * @param   position
+     *          The square on which the player is located.
+     */
+    public void setPosition(Square position) {
         setPreviousPosition(getPosition());
         this.currentPosition = position;
     }
 
+    /**
+     * Set the previous position of the Player
+     * @param position
+     */
     public void setPreviousPosition(Square position){
         this.previousPosition = position;
     }
 
+    /**
+     * Return the previous position of the square.
+     *
+     * @return  The previous position
+     */
     @Override
     public Square getPreviousPosition(){
         return this.previousPosition;
@@ -478,7 +497,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
     @Override
     public boolean hasType(Item item) {
-        return filterItemsByType(item) != null;
+        return filterItemsByType(item).size() > 0;
     }
 
     @Override

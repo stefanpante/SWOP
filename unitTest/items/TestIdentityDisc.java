@@ -1,13 +1,11 @@
 package items;
 
-import static org.junit.Assert.*;
-
 import item.IdentityDisc;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import util.Direction;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit test case for Identity Disc

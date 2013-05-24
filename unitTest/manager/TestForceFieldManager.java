@@ -2,7 +2,6 @@ package manager;
 
 import grid.Grid;
 import grid.GridProvider;
-import org.junit.*;
 import square.Square;
 import square.field.ForceField;
 import util.Coordinate;

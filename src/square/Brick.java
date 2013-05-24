@@ -29,7 +29,9 @@ public class Brick extends GridElement {
     
     /**
      * sets the wall to which is this bricks belongs.
-     * @param wall
+     * @param   wall
+     *          The wall to be added.
+     *
      */
     public void addWall(Wall wall){
     	if(!isValidWall(wall)){

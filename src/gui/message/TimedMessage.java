@@ -1,6 +1,5 @@
 package gui.message;
 
-import gui.message.Message;
 import processing.core.PApplet;
 import processing.core.PVector;
 

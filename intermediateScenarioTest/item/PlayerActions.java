@@ -1,13 +1,11 @@
 package item;
 
-import static org.junit.Assert.*;
-
-import item.LightGrenade;
+import game.Player;
 import org.junit.Before;
 import org.junit.Test;
-
-import game.Player;
 import square.Square;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests the interactions of Player with other classes.

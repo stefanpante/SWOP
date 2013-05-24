@@ -1,28 +1,23 @@
 package game;
 
-import static org.junit.Assert.assertFalse;
-
-
-import static org.junit.Assert.assertTrue;
+import controller.MoveHandler;
+import controller.TurnHandler;
+import controller.UseItemHandler;
+import grid.Grid;
+import grid.RandomGridBuilder;
+import item.LightGrenade;
+import org.junit.Before;
+import org.junit.Test;
+import square.Square;
+import square.multi.LightTrail;
+import square.obstacle.Wall;
+import util.Direction;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import controller.MoveHandler;
-import controller.TurnHandler;
-import controller.UseItemHandler;
-import item.LightGrenade;
-import grid.Grid;
-import grid.RandomGridBuilder;
-
-import org.junit.Before;
-import org.junit.Test;
-
-
-import util.Direction;
-import square.Square;
-import square.multi.LightTrail;
-import square.obstacle.Wall;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Scenario test for the use case "use Square"

@@ -1,21 +1,19 @@
 package manager;
 
-import static org.junit.Assert.*;
-
 import game.Game;
 import grid.Grid;
 import grid.GridProvider;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import util.Direction;
 import square.Square;
 import square.power.Power;
 import square.power.failure.PrimaryPowerFail;
 import square.power.failure.SecondaryPowerFail;
 import square.power.failure.TertiaryPowerFail;
 import util.Coordinate;
+import util.Direction;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests the workings of the PowerGayManager.

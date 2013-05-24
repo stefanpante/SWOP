@@ -1,9 +1,9 @@
 package command.action;
 
-import item.IdentityDisc;
 import game.Game;
-import util.Direction;
+import item.IdentityDisc;
 import square.Square;
+import util.Direction;
 
 /**
  * Created with IntelliJ IDEA.

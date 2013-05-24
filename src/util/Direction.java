@@ -167,7 +167,7 @@ public enum Direction {
      *  At index 0 the direction going counterclockwise (turning left).
      *  At index 1 the direction going clockwise (turning right).
      *
-     * @return
+     * @return  A list of neighbors
      */
 	abstract public ArrayList<Direction> neighborDirections();
 	

@@ -6,10 +6,8 @@ package command.action;
 import game.Game;
 import item.inter.Movable;
 import square.GridElement;
-import util.Direction;
 import square.Square;
-
-import java.util.NoSuchElementException;
+import util.Direction;
 
 /**
  * The Move event handles all the logic for a player to move from one square
@@ -123,7 +121,6 @@ public class MoveCommand extends ActionCommand {
 
 		setCurrentPosition(getStartPosition());
 		int currentRange = 0;
-		Square currentSquare;
 
         try {
 
@@ -143,7 +140,6 @@ public class MoveCommand extends ActionCommand {
                     && getMovable().getRange() > 0);
         } catch (Exception e) {
             e.printStackTrace();
-            return;
         }
 	}
 }

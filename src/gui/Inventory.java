@@ -5,10 +5,11 @@ import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
-import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
+
+import java.util.ArrayList;
 
 
 public class Inventory extends GUIElement{

@@ -1,9 +1,9 @@
 package square.field;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests switching of state of a force field.
