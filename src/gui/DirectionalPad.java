@@ -109,7 +109,10 @@ public class DirectionalPad extends GUIElement{
 				if(button.mouseHit(mouseX, mouseY)){
 					System.out.println("directional button pressed");
 					ObjectronGUI gui2= (ObjectronGUI) gui;
+                    System.out.println("Directional button pressed");
 					gui2.move(button.getDirection());
+
+                    break;
 				}
 			}
 		}

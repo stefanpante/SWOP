@@ -19,7 +19,7 @@ public class PlayerEffect extends Effect {
     @Override
     public void execute(Player player) {
         System.out.println("Executing on Player: " + this);
-        player.setPosition(player.getPreviousPosition(), false);
+        // player.setPosition(player.getPreviousPosition(), false);
     }
 
     @Override
