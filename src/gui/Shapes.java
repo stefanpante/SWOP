@@ -1,18 +1,12 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import item.ChargedIdentityDisc;
-import item.Flag;
-import item.ForceFieldGenerator;
-import item.IdentityDisc;
-import item.Item;
-import item.LightGrenade;
-import item.Teleport;
+import item.*;
 import processing.core.PApplet;
 import processing.core.PShape;
 import util.Direction;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Shapes {
 

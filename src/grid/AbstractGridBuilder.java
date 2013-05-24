@@ -1,19 +1,16 @@
 package grid;
 
-import item.Item;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
-import util.Direction;
+import be.kuleuven.cs.som.annotate.Basic;
 import square.Brick;
 import square.GridElement;
 import square.Square;
 import square.multi.Wall;
 import util.Coordinate;
+import util.Direction;
 
-import be.kuleuven.cs.som.annotate.Basic;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Super class for implementations of grid builder.
@@ -233,7 +230,7 @@ public abstract class AbstractGridBuilder {
 
 	/**
      * Returns the walls.
-     * @return
+     * @return  The walls
      */
 	public ArrayList<Wall> getWalls() {
 		return this.walls;

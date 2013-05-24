@@ -1,6 +1,5 @@
 package item.inter;
 
-import effect.Effect;
 import square.Square;
 
 public interface Movable {
@@ -10,7 +9,8 @@ public interface Movable {
      *
      * Moving can involve getting affected by the square there is been moved on.
      *
-     * @param square
+     * @param   square
+     *          The square to move to
      * @throws IllegalStateException
      */
 	public void move(Square square) throws IllegalStateException;
@@ -18,7 +18,8 @@ public interface Movable {
 	/**
 	 * Sets the current position of the movable.
      *
-	 * @param square
+	 * @param   square
+     *          The square to set the position of this movable to.
 	 */
 	public void setPosition(Square square);
 
@@ -26,7 +27,8 @@ public interface Movable {
 
 	/**
 	 * Returns the current position of the movable.
-	 * @return
+	 *
+     * @return  The position of this movable.
 	 */
 	public Square getPosition();
 
@@ -34,7 +36,8 @@ public interface Movable {
 
     /**
      * Returns the range of the movable object.
-     * @return
+     *
+     * @return  The range of this Movable.
      */
     public int getRange();
 

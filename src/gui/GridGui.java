@@ -5,20 +5,18 @@ import effect.imp.ForceFieldEffect;
 import effect.imp.PowerFailureEffect;
 import game.Player;
 import gui.button.DirectionalButton;
-
 import item.Flag;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
+import processing.core.PApplet;
+import processing.core.PVector;
+import util.Coordinate;
+import util.Direction;
+import util.OConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import processing.core.PApplet;
-import processing.core.PVector;
-import util.Direction;
-import util.Coordinate;
-import util.OConstants;
 
 public class GridGui extends GUIElement{
 

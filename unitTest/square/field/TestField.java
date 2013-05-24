@@ -1,11 +1,10 @@
 package square.field;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import square.Square;
+
+import static org.junit.Assert.*;
 
 /**
  * Test case for the Field (collection of squares).

@@ -1,9 +1,8 @@
 package gui.message;
 
-import processing.core.PApplet;
-import processing.core.PVector;
 import gui.ObjectronGUI;
 import gui.button.TextButton;
+import processing.core.PVector;
 
 public class YesNoDialog extends Message{
 

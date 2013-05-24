@@ -1,16 +1,15 @@
 package grid;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
 import org.junit.Test;
-
 import square.Brick;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 public class TestFileGridBuilder {
 

@@ -1,14 +1,13 @@
 package utils;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+import util.Coordinate;
+import util.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.junit.Test;
-
-import util.Direction;
-import util.Coordinate;
+import static org.junit.Assert.*;
 
 
 public class TestCoordinate {

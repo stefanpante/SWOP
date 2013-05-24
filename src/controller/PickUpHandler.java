@@ -1,14 +1,11 @@
 package controller;
 
+import command.AbstractGameCommand;
+import command.action.PickUpCommand;
+import game.Game;
 import item.Item;
 
 import java.beans.PropertyChangeListener;
-
-import command.AbstractGameCommand;
-import command.action.PickUpCommand;
-
-
-import game.Game;
 
 /**
  * Handler/Controller for the pick up use case

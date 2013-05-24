@@ -1,13 +1,11 @@
 package controller;
 
+import command.AbstractGameCommand;
+import command.action.UseItemCommand;
+import game.Game;
 import item.Item;
 
 import java.beans.PropertyChangeListener;
-
-import command.AbstractGameCommand;
-import command.action.UseItemCommand;
-
-import game.Game;
 
 /**
  * Handler/Controller for the use case in which 

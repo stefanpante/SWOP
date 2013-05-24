@@ -1,28 +1,22 @@
 package game;
 
-import static org.junit.Assert.*;
-
-
-import java.util.Random;
-
 import controller.MoveHandler;
 import controller.TurnHandler;
+import grid.Grid;
+import grid.GridProvider;
 import item.LightGrenade;
 import item.Teleport;
-
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import util.Direction;
 import square.Square;
 import square.multi.LightTrail;
 import square.obstacle.Wall;
 import square.power.failure.PrimaryPowerFail;
+import util.Direction;
 
-import grid.Grid;
-import grid.GridProvider;
+import java.util.Random;
+
+import static org.junit.Assert.*;
 
 /**
  * Scenario test for the Use Case "Move".

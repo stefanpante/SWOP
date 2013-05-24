@@ -1,9 +1,10 @@
 package util;
 
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import be.kuleuven.cs.som.annotate.*;
 
 /**
  * Coordinate2D represents a point in 2D space, 

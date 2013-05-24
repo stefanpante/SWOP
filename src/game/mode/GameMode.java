@@ -1,13 +1,12 @@
 package game.mode;
 
 
-import java.io.IOException;
-
 import game.Game;
-import game.gamebuilder.GameBuilder;
 import grid.AbstractGridBuilder;
 import grid.FileGridBuilder;
 import grid.RandomGridBuilder;
+
+import java.io.IOException;
 
 /**
  * Implements all the things which are dependent on the game mode.

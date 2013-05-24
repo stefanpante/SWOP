@@ -1,11 +1,6 @@
 package item;
 
 import effect.Effect;
-import effect.imp.EmptyEffect;
-import effect.imp.ForceFieldEffect;
-import effect.imp.ForceFieldStuckEffect;
-import item.inter.Movable;
-import game.Player;
 import square.Square;
 
 import java.util.ArrayList;
@@ -36,8 +31,7 @@ public class ForceFieldGenerator extends Item{
 
     @Override
     public ArrayList<Effect> getEffects() {
-        ArrayList<Effect> effects = new ArrayList<>();
-        return effects;
+        return new ArrayList<>();
     }
 
     public boolean isActive() {

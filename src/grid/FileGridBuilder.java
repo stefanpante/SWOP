@@ -1,17 +1,17 @@
 package grid;
 
+import square.GridElement;
+import square.Square;
+import util.AStar;
+import util.Coordinate;
+import util.Direction;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-
-import util.Direction;
-import square.GridElement;
-import square.Square;
-import util.AStar;
-import util.Coordinate;
 
 /**
  * Constructs a new grid from a file
@@ -35,12 +35,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * Free squares in the grid
 	 */
 	private ArrayList<Coordinate> free_squares;
-	/**
-	 * Squares not part of the grid
-	 */
-	private ArrayList<Coordinate> not_squares;
 
-	/**
+    /**
 	 * Squares which are covered by walls.
 	 */
 	private ArrayList<Coordinate> wall_squares;
@@ -52,7 +48,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 
 	/**
 	 * Construct a new fileGridBuilder with a given parameter
-	 * @param filepath
+     *
+	 * @param   filepath
+     *          The path to the file
 	 */
 	public FileGridBuilder(String filepath) throws IOException{
 		this.file = new File(filepath);
@@ -63,17 +61,13 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	}
 
 	protected void setConstraints(){
-		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
-		for(Coordinate coor: startCoordinates)
-			excluded.add(coor);
-		
 		setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
 	}
 
 
 	/**
 	 * Constructs the grid, reads input from file.
-	 * @return a grid built from a file.
+     *
 	 * @throws Exception  when the build process fails.
 	 */
 	@Override
@@ -136,9 +130,12 @@ public class FileGridBuilder extends AbstractGridBuilder{
 
 		this.setHSize(0);
 		this.free_squares = new ArrayList<Coordinate>();
-		this.not_squares = new ArrayList<Coordinate>();
+		/*
+	  Squares not part of the grid
+	 */
+        ArrayList<Coordinate> not_squares = new ArrayList<Coordinate>();
 		this.wall_squares = new ArrayList<Coordinate>();
-		String line = "";
+		String line;
 		while((line = br.readLine()) != null){
 			char[] chars = line.toCharArray();
 			x = 0;
@@ -146,7 +143,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 				switch(c){
 				case  ' ':  	free_squares.add(new Coordinate(x,y));
 				break;
-				case  '*':	 	not_squares.add(new Coordinate(x,y));
+				case  '*':	 	not_squares.add(new Coordinate(x, y));
 				break;
 				case  '#':		wall_squares.add(new Coordinate(x,y));
 				break;

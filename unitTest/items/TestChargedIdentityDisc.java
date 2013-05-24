@@ -1,10 +1,10 @@
 package items;
 
-import static org.junit.Assert.*;
 import item.ChargedIdentityDisc;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit test case for Charged Identity Disc

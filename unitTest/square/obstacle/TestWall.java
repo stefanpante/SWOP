@@ -1,15 +1,11 @@
 package square.obstacle;
 
+import java.util.ArrayList;
+import org.junit.*;
+import square.Brick;
+import square.multi.Wall;
 import static org.junit.Assert.*;
 
-
-import java.util.ArrayList;
-
-import org.junit.*;
-
-import square.Brick;
-import square.Square;
-import square.multi.Wall;
 
 public class TestWall {
 	

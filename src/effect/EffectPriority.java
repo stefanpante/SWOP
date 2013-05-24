@@ -35,5 +35,5 @@ public enum EffectPriority {
     /**
      * Lowest priority allowing to prevent a player from leaving
      */
-    MoveDeparture;
+    MoveDeparture
 }

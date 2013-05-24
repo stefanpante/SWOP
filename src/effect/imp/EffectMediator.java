@@ -2,7 +2,7 @@ package effect.imp;
 
 import effect.Effect;
 import effect.EffectPriority;
-import effect.filter.*;
+import effect.filter.PriorityCriteria;
 
 import java.util.ArrayList;
 

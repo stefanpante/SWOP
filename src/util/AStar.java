@@ -1,14 +1,13 @@
 package util;
 
 import grid.Grid;
+import square.GridElement;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
-
-import square.GridElement;
 
 public class AStar {
 	

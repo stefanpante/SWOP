@@ -4,12 +4,11 @@ import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Teleport;
-
-import java.util.ArrayList;
-
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
+
+import java.util.ArrayList;
 
 public class TeleportPlacer extends ItemPlacer {
 

@@ -1,25 +1,16 @@
 package game;
 
-import static org.junit.Assert.assertEquals;
-
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import effect.imp.PowerFailureEffect;
-import game.mode.RaceGameMode;
-import grid.GridProvider;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
-import controller.TurnHandler;
-
+import effect.imp.PowerFailureEffect;
+import game.mode.RaceGameMode;
 import org.junit.Before;
 import org.junit.Test;
-
-import util.Direction;
 import square.GridElement;
 import square.Square;
+import util.Direction;
+
+import static org.junit.Assert.*;
 
 /**
  * Scenario test for the use case "End Turn"

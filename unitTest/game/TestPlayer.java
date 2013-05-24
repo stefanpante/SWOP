@@ -1,16 +1,10 @@
 package game;
 
-import static org.junit.Assert.*;
-
 import item.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import org.junit.*;
 import square.Square;
+
+import static org.junit.Assert.*;
 
 /**
  * Test classes for player.

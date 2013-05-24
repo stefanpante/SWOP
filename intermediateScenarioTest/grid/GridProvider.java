@@ -1,8 +1,8 @@
 package grid;
 
-import java.util.ArrayList;
-
 import util.Coordinate;
+
+import java.util.ArrayList;
 
 public class GridProvider {
 	

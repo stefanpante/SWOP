@@ -1,12 +1,13 @@
 package controller;
 
-import java.beans.PropertyChangeListener;
 import command.AbstractGameCommand;
 import command.action.PlayerMoveCommand;
-import util.Direction;
-import square.Square;
 import game.Game;
 import game.Player;
+import square.Square;
+import util.Direction;
+
+import java.beans.PropertyChangeListener;
 
 /**
  * Controller/Handler which controls the player move use case

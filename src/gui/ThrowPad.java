@@ -1,8 +1,7 @@
 package gui;
 
-import item.IdentityDisc;
-
 import gui.button.DirectionalButton;
+import item.IdentityDisc;
 import processing.core.PApplet;
 import processing.core.PShape;
 import processing.core.PVector;
