@@ -127,18 +127,34 @@ public class IdentityDisc extends Item implements Movable {
 		return super.toString() + "IdentityDisc";
 	}
 
+    public void setPreviousPosition(Square position){
+        this.previousPosition = position;
+    }
+
 	@Override
 	public void move(Square square) throws IllegalStateException {
         if(!currentPosition.getNeighbors().containsValue(square))
             throw new IllegalStateException("Cannot move to non neighboring square");
+        setPosition(square);
+        try{
+            currentPosition.addItem(this);
+            this.currentPosition.affect(this);
+            System.out.println("UIT:" + square);
+        }catch (Exception e){
+            throw e;
+        }
 	}
 
     @Override
     public void setPosition(Square square) {
-    }
+            setPreviousPosition(getPosition());
+            this.currentPosition = square;
+     }
 
     @Override
     public void resetPosition(Square square) {
+        this.currentPosition = square;
+//        currentPosition.addSquareEffect(getPlayerEffect());
     }
 
 

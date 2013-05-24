@@ -8,11 +8,15 @@ import java.io.IOException;
 public class CTFGameMode extends GameMode{
 
 	public static int MIN_PLAYERS = 2;
-	private static int MAX_PLAYERS = 9;
+	public static int MAX_PLAYERS = 9;
 	
 	public CTFGameMode(int hSize, int vSize) {
 		super(hSize, vSize);
-	}
+        this.winMap = new HashMap<>();
+        for(Player p : getGame().getPlayers()){
+            winMap.put(p,new HashSet<Flag>());
+        }
+    }
 	
 	public CTFGameMode(String filepath) throws IOException{
 		super(filepath);
@@ -40,7 +44,15 @@ public class CTFGameMode extends GameMode{
 	public boolean checkWin() {
 		if(getGame() == null)
 			throw new IllegalStateException("The game needs to be set before wins can be checked");
-		return false;
+        Player currPlayer = getGame().getCurrentPlayer();
+        if(currPlayer.getStartPosition().equals(currPlayer.getPosition())){
+            if(currPlayer.hasType(new Flag())){
+                Flag flag = (Flag)currPlayer.filterItemsByType(new Flag()).get(0);
+                winMap.get(currPlayer).add(flag);
+                flag.setContainer(flag.getPlayer().getStartPosition());
+            }
+        }
+		return winMap.get(currPlayer).size() == getGame().getPlayers().size()-1;
 	}
 
 	@Override

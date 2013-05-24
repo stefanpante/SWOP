@@ -113,7 +113,7 @@ public class Grid {
 	 * 			False	otherwise
 	 * 			| size >= Grid.MIN_HSIZE
 	 */
-    boolean isValidHSize(int size){
+	public boolean isValidHSize(int size){
 		return size >= 0;
 	} 
 	
@@ -127,7 +127,7 @@ public class Grid {
 	 * 			False	otherwise.
 	 * 			| size >= Grid.MIN_VSIZE
 	 */
-    boolean isValidVSize(int size){
+	public boolean isValidVSize(int size){
 		return size >= 0;
 	}
 	
@@ -254,7 +254,7 @@ public class Grid {
 	 * 			False	otherwise.
 	 */
 	@Basic @Raw
-    boolean contains(Coordinate coordinate){
+	public boolean contains(Coordinate coordinate){
 		return grid.containsKey(coordinate);
 	}
 	
@@ -283,8 +283,9 @@ public class Grid {
 	 * Checks if the given square is a valid start position for the player
 	 * @param player   The square which needs to be checked
 	 */
-    boolean isValidStartPosition(GridElement player){
-		return (grid.containsValue(player) && !player.isObstacle());
+	public boolean isValidStartPosition(GridElement player){
+        return true;
+//		return (grid.containsValue(player) && !player.isObstacle());
 	}
 
 	
