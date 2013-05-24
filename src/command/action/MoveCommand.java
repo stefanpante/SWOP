@@ -128,7 +128,7 @@ public class MoveCommand extends ActionCommand {
         try {
 
             do{
-                GridElement gridElement = getGame().getGrid().getNeighbor(getCurrentPosition(), direction);
+            	GridElement gridElement = getCurrentPosition().getNeighbor(direction);
                 if(!gridElement.isObstacle() && gridElement.isSameType(new Square())){
                     currentRange++;
                     Square square = (Square) gridElement;

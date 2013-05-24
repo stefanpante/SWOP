@@ -7,6 +7,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import effect.imp.PowerFailureEffect;
+import game.mode.RaceGameMode;
 import grid.GridProvider;
 import controller.EndTurnHandler;
 import controller.MoveHandler;
@@ -16,8 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import util.Direction;
+import square.GridElement;
 import square.Square;
-import square.power.failure.PrimaryPowerFail;
 
 /**
  * Scenario test for the use case "End Turn"
@@ -27,17 +29,13 @@ import square.power.failure.PrimaryPowerFail;
 public class EndTurnHandlerTest {
 	
 	private Game game;
-	
-	private TurnHandler turnHandler;
-	
 	private EndTurnHandler endTurnHandler;
 	
 	@Before
-	public void setUpBefore() {
-		game = new Game(GridProvider.getEmptyGrid());
-		
+	public void setUpBefore(){
+		game = new Game(new RaceGameMode(10,10),2);
+		game.setGrid(new Grid(10,10));
 		endTurnHandler = new EndTurnHandler(game, null);
-		turnHandler = new TurnHandler(game, null);
 	}
 	
 	/**
@@ -58,7 +56,6 @@ public class EndTurnHandlerTest {
 	 */
 	@Test 
 	public void hasMoveTest() throws Exception{	
-		game.getPowerGayManager().clearPowerFailures();
 		
 		assertFalse(endTurnHandler.hasMoved());
 		
@@ -79,13 +76,13 @@ public class EndTurnHandlerTest {
 	 */
 	private Direction getValidMoveDirection(Game game) {
 		Direction direction = null;
-		Square currentPosition = game.getCurrentPlayer().getPosition();
-		Square next = null;
+		GridElement currentPosition = game.getCurrentPlayer().getPosition();
+		GridElement next = null;
 		
-		while(next == null || next.isObstructed()){
+		while(next == null || next.isObstacle()){
 			try {
 				direction = Direction.getRandomDirection();
-				next = game.getGrid().getNeighbor(currentPosition, direction);
+				next = currentPosition.getNeighbor(direction);
 			} catch (Exception e) {
 
 			}
@@ -148,13 +145,12 @@ public class EndTurnHandlerTest {
 		// 1) First Player: move, let position power fail and end Turn.
 		
 		Direction direction = getValidMoveDirection(game);
-		Square square = game.getGrid().getNeighbor(player.getPosition(), direction);
+		Square square = (Square) player.getPosition().getNeighbor(direction);
 		
 		MoveHandler moveHandler = new MoveHandler(game, null);
 		moveHandler.move(direction);
 		
-		square.setPower(new PrimaryPowerFail());
-		assertTrue(square.getPower().isFailing());
+		square.addEffect(new PowerFailureEffect());
 		
 		endTurnHandler.confirm(true);
 		endTurnHandler.endTurn();
@@ -163,7 +159,7 @@ public class EndTurnHandlerTest {
 		assertEquals(game.getCurrentPlayer(), otherPlayer);
 		
 		direction = getValidMoveDirection(game);
-		square = game.getGrid().getNeighbor(otherPlayer.getPosition(), direction);
+		square = (Square) otherPlayer.getPosition().getNeighbor(direction);
 		
 		moveHandler.move(direction);
 		
@@ -173,9 +169,6 @@ public class EndTurnHandlerTest {
 			endTurnHandler.endTurn();
 		}
 		
-		// Test: Check if the first player is on a power failed square and starts with 1 less action.
-		assertTrue(player.getPosition().getPower().isFailing());
-		assertTrue(game.getCurrentPlayer().getPosition().getPower().isFailing());
 		
 		assertEquals(game.getCurrentPlayer(), player);
 		assertEquals(Player.MAX_ALLOWED_ACTIONS - 1, player.getRemainingActions());

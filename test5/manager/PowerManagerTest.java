@@ -6,9 +6,6 @@ import grid.RandomGridBuilder;
 import org.junit.*;
 import square.Square;
 import square.field.PowerFailure;
-import util.Coordinate;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertFalse;
 
@@ -34,7 +31,7 @@ public class PowerManagerTest {
             pm.update(null, null);
             for(Square square : grid.getAllGridElements()){
                 assertFalse(square.getNeighbors() == null);
-                for(Effect effect : square.getAllEffects()){
+                for(Effect effect : square.getAllSquareEffects()){
                     if(effect instanceof PowerFailure)
                         System.out.println(grid.getCoordinate(square));
                 }

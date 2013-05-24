@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import util.Direction;
 import square.Square;
+import square.multi.Wall;
 import util.Coordinate;
 
 /**
@@ -237,5 +238,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
         }
         
     }
+
+    
 
 }

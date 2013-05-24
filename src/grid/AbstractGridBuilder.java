@@ -176,14 +176,6 @@ public abstract class AbstractGridBuilder {
 		return this.vSize;
 	}
 
-
-	/**
-	 * Returns the walls which have been constructed.
-	 */
-	protected ArrayList<Wall> getWalls() {
-		return this.walls;
-	}
-
 	/**
 	 * Place walls on the given coordinates
 	 *
@@ -191,33 +183,17 @@ public abstract class AbstractGridBuilder {
 	 * 			The coordinates where to place the walls
 	 */
 	protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
-		/*if(!getConstraintWall().satisfiesConstraint(flatten(walls), getGrid()))
-			throw new IllegalArgumentException("The given coordinates do not satisfy the given constraint");*/
+
 		for(ArrayList<Coordinate> sequence : walls){			
 			ArrayList<Brick> bricks = new ArrayList<Brick>();
 			for(Coordinate coor: sequence){
 				Brick brick = new Brick();
 				this.gridElements.put(coor, brick);
+				bricks.add(brick);
 			}
-			//FIXME
-			//this.walls.add(new Wall(bricks));
+			this.walls.add(new Wall(bricks));
 		}
 	}
-
-
-	/**
-	 * Utility method that flattens a two dimensional Arraylist. 
-	 * 
-	 * @return  a flattened version of the list
-	 */
-	private ArrayList<Coordinate> flatten(ArrayList<ArrayList<Coordinate>> list) {
-		ArrayList<Coordinate> result = new ArrayList<Coordinate>();
-		for(ArrayList<Coordinate> L : list){
-			result.addAll(L);
-		}
-		return result;
-	}
-
 
 	/**
 	 * Sets the neighbors of each square.
@@ -255,4 +231,11 @@ public abstract class AbstractGridBuilder {
 	protected abstract void build() throws IllegalStateException;
 
 
+	/**
+     * Returns the walls.
+     * @return
+     */
+	public ArrayList<Wall> getWalls() {
+		return this.walls;
+	}
 }

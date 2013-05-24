@@ -199,7 +199,7 @@ public abstract class Handler {
                 
                 items.put(coordinate, square.getAllItems());
                 squares.add(coordinate);
-                effects.put(coordinate, square.getAllEffects());
+                effects.put(coordinate, square.getAllSquareEffects());
                 boolean player_position;
 
                 if (square.isObstacle()) {

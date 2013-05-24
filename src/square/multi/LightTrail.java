@@ -16,19 +16,16 @@ public class LightTrail extends Field {
 
     private LightTrailEffect lightTrailEffect;
 
-	private LinkedList<Square> trailqueue;
-	
 	/**
 	 * Maximum length of a LightTrail.
 	 */
-	public static final int MAX_LENGTH = 3;
+	public static final int MAX_LENGTH = 3+1;
 	
 	/**
 	 * Initialises a new linkedList for the LightTrail.
 	 */
 	public LightTrail() {
 		super();
-		this.trailqueue  = new LinkedList<Square>();
         this.lightTrailEffect = new LightTrailEffect();
 	}
 	
@@ -49,7 +46,6 @@ public class LightTrail extends Field {
 			this.removeGridElement(getLastSquare());
 		
 		super.addGridElement(square);
-		this.trailqueue.add(square);
         setEffects(square);
 	}
 	
@@ -64,7 +60,6 @@ public class LightTrail extends Field {
 	@Override
 	public void removeGridElement(Square square) throws IllegalArgumentException {
 		super.removeGridElement(square);
-		trailqueue.remove(square);
         removeEffects(square);
 	}
 	
@@ -108,12 +103,12 @@ public class LightTrail extends Field {
 
     @Override
     public void setEffects(Square square) {
-        square.addEffect(lightTrailEffect);
+        square.addSquareEffect(lightTrailEffect);
     }
 
     @Override
     public void removeEffects(Square square) {
-        square.removeEffect(lightTrailEffect);
+        square.removeSquareEffect(lightTrailEffect);
     }
 
 

@@ -15,12 +15,12 @@ import org.junit.Test;
 import square.multi.LightTrail;
 
 import util.Direction;
+import square.GridElement;
 import square.Square;
-import square.obstacle.Wall;
 import util.Coordinate;
 
 /**
- * @author jonas
+ * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  *
  */
 public class TestGrid {
@@ -29,143 +29,13 @@ public class TestGrid {
 		return new Square();
 	}
 	
-	/**
-	 * Test prohibitsPlayer in the corners without walls.
-	 */
-	@Test 
-	public void testCanMoveToCorners1(){
-			AbstractGridBuilder gb = new RandomGridBuilder();
-			Grid grid = gb.getGrid();
-			
-			Square bl = grid.getGridElement(new Coordinate(0,9));
-			Square tr = grid.getGridElement(new Coordinate(9,0));
-			
-			//TEST CORNERS.
-			//	Bottom Left
-			//		Possible
-			assertTrue(grid.canMoveTo(bl,Direction.NORTH));
-			assertTrue(grid.canMoveTo(bl,Direction.NORTHEAST));
-			assertTrue(grid.canMoveTo(bl,Direction.EAST));
-			//		Impossible
-			assertFalse(grid.canMoveTo(bl,Direction.SOUTHEAST));
-			assertFalse(grid.canMoveTo(bl,Direction.SOUTH));
-			assertFalse(grid.canMoveTo(bl,Direction.SOUTHWEST));
-			assertFalse(grid.canMoveTo(bl,Direction.WEST));
-			assertFalse(grid.canMoveTo(bl,Direction.NORTHWEST));
-			//	Top Right
-			//		Impossible
-			assertFalse(grid.canMoveTo(tr, Direction.NORTH));
-			assertFalse(grid.canMoveTo(tr,Direction.NORTHEAST));
-			assertFalse(grid.canMoveTo(tr,Direction.EAST));
-			assertFalse(grid.canMoveTo(tr,Direction.SOUTHEAST));
-			assertFalse(grid.canMoveTo(tr, Direction.NORTHWEST));
-			//		Possible
-			assertTrue(grid.canMoveTo(tr,Direction.SOUTH));
-			assertTrue(grid.canMoveTo(tr,Direction.SOUTHWEST));
-			assertTrue(grid.canMoveTo(tr,Direction.WEST));
-					
-		}
-		
-		/**
-		 * Test the prohibitsPlayer with walls
-		 */
-		@SuppressWarnings("unused")
-		@Test 
-		public void testCanMoveTo2(){
-			AbstractGridBuilder gb = new RandomGridBuilder();
-			Grid grid = gb.getGrid();
-			
-			Square bl = grid.getGridElement(new Coordinate(0,9));
-			Square tr = grid.getGridElement(new Coordinate(9,0));
-			
-			
-			Wall blWall = new Wall(bl.getNeighbor( Direction.EAST),bl.getNeighbor(Direction.NORTHEAST));
-			Wall trWall = new Wall(tr.getNeighbor(Direction.SOUTHWEST), tr.getNeighbor(Direction.SOUTH));
-
-			
-			//TEST CORNERS.
-			//	Bottom Left
-			//		Possible
-			assertTrue(grid.canMoveTo(bl, Direction.NORTH));
-			//		Impossible
-			assertFalse(grid.canMoveTo(bl,Direction.NORTHEAST));
-			assertFalse(grid.canMoveTo(bl,Direction.EAST));
-			assertFalse(grid.canMoveTo(bl,Direction.SOUTHEAST));
-			assertFalse(grid.canMoveTo(bl,Direction.SOUTH));
-			assertFalse(grid.canMoveTo(bl,Direction.SOUTHWEST));
-			assertFalse(grid.canMoveTo(bl,Direction.WEST));
-			assertFalse(grid.canMoveTo(bl,Direction.NORTHWEST));
-			//	Top Right
-			//		Impossible
-			assertFalse(grid.canMoveTo(tr, Direction.NORTH));
-			assertFalse(grid.canMoveTo(tr, Direction.NORTHEAST));
-			assertFalse(grid.canMoveTo(tr, Direction.EAST));
-			assertFalse(grid.canMoveTo(tr, Direction.SOUTHEAST));
-			assertFalse(grid.canMoveTo(tr, Direction.SOUTH));
-			assertFalse(grid.canMoveTo(tr, Direction.SOUTHWEST));
-			//		Possible
-			assertTrue(grid.canMoveTo(tr, Direction.WEST));
-			//		Impossible
-			assertFalse(grid.canMoveTo(tr, Direction.NORTHWEST));	
-			
-		}
-		
-		/**
-		 * Tests prohibitsPlayer with a lightTrail
-		 */
-		@Test
-		public void testCanMoveTo3(){
-			AbstractGridBuilder gb = new RandomGridBuilder();
-			Grid grid = gb.getGrid();
-			
-			Square bl = grid.getGridElement(new Coordinate(0,9));
-			Square tr = grid.getGridElement(new Coordinate(9,0));
-			
-			LightTrail blLightTrail = new LightTrail();
-			try {
-				blLightTrail.addSquare(grid.getNeighbor(bl, Direction.NORTH));
-				blLightTrail.addSquare(grid.getNeighbor(bl, Direction.EAST));
-			} catch (Exception e) {
-			}
-			
-			assertTrue(blLightTrail.contains(grid.getNeighbor(bl, Direction.NORTH)));
-			assertTrue(blLightTrail.contains(grid.getNeighbor(bl, Direction.EAST)));
-			
-			LightTrail trLightTrail = new LightTrail();
-			trLightTrail.addSquare(grid.getNeighbor(tr, Direction.SOUTH));
-			trLightTrail.addSquare(grid.getNeighbor(tr, Direction.WEST));
-
-			//TEST CORNERS.
-			//	Bottem Left
-			//		Impossible
-			assertTrue(grid.getNeighbor(bl,Direction.NORTH).isObstructed());
-			assertTrue(grid.getNeighbor(bl,Direction.EAST).isObstructed());
-
-			assertFalse(grid.canMoveTo(bl, Direction.NORTH));
-			assertFalse(grid.canMoveTo(bl, Direction.NORTHEAST));
-			assertFalse(grid.canMoveTo(bl, Direction.EAST));
-			assertFalse(grid.canMoveTo(bl, Direction.SOUTHEAST));
-			assertFalse(grid.canMoveTo(bl, Direction.SOUTH));
-			assertFalse(grid.canMoveTo(bl, Direction.SOUTHWEST));
-			assertFalse(grid.canMoveTo(bl, Direction.WEST));
-			assertFalse(grid.canMoveTo(bl, Direction.NORTHWEST));
-			//	Top Right
-			assertFalse(grid.canMoveTo(tr, Direction.NORTH));
-			assertFalse(grid.canMoveTo(tr, Direction.NORTHEAST));
-			assertFalse(grid.canMoveTo(tr, Direction.EAST));
-			assertFalse(grid.canMoveTo(tr, Direction.SOUTHEAST));
-			assertFalse(grid.canMoveTo(tr, Direction.SOUTH));
-			assertFalse(grid.canMoveTo(tr, Direction.SOUTHWEST));
-			assertFalse(grid.canMoveTo(tr, Direction.WEST));
-			assertFalse(grid.canMoveTo(tr, Direction.NORTHWEST));		
-			
-		}
+	
 		
 		/**
 		 * Tests using getGridElements() by adding a bunch of squares to the grid.
 		 */
 		@Test
-		public void testGetSquares(){
+		public void testGetGridElements(){
 			AbstractGridBuilder gb = new RandomGridBuilder();
 			Grid grid = gb.getGrid();
 			
@@ -182,7 +52,7 @@ public class TestGrid {
 			coordinates.add(coMin11);
 			coordinates.add(co99);
 			
-			ArrayList<Square> squares = grid.getGridElements(coordinates);
+			ArrayList<GridElement> squares = grid.getGridElements(coordinates);
 			assertTrue(squares.contains(grid.getGridElement(co11)));
 			assertTrue(squares.contains(grid.getGridElement(co01)));
 			assertTrue(squares.contains(grid.getGridElement(co00)));
@@ -190,29 +60,5 @@ public class TestGrid {
 			assertEquals(4,squares.size());
 		}
 		
-		@Test
-		public void testNeighbors(){
-			AbstractGridBuilder gb = new RandomGridBuilder();
-			Grid grid = gb.getGrid();
-			
-			Coordinate coord = new Coordinate(0,0);
-			Square square = grid.getGridElement(coord);
-			
-			HashMap<Direction, Square> neighbors = grid.getNeighbors(square);
-			assertEquals(neighbors.values().size(), 3);
-			
-			Square neighborSquare = grid.getNeighbor(square, Direction.SOUTHEAST);
-			assertTrue(neighbors.containsValue(neighborSquare));
-			assertTrue(grid.hasNeighbor(square, Direction.SOUTHEAST, neighborSquare));
-			
-			coord = new Coordinate(2,2);
-			square = grid.getGridElement(coord);
-			neighbors = grid.getNeighbors(square);
-			assertEquals(neighbors.values().size(), 8);
-			
-			neighborSquare = grid.getNeighbor(square, Direction.SOUTHEAST);
-			assertTrue(neighbors.containsValue(neighborSquare));
-			assertTrue(grid.hasNeighbor(square, Direction.SOUTHEAST, neighborSquare));
-		}
 		
 }
