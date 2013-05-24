@@ -1,5 +1,6 @@
 package command.action;
 
+import game.mode.CTFGameMode;
 import grid.Grid;
 import grid.GridProvider;
 import game.Game;
@@ -34,7 +35,7 @@ public class MoveCommandTest {
     private static ArrayList<Coordinate> lightGrenades;
     private static ArrayList<Coordinate> identityDiscs;
     private static ArrayList<Coordinate> forceFieldGen;
-
+    private Grid grid;
 
         /**
      * SITUATION:
@@ -64,6 +65,10 @@ public class MoveCommandTest {
         wall2.add(new Coordinate(4, 1));
         walls.add(wall2);
 
+        // Set the grid.
+        this.grid = GridProvider.getGrid(10, 10, walls);
+        Game g = new Game(new CTFGameMode(), 2);
+        g.setGrid(grid);
 
         lightGrenades = new ArrayList<Coordinate>();
         lightGrenades.add(new Coordinate(7, 7));
@@ -86,8 +91,6 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, range 3, NORTH
     @Test
     public void testID1(){
-      Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-      Game g = new Game(grid);
       IdentityDisc id = new IdentityDisc();
       Coordinate co0_9 = new Coordinate(0,9);
       Square startSquare = (Square) grid.getGridElement(co0_9);

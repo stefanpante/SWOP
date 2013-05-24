@@ -61,12 +61,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The vertical size of the grid this gridBuilder will build.
 	 * @param	walls
 	 * 			A list of sequences of coordinates where walls should be placed.
-	 * @param	lightGrenades
-	 * 			A list of coordinates that should contain a LightGrenade.
-	 * @param	identityDisks
-	 * 			A list of coordinates that should contain a identityDisk	 
-	 * @param	teleports
-	 * 			A list of coordinates that should contain a teleport.
 	 */
 	protected RandomGridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls){
 		super();
