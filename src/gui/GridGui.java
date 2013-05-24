@@ -393,7 +393,6 @@ public class GridGui extends GUIElement{
 		}
 	}
 	
-	// TODO this needs to be implemented when i know how the effects are named
 	private int getEffectColor(Effect effect){
 		if(effect instanceof ForceFieldEffect){
 			System.out.println("Forcefield color applied");

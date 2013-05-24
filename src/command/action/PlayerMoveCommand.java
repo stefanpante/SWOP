@@ -31,11 +31,6 @@ public class PlayerMoveCommand extends MoveCommand{
     protected void beforeGameCommand() {
         if(getGame().isCurrentPlayerStuck())
             throw new IllegalStateException("The current player is stuck.");
-		/* Check whether it's possible to move in the given direction */
-//        TODO: remove this.
-//        if(!getGame().getGrid().canMoveTo(getStartPosition(), getDirection())){
-//            throw new IllegalStateException("Cannot move to given direction.");
-//        }
     }
 
     /**

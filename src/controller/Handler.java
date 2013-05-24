@@ -23,8 +23,6 @@ import java.util.Iterator;
  * @author Dieter Castel, Jonas Devlieghere and Stefan Pante
  */
 public abstract class Handler {
-
-	// TODO: Implements effect in property changes.
     /**
      * Property constants
      */

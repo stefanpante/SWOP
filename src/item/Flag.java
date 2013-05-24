@@ -29,9 +29,8 @@ public class Flag extends Item {
 		this.player = player;
 	}
 
-
     public Flag() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 

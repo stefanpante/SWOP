@@ -81,7 +81,6 @@ public class CTFGameMode extends GameMode{
 
     @Override
     public int getMinimumAmountOfPlayers() {
-// TODO Auto-generated method stub
         return MIN_PLAYERS;
     }
 

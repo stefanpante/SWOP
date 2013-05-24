@@ -239,7 +239,6 @@ public class Game {
     /**
 	 * Checks if the current player is unable to make a move.
 	 */
-	//FIXME
 	public boolean isCurrentPlayerStuck(){
 		if(!getCurrentPlayer().hasMoved()){
 			return false; 

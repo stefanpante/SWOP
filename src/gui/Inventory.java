@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class Inventory extends GUIElement{
 
-	//TODO: Refactor to accept height and width in constructor.
 	/**
 	 * The items in this inventory representation
 	 */

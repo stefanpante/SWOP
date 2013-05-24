@@ -16,7 +16,6 @@ public class PowerFailureEffect extends Effect {
     private static final int LOST_ACTIONS = 1;
 
     public PowerFailureEffect(){
-        //TODO back to square
         setPriority(EffectPriority.Square);
     }
 
