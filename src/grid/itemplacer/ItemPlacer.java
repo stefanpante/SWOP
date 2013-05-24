@@ -21,13 +21,13 @@ public abstract class ItemPlacer {
 	/**
 	 * The grid on which the items are placed
 	 */
-	private Grid grid;
+	private final Grid grid;
 	
 	/**
 	 * The players. Various constraints are in respect to the players.
 	 */
 	
-	private ArrayList<Player> players;
+	private final ArrayList<Player> players;
 	/**
 	 * The constraint for placing the items;
 	 */
@@ -36,7 +36,7 @@ public abstract class ItemPlacer {
 	/**
 	 * Random used for random locations in the grid.
 	 */
-	private Random random;
+	private final Random random;
 	
 	/**
 	 * Creates a new ItemPlacer
@@ -90,13 +90,13 @@ public abstract class ItemPlacer {
      * @return	An arrayList with coordinates which satisfy the itemConstraint.
      */
     ArrayList<Coordinate> getLocations(){
-        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> coordinates = new ArrayList<>();
         ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
         int max = (int) (getItemConstraint().getPercentage() * getGrid().getAllGridElements().size());
         // Removed excluded squares from candidates
         candidates.removeAll(getItemConstraint().getExcluded());
         // Removed obstructed squares from candidates
-        ArrayList<Coordinate> toBeRemoved = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> toBeRemoved = new ArrayList<>();
         for(Coordinate coordinate : candidates){
             if(getGrid().getGridElement(coordinate).isObstacle())
                 toBeRemoved.add(coordinate);
@@ -132,7 +132,7 @@ public abstract class ItemPlacer {
      * @return A list of coordinates surrounding the starting coordinate
      */
     protected ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
-		ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> coordinates = new ArrayList<>();
         int centerX = start.getX();
         int centerY = start.getY();
         int startX = centerX - size/2;
@@ -170,11 +170,11 @@ public abstract class ItemPlacer {
     }
     
     ArrayList<Player> getPlayers(){
-    	return new ArrayList<Player>(players);
+    	return new ArrayList<>(players);
     }
     
     protected ArrayList<Coordinate> getPlayerCoordinates(){
-    	ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+    	ArrayList<Coordinate> coordinates = new ArrayList<>();
     	for(Player player: players){
     		coordinates.add(getGrid().getCoordinate(player.getStartPosition()));
     	}

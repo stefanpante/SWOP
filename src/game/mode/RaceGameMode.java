@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class RaceGameMode extends GameMode{
 
-	private static int MIN_PLAYERS = 2;
-	private static int MAX_PLAYERS = 2;
+	private static final int MIN_PLAYERS = 2;
+	private static final int MAX_PLAYERS = 2;
 	
 	public RaceGameMode(int hSize, int vSize) {
 		super(hSize, vSize);
@@ -31,7 +31,7 @@ public class RaceGameMode extends GameMode{
 		gameBuilder.placeChargedIdentityDisc();
 		gameBuilder.placeTeleports();
 		
-		getGame().setActivate(true);
+		getGame().setActivate();
 		
 	}
 

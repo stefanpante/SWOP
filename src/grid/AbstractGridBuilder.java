@@ -50,12 +50,12 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * The walls which are placed on the grid.
 	 */
-    private ArrayList<Wall> walls;
+    private final ArrayList<Wall> walls;
 
 	
-	HashMap<Coordinate, GridElement> gridElements;
+	final HashMap<Coordinate, GridElement> gridElements;
 	
-	ArrayList<Square> startPositions;
+	final ArrayList<Square> startPositions;
 	
 
 
@@ -64,9 +64,9 @@ public abstract class AbstractGridBuilder {
 	 * Initializes objects needed by the grid builder.
 	 */
 	public AbstractGridBuilder(){
-		this.walls = new ArrayList<Wall>();
-		this.startPositions = new ArrayList<Square>();
-		this.gridElements = new HashMap<Coordinate, GridElement>();
+		this.walls = new ArrayList<>();
+		this.startPositions = new ArrayList<>();
+		this.gridElements = new HashMap<>();
 	}
 
 	/**
@@ -125,7 +125,7 @@ public abstract class AbstractGridBuilder {
 	 * @param hSize the horizontal size of the grid.
 	 */
     void setHSize(int hSize){
-		if(!isValidHSize(hSize)){
+		if(isNotValidHSize(hSize)){
 			throw new IllegalArgumentException("The specified hSize is not valid");
 		}
 		this.hSize = hSize;
@@ -136,7 +136,7 @@ public abstract class AbstractGridBuilder {
 	 * @param vSize the vertical size of the grid.
 	 */
     void setVSize(int vSize){
-		if(!isValidVSize(vSize)){
+		if(isNotValidVSize(vSize)){
 			throw new IllegalArgumentException("The specified vSize is not valid");
 		}
 
@@ -147,16 +147,16 @@ public abstract class AbstractGridBuilder {
 	 * Checks  whether the vertical size of the grid is valid
 	 * @param vSize2  the vertical size of the grid.
 	 */
-    boolean isValidVSize(int vSize2) {
-		return (vSize2 >= 0);
+    boolean isNotValidVSize(int vSize2) {
+		return (vSize2 < 0);
 	}
 
 	/**
 	 * Checks whether the horizontal size of the grid is valid
 	 * @param hSize the horizontal size of the grid.
 	 */
-    boolean isValidHSize(int hSize){
-		return (hSize >= 0);
+    boolean isNotValidHSize(int hSize){
+		return (hSize < 0);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public abstract class AbstractGridBuilder {
     void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
 
 		for(ArrayList<Coordinate> sequence : walls){			
-			ArrayList<Brick> bricks = new ArrayList<Brick>();
+			ArrayList<Brick> bricks = new ArrayList<>();
 			for(Coordinate coor: sequence){
 				Brick brick = new Brick();
 				this.gridElements.put(coor, brick);
@@ -198,7 +198,7 @@ public abstract class AbstractGridBuilder {
     void setNeighbors(){
 		for(Coordinate coordinate: this.gridElements.keySet()){
 			GridElement element = gridElements.get(coordinate);
-			HashMap<Direction, GridElement> neighbors = new HashMap<Direction,GridElement>();
+			HashMap<Direction, GridElement> neighbors = new HashMap<>();
 			HashMap<Direction, Coordinate> neighborCoordinates = coordinate.getAllNeighbors();
 			for(Direction direction: neighborCoordinates.keySet()){
 				GridElement el = this.gridElements.get(neighborCoordinates.get(direction));

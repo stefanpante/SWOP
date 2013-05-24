@@ -10,10 +10,10 @@ public class TextButton extends GUIButton {
 	/**
 	 * The text on the text button.
 	 */
-	private String text;
+	private final String text;
 	
-	public TextButton(float width, float height, PVector position, String text,  PApplet gui) {
-		super(width, height, position, gui);
+	public TextButton(float width, PVector position, String text, PApplet gui) {
+		super(width, (float) 25, position, gui);
 		this.text = text;
 		this.setColor(OConstants.LIGHTER_GREY.getIntColor());
 		this.setRolloverColor(OConstants.LIGHT_GREY.getIntColor());

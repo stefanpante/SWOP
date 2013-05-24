@@ -168,7 +168,7 @@ public class PowerFailure extends Field {
      *          neighboring directions.
      */
     private Direction getTertiaryDirection(){
-        ArrayList<Direction> possibleDirections = new ArrayList<Direction>();
+        ArrayList<Direction> possibleDirections = new ArrayList<>();
         possibleDirections.add(getDirection());
         possibleDirections.addAll(getDirection().neighborDirections());
         return possibleDirections.get(random.nextInt(3));

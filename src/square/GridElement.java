@@ -34,7 +34,7 @@ public abstract class GridElement {
      * @return  The neighbors of this square.
      */
     public HashMap<Direction, GridElement> getNeighbors(){
-        return new HashMap<Direction, GridElement>(neighbors);
+        return new HashMap<>(neighbors);
     }
 
     /**

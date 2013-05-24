@@ -29,7 +29,7 @@ public class ForceFieldManager extends Manager{
     /**
      * Collection of all force fields.
      */
-    private ArrayList<ForceField> forceFields;
+    private final ArrayList<ForceField> forceFields;
 
     
     /**
@@ -39,7 +39,7 @@ public class ForceFieldManager extends Manager{
      */
     public ForceFieldManager(Grid grid){
         super(grid);
-        this.forceFields = new ArrayList<ForceField>();
+        this.forceFields = new ArrayList<>();
     }
     
     /**
@@ -65,9 +65,7 @@ public class ForceFieldManager extends Manager{
      * 			True	Otherwise
      */
     boolean canHaveAsForceField(ForceField forceField) {
-        if(forceField == null)
-            return false;
-        return !contains(forceField);
+        return forceField != null && !contains(forceField);
     }
     
     /**
@@ -86,7 +84,7 @@ public class ForceFieldManager extends Manager{
      * @return
      */
     protected ArrayList<ForceField> getAllForceFields(){
-        return new ArrayList<ForceField>(this.forceFields);
+        return new ArrayList<>(this.forceFields);
     }
 
     @Override
@@ -104,7 +102,7 @@ public class ForceFieldManager extends Manager{
      * if there should be a new force field between them.
      */
     void detectForceFields(){
-        ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> generatorCoordinates = new ArrayList<>();
         
         for (GridElement gridElement: getGrid().getAllGridElements()) {
 

@@ -34,7 +34,7 @@ public class Brick extends GridElement {
      *
      */
     public void addWall(Wall wall){
-    	if(!isValidWall(wall)){
+    	if(isNotValidWall(wall)){
     		throw new IllegalArgumentException("A null wall cannot be added to the Brick");
     	}
     	
@@ -45,12 +45,8 @@ public class Brick extends GridElement {
      * Returns whether the given wall is valid for this brick.
      * @param wall		the wall to be checked
      */
-    boolean isValidWall(Wall wall){
-    	return wall != null;
-    }
-    
-    private Wall getWall(){
-    	return this.wall;
+    boolean isNotValidWall(Wall wall){
+    	return wall == null;
     }
     
     @Override

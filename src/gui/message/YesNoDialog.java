@@ -7,8 +7,8 @@ import processing.core.PVector;
 public class YesNoDialog extends Message{
 
 	
-	private TextButton yes;
-	private TextButton no;
+	private final TextButton yes;
+	private final TextButton no;
 	
 	public YesNoDialog(float width, float height, PVector position,
 			String message, ObjectronGUI gui) {
@@ -16,11 +16,11 @@ public class YesNoDialog extends Message{
 		float y = position.y + height - 35;
 		float x = position.x + width/2;
 		int color = getLabel().getColor();
-		this.yes = new TextButton(width/5, 25, new PVector(x - 10 - width/5, y), "yes", gui );
+		this.yes = new TextButton(width/5, new PVector(x - 10 - width/5, y), "yes", gui );
 		yes.setColor(color);
 		yes.addActionListener(gui);
 		yes.setActionCommand(ObjectronGUI.CONFIRM);
-		this.no = new TextButton(width/5, 25, new PVector(x + 10, y), "no", gui );
+		this.no = new TextButton(width/5, new PVector(x + 10, y), "no", gui );
 		no.addActionListener(gui);
 		no.setActionCommand(ObjectronGUI.DENY);
 		no.setColor(color);

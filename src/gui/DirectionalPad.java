@@ -10,9 +10,9 @@ import java.util.HashMap;
 
 public class DirectionalPad extends GUIElement{
 
-	private float buttonWidth;
+	private final float buttonWidth;
 
-	private float buttonHeight;
+	private final float buttonHeight;
 	
 	/**
 	 * The buttons which compose this directionalPad
@@ -38,7 +38,7 @@ public class DirectionalPad extends GUIElement{
 	 */
 	private void initButtons() {
 
-		buttons = new HashMap<Direction,DirectionalButton>();
+		buttons = new HashMap<>();
 
 
 

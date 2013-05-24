@@ -29,24 +29,24 @@ public class Inventory extends GUIElement{
 	/**
 	 * The list of buttons (representing the items.
 	 */
-	private ArrayList<ItemButton> buttons;
+	private final ArrayList<ItemButton> buttons;
 	
-	private Label label;
+	private final Label label;
 
 	/**
 	 * Constructs a new Inventory object
-	 * @param items		the items in the inventory
-	 * @param position	the position of this inventory
-	 * @param gui		The PApplet used for drawing.
-	 */
-	public Inventory(float width, float height, ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
-		super(width,height, position,gui);
+     * @param items        the items in the inventory
+     * @param position    the position of this inventory
+     * @param gui        The PApplet used for drawing.
+     */
+	public Inventory(float width, ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
+		super((float) 155, (float) 185, position,gui);
 		this.items = items;
-		this.buttons = new ArrayList<ItemButton>();
+		this.buttons = new ArrayList<>();
 		super.setColor(OConstants.LIGHTER_GREY.getIntColor());
 		this.selectedButton = null;
 		super.setPosition(position);
-		this.label = new Label(width, 25, position, inventoryName, gui);
+		this.label = new Label((float) 155, position, inventoryName, gui);
 		this.initialize();
 	}
 	

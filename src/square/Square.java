@@ -22,16 +22,16 @@ public class Square extends GridElement implements ItemContainer {
     /**
      * The effect mediator of this square.
      */
-    private EffectMediator effectMediator;
+    private final EffectMediator effectMediator;
 	/**
 	 * List of items on this square
 	 */
-	private ArrayList<Item> items;
+	private final ArrayList<Item> items;
 
 	/**
 	 * The effects of this Square.
 	 */
-	private ArrayList<Effect> effects;
+	private final ArrayList<Effect> effects;
 
 	public Square(){
 		this.items = new ArrayList<>();
@@ -60,7 +60,7 @@ public class Square extends GridElement implements ItemContainer {
 	}
 
 	public ArrayList<Effect> getAllSquareEffects(){
-		return new ArrayList<Effect>(this.effects);
+		return new ArrayList<>(this.effects);
 	}
 
     ArrayList<Effect> getAllItemEffects(){
@@ -107,7 +107,7 @@ public class Square extends GridElement implements ItemContainer {
 
 	@Override
 	public ArrayList<Item> getAllItems(){
-		return new ArrayList<Item>(items);
+		return new ArrayList<>(items);
 	}
 
     @Override

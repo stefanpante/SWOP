@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Shapes {
 
-	private PApplet gui;
+	private final PApplet gui;
 
 	public static PShape wall;
 	public static PShape powerFail;
@@ -33,7 +33,7 @@ public class Shapes {
 	public Shapes(PApplet gui) {
 		this.flags = new PShape[9];
 		this.flagsItems = new PShape[9];
-		this.directions = new HashMap<Direction, PShape>();
+		this.directions = new HashMap<>();
 		this.gui = gui;
 		this.initImages();
 	}

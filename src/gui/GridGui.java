@@ -24,34 +24,34 @@ public class GridGui extends GUIElement{
 	/**
 	 * the directionalpad to be drawn onto the grid.
 	 */
-	private DirectionalPad directionalPad;
+	private final DirectionalPad directionalPad;
 
 
 	/**
 	 * The throwpad used to throw an item.
 	 */
-	private ThrowPad throwPad;
+	private final ThrowPad throwPad;
 
 	/**
 	 * The squares to be drawn onto the screen.
 	 */
-	private HashMap<Coordinate, SquareGUI> squares;
-	private HashMap<Coordinate, SquareGUI> items;
-	private HashMap<Coordinate, PVector> positions;
+	private final HashMap<Coordinate, SquareGUI> squares;
+	private final HashMap<Coordinate, SquareGUI> items;
+	private final HashMap<Coordinate, PVector> positions;
 
 	/**
 	 * the walls to be drawn on the screen
 	 */
-	private ArrayList<SquareGUI> walls_squares;
-	private ArrayList<SquareGUI> forcefields;
-	private ArrayList<SquareGUI> powerfails;
-	private ArrayList<SquareGUI> lightTrails_Squares;
-	private ArrayList<SquareGUI> effects;
+	private final ArrayList<SquareGUI> walls_squares;
+	private final ArrayList<SquareGUI> forcefields;
+	private final ArrayList<SquareGUI> powerfails;
+	private final ArrayList<SquareGUI> lightTrails_Squares;
+	private final ArrayList<SquareGUI> effects;
 
 	/**
 	 * The players to be drawn on the screen
 	 */
-	private ArrayList<SquareGUI> players;
+	private final ArrayList<SquareGUI> players;
 
 	/**
 	 * The position of the current player.
@@ -61,14 +61,14 @@ public class GridGui extends GUIElement{
 	/**
 	 * The width of a square
 	 */
-	private float squareWidth;
+	private final float squareWidth;
 
 	/**
 	 * The height of the square.
 	 */
-	private float squareHeight;
+	private final float squareHeight;
 
-	private Label gridLabel;
+	private final Label gridLabel;
 
 	/**
 	 * Constructs a new grid representation for the gui
@@ -83,17 +83,17 @@ public class GridGui extends GUIElement{
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, position, gui);
 
-		this.forcefields = new ArrayList<SquareGUI>();
-		this.powerfails = new ArrayList<SquareGUI>();
-		this.squares = new HashMap<Coordinate, SquareGUI>();
-		this.players = new ArrayList<SquareGUI>();
-		this.items = new HashMap<Coordinate, SquareGUI>();
-		this.effects = new ArrayList<SquareGUI>();
-		this.lightTrails_Squares = new ArrayList<SquareGUI>();
-		this.walls_squares = new ArrayList<SquareGUI>();
+		this.forcefields = new ArrayList<>();
+		this.powerfails = new ArrayList<>();
+		this.squares = new HashMap<>();
+		this.players = new ArrayList<>();
+		this.items = new HashMap<>();
+		this.effects = new ArrayList<>();
+		this.lightTrails_Squares = new ArrayList<>();
+		this.walls_squares = new ArrayList<>();
 		this.currentPlayer = new Coordinate(0,0);
-		this.positions = new HashMap<Coordinate, PVector>();
-		this.gridLabel = new Label(width - OConstants.MARGIN, 25, new PVector(position.x, position.y -30), "The grid", gui);
+		this.positions = new HashMap<>();
+		this.gridLabel = new Label(width - OConstants.MARGIN, new PVector(position.x, position.y -30), "The grid", gui);
 		this.initGrid(hCells, vCells);
 		this.squareWidth = (width - hCells * OConstants.MARGIN) / hCells;
 		this.squareHeight = (height- vCells * OConstants.MARGIN) / vCells;
@@ -139,7 +139,7 @@ public class GridGui extends GUIElement{
 	 * @param includedSquares	the Squares which are part of the grid.
 	 */
 	public void adjustGrid(ArrayList<Coordinate> includedSquares){
-		ArrayList<Coordinate> toRemove = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> toRemove = new ArrayList<>();
 
 		for(Coordinate coordinate: squares.keySet()){
 			if(!includedSquares.contains(coordinate)){

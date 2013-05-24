@@ -11,7 +11,7 @@ public class DirectionalButton extends ShapeButton{
 	/**
 	 * The direction which this button represents
 	 */
-	private Direction direction;
+	private final Direction direction;
 
 
 	public DirectionalButton(float width, float height, Direction direction, PVector position,

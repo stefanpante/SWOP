@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class PriorityCriteria implements Criteria {
 
-    private EffectPriority effectPriority;
+    private final EffectPriority effectPriority;
 
     public PriorityCriteria(EffectPriority priority){
         this.effectPriority = priority;

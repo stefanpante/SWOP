@@ -32,7 +32,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     /**
      * List of items on this square
      */
-    private ArrayList<Item> items;
+    private final ArrayList<Item> items;
 
 	/**
 	 * The start position of this player
@@ -53,7 +53,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	/**
 	 * The player's Light Trail
 	 */
-	private LightTrail lightTrail;
+	private final LightTrail lightTrail;
 	
 	/**
 	 * The number of remaining actions the player has left
@@ -67,7 +67,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	
 	private boolean alive;
 
-    private PlayerEffect playerEffect;
+    private final PlayerEffect playerEffect;
 	
 	/**
 	 * The amount of action a player has during one move
@@ -316,16 +316,15 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * Destroys the items of a player. drops the flag, etc.
 	 */
 	public void kill(){
-		setAlive(false);
+		setAlive();
 	}
 
 	/**
 	 * Sets whether the player is dead or alive.
      *
-	 * @param alive	boolean representing the alive state of the player.
-	 */
-    void setAlive(boolean alive){
-		this.alive = alive;
+     */
+    void setAlive(){
+		this.alive = false;
 	}
 
 

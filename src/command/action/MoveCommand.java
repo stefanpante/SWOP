@@ -21,18 +21,18 @@ public class MoveCommand extends ActionCommand {
 	/**
 	 * The direction moving to.
 	 */
-	private Direction direction;
+	private final Direction direction;
 
 
 	/**
 	 * The movable of this MoveCommand.
 	 */
-	private Movable movable;
+	private final Movable movable;
 
 	/**
 	 * Position the player is moving from.
 	 */
-	private Square startPosition;
+	private final Square startPosition;
 
 	/**
 	 * Position the Movable was on before the currentPosition.
@@ -99,17 +99,17 @@ public class MoveCommand extends ActionCommand {
 	}
 
     @Override
-    protected void beforeGameCommand() throws Exception {
+    protected void beforeGameCommand() {
         //NOOP
     }
 
     @Override
-	protected void duringGameCommand() throws Exception {
+	protected void duringGameCommand() {
 		move();
 	}
 
     @Override
-    protected void afterGameCommand() throws Exception {
+    protected void afterGameCommand() {
         //NOOP
     }
 

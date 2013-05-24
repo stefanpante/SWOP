@@ -11,14 +11,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Dieter
  * Date: 23/05/13
  * Time: 14:37
- * To change this template use File | Settings | File Templates.
  */
 abstract class DropFlagEffect extends Effect {
-    private Square centerSquare;
+    private final Square centerSquare;
 
     /**
      * Creates a new  DropflagEffect with a square around which the flag will be dropped.
@@ -45,7 +43,7 @@ abstract class DropFlagEffect extends Effect {
         if(flag != null){
             player.removeItem(flag);
             Random rnd = new Random();
-            ArrayList<GridElement> neighbors = new ArrayList<GridElement>(getCenterSquare().getNeighbors().values());
+            ArrayList<GridElement> neighbors = new ArrayList<>(getCenterSquare().getNeighbors().values());
             int randomIndex = rnd.nextInt(neighbors.size());
             
             GridElement newLocation;

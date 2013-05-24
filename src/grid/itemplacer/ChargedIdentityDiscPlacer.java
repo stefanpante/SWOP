@@ -22,7 +22,7 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
 	 * The max difference between the shortest path of each player to the Charged
 	 * IdentityDisc.
 	 */
-	private static int MAX_DIFFERENCE_LENGTH = 2;
+	private static final int MAX_DIFFERENCE_LENGTH = 2;
 	
 	/**
 	 * Constructs a new ChargedIdentityDiscPlacer, it should place the ChargedIdentityDisc at 
@@ -49,14 +49,14 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
      * @return A coordinate equally ( + - MAX_DIFFERENCE) far away from each player
      */
       Square getLocation() {
-    	ArrayList<Square> playerSquares = new ArrayList<Square>();
+    	ArrayList<Square> playerSquares = new ArrayList<>();
     	for(Player player: getPlayers())
     		playerSquares.add(player.getStartPosition());
  
     	for(GridElement gridElement : getGrid().getAllGridElements()){
             if(!gridElement.isObstacle()){
                 try{
-                    ArrayList<Integer> lengths = new ArrayList<Integer>();
+                    ArrayList<Integer> lengths = new ArrayList<>();
                     for(Square playerSquare: playerSquares){
                     	AStar astar = new AStar(getGrid());
                     	lengths.add(astar.shortestPath(playerSquare, gridElement).size());

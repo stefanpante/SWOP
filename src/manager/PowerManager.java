@@ -24,7 +24,7 @@ public class PowerManager extends Manager {
     /**
      * The list of Power Failures of this Power Manager
      */
-    private ArrayList<PowerFailure> powerFailures;
+    private final ArrayList<PowerFailure> powerFailures;
 
     /**
      * Random generator for this Power Manager
@@ -39,7 +39,7 @@ public class PowerManager extends Manager {
      */
     public PowerManager(Grid grid){
         super(grid);
-        this.powerFailures = new ArrayList<PowerFailure>();
+        this.powerFailures = new ArrayList<>();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class PowerManager extends Manager {
      * Update all Power Failures and remove those that became inactive.
      */
     private void updatePowerFailures() {
-        ArrayList<PowerFailure> inactivePowerFailures = new ArrayList<PowerFailure>();
+        ArrayList<PowerFailure> inactivePowerFailures = new ArrayList<>();
         for(PowerFailure powerFailure : powerFailures){
             if(powerFailure.isActive()){
                 powerFailure.increaseActions();
