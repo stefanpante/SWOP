@@ -35,7 +35,7 @@ public class FlagPlacer extends ItemPlacer {
 	}
 	
 	@Override
-	protected void placeItem(Square square, Item item) throws IllegalArgumentException {
+    void placeItem(Square square, Item item) throws IllegalArgumentException {
 		if(square == null)
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");

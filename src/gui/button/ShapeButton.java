@@ -11,12 +11,8 @@ public abstract class ShapeButton extends GUIButton {
 	 * The shape of the button.
 	 */
     final PShape shape;
-	/**
-	 * The rollover shape of this button.
-	 */
-    private PShape rolloverShape;
-	
-	/**
+
+    /**
 	 * Constructs a new ShapeButton
 	 * @param width		the width for the button
 	 * @param height	the height for the button
@@ -35,7 +31,10 @@ public abstract class ShapeButton extends GUIButton {
 	 * @param rolloverShape
 	 */
 	public void setRolloverShape(PShape rolloverShape){
-		this.rolloverShape = rolloverShape;
+		/*
+	  The rollover shape of this button.
+	 */
+        PShape rolloverShape1 = rolloverShape;
 	}
 
 	/**

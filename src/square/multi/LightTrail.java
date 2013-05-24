@@ -56,7 +56,7 @@ public class LightTrail extends Field {
 	 * 			If the square is not valid.
 	 */
 	@Override
-	public void removeGridElement(Square square) throws IllegalArgumentException {
+    protected void removeGridElement(Square square) throws IllegalArgumentException {
 		super.removeGridElement(square);
         removeEffects(square);
 	}
@@ -100,12 +100,12 @@ public class LightTrail extends Field {
 	}
 
     @Override
-    public void setEffects(Square square) {
+    protected void setEffects(Square square) {
         square.addSquareEffect(lightTrailEffect);
     }
 
     @Override
-    public void removeEffects(Square square) {
+    protected void removeEffects(Square square) {
         square.removeSquareEffect(lightTrailEffect);
     }
 

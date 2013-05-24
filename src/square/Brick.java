@@ -9,12 +9,7 @@ import square.multi.Wall;
  */
 public class Brick extends GridElement {
 
-	/**
-	 * The wall to which this brick belongs.
-	 */
-	private Wall wall;
-	
-	/**
+    /**
 	 * Constructs a new brick object.
 	 */
 	public Brick(){
@@ -38,7 +33,10 @@ public class Brick extends GridElement {
     		throw new IllegalArgumentException("A null wall cannot be added to the Brick");
     	}
     	
-    	this.wall = wall;
+    	/*
+	  The wall to which this brick belongs.
+	 */
+        Wall wall1 = wall;
     }
     
     /**
