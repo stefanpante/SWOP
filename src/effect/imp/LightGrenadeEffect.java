@@ -25,7 +25,6 @@ public class LightGrenadeEffect extends DropFlagEffect {
 
     @Override
     public void execute(@NotNull Player player) {
-        System.out.println("Executing on Player: " + this);
         dropFlag(player);
     }
 

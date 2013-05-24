@@ -129,7 +129,6 @@ public class MoveCommand extends ActionCommand {
                 if(!gridElement.isObstacle() && gridElement.isSameType(new Square())){
                     currentRange++;
                     Square square = (Square) gridElement;
-                    System.out.println("move called");
                     movable.move(square);
                     //setPrevPosition(getCurrentPosition());
                     //setCurrentPosition(movable.getPosition());

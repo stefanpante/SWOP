@@ -30,10 +30,8 @@ public class EffectMediator {
             EffectPriority effectPriority = EffectPriority.values()[i];
             ArrayList<Effect> result = getSquareEffectsBy(effects, effectPriority);
             if(result.size() > 0){
-                System.out.println("in        in");
                 if(EffectPriority.values()[i] == EffectPriority.TeleportBlocked){
                     nextOneBlocked = true;
-                    System.out.println("NextOneBlocked!");
                 }else{
                     if(!nextOneBlocked){
                         return result;

@@ -395,7 +395,6 @@ public class GridGui extends GUIElement{
 	
 	private int getEffectColor(Effect effect){
 		if(effect instanceof ForceFieldEffect){
-			System.out.println("Forcefield color applied");
 			return OConstants.FORCEFIELD_COLOR.getTransparantIntColor(70);
 		}
 		if(effect instanceof PowerFailureEffect){

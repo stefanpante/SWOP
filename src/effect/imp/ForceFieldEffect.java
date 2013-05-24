@@ -19,9 +19,7 @@ public class ForceFieldEffect extends Effect {
 
     @Override
     public void execute(@NotNull Player player) {
-        System.out.println("Executing on Player: " + this);
         player.resetPosition(player.getPreviousPosition());
-        throw new IllegalArgumentException("You've been thrown back by " + this);
     }
 
     @Override

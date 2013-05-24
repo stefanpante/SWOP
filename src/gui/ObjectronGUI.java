@@ -249,7 +249,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void pick(){
 		FileDialog fd = new FileDialog(this.frame, "Choose your grid", FileDialog.LOAD);
 		fd.setVisible(true);
-		System.out.println(fd.getDirectory() + fd.getFile());
 		setUpGame(fd.getDirectory() + fd.getFile());
 
 	}
@@ -343,7 +342,6 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 			w = (int) (sw * hCells);
 	
 		}
-		System.out.println("Init the new GridGUI");
 		this.grid = new GridGui(new PVector(25,55), this, w, h, hCells, vCells);
 		this.initialized = true;
 		if( h < 550){

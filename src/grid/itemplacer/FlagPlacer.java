@@ -31,7 +31,6 @@ public class FlagPlacer extends ItemPlacer {
 	public void placeItems() {
 		for(Player player: getPlayers()){
 			placeItem(player.getStartPosition(), new Flag(player));
-			System.out.println(player.getStartPosition().hasType(new Flag()));
 		}
 	}
 	

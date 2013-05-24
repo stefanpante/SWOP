@@ -140,7 +140,6 @@ public class IdentityDisc extends Item implements Movable {
         try{
             currentPosition.addItem(this);
             this.currentPosition.affect(this);
-            System.out.println("UIT:" + square);
         }catch (Exception e){
             throw e;
         }

@@ -215,7 +215,6 @@ public class Player extends Observable implements Movable, ItemContainer {
             currentPosition.addSquareEffect(getPlayerEffect());
             this.moved = true;
             decrementActions();
-            System.out.println("UIT:" + position);
         }catch (Exception e){
             throw e;
         }

@@ -57,7 +57,6 @@ public class CTFGameMode extends GameMode{
         if(getGame() == null)
             throw new IllegalStateException("The game needs to be set before wins can be checked");
         Player currPlayer = getGame().getCurrentPlayer();
-        System.out.println("CHECKING WIN");
         if(currPlayer.getStartPosition().equals(currPlayer.getPosition())){
             if(currPlayer.hasType(new Flag())){
                 Flag flag = (Flag)currPlayer.filterItemsByType(new Flag()).get(0);

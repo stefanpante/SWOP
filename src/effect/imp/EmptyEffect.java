@@ -14,7 +14,6 @@ public class EmptyEffect extends Effect {
 
     @Override
     public void execute(Player player) {
-        System.out.println("Executing on Player: " + this);
     }
 
     @Override

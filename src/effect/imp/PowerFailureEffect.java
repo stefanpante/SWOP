@@ -21,7 +21,6 @@ public class PowerFailureEffect extends Effect {
 
     @Override
     public void execute(@NotNull Player player) {
-        System.out.println("Executing on Player: " + this);
         player.loseActions(LOST_ACTIONS);
     }
 
