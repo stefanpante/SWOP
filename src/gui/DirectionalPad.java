@@ -10,14 +10,14 @@ import java.util.HashMap;
 
 public class DirectionalPad extends GUIElement{
 
-	float buttonWidth;
+	private float buttonWidth;
 
 	private float buttonHeight;
 	
 	/**
 	 * The buttons which compose this directionalPad
 	 */
-	protected HashMap<Direction,DirectionalButton> buttons;
+    HashMap<Direction,DirectionalButton> buttons;
 
 	/**
 	 * Constructs a new DirectionalPad.

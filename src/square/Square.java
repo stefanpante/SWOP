@@ -63,7 +63,7 @@ public class Square extends GridElement implements ItemContainer {
 		return new ArrayList<Effect>(this.effects);
 	}
 
-    public ArrayList<Effect> getAllItemEffects(){
+    ArrayList<Effect> getAllItemEffects(){
         ArrayList<Effect> result = new ArrayList<>();
         for(Item i : getAllItems()){
             result.addAll(i.getEffects());

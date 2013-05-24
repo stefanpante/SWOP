@@ -25,12 +25,12 @@ public abstract class GUIButton extends GUIElement {
 	/**
 	 * The color of the button when the mouse hovered.
 	 */
-	protected int rolloverColor;
+    int rolloverColor;
 	
 	/**
 	 *  Whether or not the button is visible.
 	 */
-	protected boolean visible;
+    boolean visible;
 	
 	/**
 	 * constructs a new button, the position is set to (0,0)
@@ -38,7 +38,7 @@ public abstract class GUIButton extends GUIElement {
 	 * @param height	the height for the button;
 	 * @param gui		the PApplet to draw the button.
 	 */
-	public GUIButton(float width, float height, PApplet gui) {
+    private GUIButton(float width, float height, PApplet gui) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, new PVector(), gui);
 		super.setColor(OConstants.LIGHT_GREY.getIntColor());
@@ -54,7 +54,7 @@ public abstract class GUIButton extends GUIElement {
 	 * @param position	the position for the button.
 	 * @param gui		the PApplet for the button.
 	 */
-	public GUIButton(float width, float height, PVector position,PApplet gui) {
+    GUIButton(float width, float height, PVector position, PApplet gui) {
 		this(width, height, gui);
 		super.setPosition(position);
 	}
@@ -71,7 +71,7 @@ public abstract class GUIButton extends GUIElement {
 	 * Sets the rollover color for the button.
 	 * @param color   the rollover color
 	 */
-	public void setRolloverColor(int color){
+    void setRolloverColor(int color){
 		this.rolloverColor = color;
 		
 	}

@@ -60,7 +60,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		build();
 	}
 
-	protected void setConstraints(){
+	void setConstraints(){
 		setConstraintWall(new GridConstraint(1, new ArrayList<Coordinate>()));
 	}
 
@@ -165,7 +165,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		}
 	}
 	
-	public void addStartCoordinate(Coordinate coor){
+	void addStartCoordinate(Coordinate coor){
 		this.startCoordinates.add(coor);
 	}
 	
@@ -250,7 +250,7 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		return sequence;
 	}
 
-	public void checkConsistency() throws IllegalStateException {
+	void checkConsistency() throws IllegalStateException {
 		// Check whether there are no islands
 		for(GridElement el1: getGrid().getAllGridElements()){
 			for(GridElement el2: getGrid().getAllGridElements()){

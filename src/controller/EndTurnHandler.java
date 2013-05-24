@@ -13,7 +13,7 @@ import java.beans.PropertyChangeListener;
  */
 public class EndTurnHandler extends Handler {
 	
-	boolean confirmed = false;
+	private boolean confirmed = false;
 	
 	/**
 	 *  Creates a new EndTurnhandler with a given game and listener.
@@ -27,14 +27,14 @@ public class EndTurnHandler extends Handler {
 	/**
 	 * resets the confirm ( used because the player needs to confirm he wants to end his turn
 	 */
-	public void resetConfirm(){
+    void resetConfirm(){
 		confirmed = false;
 	}
 	
 	/**
 	 * Returns whether the player has confirmed.
 	 */
-	public boolean isConfirmed(){
+    boolean isConfirmed(){
 		return confirmed;
 	}
 	

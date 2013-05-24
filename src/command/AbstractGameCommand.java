@@ -21,7 +21,7 @@ public abstract class AbstractGameCommand implements Command {
      * @param   game
      *          The game of this command
      */
-	public AbstractGameCommand(Game game){
+    protected AbstractGameCommand(Game game){
 		setGame(game);
 	}
 
@@ -40,7 +40,7 @@ public abstract class AbstractGameCommand implements Command {
      *
      * @return  The game
      */
-	public Game getGame(){
+    protected Game getGame(){
 		return this.game;
 	}
 	

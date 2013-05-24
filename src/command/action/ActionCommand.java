@@ -16,7 +16,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
      *
      * @param game the game on which the ActionCommand uses.
      */
-    public ActionCommand(Game game) {
+    ActionCommand(Game game) {
         super(game);
     }
 

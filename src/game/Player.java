@@ -32,7 +32,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     /**
      * List of items on this square
      */
-    ArrayList<Item> items;
+    private ArrayList<Item> items;
 
 	/**
 	 * The start position of this player
@@ -120,7 +120,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @return	True	If square is not null and not obstructed.
 	 * 			False	If square is null or obstructed.
 	 */
-	public static boolean isValidPosition(Square newPosition) {
+	private static boolean isValidPosition(Square newPosition) {
         return newPosition != null;
     }
 
@@ -140,7 +140,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * Checks whether a given number of actions is a valid number of actions to lose.
 	 * @return 		true if the number is larger than or equal to zero.
 	 */
-	public boolean isValidActionsLost(int actions){
+    boolean isValidActionsLost(int actions){
 		return (actions >= 0);
 	}
 
@@ -149,7 +149,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @param turns
 	 * @return		true if the number is larger than or equal to zero.
 	 */
-	public boolean isValidTurnsLost(int turns){
+    boolean isValidTurnsLost(int turns){
 		return (turns >= 0);
 	}
 
@@ -245,7 +245,7 @@ public class Player extends Observable implements Movable, ItemContainer {
      * Set the previous position of the Player
      * @param position
      */
-    public void setPreviousPosition(Square position){
+    void setPreviousPosition(Square position){
         this.previousPosition = position;
     }
 
@@ -324,7 +324,7 @@ public class Player extends Observable implements Movable, ItemContainer {
      *
 	 * @param alive	boolean representing the alive state of the player.
 	 */
-	public void setAlive(boolean alive){
+    void setAlive(boolean alive){
 		this.alive = alive;
 	}
 
@@ -438,7 +438,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @throws IllegalArgumentException
 	 * 			thrown when the given remainingactions is not valid.
 	 */
-	public void setRemainingActions(int remainingActions) throws IllegalArgumentException{
+    void setRemainingActions(int remainingActions) throws IllegalArgumentException{
 		if(!isValidRemainingActions(remainingActions)){
 			throw new IllegalArgumentException("remaining actions is not valid!");
 		}

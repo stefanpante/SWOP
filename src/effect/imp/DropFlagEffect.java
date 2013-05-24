@@ -17,7 +17,7 @@ import java.util.Random;
  * Time: 14:37
  * To change this template use File | Settings | File Templates.
  */
-public abstract class DropFlagEffect extends Effect {
+abstract class DropFlagEffect extends Effect {
     private Square centerSquare;
 
     /**
@@ -26,15 +26,15 @@ public abstract class DropFlagEffect extends Effect {
      * @param   centerSquare
      *          The square of which its neighbors can contain the dropped flag.
      */
-    public DropFlagEffect(Square centerSquare){
+    DropFlagEffect(Square centerSquare){
         this.centerSquare = centerSquare;
     }
 
-    public Square getCenterSquare(){
+    Square getCenterSquare(){
         return centerSquare;
     }
 
-    protected void dropFlag(Player player) {
+    void dropFlag(Player player) {
         Item flag = null;
         for(Item i :  player.getAllItems()){
             if(i.isSameType(new Flag())){

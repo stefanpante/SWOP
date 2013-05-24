@@ -14,7 +14,7 @@ public class Message extends GUIElement {
     /**
      * The label of the message
      */
-    protected Label label;
+    private Label label;
 
     /**
      * The text which is displayed inside the message.
@@ -30,7 +30,7 @@ public class Message extends GUIElement {
      * @param message  The String which is displayed
      * @param gui
      */
-    public Message(float width, float height, PVector position, String message, PApplet gui) {
+    Message(float width, float height, PVector position, String message, PApplet gui) {
         super(width,height, position, gui);
         this.label = new Label(width, 25, position, "Message", gui);
         setText(message);
@@ -68,7 +68,7 @@ public class Message extends GUIElement {
         return this.text;
     }
 
-    public void setText(String text) {
+    void setText(String text) {
         this.text = text;
 
     }

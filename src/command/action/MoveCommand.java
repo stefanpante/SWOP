@@ -51,7 +51,7 @@ public class MoveCommand extends ActionCommand {
      * @param startSquare	the Square on which the move initiates.
      * @param dir			the direction in which the identityDisc moves. 
 	 */
-	public MoveCommand(Game game, Movable movable, Square startSquare, Direction dir) {
+    MoveCommand(Game game, Movable movable, Square startSquare, Direction dir) {
 		super(game);
 		this.direction = dir;
 		this.movable = movable;
@@ -62,7 +62,7 @@ public class MoveCommand extends ActionCommand {
 	/**
 	 * Returns the direction of the move.
 	 */
-	protected Movable getMovable(){
+    Movable getMovable(){
 		return this.movable;
 	}
 
@@ -70,7 +70,7 @@ public class MoveCommand extends ActionCommand {
 	/**
 	 * Returns the direction of the move.
 	 */
-	protected Square getStartPosition(){
+    Square getStartPosition(){
 		return this.startPosition;
 	}
 
@@ -78,7 +78,7 @@ public class MoveCommand extends ActionCommand {
 	/**
 	 * Returns the direction of the move.
 	 */
-	protected Direction getDirection(){
+    Direction getDirection(){
 		return this.direction;
 	}
 
@@ -116,7 +116,7 @@ public class MoveCommand extends ActionCommand {
     /**
 	 * performs the actual move of the movable
 	 */
-	protected void move(){
+    void move(){
         System.out.println("MOVE");
 
 		setCurrentPosition(getStartPosition());

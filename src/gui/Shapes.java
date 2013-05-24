@@ -14,20 +14,20 @@ public class Shapes {
 
 	public static PShape wall;
 	public static PShape powerFail;
-	public static PShape identityDisc;
-	public static PShape chargedIdentityDisc;
-	public static PShape lightgrenade;
+	private static PShape identityDisc;
+	private static PShape chargedIdentityDisc;
+	private static PShape lightgrenade;
 	public static PShape powerFailureItem;
 
-	public static HashMap<Direction, PShape> directions;
+	private static HashMap<Direction, PShape> directions;
 	
-	public static PShape items;
+	private static PShape items;
 	public static PShape teleportItem;
-	public static PShape teleport;
-	public static PShape forcefieldGenerator_on;
-	public static PShape forcefieldGenerator_off;
-	public static PShape[] flags;
-	public static PShape[] flagsItems;
+	private static PShape teleport;
+	private static PShape forcefieldGenerator_on;
+	private static PShape forcefieldGenerator_off;
+	private static PShape[] flags;
+	private static PShape[] flagsItems;
 	
 
 	public Shapes(PApplet gui) {

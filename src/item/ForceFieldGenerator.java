@@ -38,9 +38,6 @@ public class ForceFieldGenerator extends Item{
         return this.active;
     }
 
-    public void activate(){
-        this.active = true;
-    }
 
     @Override
     public String toString() {

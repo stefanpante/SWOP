@@ -20,17 +20,17 @@ public class PowerFailure extends Field {
     /**
      * The lenght of a Power Failure Field
      */
-    public static final int LENGTH = 3;
+    private static final int LENGTH = 3;
 
     /**
      * The duration of this Power Failure in terms of turns
      */
-    public static final int DURATION_TURNS = 3;
+    private static final int DURATION_TURNS = 3;
 
     /**
      * The duration of this Power Failure in therms of actions
      */
-    public static final int DURATION_ACTIONS = Player.MAX_ALLOWED_ACTIONS * DURATION_TURNS;
+    private static final int DURATION_ACTIONS = Player.MAX_ALLOWED_ACTIONS * DURATION_TURNS;
 
 
     private static final int PRIMARY = 0;
@@ -196,7 +196,7 @@ public class PowerFailure extends Field {
     /**
      * Desttry this Power Failure
      */
-    public void destroy(){
+    void destroy(){
         for(Square square: getGridElements()){
             removePowerFailure(square);
         }
@@ -222,12 +222,12 @@ public class PowerFailure extends Field {
                 '}';
     }
 
-    public void setPowerFailure(int i, Square square) {
+    void setPowerFailure(int i, Square square) {
         addGridElement(i, square);
         setEffects(square);
     }
 
-    public void removePowerFailure(Square square) {
+    void removePowerFailure(Square square) {
         removeGridElement(square);
         removeEffects(square);
     }

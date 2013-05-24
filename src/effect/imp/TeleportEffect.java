@@ -12,7 +12,7 @@ import square.Square;
  */
 public class TeleportEffect extends DropFlagEffect {
 
-    Square teleportDestination;
+    private Square teleportDestination;
 
     /**
      * Creates a new  DropflagEffect with a square around which the flag will be dropped.
@@ -25,7 +25,7 @@ public class TeleportEffect extends DropFlagEffect {
         this.teleportDestination = teleportDestination;
     }
 
-    public Square getTeleportDestination() {
+    Square getTeleportDestination() {
         return teleportDestination;
     }
 

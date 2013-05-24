@@ -16,7 +16,7 @@ public class TeleportPlacer extends ItemPlacer {
 	/**
 	 * Percentage of squares with a teleport.
 	 */
-	public static float PERCENTAGE_TELEPORTS = 0.03f;
+	private static float PERCENTAGE_TELEPORTS = 0.03f;
 
 	public TeleportPlacer(Grid grid, ArrayList<Player> players) {
 		super(grid, players);

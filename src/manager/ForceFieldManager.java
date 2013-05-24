@@ -49,7 +49,7 @@ public class ForceFieldManager extends Manager{
      * @throws	IllegalArgumentException
      * 			Throws an exception if the force field is already contained.
      */
-    protected void addForceField(ForceField forceField) throws IllegalArgumentException {
+    void addForceField(ForceField forceField) throws IllegalArgumentException {
         if(!canHaveAsForceField(forceField))
         	throw new IllegalArgumentException("This force field cannot be added.");
         
@@ -64,7 +64,7 @@ public class ForceFieldManager extends Manager{
      * @return	False	If the force field is null or already contained.
      * 			True	Otherwise
      */
-    protected boolean canHaveAsForceField(ForceField forceField) {
+    boolean canHaveAsForceField(ForceField forceField) {
         if(forceField == null)
             return false;
         return !contains(forceField);
@@ -103,7 +103,7 @@ public class ForceFieldManager extends Manager{
      * If there are two generators within eachother's range, we check
      * if there should be a new force field between them.
      */
-    protected void detectForceFields(){   
+    void detectForceFields(){
         ArrayList<Coordinate> generatorCoordinates = new ArrayList<Coordinate>();
         
         for (GridElement gridElement: getGrid().getAllGridElements()) {
@@ -139,7 +139,7 @@ public class ForceFieldManager extends Manager{
      * @param coordinate
      * @param coordinateToCheck
      */
-    protected void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
+    void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {

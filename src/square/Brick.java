@@ -45,11 +45,11 @@ public class Brick extends GridElement {
      * Returns whether the given wall is valid for this brick.
      * @param wall		the wall to be checked
      */
-    public boolean isValidWall(Wall wall){
+    boolean isValidWall(Wall wall){
     	return wall != null;
     }
     
-    public Wall getWall(){
+    private Wall getWall(){
     	return this.wall;
     }
     

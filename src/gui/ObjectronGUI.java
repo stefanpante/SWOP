@@ -33,11 +33,11 @@ import java.util.HashMap;
 public class ObjectronGUI extends PApplet implements PropertyChangeListener, ActionListener, ControlListener{
 
 	/* The actions which are used by the buttons */
-	public static final String PICKUP_ACTION = "pickup";
-	public static final String USEITEM_ACTION = "useitem";
-	public static final String ENDTURN_ACTION = "endTurn";
-	public static final String STARTNEWGAME_ACTION = "startnewgame";
-	public static final String GAMEMODE = "gamemode";
+	private static final String PICKUP_ACTION = "pickup";
+	private static final String USEITEM_ACTION = "useitem";
+	private static final String ENDTURN_ACTION = "endTurn";
+	private static final String STARTNEWGAME_ACTION = "startnewgame";
+	private static final String GAMEMODE = "gamemode";
 	public static final String CONFIRM = "yes";
 	public static final String DENY = "no";
 	

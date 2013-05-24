@@ -13,7 +13,7 @@ public abstract class Effect {
     private EffectPriority effectPriority;
 
 
-    public void setPriority(EffectPriority effectPriority){
+    protected void setPriority(EffectPriority effectPriority){
         this.effectPriority = effectPriority;
     }
 

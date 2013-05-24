@@ -30,7 +30,7 @@ public abstract class Handler {
     public static final String SQUARES_PROPERTY = "squares";
     public static final String PLAYERS_PROPERTY = "Players";
     public static final String EFFECTS_PROPERTY = "Effects";
-    public static final String CURRENT_PLAYER_PROPERTY = "CurrentPlayer";
+    static final String CURRENT_PLAYER_PROPERTY = "CurrentPlayer";
     public static final String CURRENT_POSITION_PROPERTY = "CurrentPosition";
     public static final String SQUARE_INVENTORY_PROPERTY = "SquareInventory";
     public static final String PLAYER_INVENTORY_PROPERTY = "PlayerInventory";
@@ -50,7 +50,7 @@ public abstract class Handler {
     /**
      * Used to signal property changes
      */
-    protected PropertyChangeSupport propertyChangeSupport;
+    private PropertyChangeSupport propertyChangeSupport;
 
     /**
      * constructs a new Handler object.
@@ -85,7 +85,7 @@ public abstract class Handler {
      *
      * @param listener the listener to be added.
      */
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
+    void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
@@ -104,7 +104,7 @@ public abstract class Handler {
      * @param propertyName the name of the property that has been modified.
      * @param newValue     The new value associated with the property.
      */
-    protected void firePropertyChange(String propertyName, Object newValue) {
+    void firePropertyChange(String propertyName, Object newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, new Object(), newValue);
     }
 
@@ -114,7 +114,7 @@ public abstract class Handler {
      *
      * @return ArrayList<Coordinate>	List of all coordinates which contain a player.
      */
-    public HashMap<Player, Coordinate> getPlayerLocations() {
+    HashMap<Player, Coordinate> getPlayerLocations() {
         HashMap<Player, Coordinate> players = new HashMap<Player, Coordinate>();
         for (Player player : getGame().getPlayers()) {
             players.put(player, getGame().getGrid().getCoordinate(player.getPosition()));
@@ -127,7 +127,7 @@ public abstract class Handler {
      *
      * @return ArrayList<item>	List of all items of the current square.
      */
-    public ArrayList<Item> getSquareItems() {
+    ArrayList<Item> getSquareItems() {
         return getGame().getCurrentPlayer().getPosition().getAllItems();
     }
 
@@ -136,7 +136,7 @@ public abstract class Handler {
      *
      * @return ArrayList<item>	List of all items of the current player.
      */
-    public ArrayList<Item> getPlayerItems() {
+    ArrayList<Item> getPlayerItems() {
         return getGame().getCurrentPlayer().getAllItems();
     }
 
@@ -154,7 +154,7 @@ public abstract class Handler {
      *
      * @param game the game which the nadlers use.
      */
-    protected void setGame(Game game) {
+    void setGame(Game game) {
         this.game = game;
     }
 
@@ -179,7 +179,7 @@ public abstract class Handler {
     /**
      * Returns all the game properties needed to fire propertyChanges.
      */
-    protected HashMap<String, Object> getProperties() {
+    HashMap<String, Object> getProperties() {
 
         HashMap<String, Object> properties = new HashMap<String, Object>();
         HashMap<Coordinate, ArrayList<Effect>> effects = new HashMap<Coordinate, ArrayList<Effect>>();
@@ -238,7 +238,7 @@ public abstract class Handler {
      *
      * @return HashMap with coordinates of lightTrails per player List of coordinates which have a LightTrail.
      */
-    public HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
+    HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
         HashMap<Player, LightTrail> map = new HashMap<Player, LightTrail>();
         for (Player player : getGame().getPlayers()) {
             map.put(player, player.getLightTrail());

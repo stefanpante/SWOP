@@ -81,19 +81,10 @@ public class Game {
 		this.grid = grid;		
 	}
 	
-	public boolean isValidGrid(Grid grid){
+	boolean isValidGrid(Grid grid){
 		return grid != null;
 	}
 
-	/**
-	 * Check whether the given player is a valid player for all the objects of Game.
-	 * @param 	player
-	 *			The player to check.
-	 * @return	True
-	 */
-	public static boolean isValidPlayer(Player player) {
-		return player != null;
-	}
 	
 	/**
 	 * Check whether the given currentPlayer is a valid currentPlayer for this Game.

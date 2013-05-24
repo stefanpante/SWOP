@@ -10,11 +10,11 @@ public abstract class ShapeButton extends GUIButton {
 	/**
 	 * The shape of the button.
 	 */
-	protected PShape shape;
+    PShape shape;
 	/**
 	 * The rollover shape of this button.
 	 */
-	protected PShape rolloverShape;
+    private PShape rolloverShape;
 	
 	/**
 	 * Constructs a new ShapeButton
@@ -24,7 +24,7 @@ public abstract class ShapeButton extends GUIButton {
 	 * @param position	the position of the button
 	 * @param gui		the PApplet used to draw.
 	 */
-	public ShapeButton(float width, float height, PShape shape, PVector position, PApplet gui) {
+    ShapeButton(float width, float height, PShape shape, PVector position, PApplet gui) {
 		super(width, height, position, gui);
 		this.shape = shape;
 

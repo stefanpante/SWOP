@@ -26,21 +26,21 @@ public abstract class GameMode {
 	/**
 	 * The gridbuilder used to construct the grid for the game.
 	 */
-	protected AbstractGridBuilder gridBuilder;
+    AbstractGridBuilder gridBuilder;
 	
 	
-	public GameMode(int hSize, int vSize) {
+	GameMode(int hSize, int vSize) {
 		this.gridBuilder = new RandomGridBuilder(hSize, vSize);
 	}
 	
-	public GameMode(String filepath) throws IOException{
+	GameMode(String filepath) throws IOException{
 		this.gridBuilder =  new FileGridBuilder(filepath);
 	}
 	
 	public void setGame(Game game){
 		this.game = game;
 	}
-	protected Game getGame(){
+	Game getGame(){
 		return this.game;
 	}
 	

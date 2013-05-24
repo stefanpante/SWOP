@@ -43,7 +43,7 @@ public class IdentityDisc extends Item implements Movable {
         this(MAX_TRAVEL_DISTANCE);
     }
 
-    public IdentityDisc(int range){
+    private IdentityDisc(int range){
         this.range = range;
         this.active = false;
     }
@@ -64,7 +64,7 @@ public class IdentityDisc extends Item implements Movable {
      * @throws IllegalArgumentException
      * 		   thrown when the range is smaller than zero.
      */
-    public void setRange(int range) throws IllegalArgumentException{
+    void setRange(int range) throws IllegalArgumentException{
         if(!isValidRange(range)){
             throw new IllegalArgumentException("Range should never be negative");
         }
@@ -76,7 +76,7 @@ public class IdentityDisc extends Item implements Movable {
      * Checks whether the range is larger than zero.
      * @param range  the range for the identity disc.
      */
-    public boolean isValidRange(int range){
+    boolean isValidRange(int range){
         return (range >= 0);
     }
 

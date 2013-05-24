@@ -29,7 +29,7 @@ public abstract class GUIElement implements Drawable{
 	/**
 	 * whether or not the GUIElement is visible. standard visibility is true.
 	 */
-	protected boolean visible;
+    boolean visible;
 	
 	/**
 	 * The PApplet used to draw
@@ -41,7 +41,7 @@ public abstract class GUIElement implements Drawable{
 	 */
 	protected PVector position;
 	
-	public GUIElement(float width, float height, PVector position, PApplet gui) {
+	protected GUIElement(float width, float height, PVector position, PApplet gui) {
 		this.height = height;
 		this.width = width;
 		this.position = position;
@@ -112,7 +112,7 @@ public abstract class GUIElement implements Drawable{
 	/**
 	 * Returns the visibility of the button.
 	 */
-	public boolean isVisible(){
+    protected boolean isVisible(){
 		return this.visible;
 	}
 	

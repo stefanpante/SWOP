@@ -41,7 +41,7 @@ public class GridConstraint {
 	 * @param 	percentage
 	 * 			The percentage constraint of this contraint
 	 */
-	public GridConstraint(float percentage){
+    private GridConstraint(float percentage){
 		this(percentage, new ArrayList<Coordinate>(), new ArrayList<ArrayList<Coordinate>>());
 	}
 	
@@ -86,7 +86,7 @@ public class GridConstraint {
 	 * @return	True if and only if the given value is larger or equal to zero
 	 * 			and smaller of equal to 1.
 	 */
-	public static boolean isValidPercentage(float percentage){
+	private static boolean isValidPercentage(float percentage){
 		return percentage >= 0 && percentage <= 1; 
 	}
 	

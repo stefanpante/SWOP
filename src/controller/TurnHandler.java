@@ -51,14 +51,14 @@ public class TurnHandler extends Handler implements Observer {
 	 * 
 	 * @return	True if and only if the player has remaining actions
 	 */
-	public boolean isEndOfTurn(){
+    boolean isEndOfTurn(){
 		return getGame().getCurrentPlayer().getRemainingActions() <= 0;
 	}
 	
 	/**
 	 * End the current turn
 	 */
-	public void endTurn(boolean skip) throws Exception {
+    void endTurn(boolean skip) throws Exception {
         fireChanges();
 		if(!skip && !getGame().getCurrentPlayer().hasMoved()){
 			getGame().end();

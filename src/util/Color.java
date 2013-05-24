@@ -11,15 +11,15 @@ public class Color {
 		setBlue(b);
 	}
 	
-	public void setRed(int r){
+	void setRed(int r){
 		this.r = getValidComponent(r);
 	}
 	
-	public void setGreen(int g){
+	void setGreen(int g){
 		this.g = getValidComponent(g);
 	}
 	
-	public void setBlue(int b){
+	void setBlue(int b){
 		this.b = getValidComponent(b);
 	}
 	

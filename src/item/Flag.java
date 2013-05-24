@@ -82,7 +82,7 @@ public class Flag extends Item {
 	}
 	
 	
-	public void returnToStartPosition(){
+	void returnToStartPosition(){
 		getContainer().removeItem(this);
 		player.getStartPosition().addItem(this);
 	}

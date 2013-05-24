@@ -29,7 +29,7 @@ public class TimedMessage extends Message {
         this.setDuration(duration);
     }
 
-    public void setDuration(int duration) {
+    void setDuration(int duration) {
         this.endFrame = duration * gui.frameRate;
     }
 

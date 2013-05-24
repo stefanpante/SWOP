@@ -9,18 +9,18 @@ import java.util.Observer;
  * Date: 13/05/13
  * Time: 11:10
  */
-public abstract class Manager implements Observer {
+abstract class Manager implements Observer {
 
     /**
      * The grid the power manager is working on.
      */
     private final Grid grid;
 
-    public Manager(Grid grid){
+    Manager(Grid grid){
         this.grid = grid;
     }
 
-    public Grid getGrid(){
+    Grid getGrid(){
         return this.grid;
     }
 }

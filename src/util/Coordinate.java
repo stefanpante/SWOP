@@ -73,7 +73,7 @@ public class Coordinate {
 	 * @param x  the x coordinate
 	 * 		
 	 */
-	public void setX(int x) throws IllegalArgumentException{
+    void setX(int x) throws IllegalArgumentException{
 		if(!isValidX(x)) throw new IllegalArgumentException("The given x("+x+") is not a valid x coordinate.");
 		this.x = x;
 	}
@@ -83,7 +83,7 @@ public class Coordinate {
 	 * 
 	 * @param y
 	 */
-	public void setY(int y) throws IllegalArgumentException{
+    void setY(int y) throws IllegalArgumentException{
 		if(!isValidY(y)) throw new IllegalArgumentException("The given y("+y+") is not a valid y coordinate.");
 		this.y = y;
 	}
@@ -95,7 +95,7 @@ public class Coordinate {
 	 * @return 	Always true since the coordinates have no constraints.
 	 * 			| result == true
 	 */
-	public static boolean isValidX(int x){
+	private static boolean isValidX(int x){
 		return true;
 	}
 
@@ -106,7 +106,7 @@ public class Coordinate {
 	 * @return 	Always true since the coordinates have no constraints.
 	 * 			| result == true
 	 */
-	public static boolean isValidY(int y){
+	private static boolean isValidY(int y){
 		return true;	
 	}
 

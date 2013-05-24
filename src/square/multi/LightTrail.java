@@ -17,7 +17,7 @@ public class LightTrail extends Field {
 	/**
 	 * Maximum length of a LightTrail.
 	 */
-	public static final int MAX_LENGTH = 3;
+	private static final int MAX_LENGTH = 3;
 	
 	/**
 	 * Initialises a new linkedList for the LightTrail.
@@ -67,7 +67,7 @@ public class LightTrail extends Field {
 	 * @return	Square	If the trail is not empty the last one is returned.
 	 * 			Null	If the trail is empty.
 	 */
-	public Square getLastSquare() {
+    Square getLastSquare() {
 		if(getLength() >= 1)
 			return getGridElements().get(0);
 		else
@@ -80,7 +80,7 @@ public class LightTrail extends Field {
 	 * @return	Square	If the trail is not empty the newest one is returned.
 	 * 			Null	If the trail is empty.
 	 */
-	public Square getNewestSquare() {
+    Square getNewestSquare() {
 		if(getLength() >= 1)
 			return getGridElements().get(getLength() - 1);
 		else

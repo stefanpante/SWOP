@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class RaceGameMode extends GameMode{
 
-	public static int MIN_PLAYERS = 2;
-	public static int MAX_PLAYERS = 2;
+	private static int MIN_PLAYERS = 2;
+	private static int MAX_PLAYERS = 2;
 	
 	public RaceGameMode(int hSize, int vSize) {
 		super(hSize, vSize);

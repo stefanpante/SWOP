@@ -24,7 +24,7 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	/**
 	 * Percentage of square covered by identity disks
 	 */
-	public static float PERCENTAGE_IDENTITY_DISKS = 0.02f;
+	private static float PERCENTAGE_IDENTITY_DISKS = 0.02f;
 	
 	/**
 	 * Construct a new IdentityDiscPlacer.
@@ -43,7 +43,7 @@ public class IdentityDiscPlacer extends ItemPlacer {
 		}	
 	}
 	
-	public ArrayList<ArrayList<Coordinate>> getIncluded(){
+	ArrayList<ArrayList<Coordinate>> getIncluded(){
 		ArrayList<ArrayList<Coordinate>> included = new ArrayList<ArrayList<Coordinate>>();
 		for(Coordinate coordinate: getPlayerCoordinates())
 			included.add(getSquaredLocation(coordinate, INCLUDED_RADIUS));

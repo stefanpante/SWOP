@@ -42,7 +42,7 @@ public abstract class Item {
      * Return the container of this item
      * @return  The Item Container
      */
-    protected ItemContainer getContainer(){
+    ItemContainer getContainer(){
         return this.container;
     }
 

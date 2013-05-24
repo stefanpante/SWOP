@@ -20,7 +20,7 @@ public class MultiGridElement<T extends GridElement> {
     /**
      * Create a new MutliGridElement
      */
-    public MultiGridElement(){
+    protected MultiGridElement(){
         gridElements = new ArrayList<T>();
     }
 
@@ -67,7 +67,7 @@ public class MultiGridElement<T extends GridElement> {
      * @throws java.util.NoSuchElementException
      *          If there is no gridElement at the given position
      */
-    public void addGridElement(int i, T gridElement){
+    protected void addGridElement(int i, T gridElement){
         if(!isValidGridElement(gridElement))
             throw new NoSuchElementException("Cannot add gridElement to this MultiObstacle: the gridElement is invalid.");
         gridElements.add(i, gridElement);
@@ -81,7 +81,7 @@ public class MultiGridElement<T extends GridElement> {
      * @throws  NoSuchElementException
      *          If there is no gridElement at the given position
      */
-    public T getGridElement(int i){
+    protected T getGridElement(int i){
         if(i >= gridElements.size())
             throw new NoSuchElementException("There is no gridElement at the given position");
         return gridElements.get(i);
@@ -101,7 +101,7 @@ public class MultiGridElement<T extends GridElement> {
      * @throws 	IllegalArgumentException
      * 			If the gridElement is not
      */
-    public void removeGridElement(T gridElement) throws IllegalArgumentException {
+    protected void removeGridElement(T gridElement) throws IllegalArgumentException {
         if(!getGridElements().contains(gridElement)){
             throw new IllegalArgumentException("A gridElement that is not added can not part of the obstacle cannot be removed.");
         }else{

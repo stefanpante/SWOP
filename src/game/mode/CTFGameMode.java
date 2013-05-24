@@ -8,7 +8,7 @@ import java.io.IOException;
 public class CTFGameMode extends GameMode{
 
 	public static int MIN_PLAYERS = 2;
-	public static int MAX_PLAYERS = 9;
+	private static int MAX_PLAYERS = 9;
 	
 	public CTFGameMode(int hSize, int vSize) {
 		super(hSize, vSize);

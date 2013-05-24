@@ -19,7 +19,7 @@ public class EffectMediator {
     }
 
 
-    public ArrayList<Effect> getResultingEffectsWithPriorityAbove(ArrayList<Effect> effects, EffectPriority priority){
+    ArrayList<Effect> getResultingEffectsWithPriorityAbove(ArrayList<Effect> effects, EffectPriority priority){
 
         int max = priority.ordinal();
 

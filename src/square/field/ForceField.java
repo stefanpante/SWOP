@@ -18,17 +18,17 @@ public class ForceField extends Field {
 	/**
 	 * Maximum length of a Force Field.
 	 */
-	public static final int MAX_LENGTH = 4;
+	private static final int MAX_LENGTH = 4;
 	
 	/**
 	 * Amount of actions the force field is active.
 	 */
-    public static final int ACTIONS_ON = 2;
+    private static final int ACTIONS_ON = 2;
     
     /**
      * Amount of actions the force field is inactive.
      */
-    public static final int ACTIONS_OFF = 2;
+    private static final int ACTIONS_OFF = 2;
     
     /**
      * Current actions remaining.
@@ -63,7 +63,7 @@ public class ForceField extends Field {
      * @param   active
      *          Whether the ForceField should be active
      */
-    public void setActive(boolean active){
+    void setActive(boolean active){
         if(active)
             setAllEffects();
         else

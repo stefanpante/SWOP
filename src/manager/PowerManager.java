@@ -19,7 +19,7 @@ public class PowerManager extends Manager {
     /**
      * The chance a Square has a Power Failure
      */
-    public static final float POWERFAIL_CHANCE = 0.01f;
+    private static final float POWERFAIL_CHANCE = 0.01f;
 
     /**
      * The list of Power Failures of this Power Manager

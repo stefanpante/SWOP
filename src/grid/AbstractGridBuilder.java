@@ -50,12 +50,12 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * The walls which are placed on the grid.
 	 */
-	protected ArrayList<Wall> walls;
+    private ArrayList<Wall> walls;
 
 	
-	protected HashMap<Coordinate, GridElement> gridElements;
+	HashMap<Coordinate, GridElement> gridElements;
 	
-	protected ArrayList<Square> startPositions;
+	ArrayList<Square> startPositions;
 	
 
 
@@ -84,7 +84,7 @@ public abstract class AbstractGridBuilder {
 	 * 
 	 * @param grid the grid to set
 	 */
-	protected void setGrid(Grid grid) {
+    void setGrid(Grid grid) {
 		this.grid = grid;
 	}
 
@@ -92,8 +92,8 @@ public abstract class AbstractGridBuilder {
 	 * Returns the random generator.
 	 * 
 	 * @return the random generator.
-	 */	
-	protected Random getRandom() {
+	 */
+    Random getRandom() {
 		return random;
 	}
 
@@ -102,21 +102,21 @@ public abstract class AbstractGridBuilder {
 	 * 
 	 * @param random the random to set
 	 */
-	protected void setRandom(Random random) {
+    void setRandom(Random random) {
 		this.random = random;
 	}
 
 	/**
 	 * Returns the constraints for the walls
 	 */
-	public GridConstraint getConstraintWall() {
+    GridConstraint getConstraintWall() {
 		return constraintWall;
 	}
 
 	/**
 	 * Returns the constraints for the walls
 	 */
-	public void setConstraintWall(GridConstraint constraintWall) {
+    void setConstraintWall(GridConstraint constraintWall) {
 		this.constraintWall = constraintWall;
 	}
 
@@ -124,7 +124,7 @@ public abstract class AbstractGridBuilder {
 	 * Sets the maximum horizontal size of the grid ( in squares)
 	 * @param hSize the horizontal size of the grid.
 	 */
-	public void setHSize(int hSize){
+    void setHSize(int hSize){
 		if(!isValidHSize(hSize)){
 			throw new IllegalArgumentException("The specified hSize is not valid");
 		}
@@ -135,7 +135,7 @@ public abstract class AbstractGridBuilder {
 	 * sets the maximum vertical size of the grid ( in squares)
 	 * @param vSize the vertical size of the grid.
 	 */
-	public void setVSize(int vSize){
+    void setVSize(int vSize){
 		if(!isValidVSize(vSize)){
 			throw new IllegalArgumentException("The specified vSize is not valid");
 		}
@@ -147,7 +147,7 @@ public abstract class AbstractGridBuilder {
 	 * Checks  whether the vertical size of the grid is valid
 	 * @param vSize2  the vertical size of the grid.
 	 */
-	public boolean isValidVSize(int vSize2) {
+    boolean isValidVSize(int vSize2) {
 		return (vSize2 >= 0);
 	}
 
@@ -155,21 +155,21 @@ public abstract class AbstractGridBuilder {
 	 * Checks whether the horizontal size of the grid is valid
 	 * @param hSize the horizontal size of the grid.
 	 */
-	public boolean isValidHSize(int hSize){
+    boolean isValidHSize(int hSize){
 		return (hSize >= 0);
 	}
 
 	/**
 	 * Returns the maximum horizontal size of the grid ( in squares)
 	 */
-	public int getHSize(){
+    int getHSize(){
 		return this.hSize;
 	}
 
 	/**
 	 * returns the maximum vertical size of the grid ( in squares)
 	 */
-	public int getVSize(){
+    int getVSize(){
 		return this.vSize;
 	}
 
@@ -179,7 +179,7 @@ public abstract class AbstractGridBuilder {
 	 * @param 	walls
 	 * 			The coordinates where to place the walls
 	 */
-	protected void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
+    void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
 
 		for(ArrayList<Coordinate> sequence : walls){			
 			ArrayList<Brick> bricks = new ArrayList<Brick>();
@@ -195,7 +195,7 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * Sets the neighbors of each square.
 	 */
-	protected void setNeighbors(){
+    void setNeighbors(){
 		for(Coordinate coordinate: this.gridElements.keySet()){
 			GridElement element = gridElements.get(coordinate);
 			HashMap<Direction, GridElement> neighbors = new HashMap<Direction,GridElement>();
@@ -210,7 +210,7 @@ public abstract class AbstractGridBuilder {
 		}
 	}
 	
-	protected void setStartPositions(){
+	void setStartPositions(){
 		for(Square square: startPositions){
 			getGrid().addStartPosition(square);
 		}

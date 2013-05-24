@@ -15,7 +15,7 @@ import java.util.Random;
 public class RandomGridBuilder extends AbstractGridBuilder{
 	
 	public static int MIN_HSIZE = 10;
-	public static int MIN_VSIZE = 10;
+	private static int MIN_VSIZE = 10;
 	
 	/**
 	 * This creates a flat grid, with dimensions 10x10 and no
@@ -116,7 +116,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * Utility build method used for testing purposes.
 	 * @throws IllegalStateException
 	 */
-	protected void build(ArrayList<ArrayList<Coordinate>> walls)
+    void build(ArrayList<ArrayList<Coordinate>> walls)
 	throws IllegalStateException{
 		setSquares();
 		placeWalls(walls);
@@ -208,7 +208,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The constraint which is taken into account.
 	 * @return	A list of sequences of coordinates.
 	 */
-	protected ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint) {
+    ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint) {
 		ArrayList<Coordinate> candidates = new ArrayList<Coordinate>(gridElements.keySet());
 		ArrayList<ArrayList<Coordinate>> result = new ArrayList<ArrayList<Coordinate>>();
 		

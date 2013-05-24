@@ -14,13 +14,13 @@ public abstract class Field extends MultiGridElement<Square> {
             setEffects(square);
     }
 
-    public void removeAllEffects(){
+    void removeAllEffects(){
         for(Square square : getGridElements())
             removeEffects(square);
     }
 
-    public abstract void setEffects(Square square);
+    protected abstract void setEffects(Square square);
 
-    public abstract void removeEffects(Square square);
+    protected abstract void removeEffects(Square square);
 
 }

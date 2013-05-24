@@ -42,7 +42,7 @@ public abstract class ItemPlacer {
 	 * Creates a new ItemPlacer
 	 * @param grid	the grid on which the items should be placed.
 	 */
-	public ItemPlacer(Grid grid, ArrayList<Player> players){
+    ItemPlacer(Grid grid, ArrayList<Player> players){
 		this.grid = grid;
 		this.players = players;
 		this.random = new Random();
@@ -52,7 +52,7 @@ public abstract class ItemPlacer {
 	 * Sets the constraint for the placement of the items.
 	 * @param itemConstraint	the constraint for the item
 	 */
-	public void setItemConstraint(GridConstraint itemConstraint){
+    void setItemConstraint(GridConstraint itemConstraint){
 		this.itemConstraint = itemConstraint;
 	}
 	
@@ -60,7 +60,7 @@ public abstract class ItemPlacer {
 	 * returns the constraint for the item placement.
 	 * @return
 	 */
-	public GridConstraint getItemConstraint(){
+    GridConstraint getItemConstraint(){
 		return this.itemConstraint;
 	}
 	
@@ -72,7 +72,7 @@ public abstract class ItemPlacer {
 	 * @param 	item
 	 * 			The item to be placed on the given coordinate
 	 */
-	protected void placeItem(Square square, Item item) throws IllegalArgumentException {
+    void placeItem(Square square, Item item) throws IllegalArgumentException {
 		if(square == null || square.isObstacle())
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
@@ -89,7 +89,7 @@ public abstract class ItemPlacer {
      * corresponding to Squares on the grid.
      * @return	An arrayList with coordinates which satisfy the itemConstraint.
      */
-    public ArrayList<Coordinate> getLocations(){
+    ArrayList<Coordinate> getLocations(){
         ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
         ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
         int max = (int) (getItemConstraint().getPercentage() * getGrid().getAllGridElements().size());
@@ -158,18 +158,18 @@ public abstract class ItemPlacer {
 	 * Returns a random index inside an arrayList
 	 * @param a	the list of which a random index is selected.
 	 */
-    protected int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
+    int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
         return random.nextInt(a.size());
     }
     
     /**
      * Returns the grid.
      */
-    public Grid getGrid(){
+    Grid getGrid(){
     	return this.grid;
     }
     
-    protected ArrayList<Player> getPlayers(){
+    ArrayList<Player> getPlayers(){
     	return new ArrayList<Player>(players);
     }
     

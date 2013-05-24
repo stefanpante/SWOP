@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public class LightGrenadePlacer extends ItemPlacer{
 
-	public static int INCLUDED_RADIUS = 5;
+	private static int INCLUDED_RADIUS = 5;
 	/**
 	 * Percentage of square covered by grenades
 	 */
-	public static float PERCENTAGE_GRENADES = 0.05f;
+	private static float PERCENTAGE_GRENADES = 0.05f;
 	/**
 	 * Constructs a new LightGrenadePlacer, places the items on the given grid.
 	 * @param grid		The grid on which the items should be placed.
@@ -42,7 +42,7 @@ public class LightGrenadePlacer extends ItemPlacer{
 		}
 	}
 	
-	public ArrayList<ArrayList<Coordinate>> getIncluded(){
+	ArrayList<ArrayList<Coordinate>> getIncluded(){
 		ArrayList<ArrayList<Coordinate>> included = new ArrayList<ArrayList<Coordinate>>();
 		for(Coordinate coordinate: getPlayerCoordinates())
 			included.add(getSquaredLocation(coordinate, INCLUDED_RADIUS));
