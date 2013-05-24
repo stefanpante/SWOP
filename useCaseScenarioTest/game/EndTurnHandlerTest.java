@@ -25,7 +25,6 @@ public class EndTurnHandlerTest {
 	@Before
 	public void setUpBefore(){
 		game = new Game(new RaceGameMode(10,10),2);
-		game.setGrid(new Grid(10,10));
 		endTurnHandler = new EndTurnHandler(game, null);
 	}
 	
@@ -104,7 +103,7 @@ public class EndTurnHandlerTest {
 		endTurnHandler.confirm(true);
 		endTurnHandler.endTurn();
 		
-		assertEquals(nextPlayer, game.getCurrentPlayer());
+		assertFalse(player == game.getCurrentPlayer());
 	}
 	
 	/**
@@ -141,8 +140,9 @@ public class EndTurnHandlerTest {
 		MoveHandler moveHandler = new MoveHandler(game, null);
 		moveHandler.move(direction);
 		
-		square.addEffect(new PowerFailureEffect());
+		square.addSquareEffect(new PowerFailureEffect());
 		
+		endTurnHandler.endTurn();
 		endTurnHandler.confirm(true);
 		endTurnHandler.endTurn();
 		

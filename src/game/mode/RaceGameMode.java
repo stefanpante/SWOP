@@ -29,6 +29,7 @@ public class RaceGameMode extends GameMode{
 		gameBuilder.placeIdentityDiscs();
 		gameBuilder.placeForceFieldGenerators();
 		gameBuilder.placeChargedIdentityDisc();
+		gameBuilder.placeLightGrenades();
 		gameBuilder.placeTeleports();
 		
 		getGame().setActivate();

@@ -1,6 +1,7 @@
 package game;
 
 import controller.*;
+import game.mode.RaceGameMode;
 import grid.Grid;
 import grid.GridProvider;
 import item.ChargedIdentityDisc;
@@ -8,6 +9,8 @@ import item.IdentityDisc;
 import item.Teleport;
 import org.junit.Before;
 import org.junit.Test;
+
+import effect.Effect;
 import square.Square;
 import square.obstacle.Wall;
 import util.Coordinate;
@@ -39,7 +42,7 @@ public class LaunchableScenarioTest {
 	@Before
 	public void setUpGame(){
 		Grid grid = GridProvider.getEmptyGrid();
-		game = new Game(grid);
+		game = new Game(new RaceGameMode(10,10),2);
 
 		moveHandler = new MoveHandler(game, null);
 		pickUpHandler = new PickUpHandler(game,null);
@@ -55,15 +58,16 @@ public class LaunchableScenarioTest {
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
 
-		Square next = game.getGrid().getNeighbor(currentPlayer.getPosition(), direction);
+		Square next = (Square) currentPlayer.getPosition().getNeighbor(direction);
 		IdentityDisc id = new IdentityDisc();
-		next.getInventory().addItem(id);
+		next.addItem(id);
 
-		// Make sure that there are no powerfailures
-		game.getPowerGayManager().clearPowerFailures();
-
+		
 		// move into the direction that the Identitydisc is situated
 		try {
+			for(Effect effect: next.getAllSquareEffects()){
+				next.removeSquareEffect(effect);
+			}
 			moveHandler.move(direction);
 		} catch (Exception e) {
 			fail("MoveHandler shouldn't throw an exception");
@@ -77,7 +81,7 @@ public class LaunchableScenarioTest {
 			fail("MoveHandler shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(currentPlayer.getInventory().hasItem(id));
+		assertTrue(currentPlayer.hasItem(id));
 
 	}
 
@@ -87,12 +91,14 @@ public class LaunchableScenarioTest {
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
 
-		Square next = game.getGrid().getNeighbor(currentPlayer.getPosition(), direction);
+		Square next = (Square) currentPlayer.getPosition().getNeighbor(direction);
 		ChargedIdentityDisc id = new ChargedIdentityDisc();
-		next.getInventory().addItem(id);
+		next.addItem(id);
 
-		// Make sure that there are no powerfailures
-		game.getPowerGayManager().clearPowerFailures();
+		for(Effect effect: next.getAllSquareEffects()){
+			next.removeSquareEffect(effect);
+		}
+	
 
 		// move into the direction that the Identitydisc is situated
 		try {
@@ -109,7 +115,7 @@ public class LaunchableScenarioTest {
 			fail("PickUpHandler shouldn't throw an exception");
 			e.printStackTrace();
 		}
-		assertTrue(currentPlayer.getInventory().hasItem(id));
+		assertTrue(currentPlayer.hasItem(id));
 
 	}
 	/**
@@ -122,9 +128,11 @@ public class LaunchableScenarioTest {
 
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
 
+		Square next = (Square) currentPlayer.getPosition().getNeighbor(direction);
 		// Make sure that there are no powerfailures and obstacles
-		game.getPowerGayManager().clearPowerFailures();
-
+		for(Effect effect: next.getAllSquareEffects()){
+			next.removeSquareEffect(effect);
+		}
 		// move into the direction that the Identitydisc is situated
 		moveHandler.move(direction);
 
@@ -140,7 +148,11 @@ public class LaunchableScenarioTest {
 		Direction direction = getValidDirection(game, currentPlayer.getPosition());
 
 		// Make sure that there are no powerfailures and obstacles
-		game.getPowerGayManager().clearPowerFailures();
+		Square next = (Square) currentPlayer.getPosition().getNeighbor(direction);
+		
+		for(Effect effect: next.getAllSquareEffects()){
+			next.removeSquareEffect(effect);
+		}
 		// move into the direction that the Identitydisc is situated
 		moveHandler.move(direction);
 
@@ -156,11 +168,9 @@ public class LaunchableScenarioTest {
 	@Test
 	public void testThrowIdentityDisc(){
 
-		// make sure there are no powerfailures
-		game.getPowerGayManager().clearPowerFailures();
-
+	
 		// Throw the identity disc in all possible directions.
-		Square currentPosition = game.getGrid().getGridElement(new Coordinate(0,0));
+		Square currentPosition = (Square) game.getGrid().getGridElement(new Coordinate(0,0));
 		// All possible throw directions
 		Direction[] directions = new Direction[]{Direction.SOUTH, Direction.EAST};
 		game.getCurrentPlayer().move(currentPosition);
@@ -170,7 +180,7 @@ public class LaunchableScenarioTest {
 			// new identity disc
 			IdentityDisc id = new IdentityDisc();
 			// Player should have identitydisc in inventory
-			game.getCurrentPlayer().getInventory().addItem(id);
+			game.getCurrentPlayer().addItem(id);
 			// throw the identitydisc in the given direction
 			
 			Square position = game.getCurrentPlayer().getPosition();
@@ -180,12 +190,12 @@ public class LaunchableScenarioTest {
 				fail("ThrowLaunchableHander shouldn't throw an exception");
 				e.printStackTrace();
 			}
-			position = game.getGrid().getNeighbor(position, direction);
-			position = game.getGrid().getNeighbor(position, direction);
-			position = game.getGrid().getNeighbor(position, direction);
+			position = (Square) position.getNeighbor(direction);
+			position = (Square) position.getNeighbor(direction);
+			position = (Square) position.getNeighbor(direction);
 
 			// assert that the square has the item
-			assertTrue(position.getInventory().hasItem(id));
+			assertTrue(position.hasItem(id));
 
 		}
 		
