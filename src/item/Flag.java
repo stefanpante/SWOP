@@ -67,13 +67,18 @@ public class Flag extends Item {
 	@Override
 	public void setContainer(ItemContainer itemContainer){
 		if(itemContainer == this.player){
-			itemContainer.removeItem(this);
-			player.getStartPosition().addItem(this);
+			returnToStartPosition();
 		}
 		else{
 			getContainer().removeItem(this);
 			setContainer(itemContainer);
 		}
+	}
+	
+	
+	public void returnToStartPosition(){
+		getContainer().removeItem(this);
+		player.getStartPosition().addItem(this);
 	}
 
     @Override
