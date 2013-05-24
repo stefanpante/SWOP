@@ -233,12 +233,12 @@ public class PowerFailure extends Field {
     }
 
     @Override
-    public void setEffects(Square square) {
+    protected void setEffects(Square square) {
         square.addSquareEffect(powerFailureEffect);
     }
 
     @Override
-    public void removeEffects(Square square) {
+    protected void removeEffects(Square square) {
         square.removeSquareEffect(powerFailureEffect);
     }
 }

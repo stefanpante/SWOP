@@ -13,7 +13,7 @@ import java.util.Set;
 public class CTFGameMode extends GameMode{
 
     public static final int MIN_PLAYERS = 2;
-    public static int MAX_PLAYERS = 9;
+    private static final int MAX_PLAYERS = 9;
     private HashMap<Player,Set<Flag>> winMap;
 
 

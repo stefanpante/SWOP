@@ -39,7 +39,7 @@ public class Inventory extends GUIElement{
      * @param position    the position of this inventory
      * @param gui        The PApplet used for drawing.
      */
-	public Inventory(float width, ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
+	public Inventory(ArrayList<Item> items, PVector position, String inventoryName, PApplet gui){
 		super((float) 155, (float) 185, position,gui);
 		this.items = items;
 		this.buttons = new ArrayList<>();

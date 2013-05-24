@@ -127,7 +127,7 @@ public class IdentityDisc extends Item implements Movable {
 		return super.toString() + "IdentityDisc";
 	}
 
-    public void setPreviousPosition(Square position){
+    void setPreviousPosition(Square position){
         this.previousPosition = position;
     }
 

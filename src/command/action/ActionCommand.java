@@ -24,7 +24,7 @@ public abstract class ActionCommand extends AbstractGameCommand {
      * Executes the actual action.
      */
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         beforeActionCommand();
         beforeGameCommand();
         duringGameCommand();

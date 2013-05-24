@@ -45,9 +45,9 @@ public abstract class AbstractGameCommand implements Command {
 	}
 	
 	/**
-	 * Execite this command
+	 * Execute this command
 	 */
-	public void execute() throws Exception {
+	public void execute() {
 		beforeGameCommand();
 		duringGameCommand();
 		afterGameCommand();
