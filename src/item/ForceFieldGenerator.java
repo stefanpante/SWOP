@@ -37,8 +37,6 @@ public class ForceFieldGenerator extends Item{
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();
-        effects.add(new ForceFieldEffect());
-        effects.add(new ForceFieldStuckEffect());
         return effects;
     }
 
