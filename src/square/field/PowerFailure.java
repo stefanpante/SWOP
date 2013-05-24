@@ -1,6 +1,5 @@
 package square.field;
 
-import effect.Effect;
 import effect.imp.PowerFailureEffect;
 import game.Player;
 import square.GridElement;
@@ -230,12 +229,12 @@ public class PowerFailure extends Field {
 
     @Override
     public void setEffects(Square square) {
-        square.addEffect(powerFailureEffect);
+        square.addSquareEffect(powerFailureEffect);
     }
 
     @Override
     public void removeEffects(Square square) {
-        square.removeEffect(powerFailureEffect);
+        square.removeSquareEffect(powerFailureEffect);
     }
 
 }

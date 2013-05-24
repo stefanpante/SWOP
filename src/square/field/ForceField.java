@@ -114,13 +114,13 @@ public class ForceField extends Field {
 
     @Override
     public void setEffects(Square square) {
-        square.addEffect(forceFieldEffect);
-        square.addEffect(forceFieldStuckEffect);
+        square.addSquareEffect(forceFieldEffect);
+        square.addSquareEffect(forceFieldStuckEffect);
     }
 
     @Override
     public void removeEffects(Square square) {
-        square.addEffect(forceFieldEffect);
-        square.removeEffect(forceFieldStuckEffect);
+        square.removeSquareEffect(forceFieldEffect);
+        square.removeSquareEffect(forceFieldStuckEffect);
     }
 }

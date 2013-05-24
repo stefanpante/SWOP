@@ -18,18 +18,16 @@ public class EffectMediator {
         return priorityCriteria.meetsCriteria(effects);
     }
 
-    public ArrayList<Effect> getResultingEffects(ArrayList<Effect> effects){
 
-//        System.out.println("--- Get Resulting Effects ---");
-//        System.out.println("Effects on Square :" + effects);
+    public ArrayList<Effect> getResultingEffectsWithPriorityAbove(ArrayList<Effect> effects, EffectPriority priority){
+
+        int max = priority.ordinal();
 
         boolean nextOneBlocked = false;
-        for(int i = 0; i < EffectPriority.values().length; i++){
+        for(int i = 0; i < max; i++){
 
             EffectPriority effectPriority = EffectPriority.values()[i];
-//            System.out.println(i + " Checking priority: " + effectPriority);
             ArrayList<Effect> result = getSquareEffectsBy(effects, effectPriority);
-//            System.out.println(i + " Result: " + result);
             if(result.size() > 0){
                 System.out.println("in        in");
                 if(EffectPriority.values()[i] == EffectPriority.TeleportBlocked){
@@ -37,7 +35,6 @@ public class EffectMediator {
                     System.out.println("NextOneBlocked!");
                 }else{
                     if(!nextOneBlocked){
-//                        System.out.println("--- End of Resulting Effects ---");
                         return result;
                     }else{
                         nextOneBlocked = false;
@@ -45,7 +42,10 @@ public class EffectMediator {
                 }
             }
         }
-//        System.out.println("--- End of Resulting Effects ---");
         return new ArrayList<>();
+    }
+
+    public ArrayList<Effect> getResultingEffects(ArrayList<Effect> effects){
+        return getResultingEffectsWithPriorityAbove(effects, EffectPriority.values()[EffectPriority.values().length - 1]);
     }
 }

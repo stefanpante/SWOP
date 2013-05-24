@@ -197,7 +197,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		this.startPosition = pos;
 		this.currentPosition = pos;
-        // startPosition.addEffect(playerEffect);
+        startPosition.addSquareEffect(playerEffect);
 	}
 
 
@@ -212,7 +212,9 @@ public class Player extends Observable implements Movable, ItemContainer {
             throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
         setPosition(position);
         try{
+            previousPosition.removeSquareEffect(getPlayerEffect());
             this.currentPosition.affect(this);
+            currentPosition.addSquareEffect(getPlayerEffect());
             this.moved = true;
             decrementActions();
             System.out.println("UIT:" + position);
@@ -223,6 +225,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
     public void resetPosition(Square position){
         this.currentPosition = position;
+        currentPosition.addSquareEffect(getPlayerEffect());
     }
 
     public void setPosition(Square position) throws IllegalStateException {

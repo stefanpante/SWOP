@@ -108,12 +108,12 @@ public class LightTrail extends Field {
 
     @Override
     public void setEffects(Square square) {
-        square.addEffect(lightTrailEffect);
+        square.addSquareEffect(lightTrailEffect);
     }
 
     @Override
     public void removeEffects(Square square) {
-        square.removeEffect(lightTrailEffect);
+        square.removeSquareEffect(lightTrailEffect);
     }
 
 

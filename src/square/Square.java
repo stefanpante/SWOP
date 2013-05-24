@@ -1,6 +1,7 @@
 package square;
 
 import effect.Effect;
+import effect.EffectPriority;
 import effect.imp.EffectMediator;
 import game.Player;
 import item.IdentityDisc;
@@ -42,7 +43,7 @@ public class Square extends GridElement implements ItemContainer {
 	/**
 	 * Adds the given effect to the list of effects.
 	 */
-	public void addEffect(Effect effect) throws IllegalArgumentException{
+	public void addSquareEffect(Effect effect) throws IllegalArgumentException{
 		if(effect == null)
 			throw new IllegalArgumentException("The effect cannot be null.");
 		effects.add(effect);
@@ -51,16 +52,15 @@ public class Square extends GridElement implements ItemContainer {
 	/**
 	 * Removes the given effect from the list of effects.
 	 */
-	public void removeEffect(Effect effect) throws IllegalArgumentException{
+	public void removeSquareEffect(Effect effect) throws IllegalArgumentException{
         if(effect == null)
             throw new NoSuchElementException("The effect to be removed cannot be null.");
 		if(!effects.contains(effect))
-			throw new NoSuchElementException("Cannot remove an effect that's not on this square.");
+			throw new NoSuchElementException("Cannot remove " +effect+ " from " + this);
 		effects.remove(effect);
 	}
 
-    //TODO: bad naming much? this are not all effects.
-	public ArrayList<Effect> getAllEffects(){
+	public ArrayList<Effect> getAllSquareEffects(){
 		return new ArrayList<Effect>(this.effects);
 	}
 
@@ -72,10 +72,14 @@ public class Square extends GridElement implements ItemContainer {
         return result;
     }
 
-    private ArrayList<Effect> getResultingEffects(){
-        ArrayList<Effect> result = new ArrayList<>(this.getAllEffects());
+    private ArrayList<Effect> getAllEffects(){
+        ArrayList<Effect> result = new ArrayList<>(this.getAllSquareEffects());
         result.addAll(getAllItemEffects());
-        return effectMediator.getResultingEffects(result);
+        return result;
+    }
+
+    private ArrayList<Effect> getResultingEffects(){
+        return effectMediator.getResultingEffects(getAllEffects());
     }
 
     public void affect(Player player){
@@ -99,6 +103,7 @@ public class Square extends GridElement implements ItemContainer {
         s += ", ";
 		s += effects;
 		s += " ]";
+        s += "(isObstructed: "+isObstructed()+")";
 		return s;
 	}
 
@@ -165,6 +170,10 @@ public class Square extends GridElement implements ItemContainer {
     @Override
     public boolean isObstacle() {
         return false;
+    }
+
+    public boolean isObstructed(){
+        return effectMediator.getResultingEffectsWithPriorityAbove(getAllEffects(), EffectPriority.Move).size() > 0;
     }
 
     @Override
