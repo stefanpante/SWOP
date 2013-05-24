@@ -24,7 +24,6 @@ public class PlayerMoveCommand extends MoveCommand{
      */
     public PlayerMoveCommand(Game game, Movable movable, Square startSquare, Direction dir) {
         super(game, movable, startSquare, dir);
-        System.out.println("                               PLAYER MOVE COMMAND");
     }
 
     /**

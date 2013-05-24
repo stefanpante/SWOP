@@ -208,8 +208,6 @@ public class Player extends Observable implements Movable, ItemContainer {
      * 		  	thrown if the player is unable to make this move
      */
     public void move(Square position) throws IllegalStateException{
-        if(!position.getNeighbors().containsValue(currentPosition))
-            throw new IllegalStateException("Cannot move to non neighboring square");
         if(!isValidPosition(position))
             throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
         setPosition(position);

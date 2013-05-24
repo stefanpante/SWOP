@@ -32,7 +32,7 @@ public class TeleportEffect extends DropFlagEffect {
     @Override
     public void execute(Player player) {
         System.out.println("Executing on Player: " + this);
-        // dropFlag(player);
+        dropFlag(player);
         TeleportBlockEffect effect = new TeleportBlockEffect();
         getTeleportDestination().addEffect(effect);
         player.move(getTeleportDestination());
