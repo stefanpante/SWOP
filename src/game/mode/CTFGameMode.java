@@ -48,7 +48,7 @@ public class CTFGameMode extends GameMode{
             winMap.put(p,new HashSet<Flag>());
         }
 
-        getGame().setActivate(true);
+        getGame().setActivate();
 
     }
 
