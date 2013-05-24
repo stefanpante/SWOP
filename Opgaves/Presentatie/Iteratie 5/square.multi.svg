@@ -60,12 +60,21 @@
       ><path d="M0 0 L83 0 L83 21 L0 21 L0 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath19"
-      ><path d="M0 0 L222 0 L222 104 L0 104 L0 0 Z"
+      ><path d="M-7 -7 L231 -7 L231 91 L-7 91 L-7 -7 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath20"
-      ><path d="M0 0 L104 0 L104 162 L0 162 L0 0 Z"
+      ><path d="M0 0 L0 66 L220 66 L220 0 Z"
       /></clipPath
       ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath21"
+      ><path d="M0 0 L220 0 L220 14 L0 14 L0 0 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath22"
+      ><path d="M0 0 L222 0 L222 104 L0 104 L0 0 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath23"
+      ><path d="M0 0 L104 0 L104 162 L0 162 L0 0 Z"
+      /></clipPath
+      ><clipPath clipPathUnits="userSpaceOnUse" id="clipPath24"
       ><path d="M0 0 L104 0 L104 152 L0 152 L0 0 Z"
       /></clipPath
     ></defs
@@ -219,22 +228,45 @@
     ><text x="3" xml:space="preserve" y="15" clip-path="url(#clipPath18)" stroke="none"
       >T : GridElement</text
     ></g
+    ><g font-size="11" transform="translate(12,60)" fill-opacity="1" fill="white" text-rendering="geometricPrecision" font-family="&apos;Arial&apos;" stroke="white" font-weight="bold" stroke-opacity="1"
+    ><rect x="0" width="220" height="80" y="0" clip-path="url(#clipPath19)" stroke="none"
+    /></g
+    ><g font-size="11" stroke-linecap="butt" transform="translate(12,60)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="&apos;Arial&apos;" stroke-linejoin="round" stroke="black" font-weight="bold" stroke-opacity="1" stroke-miterlimit="0"
+    ><rect fill="none" x="0" width="220" height="80" y="0" clip-path="url(#clipPath19)"
+      /><line y2="14" fill="none" x1="0" clip-path="url(#clipPath19)" x2="220" y1="14"
+    /></g
+    ><g font-size="11" transform="matrix(1,0,0,1,12,74)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="&apos;Arial&apos;" stroke="black" stroke-opacity="1"
+    ><text x="2" xml:space="preserve" y="13" clip-path="url(#clipPath20)" stroke="none"
+      >+LightTrail() : void</text
+    ></g
+    ><g font-size="11" transform="matrix(1,0,0,1,12,74)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="&apos;Arial&apos;" stroke="black" stroke-opacity="1"
+    ><text x="2" xml:space="preserve" y="27" clip-path="url(#clipPath20)" stroke="none"
+      >+execute(player : Player) : void</text
+      ><text x="2" xml:space="preserve" y="41" clip-path="url(#clipPath20)" stroke="none"
+      >+execute(identityDisc : IdentityDisc) : void</text
+      ><text x="2" xml:space="preserve" y="55" clip-path="url(#clipPath20)" stroke="none"
+      >+toString() : String</text
+    ></g
+    ><g font-size="11" transform="translate(12,60)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="&apos;Arial&apos;" stroke="black" font-weight="bold" stroke-opacity="1"
+    ><text x="69" xml:space="preserve" y="11" clip-path="url(#clipPath21)" stroke="none"
+      >LightTrailEffect</text
+    ></g
     ><g font-size="11" stroke-linecap="butt" transform="translate(233,390)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
-    ><line y2="50" fill="none" x1="168" clip-path="url(#clipPath19)" x2="50" y1="50"
-      /><line y2="56" fill="none" x1="163" clip-path="url(#clipPath19)" x2="154" y1="44"
-      /><line y2="44" fill="none" x1="163" clip-path="url(#clipPath19)" x2="154" y1="56"
-      /><line y2="56" fill="none" x1="50" clip-path="url(#clipPath19)" x2="62" y1="50"
-      /><line y2="44" fill="none" x1="50" clip-path="url(#clipPath19)" x2="62" y1="50"
+    ><line y2="50" fill="none" x1="168" clip-path="url(#clipPath22)" x2="50" y1="50"
+      /><line y2="56" fill="none" x1="163" clip-path="url(#clipPath22)" x2="154" y1="44"
+      /><line y2="44" fill="none" x1="163" clip-path="url(#clipPath22)" x2="154" y1="56"
+      /><line y2="56" fill="none" x1="50" clip-path="url(#clipPath22)" x2="62" y1="50"
+      /><line y2="44" fill="none" x1="50" clip-path="url(#clipPath22)" x2="62" y1="50"
     /></g
     ><g font-size="11" stroke-linecap="butt" transform="translate(462,121)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
-    ><line y2="108" fill="none" x1="50" clip-path="url(#clipPath20)" x2="50" y1="50"
-      /><polygon fill="white" clip-path="url(#clipPath20)" points=" 50 50 44 62 56 62" stroke="none"
-      /><polygon fill="none" points=" 50 50 44 62 56 62" clip-path="url(#clipPath20)"
+    ><line y2="108" fill="none" x1="50" clip-path="url(#clipPath23)" x2="50" y1="50"
+      /><polygon fill="white" clip-path="url(#clipPath23)" points=" 50 50 44 62 56 62" stroke="none"
+      /><polygon fill="none" points=" 50 50 44 62 56 62" clip-path="url(#clipPath23)"
     /></g
     ><g font-size="11" stroke-linecap="butt" transform="translate(472,261)" fill-opacity="1" fill="black" text-rendering="geometricPrecision" font-family="sans-serif" stroke-linejoin="round" stroke="black" stroke-opacity="1"
-    ><line y2="98" fill="none" x1="50" clip-path="url(#clipPath21)" x2="50" y1="50"
-      /><polygon fill="white" clip-path="url(#clipPath21)" points=" 50 50 44 62 56 62" stroke="none"
-      /><polygon fill="none" points=" 50 50 44 62 56 62" clip-path="url(#clipPath21)"
+    ><line y2="98" fill="none" x1="50" clip-path="url(#clipPath24)" x2="50" y1="50"
+      /><polygon fill="white" clip-path="url(#clipPath24)" points=" 50 50 44 62 56 62" stroke="none"
+      /><polygon fill="none" points=" 50 50 44 62 56 62" clip-path="url(#clipPath24)"
     /></g
   ></g
 ></svg

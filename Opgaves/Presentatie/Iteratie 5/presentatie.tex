@@ -82,11 +82,6 @@
 \end{center}
 \end{frame}
 
-
-\begin{frame}{Square}
-uitleg over effecten enzo in squares?
-\end{frame}
-
 \begin{frame}{Wall}
 \begin{center}
 \includegraphics[scale=0.4]{images/wall}
@@ -135,6 +130,12 @@ uitleg over effecten enzo in squares?
 \end{center}
 \end{frame}
 
+\begin{frame}{Teleport}
+\begin{center}
+\includegraphics[width=0.80\linewidth]{images/teleport}
+\end{center}
+\end{frame}
+
 \begin{frame}{Flag}
 \vspace{0.45in}
 \begin{center}
@@ -146,6 +147,11 @@ uitleg over effecten enzo in squares?
 \begin{center}
 \includegraphics[width=0.95\linewidth]{images/itemplacer}
 \end{center}
+\end{frame}
+
+\begin{frame}{Items en Effecten}
+\vspace{1.5in}
+Items hebben vaak een effect op de player, Hierop komen we later terug
 \end{frame}
 
 \begin{frame}{ItemContainer}
@@ -164,22 +170,64 @@ Square
 
 \subsection{Effecten}
 
+\begin{frame}{Overzicht}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{images/effectenoverview}
+\end{center}
+\end{frame}
+\begin{frame}{Effecten en Square}
+\begin{itemize}
+\item Effecten worden afgehandeld via de Square.
+\item Effecten hebben invloed op elkaar. Effecten worden gefilterd door EffectMediator
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Effecten en Squares}
+\vspace{0.2in}
+\begin{center}
+\includegraphics[width=0.9\linewidth]{images/squareeffect}
+\end{center}
+\end{frame}
+
+
 \begin{frame}{LightTrail}
 \begin{center}
 \includegraphics[width=0.6\linewidth]{images/lighttrail}
 \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{PowerFail}
 \begin{center}
-\includegraphics[width=0.6\linewidth]{images/lighttrail}
+\includegraphics[width=0.7\linewidth]{images/powerfailure}
 \end{center}
 \end{frame}
 
-\begin{frame}{PowerFail}
+\begin{frame}{ForceField}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{images/forcefield}
+\end{center}
+
+\subsection{Itemeffecten}
+\end{frame}
+\begin{frame}{Teleport}
+Een teleport veroorzaakt de val van een vlag, het verplaatsen van een player.
+\begin{center}
+\includegraphics[width= 0.85\linewidth]{images/teleporteffect}
+\end{center}
 \end{frame}
 
-\begin{frame}{Teleport}
+\begin{frame}{LightGrenade}
+Lightgrenade veroorzaakt verlies van acties, val van een vlag.
+\begin{center}
+\includegraphics[width= 0.85\linewidth]{images/lightgrenadeeffect}
+\end{center}
+\end{frame}
+
+\begin{frame}{IdentityDisc}
+IdentityDisc zorgt ervoor dat player beurt verliest en val van een vlag.
+\begin{center}
+
+\end{center}
 \end{frame}
 
 \subsection{Game}
@@ -188,8 +236,21 @@ Square
 \end{frame}
 
 \begin{frame}{Game}
+Vereenvoudigde weergave van de structuur van een game
+\begin{center}
+\includegraphics[scale=0.5]{images/simple}
+\end{center}
 \end{frame}
 
+\begin{frame}{GameMode}
+Capture the flag en Race Game
+\begin{itemize}
+\item verschillend bouwproces (Vlaggen plaatsen of niet)
+\item verschillend aantal spelers mogelijk.
+\item Verschillende win en lose conditions.
+\end{itemize}
+
+\end{frame}
 \begin{frame}{RaceGameMode}
 \end{frame}
 
@@ -207,18 +268,36 @@ Square
 \begin{frame}{Pick Up}
 \end{frame}
 
+\begin{frame}{Pick Up Sequence diagram}
+\end{frame}
+
 \begin{frame}{Use Item}
 \end{frame}
 
-\begin{frame}{Throw IdentityDisc}
+\begin{frame}{Use Item Sequence diagram}
+\end{frame}
+
+\begin{frame}{Throw IdentityDisk}
+\end{frame}
+
+\begin{frame}{Throw IdentityDisk Sequence diagram}
 \end{frame}
 
 \begin{frame}{End Turn}
 \end{frame}
 
+\begin{frame}{End Turn Sequence Diagram}
+
+\end{frame}
 \subsection{Handlers}
 
 \begin{frame}{Handlers}
+\begin{itemize}
+\item Handlers controleren de flow tussen Model en View,
+\item LightWeight door gebruik van command Pattern
+\item Gebruikt propertyChanges om wijzigen aan GUI door te geven \\
+= Model View Adapter
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Overview (Model view adapter pattern)}
