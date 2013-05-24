@@ -3,8 +3,6 @@ package grid.itemplacer;
 import game.Player;
 import grid.Grid;
 import grid.GridProvider;
-import org.junit.*;
-
 import square.Square;
 import util.Coordinate;
 

@@ -1,16 +1,15 @@
 package grid.itemplacer;
 
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Random;
-
 import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Item;
-import square.GridElement;
 import square.Square;
 import util.Coordinate;
+
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 /**
  * Class used to place all the items on the grid.

@@ -1,11 +1,9 @@
 package square.obstacle;
 
-import static org.junit.Assert.*;
-
-import square.*;
-
-import org.junit.*;
+import square.Square;
 import square.multi.LightTrail;
+
+import static org.junit.Assert.*;
 
 public class TestLightTrail {
 

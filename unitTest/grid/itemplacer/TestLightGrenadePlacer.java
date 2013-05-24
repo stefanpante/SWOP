@@ -1,15 +1,10 @@
 package grid.itemplacer;
 
-import item.LightGrenade;
 import game.Game;
-import game.mode.CTFGameMode;
 import game.mode.RaceGameMode;
-import grid.Grid;
-import grid.RandomGridBuilder;
-
+import item.LightGrenade;
 import org.junit.Before;
 import org.junit.Test;
-
 import square.Square;
 import util.Coordinate;
 import util.Direction;

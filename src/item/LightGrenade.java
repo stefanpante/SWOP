@@ -3,8 +3,6 @@ package item;
 import effect.Effect;
 import effect.imp.EmptyEffect;
 import effect.imp.LightGrenadeEffect;
-import item.inter.Movable;
-import game.Player;
 import square.Square;
 
 import java.util.ArrayList;

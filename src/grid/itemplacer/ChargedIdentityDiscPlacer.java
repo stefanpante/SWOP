@@ -2,14 +2,12 @@ package grid.itemplacer;
 
 import game.Player;
 import grid.Grid;
-
 import item.ChargedIdentityDisc;
-
-import java.util.ArrayList;
-
 import square.GridElement;
 import square.Square;
 import util.AStar;
+
+import java.util.ArrayList;
 
 /**
  * Places the chargedIdentityDisc on the specified grid.
@@ -58,7 +56,6 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
     	for(GridElement gridElement : getGrid().getAllGridElements()){
             if(!gridElement.isObstacle()){
                 try{
-                    AStar aStar = new AStar(getGrid());
                     ArrayList<Integer> lengths = new ArrayList<Integer>();
                     for(Square playerSquare: playerSquares){
                     	AStar astar = new AStar(getGrid());

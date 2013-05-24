@@ -3,8 +3,8 @@
  */
 package command.action;
 
-import item.Item;
 import game.Game;
+import item.Item;
 
 /**
  * @author Dieter Castel, Jonas Devlieghere   and Stefan Pante

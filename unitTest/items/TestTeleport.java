@@ -1,12 +1,11 @@
 package items;
 
-import static org.junit.Assert.*;
 import item.Teleport;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import square.Square;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit test case for Teleport.

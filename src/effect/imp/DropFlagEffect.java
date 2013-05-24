@@ -3,7 +3,6 @@ package effect.imp;
 import effect.Effect;
 import game.Player;
 import item.Flag;
-import item.IdentityDisc;
 import item.Item;
 import square.GridElement;
 import square.Square;
@@ -49,9 +48,8 @@ public abstract class DropFlagEffect extends Effect {
             ArrayList<GridElement> neighbors = new ArrayList<GridElement>(getCenterSquare().getNeighbors().values());
             int randomIndex = rnd.nextInt(neighbors.size());
             
-            boolean foundLocation = false;
-            GridElement newLocation = null;
-            while(!foundLocation){
+            GridElement newLocation;
+            while(true){
             	newLocation = neighbors.get(randomIndex);
             	if(newLocation.isSameType(new Square())){
             		((Square) newLocation).addItem(flag);

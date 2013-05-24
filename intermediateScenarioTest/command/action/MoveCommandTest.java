@@ -1,18 +1,17 @@
 package command.action;
 
+import game.Game;
+import game.Player;
 import game.mode.CTFGameMode;
 import grid.Grid;
 import grid.GridProvider;
-import game.Game;
-import game.Player;
 import item.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import square.GridElement;
-import util.Direction;
 import square.Square;
 import util.Coordinate;
+import util.Direction;
 
 import java.util.ArrayList;
 
@@ -80,7 +79,7 @@ public class MoveCommandTest {
         teleports.add(new Coordinate(4, 4));
 
         forceFieldGen = new ArrayList<Coordinate>();
-        forceFieldGen.add(new Coordinate(8,8));
+        forceFieldGen.add(new Coordinate(8, 8));
     }
 
     @Before

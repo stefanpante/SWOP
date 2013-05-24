@@ -1,18 +1,15 @@
 package items;
 
-import static org.junit.Assert.*;
-import item.ChargedIdentityDisc;
 import item.IdentityDisc;
 import item.Item;
 import item.LightGrenade;
-import item.Teleport;
 import item.inventory.Inventory;
 import item.inventory.PlayerInventory;
 import item.inventory.SquareInventory;
-
-import  org.junit.Assert.*;
-
+import org.junit.Assert.*;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class TestInventory {
 

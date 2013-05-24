@@ -3,7 +3,6 @@ package manager;
 import effect.Effect;
 import grid.Grid;
 import grid.RandomGridBuilder;
-import org.junit.*;
 import square.Square;
 import square.field.PowerFailure;
 

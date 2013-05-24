@@ -1,11 +1,9 @@
 package command.action;
 
 import game.Game;
-import item.ForceFieldGenerator;
-import item.LightGrenade;
 import item.inter.Movable;
-import util.Direction;
 import square.Square;
+import util.Direction;
 
 /**
  * Created with IntelliJ IDEA.

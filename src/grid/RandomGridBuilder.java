@@ -1,12 +1,12 @@
 package grid;
 
+import square.Square;
+import util.Coordinate;
+import util.Direction;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import util.Direction;
-import square.Square;
-import square.multi.Wall;
-import util.Coordinate;
 
 /**
  * @author Jonas Devlieghere, Dieter Castel

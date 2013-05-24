@@ -2,9 +2,8 @@ package item;
 
 import effect.Effect;
 import effect.imp.EmptyEffect;
-import item.inter.ItemContainer;
-import item.inter.Movable;
 import game.Player;
+import item.inter.ItemContainer;
 import square.Square;
 
 import java.util.ArrayList;

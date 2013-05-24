@@ -1,20 +1,15 @@
 package game;
 
-import controller.TurnHandler;
+import be.kuleuven.cs.som.annotate.Basic;
+import be.kuleuven.cs.som.annotate.Raw;
 import game.mode.GameMode;
 import grid.Grid;
-
-import java.util.*;
-import java.util.Map.Entry;
-
 import manager.ForceFieldManager;
 import manager.PowerManager;
 import notnullcheckweaver.NotNull;
-import square.GridElement;
-import util.Direction;
-import square.Square;
-import be.kuleuven.cs.som.annotate.Basic;
-import be.kuleuven.cs.som.annotate.Raw;
+
+import java.util.ArrayList;
+import java.util.Observer;
 
 /**
  * Game class, this class controls the flow of the game
@@ -76,7 +71,8 @@ public class Game {
 	/**
 	 * Sets the grid for the game.
 	 * 
-	 * @param grid
+	 * @param   grid
+     *          The grid to be set
 	 */
 	public void setGrid(Grid grid) {
 		if(!isValidGrid(grid)){

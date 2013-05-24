@@ -1,16 +1,13 @@
 package controller;
 
-import game.Game;
-
-import item.IdentityDisc;
-
-import java.beans.PropertyChangeListener;
-
 import command.AbstractGameCommand;
 import command.action.IdentityDiscMoveCommand;
-
-import util.Direction;
+import game.Game;
+import item.IdentityDisc;
 import square.Square;
+import util.Direction;
+
+import java.beans.PropertyChangeListener;
 
 /**
  * Handler for the throwing a launchable.

@@ -1,20 +1,12 @@
 package square;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-
-
 import item.*;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-
+import org.junit.*;
 import square.obstacle.MultiObstacle;
 import square.obstacle.Wall;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 public class TestSquare {

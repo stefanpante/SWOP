@@ -2,13 +2,11 @@ package grid.itemplacer;
 
 import game.Player;
 import grid.Grid;
-
 import item.Flag;
 import item.Item;
+import square.Square;
 
 import java.util.ArrayList;
-
-import square.Square;
 
 /**
  * Class to place flags on the grid.

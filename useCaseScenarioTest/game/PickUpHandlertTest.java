@@ -1,21 +1,15 @@
 package game;
 
-import static org.junit.Assert.*;
-
 import controller.PickUpHandler;
 import controller.TurnHandler;
+import grid.RandomGridBuilder;
 import item.LightGrenade;
 import item.inventory.PlayerInventory;
-import game.Game;
-import grid.RandomGridBuilder;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import command.AbstractGameCommand;
-
-
 import square.Square;
+
+import static org.junit.Assert.*;
 
 /**
  * Scenario test for the "pick up" use case.

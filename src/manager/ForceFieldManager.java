@@ -2,11 +2,11 @@ package manager;
 
 import grid.Grid;
 import item.ForceFieldGenerator;
-import util.Direction;
 import square.GridElement;
 import square.Square;
 import square.field.ForceField;
 import util.Coordinate;
+import util.Direction;
 
 import java.util.ArrayList;
 import java.util.Observable;

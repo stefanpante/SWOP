@@ -4,14 +4,12 @@ import game.Game;
 import game.mode.RaceGameMode;
 import item.Item;
 import item.Teleport;
-
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import square.GridElement;
 import square.Square;
+
+import java.util.ArrayList;
 
 public class TestTeleportPlacer {
 

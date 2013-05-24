@@ -1,20 +1,14 @@
 package game;
 
-import static org.junit.Assert.*;
-import grid.AbstractGridBuilder;
-import grid.Grid;
+import game.mode.RaceGameMode;
 import grid.RandomGridBuilder;
-
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import game.Player;
-import game.mode.RaceGameMode;
-
 import square.Square;
+
+import static org.junit.Assert.*;
 
 public class TestGame {
 

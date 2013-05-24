@@ -1,13 +1,9 @@
 package game.mode;
 
-import java.io.IOException;
-import java.util.Map;
-
-import game.Game;
 import game.Player;
 import game.gamebuilder.GameBuilder;
-import square.Square;
-import util.Direction;
+
+import java.io.IOException;
 
 public class RaceGameMode extends GameMode{
 

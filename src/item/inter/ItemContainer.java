@@ -35,7 +35,9 @@ public interface ItemContainer {
      *
      * @param   item
      *          The item of which the type will be used.
-     * @return
+     *
+     * @return  True if and only if this item container contains an item with the same
+     *          type as the given item.
      */
     public boolean hasType(Item item);
 
@@ -49,7 +51,8 @@ public interface ItemContainer {
 
     /**
      * Returns all the items in the container as a list.
-     * @return
+     *
+     * @return  A list of items in this container.
      */
     public ArrayList<Item> getAllItems();
 

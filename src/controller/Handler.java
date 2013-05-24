@@ -4,17 +4,17 @@ import effect.Effect;
 import game.Game;
 import game.Player;
 import item.Item;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import square.Brick;
 import square.GridElement;
 import square.Square;
 import square.multi.LightTrail;
 import util.Coordinate;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Handler class (abstract) that will be implemented by all our use case handlers.
@@ -128,7 +128,6 @@ public abstract class Handler {
      * @return ArrayList<item>	List of all items of the current square.
      */
     public ArrayList<Item> getSquareItems() {
-    	System.out.println("is Current player position null? " + getGame() == null);
         return getGame().getCurrentPlayer().getPosition().getAllItems();
     }
 
@@ -245,7 +244,6 @@ public abstract class Handler {
             map.put(player, player.getLightTrail());
         }
         Iterator<Player> iterator = map.keySet().iterator();
-        HashMap<Player, Coordinate> players = getPlayerLocations();
 
         HashMap<Player, ArrayList<Coordinate>> hashMap = new HashMap<Player, ArrayList<Coordinate>>();
 

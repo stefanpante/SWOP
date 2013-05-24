@@ -1,12 +1,10 @@
 package controller;
 
-import java.beans.PropertyChangeListener;
-
 import command.AbstractGameCommand;
 import command.action.EndTurnCommand;
-
-
 import game.Game;
+
+import java.beans.PropertyChangeListener;
 
 /**
  * The Controller/Handler to end the turn of a player
@@ -55,7 +53,8 @@ public class EndTurnHandler extends Handler {
 	/**
 	 * Check to see if the player hasMoved before ending the turn.
 	 * Can be used to warn the player that he needs to move.
-	 * @return
+     *
+	 * @return  True if and only if the Player has moved.
 	 */
 	public boolean hasMoved(){
 		return getGame().getCurrentPlayer().hasMoved();

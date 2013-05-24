@@ -2,14 +2,14 @@ package controller;
 
 import game.Game;
 import game.Player;
-
 import game.mode.CTFGameMode;
 import game.mode.GameMode;
 import game.mode.RaceGameMode;
+import util.Coordinate;
+
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.HashMap;
-import util.Coordinate;
 
 /**
  * 

@@ -1,13 +1,5 @@
 package gui.button;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.event.ChangeListener;
-
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;

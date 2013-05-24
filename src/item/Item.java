@@ -1,9 +1,8 @@
 package item;
 
-import game.Player;
 import effect.Effect;
+import game.Player;
 import item.inter.ItemContainer;
-import item.inter.Movable;
 import square.Square;
 
 import java.util.ArrayList;
@@ -23,7 +22,8 @@ public abstract class Item {
     /**
      * Set the container of this item
      *
-     * @param container
+     * @param   container
+     *          The container to be set.
      */
     public void setContainer(ItemContainer container){
         if(!isValidContainer(container))
@@ -40,12 +40,19 @@ public abstract class Item {
 
     /**
      * Return the container of this item
-     * @return
+     * @return  The Item Container
      */
     protected ItemContainer getContainer(){
         return this.container;
     }
 
+    /**
+     * Returns wether this item can be added to the Square.
+     *
+     * @param   square
+     *          The square to be checked
+     * @return  True if and only if this item can be added to the square.
+     */
     public abstract boolean canAddTo(Square square);
 
     /**
