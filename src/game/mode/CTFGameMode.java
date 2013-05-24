@@ -3,6 +3,7 @@ package game.mode;
 import game.Player;
 import game.gamebuilder.GameBuilder;
 import item.Flag;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,7 +15,8 @@ public class CTFGameMode extends GameMode{
 
     public static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 9;
-    private HashMap<Player,Set<Flag>> winMap;
+    @NotNull
+    private final HashMap<Player,Set<Flag>> winMap;
 
 
     public CTFGameMode(int hSize, int vSize) {
@@ -22,7 +24,7 @@ public class CTFGameMode extends GameMode{
         this.winMap = new HashMap<>();
     }
 
-    public CTFGameMode(String filepath) throws IOException{
+    public CTFGameMode(String filepath) {
         super(filepath);
         this.winMap = new HashMap<>();
     }

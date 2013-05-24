@@ -1,5 +1,7 @@
 package util;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,12 +13,14 @@ import java.util.Random;
  * */
 public enum Direction {
 	NORTH {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.SOUTH;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.NORTHWEST);
@@ -29,12 +33,14 @@ public enum Direction {
 			return false;
 		}
 	},	NORTHEAST{
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.SOUTHWEST;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.NORTH);
@@ -47,12 +53,14 @@ public enum Direction {
 			return true;
 		}
 	},	EAST {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.WEST;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.NORTHEAST);
@@ -65,12 +73,14 @@ public enum Direction {
 			return false;
 		}
 	},	SOUTHEAST {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.NORTHWEST;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.EAST);
@@ -83,12 +93,14 @@ public enum Direction {
 			return true;
 		}
 	},	SOUTH {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.NORTH;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.SOUTHEAST);
@@ -101,12 +113,14 @@ public enum Direction {
 			return false;
 		}
 	},	SOUTHWEST {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.NORTHEAST;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.WEST);
@@ -119,12 +133,14 @@ public enum Direction {
 			return true;
 		}
 	},	WEST {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.EAST;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.SOUTHWEST);
@@ -137,12 +153,14 @@ public enum Direction {
 			return false;
 		}
 	},	NORTHWEST {
-		@Override
+		@NotNull
+        @Override
 		public Direction opposite() {
 			return Direction.SOUTHEAST;
 		}
 
-		@Override
+		@NotNull
+        @Override
 		public ArrayList<Direction> neighborDirections() {
 			ArrayList<Direction> neighborDirections = new ArrayList<>();
             neighborDirections.add(Direction.WEST);
@@ -160,7 +178,8 @@ public enum Direction {
 	 * Returns the opposite direction of the direction on which it is called.
 	 * @return returns the direction opposite of this direction.
 	 */
-	abstract public Direction opposite();
+	@NotNull
+    abstract public Direction opposite();
 
     /**
      * Returns the neighboring directions of the direction on which the method is called.
@@ -169,7 +188,8 @@ public enum Direction {
      *
      * @return  A list of neighbors
      */
-	abstract public ArrayList<Direction> neighborDirections();
+	@NotNull
+    abstract public ArrayList<Direction> neighborDirections();
 	
 	abstract public boolean isDiagonal();
 
@@ -178,7 +198,8 @@ public enum Direction {
 	 * 
 	 * @return	North or East with a 50%.
 	 */
-	public static Direction getRandomOrientation() {
+	@NotNull
+    public static Direction getRandomOrientation() {
 		Random random = new Random();
 		if(random.nextBoolean())
 			return Direction.NORTH;

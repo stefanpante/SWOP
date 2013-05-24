@@ -7,6 +7,7 @@ import grid.Grid;
 import manager.ForceFieldManager;
 import manager.PowerManager;
 import notnullcheckweaver.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Observer;
@@ -40,7 +41,8 @@ public class Game {
 	/**
 	 * The currentPlayer of this Game object.
 	 */
-	private Player currentPlayer;
+	@Nullable
+    private Player currentPlayer;
 	
 	/**
 	 * Boolean indicating the game is over
@@ -55,9 +57,10 @@ public class Game {
 	/**
 	 * The type of game which is played;
 	 */
-	private final GameMode gameMode;
+	@org.jetbrains.annotations.NotNull
+    private final GameMode gameMode;
 	
-	public Game(GameMode gameMode, int numOfPlayers){
+	public Game(@org.jetbrains.annotations.NotNull GameMode gameMode, int numOfPlayers){
 		this.gameMode = gameMode;
 		this.numOfPlayers = numOfPlayers;
 		gameMode.setGame(this);
@@ -81,7 +84,7 @@ public class Game {
 		this.grid = grid;		
 	}
 	
-	boolean isValidGrid(Grid grid){
+	boolean isValidGrid(@Nullable Grid grid){
 		return grid != null;
 	}
 
@@ -92,7 +95,7 @@ public class Game {
 	 *			The currentPlayer to check.
 	 * @return	True
 	 */
-	public static boolean isValidCurrentPlayer(Player currentPlayer) {
+	public static boolean isValidCurrentPlayer(@Nullable Player currentPlayer) {
 		return !(currentPlayer == null);
 	}
 
@@ -109,7 +112,7 @@ public class Game {
 	 *			If the given argument can't be currentPlayer of this game.
 	 *			| !canHaveAsCurrentPlayer(currentPlayer)
 	 */
-	public void setCurrentPlayer(Player currentPlayer) { 
+	public void setCurrentPlayer(@Nullable Player currentPlayer) {
 		if (currentPlayer == null || !isValidCurrentPlayer(currentPlayer) || !canHaveAsCurrentPlayer(currentPlayer)) {
 			throw new IllegalArgumentException(
 					"The argument ("
@@ -143,7 +146,8 @@ public class Game {
 	 *
 	 * @return 	An object of the Player class.
 	 */
-	@Basic @Raw
+	@Nullable
+    @Basic @Raw
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
@@ -177,7 +181,8 @@ public class Game {
 	 * Returns all players
 	 * @return Returns all players of this game
 	 */
-	public ArrayList<Player> getPlayers(){
+	@org.jetbrains.annotations.NotNull
+    public ArrayList<Player> getPlayers(){
 		return new ArrayList<>(this.players);
 	}
 
@@ -186,7 +191,7 @@ public class Game {
      *
      * @param players
      */
-    public void setPlayers(ArrayList<Player> players){
+    public void setPlayers(@org.jetbrains.annotations.NotNull ArrayList<Player> players){
         if(players.size() < gameMode.getMinimumAmountOfPlayers() ||
                 players.size() > gameMode.getMaximumAmountOfPlayers())
             throw new IllegalStateException("There is a minimum of " + gameMode.getMinimumAmountOfPlayers()
@@ -262,6 +267,7 @@ public class Game {
 		this.active = true;
 	}
 
+    @org.jetbrains.annotations.NotNull
     public GameMode getGameMode(){
         return this.gameMode;
     }

@@ -3,6 +3,8 @@
  */
 package grid;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import util.Coordinate;
 
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ public class GridConstraint {
      * @param 	excluded
      * 			The list of excluded coordinates
      */
-    public GridConstraint(float percentage, ArrayList<Coordinate> excluded){
+    public GridConstraint(float percentage, @NotNull ArrayList<Coordinate> excluded){
         this(percentage, excluded, new ArrayList<ArrayList<Coordinate>>());
     }
 
@@ -72,7 +74,7 @@ public class GridConstraint {
      * @param	included
      * 			The list of lists containing included coordinates
      */
-    public GridConstraint(float percentage, ArrayList<Coordinate> excluded, ArrayList<ArrayList<Coordinate>> included){
+    public GridConstraint(float percentage, @NotNull ArrayList<Coordinate> excluded, ArrayList<ArrayList<Coordinate>> included){
         setPercentage(percentage);
         setExcluded(excluded);
         setIncluded(included);
@@ -96,7 +98,7 @@ public class GridConstraint {
         this.percentage = percentage;
     }
 
-    private void setExcluded(ArrayList<Coordinate> excluded){
+    private void setExcluded(@NotNull ArrayList<Coordinate> excluded){
         this.excluded = new ArrayList<>(excluded);
     }
 
@@ -118,6 +120,7 @@ public class GridConstraint {
      *
      * @return	The list of excluded coordinates for this constraint
      */
+    @NotNull
     public ArrayList<Coordinate> getExcluded(){
         return new ArrayList<>(this.excluded);
     }
@@ -127,11 +130,12 @@ public class GridConstraint {
      *
      * @return	The list of lists of included coordinates
      */
+    @NotNull
     public ArrayList<ArrayList<Coordinate>> getIncluded(){
         return new ArrayList<>(this.included);
     }
 
-    protected boolean satisfiesConstraint(ArrayList<Coordinate> coordinates, Grid grid){
+    protected boolean satisfiesConstraint(@Nullable ArrayList<Coordinate> coordinates, @NotNull Grid grid){
         if(coordinates == null)
             return false;
 

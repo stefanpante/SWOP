@@ -1,6 +1,7 @@
 package item;
 
 import effect.Effect;
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class ForceFieldGenerator extends Item{
 
     @Override
-    public boolean canAddTo(Square square) {
+    public boolean canAddTo(@NotNull Square square) {
         return !square.hasItem(this);
     }
 
@@ -27,17 +28,18 @@ public class ForceFieldGenerator extends Item{
         return item instanceof ForceFieldGenerator;
     }
 
+    @NotNull
     @Override
     public ArrayList<Effect> getEffects() {
         return new ArrayList<>();
     }
 
     public boolean isActive() {
-        boolean active = false;
-        return active;
+        return false;
     }
 
 
+    @NotNull
     @Override
     public String toString() {
         return super.toString() + "ForceFieldGenerator";

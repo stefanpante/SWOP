@@ -14,6 +14,8 @@ import gui.message.TimedMessage;
 import gui.message.YesNoDialog;
 import item.IdentityDisc;
 import item.Item;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PVector;
@@ -102,7 +104,8 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	/**
 	 * The messages which can be displayed
 	 */
-	private YesNoDialog endTurnDialog;
+	@Nullable
+    private YesNoDialog endTurnDialog;
 	private TimedMessage message;
 
 	/**
@@ -495,7 +498,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		changePlayer();
 	}
 	
-	private void endTurn(String value){
+	private void endTurn(@NotNull String value){
 		if(value.equals(CONFIRM)){
 			try{
 				gameHandler.getEndTurnHandler().confirm(true);
@@ -546,7 +549,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 
 	}
 
-	private void showException(Exception exc){
+	private void showException(@NotNull Exception exc){
 		exc.printStackTrace();
 		String text = exc.getMessage();
 		showMessage(text);
@@ -563,7 +566,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(@NotNull PropertyChangeEvent evt) {
 		String propertyName = evt.getPropertyName();
 		Object o = evt.getNewValue();
 	
@@ -605,7 +608,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	
 
 	@Override
-	public void actionPerformed(ActionEvent evt) {
+	public void actionPerformed(@NotNull ActionEvent evt) {
 		String command = evt.getActionCommand();
 		switch(command){
 		case PICKUP_ACTION:		this.pickUp();
@@ -623,7 +626,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	}
 
 	@Override
-	public void controlEvent(ControlEvent arg0) {
+	public void controlEvent(@NotNull ControlEvent arg0) {
 		int mode = (int) arg0.getValue();
 		switch(mode){
 		case 0: 			numPlayers.hide();

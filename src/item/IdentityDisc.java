@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.imp.EmptyEffect;
 import item.inter.Movable;
 import notnullcheckweaver.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.Square;
 import util.Direction;
 
@@ -89,7 +90,7 @@ public class IdentityDisc extends Item implements Movable {
      * @return  True if and only if the given value is not null
      * 			and doesn't represent a diagonal direction
      */
-    public static boolean isValidTravelDirection(Direction travelDirection) {
+    public static boolean isValidTravelDirection(@Nullable Direction travelDirection) {
         return travelDirection != null && !travelDirection.isDiagonal();
     }
 
@@ -106,7 +107,7 @@ public class IdentityDisc extends Item implements Movable {
 	}
 
     @Override
-    public boolean canAddTo(Square square) {
+    public boolean canAddTo(@org.jetbrains.annotations.NotNull Square square) {
         return (!square.hasItem(this));
     }
 
@@ -174,6 +175,7 @@ public class IdentityDisc extends Item implements Movable {
         return previousPosition;
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();

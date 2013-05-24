@@ -1,5 +1,6 @@
 package square;
 
+import org.jetbrains.annotations.Nullable;
 import square.multi.Wall;
 
 /**
@@ -43,7 +44,7 @@ public class Brick extends GridElement {
      * Returns whether the given wall is valid for this brick.
      * @param wall		the wall to be checked
      */
-    boolean isNotValidWall(Wall wall){
+    boolean isNotValidWall(@Nullable Wall wall){
     	return wall == null;
     }
     

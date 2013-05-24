@@ -3,6 +3,8 @@ package grid.itemplacer;
 import game.Player;
 import grid.Grid;
 import item.ChargedIdentityDisc;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.GridElement;
 import square.Square;
 import util.AStar;
@@ -48,6 +50,7 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
      *
      * @return A coordinate equally ( + - MAX_DIFFERENCE) far away from each player
      */
+      @Nullable
       Square getLocation() {
     	ArrayList<Square> playerSquares = new ArrayList<>();
     	for(Player player: getPlayers())
@@ -80,7 +83,7 @@ public class ChargedIdentityDiscPlacer extends ItemPlacer {
      * @return	true if the lengths are within +- MAX_DIFFERENCE from each other,
      * 			false otherwise
      */
-    private boolean compareLengths(ArrayList<Integer> lengths){
+    private boolean compareLengths(@NotNull ArrayList<Integer> lengths){
 
     	for(int i : lengths){
     		for(int j: lengths){

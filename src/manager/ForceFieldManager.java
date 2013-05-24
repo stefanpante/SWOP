@@ -2,6 +2,8 @@ package manager;
 
 import grid.Grid;
 import item.ForceFieldGenerator;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.GridElement;
 import square.Square;
 import square.field.ForceField;
@@ -29,6 +31,7 @@ public class ForceFieldManager extends Manager{
     /**
      * Collection of all force fields.
      */
+    @NotNull
     private final ArrayList<ForceField> forceFields;
 
     
@@ -49,7 +52,7 @@ public class ForceFieldManager extends Manager{
      * @throws	IllegalArgumentException
      * 			Throws an exception if the force field is already contained.
      */
-    void addForceField(ForceField forceField) throws IllegalArgumentException {
+    void addForceField(@NotNull ForceField forceField) throws IllegalArgumentException {
         if(!canHaveAsForceField(forceField))
         	throw new IllegalArgumentException("This force field cannot be added.");
         
@@ -64,7 +67,7 @@ public class ForceFieldManager extends Manager{
      * @return	False	If the force field is null or already contained.
      * 			True	Otherwise
      */
-    boolean canHaveAsForceField(ForceField forceField) {
+    boolean canHaveAsForceField(@Nullable ForceField forceField) {
         return forceField != null && !contains(forceField);
     }
     
@@ -83,6 +86,7 @@ public class ForceFieldManager extends Manager{
      * 
      * @return
      */
+    @NotNull
     protected ArrayList<ForceField> getAllForceFields(){
         return new ArrayList<>(this.forceFields);
     }
@@ -137,7 +141,7 @@ public class ForceFieldManager extends Manager{
      * @param coordinate
      * @param coordinateToCheck
      */
-    void createForceFieldBetween(Coordinate coordinate, Coordinate coordinateToCheck) {
+    void createForceFieldBetween(@NotNull Coordinate coordinate, @NotNull Coordinate coordinateToCheck) {
         ArrayList<Coordinate> coordinates = coordinate.getCoordinatesTo(coordinateToCheck);
         ForceField forceField = new ForceField();
         for (Coordinate c : coordinates) {

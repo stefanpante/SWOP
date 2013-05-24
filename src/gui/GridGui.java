@@ -9,6 +9,7 @@ import item.Flag;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
+import org.jetbrains.annotations.NotNull;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.Coordinate;
@@ -24,34 +25,45 @@ public class GridGui extends GUIElement{
 	/**
 	 * the directionalpad to be drawn onto the grid.
 	 */
-	private final DirectionalPad directionalPad;
+	@NotNull
+    private final DirectionalPad directionalPad;
 
 
 	/**
 	 * The throwpad used to throw an item.
 	 */
-	private final ThrowPad throwPad;
+	@NotNull
+    private final ThrowPad throwPad;
 
 	/**
 	 * The squares to be drawn onto the screen.
 	 */
-	private final HashMap<Coordinate, SquareGUI> squares;
-	private final HashMap<Coordinate, SquareGUI> items;
-	private final HashMap<Coordinate, PVector> positions;
+	@NotNull
+    private final HashMap<Coordinate, SquareGUI> squares;
+	@NotNull
+    private final HashMap<Coordinate, SquareGUI> items;
+	@NotNull
+    private final HashMap<Coordinate, PVector> positions;
 
 	/**
 	 * the walls to be drawn on the screen
 	 */
-	private final ArrayList<SquareGUI> walls_squares;
-	private final ArrayList<SquareGUI> forcefields;
-	private final ArrayList<SquareGUI> powerfails;
-	private final ArrayList<SquareGUI> lightTrails_Squares;
-	private final ArrayList<SquareGUI> effects;
+	@NotNull
+    private final ArrayList<SquareGUI> walls_squares;
+	@NotNull
+    private final ArrayList<SquareGUI> forcefields;
+	@NotNull
+    private final ArrayList<SquareGUI> powerfails;
+	@NotNull
+    private final ArrayList<SquareGUI> lightTrails_Squares;
+	@NotNull
+    private final ArrayList<SquareGUI> effects;
 
 	/**
 	 * The players to be drawn on the screen
 	 */
-	private final ArrayList<SquareGUI> players;
+	@NotNull
+    private final ArrayList<SquareGUI> players;
 
 	/**
 	 * The position of the current player.
@@ -68,7 +80,8 @@ public class GridGui extends GUIElement{
 	 */
 	private final float squareHeight;
 
-	private final Label gridLabel;
+	@NotNull
+    private final Label gridLabel;
 
 	/**
 	 * Constructs a new grid representation for the gui
@@ -79,7 +92,7 @@ public class GridGui extends GUIElement{
 	 * @param hCells
 	 * @param vCells
 	 */
-	public GridGui(PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
+	public GridGui(@NotNull PVector position, PApplet gui, float width, float height, int hCells, int vCells) {
 		//float height, float width, PVector position, PApplet gui
 		super(width, height, position, gui);
 
@@ -105,7 +118,8 @@ public class GridGui extends GUIElement{
 		this.adjustPad(throwPad);
 	}
 
-	public Label getLabel(){
+	@NotNull
+    public Label getLabel(){
 		return this.gridLabel;
 	}
 
@@ -138,7 +152,7 @@ public class GridGui extends GUIElement{
 	 * Non-included squares are removed from the grid.
 	 * @param includedSquares	the Squares which are part of the grid.
 	 */
-	public void adjustGrid(ArrayList<Coordinate> includedSquares){
+	public void adjustGrid(@NotNull ArrayList<Coordinate> includedSquares){
 		ArrayList<Coordinate> toRemove = new ArrayList<>();
 
 		for(Coordinate coordinate: squares.keySet()){
@@ -152,7 +166,7 @@ public class GridGui extends GUIElement{
 		}
 	}
 	
-	public void updateLightTrails(HashMap<Player, ArrayList<Coordinate>> o){
+	public void updateLightTrails(@NotNull HashMap<Player, ArrayList<Coordinate>> o){
 		lightTrails_Squares.clear();
 		for(Player player: o.keySet()){
 			ArrayList<Coordinate> playercoor = o.get(player);
@@ -228,7 +242,7 @@ public class GridGui extends GUIElement{
 		throwPad.hover(mouseX, mouseY);
 	}
 
-	public void updateWalls(ArrayList<Coordinate> o ){
+	public void updateWalls(@NotNull ArrayList<Coordinate> o ){
 		walls_squares.clear();
 		for(Coordinate wall: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(wall), gui);
@@ -241,7 +255,7 @@ public class GridGui extends GUIElement{
 	/**
 	 * Changes the player positions.
 	 */
-	public void updatePlayers(HashMap<Player,Coordinate> players) {
+	public void updatePlayers(@NotNull HashMap<Player,Coordinate> players) {
 		this.players.clear();
 		for(Player player : players.keySet() ){
 			int id  = player.getID();
@@ -251,7 +265,7 @@ public class GridGui extends GUIElement{
 		}
 	}
 
-	public void updatePowerFailures(ArrayList<Coordinate> o){
+	public void updatePowerFailures(@NotNull ArrayList<Coordinate> o){
 		powerfails.clear();
 		for(Coordinate coor: o){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
@@ -268,7 +282,7 @@ public class GridGui extends GUIElement{
 
 	}
 
-	private void adjustPad(DirectionalPad pad){
+	private void adjustPad(@NotNull DirectionalPad pad){
 		pad.setPosition(getPixels(currentPlayer));
 		HashMap<Direction, DirectionalButton> buttons = pad.getButtons();
 
@@ -302,7 +316,7 @@ public class GridGui extends GUIElement{
 
 
 
-	public void updateItems(HashMap<Coordinate,ArrayList<Item>> o){
+	public void updateItems(@NotNull HashMap<Coordinate,ArrayList<Item>> o){
 		items.clear();
 
 		for(Coordinate coor: o.keySet()){
@@ -335,7 +349,7 @@ public class GridGui extends GUIElement{
 		}
 	}
 
-	private boolean containsTeleport(ArrayList<Item> items){
+	private boolean containsTeleport(@NotNull ArrayList<Item> items){
 		for(Item item: items){
 			if(item instanceof Teleport)
 				return true;
@@ -344,7 +358,7 @@ public class GridGui extends GUIElement{
 		return false;
 	}
 
-	private boolean containsFlag(ArrayList<Item> items){
+	private boolean containsFlag(@NotNull ArrayList<Item> items){
 		for(Item item: items){
 			if(item instanceof Flag)
 				return true;
@@ -352,15 +366,17 @@ public class GridGui extends GUIElement{
 		return false;
 	}
 
-	public DirectionalPad getDirectionalPad(){
+	@NotNull
+    public DirectionalPad getDirectionalPad(){
 		return this.directionalPad;
 	}
 
-	public ThrowPad getThrowPad() {
+	@NotNull
+    public ThrowPad getThrowPad() {
 		return this.throwPad;
 	}
 
-	public void updateEffects(HashMap<Coordinate, ArrayList<Effect>> o) {
+	public void updateEffects(@NotNull HashMap<Coordinate, ArrayList<Effect>> o) {
 		effects.clear();
 		for(Coordinate coordinate: o.keySet()){
 			ArrayList<Effect> effects = o.get(coordinate);

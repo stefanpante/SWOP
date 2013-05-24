@@ -29,7 +29,7 @@ public class UseItemHandler extends Handler {
 	 * the player uses an item that isn't in his inventory. (IllegalArgument)
 	 * Or when the player cannot use the item on the square.
 	 */
-	public void useItem(Item item) throws Exception {
+	public void useItem(Item item) {
 		fireChanges();
 		AbstractGameCommand useItemEvent = new UseItemCommand(getGame(), item);
 		useItemEvent.execute();

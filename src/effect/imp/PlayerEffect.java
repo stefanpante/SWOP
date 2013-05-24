@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jonas
@@ -17,7 +18,7 @@ public class PlayerEffect extends Effect {
     }
 
     @Override
-    public void execute(Player player) {
+    public void execute(@NotNull Player player) {
         System.out.println("Executing on Player: " + this);
         player.resetPosition(player.getPreviousPosition());
         throw new IllegalArgumentException("You've been thrown back by " + this);
@@ -28,6 +29,7 @@ public class PlayerEffect extends Effect {
         //
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "PlayerEffect";

@@ -2,6 +2,7 @@ package gui.message;
 
 import gui.GUIElement;
 import gui.Label;
+import org.jetbrains.annotations.NotNull;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PVector;
@@ -14,6 +15,7 @@ public class Message extends GUIElement {
     /**
      * The label of the message
      */
+    @NotNull
     private final Label label;
 
     /**
@@ -57,6 +59,7 @@ public class Message extends GUIElement {
     /**
      * Returns the label of the message
      */
+    @NotNull
     public Label getLabel() {
         return this.label;
     }

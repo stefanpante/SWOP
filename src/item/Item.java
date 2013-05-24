@@ -3,6 +3,8 @@ package item;
 import effect.Effect;
 import game.Player;
 import item.inter.ItemContainer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.Square;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public abstract class Item {
         this.container = container;
     }
 
-    private boolean isValidContainer(ItemContainer container) {
+    private boolean isValidContainer(@Nullable ItemContainer container) {
         return container != null;
     }
 
@@ -62,7 +64,7 @@ public abstract class Item {
      *          The player to be checked
      * @return  True if and only if the player has enough space
      */
-    public boolean canAddTo(Player player){
+    public boolean canAddTo(@NotNull Player player){
         return player.getAllItems().size() < Player.MAX_ITEMS;
     }
 

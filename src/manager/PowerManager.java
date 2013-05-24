@@ -1,6 +1,7 @@
 package manager;
 
 import grid.Grid;
+import org.jetbrains.annotations.NotNull;
 import square.GridElement;
 import square.Square;
 import square.field.PowerFailure;
@@ -24,6 +25,7 @@ public class PowerManager extends Manager {
     /**
      * The list of Power Failures of this Power Manager
      */
+    @NotNull
     private final ArrayList<PowerFailure> powerFailures;
 
     /**

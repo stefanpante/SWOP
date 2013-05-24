@@ -1,6 +1,7 @@
 package grid;
 
 import be.kuleuven.cs.som.annotate.Basic;
+import org.jetbrains.annotations.NotNull;
 import square.Brick;
 import square.GridElement;
 import square.Square;
@@ -50,12 +51,15 @@ public abstract class AbstractGridBuilder {
 	/**
 	 * The walls which are placed on the grid.
 	 */
+    @NotNull
     private final ArrayList<Wall> walls;
 
 	
-	final HashMap<Coordinate, GridElement> gridElements;
+	@NotNull
+    final HashMap<Coordinate, GridElement> gridElements;
 	
-	final ArrayList<Square> startPositions;
+	@NotNull
+    final ArrayList<Square> startPositions;
 	
 
 
@@ -179,7 +183,7 @@ public abstract class AbstractGridBuilder {
 	 * @param 	walls
 	 * 			The coordinates where to place the walls
 	 */
-    void placeWalls(ArrayList<ArrayList<Coordinate>> walls) {
+    void placeWalls(@NotNull ArrayList<ArrayList<Coordinate>> walls) {
 
 		for(ArrayList<Coordinate> sequence : walls){			
 			ArrayList<Brick> bricks = new ArrayList<>();
@@ -232,7 +236,8 @@ public abstract class AbstractGridBuilder {
      * Returns the walls.
      * @return  The walls
      */
-	public ArrayList<Wall> getWalls() {
+	@NotNull
+    public ArrayList<Wall> getWalls() {
 		return this.walls;
 	}
 }

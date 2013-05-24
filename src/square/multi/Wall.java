@@ -1,6 +1,7 @@
 package square.multi;
 
 
+import org.jetbrains.annotations.NotNull;
 import square.Brick;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Wall extends MultiGridElement<Brick> {
      *
 	 * @param 	sequence the Sequence of which a wall should be created
 	 */
-	public Wall(ArrayList<Brick> sequence) throws IllegalArgumentException {
+	public Wall(@NotNull ArrayList<Brick> sequence) throws IllegalArgumentException {
 		if(sequence.size() < 2) 
 			throw new IllegalArgumentException("A wall should have at least two bricks");
 		for(Brick brick: sequence){

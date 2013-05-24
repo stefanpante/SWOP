@@ -2,6 +2,8 @@ package util;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,7 +113,8 @@ public class Coordinate {
 	/**
 	 * The string representation of this coordinate.
 	 */
-	@Override
+	@NotNull
+    @Override
 	public String toString() {
         return "(" + getX()+","+ getY() +")";
 	}
@@ -122,14 +125,16 @@ public class Coordinate {
 	 * @param 	direction the direction in which the neighbor is wanted
 	 * @return 	the closest neighbor in the given direction
 	 */
-	public Coordinate getNeighbor(Direction direction){
+	@Nullable
+    public Coordinate getNeighbor(@NotNull Direction direction){
 		return getCoordinate(direction,1);
 	}
 	
 	/**
 	 * Returns a list of all eight neighbors of this coordinate in respect to the direction.
 	 */
-	public HashMap<Direction,Coordinate> getAllNeighbors(){
+	@NotNull
+    public HashMap<Direction,Coordinate> getAllNeighbors(){
 		HashMap<Direction,Coordinate> coordinates = new HashMap<>();
 		
 		coordinates.put(Direction.EAST,new Coordinate(x+1, y));
@@ -169,7 +174,7 @@ public class Coordinate {
 	* 			| (((Coordinate2D) obj).getY() == getY())
 	*/
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(@Nullable Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -192,7 +197,8 @@ public class Coordinate {
      *          The distance at which the coordinate is returned
      * @return  The coordinate in the given directin at the given distance
      */
-    public Coordinate getCoordinate(Direction direction, int distance){
+    @Nullable
+    public Coordinate getCoordinate(@NotNull Direction direction, int distance){
         switch (direction){
             case NORTH:
                 return new Coordinate(getX(), getY() - distance);
@@ -221,7 +227,8 @@ public class Coordinate {
      *          The last coordinate of the set.
      * @return  A list with coordinates between this coordinate and the given coordinate
      */
-    public ArrayList<Coordinate> getCoordinatesTo(Coordinate coordinate){
+    @NotNull
+    public ArrayList<Coordinate> getCoordinatesTo(@NotNull Coordinate coordinate){
         Direction direction = directionTo(coordinate);
         ArrayList<Coordinate> coordinates = new ArrayList<>();
         coordinates.add(this);
@@ -243,7 +250,8 @@ public class Coordinate {
      *          The coordinate for which the direction is returned
      * @return  The main direction in which the given coordinate lies
      */
-    public Direction directionTo(Coordinate coordinate){
+    @NotNull
+    public Direction directionTo(@NotNull Coordinate coordinate){
         if(equals(coordinate))
             throw  new IllegalArgumentException("The given squares are the same.");
 

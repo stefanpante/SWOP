@@ -1,6 +1,8 @@
 package square.multi;
 
 import effect.imp.LightTrailEffect;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.Square;
 import square.field.Field;
 
@@ -12,6 +14,7 @@ import square.field.Field;
  */
 public class LightTrail extends Field {
 
+    @NotNull
     private final LightTrailEffect lightTrailEffect;
 
 	/**
@@ -36,7 +39,7 @@ public class LightTrail extends Field {
 	 * 			If the square is not valid.
 	 */
 	@Override
-	public void addGridElement(Square square) throws IllegalArgumentException {
+	public void addGridElement(@NotNull Square square) throws IllegalArgumentException {
 		if(!isValidGridElement(square))
 			throw new IllegalArgumentException("This square is not valid for this Light Trail.");
 		
@@ -56,7 +59,7 @@ public class LightTrail extends Field {
 	 * 			If the square is not valid.
 	 */
 	@Override
-    protected void removeGridElement(Square square) throws IllegalArgumentException {
+    protected void removeGridElement(@NotNull Square square) throws IllegalArgumentException {
 		super.removeGridElement(square);
         removeEffects(square);
 	}
@@ -67,6 +70,7 @@ public class LightTrail extends Field {
 	 * @return	Square	If the trail is not empty the last one is returned.
 	 * 			Null	If the trail is empty.
 	 */
+    @Nullable
     Square getLastSquare() {
 		if(getLength() >= 1)
 			return getGridElements().get(0);
@@ -80,6 +84,7 @@ public class LightTrail extends Field {
 	 * @return	Square	If the trail is not empty the newest one is returned.
 	 * 			Null	If the trail is empty.
 	 */
+    @Nullable
     Square getNewestSquare() {
 		if(getLength() >= 1)
 			return getGridElements().get(getLength() - 1);
@@ -87,7 +92,7 @@ public class LightTrail extends Field {
 			return null;
 	}
 
-	public void setHead(Square square) {
+	public void setHead(@NotNull Square square) {
         try{
             if(getNewestSquare() == square)
                 this.removeGridElement(getLastSquare());
@@ -100,12 +105,12 @@ public class LightTrail extends Field {
 	}
 
     @Override
-    protected void setEffects(Square square) {
+    protected void setEffects(@NotNull Square square) {
         square.addSquareEffect(lightTrailEffect);
     }
 
     @Override
-    protected void removeEffects(Square square) {
+    protected void removeEffects(@NotNull Square square) {
         square.removeSquareEffect(lightTrailEffect);
     }
 

@@ -4,6 +4,7 @@ import game.Player;
 import grid.Grid;
 import item.Flag;
 import item.Item;
+import org.jetbrains.annotations.Nullable;
 import square.Square;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class FlagPlacer extends ItemPlacer {
 	}
 	
 	@Override
-    void placeItem(Square square, Item item) throws IllegalArgumentException {
+    void placeItem(@Nullable Square square, Item item) throws IllegalArgumentException {
 		if(square == null)
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");

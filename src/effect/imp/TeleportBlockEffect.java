@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jonas
@@ -16,6 +17,7 @@ public class TeleportBlockEffect extends Effect {
         setPriority(EffectPriority.TeleportBlocked);
     }
 
+    @NotNull
     @Override
     public String toString(){
         return "TeleportBlockEffect";

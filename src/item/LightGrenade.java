@@ -3,6 +3,7 @@ package item;
 import effect.Effect;
 import effect.imp.EmptyEffect;
 import effect.imp.LightGrenadeEffect;
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 
 import java.util.ArrayList;
@@ -29,14 +30,15 @@ public class LightGrenade extends Item{
         activated = true;
 	}
 
-    public boolean canAddTo(Square square){
+    public boolean canAddTo(@NotNull Square square){
         return (!square.hasItem(this) && !square.hasType(this));
     }
 
 	/**
 	 * Returns the string representation of this LightGrenade
 	 */
-	@Override
+	@NotNull
+    @Override
 	public String toString() {
 		return super.toString() + "LightGrenade";
 	}
@@ -57,6 +59,7 @@ public class LightGrenade extends Item{
 		return (o instanceof LightGrenade);
 	}
 
+    @NotNull
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();

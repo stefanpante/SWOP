@@ -1,5 +1,6 @@
 package grid;
 
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 import util.Coordinate;
 import util.Direction;
@@ -148,7 +149,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The maximum amount of squares a single wall can cover.
 	 * @return	A list of coordinates that now have a wall placed on it.
 	 */
-	ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
+    @NotNull
+    ArrayList<Coordinate> getWall(@NotNull ArrayList<Coordinate> candidates, int maxWallLength){
 		ArrayList<Coordinate> wall = new ArrayList<>();
 		Direction direction = Direction.getRandomOrientation();
 		int maxPercentageLength;
@@ -179,7 +181,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @param 	candidates 
 	 * 			the list of squares of which the perimeter of the wall will be removed.
 	 */
-	void removePerimeter(ArrayList<Coordinate> coordinates, ArrayList<Coordinate> candidates) {
+	void removePerimeter(@NotNull ArrayList<Coordinate> coordinates, @NotNull ArrayList<Coordinate> candidates) {
 		for(Coordinate coordinate : coordinates){
 			for(Direction direction : Direction.values()){
 				Coordinate neighbor = coordinate.getNeighbor(direction);
@@ -189,6 +191,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		}
 	} 
     
+    @NotNull
     private ArrayList<Coordinate> getStartCoordinates(){
     	ArrayList<Coordinate> startPositions = new ArrayList<>();
     	
@@ -208,7 +211,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * 			The constraint which is taken into account.
 	 * @return	A list of sequences of coordinates.
 	 */
-    ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint) {
+    @NotNull
+    ArrayList<ArrayList<Coordinate>> randomWallLocations(@NotNull GridConstraint constraint) {
 		ArrayList<Coordinate> candidates = new ArrayList<>(gridElements.keySet());
 		ArrayList<ArrayList<Coordinate>> result = new ArrayList<>();
 		

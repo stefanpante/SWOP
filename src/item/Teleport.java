@@ -4,6 +4,8 @@ import effect.Effect;
 import effect.imp.EmptyEffect;
 import effect.imp.TeleportEffect;
 import game.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.Square;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class Teleport extends Item {
      * 			If the given destination is not valid.
      * 			| !isValidDestination(destination) || !canHaveAsDestination(destination)
      */
-    public void setDestination(Square destination) throws IllegalArgumentException {
+    public void setDestination(@NotNull Square destination) throws IllegalArgumentException {
         if(!canHaveAsDestination(destination))
             throw new IllegalArgumentException("The given destination is not a valid one for this Teleport");
         this.destination = destination;
@@ -64,7 +66,7 @@ public class Teleport extends Item {
      * @return	True if and only if the destination is not this teleport.
      * 			And if the given destination is not null.
      */
-    public boolean canHaveAsDestination(Square destination) {
+    public boolean canHaveAsDestination(@NotNull Square destination) {
         if(!isValidDestination(destination))
             return false;
         if(!destination.hasType(this))
@@ -83,7 +85,7 @@ public class Teleport extends Item {
      * 			The destination to check
      * @return	True if and only if the destination is not null.
      */
-    public static boolean isValidDestination(Square destination){
+    public static boolean isValidDestination(@Nullable Square destination){
         return destination != null;
     }
 
@@ -97,7 +99,7 @@ public class Teleport extends Item {
         return getDestination() != null && !getDestination().isObstacle();
     }
 
-    public boolean canAddTo(Square square){
+    public boolean canAddTo(@NotNull Square square){
         return (!square.hasItem(this) && !square.hasType(this));
     }
 
@@ -106,6 +108,7 @@ public class Teleport extends Item {
     }
 
 
+    @NotNull
     @Override
     public String toString() {
         return super.toString() + "Teleport";
@@ -120,6 +123,7 @@ public class Teleport extends Item {
         return (o instanceof Teleport);
     }
 
+    @NotNull
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();

@@ -1,6 +1,8 @@
 package gui;
 
 import item.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import processing.core.PApplet;
 import processing.core.PShape;
 import util.Direction;
@@ -69,7 +71,8 @@ public class Shapes {
 		}
 	}
 	
-	public static PShape getShape(Item item){
+	@Nullable
+    public static PShape getShape(Item item){
 		if(item instanceof IdentityDisc){
 			if(item instanceof ChargedIdentityDisc){
 				return Shapes.chargedIdentityDisc;
@@ -106,7 +109,8 @@ public class Shapes {
 		return null;
 	}
 
-	public static PShape getFlagItem(ArrayList<Item> it) {
+	@Nullable
+    public static PShape getFlagItem(@NotNull ArrayList<Item> it) {
 		for(Item item: it){
 			if(item instanceof Flag){
 				Flag f = (Flag) item;
