@@ -71,8 +71,9 @@ public class Flag extends Item {
 			player.getStartPosition().addItem(this);
 		}
 		else{
-			getContainer().removeItem(this);
-			setContainer(itemContainer);
+            if(getContainer() != null)
+			    getContainer().removeItem(this);
+			super.setContainer(itemContainer);
 		}
 	}
 

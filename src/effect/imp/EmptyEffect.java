@@ -7,7 +7,7 @@ import item.IdentityDisc;
 
 public class EmptyEffect extends Effect {
 
-    public void EmptyEffect(){
+    public EmptyEffect(){
         setPriority(EffectPriority.Square);
     }
 

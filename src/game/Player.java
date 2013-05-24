@@ -197,7 +197,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
     @Override
     public void setPosition(Square position, boolean updatePrevious) throws IllegalStateException {
-        System.out.println("LOLOLOLOL " + position + " and   " + updatePrevious);
+        System.out.println(position + " and   " + updatePrevious);
         if(!isValidPosition(position))
 			throw new IllegalStateException("Cannot set the player's position to a square that is obstructed.");
         if(updatePrevious){

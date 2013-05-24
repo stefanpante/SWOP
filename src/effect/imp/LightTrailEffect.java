@@ -12,7 +12,7 @@ import item.IdentityDisc;
  */
 public class LightTrailEffect extends Effect {
 
-    public void LightTrail(){
+    public LightTrailEffect(){
           setPriority(EffectPriority.MoveBlock);
     }
 

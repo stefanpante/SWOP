@@ -44,7 +44,6 @@ public class PowerManager extends Manager {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println(o);
         updatePowerFailures();
         createNewPowerFailures();
     }
