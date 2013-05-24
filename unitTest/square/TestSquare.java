@@ -13,9 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 
-import square.obstacle.MultiObstacle;
-import square.obstacle.Wall;
-
 
 public class TestSquare {
 
@@ -120,21 +117,9 @@ public class TestSquare {
 
 	
 	@Test
-	public void testSetObstacle() {
-		Square square = new Square();
-		Square otherSquare = new Square();
-		
-		
-		MultiObstacle wall = new Wall(square, otherSquare);
-		
-		assertEquals(square.getObstacle(), wall);
-		assertTrue(square.isObstructed());
-	}
-	
-	@Test
 	public void testIsObstructed() {
 		Square square = new Square();
-		assertFalse(square.isObstructed());
+		assertFalse(square.isObstacle());
 	}
 
     @Test(expected = IllegalArgumentException.class)
@@ -152,7 +137,7 @@ public class TestSquare {
         LightGrenade lg = new LightGrenade();
         sq.addItem(lg);
         assertTrue(sq.hasType(new LightGrenade()));
-        assertTrue(lg.equals(sq.filterItemsByType(new LightGrenade())));
+        assertTrue(lg.equals(sq.filterItemsByType(new LightGrenade()).get(0)));
         LightGrenade lg2 = new LightGrenade();
         sq.addItem(lg2);
     }
@@ -216,6 +201,6 @@ public class TestSquare {
         Square sq = new Square();
         Item it = new Flag();
         sq.addItem(it);
-        assertTrue(sq.hasItem(new Flag()));
+        assertTrue(sq.hasItem(it));
     }
 }

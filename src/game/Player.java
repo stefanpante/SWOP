@@ -480,7 +480,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
     @Override
     public boolean hasType(Item item) {
-        return filterItemsByType(item) != null;
+        return filterItemsByType(item).size() > 0;
     }
 
     @Override

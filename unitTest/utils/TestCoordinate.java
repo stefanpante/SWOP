@@ -3,6 +3,7 @@ package utils;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -108,15 +109,15 @@ public class TestCoordinate {
 		Coordinate neighborSouthEast = new Coordinate(0,1);
 		Coordinate neighborEast = new Coordinate(0,0);
 		
-		ArrayList<Coordinate> allNeighbors = coordinate.getAllNeighbors();
-		assertTrue(allNeighbors.contains(neighborNorthEast));
-		assertTrue(allNeighbors.contains(neighborNorth));
-		assertTrue(allNeighbors.contains(neighborNorthWest));
-		assertTrue(allNeighbors.contains(neighborWest));
-		assertTrue(allNeighbors.contains(neighborSouthWest));
-		assertTrue(allNeighbors.contains(neighborSouth));
-		assertTrue(allNeighbors.contains(neighborSouthEast));
-		assertTrue(allNeighbors.contains(neighborEast));
+		HashMap<Direction, Coordinate> allNeighbors = coordinate.getAllNeighbors();
+		assertTrue(allNeighbors.containsValue(neighborNorthEast));
+		assertTrue(allNeighbors.containsValue(neighborNorth));
+		assertTrue(allNeighbors.containsValue(neighborNorthWest));
+		assertTrue(allNeighbors.containsValue(neighborWest));
+		assertTrue(allNeighbors.containsValue(neighborSouthWest));
+		assertTrue(allNeighbors.containsValue(neighborSouth));
+		assertTrue(allNeighbors.containsValue(neighborSouthEast));
+		assertTrue(allNeighbors.containsValue(neighborEast));
 		assertEquals(8, allNeighbors.size());
 	}
 	
