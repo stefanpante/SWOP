@@ -65,15 +65,18 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 */
 	protected RandomGridBuilder(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls){
 		super();
+		setEmptyConstraints();
 		setHSize(hSize);
 	    setVSize(vSize);
 		setRandom(new Random());
 		setSquares();
-		setEmptyConstraints();
+		build(walls);
+		setNeighbors();
+		
         setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
         setStartPositions();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
-		build(walls);
+		
 		
 	}
 
@@ -98,10 +101,12 @@ public class RandomGridBuilder extends AbstractGridBuilder{
      */
 	@Override
 	protected void build() throws IllegalStateException {
-		setSquares();
-		setNeighbors();
 		setConstraints();
+		setSquares();
 		placeWalls(randomWallLocations(getConstraintWall()));
+		setNeighbors();
+		
+		
 		setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
 		setStartPositions();
 	}
@@ -113,8 +118,9 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	protected void build(ArrayList<ArrayList<Coordinate>> walls)
 	throws IllegalStateException{
 		setSquares();
-		setNeighbors();
 		placeWalls(walls);
+		setNeighbors();
+		
 		setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
 		setStartPositions();
 	}

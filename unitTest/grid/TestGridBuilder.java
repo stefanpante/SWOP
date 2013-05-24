@@ -65,10 +65,10 @@ public class TestGridBuilder {
 				if(wallsPos.contains(coor)){
 					coveredSquares++;
 					assertTrue(sq.isObstacle());
-					assertTrue(walls.contains(sq));
+					assertTrue(bricks.contains(sq));
 				} else {
 					assertFalse(grid.getGridElement(coor).isObstacle());
-					assertFalse(walls.contains(sq));
+					assertFalse(bricks.contains(sq));
 				}
 			}
 		}
@@ -111,6 +111,7 @@ public class TestGridBuilder {
 				}
 				for(Direction dir: Direction.values()){
 					try{
+						System.out.println("sq is null"  + dir == null );
 						GridElement neighbor = sq.getNeighbor(dir);
 						if(!w.getGridElements().contains(neighbor)){
 							wallNeighborSquares.add(neighbor);
@@ -146,9 +147,9 @@ public class TestGridBuilder {
 		this.gridBuilder = new RandomGridBuilder();
 		this.grid = this.gridBuilder.getGrid();
 		
-		Iterator<Square> iterator = grid.getAllGridElements().iterator();
+		Iterator<GridElement> iterator = grid.getAllGridElements().iterator();
 		
 		while(iterator.hasNext())
-			assertFalse(iterator.next().isObstructed());
+			assertFalse(iterator.next().isObstacle());
 	}
 }

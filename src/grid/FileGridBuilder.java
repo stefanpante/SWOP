@@ -81,9 +81,9 @@ public class FileGridBuilder extends AbstractGridBuilder{
 		try{
 			readInput();
 			setSquares();
+			placeWalls(this.getWallsLocation());
 			setNeighbors();
 			setConstraints();
-			placeWalls(this.getWallsLocation());
 			setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
 			setStartPositions();
 			checkConsistency();

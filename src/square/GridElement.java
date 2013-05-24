@@ -17,6 +17,7 @@ public abstract class GridElement {
      */
     private HashMap<Direction, GridElement> neighbors;
 
+
     /**
      * Sets all the neighbors of the square instance
      *
@@ -43,6 +44,7 @@ public abstract class GridElement {
      * @return the neighbor in the given direction
      */
     public GridElement getNeighbor(Direction direction) throws NoSuchElementException {
+    	System.out.println("Neighbors are null" + (neighbors == null));
         if(!neighbors.containsKey(direction))
             throw new NoSuchElementException("There is no neighbor in the given direction (" + direction + ")");
         return neighbors.get(direction);
