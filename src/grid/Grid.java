@@ -283,7 +283,8 @@ public class Grid {
 	 * @param player   The square which needs to be checked
 	 */
 	public boolean isValidStartPosition(GridElement player){
-		return (grid.containsValue(player) && !player.isObstacle());
+        return true;
+//		return (grid.containsValue(player) && !player.isObstacle());
 	}
 
 	
