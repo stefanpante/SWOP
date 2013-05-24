@@ -1,8 +1,5 @@
 package game;
 
-
-
-
 import be.kuleuven.cs.som.annotate.Basic;
 
 import effect.Effect;
@@ -320,7 +317,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	public void decrementActions(){
         this.remainingActions--;
-        lightTrail.setHead(this.getPosition());
+        lightTrail.setHead(this.getPreviousPosition());
         endAction();
     }
 	
@@ -352,7 +349,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	/**
 	 * Causes a player to lose actions
 	 * 
-	 * @param actions	the number of actions a player loses.
+	 * @param   actions	the number of actions a player loses.
 	 * @throws 	IllegalArgumentException
 	 * 			thrown when the number of actions lost is not valid.
 	 */
@@ -371,7 +368,8 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	public void performEmptyActions(){
 		while(remainingActions > 0){
-			this.decrementActions();
+            lightTrail.setHead(this.getPosition());
+            this.decrementActions();
 		}
 	}
 

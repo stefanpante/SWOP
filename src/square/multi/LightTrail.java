@@ -19,7 +19,7 @@ public class LightTrail extends Field {
 	/**
 	 * Maximum length of a LightTrail.
 	 */
-	public static final int MAX_LENGTH = 3+1;
+	public static final int MAX_LENGTH = 3;
 	
 	/**
 	 * Initialises a new linkedList for the LightTrail.
