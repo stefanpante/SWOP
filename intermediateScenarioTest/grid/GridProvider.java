@@ -14,15 +14,8 @@ public class GridProvider {
 		return (new RandomGridBuilder()).getGrid();
 	}
 	
-	public static Grid getGrid(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls, 
-			ArrayList<Coordinate> lightGrenades, 
-			ArrayList<Coordinate> identityDisks, 
-			ArrayList<Coordinate> teleports,
-            ArrayList<Coordinate> forceFieldGen,
-            Coordinate chargedIdentityDisk) {
-		
-		RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize, walls, lightGrenades, identityDisks, teleports, forceFieldGen, chargedIdentityDisk);
-		
-		return gridBuilder.getGrid();
+	public static Grid getGrid(int hSize, int vSize, ArrayList<ArrayList<Coordinate>> walls) {
+        RandomGridBuilder gridBuilder = new RandomGridBuilder(hSize, vSize, walls);
+        return gridBuilder.getGrid();
 	}
 }
