@@ -27,6 +27,7 @@ public class CTFGameMode extends GameMode{
 
     public CTFGameMode(String filepath) throws IOException{
         super(filepath);
+        this.winMap = new HashMap<>();
     }
 
     @Override
@@ -42,6 +43,10 @@ public class CTFGameMode extends GameMode{
         gameBuilder.placeChargedIdentityDisc();
         gameBuilder.placeTeleports();
         gameBuilder.placeFlags();
+
+        for(Player p : getGame().getPlayers()){
+            winMap.put(p,new HashSet<Flag>());
+        }
 
         getGame().setActivate();
 

@@ -239,12 +239,12 @@ public class Game {
 		if(!getCurrentPlayer().hasMoved()){
 			return false; 
 		}
-	/*	for(Entry<Direction, GridElement> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
-			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
-				return false;
-			}
-		}*/
-		return true;
+//	    for(Entry<Direction, GridElement> entry : getGrid().getNeighbors(getCurrentPlayer().getPosition()).entrySet()){
+//			if(getGrid().canMoveTo(getCurrentPlayer().getPosition(), entry.getKey())){
+//				return false;
+//			}
+//		}
+		return false;
 	}
 
     public void addObserver(Observer observer){
