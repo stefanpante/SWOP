@@ -1,6 +1,7 @@
 package effect.imp;
 
 import effect.Effect;
+import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
 
@@ -12,6 +13,11 @@ import item.IdentityDisc;
 public class PowerFailureEffect extends Effect {
 
     private static final int LOST_ACTIONS = 1;
+
+    public PowerFailureEffect(){
+        //TODO back to square
+        setPriority(EffectPriority.Square);
+    }
 
     @Override
     public void execute(Player player) {

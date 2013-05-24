@@ -3,7 +3,6 @@ package effect.imp;
 import effect.Effect;
 import effect.EffectPriority;
 import effect.filter.*;
-import square.Square;
 
 import java.util.ArrayList;
 
@@ -14,47 +13,41 @@ import java.util.ArrayList;
  */
 public class EffectMediator {
 
-    private ArrayList<Effect> effects;
-
-    public void setEffects(ArrayList<Effect> effects){
-        this.effects = effects;
-    }
-
-    private ArrayList<Effect> getSquareEffectBy(EffectPriority priority){
+    private ArrayList<Effect> getSquareEffectsBy(ArrayList<Effect> effects, EffectPriority priority){
         PriorityCriteria priorityCriteria = new PriorityCriteria(priority);
-        return priorityCriteria.meetsCriteria(this.effects);
+        return priorityCriteria.meetsCriteria(effects);
     }
 
-    public ArrayList<Effect> getResultingEffects(){
-        int length = EffectPriority.values().length;
-        return getEffectsBetween(EffectPriority.values()[0],EffectPriority.values()[length-1]);
-    }
+    public ArrayList<Effect> getResultingEffects(ArrayList<Effect> effects){
 
-    public ArrayList<Effect> getEffectsBetween(EffectPriority low, EffectPriority high){
-        int lowIndex = low.ordinal();
-        int highIndex = high.ordinal();
-
-        if(lowIndex > highIndex)
-            throw new IllegalArgumentException("The priority for low is higher than for high.");
+        System.out.println("--- Get Resulting Effects ---");
+        System.out.println("Effects on Square :" + effects);
 
         boolean nextOneBlocked = false;
-        for(int i = lowIndex; i <= highIndex; i++){
-            ArrayList<Effect> effects = getSquareEffectBy(EffectPriority.values()[i]);
-            if(effects.size() > 0){
-                if(EffectPriority.values()[i] == EffectPriority.MoveEffectBlock){
+        for(int i = 0; i < EffectPriority.values().length; i++){
+
+            EffectPriority effectPriority = EffectPriority.values()[i];
+            System.out.println(i + " Checking priority: " + effectPriority);
+            ArrayList<Effect> result = getSquareEffectsBy(effects, effectPriority);
+            System.out.println(i + " Result: " + result);
+            if(result.size() > 0){
+                System.out.println("in        in");
+                if(EffectPriority.values()[i] == EffectPriority.TeleportBlocked){
                     nextOneBlocked = true;
+                    System.out.println("NextOneBlocked!");
                 }else{
                     if(!nextOneBlocked){
-                        return effects;
+                        System.out.println("not nextone");
+                        System.out.println("--- End of Resulting Effects ---");
+                        return result;
                     }else{
+                        System.out.println("nextone");
                         nextOneBlocked = false;
                     }
                 }
             }
         }
+        System.out.println("--- End of Resulting Effects ---");
         return new ArrayList<>();
     }
-
-
-
 }

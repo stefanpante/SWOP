@@ -14,7 +14,7 @@ import item.IdentityDisc;
  */
 public class ForceFieldStuckEffect extends Effect {
 
-    public void ForceFieldStuckEffect(){
+    public ForceFieldStuckEffect(){
         setPriority(EffectPriority.MoveDeparture);
     }
 

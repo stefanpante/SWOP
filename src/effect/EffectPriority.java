@@ -22,7 +22,7 @@ public enum EffectPriority {
     /**
      * Prioirty allowing to block the next level of priority: movement (in particular Teleport) effects
      */
-    MoveEffectBlock,
+    TeleportBlocked,
     /**
      * Priority allowing movements such as teleports to place the Movable on a different location.
      */

@@ -22,6 +22,7 @@ public class TeleportEffect extends DropFlagEffect {
     public TeleportEffect(Square centerSquare, Square teleportDestination) {
         super(centerSquare);
         setPriority(EffectPriority.Move);
+        this.teleportDestination = teleportDestination;
     }
 
     public Square getTeleportDestination() {
@@ -31,12 +32,18 @@ public class TeleportEffect extends DropFlagEffect {
     @Override
     public void execute(Player player) {
         dropFlag(player);
+        TeleportBlockEffect effect = new TeleportBlockEffect();
+        getTeleportDestination().addEffect(effect);
         player.setPosition(getTeleportDestination(),true);
+        getTeleportDestination().removeEffect(effect);
     }
 
     @Override
     public void execute(IdentityDisc identityDisc) {
+        TeleportBlockEffect effect = new TeleportBlockEffect();
+        getTeleportDestination().addEffect(effect);
         identityDisc.setPosition(getTeleportDestination(),true);
+        getTeleportDestination().removeEffect(effect);
     }
 
     @Override

@@ -14,7 +14,7 @@ import item.IdentityDisc;
  */
 public class ForceFieldEffect extends Effect {
 
-    public void ForceFieldEffect(){
+    public ForceFieldEffect(){
         setPriority(EffectPriority.ForceField);
     }
 

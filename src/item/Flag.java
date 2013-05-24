@@ -70,8 +70,9 @@ public class Flag extends Item {
 			returnToStartPosition();
 		}
 		else{
-			getContainer().removeItem(this);
-			setContainer(itemContainer);
+            if(getContainer() != null)
+			    getContainer().removeItem(this);
+			super.setContainer(itemContainer);
 		}
 	}
 	
