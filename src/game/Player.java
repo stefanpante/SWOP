@@ -197,6 +197,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 			throw new IllegalArgumentException("The startposition of a player should not be obstructed");
 		this.startPosition = pos;
 		this.currentPosition = pos;
+        lightTrail.setHead(startPosition);
         startPosition.addSquareEffect(playerEffect);
 	}
 
@@ -229,9 +230,12 @@ public class Player extends Observable implements Movable, ItemContainer {
     }
 
     public void setPosition(Square position) throws IllegalStateException {
-        this.previousPosition = this.currentPosition;
-        lightTrail.setHead(this.previousPosition);
+        setPreviousPosition(getPosition());
         this.currentPosition = position;
+    }
+
+    public void setPreviousPosition(Square position){
+        this.previousPosition = position;
     }
 
     @Override
@@ -316,6 +320,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	public void decrementActions(){
         this.remainingActions--;
+        lightTrail.setHead(this.getPosition());
         endAction();
     }
 	

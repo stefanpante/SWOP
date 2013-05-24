@@ -35,8 +35,11 @@ public class TeleportEffect extends DropFlagEffect {
         dropFlag(player);
         TeleportBlockEffect effect = new TeleportBlockEffect();
         getTeleportDestination().addSquareEffect(effect);
-        player.getPosition().addSquareEffect(player.getPlayerEffect());
+        Square fromTeleport = player.getPosition();
+        fromTeleport.addSquareEffect(player.getPlayerEffect());
         player.move(getTeleportDestination());
+        fromTeleport.removeSquareEffect(player.getPlayerEffect());
+        player.setPreviousPosition(getTeleportDestination());
         getTeleportDestination().removeSquareEffect(effect);
     }
 
