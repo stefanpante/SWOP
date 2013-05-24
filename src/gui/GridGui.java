@@ -306,13 +306,7 @@ public class GridGui extends GUIElement{
 
 	public void updateItems(HashMap<Coordinate,ArrayList<Item>> o){
 		items.clear();
-		for(ArrayList<Item> items: o.values()){
-			for(Item item: items){
-				if(item instanceof Flag){
-					System.out.println("Flag found");
-				}
-			}
-		}
+
 		for(Coordinate coor: o.keySet()){
 			SquareGUI s = new SquareGUI(squareWidth, squareHeight, getPixels(coor), gui);
 			s.setColor(gui.color(255,0));
