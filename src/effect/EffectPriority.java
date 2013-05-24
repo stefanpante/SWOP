@@ -6,6 +6,7 @@ package effect;
  * Time: 12:46
  */
 public enum EffectPriority {
+
     /**
      * Highest priority preventing players from entering the square
      * and allowing Idenity Disks to enter and be destroyed.

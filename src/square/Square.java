@@ -103,7 +103,6 @@ public class Square extends GridElement implements ItemContainer {
         s += ", ";
 		s += effects;
 		s += " ]";
-        s += "(isObstructed: "+isObstructed()+")";
 		return s;
 	}
 
@@ -170,10 +169,6 @@ public class Square extends GridElement implements ItemContainer {
     @Override
     public boolean isObstacle() {
         return false;
-    }
-
-    public boolean isObstructed(){
-        return effectMediator.getResultingEffectsWithPriorityAbove(getAllEffects(), EffectPriority.Move).size() > 0;
     }
 
     @Override
