@@ -1,5 +1,7 @@
 package square.obstacle;
 
+import org.junit.Test;
+
 import square.Square;
 import square.multi.LightTrail;
 
