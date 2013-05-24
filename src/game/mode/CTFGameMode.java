@@ -20,9 +20,6 @@ public class CTFGameMode extends GameMode{
     public CTFGameMode(int hSize, int vSize) {
         super(hSize, vSize);
         this.winMap = new HashMap<>();
-        for(Player p : getGame().getPlayers()){
-            winMap.put(p,new HashSet<Flag>());
-        }
     }
 
     public CTFGameMode(String filepath) throws IOException{
