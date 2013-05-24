@@ -6,16 +6,14 @@ import game.Player;
 import item.IdentityDisc;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Dieter
- * Date: 23/05/13
- * Time: 16:00
- * To change this template use File | Settings | File Templates.
+ * User: jonas
+ * Date: 24/05/13
+ * Time: 09:26
  */
-public class ForceFieldEffect extends Effect {
+public class PlayerEffect extends Effect {
 
-    public ForceFieldEffect(){
-        setPriority(EffectPriority.ForceField);
+    public PlayerEffect(){
+        setPriority(EffectPriority.Player);
     }
 
     @Override
@@ -26,11 +24,11 @@ public class ForceFieldEffect extends Effect {
 
     @Override
     public void execute(IdentityDisc identityDisc) {
-        identityDisc.destroy();
+        //
     }
 
     @Override
     public String toString() {
-        return "ForceFieldEffect";
+        return "PlayerEffect";
     }
 }

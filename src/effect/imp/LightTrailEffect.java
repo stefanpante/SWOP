@@ -18,6 +18,7 @@ public class LightTrailEffect extends Effect {
 
     @Override
     public void execute(Player player) {
+        System.out.println("Executing on Player: " + this);
         player.setPosition(player.getPreviousPosition(),false);
     }
 
