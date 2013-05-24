@@ -41,6 +41,7 @@ public class CTFGameMode extends GameMode{
         gameBuilder.placeForceFieldGenerators();
         gameBuilder.placeChargedIdentityDisc();
         gameBuilder.placeTeleports();
+        gameBuilder.placeLightGrenades();
         gameBuilder.placeFlags();
 
         for(Player p : getGame().getPlayers()){

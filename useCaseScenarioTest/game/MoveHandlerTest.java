@@ -2,6 +2,7 @@ package game;
 
 import controller.MoveHandler;
 import controller.TurnHandler;
+import game.mode.RaceGameMode;
 import grid.Grid;
 import grid.GridProvider;
 import item.LightGrenade;
@@ -34,7 +35,7 @@ public class MoveHandlerTest {
 	@Before
 	public void setUpBefore(){
 		Grid grid = GridProvider.getEmptyGrid();
-		game = new Game(grid);
+		game = new Game(new RaceGameMode(10,10),2);
 		
 		moveHandler = new MoveHandler(game,null);
 		turnHandler = new TurnHandler(game, null);
@@ -73,11 +74,11 @@ public class MoveHandlerTest {
 		Square currentPosition = game.getCurrentPlayer().getPosition();
 		LightGrenade lg = new LightGrenade();
 
-		if(!currentPosition.getInventory().hasLightGrenade()) {
-			currentPosition.getInventory().addItem(lg);
-			lg.drop();
+		if(!currentPosition.hasType(new LightGrenade())) {
+			currentPosition.addItem(lg);
+			lg.activate();
 		}else{
-			lg = currentPosition.getInventory().getLightGrenade();
+			lg = currentPosition.filterItemsByType(new LightGrenade());
 		}
 		
 		for(Direction direction: Direction.values()) {
