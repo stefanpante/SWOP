@@ -5,12 +5,11 @@ import grid.Grid;
 import grid.GridProvider;
 import game.Game;
 import game.Player;
-import item.ChargedIdentityDisc;
-import item.IdentityDisc;
-import item.Item;
-import item.Teleport;
+import item.*;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import square.GridElement;
 import util.Direction;
 import square.Square;
 import util.Coordinate;
@@ -36,7 +35,8 @@ public class MoveCommandTest {
     private static ArrayList<Coordinate> identityDiscs;
     private static ArrayList<Coordinate> forceFieldGen;
     private Grid grid;
-
+    private Game g;
+    private ArrayList<Teleport>  teleportObjs;
         /**
      * SITUATION:
      * 		__0___1___2___3___4___5___6___7___8___9__
@@ -65,11 +65,6 @@ public class MoveCommandTest {
         wall2.add(new Coordinate(4, 1));
         walls.add(wall2);
 
-        // Set the grid.
-        this.grid = GridProvider.getGrid(10, 10, walls);
-        Game g = new Game(new CTFGameMode(), 2);
-        g.setGrid(grid);
-
         lightGrenades = new ArrayList<Coordinate>();
         lightGrenades.add(new Coordinate(7, 7));
         lightGrenades.add(new Coordinate(0, 8));
@@ -86,6 +81,46 @@ public class MoveCommandTest {
 
         forceFieldGen = new ArrayList<Coordinate>();
         forceFieldGen.add(new Coordinate(8,8));
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        // Set the grid.
+        g = new Game(new CTFGameMode(10,10), 2);
+        grid = GridProvider.getGrid(10, 10, walls);
+
+        for(Coordinate co : lightGrenades){
+            ((Square)grid.getGridElement(co)).addItem(new LightGrenade());
+        }
+
+        for(Coordinate co : identityDiscs){
+            ((Square)grid.getGridElement(co)).addItem(new IdentityDisc());
+        }
+
+        //Place tele
+        teleportObjs = new ArrayList<>();
+        for(Coordinate co : teleports){
+            Teleport t = new Teleport();
+            teleportObjs.add(t);
+            ((Square)grid.getGridElement(co)).addItem(t);
+        }
+
+        // Link tele
+        for(int i=0; i<teleportObjs.size(); i++){
+            teleportObjs.get(i).setDestination((Square)grid.getGridElement(teleports.get((i + 1) % teleportObjs.size())));
+        }
+
+        for(Coordinate co : forceFieldGen){
+            ((Square)grid.getGridElement(co)).addItem(new ForceFieldGenerator());
+        }
+
+        ((Square)grid.getGridElement(new Coordinate(0,0))).addItem(new ChargedIdentityDisc());
+//        grid.addStartPosition((Square)grid.getGridElement(new Coordinate(0,0)));
+//        grid.addStartPosition((Square)grid.getGridElement(new Coordinate(9,9)));
+//        grid.addStartPosition((Square)grid.getGridElement(new Coordinate(0,9)));
+//        grid.addStartPosition((Square)grid.getGridElement(new Coordinate(9,0)));
+        g.setGrid(grid);
+
     }
 
     //Normal case no walls no teleports, range 3, NORTH
@@ -113,8 +148,6 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, range 3, EAST
     @Test
     public void testID2() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         IdentityDisc id = new IdentityDisc();
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = (Square) grid.getGridElement(co0_9);
@@ -134,8 +167,6 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, range MAX, NORTH
     @Test
     public void testID3() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         ChargedIdentityDisc cd = new ChargedIdentityDisc();
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = (Square) grid.getGridElement(co0_9);
@@ -155,8 +186,6 @@ public class MoveCommandTest {
     //Normal case no walls no teleports, range MAX, NORTH
     @Test
     public void testID4() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         ChargedIdentityDisc cd = new ChargedIdentityDisc();
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = (Square) grid.getGridElement(co0_9);
@@ -176,8 +205,6 @@ public class MoveCommandTest {
     //Case with walls and no teleports, range 3, EAST
     @Test
     public void testID5() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         IdentityDisc id = new IdentityDisc();
         Coordinate co0_0 = new Coordinate(0,0);
         Square startSquare = (Square) grid.getGridElement(co0_0);
@@ -196,8 +223,6 @@ public class MoveCommandTest {
     //Case with walls and no teleports, range 3, NORTH
     @Test
     public void testID6() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         IdentityDisc id = new IdentityDisc();
         Coordinate co3_4 = new Coordinate(3,4);
         Square startSquare = (Square) grid.getGridElement(co3_4);
@@ -217,8 +242,6 @@ public class MoveCommandTest {
     //Case with walls and no teleports, range 3, NORTH
     @Test
     public void testID7() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         IdentityDisc id = new IdentityDisc();
         Coordinate co5_0 = new Coordinate(5,0);
         Square startSquare = (Square) grid.getGridElement(co5_0);
@@ -237,8 +260,6 @@ public class MoveCommandTest {
     //Case with walls and no teleports, range MAX, NORTH
     @Test
     public void testID8() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         ChargedIdentityDisc cd = new ChargedIdentityDisc();
         Coordinate co3_9 = new Coordinate(3,9);
         Square startSquare = (Square) grid.getGridElement(co3_9);
@@ -257,8 +278,6 @@ public class MoveCommandTest {
     //Case with walls and no teleports, range MAX, WEST
     @Test
     public void testID9() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         ChargedIdentityDisc cd = new ChargedIdentityDisc();
         Coordinate co5_0 = new Coordinate(5,0);
         Square startSquare = (Square) grid.getGridElement(co5_0);
@@ -278,11 +297,9 @@ public class MoveCommandTest {
     //Case with walls and teleports, range 3, NORTH
     @Test
     public void testID10() {
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs,teleports, forceFieldGen, new Coordinate(3,3));
-        Game g = new Game(grid);
         //Assure the teleports have a proper destination set.
-        Teleport t0 = (Square) grid.getGridElement(teleports.get(0)).getTeleport();
-        Teleport t1 = (Square) grid.getGridElement(teleports.get(1)).getTeleport();
+        Teleport t0 = teleportObjs.get(0);
+        Teleport t1 = teleportObjs.get(1);
         assertTrue(t0.getDestination().equals((Square) grid.getGridElement(teleports.get(1))));
         assertTrue(t1.getDestination().equals((Square) grid.getGridElement(teleports.get(0))));
 
@@ -300,21 +317,10 @@ public class MoveCommandTest {
         Square expectedSquare = (Square) grid.getGridElement(new Coordinate(4,3));
         assertTrue(expectedSquare.hasItem(id));
     }
-    
-    public Coordinate getLocationID(Grid grid, Item item){
-    	for(Square s: grid.getAllGridElements()){
-    		if(s.hasItem(item))
-    			return grid.getCoordinate(s);
-    	}
-    	
-    	return null;
-    }
 
     //Normal case no walls no teleports, player move NORTH
     @Test
     public void testPlayer1(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-        Game g = new Game(grid);
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = (Square) grid.getGridElement(co0_9);
         Player player = g.getCurrentPlayer();
@@ -326,14 +332,12 @@ public class MoveCommandTest {
     		fail("Move Command shouldn't throw an exception");
     		
     	}
-        assertEquals(player, (Square) grid.getGridElement(new Coordinate(0, 8)).getObstacle());
+        assertEquals(((Square) grid.getGridElement(new Coordinate(0,8))), player.getPosition());
     }
 
     //Normal case no walls no teleports, player move NORTHEAST
     @Test
     public void testPlayer2(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-        Game g = new Game(grid);
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = (Square) grid.getGridElement(co0_9);
         Player player = g.getCurrentPlayer();
@@ -345,14 +349,12 @@ public class MoveCommandTest {
     		fail("Move Command shouldn't throw an exception");
     		
     	}
-        assertEquals(player,(Square) grid.getGridElement(new Coordinate(1,8)).getObstacle());
+        assertEquals(((Square) grid.getGridElement(new Coordinate(1,8))), player.getPosition());
     }
 
     //Normal case no walls no teleports, player move NORTHEAST
     @Test
     public void testPlayer3(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-        Game g = new Game(grid);
         Coordinate co0_9 = new Coordinate(0,9);
         Square startSquare = (Square) grid.getGridElement(co0_9);
         Player player = g.getCurrentPlayer();
@@ -364,14 +366,12 @@ public class MoveCommandTest {
     		fail("Move Command shouldn't throw an exception");
     		
     	}
-        assertEquals(player,(Square) grid.getGridElement(new Coordinate(1,9)).getObstacle());
+        assertEquals(((Square) grid.getGridElement(new Coordinate(1,9))), player.getPosition());
     }
 
     // teleports, player move NORTH
     @Test
     public void testPlayer4(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-        Game g = new Game(grid);
         Coordinate co2_5 = new Coordinate(2,5);
         Square startSquare = (Square) grid.getGridElement(co2_5);
         Player player = g.getCurrentPlayer();
@@ -383,15 +383,13 @@ public class MoveCommandTest {
             fail("Move Command shouldn't throw an exception");
 
         }
-        assertEquals(player,(Square) grid.getGridElement(new Coordinate(4,4)).getObstacle());
+        assertEquals(((Square) grid.getGridElement(new Coordinate(4,4))), player.getPosition());
     }
 
 
     // teleports, player move WEST
     @Test
     public void testPlayer5(){
-        Grid grid = GridProvider.getGrid(10, 10, walls, lightGrenades, identityDiscs, teleports, forceFieldGen, new Coordinate(3, 3));
-        Game g = new Game(grid);
         Coordinate co5_4 = new Coordinate(5,4);
         Square startSquare = (Square) grid.getGridElement(co5_4);
         Player player = g.getCurrentPlayer();
@@ -404,6 +402,6 @@ public class MoveCommandTest {
             fail("Move Command shouldn't throw an exception");
 
         }
-        assertEquals(player,(Square) grid.getGridElement(new Coordinate(2,4)).getObstacle());
+        assertEquals(((Square) grid.getGridElement(new Coordinate(2,4))), player.getPosition());
     }
 }

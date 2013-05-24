@@ -69,6 +69,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		setRandom(new Random());
 		setSquares();
 		setEmptyConstraints();
+        setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
+        setStartPositions();
 		//Walls are build explicitly first cause other randomLocations depend on the placed obstacles.
 		build(walls);
 		
@@ -105,11 +107,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 
 	/**
 	 * Utility build method used for testing purposes.
-	 * @param lightGrenades  The lightGrenades to set on the grid.
-	 * @param identityDisks  The lightGrenades to set on the grid.
-	 * @param teleports      The lightGrenades to set on the grid.
-	 * @param fFgen            The lightGrenades to set on the grid.
-	 * @param chargedIdentityDisk  the location of the chargedIdentityDisk
 	 * @throws IllegalStateException
 	 */
 	protected void build(ArrayList<ArrayList<Coordinate>> walls)
@@ -119,7 +116,6 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 		placeWalls(walls);
 		setGrid(new Grid(getHSize(),getVSize(), this.gridElements));
 		setStartPositions();
-		
 	}
 	
 
