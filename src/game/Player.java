@@ -230,6 +230,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 
     public void setPosition(Square position) throws IllegalStateException {
         this.previousPosition = this.currentPosition;
+        lightTrail.setHead(this.previousPosition);
         this.currentPosition = position;
     }
 
@@ -315,7 +316,6 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 */
 	public void decrementActions(){
         this.remainingActions--;
-        lightTrail.setHead(getPreviousPosition());
         endAction();
     }
 	
