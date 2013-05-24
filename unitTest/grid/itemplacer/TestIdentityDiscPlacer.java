@@ -9,6 +9,9 @@ import util.Coordinate;
 
 import java.util.ArrayList;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class TestIdentityDiscPlacer {
@@ -16,14 +19,6 @@ public class TestIdentityDiscPlacer {
 	public static int RUNS = 10;
 	Grid g;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-
-	}
 
 
 	@Before
@@ -31,10 +26,6 @@ public class TestIdentityDiscPlacer {
 		g = GridProvider.getEmptyGrid();
 	}
 
-	@After
-	public void tearDown() throws Exception {
-
-	}
 
 	/**
 	 * Tests whether there is an identityDisc in the INCLUDED RADIUS of the player.
