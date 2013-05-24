@@ -3,6 +3,7 @@ package effect.imp;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 
 /**
@@ -30,7 +31,7 @@ public class TeleportEffect extends DropFlagEffect {
     }
 
     @Override
-    public void execute(Player player) {
+    public void execute(@NotNull Player player) {
         System.out.println("Executing on Player: " + this);
 
         dropFlag(player);
@@ -53,6 +54,7 @@ public class TeleportEffect extends DropFlagEffect {
         getTeleportDestination().removeSquareEffect(effect);
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "TeleportEffect";

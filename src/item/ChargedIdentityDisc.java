@@ -1,6 +1,8 @@
 package item;
 
 
+import org.jetbrains.annotations.NotNull;
+
 public class ChargedIdentityDisc extends IdentityDisc {
 	
 	/**
@@ -16,7 +18,8 @@ public class ChargedIdentityDisc extends IdentityDisc {
 		super.setRange(MAX_TRAVEL_DISTANCE);
 	}
 		
-	@Override
+	@NotNull
+    @Override
 	public String toString() {
 		return super.toString() + "ChargedIdentityDisc";
 	}

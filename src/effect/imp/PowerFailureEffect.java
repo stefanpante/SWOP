@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * User: jonas
@@ -20,16 +21,17 @@ public class PowerFailureEffect extends Effect {
     }
 
     @Override
-    public void execute(Player player) {
+    public void execute(@NotNull Player player) {
         System.out.println("Executing on Player: " + this);
         player.loseActions(LOST_ACTIONS);
     }
 
     @Override
-    public void execute(IdentityDisc identityDisc) {
+    public void execute(@NotNull IdentityDisc identityDisc) {
         identityDisc.decreaseRange();
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "PowerFailureEffect";

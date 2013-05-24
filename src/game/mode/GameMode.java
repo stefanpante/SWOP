@@ -5,6 +5,7 @@ import game.Game;
 import grid.AbstractGridBuilder;
 import grid.FileGridBuilder;
 import grid.RandomGridBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
@@ -26,6 +27,7 @@ public abstract class GameMode {
 	/**
 	 * The gridbuilder used to construct the grid for the game.
 	 */
+    @NotNull
     final AbstractGridBuilder gridBuilder;
 	
 	

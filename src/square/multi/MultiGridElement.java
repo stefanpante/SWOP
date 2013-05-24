@@ -1,5 +1,7 @@
 package square.multi;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.GridElement;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public class MultiGridElement<T extends GridElement> {
     /**
      * An MultiGridElement covers a set of Grid Elements.
      */
+    @NotNull
     private final ArrayList<T> gridElements;
 
     /**
@@ -27,6 +30,7 @@ public class MultiGridElement<T extends GridElement> {
     /**
      * Returns a list of Grid Elements which this MutliGridElement covers.
      */
+    @NotNull
     public ArrayList<T> getGridElements() {
         return new ArrayList<>(this.gridElements);
     }
@@ -116,7 +120,7 @@ public class MultiGridElement<T extends GridElement> {
      * 			The gridElement to be checked
      * @return	True if and only the gridElement is not not null and not yet part of the MutliGridElement
      */
-    public boolean isValidGridElement(T gridElement){
+    public boolean isValidGridElement(@Nullable T gridElement){
         return gridElement != null && !getGridElements().contains(gridElement);
     }
 

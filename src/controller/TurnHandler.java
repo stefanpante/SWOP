@@ -5,6 +5,7 @@ package controller;
 
 import game.Game;
 import game.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
@@ -18,9 +19,10 @@ import java.util.Observer;
  */
 public class TurnHandler extends Handler implements Observer {
 
-	private final HashMap<Player,Integer> counter;
+	@NotNull
+    private final HashMap<Player,Integer> counter;
 	
-	public TurnHandler(Game game, PropertyChangeListener listener) {
+	public TurnHandler(@NotNull Game game, PropertyChangeListener listener) {
 		super(game, listener);
         game.addObserver(this);
 

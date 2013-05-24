@@ -32,7 +32,7 @@ public class ThrowIdentityDiskHandler extends Handler {
 	 * @param direction	the direction in which the disc is thrown.
 	 * @throws Exception
 	 */
-	public void throwLaunchable(IdentityDisc disc, Direction direction) throws Exception {
+	public void throwLaunchable(IdentityDisc disc, Direction direction) {
 		fireChanges();
 		Square startSquare = getGame().getCurrentPlayer().getPosition();
 		AbstractGameCommand throwLaunchableEvent = new IdentityDiscMoveCommand(getGame(), disc, startSquare, direction);

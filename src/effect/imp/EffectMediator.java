@@ -3,6 +3,7 @@ package effect.imp;
 import effect.Effect;
 import effect.EffectPriority;
 import effect.filter.PriorityCriteria;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class EffectMediator {
     }
 
 
-    ArrayList<Effect> getResultingEffectsWithPriorityAbove(ArrayList<Effect> effects, EffectPriority priority){
+    ArrayList<Effect> getResultingEffectsWithPriorityAbove(ArrayList<Effect> effects, @NotNull EffectPriority priority){
 
         int max = priority.ordinal();
 

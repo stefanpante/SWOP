@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.imp.EmptyEffect;
 import game.Player;
 import item.inter.ItemContainer;
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Flag extends Item {
     }
 	
 	@Override
-	public boolean canAddTo(Player player){
+	public boolean canAddTo(@NotNull Player player){
 		return  (!player.hasType(new Flag())) && player.getAllItems().size() < Player.MAX_ITEMS;
 		
 	}
@@ -50,6 +51,7 @@ public class Flag extends Item {
 		return (item instanceof Flag);
 	}
 
+    @NotNull
     @Override
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();
@@ -87,6 +89,7 @@ public class Flag extends Item {
 		player.getStartPosition().addItem(this);
 	}
 
+    @NotNull
     @Override
     public String toString() {
         return super.toString() + "Flag";

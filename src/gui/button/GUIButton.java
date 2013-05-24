@@ -1,6 +1,7 @@
 package gui.button;
 
 import gui.GUIElement;
+import org.jetbrains.annotations.NotNull;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
@@ -15,7 +16,8 @@ public abstract class GUIButton extends GUIElement {
 	/**
 	 * The actionListeners for the button
 	 */
-	private final ArrayList<ActionListener> actionListeners;
+	@NotNull
+    private final ArrayList<ActionListener> actionListeners;
 	
 	/**
 	 * The actionCommand for this button

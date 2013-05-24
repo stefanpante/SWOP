@@ -14,7 +14,7 @@ public class RaceGameMode extends GameMode{
 		super(hSize, vSize);
 	}
 	
-	public RaceGameMode(String filepath) throws IOException{
+	public RaceGameMode(String filepath) {
 		super(filepath);
 	}
 

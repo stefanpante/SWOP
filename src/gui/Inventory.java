@@ -5,6 +5,8 @@ import item.ForceFieldGenerator;
 import item.Item;
 import item.LightGrenade;
 import item.Teleport;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import processing.core.PApplet;
 import processing.core.PVector;
 import util.OConstants;
@@ -24,14 +26,17 @@ public class Inventory extends GUIElement{
 	/*
 	 * The last button which was pressed by the user.
 	 */
-	private ItemButton selectedButton;
+	@Nullable
+    private ItemButton selectedButton;
 
 	/**
 	 * The list of buttons (representing the items.
 	 */
-	private final ArrayList<ItemButton> buttons;
+	@NotNull
+    private final ArrayList<ItemButton> buttons;
 	
-	private final Label label;
+	@NotNull
+    private final Label label;
 
 	/**
 	 * Constructs a new Inventory object
@@ -50,7 +55,8 @@ public class Inventory extends GUIElement{
 		this.initialize();
 	}
 	
-	public Label getLabel(){
+	@NotNull
+    public Label getLabel(){
 		return this.label;
 	}
 
@@ -161,7 +167,8 @@ public class Inventory extends GUIElement{
 
 	}
 
-	public Item getSelectedItem() {
+	@Nullable
+    public Item getSelectedItem() {
 		if(selectedButton == null){
 			return null;
 		}

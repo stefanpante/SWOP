@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * User: Dieter
@@ -28,6 +29,7 @@ public class ForceFieldStuckEffect extends Effect {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "ForceFieldStuckEffect";

@@ -2,15 +2,18 @@ package gui.message;
 
 import gui.ObjectronGUI;
 import gui.button.TextButton;
+import org.jetbrains.annotations.NotNull;
 import processing.core.PVector;
 
 public class YesNoDialog extends Message{
 
 	
-	private final TextButton yes;
-	private final TextButton no;
+	@NotNull
+    private final TextButton yes;
+	@NotNull
+    private final TextButton no;
 	
-	public YesNoDialog(float width, float height, PVector position,
+	public YesNoDialog(float width, float height, @NotNull PVector position,
 			String message, ObjectronGUI gui) {
 		super(width, height, position, message, gui);
 		float y = position.y + height - 35;
@@ -34,7 +37,8 @@ public class YesNoDialog extends Message{
 		}
 	}
 	
-	public TextButton getYesButton(){
+	@NotNull
+    public TextButton getYesButton(){
 		return this.yes;
 	}
 	
@@ -43,7 +47,8 @@ public class YesNoDialog extends Message{
 		no.isPressed(mouseX, mouseY);
 	}
 	
-	public TextButton getNoButton(){
+	@NotNull
+    public TextButton getNoButton(){
 		return this.no;
 	}
 	@Override

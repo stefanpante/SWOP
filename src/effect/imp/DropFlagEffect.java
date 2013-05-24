@@ -4,6 +4,7 @@ import effect.Effect;
 import game.Player;
 import item.Flag;
 import item.Item;
+import org.jetbrains.annotations.NotNull;
 import square.GridElement;
 import square.Square;
 
@@ -32,7 +33,7 @@ abstract class DropFlagEffect extends Effect {
         return centerSquare;
     }
 
-    void dropFlag(Player player) {
+    void dropFlag(@NotNull Player player) {
         Item flag = null;
         for(Item i :  player.getAllItems()){
             if(i.isSameType(new Flag())){

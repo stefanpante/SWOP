@@ -1,5 +1,6 @@
 package square;
 
+import org.jetbrains.annotations.NotNull;
 import util.Direction;
 
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public abstract class GridElement {
      *
      * @return  The neighbors of this square.
      */
+    @NotNull
     public HashMap<Direction, GridElement> getNeighbors(){
         return new HashMap<>(neighbors);
     }

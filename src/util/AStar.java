@@ -1,6 +1,8 @@
 package util;
 
 import grid.Grid;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.GridElement;
 
 import java.util.ArrayList;
@@ -12,8 +14,10 @@ import java.util.PriorityQueue;
 public class AStar {
 	
 	private ArrayList<GridElementContainer> source;
-	private final ArrayList<GridElementContainer> closedSet;
-	private final PriorityQueue<GridElementContainer> openSet;
+	@NotNull
+    private final ArrayList<GridElementContainer> closedSet;
+	@NotNull
+    private final PriorityQueue<GridElementContainer> openSet;
 	private final Grid grid;
 	
 	public AStar(Grid grid){
@@ -28,7 +32,7 @@ public class AStar {
  * @param   grid
  *          The grid of the game
  */
-	private void boxAllGridElements(Grid grid, GridElement el1, GridElement el2) {
+	private void boxAllGridElements(@NotNull Grid grid, GridElement el1, GridElement el2) {
 		this.source = new ArrayList<>();
 		for(GridElement element : grid.getAllGridElements()){
 			GridElementContainer sq = new GridElementContainer(element);
@@ -46,7 +50,8 @@ public class AStar {
      *
      * @return  A list of gridelement Containers
      */
-private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Direction,GridElement> gridElements){
+@NotNull
+private ArrayList<GridElementContainer> getGridElementContainers(@NotNull HashMap<Direction,GridElement> gridElements){
 	ArrayList<GridElementContainer> gridElementContainers = new ArrayList<>();
 	for(Entry<Direction,GridElement> entry : gridElements.entrySet()){
 		GridElementContainer sq = getGridElementContainer(entry.getValue());
@@ -61,7 +66,8 @@ private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Directi
  *
  * @return  The gridelement container for a given gridelement
  */
-	private GridElementContainer getGridElementContainer(GridElement gridElement){
+	@Nullable
+    private GridElementContainer getGridElementContainer(GridElement gridElement){
 		for(GridElementContainer sc : source){
 			if(sc.getGridElement().equals(gridElement)){
 				return sc;
@@ -77,7 +83,8 @@ private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Directi
  *
  * @return  The shortest path between the two gridelements
  */
-	public ArrayList<Coordinate> shortestPath(GridElement el1, GridElement el2){	
+	@NotNull
+    public ArrayList<Coordinate> shortestPath(GridElement el1, GridElement el2){
 		boxAllGridElements(grid, el1, el2);
 		GridElementContainer start = getGridElementContainer(el1);
 		GridElementContainer goal = getGridElementContainer(el2);
@@ -133,7 +140,8 @@ private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Directi
 		return Math.abs(start.getX() - goal.getX()) + Math.abs(start.getY() - (goal.getY()));
 	}
 
-	private ArrayList<Coordinate> reconstructPath(GridElementContainer gridElementContainer, GridElementContainer startGridElementContainer){
+	@NotNull
+    private ArrayList<Coordinate> reconstructPath(@NotNull GridElementContainer gridElementContainer, @NotNull GridElementContainer startGridElementContainer){
 		ArrayList<Coordinate> path = new ArrayList<>();
 		while(!(gridElementContainer.getPreviousGridElementContainer() == null)){
 			path.add(grid.getCoordinate(gridElementContainer.getGridElement()));
@@ -187,7 +195,7 @@ private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Directi
 			return this.distanceFromGoal;
 		}
 		
-		public int compareTo(GridElementContainer other) { 
+		public int compareTo(@NotNull GridElementContainer other) {
 		    final int BEFORE = -1;
 		    final int EQUAL = 0;
 		    final int AFTER = 1;
@@ -217,7 +225,7 @@ private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Directi
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(@Nullable Object obj) {
 			if (this == obj) {
 				return true;
 			}
@@ -241,7 +249,8 @@ private ArrayList<GridElementContainer> getGridElementContainers(HashMap<Directi
 			return true;
 		}
 
-		private AStar getOuterType() {
+		@NotNull
+        private AStar getOuterType() {
 			return AStar.this;
 		}
 	}

@@ -32,6 +32,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     /**
      * List of items on this square
      */
+    @org.jetbrains.annotations.NotNull
     private final ArrayList<Item> items;
 
 	/**
@@ -53,7 +54,8 @@ public class Player extends Observable implements Movable, ItemContainer {
 	/**
 	 * The player's Light Trail
 	 */
-	private final LightTrail lightTrail;
+	@org.jetbrains.annotations.NotNull
+    private final LightTrail lightTrail;
 	
 	/**
 	 * The number of remaining actions the player has left
@@ -67,6 +69,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	
 	private boolean alive;
 
+    @org.jetbrains.annotations.NotNull
     private final PlayerEffect playerEffect;
 	
 	/**
@@ -108,7 +111,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @returns	True	If the square is not null and not obstructed.
 	 * 			False	If the square is null or obstructed.
 	 */
-	public static boolean isValidStartPosition(Square square) {
+	public static boolean isValidStartPosition(@org.jetbrains.annotations.Nullable Square square) {
         return square != null;
     }
 	
@@ -120,7 +123,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @return	True	If square is not null and not obstructed.
 	 * 			False	If square is null or obstructed.
 	 */
-	private static boolean isValidPosition(Square newPosition) {
+	private static boolean isValidPosition(@org.jetbrains.annotations.Nullable Square newPosition) {
         return newPosition != null;
     }
 
@@ -270,7 +273,8 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @return	The name of this player. 
 	 * 
 	 */
-	public String getName(){
+	@org.jetbrains.annotations.NotNull
+    public String getName(){
 		return "Player " + getID();
 	}
 
@@ -411,7 +415,7 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * @throws	IllegalStateException
 	 * 			when the item that is used is not inside the inventory or null.
 	 */
-	public void useItem(Item item) throws IllegalStateException {
+	public void useItem(@org.jetbrains.annotations.Nullable Item item) throws IllegalStateException {
 		if(item == null)
 			throw new IllegalStateException("Can't use a 'null' item");
         removeItem(item);
@@ -450,12 +454,14 @@ public class Player extends Observable implements Movable, ItemContainer {
 	 * 
 	 * @return	This player's light trail
 	 */
-	public LightTrail getLightTrail(){
+	@org.jetbrains.annotations.NotNull
+    public LightTrail getLightTrail(){
 		return this.lightTrail;
 	}
 
 	
-	@Override
+	@org.jetbrains.annotations.NotNull
+    @Override
 	public String toString() {
 		return "Player " + this.getID();
 	}
@@ -471,7 +477,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     }
 
     @Override
-    public void addItem(Item item) {
+    public void addItem(@org.jetbrains.annotations.Nullable Item item) {
         if(item == null)
             throw new IllegalArgumentException("The item cannot be null");
         if(!item.canAddTo(this))
@@ -481,7 +487,7 @@ public class Player extends Observable implements Movable, ItemContainer {
     }
 
     @Override
-    public void removeItem(Item item) {
+    public void removeItem(@org.jetbrains.annotations.Nullable Item item) {
         if(item == null)
             throw new IllegalArgumentException("The item cannot be null");
         if(!hasItem(item))
@@ -495,12 +501,13 @@ public class Player extends Observable implements Movable, ItemContainer {
     }
 
     @Override
-    public boolean hasType(Item item) {
+    public boolean hasType(@org.jetbrains.annotations.NotNull Item item) {
         return filterItemsByType(item).size() > 0;
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
-    public ArrayList<Item> filterItemsByType(Item item) {
+    public ArrayList<Item> filterItemsByType(@org.jetbrains.annotations.NotNull Item item) {
         ArrayList<Item> result = new ArrayList<>();
         for(Item it : getAllItems()){
             if(item.isSameType(it))
@@ -509,6 +516,7 @@ public class Player extends Observable implements Movable, ItemContainer {
         return result;
     }
 
+    @org.jetbrains.annotations.NotNull
     @Override
     public ArrayList<Item> getAllItems() {
         return new ArrayList<Item>(items);
@@ -519,6 +527,7 @@ public class Player extends Observable implements Movable, ItemContainer {
         return itemContainer instanceof Player;
     }
 
+    @org.jetbrains.annotations.NotNull
     public Effect getPlayerEffect(){
         return this.playerEffect;
     }

@@ -2,6 +2,7 @@ package square.field;
 
 import effect.imp.PowerFailureEffect;
 import game.Player;
+import org.jetbrains.annotations.NotNull;
 import square.GridElement;
 import square.Square;
 import util.Direction;
@@ -212,6 +213,7 @@ public class PowerFailure extends Field {
         return this.active;
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "PowerFailure{" +
@@ -222,23 +224,23 @@ public class PowerFailure extends Field {
                 '}';
     }
 
-    void setPowerFailure(int i, Square square) {
+    void setPowerFailure(int i, @NotNull Square square) {
         addGridElement(i, square);
         setEffects(square);
     }
 
-    void removePowerFailure(Square square) {
+    void removePowerFailure(@NotNull Square square) {
         removeGridElement(square);
         removeEffects(square);
     }
 
     @Override
-    protected void setEffects(Square square) {
+    protected void setEffects(@NotNull Square square) {
         square.addSquareEffect(powerFailureEffect);
     }
 
     @Override
-    protected void removeEffects(Square square) {
+    protected void removeEffects(@NotNull Square square) {
         square.removeSquareEffect(powerFailureEffect);
     }
 }

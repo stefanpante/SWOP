@@ -1,5 +1,6 @@
 package grid;
 
+import org.jetbrains.annotations.NotNull;
 import square.GridElement;
 import square.Square;
 import util.AStar;
@@ -24,7 +25,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * the file to be parsed.
 	 */
-	private final File file;
+	@NotNull
+    private final File file;
 
 	/**
 	 * the buffered reader used to read the file.
@@ -44,7 +46,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	/**
 	 * ArrayList containing the start positions of the players.
 	 */
-	private final ArrayList<Coordinate> startCoordinates;
+	@NotNull
+    private final ArrayList<Coordinate> startCoordinates;
 
 	/**
 	 * Construct a new fileGridBuilder with a given parameter
@@ -194,7 +197,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * places all the walls in the Grid,
 	 * The walls are checked for consistency after the building process.
 	 */
-	private ArrayList<ArrayList<Coordinate>> getWallsLocation(){
+	@NotNull
+    private ArrayList<ArrayList<Coordinate>> getWallsLocation(){
 		ArrayList<ArrayList<Coordinate>> wallsLocation = new ArrayList<>();
 		// make a copy of the initial walls array, so that it can be saved for later.
 		ArrayList<Coordinate> walls = new ArrayList<>(wall_squares);
@@ -227,7 +231,8 @@ public class FileGridBuilder extends AbstractGridBuilder{
 	 * @param direction	 the direction in which we look for wall coordinates
 	 * @return  the sequence of coordinates which make up a part of the wall.
 	 */
-	private ArrayList<Coordinate> getWallSequence(Coordinate coordinate, Direction direction){
+	@NotNull
+    private ArrayList<Coordinate> getWallSequence(Coordinate coordinate, Direction direction){
 		ArrayList<Coordinate> sequence = new ArrayList<>();
 		wall_squares.remove(coordinate);
 		Coordinate coor = coordinate;

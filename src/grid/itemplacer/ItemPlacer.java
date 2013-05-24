@@ -4,6 +4,8 @@ import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Item;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.Square;
 import util.Coordinate;
 
@@ -36,7 +38,8 @@ public abstract class ItemPlacer {
 	/**
 	 * Random used for random locations in the grid.
 	 */
-	private final Random random;
+	@NotNull
+    private final Random random;
 	
 	/**
 	 * Creates a new ItemPlacer
@@ -72,7 +75,7 @@ public abstract class ItemPlacer {
 	 * @param 	item
 	 * 			The item to be placed on the given coordinate
 	 */
-    void placeItem(Square square, Item item) throws IllegalArgumentException {
+    void placeItem(@Nullable Square square, Item item) throws IllegalArgumentException {
 		if(square == null || square.isObstacle())
 			return;
 			//			throw new IllegalArgumentException("Cannot place an object on a square that is obstructed.");
@@ -89,6 +92,7 @@ public abstract class ItemPlacer {
      * corresponding to Squares on the grid.
      * @return	An arrayList with coordinates which satisfy the itemConstraint.
      */
+    @NotNull
     ArrayList<Coordinate> getLocations(){
         ArrayList<Coordinate> coordinates = new ArrayList<>();
         ArrayList<Coordinate> candidates = getGrid().getAllCoordinates();
@@ -131,7 +135,8 @@ public abstract class ItemPlacer {
      *          The amount of coordinates surrounding the starting coordinate.
      * @return A list of coordinates surrounding the starting coordinate
      */
-    protected ArrayList<Coordinate> getSquaredLocation(Coordinate start, int size){
+    @NotNull
+    protected ArrayList<Coordinate> getSquaredLocation(@NotNull Coordinate start, int size){
 		ArrayList<Coordinate> coordinates = new ArrayList<>();
         int centerX = start.getX();
         int centerY = start.getY();
@@ -158,7 +163,7 @@ public abstract class ItemPlacer {
 	 * Returns a random index inside an arrayList
 	 * @param a	the list of which a random index is selected.
 	 */
-    int getRandomIndex(@SuppressWarnings("rawtypes") ArrayList a){
+    int getRandomIndex(@NotNull @SuppressWarnings("rawtypes") ArrayList a){
         return random.nextInt(a.size());
     }
     
@@ -169,10 +174,12 @@ public abstract class ItemPlacer {
     	return this.grid;
     }
     
+    @NotNull
     ArrayList<Player> getPlayers(){
     	return new ArrayList<>(players);
     }
     
+    @NotNull
     protected ArrayList<Coordinate> getPlayerCoordinates(){
     	ArrayList<Coordinate> coordinates = new ArrayList<>();
     	for(Player player: players){

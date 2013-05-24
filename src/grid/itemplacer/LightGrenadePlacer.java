@@ -4,6 +4,7 @@ import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.LightGrenade;
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 import util.Coordinate;
 
@@ -42,7 +43,8 @@ public class LightGrenadePlacer extends ItemPlacer{
 		}
 	}
 	
-	ArrayList<ArrayList<Coordinate>> getIncluded(){
+	@NotNull
+    ArrayList<ArrayList<Coordinate>> getIncluded(){
 		ArrayList<ArrayList<Coordinate>> included = new ArrayList<>();
 		for(Coordinate coordinate: getPlayerCoordinates())
 			included.add(getSquaredLocation(coordinate, INCLUDED_RADIUS));

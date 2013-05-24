@@ -4,6 +4,7 @@ import effect.Effect;
 import effect.EffectPriority;
 import game.Player;
 import item.IdentityDisc;
+import org.jetbrains.annotations.NotNull;
 
 public class EmptyEffect extends Effect {
 
@@ -21,6 +22,7 @@ public class EmptyEffect extends Effect {
         // Do nothing
     }
 
+    @NotNull
     @Override
     public String toString() {
         return "EmptyEffect";

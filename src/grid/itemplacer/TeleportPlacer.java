@@ -4,6 +4,7 @@ import game.Player;
 import grid.Grid;
 import grid.GridConstraint;
 import item.Teleport;
+import org.jetbrains.annotations.NotNull;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
@@ -49,7 +50,7 @@ public class TeleportPlacer extends ItemPlacer {
 	 * @param 	teleports
 	 * 			The list of teleports to link.
      */
-	private void linkTeleports(ArrayList<Teleport> teleports, ArrayList<Square> destinations) {
+	private void linkTeleports(@NotNull ArrayList<Teleport> teleports, @NotNull ArrayList<Square> destinations) {
 		for(Teleport teleport : teleports){
 			Square candidateDestination = destinations.get(getRandomIndex(destinations));
 			while(candidateDestination.hasItem(teleport)){

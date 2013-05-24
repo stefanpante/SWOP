@@ -2,6 +2,7 @@ package square.field;
 
 import effect.imp.ForceFieldEffect;
 import effect.imp.ForceFieldStuckEffect;
+import org.jetbrains.annotations.NotNull;
 import square.Square;
 
 /**
@@ -12,7 +13,9 @@ import square.Square;
  */
 public class ForceField extends Field {
 
+    @NotNull
     private final ForceFieldEffect forceFieldEffect;
+    @NotNull
     private final ForceFieldStuckEffect forceFieldStuckEffect;
 	
 	/**
@@ -113,13 +116,13 @@ public class ForceField extends Field {
 	}
 
     @Override
-    public void setEffects(Square square) {
+    public void setEffects(@NotNull Square square) {
         square.addSquareEffect(forceFieldEffect);
         square.addSquareEffect(forceFieldStuckEffect);
     }
 
     @Override
-    public void removeEffects(Square square) {
+    public void removeEffects(@NotNull Square square) {
         square.removeSquareEffect(forceFieldEffect);
         square.removeSquareEffect(forceFieldStuckEffect);
     }

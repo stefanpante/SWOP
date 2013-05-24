@@ -3,6 +3,8 @@ package grid;
 
 import be.kuleuven.cs.som.annotate.Basic;
 import be.kuleuven.cs.som.annotate.Raw;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import square.GridElement;
 import square.Square;
 import util.Coordinate;
@@ -56,7 +58,8 @@ public class Grid {
 	 * the start position of the players
 	 */
 	
-	private final ArrayList<Square> startPositions;
+	@NotNull
+    private final ArrayList<Square> startPositions;
 	
 	/**
 	 * Creates a new grid with given height and length.
@@ -158,7 +161,7 @@ public class Grid {
 	 * 			|	&&
 	 * 			|	coordinate.getY() >= 0
 	 */
-	public boolean isValidCoordinate(Coordinate coordinate) {
+	public boolean isValidCoordinate(@Nullable Coordinate coordinate) {
         return coordinate != null && coordinate.getX() >= 0 && coordinate.getY() >= 0;
     }
 	
@@ -190,7 +193,8 @@ public class Grid {
 	 * @return	A list of squares corresponding to all the valid given coordinates.
 	 * 			Not in a specific order.
 	 */
-	public ArrayList<GridElement> getGridElements(ArrayList<Coordinate> coordinates){
+	@NotNull
+    public ArrayList<GridElement> getGridElements(@NotNull ArrayList<Coordinate> coordinates){
 		ArrayList<GridElement> gridElements = new ArrayList<>();
 		for(Coordinate coordinate : coordinates){
 			try {
@@ -225,7 +229,8 @@ public class Grid {
 	 * @param gridElements		the gridElements of which the coordinates are returned
 	 * @return				the coordinates of the gridElements
 	 */
-	public ArrayList<Coordinate> getCoordinates(ArrayList<? extends GridElement> gridElements){
+	@NotNull
+    public ArrayList<Coordinate> getCoordinates(@NotNull ArrayList<? extends GridElement> gridElements){
 		ArrayList<Coordinate> coors = new ArrayList<>();
 		for(GridElement gridElement: gridElements)
 			coors.add(getCoordinate(gridElement));
@@ -264,7 +269,8 @@ public class Grid {
 	 * @return	A list with all the squares positioned 
 	 * 			at a coordinate in this grid.
 	 */
-	@Basic @Raw
+	@NotNull
+    @Basic @Raw
 	public ArrayList<GridElement> getAllGridElements(){
 		return new ArrayList<>(grid.values());
 	}
@@ -274,7 +280,8 @@ public class Grid {
 	 * 
 	 * @return	A list with all the coordinates of this grid.
 	 */
-	@Basic @Raw
+	@NotNull
+    @Basic @Raw
 	public ArrayList<Coordinate> getAllCoordinates(){
 		return new ArrayList<>(grid.keySet());
 	}
@@ -292,6 +299,7 @@ public class Grid {
      * Returns the start positions of all the players on the grid.
      * @return
      */
+    @NotNull
     public ArrayList<Square> getStartPositions(){
     	return new ArrayList<>(startPositions);
     }
@@ -311,7 +319,8 @@ public class Grid {
 	/**
 	 * Returns a string representation of the grid.
 	 */
-	@Override
+	@NotNull
+    @Override
 	public String toString() {
 		return "Grid (hSize="+getHSize()+", vSize" + getVSize()+")";
 	}

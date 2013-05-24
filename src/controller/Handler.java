@@ -4,6 +4,7 @@ import effect.Effect;
 import game.Game;
 import game.Player;
 import item.Item;
+import org.jetbrains.annotations.NotNull;
 import square.Brick;
 import square.GridElement;
 import square.Square;
@@ -50,6 +51,7 @@ public abstract class Handler {
     /**
      * Used to signal property changes
      */
+    @NotNull
     private final PropertyChangeSupport propertyChangeSupport;
 
     /**
@@ -114,6 +116,7 @@ public abstract class Handler {
      *
      * @return ArrayList<Coordinate>	List of all coordinates which contain a player.
      */
+    @NotNull
     HashMap<Player, Coordinate> getPlayerLocations() {
         HashMap<Player, Coordinate> players = new HashMap<>();
         for (Player player : getGame().getPlayers()) {
@@ -127,6 +130,7 @@ public abstract class Handler {
      *
      * @return ArrayList<item>	List of all items of the current square.
      */
+    @NotNull
     ArrayList<Item> getSquareItems() {
         return getGame().getCurrentPlayer().getPosition().getAllItems();
     }
@@ -136,6 +140,7 @@ public abstract class Handler {
      *
      * @return ArrayList<item>	List of all items of the current player.
      */
+    @NotNull
     ArrayList<Item> getPlayerItems() {
         return getGame().getCurrentPlayer().getAllItems();
     }
@@ -179,6 +184,7 @@ public abstract class Handler {
     /**
      * Returns all the game properties needed to fire propertyChanges.
      */
+    @NotNull
     HashMap<String, Object> getProperties() {
 
         HashMap<String, Object> properties = new HashMap<>();
@@ -238,6 +244,7 @@ public abstract class Handler {
      *
      * @return HashMap with coordinates of lightTrails per player List of coordinates which have a LightTrail.
      */
+    @NotNull
     HashMap<Player, ArrayList<Coordinate>> getLightTrailLocations() {
         HashMap<Player, LightTrail> map = new HashMap<>();
         for (Player player : getGame().getPlayers()) {
