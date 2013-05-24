@@ -19,7 +19,7 @@ public class ForceFieldGeneratorPlacer extends ItemPlacer {
 	/**
 	 * Percentage of squares with a ForceFieldGenerator
 	 */
-	private static float PERCENTAGE_FORCEFIELDGENERATORS = 0.07f;
+	private static final float PERCENTAGE_FORCEFIELDGENERATORS = 0.07f;
 
 	/**
 	 * Constructs a new ForceFieldGeneratorPlacer

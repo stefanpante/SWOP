@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class RandomGridBuilder extends AbstractGridBuilder{
 	
-	public static int MIN_HSIZE = 10;
-	private static int MIN_VSIZE = 10;
+	public static final int MIN_HSIZE = 10;
+	private static final int MIN_VSIZE = 10;
 	
 	/**
 	 * This creates a flat grid, with dimensions 10x10 and no
@@ -85,16 +85,16 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * Checks if the number of horizontal Squares is valid to create a grid with.
 	 */
 	@Override
-    public boolean isValidHSize(int hSize){
-        return ( hSize >= MIN_HSIZE);
+    public boolean isNotValidHSize(int hSize){
+        return (hSize < MIN_HSIZE);
     }
 
 	/**
 	 * Checks if the number of vertical Squares is valid to create a grid with.
 	 */
     @Override
-    public boolean isValidVSize(int vSize){
-        return (vSize >= MIN_VSIZE);
+    public boolean isNotValidVSize(int vSize){
+        return (vSize < MIN_VSIZE);
     }
 	
     /**
@@ -128,7 +128,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	
 
 	private void setConstraints(){
-		ArrayList<Coordinate> excluded = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> excluded = new ArrayList<>();
 		for(Coordinate coor: getStartCoordinates()){
 			excluded.add(coor);
 		}
@@ -149,7 +149,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @return	A list of coordinates that now have a wall placed on it.
 	 */
 	ArrayList<Coordinate> getWall(ArrayList<Coordinate> candidates, int maxWallLength){
-		ArrayList<Coordinate> wall = new ArrayList<Coordinate>();
+		ArrayList<Coordinate> wall = new ArrayList<>();
 		Direction direction = Direction.getRandomOrientation();
 		int maxPercentageLength;
 		/* Determine length */
@@ -190,7 +190,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	} 
     
     private ArrayList<Coordinate> getStartCoordinates(){
-    	ArrayList<Coordinate> startPositions = new ArrayList<Coordinate>();
+    	ArrayList<Coordinate> startPositions = new ArrayList<>();
     	
     	
     	startPositions.add(new Coordinate(0, getVSize() -1));
@@ -209,8 +209,8 @@ public class RandomGridBuilder extends AbstractGridBuilder{
 	 * @return	A list of sequences of coordinates.
 	 */
     ArrayList<ArrayList<Coordinate>> randomWallLocations(GridConstraint constraint) {
-		ArrayList<Coordinate> candidates = new ArrayList<Coordinate>(gridElements.keySet());
-		ArrayList<ArrayList<Coordinate>> result = new ArrayList<ArrayList<Coordinate>>();
+		ArrayList<Coordinate> candidates = new ArrayList<>(gridElements.keySet());
+		ArrayList<ArrayList<Coordinate>> result = new ArrayList<>();
 		
 		// Removed excluded squares from candidates
 		candidates.removeAll(constraint.getExcluded());
@@ -233,7 +233,7 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     @Override
     protected void setSquares() {
         Coordinate coordinate;
-        HashMap<Coordinate, Square> start = new HashMap<Coordinate, Square>();
+        HashMap<Coordinate, Square> start = new HashMap<>();
         for(int x = 0; x < getHSize(); x++){
             for(int y = 0; y < getVSize(); y++){
                 coordinate = new Coordinate(x, y);

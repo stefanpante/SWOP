@@ -11,7 +11,7 @@ public class ItemButton extends ShapeButton {
 	/**
 	 * The item connected to this button.
 	 */
-	private Item item;
+	private final Item item;
 
 	/**
 	 * If the button is selected, it should be drawn different

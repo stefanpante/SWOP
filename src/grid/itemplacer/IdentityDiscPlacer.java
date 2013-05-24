@@ -20,11 +20,11 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	 * The radius in which a IdentityDisc should be placed relative to the start position of
 	 * the player.
 	 */
-	public static int INCLUDED_RADIUS = 7;
+	public static final int INCLUDED_RADIUS = 7;
 	/**
 	 * Percentage of square covered by identity disks
 	 */
-	private static float PERCENTAGE_IDENTITY_DISKS = 0.02f;
+	private static final float PERCENTAGE_IDENTITY_DISKS = 0.02f;
 	
 	/**
 	 * Construct a new IdentityDiscPlacer.
@@ -44,7 +44,7 @@ public class IdentityDiscPlacer extends ItemPlacer {
 	}
 	
 	ArrayList<ArrayList<Coordinate>> getIncluded(){
-		ArrayList<ArrayList<Coordinate>> included = new ArrayList<ArrayList<Coordinate>>();
+		ArrayList<ArrayList<Coordinate>> included = new ArrayList<>();
 		for(Coordinate coordinate: getPlayerCoordinates())
 			included.add(getSquaredLocation(coordinate, INCLUDED_RADIUS));
 		

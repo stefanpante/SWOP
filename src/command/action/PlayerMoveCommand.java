@@ -42,7 +42,7 @@ public class PlayerMoveCommand extends MoveCommand{
      * Performs additional actions after the move to ensure consistency with the domain model.
      */
     @Override
-    protected void afterGameCommand() throws Exception {
+    protected void afterGameCommand() {
         getMovable().resetRange();
     }
 

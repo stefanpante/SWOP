@@ -12,7 +12,7 @@ import item.Item;
  */
 public class UseItemCommand extends ActionCommand {
 	
-	private Item item;
+	private final Item item;
 
     /**
      * Create a new UseItem Command.

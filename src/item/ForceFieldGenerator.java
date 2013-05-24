@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class ForceFieldGenerator extends Item{
 
-    private boolean active;
+    private boolean active = false;
 
     @Override
     public boolean canAddTo(Square square) {

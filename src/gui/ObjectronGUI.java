@@ -76,19 +76,14 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	/**
 	 * The default width and height of a message
 	 */
-	private int messageHeight = 125;
-	private int messageWidth = 300;
+	private final int messageHeight = 125;
+	private final int messageWidth = 300;
 	/**
 	 * The standard font for the gui.
 	 */
 	private PFont standardFont;
 
-	/**
-	 * Buttons & controllers used in the initialisation of the game.
-	 */
-	private Button confirm;
-	private Button filepick;
-	private DropdownList gamemode;
+    private DropdownList gamemode;
 	private Textfield widthGrid;
 	private Textfield heightGrid;
 	private Textfield numPlayers;
@@ -126,18 +121,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	
 	private Textarea warning;
 
-	private String warningText = "You have done something wrong: \n " +
-			"\t - A random grid has a minimum size of 10 x 10 \n " +
-			"\t - If you have specified a file, please make sure it is correct \n " +
-			"\t - The maximum number of players for a generated grid is 4 \n" +
-			"\t   and the maximum amount for a grid from file is equal to \n" +
-			"\t   the number of start positions specified in the file";
-	/**
+    /**
 	 * initializes the objectron gui
 	 */
 	@Override
 	public void setup(){
-		buttons = new ArrayList<GUIButton>();
+		buttons = new ArrayList<>();
 		standardFont = new PFont(this.getFont(), true);
 		// sets the size from the applet to a fourth of the screen.
 		size(hSize, vSize);
@@ -151,9 +140,9 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		this.grid = new GridGui(new PVector(25, 55), this, 500,500, 10, 10);
 
 		// Sets up the inventory representation.
-		ArrayList<Item> items = new ArrayList<Item>();
-		squareInventory = new Inventory(155, 185, items, new PVector(530,25), "Square Inventory", this);
-		playerInventory = new Inventory(155, 185, items, new PVector(530,225),"Player Inventory", this);
+		ArrayList<Item> items = new ArrayList<>();
+		squareInventory = new Inventory(155, items, new PVector(530,25), "Square Inventory", this);
+		playerInventory = new Inventory(155, items, new PVector(530,225),"Player Inventory", this);
 
 		setupButtons();
 		initializeInput();
@@ -212,23 +201,32 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 		gamemode.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
 		gamemode.setColorForeground(OConstants.LIGHT_GREY.getIntColor());
 
-		filepick = inputController.addButton("pick");
+        Button filepick = inputController.addButton("pick");
 		filepick.setLabel("Pick grid from file");
-		filepick.setPosition(hSize/4,350);
-		filepick.setSize(hSize/2, 35);
+		filepick.setPosition(hSize / 4, 350);
+		filepick.setSize(hSize / 2, 35);
 		filepick.setColor(color);
 		filepick.setColorLabel(OConstants.BLACK.getIntColor());
 		filepick.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
 		
-		confirm = inputController.addButton("confirm");
-		confirm.setPosition(hSize/4,390);
-		confirm.setSize(hSize/2, 35);
+		/*
+	  Buttons & controllers used in the initialisation of the game.
+	 */
+        Button confirm = inputController.addButton("confirm");
+		confirm.setPosition(hSize / 4, 390);
+		confirm.setSize(hSize / 2, 35);
 		confirm.setColor(color);
 		confirm.setColorLabel(OConstants.BLACK.getIntColor());
 		confirm.setColorBackground(OConstants.LIGHTER_GREY.getIntColor());
 	
 		warning = inputController.addTextarea("Hallo");
-		warning.setText(warningText);
+        String warningText = "You have done something wrong: \n " +
+                "\t - A random grid has a minimum size of 10 x 10 \n " +
+                "\t - If you have specified a file, please make sure it is correct \n " +
+                "\t - The maximum number of players for a generated grid is 4 \n" +
+                "\t   and the maximum amount for a grid from file is equal to \n" +
+                "\t   the number of start positions specified in the file";
+        warning.setText(warningText);
 		warning.setSize(hSize/2, 150);
 		warning.setPosition(hSize/4, 430);
 		warning.show();
@@ -282,16 +280,16 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	 */
 	private void setupButtons(){
 
-		TextButton pickUpButton = new TextButton(145, 25, new PVector(535, 180), "pick up", this);
+		TextButton pickUpButton = new TextButton(145, new PVector(535, 180), "pick up", this);
 		pickUpButton.setActionCommand(PICKUP_ACTION);
 
-		TextButton useItemButton =new TextButton(145, 25, new PVector(535, 380), "use item", this);
+		TextButton useItemButton =new TextButton(145, new PVector(535, 380), "use item", this);
 		useItemButton.setActionCommand(USEITEM_ACTION);
 
-		TextButton endTurnButton = new TextButton(145, 25, new PVector(535, 415), "end turn", this);
+		TextButton endTurnButton = new TextButton(145, new PVector(535, 415), "end turn", this);
 		endTurnButton.setActionCommand(ENDTURN_ACTION);
 
-		TextButton startNewGameButton = new TextButton(145, 25, new PVector(535, 445), "start new game", this);
+		TextButton startNewGameButton = new TextButton(145, new PVector(535, 445), "start new game", this);
 		startNewGameButton.setActionCommand(STARTNEWGAME_ACTION);
 
 		buttons.add(pickUpButton);
@@ -478,19 +476,12 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	private void useItem(){
 		Item item = playerInventory.getSelectedItem();
 		if(item == null){
-			if(item instanceof IdentityDisc){
-				grid.getDirectionalPad().setVisibility(false);
-				grid.getThrowPad().setVisibility(true);
-				grid.getThrowPad().setIdentityDisc((IdentityDisc) item);
-			}
-			else{
-				try{
-					gameHandler.getUseItemHandler().useItem(item);
-				}catch(Exception e){
-					showException(e);
-				}
-			}
-		}
+            try{
+                gameHandler.getUseItemHandler().useItem(item);
+            }catch(Exception e){
+                showException(e);
+            }
+        }
 	}
 
 	private  void endTurn(){
@@ -563,7 +554,7 @@ public class ObjectronGUI extends PApplet implements PropertyChangeListener, Act
 	
 	private void showMessage(String text){
 		PVector position = new PVector(hSize/2 - messageWidth/2, vSize/2 - messageHeight/2);
-		message = new TimedMessage(messageWidth, messageHeight, position, text, 4, this);
+		message = new TimedMessage(messageWidth, messageHeight, position, text, this);
 		message.getLabel().setColor(currentColor);
 	}
 

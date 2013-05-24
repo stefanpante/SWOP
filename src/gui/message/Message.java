@@ -14,7 +14,7 @@ public class Message extends GUIElement {
     /**
      * The label of the message
      */
-    private Label label;
+    private final Label label;
 
     /**
      * The text which is displayed inside the message.
@@ -32,7 +32,7 @@ public class Message extends GUIElement {
      */
     Message(float width, float height, PVector position, String message, PApplet gui) {
         super(width,height, position, gui);
-        this.label = new Label(width, 25, position, "Message", gui);
+        this.label = new Label(width, position, "Message", gui);
         setText(message);
     }
 

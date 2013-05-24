@@ -16,7 +16,7 @@ public class TeleportPlacer extends ItemPlacer {
 	/**
 	 * Percentage of squares with a teleport.
 	 */
-	private static float PERCENTAGE_TELEPORTS = 0.03f;
+	private static final float PERCENTAGE_TELEPORTS = 0.03f;
 
 	public TeleportPlacer(Grid grid, ArrayList<Player> players) {
 		super(grid, players);
@@ -26,8 +26,8 @@ public class TeleportPlacer extends ItemPlacer {
 	@Override
 	public void placeItems() {
 		ArrayList<Coordinate> coordinates = getLocations();
-		ArrayList<Teleport> teleports = new ArrayList<Teleport>();
-		ArrayList<Square> destinations = new ArrayList<Square>();
+		ArrayList<Teleport> teleports = new ArrayList<>();
+		ArrayList<Square> destinations = new ArrayList<>();
 		for(Coordinate coor: coordinates){
 			Teleport teleport = new Teleport();
 			teleports.add(teleport);
@@ -48,10 +48,7 @@ public class TeleportPlacer extends ItemPlacer {
 	 *
 	 * @param 	teleports
 	 * 			The list of teleports to link.
-	 * @param 	linkRandomly
-	 * 			Boolean that hould be true if the linking should happen randomly.
-	 * 			Otherwise each teleport will be linked to its next neighbor in the list.
-	 */
+     */
 	private void linkTeleports(ArrayList<Teleport> teleports, ArrayList<Square> destinations) {
 		for(Teleport teleport : teleports){
 			Square candidateDestination = destinations.get(getRandomIndex(destinations));

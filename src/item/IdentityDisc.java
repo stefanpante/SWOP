@@ -21,7 +21,7 @@ public class IdentityDisc extends Item implements Movable {
     /**
 	 * The maximum travel distance of an uncharged identity disc.
 	 */
-	public static int MAX_TRAVEL_DISTANCE = 3;
+	public static final int MAX_TRAVEL_DISTANCE = 3;
 	
 	/**
 	 * Constructor that makes an Identity Disc.
@@ -65,7 +65,7 @@ public class IdentityDisc extends Item implements Movable {
      * 		   thrown when the range is smaller than zero.
      */
     void setRange(int range) throws IllegalArgumentException{
-        if(!isValidRange(range)){
+        if(isNotValidRange(range)){
             throw new IllegalArgumentException("Range should never be negative");
         }
 
@@ -76,8 +76,8 @@ public class IdentityDisc extends Item implements Movable {
      * Checks whether the range is larger than zero.
      * @param range  the range for the identity disc.
      */
-    boolean isValidRange(int range){
-        return (range >= 0);
+    boolean isNotValidRange(int range){
+        return (range < 0);
     }
 
     /**

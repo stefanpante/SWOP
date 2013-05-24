@@ -61,7 +61,8 @@ public class LightGrenade extends Item{
     public ArrayList<Effect> getEffects() {
         ArrayList<Effect> effects = new ArrayList<>();
         if(getContainer().isSameType(new Square())){
-            effects.add(new LightGrenadeEffect((Square) getContainer()));
+            if(isActive())
+                effects.add(new LightGrenadeEffect((Square) getContainer()));
         }else{
             effects.add(new EmptyEffect());
         }

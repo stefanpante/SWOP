@@ -74,7 +74,7 @@ public class Coordinate {
 	 * 		
 	 */
     void setX(int x) throws IllegalArgumentException{
-		if(!isValidX(x)) throw new IllegalArgumentException("The given x("+x+") is not a valid x coordinate.");
+		if(isNotValidX(x)) throw new IllegalArgumentException("The given x("+x+") is not a valid x coordinate.");
 		this.x = x;
 	}
 
@@ -84,7 +84,7 @@ public class Coordinate {
 	 * @param y
 	 */
     void setY(int y) throws IllegalArgumentException{
-		if(!isValidY(y)) throw new IllegalArgumentException("The given y("+y+") is not a valid y coordinate.");
+		if(isNotValidY(y)) throw new IllegalArgumentException("The given y("+y+") is not a valid y coordinate.");
 		this.y = y;
 	}
 
@@ -95,8 +95,8 @@ public class Coordinate {
 	 * @return 	Always true since the coordinates have no constraints.
 	 * 			| result == true
 	 */
-	private static boolean isValidX(int x){
-		return true;
+	private static boolean isNotValidX(int x){
+		return false;
 	}
 
 	/**
@@ -106,8 +106,8 @@ public class Coordinate {
 	 * @return 	Always true since the coordinates have no constraints.
 	 * 			| result == true
 	 */
-	private static boolean isValidY(int y){
-		return true;	
+	private static boolean isNotValidY(int y){
+		return false;
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class Coordinate {
 	 * Returns a list of all eight neighbors of this coordinate in respect to the direction.
 	 */
 	public HashMap<Direction,Coordinate> getAllNeighbors(){
-		HashMap<Direction,Coordinate> coordinates = new HashMap<Direction, Coordinate>();
+		HashMap<Direction,Coordinate> coordinates = new HashMap<>();
 		
 		coordinates.put(Direction.EAST,new Coordinate(x+1, y));
 		coordinates.put(Direction.SOUTHEAST,new Coordinate(x+1, y+1));
@@ -225,7 +225,7 @@ public class Coordinate {
      */
     public ArrayList<Coordinate> getCoordinatesTo(Coordinate coordinate){
         Direction direction = directionTo(coordinate);
-        ArrayList<Coordinate> coordinates = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> coordinates = new ArrayList<>();
         coordinates.add(this);
         Coordinate neighbor = getNeighbor(direction);
         while(!neighbor.equals(coordinate)){

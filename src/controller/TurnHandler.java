@@ -18,13 +18,13 @@ import java.util.Observer;
  */
 public class TurnHandler extends Handler implements Observer {
 
-	private HashMap<Player,Integer> counter;
+	private final HashMap<Player,Integer> counter;
 	
 	public TurnHandler(Game game, PropertyChangeListener listener) {
 		super(game, listener);
         game.addObserver(this);
 
-		counter = new HashMap<Player,Integer>();
+		counter = new HashMap<>();
 		
 		for(Player player : getGame().getPlayers()){
 			counter.put(player, 0);

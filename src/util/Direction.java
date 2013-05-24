@@ -18,7 +18,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.NORTHWEST);
 			neighborDirections.add(Direction.NORTHEAST);
 			return neighborDirections;
@@ -36,7 +36,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.NORTH);
 			neighborDirections.add(Direction.EAST);
 			return neighborDirections;
@@ -54,7 +54,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.NORTHEAST);
 			neighborDirections.add(Direction.SOUTHEAST);
 			return neighborDirections;
@@ -72,7 +72,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.EAST);
 			neighborDirections.add(Direction.SOUTH);
 			return neighborDirections;
@@ -90,7 +90,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.SOUTHEAST);
 			neighborDirections.add(Direction.SOUTHWEST);
 			return neighborDirections;
@@ -108,7 +108,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.WEST);
 			neighborDirections.add(Direction.SOUTH);
 			return neighborDirections;
@@ -126,7 +126,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
 			neighborDirections.add(Direction.SOUTHWEST);
 			neighborDirections.add(Direction.NORTHWEST);
 			return neighborDirections;
@@ -144,7 +144,7 @@ public enum Direction {
 
 		@Override
 		public ArrayList<Direction> neighborDirections() {
-			ArrayList<Direction> neighborDirections = new ArrayList<Direction>();
+			ArrayList<Direction> neighborDirections = new ArrayList<>();
             neighborDirections.add(Direction.WEST);
             neighborDirections.add(Direction.NORTH);
 			return neighborDirections;

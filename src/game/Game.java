@@ -50,12 +50,12 @@ public class Game {
 	/**
 	 * The number of players in the game.
 	 */
-	private int numOfPlayers;
+	private final int numOfPlayers;
 	
 	/**
 	 * The type of game which is played;
 	 */
-	private GameMode gameMode;
+	private final GameMode gameMode;
 	
 	public Game(GameMode gameMode, int numOfPlayers){
 		this.gameMode = gameMode;
@@ -157,18 +157,7 @@ public class Game {
 	public Grid getGrid(){
 		return this.grid;
 	}
-	
-	/**
-	 * Returns the value of the player1 of this Game as an Player.
-	 *
-	 * @return 	An object of the Player class.
-	 * 			| Player
-	 */
-	public Player getPlayer(int i) throws IllegalArgumentException {
-		if(i >= players.size())
-			throw new IllegalArgumentException();
-		return players.get(i);
-	}
+
 	
 	/**
 	 * Gets the player instance which isn't the current player.
@@ -181,25 +170,15 @@ public class Game {
 		int nextPlayer = (players.indexOf(getCurrentPlayer()) + 1) % players.size();
 		return players.get(nextPlayer);
 	}
-	
-	
-	
-	/**
-	 * Returns all players, except the current player
-	 * @return	Returns all players, except the current player
-	 */
-	public ArrayList<Player> getOtherPlayers(){
-		ArrayList<Player> otherPlayers = getPlayers();
-		otherPlayers.remove(currentPlayer);
-		return otherPlayers;
-	}
-	
+
+
+
 	/**
 	 * Returns all players
 	 * @return Returns all players of this game
 	 */
 	public ArrayList<Player> getPlayers(){
-		return new ArrayList<Player>(this.players);
+		return new ArrayList<>(this.players);
 	}
 
     /**
@@ -273,22 +252,14 @@ public class Game {
             player.addObserver(observer);
         }
     }
-    
-    public Player checkLosers() {
-		if(isCurrentPlayerStuck()){
-			getCurrentPlayer().kill();
-			return getCurrentPlayer();
-		}
 
-		return null;
-	}
     
     public int getNumberOfPlayers(){
     	return this.numOfPlayers;
     }
 
-	public void setActivate(boolean active) {
-		this.active = active;
+	public void setActivate() {
+		this.active = true;
 	}
 
     public GameMode getGameMode(){

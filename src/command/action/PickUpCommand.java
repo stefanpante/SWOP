@@ -12,7 +12,7 @@ import item.Item;
  */
 public class PickUpCommand extends ActionCommand {
 	
-	private Item item;
+	private final Item item;
 
 	/**
 	 * Command to pick up an item
