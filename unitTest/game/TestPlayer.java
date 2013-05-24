@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import square.Square;
-import square.obstacle.Wall;
 
 /**
  * Test classes for player.
@@ -46,18 +45,7 @@ public class TestPlayer {
 		
 		new Player(null, 0);
 	}
-	
-	/**
-	 * A square which is obstructed cannot be valid.
-	 */
-	@Test(expected=IllegalArgumentException.class)
-	public void testObstructedSquare() {
-		Square square = new Square();
-		new Wall(new Square(), square);
-		
-		new Player(square, 0);
-	}
-	
+
 	/**
 	 * Checks if remaining actions more than the maximum allowed is not valid.
 	 */
@@ -117,7 +105,7 @@ public class TestPlayer {
 	 * Test if using an item which is not contained in the inventory
 	 * results in an exception.
 	 */
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void testUseItemNotContained() {
 		Player player = new Player(new Square(), 0);
 		
@@ -139,21 +127,7 @@ public class TestPlayer {
 		assertFalse(player.hasItem(lightGrenade));
 	}
 	
-	/**
-	 * Test moving to a square which is obstructed
-	 * must result in an exception.
-	 */
-	@Test(expected=IllegalStateException.class)
-	public void testMoveObstructed() {
-		Square square = new Square();
-		new Wall(new Square(), square);
-		
-		Player player = new Player(new Square(), 0);
-		
-		assertFalse(player.hasMoved());
-		player.move(square);
-	}
-	
+
 	/**
 	 * Test move to a valid square.
 	 */
@@ -168,23 +142,6 @@ public class TestPlayer {
 		assertTrue(player.hasMoved());
 	}
 	
-	/**
-	 * Test move, the square the player is moving to must become
-	 * an obstacle. The square moving from remains obstructed.
-	 */
-	@Test
-	public void testMoveObstacle() {
-		Square square = new Square();
-		Square square2 = new Square();
-		Player player = new Player(square, 0);
-		
-		assertTrue(square.isObstructed());
-		assertFalse(square2.isObstructed());
-		assertEquals(square.getObstacle(), player);
-		
-		player.move(square2);
-	}
-
 
     @Test
     public void testPlayerInventoryMaximumSize() {
@@ -223,7 +180,7 @@ public class TestPlayer {
 
 
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPlayerInventorySize2() {
         Player p1 = new Player(new Square(),1);
 
@@ -268,7 +225,7 @@ public class TestPlayer {
         assertTrue(p1.hasItem(flag));
     }
 
-    @Test(expected=IllegalStateException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void testAddMoreFlags(){
         Player p1 = new Player(new Square(),1);
         Flag flag = new Flag();

@@ -1,6 +1,7 @@
 package grid;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import util.Direction;
 import square.Square;
@@ -232,15 +233,20 @@ public class RandomGridBuilder extends AbstractGridBuilder{
     @Override
     protected void setSquares() {
         Coordinate coordinate;
+        HashMap<Coordinate, Square> start = new HashMap<Coordinate, Square>();
         for(int x = 0; x < getHSize(); x++){
             for(int y = 0; y < getVSize(); y++){
                 coordinate = new Coordinate(x, y);
                 Square square = new Square();
                this.gridElements.put(coordinate, square);
                if(getStartCoordinates().contains(coordinate)){
-            	   this.startPositions.add(square);
+            	   start.put(coordinate, square);
                }
             }
+        }
+        
+        for(Coordinate c: getStartCoordinates()){
+        	this.startPositions.add(start.get(c));
         }
         
     }

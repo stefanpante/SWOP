@@ -39,6 +39,12 @@ public class Flag extends Item {
     public boolean canAddTo(Square square) {
         return true;
     }
+	
+	@Override
+	public boolean canAddTo(Player player){
+		return  (!player.hasType(new Flag())) && player.getAllItems().size() < Player.MAX_ITEMS;
+		
+	}
 
     @Override
 	public boolean isSameType(Item item) {

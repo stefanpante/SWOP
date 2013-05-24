@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import game.Player;
+import game.mode.RaceGameMode;
 
 import square.Square;
 
@@ -37,23 +38,8 @@ public class TestGame {
 	public void setUp() throws Exception {
 		RandomGridBuilder builder = new RandomGridBuilder(10,10);
 		
-		game = new Game(builder.getGrid());
+		game = new Game(new RaceGameMode(10,10),2);
 	}
-
-	@After
-	public void tearDown() throws Exception {
-		
-	}
-	
-	@Test
-	public void testConstructorGrid() {
-		AbstractGridBuilder gridBuilder = new RandomGridBuilder(20, 20);
-		Game game = new Game(gridBuilder.getGrid());
-		
-		game.start();
-		assertTrue(game.isActive());
-	}
-	
 
 
 	@Test 
@@ -124,29 +110,4 @@ public class TestGame {
 		assertFalse(Game.isValidCurrentPlayer(null));
 	}
 	
-	@Test
-	public void testSetPlayer(){
-		Player playa = null;
-		Player player1 = game.getCurrentPlayer();
-		Player player2 = game.getNextPlayer();
-		 
-		try{
-			game.addPlayer(playa);
-			fail("A player cant be null");
-			
-		}
-		catch(Exception e){}
-		 
-		try{
-			game.addPlayer(player2);
-			fail("Two player objects should not be the same");
-		}
-		catch(Exception e){ }
-		try{
-			game.addPlayer(player1);
-			fail("The two player objects should not be the same");
-		}
-		catch(Exception e){}
-		
-	}
 }
