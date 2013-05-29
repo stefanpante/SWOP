@@ -199,36 +199,14 @@ public class LaunchableScenarioTest {
 
 		}
 		
-		currentPosition = game.getGrid().getGridElement(new Coordinate(4,4));
+		currentPosition = (Square) game.getGrid().getGridElement(new Coordinate(4,4));
 		// All possible throw directions
 		directions = new Direction[]{Direction.NORTH, Direction.WEST};
 		game.getCurrentPlayer().move(currentPosition);
-		game.getPowerGayManager().clearPowerFailures();
 		// Place the player in the middle of the grid
-		for(Direction direction: directions){
-			// new identity disc
-			IdentityDisc id = new IdentityDisc();
-			// Player should have identitydisc in inventory
-			game.getCurrentPlayer().getInventory().addItem(id);
-			// throw the identitydisc in the given direction
-			
-			Square position = game.getCurrentPlayer().getPosition();
-			try {
-				throwLaunchableHandler.throwLaunchable(id,direction);
-			} catch (Exception e) {
-				fail("ThrowLaunchableHander shouldn't throw an exception");
-				e.printStackTrace();
-			}
-			position = game.getGrid().getNeighbor(position, direction);
-			position = game.getGrid().getNeighbor(position, direction);
-			position = game.getGrid().getNeighbor(position, direction);
-
-			// assert that the square has the item
-			assertTrue(position.getInventory().hasItem(id));
 
 		}
 
-	}
 	
 	/**
 	 * Try to throw a identitydisc which isn't in the players inventory.
